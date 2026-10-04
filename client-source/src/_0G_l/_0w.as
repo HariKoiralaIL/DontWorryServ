@@ -6,7 +6,7 @@
 package _0G_l {
 import flash.display.Sprite;
 
-import _E_7._for_;
+import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 import flash.display.BitmapData;
 
@@ -46,7 +46,7 @@ import flash.utils.getTimer;
 import com.company.assembleegameclient.util.TextureRedrawer;
 import com.company.assembleegameclient.util._0B_c;
 
-import _E_7._aS_;
+import com.company.assembleegameclient.ui.tooltip.TitleDescriptionToolTip;
 
 public class _0w extends Sprite {
 
@@ -55,7 +55,7 @@ public class _0w extends Sprite {
 
     private static var _t9:Class = _8E_;
     private static var _4l:Class = _kI_;
-    private static var toolTip_:_for_ = null;
+    private static var toolTip_:ToolTip = null;
 
     public function _0w(_arg1:XML, _arg2:Boolean) {
         this.id_ = int(_arg1.@id);
@@ -163,7 +163,7 @@ public class _0w extends Sprite {
         }
         var _local1:String = this._0D_z.split(",").join(", ");
         var _local2:String = (((((((((((("Type: " + _D_Z_._E_M_[this._Y_9].name_) + "\n") + "Size: ") + this.bitmapData_.width) + " x ") + this.bitmapData_.height) + "\n") + "Tags: ") + _local1) + "\n") + "Id: ") + this.id_);
-        toolTip_ = new _aS_(0x2A2A2A, 0x9B9B9B, this.name_, _local2, 200);
+        toolTip_ = new TitleDescriptionToolTip(0x2A2A2A, 0x9B9B9B, this.name_, _local2, 200);
         stage.addChild(toolTip_);
     }
 

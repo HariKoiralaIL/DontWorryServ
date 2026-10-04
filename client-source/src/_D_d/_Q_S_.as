@@ -22,7 +22,7 @@ import com.company.assembleegameclient.map._M_X_;
 
 import _D_d._0E_2;
 
-import _E_7._for_;
+import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 import _D_d.*;
 
@@ -50,7 +50,7 @@ internal class _Q_S_ extends _P_u {
     public var _5b:XML;
     private var _G_m:Shape;
 
-    override protected function getToolTip():_for_ {
+    override protected function getToolTip():ToolTip {
         return (new _0E_2(this._5b));
     }
 

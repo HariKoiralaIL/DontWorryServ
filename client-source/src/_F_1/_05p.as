@@ -7,7 +7,7 @@ package _F_1 {
 import _9R_._B_w;
 import _9R_._W_h;
 
-import _E_7.RankToolTip;
+import com.company.assembleegameclient.ui.tooltip.RankToolTip;
 
 import _qN_.Account;
 import _qN_._9j;

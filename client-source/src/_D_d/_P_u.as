@@ -6,7 +6,7 @@
 package _D_d {
 import flash.display.Sprite;
 
-import _E_7._for_;
+import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 import flash.events.Event;
 import flash.events.MouseEvent;
@@ -16,7 +16,7 @@ public class _P_u extends Sprite {
     public static const WIDTH:int = 50;
     public static const HEIGHT:int = 50;
 
-    protected static var toolTip_:_for_ = null;
+    protected static var toolTip_:ToolTip = null;
 
     public function _P_u(_arg1:int) {
         this.type_ = _arg1;
@@ -32,7 +32,7 @@ public class _P_u extends Sprite {
         this.draw();
     }
 
-    protected function _V_B_(_arg1:_for_):void {
+    protected function _V_B_(_arg1:ToolTip):void {
         this._X_S_();
         toolTip_ = _arg1;
         if (toolTip_ != null) {
@@ -49,7 +49,7 @@ public class _P_u extends Sprite {
         }
     }
 
-    protected function getToolTip():_for_ {
+    protected function getToolTip():ToolTip {
         return (null);
     }
 

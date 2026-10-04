@@ -6,7 +6,7 @@
 package _0C_P_ {
 import flash.display.Sprite;
 
-import _E_7._for_;
+import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 import com.company.ui.SimpleText;
 
@@ -14,11 +14,11 @@ import flash.filters.DropShadowFilter;
 import flash.events.MouseEvent;
 import flash.events.Event;
 
-import _E_7._aS_;
+import com.company.assembleegameclient.ui.tooltip.TitleDescriptionToolTip;
 
 public class _0_i extends Sprite {
 
-    private static var _fO_:_for_;
+    private static var _fO_:ToolTip;
 
     public function _0_i(_arg1:String, _arg2:String, _arg3:String) {
         this._W_Y_ = _arg1;
@@ -50,7 +50,7 @@ public class _0_i extends Sprite {
     }
 
     private function onMouseOver(_arg1:MouseEvent):void {
-        _fO_ = new _aS_(0x2D2D2D, 0x828282, null, this._Z_E_, 150);
+        _fO_ = new TitleDescriptionToolTip(0x2D2D2D, 0x828282, null, this._Z_E_, 150);
         stage.addChild(_fO_);
     }
 

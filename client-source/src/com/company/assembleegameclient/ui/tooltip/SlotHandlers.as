@@ -1,9 +1,9 @@
 ﻿// Decompiled by AS3 Sorcerer 1.99
 // http://www.as3sorcerer.com/
 
-//_E_7._fM_
+//com.company.assembleegameclient.ui.tooltip.SlotHandlers
 
-package _E_7 {
+package com.company.assembleegameclient.ui.tooltip {
 import _05H_._09A_;
 import _05H_._M_K_;
 
@@ -24,9 +24,9 @@ import _05H_._5q;
 import _05H_._W_C_;
 import _05H_._U_y;
 
-public class _fM_ {
+public class SlotHandlers {
 
-    public function _fM_() {
+    public function SlotHandlers() {
         var weapons_:_09A_ = new _09A_();
         var armors_:_M_K_ = new _M_K_();
         this.hash = {};
@@ -65,20 +65,20 @@ public class _fM_ {
     }
     private var hash:Object;
 
-    public function _hS_(_arg1:XML, _arg2:XML, _arg3:Object, _arg4:Object):_R_N_ {
+    public function buildData(_arg1:XML, xml:XML, _arg3:Object, _arg4:Object):SlotTooltipData {
         var _local3:int = int(_arg1.SlotType);
-        var _local4:_U_y = this.hash[_local3];
-        var _local5:_R_N_ = new _R_N_();
-        if (_local4 != null) {
-            _local4._N_Q_(_arg1, _arg2);
-            _local4._NQ_d_(_arg1, _arg2, _arg3, _arg4);
-            _local5.text = _local4._t4;
-            _local5._5n = _local4._5n;
-            _local5._P_3 = _local4._P_3;
+        var _U_y2:_U_y = this.hash[_local3];
+        var slotTooltipData:SlotTooltipData = new SlotTooltipData();
+        if (_U_y2 != null) {
+            _U_y2._N_Q_(_arg1, xml);
+            _U_y2._NQ_d_(_arg1, xml, _arg3, _arg4);
+            slotTooltipData.text = _U_y2._t4;
+            slotTooltipData._5n = _U_y2._5n;
+            slotTooltipData._P_3 = _U_y2._P_3;
         }
-        return (_local5);
+        return (slotTooltipData);
     }
 
 }
-}//package _E_7
+}//package com.company.assembleegameclient.ui.tooltip
 

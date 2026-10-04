@@ -1,14 +1,14 @@
 ﻿// Decompiled by AS3 Sorcerer 1.99
 // http://www.as3sorcerer.com/
 
-//_E_7._R_N_
+//com.company.assembleegameclient.ui.tooltip.SlotTooltipData
 
-package _E_7 {
+package com.company.assembleegameclient.ui.tooltip {
 import flash.utils.Dictionary;
 
-public class _R_N_ {
+public class SlotTooltipData {
 
-    public function _R_N_() {
+    public function SlotTooltipData() {
         this.text = "";
         this._5n = new Dictionary(true);
         this._P_3 = new Dictionary(true);
@@ -17,5 +17,5 @@ public class _R_N_ {
     public var _5n:Dictionary;
     public var _P_3:Dictionary;
 }
-}//package _E_7
+}//package com.company.assembleegameclient.ui.tooltip
 

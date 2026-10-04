@@ -1,9 +1,9 @@
 ﻿// Decompiled by AS3 Sorcerer 1.99
 // http://www.as3sorcerer.com/
 
-//_E_7._ap
+//com.company.assembleegameclient.ui.tooltip.QuestToolTip
 
-package _E_7 {
+package com.company.assembleegameclient.ui.tooltip {
 import com.company.ui.SimpleText;
 import com.company.assembleegameclient.ui.ui_playerslist;
 
@@ -11,9 +11,9 @@ import flash.filters.DropShadowFilter;
 
 import com.company.assembleegameclient.objects.GameObject;
 
-public class _ap extends _for_ {
+public class QuestToolTip extends ToolTip {
 
-    public function _ap(_arg1:GameObject) {
+    public function QuestToolTip(_arg1:GameObject) {
         super(6036765, 1, 16549442, 1, false);
         this.text_ = new SimpleText(22, 16549442, false, 0, 0, "Myriad Pro");
         this.text_.setBold(true);
@@ -23,14 +23,14 @@ public class _ap extends _for_ {
         this.text_.x = 0;
         this.text_.y = 0;
         addChild(this.text_);
-        this._id = new ui_playerslist(0xB3B3B3, true, _arg1);
-        this._id.x = 0;
-        this._id.y = 32;
-        addChild(this._id);
+        this.playerEntry_ = new ui_playerslist(0xB3B3B3, true, _arg1);
+        this.playerEntry_.x = 0;
+        this.playerEntry_.y = 32;
+        addChild(this.playerEntry_);
         filters = [];
     }
-    public var _id:ui_playerslist;
+    public var playerEntry_:ui_playerslist;
     private var text_:SimpleText;
 }
-}//package _E_7
+}//package com.company.assembleegameclient.ui.tooltip
 

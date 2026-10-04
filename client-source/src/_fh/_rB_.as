@@ -12,7 +12,7 @@ import com.company.assembleegameclient.objects.GameObject;
 
 import flash.display.Shape;
 
-import _E_7._for_;
+import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 import flash.geom.Point;
 import flash.events.MouseEvent;
@@ -64,7 +64,7 @@ public class _rB_ extends Sprite {
     public var go_:GameObject = null;
     public var _rM_:Vector.<GameObject>;
     public var _68:Boolean = false;
-    protected var _fO_:_for_ = null;
+    protected var _fO_:ToolTip = null;
     private var _0H_M_:Boolean;
     private var _7Q_:Shape;
     private var _0B_:Point;
@@ -144,7 +144,7 @@ public class _rB_ extends Sprite {
         visible = true;
     }
 
-    protected function _V_B_(_arg1:_for_):void {
+    protected function _V_B_(_arg1:ToolTip):void {
         this._X_S_();
         this._fO_ = _arg1;
         if (this._fO_ != null) {
@@ -168,15 +168,15 @@ public class _rB_ extends Sprite {
         stage.addChild(_0G_Y_);
     }
 
-    private function _mM_(_arg1:_for_):void {
+    private function _mM_(_arg1:ToolTip):void {
         var _local8:Number;
         var _local9:Number;
         var _local2:Number = this._7Q_.rotation;
         var _local3:int = ((_K_c + _C_9) + 12);
         var _local4:Number = (_local3 * Math.cos((_local2 * Trig._km)));
         var _local5:Number = (_local3 * Math.sin((_local2 * Trig._km)));
-        var _local6:Number = _arg1._R_A_;
-        var _local7:Number = _arg1._D_f;
+        var _local6:Number = _arg1.contentWidth_;
+        var _local7:Number = _arg1.contentHeight_;
         if ((((_local2 >= 45)) && ((_local2 <= 135)))) {
             _local8 = (_local4 + (_local6 / Math.tan((_local2 * Trig._km))));
             _arg1.x = (((_local4 + _local8) / 2) - (_local6 / 2));

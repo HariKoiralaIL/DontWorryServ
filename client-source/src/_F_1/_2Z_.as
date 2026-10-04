@@ -6,7 +6,7 @@
 package _F_1 {
 import flash.display.Sprite;
 
-import _E_7._aS_;
+import com.company.assembleegameclient.ui.tooltip.TitleDescriptionToolTip;
 
 import com.company.ui.SimpleText;
 
@@ -18,7 +18,7 @@ import flash.events.MouseEvent;
 
 public class _2Z_ extends Sprite {
 
-    public static var _0B_k:_aS_ = new _aS_(0x2A2A2A, 0x9B9B9B, null, "", 150);
+    public static var _0B_k:TitleDescriptionToolTip = new TitleDescriptionToolTip(0x2A2A2A, 0x9B9B9B, null, "", 150);
 
     public function _2Z_(_arg1:int, _arg2:uint, _arg3:uint, _arg4:String, _arg5:String, _arg6:int, _arg7:String, _arg8:String, _arg9:DisplayObject):void {
         this.name_ = _arg4;

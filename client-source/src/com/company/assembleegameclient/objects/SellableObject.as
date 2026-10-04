@@ -4,7 +4,7 @@
 //com.company.assembleegameclient.objects.SellableObject
 
 package com.company.assembleegameclient.objects {
-import _E_7._for_;
+import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 import flash.display.BitmapData;
 
@@ -45,7 +45,7 @@ public class SellableObject extends GameObject implements _G_4 {
         return (null);
     }
 
-    public function getTooltip():_for_ {
+    public function getTooltip():ToolTip {
         return (null);
     }
 

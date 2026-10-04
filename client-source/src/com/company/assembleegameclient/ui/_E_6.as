@@ -21,9 +21,9 @@ import flash.geom.Point;
 import flash.utils.Timer;
 import flash.utils.getTimer;
 
-import _E_7.EquipmentToolTip;
-import _E_7._aS_;
-import _E_7._for_;
+import com.company.assembleegameclient.ui.tooltip.EquipmentToolTip;
+import com.company.assembleegameclient.ui.tooltip.TitleDescriptionToolTip;
+import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 
 import _ke._U_c;
@@ -42,7 +42,7 @@ public class _E_6 extends Slot {
     private static const _01M_:String = "Treasure Chest";
     protected static const _P_r:Array = [new ColorMatrixFilter([0.4, 0, 0, 0, 0, 0, 0.4, 0, 0, 0, 0, 0, 0.4, 0, 0, 0, 0, 0, 1, 0])];
 
-    public static var toolTip_:_for_;
+    public static var toolTip_:ToolTip;
 
     public function _E_6(_arg1:Inventory, _arg2:int, _arg3:int, _arg4:int, _arg5:Array, _equipment:Boolean = false) {
         super(_arg3, _arg4, _arg5, _equipment);
@@ -222,7 +222,7 @@ public class _E_6 extends Slot {
     }
 
     private function _i9():void {
-        toolTip_ = new _aS_(0x2A2A2A, 0x9B9B9B, null, (("Empty " + this._5I_()) + " slot"), 200);
+        toolTip_ = new TitleDescriptionToolTip(0x2A2A2A, 0x9B9B9B, null, (("Empty " + this._5I_()) + " slot"), 200);
     }
 
     private function _H_T_():void {

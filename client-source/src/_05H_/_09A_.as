@@ -4,7 +4,7 @@
 //_05H_._09A_
 
 package _05H_ {
-import _E_7._0J_n;
+import com.company.assembleegameclient.ui.tooltip.TooltipText;
 
 public class _09A_ extends _U_y {
 
@@ -40,7 +40,7 @@ public class _09A_ extends _U_y {
         var _local1:String = this._wD_();
         var _local2:Number = ((Number(this._E_y.Speed) * Number(this._E_y.LifetimeMS)) / 10000);
         var _local3:Number = ((Number(this._0F_j.Speed) * Number(this._0F_j.LifetimeMS)) / 10000);
-        var _local4:String = _0J_n._A_l(_local2);
+        var _local4:String = TooltipText.formatNumber(_local2);
         _local1 = (_local1 + (_qF_("Projectile Range: ", _u8) + _qF_((_local4 + "\n"), _qy((_local2 - _local3)))));
         if (this._E_y.hasOwnProperty("MultiHit")) {
             _local1 = (_local1 + _qF_("Shots hit multiple targets\n", _iF_));

@@ -14,7 +14,7 @@ import com.company.assembleegameclient.ui._u5;
 import flash.display.Sprite;
 import flash.display.Bitmap;
 
-import _E_7._for_;
+import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 import flash.text.TextFieldAutoSize;
 import flash.filters.DropShadowFilter;
@@ -98,7 +98,7 @@ public class _aR_ extends Panel {
     private var _0C_:SimpleText = null;
     private var _5U_:Sprite;
     private var bitmap_:Bitmap;
-    private var toolTip_:_for_;
+    private var toolTip_:ToolTip;
 
     public var event:_aJ_;
 

@@ -2,7 +2,7 @@
  * Created by club5_000 on 9/20/2014.
  */
 package com.company.assembleegameclient.ui {
-  import _E_7.EquipmentToolTip;
+  import com.company.assembleegameclient.ui.tooltip.EquipmentToolTip;
 
   import _ke._U_c;
 
