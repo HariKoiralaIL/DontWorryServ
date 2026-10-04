@@ -4,8 +4,8 @@
 //_F_1.CharacterBox
 
 package _F_1 {
-import _E_7._E_J_;
-import _E_7._for_;
+import com.company.assembleegameclient.ui.tooltip.ClassToolTip;
+import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 import com.company.assembleegameclient.appengine.SavedCharacter;
 import com.company.assembleegameclient.appengine._0A_H_;
@@ -101,8 +101,8 @@ public class CharacterBox extends Sprite {
         return (int(this.playerXML_.@type));
     }
 
-    public function getTooltip():_for_ {
-        return (new _E_J_(this.playerXML_, this.charList_, this.charStats_));
+    public function getTooltip():ToolTip {
+        return (new ClassToolTip(this.playerXML_, this.charList_, this.charStats_));
     }
 
     public function _P_Y_(_arg1:Boolean):void {

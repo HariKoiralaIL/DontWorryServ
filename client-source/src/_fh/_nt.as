@@ -9,15 +9,15 @@ import com.company.assembleegameclient.map._X_l;
 import flash.utils.getTimer;
 import flash.events.MouseEvent;
 
-import _E_7._ap;
+import com.company.assembleegameclient.ui.tooltip.QuestToolTip;
 
 import com.company.assembleegameclient.parameters.Parameters;
 
-import _E_7._C_8;
+import com.company.assembleegameclient.ui.tooltip.PortraitToolTip;
 
 import com.company.assembleegameclient.objects.GameObject;
 
-import _E_7._for_;
+import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 import com.company.assembleegameclient.map.Quest;
 import com.company.assembleegameclient.map._0D_v;
@@ -39,7 +39,7 @@ public class _nt extends _rB_ {
             _V_B_(this.getToolTip(_local3, _arg1));
         } else {
             if (go_ != null) {
-                _local4 = (_fO_ is _ap);
+                _local4 = (_fO_ is QuestToolTip);
                 _local5 = this._01(_arg1);
                 if (_local4 != _local5) {
                     _V_B_(this.getToolTip(_local3, _arg1));
@@ -53,15 +53,15 @@ public class _nt extends _rB_ {
         _V_B_(this.getToolTip(go_, getTimer()));
     }
 
-    private function getToolTip(_arg1:GameObject, _arg2:int):_for_ {
+    private function getToolTip(_arg1:GameObject, _arg2:int):ToolTip {
         if ((((_arg1 == null)) || ((_arg1.texture_ == null)))) {
             return (null);
         }
         if (this._01(_arg2)) {
-            return (new _ap(go_));
+            return (new QuestToolTip(go_));
         }
         if (Parameters.data_.showQuestPortraits) {
-            return (new _C_8(_arg1));
+            return (new PortraitToolTip(_arg1));
         }
         return (null);
     }

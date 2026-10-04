@@ -1,0 +1,87 @@
+{
+ "batch": [
+  "PortraitToolTip",
+  "PlayerToolTip",
+  "SlotHandlers",
+  "SlotTooltipData",
+  "ToolTip",
+  "CharacterToolTip",
+  "RankToolTip",
+  "TooltipText",
+  "ClassToolTip",
+  "EquipmentToolTip",
+  "TitleDescriptionToolTip",
+  "PlayerListToolTip",
+  "QuestToolTip",
+  "OrbStatHandler",
+  "PoisonStatHandler",
+  "SlotStatHandler",
+  "HelmStatHandler",
+  "WeaponStatHandler",
+  "TomeStatHandler",
+  "EmptyStatHandler",
+  "QuiverStatHandler",
+  "ScepterStatHandler",
+  "SealStatHandler",
+  "PrismStatHandler",
+  "SpellStatHandler",
+  "TrapStatHandler",
+  "SkullStatHandler",
+  "CloakStatHandler",
+  "ShieldStatHandler",
+  "ArmorStatHandler"
+ ],
+ "locals": {
+  "auto": true,
+  "overrides": [
+   {
+    "class": "EquipmentToolTip",
+    "func": "EquipmentToolTip",
+    "old": "_arg1",
+    "new": "objectType"
+   },
+   {
+    "class": "EquipmentToolTip",
+    "func": "EquipmentToolTip",
+    "old": "_arg3",
+    "new": "containerType"
+   },
+   {
+    "class": "EquipmentToolTip",
+    "func": "EquipmentToolTip",
+    "old": "_arg4",
+    "new": "ownerId"
+   },
+   {
+    "class": "EquipmentToolTip",
+    "func": "EquipmentToolTip",
+    "old": "_arg5",
+    "new": "stackCount"
+   },
+   {
+    "class": "EquipmentToolTip",
+    "func": "EquipmentToolTip",
+    "old": "_arg6",
+    "new": "ownedByPlayer"
+   },
+   {
+    "class": "EquipmentToolTip",
+    "func": "EquipmentToolTip",
+    "old": "_arg7",
+    "new": "itemData"
+   },
+   {
+    "class": "EquipmentToolTip",
+    "func": "addLine",
+    "old": "_arg1",
+    "new": "lineY"
+   },
+   {
+    "class": "EquipmentToolTip",
+    "func": "addLine",
+    "old": "_arg2",
+    "new": "lineIndex"
+   }
+  ]
+ }
+}

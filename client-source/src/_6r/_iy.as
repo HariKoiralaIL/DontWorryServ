@@ -9,7 +9,7 @@ import _C__._cM_;
 import _U_5._sC_;
 import _U_5._sT_;
 
-import _E_7._for_;
+import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 public class _iy extends _cM_ {
 
@@ -30,7 +30,7 @@ public class _iy extends _cM_ {
         this._H_F_.remove(this._rG_);
     }
 
-    private function _06X_(_arg1:_for_):void {
+    private function _06X_(_arg1:ToolTip):void {
         this.view.show(_arg1);
     }
 

@@ -6,7 +6,7 @@
 package com.company.assembleegameclient.ui {
 import flash.display.Sprite;
 
-import _E_7._aS_;
+import com.company.assembleegameclient.ui.tooltip.TitleDescriptionToolTip;
 
 import flash.events.Event;
 
@@ -30,7 +30,7 @@ public class Stats extends Sprite {
         var _local3:XML;
         var _local4:Stat;
         this._086 = new Vector.<Stat>();
-        this.toolTip_ = new _aS_(0x2A2A2A, 0x9B9B9B, "", "", 200);
+        this.toolTip_ = new TitleDescriptionToolTip(0x2A2A2A, 0x9B9B9B, "", "", 200);
         super();
         this.w_ = _arg1;
         this.h_ = _arg2;
@@ -96,7 +96,7 @@ public class Stats extends Sprite {
     public var w_:int;
     public var h_:int;
     public var _086:Vector.<Stat>;
-    public var toolTip_:_aS_;
+    public var toolTip_:TitleDescriptionToolTip;
 
     public function draw(_arg1:Player):void {
         this._086[_att_stat].draw(_arg1.attack_, _arg1._05s, _arg1._X_2);
@@ -130,7 +130,7 @@ public class Stats extends Sprite {
 
     private function onMouseOver(_arg1:MouseEvent):void {
         var _local2:Stat = (_arg1.target as Stat);
-        this.toolTip_._N_k(_local2.fullName_);
+        this.toolTip_.setTitle(_local2.fullName_);
         this.toolTip_._02C_(_local2.description_);
         if (!stage.contains(this.toolTip_)) {
             stage.addChild(this.toolTip_);

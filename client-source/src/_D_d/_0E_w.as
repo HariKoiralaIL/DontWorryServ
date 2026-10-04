@@ -8,7 +8,7 @@ import flash.display.Shape;
 
 import com.company.assembleegameclient.map._sn;
 
-import _E_7._for_;
+import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 public class _0E_w extends _P_u {
 
@@ -25,7 +25,7 @@ public class _0E_w extends _P_u {
     }
     public var _hI_:XML;
 
-    override protected function getToolTip():_for_ {
+    override protected function getToolTip():ToolTip {
         return (new _D_M_(this._hI_));
     }
 

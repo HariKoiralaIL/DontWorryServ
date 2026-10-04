@@ -4,7 +4,7 @@
 //com.company.assembleegameclient.screens.charrects.CurrentCharacterRect
 
 package com.company.assembleegameclient.screens.charrects {
-import _E_7._for_;
+import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
     import _F_1.CharacterBox;
 
@@ -38,7 +38,7 @@ import flash.geom.ColorTransform;
 
 import com.company.rotmg.graphics.DeleteXGraphic;
 
-import _E_7._0M_k;
+import com.company.assembleegameclient.ui.tooltip.CharacterToolTip;
 
 import _0I_S_._09s;
 
@@ -50,7 +50,7 @@ import com.company.util.BitmapUtil;
 
     public class CurrentCharacterRect extends CharacterRect {
 
-    private static var toolTip_:_for_ = null;
+    private static var toolTip_:ToolTip = null;
 
     public function CurrentCharacterRect(_arg1:String, _arg2:SavedCharacter, _arg3:_0A_H_) {
         super(0x2e2e2c, 0x4a4946);
@@ -165,7 +165,7 @@ import com.company.util.BitmapUtil;
     override protected function onMouseOver(_arg1:MouseEvent):void {
         super.onMouseOver(_arg1);
         this.removeToolTip();
-        toolTip_ = new _0M_k(this._name, this.character._iJ_, this.characterStats);
+        toolTip_ = new CharacterToolTip(this._name, this.character._iJ_, this.characterStats);
         stage.addChild(toolTip_);
     }
 

@@ -17,7 +17,7 @@ import flash.utils.getTimer;
 
 import _0D_B_.PlayerMenu;
 
-import _E_7._c4;
+import com.company.assembleegameclient.ui.tooltip.PlayerToolTip;
 
 
 public class _w6 extends Panel {
@@ -37,7 +37,7 @@ public class _w6 extends Panel {
         addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
     }
     public var _X_T_:Vector.<ui_playerslist>;
-    private var toolTip_:_c4 = null;
+    private var toolTip_:PlayerToolTip = null;
     private var _0G_Y_:PlayerMenu = null;
     private var _68:Boolean = false;
 
@@ -147,7 +147,7 @@ public class _w6 extends Panel {
         if ((((_local3 == null)) || ((_local3.texture_ == null)))) {
             return;
         }
-        this.toolTip_ = new _c4(_local3);
+        this.toolTip_ = new PlayerToolTip(_local3);
         stage.addChild(this.toolTip_);
         this._68 = true;
     }

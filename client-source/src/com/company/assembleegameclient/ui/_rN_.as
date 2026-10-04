@@ -9,7 +9,7 @@ import flash.geom.ColorTransform;
 import flash.display.BitmapData;
 import flash.display.Bitmap;
 
-import _E_7._aS_;
+import com.company.assembleegameclient.ui.tooltip.TitleDescriptionToolTip;
 
 import com.company.assembleegameclient.util.TextureRedrawer;
 
@@ -33,7 +33,7 @@ public class _rN_ extends Sprite {
         addChild(this._5U_);
         this._0C_p = _arg3;
         if (_arg2 != "") {
-            this.toolTip_ = new _aS_(0x2A2A2A, 0x9B9B9B, _arg2, "", 200);
+            this.toolTip_ = new TitleDescriptionToolTip(0x2A2A2A, 0x9B9B9B, _arg2, "", 200);
         }
         addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
         addEventListener(MouseEvent.MOUSE_OVER, this.onMouseOver);
@@ -44,7 +44,7 @@ public class _rN_ extends Sprite {
     protected var _5U_:Bitmap;
     protected var _0C_p:String;
     protected var _4p:ColorTransform = null;
-    protected var toolTip_:_aS_ = null;
+    protected var toolTip_:TitleDescriptionToolTip = null;
 
     public function _037(_arg1:ColorTransform):void {
         if (_arg1 == this._4p) {

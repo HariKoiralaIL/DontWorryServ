@@ -13,7 +13,7 @@ import flash.display.Bitmap;
 
 import _D_d._9o;
 
-import _E_7._for_;
+import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 import _D_d.*;
 
@@ -32,7 +32,7 @@ internal class _Q_H_ extends _P_u {
     }
     public var _J_i:XML;
 
-    override protected function getToolTip():_for_ {
+    override protected function getToolTip():ToolTip {
         return (new _9o(this._J_i));
     }
 

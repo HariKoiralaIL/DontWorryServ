@@ -4,7 +4,7 @@
 //_fh._A_p
 
 package _fh {
-import _E_7._zY_;
+import com.company.assembleegameclient.ui.tooltip.PlayerListToolTip;
 
 import flash.events.MouseEvent;
 
@@ -45,7 +45,7 @@ public class _A_p extends _rB_ {
 
     override protected function onMouseOver(_arg1:MouseEvent):void {
         super.onMouseOver(_arg1);
-        _V_B_(new _zY_(this._K_M_(), false));
+        _V_B_(new PlayerListToolTip(this._K_M_(), false));
     }
 
     override protected function onMouseOut(_arg1:MouseEvent):void {

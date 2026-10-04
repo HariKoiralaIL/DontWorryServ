@@ -4,13 +4,13 @@
 //_D_d._0E_2
 
 package _D_d {
-import _E_7._for_;
+import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 import com.company.ui.SimpleText;
 
 import flash.filters.DropShadowFilter;
 
-public class _0E_2 extends _for_ {
+public class _0E_2 extends ToolTip {
 
     private static const _be:int = 180;
 

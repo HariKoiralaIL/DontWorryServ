@@ -2,7 +2,7 @@
  * Created by club5_000 on 9/13/2014.
  */
 package _0D_d {
-  import _E_7.EquipmentToolTip;
+  import com.company.assembleegameclient.ui.tooltip.EquipmentToolTip;
 
   import _ke._U_c;
 

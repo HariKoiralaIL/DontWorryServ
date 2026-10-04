@@ -1,0 +1,634 @@
+{
+ "batch": [
+  "EquipmentToolTip",
+  "RankToolTip",
+  "_for_",
+  "_0J_n",
+  "_0M_k",
+  "_C_8",
+  "_R_N_",
+  "_aS_",
+  "_ap",
+  "_c4",
+  "_E_J_",
+  "_fM_",
+  "_zY_"
+ ],
+ "package_map": {
+  "_E_7": "com.company.assembleegameclient.ui.tooltip"
+ },
+ "classes": {
+  "_for_": "ToolTip",
+  "_0J_n": "TooltipText",
+  "_0M_k": "CharacterToolTip",
+  "_C_8": "PortraitToolTip",
+  "_R_N_": "SlotTooltipData",
+  "_aS_": "TitleDescriptionToolTip",
+  "_ap": "QuestToolTip",
+  "_c4": "PlayerToolTip",
+  "_E_J_": "ClassToolTip",
+  "_fM_": "SlotHandlers",
+  "_zY_": "PlayerListToolTip"
+ },
+ "members": [
+  {
+   "old": "_vV_",
+   "new": "backgroundFill_",
+   "classes": [
+    "_for_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_0y",
+   "new": "outlineStroke_",
+   "classes": [
+    "_for_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_fP_",
+   "new": "backgroundAlpha_",
+   "classes": [
+    "_for_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_0C_d",
+   "new": "outlineColor_",
+   "classes": [
+    "_for_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_069",
+   "new": "outlineAlpha_",
+   "classes": [
+    "_for_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_J_",
+   "new": "followMouse_",
+   "classes": [
+    "_for_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_R_A_",
+   "new": "contentWidth_",
+   "classes": [
+    "_for_"
+   ],
+   "users": true
+  },
+  {
+   "old": "_D_f",
+   "new": "contentHeight_",
+   "classes": [
+    "_for_"
+   ],
+   "users": true
+  },
+  {
+   "old": "_rJ_",
+   "new": "GREEN",
+   "classes": [
+    "_0J_n"
+   ],
+   "users": true
+  },
+  {
+   "old": "_at",
+   "new": "RED",
+   "classes": [
+    "_0J_n"
+   ],
+   "users": true
+  },
+  {
+   "old": "_iF_",
+   "new": "YELLOW",
+   "classes": [
+    "_0J_n"
+   ],
+   "users": true
+  },
+  {
+   "old": "_M_w",
+   "new": "colorize",
+   "classes": [
+    "_0J_n"
+   ],
+   "users": true
+  },
+  {
+   "old": "_A_l",
+   "new": "formatNumber",
+   "classes": [
+    "_0J_n"
+   ],
+   "users": true
+  },
+  {
+   "old": "_qy",
+   "new": "compareColor",
+   "classes": [
+    "_0J_n"
+   ],
+   "users": true
+  },
+  {
+   "old": "_02y",
+   "new": "playerEntry_",
+   "classes": [
+    "_0M_k",
+    "_c4"
+   ],
+   "users": false
+  },
+  {
+   "old": "_023",
+   "new": "hpBar_",
+   "classes": [
+    "_0M_k",
+    "_c4"
+   ],
+   "users": false
+  },
+  {
+   "old": "_F_C_",
+   "new": "mpBar_",
+   "classes": [
+    "_0M_k",
+    "_c4"
+   ],
+   "users": false
+  },
+  {
+   "old": "_e9",
+   "new": "inventory_",
+   "classes": [
+    "_0M_k",
+    "_c4"
+   ],
+   "users": false
+  },
+  {
+   "old": "_qc",
+   "new": "divider_",
+   "classes": [
+    "_0M_k",
+    "_E_J_",
+    "RankToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_05h",
+   "new": "statsText_",
+   "classes": [
+    "_0M_k",
+    "_E_J_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_U_n",
+   "new": "nextGoalText_",
+   "classes": [
+    "_0M_k",
+    "_E_J_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_pg",
+   "new": "starDisplay_",
+   "classes": [
+    "_c4"
+   ],
+   "users": false
+  },
+  {
+   "old": "_4v",
+   "new": "guildDisplay_",
+   "classes": [
+    "_c4"
+   ],
+   "users": false
+  },
+  {
+   "old": "_xi",
+   "new": "clickHint_",
+   "classes": [
+    "_c4",
+    "_zY_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_id",
+   "new": "playerEntry_",
+   "classes": [
+    "_ap"
+   ],
+   "users": false
+  },
+  {
+   "old": "_tm",
+   "new": "portrait_",
+   "classes": [
+    "_C_8",
+    "_E_J_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_aV_",
+   "new": "unlockText_",
+   "classes": [
+    "_E_J_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_nr",
+   "new": "unusedText_",
+   "classes": [
+    "_E_J_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_2U_",
+   "new": "titleText_",
+   "classes": [
+    "RankToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_I_u",
+   "new": "descriptionText_",
+   "classes": [
+    "RankToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_M_J_",
+   "new": "legendLines_",
+   "classes": [
+    "RankToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_P_V_",
+   "new": "titleText_",
+   "classes": [
+    "_aS_"
+   ],
+   "users": true
+  },
+  {
+   "old": "_0B_A_",
+   "new": "descriptionText_",
+   "classes": [
+    "_aS_"
+   ],
+   "users": true
+  },
+  {
+   "old": "_N_k",
+   "new": "setTitle",
+   "classes": [
+    "_aS_"
+   ],
+   "users": true
+  },
+  {
+   "old": "_02C_",
+   "new": "setDescription",
+   "classes": [
+    "_aS_"
+   ],
+   "users": true
+  },
+  {
+   "old": "_nC_",
+   "new": "players_",
+   "classes": [
+    "_zY_"
+   ],
+   "users": true
+  },
+  {
+   "old": "_o2",
+   "new": "entries_",
+   "classes": [
+    "_zY_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_09B_",
+   "new": "setPlayers",
+   "classes": [
+    "_zY_"
+   ],
+   "users": true
+  },
+  {
+   "old": "_hS_",
+   "new": "buildData",
+   "classes": [
+    "_fM_"
+   ],
+   "users": true
+  },
+  {
+   "old": "_be",
+   "new": "TOOLTIP_WIDTH",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_K_z",
+   "new": "HANGING_INDENT_CSS",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_N_W_",
+   "new": "restrictionsToHtml",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_5U_",
+   "new": "icon_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_P_V_",
+   "new": "nameText_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_g1_",
+   "new": "namePrefixText_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_V_0",
+   "new": "tierText_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_C_G_",
+   "new": "descriptionText_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_f8",
+   "new": "statsText_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_tF_",
+   "new": "restrictionsText_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_fT_",
+   "new": "specialInfoText_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_Y_X_",
+   "new": "playerHasSlot_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_0G_J_",
+   "new": "playerCanUse_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_I_z",
+   "new": "itemXml_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_uW_",
+   "new": "slotHandlers_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_Q_O_",
+   "new": "restrictions_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_O_Q_",
+   "new": "specialInfo_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_a2",
+   "new": "effects_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_0A_f",
+   "new": "slotType_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_sJ_",
+   "new": "containerType_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_J_9",
+   "new": "ownerId_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_G_H_",
+   "new": "stackCount_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_bs",
+   "new": "ownedByPlayer_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_02N_",
+   "new": "nextY_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_gE_",
+   "new": "slotData_",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_41",
+   "new": "effectsToHtml",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_tO_",
+   "new": "isPermaPetItem",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_02c",
+   "new": "isSlotEmpty",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  }
+ ],
+ "locals": {
+  "auto": true,
+  "overrides": [
+   {
+    "class": "EquipmentToolTip",
+    "func": "EquipmentToolTip",
+    "old": "_arg1",
+    "new": "objectType"
+   },
+   {
+    "class": "EquipmentToolTip",
+    "func": "EquipmentToolTip",
+    "old": "_arg3",
+    "new": "containerType"
+   },
+   {
+    "class": "EquipmentToolTip",
+    "func": "EquipmentToolTip",
+    "old": "_arg4",
+    "new": "ownerId"
+   },
+   {
+    "class": "EquipmentToolTip",
+    "func": "EquipmentToolTip",
+    "old": "_arg5",
+    "new": "stackCount"
+   },
+   {
+    "class": "EquipmentToolTip",
+    "func": "EquipmentToolTip",
+    "old": "_arg6",
+    "new": "ownedByPlayer"
+   },
+   {
+    "class": "EquipmentToolTip",
+    "func": "EquipmentToolTip",
+    "old": "_arg7",
+    "new": "itemData"
+   },
+   {
+    "class": "EquipmentToolTip",
+    "func": "addLine",
+    "old": "_arg1",
+    "new": "lineY"
+   },
+   {
+    "class": "EquipmentToolTip",
+    "func": "addLine",
+    "old": "_arg2",
+    "new": "lineIndex"
+   }
+  ]
+ }
+}

@@ -15,7 +15,7 @@ import flash.display.BitmapData;
 
 import flash.display.Shape;
 
-import _E_7._zY_;
+import com.company.assembleegameclient.ui.tooltip.PlayerListToolTip;
 
 import _0D_B_._06M_;
 
@@ -130,7 +130,7 @@ public class _ej extends Sprite {
     public var _1_:Sprite;
     public var _tk:Sprite;
     private var _68:Boolean = false;
-    private var toolTip_:_zY_ = null;
+    private var toolTip_:PlayerListToolTip = null;
     private var _0G_Y_:_06M_ = null;
     private var _6q:Matrix;
     private var _P_T_:Matrix;
@@ -271,11 +271,11 @@ public class _ej extends Sprite {
         }
         if (this._nC_.length != 0) {
             if (this.toolTip_ == null) {
-                this.toolTip_ = new _zY_(this._nC_);
+                this.toolTip_ = new PlayerListToolTip(this._nC_);
                 stage.addChild(this.toolTip_);
             } else {
                 if (!this._while(this.toolTip_._nC_, this._nC_)) {
-                    this.toolTip_._09B_(this._nC_);
+                    this.toolTip_.setPlayers(this._nC_);
                 }
             }
         } else {

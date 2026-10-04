@@ -4,7 +4,7 @@ package _nA_ {
 
   import _0L_C_._qO_;
 
-  import _E_7._aS_;
+  import com.company.assembleegameclient.ui.tooltip.TitleDescriptionToolTip;
 
   import _F_1._C_Q_;
 
@@ -52,7 +52,7 @@ public class _xI_ extends Sprite {
     private var image_:BitmapData;
     private var text_:SimpleText;
     private var useImg_:Boolean;
-    private var _xd_:_aS_ = new _aS_(0x2A2A2A, 0x9B9B9B, "Halloween Raid", "To access it simply type /raid hw!", 200);
+    private var _xd_:TitleDescriptionToolTip = new TitleDescriptionToolTip(0x2A2A2A, 0x9B9B9B, "Halloween Raid", "To access it simply type /raid hw!", 200);
 
     private var action_:String;
     private var actions:Array = ['UPDATE', 'DONATE', 'DISCORD', 'RAID'];

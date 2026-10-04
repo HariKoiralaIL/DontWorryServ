@@ -6,7 +6,7 @@
 package com.company.assembleegameclient.ui {
 import flash.display.Sprite;
 
-import _E_7._for_;
+import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 import com.company.assembleegameclient.game.GameSprite;
 import com.company.ui.SimpleText;
@@ -17,7 +17,7 @@ import flash.filters.DropShadowFilter;
 import flash.events.MouseEvent;
 import flash.events.Event;
 
-import _E_7.EquipmentToolTip;
+import com.company.assembleegameclient.ui.tooltip.EquipmentToolTip;
 
 import _ke._U_c;
 
@@ -44,7 +44,7 @@ public class _eb extends Sprite {
     public static const _Q_p:int = 2;
     public static const _iR_:int = 3;
 
-    private static var _fO_:_for_ = null;
+    private static var _fO_:ToolTip = null;
 
     public function _eb(_arg1:GameSprite, _arg2:String, _arg3:Vector.<_35>, _arg4:Boolean) {
         var _local6:_35;
@@ -176,7 +176,7 @@ public class _eb extends Sprite {
         }
     }
 
-    private function _V_B_(_arg1:_for_):void {
+    private function _V_B_(_arg1:ToolTip):void {
         this._X_S_();
         _fO_ = _arg1;
         if (_fO_ != null) {

@@ -1,0 +1,792 @@
+{
+ "batch": [
+  "_U_y",
+  "_09A_",
+  "_M_K_",
+  "_A_Y_",
+  "_zr",
+  "_04E_",
+  "_implements",
+  "_L_m",
+  "_F_o",
+  "_oE_",
+  "_J_5",
+  "_M_",
+  "_X_7",
+  "_vD_",
+  "_5q",
+  "_W_C_",
+  "_xA_6",
+  "SlotTooltipData",
+  "SlotHandlers",
+  "EquipmentToolTip",
+  "TooltipText",
+  "TitleDescriptionToolTip",
+  "PlayerListToolTip"
+ ],
+ "package_map": {
+  "_05H_": "com.company.assembleegameclient.ui.tooltip.handlers"
+ },
+ "classes": {
+  "_U_y": "SlotStatHandler",
+  "_09A_": "WeaponStatHandler",
+  "_M_K_": "ArmorStatHandler",
+  "_A_Y_": "TomeStatHandler",
+  "_zr": "ShieldStatHandler",
+  "_04E_": "SpellStatHandler",
+  "_implements": "SealStatHandler",
+  "_L_m": "CloakStatHandler",
+  "_F_o": "QuiverStatHandler",
+  "_oE_": "HelmStatHandler",
+  "_J_5": "PoisonStatHandler",
+  "_M_": "SkullStatHandler",
+  "_X_7": "TrapStatHandler",
+  "_vD_": "OrbStatHandler",
+  "_5q": "PrismStatHandler",
+  "_W_C_": "ScepterStatHandler",
+  "_xA_6": "EmptyStatHandler"
+ },
+ "members": [
+  {
+   "old": "_rJ_",
+   "new": "GREEN",
+   "classes": [
+    "_U_y",
+    "_09A_",
+    "_M_K_",
+    "_A_Y_",
+    "_zr",
+    "_04E_",
+    "_implements",
+    "_L_m",
+    "_F_o",
+    "_oE_",
+    "_J_5",
+    "_M_",
+    "_X_7",
+    "_vD_",
+    "_5q",
+    "_W_C_",
+    "_xA_6",
+    "SlotTooltipData",
+    "SlotHandlers"
+   ],
+   "users": true
+  },
+  {
+   "old": "_at",
+   "new": "RED",
+   "classes": [
+    "_U_y",
+    "_09A_",
+    "_M_K_",
+    "_A_Y_",
+    "_zr",
+    "_04E_",
+    "_implements",
+    "_L_m",
+    "_F_o",
+    "_oE_",
+    "_J_5",
+    "_M_",
+    "_X_7",
+    "_vD_",
+    "_5q",
+    "_W_C_",
+    "_xA_6",
+    "SlotTooltipData",
+    "SlotHandlers"
+   ],
+   "users": true
+  },
+  {
+   "old": "_iF_",
+   "new": "YELLOW",
+   "classes": [
+    "_U_y",
+    "_09A_",
+    "_M_K_",
+    "_A_Y_",
+    "_zr",
+    "_04E_",
+    "_implements",
+    "_L_m",
+    "_F_o",
+    "_oE_",
+    "_J_5",
+    "_M_",
+    "_X_7",
+    "_vD_",
+    "_5q",
+    "_W_C_",
+    "_xA_6",
+    "SlotTooltipData",
+    "SlotHandlers"
+   ],
+   "users": true
+  },
+  {
+   "old": "_u8",
+   "new": "GRAY",
+   "classes": [
+    "_U_y",
+    "_09A_",
+    "_M_K_",
+    "_A_Y_",
+    "_zr",
+    "_04E_",
+    "_implements",
+    "_L_m",
+    "_F_o",
+    "_oE_",
+    "_J_5",
+    "_M_",
+    "_X_7",
+    "_vD_",
+    "_5q",
+    "_W_C_",
+    "_xA_6",
+    "SlotTooltipData",
+    "SlotHandlers"
+   ],
+   "users": true
+  },
+  {
+   "old": "_0C_1",
+   "new": "PURPLE",
+   "classes": [
+    "_U_y",
+    "_09A_",
+    "_M_K_",
+    "_A_Y_",
+    "_zr",
+    "_04E_",
+    "_implements",
+    "_L_m",
+    "_F_o",
+    "_oE_",
+    "_J_5",
+    "_M_",
+    "_X_7",
+    "_vD_",
+    "_5q",
+    "_W_C_",
+    "_xA_6",
+    "SlotTooltipData",
+    "SlotHandlers"
+   ],
+   "users": true
+  },
+  {
+   "old": "_5n",
+   "new": "handledXml",
+   "classes": [
+    "_U_y",
+    "_09A_",
+    "_M_K_",
+    "_A_Y_",
+    "_zr",
+    "_04E_",
+    "_implements",
+    "_L_m",
+    "_F_o",
+    "_oE_",
+    "_J_5",
+    "_M_",
+    "_X_7",
+    "_vD_",
+    "_5q",
+    "_W_C_",
+    "_xA_6",
+    "SlotTooltipData",
+    "SlotHandlers"
+   ],
+   "users": true
+  },
+  {
+   "old": "_P_3",
+   "new": "onEquipText",
+   "classes": [
+    "_U_y",
+    "_09A_",
+    "_M_K_",
+    "_A_Y_",
+    "_zr",
+    "_04E_",
+    "_implements",
+    "_L_m",
+    "_F_o",
+    "_oE_",
+    "_J_5",
+    "_M_",
+    "_X_7",
+    "_vD_",
+    "_5q",
+    "_W_C_",
+    "_xA_6",
+    "SlotTooltipData",
+    "SlotHandlers"
+   ],
+   "users": true
+  },
+  {
+   "old": "_t4",
+   "new": "tooltipText",
+   "classes": [
+    "_U_y",
+    "_09A_",
+    "_M_K_",
+    "_A_Y_",
+    "_zr",
+    "_04E_",
+    "_implements",
+    "_L_m",
+    "_F_o",
+    "_oE_",
+    "_J_5",
+    "_M_",
+    "_X_7",
+    "_vD_",
+    "_5q",
+    "_W_C_",
+    "_xA_6",
+    "SlotTooltipData",
+    "SlotHandlers"
+   ],
+   "users": true
+  },
+  {
+   "old": "_N_Q_",
+   "new": "compare",
+   "classes": [
+    "_U_y",
+    "_09A_",
+    "_M_K_",
+    "_A_Y_",
+    "_zr",
+    "_04E_",
+    "_implements",
+    "_L_m",
+    "_F_o",
+    "_oE_",
+    "_J_5",
+    "_M_",
+    "_X_7",
+    "_vD_",
+    "_5q",
+    "_W_C_",
+    "_xA_6",
+    "SlotTooltipData",
+    "SlotHandlers"
+   ],
+   "users": true
+  },
+  {
+   "old": "_NQ_d_",
+   "new": "compareWithData",
+   "classes": [
+    "_U_y",
+    "_09A_",
+    "_M_K_",
+    "_A_Y_",
+    "_zr",
+    "_04E_",
+    "_implements",
+    "_L_m",
+    "_F_o",
+    "_oE_",
+    "_J_5",
+    "_M_",
+    "_X_7",
+    "_vD_",
+    "_5q",
+    "_W_C_",
+    "_xA_6",
+    "SlotTooltipData",
+    "SlotHandlers"
+   ],
+   "users": true
+  },
+  {
+   "old": "_qy",
+   "new": "compareColor",
+   "classes": [
+    "_U_y",
+    "_09A_",
+    "_M_K_",
+    "_A_Y_",
+    "_zr",
+    "_04E_",
+    "_implements",
+    "_L_m",
+    "_F_o",
+    "_oE_",
+    "_J_5",
+    "_M_",
+    "_X_7",
+    "_vD_",
+    "_5q",
+    "_W_C_",
+    "_xA_6",
+    "SlotTooltipData",
+    "SlotHandlers"
+   ],
+   "users": true
+  },
+  {
+   "old": "_qF_",
+   "new": "colorize",
+   "classes": [
+    "_U_y",
+    "_09A_",
+    "_M_K_",
+    "_A_Y_",
+    "_zr",
+    "_04E_",
+    "_implements",
+    "_L_m",
+    "_F_o",
+    "_oE_",
+    "_J_5",
+    "_M_",
+    "_X_7",
+    "_vD_",
+    "_5q",
+    "_W_C_",
+    "_xA_6",
+    "SlotTooltipData",
+    "SlotHandlers"
+   ],
+   "users": true
+  },
+  {
+   "old": "_X_C_",
+   "new": "mpCostLine",
+   "classes": [
+    "_U_y",
+    "_09A_",
+    "_M_K_",
+    "_A_Y_",
+    "_zr",
+    "_04E_",
+    "_implements",
+    "_L_m",
+    "_F_o",
+    "_oE_",
+    "_J_5",
+    "_M_",
+    "_X_7",
+    "_vD_",
+    "_5q",
+    "_W_C_",
+    "_xA_6",
+    "SlotTooltipData",
+    "SlotHandlers"
+   ],
+   "users": true
+  },
+  {
+   "old": "_09d",
+   "new": "reset",
+   "classes": [
+    "_U_y",
+    "_09A_",
+    "_M_K_",
+    "_A_Y_",
+    "_zr",
+    "_04E_",
+    "_implements",
+    "_L_m",
+    "_F_o",
+    "_oE_",
+    "_J_5",
+    "_M_",
+    "_X_7",
+    "_vD_",
+    "_5q",
+    "_W_C_",
+    "_xA_6",
+    "SlotTooltipData",
+    "SlotHandlers"
+   ],
+   "users": true
+  },
+  {
+   "old": "_5n",
+   "new": "handledXml",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_P_3",
+   "new": "onEquipText",
+   "classes": [
+    "EquipmentToolTip"
+   ],
+   "users": false
+  },
+  {
+   "old": "_rJ_",
+   "new": "GREEN",
+   "classes": [
+    "TooltipText"
+   ],
+   "users": true
+  },
+  {
+   "old": "_at",
+   "new": "RED",
+   "classes": [
+    "TooltipText"
+   ],
+   "users": true
+  },
+  {
+   "old": "_iF_",
+   "new": "YELLOW",
+   "classes": [
+    "TooltipText"
+   ],
+   "users": true
+  },
+  {
+   "old": "_qy",
+   "new": "compareColor",
+   "classes": [
+    "TooltipText"
+   ],
+   "users": true
+  },
+  {
+   "old": "_E_y",
+   "new": "projectileXml",
+   "classes": [
+    "_09A_",
+    "_04E_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_0F_j",
+   "new": "curProjectileXml",
+   "classes": [
+    "_09A_",
+    "_04E_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_go",
+   "new": "numShotsLine",
+   "classes": [
+    "_09A_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_56",
+   "new": "rangeLines",
+   "classes": [
+    "_09A_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_wD_",
+   "new": "damageLine",
+   "classes": [
+    "_09A_",
+    "_04E_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_R_J_",
+   "new": "rateOfFireLine",
+   "classes": [
+    "_09A_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_M_l",
+   "new": "rangeLine",
+   "classes": [
+    "_04E_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_7_",
+   "new": "weaponHandler",
+   "classes": [
+    "_zr",
+    "_F_o"
+   ],
+   "users": false
+  },
+  {
+   "old": "_04S_",
+   "new": "addOgmurEffect",
+   "classes": [
+    "_zr"
+   ],
+   "users": false
+  },
+  {
+   "old": "_0r",
+   "new": "curCondition",
+   "classes": [
+    "_F_o"
+   ],
+   "users": false
+  },
+  {
+   "old": "_1Q_",
+   "new": "curDecoy",
+   "classes": [
+    "_5q"
+   ],
+   "users": false
+  },
+  {
+   "old": "_sw",
+   "new": "DEFENSE_STAT",
+   "classes": [
+    "_M_K_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_1R_",
+   "new": "defenseTags",
+   "classes": [
+    "_M_K_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_W_6",
+   "new": "curDefenseTags",
+   "classes": [
+    "_M_K_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_iN_",
+   "new": "defenseLine",
+   "classes": [
+    "_M_K_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_06O_",
+   "new": "findInvisibleEffect",
+   "classes": [
+    "_L_m"
+   ],
+   "users": false
+  },
+  {
+   "old": "_it",
+   "new": "invisibleLine",
+   "classes": [
+    "_L_m"
+   ],
+   "users": false
+  },
+  {
+   "old": "_O_J_",
+   "new": "addUniqueEffect",
+   "classes": [
+    "_L_m",
+    "_vD_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_od",
+   "new": "findVampireBlast",
+   "classes": [
+    "_M_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_sZ_",
+   "new": "findTrap",
+   "classes": [
+    "_X_7"
+   ],
+   "users": false
+  },
+  {
+   "old": "_kc",
+   "new": "findStasisBlast",
+   "classes": [
+    "_vD_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_nd",
+   "new": "findAura",
+   "classes": [
+    "_implements"
+   ],
+   "users": false
+  },
+  {
+   "old": "_default",
+   "new": "hasAllAuras",
+   "classes": [
+    "_implements"
+   ],
+   "users": false
+  },
+  {
+   "old": "_W_m",
+   "new": "healingAura",
+   "classes": [
+    "_implements"
+   ],
+   "users": false
+  },
+  {
+   "old": "_Z_x",
+   "new": "damagingAura",
+   "classes": [
+    "_implements"
+   ],
+   "users": false
+  },
+  {
+   "old": "_cO_",
+   "new": "curHealingAura",
+   "classes": [
+    "_implements"
+   ],
+   "users": false
+  },
+  {
+   "old": "_W_M_",
+   "new": "curDamagingAura",
+   "classes": [
+    "_implements"
+   ],
+   "users": false
+  },
+  {
+   "old": "_0H_r",
+   "new": "healingLine",
+   "classes": [
+    "_implements"
+   ],
+   "users": false
+  },
+  {
+   "old": "_C_r",
+   "new": "damagingLine",
+   "classes": [
+    "_implements"
+   ],
+   "users": false
+  },
+  {
+   "old": "_0F_P_",
+   "new": "berserkAura",
+   "classes": [
+    "_oE_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_0N_4",
+   "new": "curBerserkAura",
+   "classes": [
+    "_oE_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_vs",
+   "new": "curSpeedy",
+   "classes": [
+    "_oE_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_08L_",
+   "new": "armored",
+   "classes": [
+    "_oE_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_dw",
+   "new": "curArmored",
+   "classes": [
+    "_oE_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_fH_",
+   "new": "findEffects",
+   "classes": [
+    "_oE_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_jZ_",
+   "new": "findAuraEffect",
+   "classes": [
+    "_oE_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_H_1",
+   "new": "findSelfEffect",
+   "classes": [
+    "_oE_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_gU_",
+   "new": "addBerserkLine",
+   "classes": [
+    "_oE_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_0I_P_",
+   "new": "addSpeedyLine",
+   "classes": [
+    "_oE_"
+   ],
+   "users": false
+  },
+  {
+   "old": "_G_q",
+   "new": "addArmoredLine",
+   "classes": [
+    "_oE_"
+   ],
+   "users": false
+  }
+ ],
+ "locals": {
+  "auto": true,
+  "overrides": []
+ }
+}

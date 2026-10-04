@@ -15,7 +15,7 @@ import _U_5._sT_;
 import _U_5._M_d;
 import _U_5._01W_;
 
-import _E_7._for_;
+import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 import _F_1._C_Q_;
 
@@ -48,7 +48,7 @@ public class _V_M_ extends _cM_ {
         this._H_F_.dispatch();
     }
 
-    private function _Y_Y_(_arg1:_for_):void {
+    private function _Y_Y_(_arg1:ToolTip):void {
         this._0C__.dispatch(_arg1);
     }
 

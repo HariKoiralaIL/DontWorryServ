@@ -10,8 +10,8 @@ import _05R_.GTween;
 
 import _1s._yx;
 
-import _E_7.EquipmentToolTip;
-import _E_7._for_;
+import com.company.assembleegameclient.ui.tooltip.EquipmentToolTip;
+import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 
 import _ke._U_c;
@@ -132,7 +132,7 @@ public class Merchant extends SellableObject implements _G_4 {
         return (_local1.@id.toString());
     }
 
-    override public function getTooltip():_for_ {
+    override public function getTooltip():ToolTip {
         return (new EquipmentToolTip(this._0E_, map_.player_, -1, _U_c.NPC));
     }
 
