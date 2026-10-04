@@ -1,0 +1,5 @@
+To get Item Glow:
+	- Added Glow Handler in: ObjectLibrary.as
+	- Added a static list of Tag to glow color matching
+	- Modified xmls (C:\Users\adven\Downloads\Project-B-Public-master\Project-B-Public-master\client-source\src\zerorealms\rotmg\assets\_items.dat)
+

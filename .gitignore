@@ -1,0 +1,116 @@
+# =========================
+# Executables / binaries
+# =========================
+*.exe
+*.dll
+*.so
+*.a
+*.lib
+*.out
+
+# =========================
+# Build output directories
+# =========================
+client-source/out/
+server-source/bin/
+
+# Common C/C++ build directories
+build/
+bin/
+out/
+Debug/
+Release/
+x64/
+x86/
+
+# =========================
+# Object / intermediate files
+# =========================
+*.o
+*.obj
+*.lo
+*.gch
+*.pch
+
+# =========================
+# CMake generated files
+# =========================
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+
+# =========================
+# Visual Studio
+# =========================
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.VC.opendb
+
+# Visual Studio Code
+.vscode/
+
+# =========================
+# Code::Blocks
+# =========================
+*.depend
+*.layout
+
+# =========================
+# CLion / JetBrains
+# =========================
+.idea/
+
+# =========================
+# MinGW / GCC
+# =========================
+*.d
+*.gcno
+*.gcda
+*.gcov
+
+# =========================
+# Debugging / profiling
+# =========================
+*.pdb
+*.ilk
+*.idb
+*.ipdb
+*.iobj
+
+# =========================
+# Logs / temporary files
+# =========================
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+
+# =========================
+# OS-generated files
+# =========================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Linux
+.directory
+
+# =========================
+# Crash dumps
+# =========================
+*.dmp
+*.core
