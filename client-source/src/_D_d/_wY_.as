@@ -90,10 +90,10 @@ public class _wY_ extends Sprite {
         }
         this._01h._08S_();
         var _local3:_11 = this._09l._p_(_local2.x, _local2.y);
-        var _local4:Vector.<int> = (((_local3 == null)) ? _M_u._0K_Q_ : _local3._5F_);
-        var _local5:String = (((_local4[_M_u._6h] == -1)) ? "None" : _pf._6H_(_local4[_M_u._6h]));
-        var _local6:String = (((_local4[_M_u._S_E_] == -1)) ? "None" : ObjectLibrary._6H_(_local4[_M_u._S_E_]));
-        var _local7:String = (((_local4[_M_u._0G_m] == -1)) ? "None" : _sn._6H_(_local4[_M_u._0G_m]));
+        var _local4:Vector.<int> = (((_local3 == null)) ? MapLayer.EMPTY_TYPES : _local3._5F_);
+        var _local5:String = (((_local4[MapLayer.GROUND] == -1)) ? "None" : _pf._6H_(_local4[MapLayer.GROUND]));
+        var _local6:String = (((_local4[MapLayer.OBJECT] == -1)) ? "None" : ObjectLibrary._6H_(_local4[MapLayer.OBJECT]));
+        var _local7:String = (((_local4[MapLayer.REGION] == -1)) ? "None" : _sn._6H_(_local4[MapLayer.REGION]));
         this._Y_W_.text = (((((((("<span class='in'>" + "Ground: ") + _local5) + "\nObject: ") + _local6) + (((((_local3 == null)) || ((_local3._fi == null)))) ? "" : ((" (" + _local3._fi) + ")"))) + "\nRegion: ") + _local7) + "</span>");
         this._Y_W_._08S_();
     }

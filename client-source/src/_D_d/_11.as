@@ -24,7 +24,7 @@ public class _11 {
 
     public function isEmpty():Boolean {
         var _local1:int;
-        while (_local1 < _M_u._0G_D_) {
+        while (_local1 < MapLayer.NUM_LAYERS) {
             if (this._5F_[_local1] != -1) {
                 return (false);
             }

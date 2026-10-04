@@ -32,7 +32,7 @@ import flash.ui.Keyboard;
 
 import com.company.util._H_V_;
 
-import _D_d._M_u;
+import _D_d.MapLayer;
 
 import com.company.assembleegameclient.map._pf;
 import com.company.assembleegameclient.objects.ObjectLibrary;
@@ -340,20 +340,20 @@ internal class _N_g extends Sprite {
         if (_arg3 == null) {
             return;
         }
-        if (_arg3._5F_[_M_u._6h] != -1) {
-            _local5 = _pf.getBitmapData(_arg3._5F_[_M_u._6h]);
+        if (_arg3._5F_[MapLayer.GROUND] != -1) {
+            _local5 = _pf.getBitmapData(_arg3._5F_[MapLayer.GROUND]);
             this._ym.copyTo(_local5, _local5.rect, _local4);
         }
-        if (_arg3._5F_[_M_u._S_E_] != -1) {
-            _local6 = ObjectLibrary.getTextureFromType(_arg3._5F_[_M_u._S_E_]);
+        if (_arg3._5F_[MapLayer.OBJECT] != -1) {
+            _local6 = ObjectLibrary.getTextureFromType(_arg3._5F_[MapLayer.OBJECT]);
             if ((((_local6 == null)) || ((_local6 == this._F_l)))) {
                 this._ym.copyTo(this._bd, this._bd.rect, _local4);
             } else {
                 this._ym.copyTo(_local6, _local6.rect, _local4);
             }
         }
-        if (_arg3._5F_[_M_u._0G_m] != -1) {
-            _local7 = _sn.getColor(_arg3._5F_[_M_u._0G_m]);
+        if (_arg3._5F_[MapLayer.REGION] != -1) {
+            _local7 = _sn.getColor(_arg3._5F_[MapLayer.REGION]);
             this._0s.setPixel32(_arg1, _arg2, (0x5F000000 | _local7));
         }
     }

@@ -4,7 +4,7 @@
 //_D_d._02i
 
 package _D_d {
-import _D_d._M_u;
+import _D_d.MapLayer;
 
 import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.util._L_2;
@@ -17,8 +17,8 @@ internal class _02i extends _E_m {
         var _local1:String;
         var _local3:int;
         var _local4:XML;
-        var _local5:_Q_H_;
-        super(_M_u._S_E_);
+        var _local5:ObjectElement;
+        super(MapLayer.OBJECT);
         var _local2:Vector.<String> = new Vector.<String>();
         for (_local1 in ObjectLibrary._pb) {
             _local2.push(_local1);
@@ -28,7 +28,7 @@ internal class _02i extends _E_m {
             _local3 = ObjectLibrary._pb[_local1];
             _local4 = ObjectLibrary._Q_F_[_local3];
             if (!((((_local4.hasOwnProperty("Item")) || (_local4.hasOwnProperty("Player")))) || ((_local4.Class == "Projectile")))) {
-                _local5 = new _Q_H_(_local4);
+                _local5 = new ObjectElement(_local4);
                 _08M_(_local5);
             }
         }

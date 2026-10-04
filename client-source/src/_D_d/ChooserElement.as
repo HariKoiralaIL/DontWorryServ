@@ -1,7 +1,7 @@
 ﻿// Decompiled by AS3 Sorcerer 1.99
 // http://www.as3sorcerer.com/
 
-//_D_d._P_u
+//_D_d.ChooserElement
 
 package _D_d {
 import flash.display.Sprite;
@@ -11,36 +11,36 @@ import com.company.assembleegameclient.ui.tooltip.ToolTip;
 import flash.events.Event;
 import flash.events.MouseEvent;
 
-public class _P_u extends Sprite {
+public class ChooserElement extends Sprite {
 
     public static const WIDTH:int = 50;
     public static const HEIGHT:int = 50;
 
     protected static var toolTip_:ToolTip = null;
 
-    public function _P_u(_arg1:int) {
-        this.type_ = _arg1;
+    public function ChooserElement(type:int) {
+        this.type_ = type;
         addEventListener(Event.ADDED_TO_STAGE, this.onAddedToStage);
         addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
     }
     public var type_:int;
     protected var selected_:Boolean = false;
-    protected var _68:Boolean = false;
+    protected var hovered_:Boolean = false;
 
-    public function setSelected(_arg1:Boolean):void {
-        this.selected_ = _arg1;
+    public function setSelected(selected:Boolean):void {
+        this.selected_ = selected;
         this.draw();
     }
 
-    protected function _V_B_(_arg1:ToolTip):void {
-        this._X_S_();
-        toolTip_ = _arg1;
+    protected function showToolTip(toolTip:ToolTip):void {
+        this.hideToolTip();
+        toolTip_ = toolTip;
         if (toolTip_ != null) {
             stage.addChild(toolTip_);
         }
     }
 
-    protected function _X_S_():void {
+    protected function hideToolTip():void {
         if (toolTip_ != null) {
             if (toolTip_.parent != null) {
                 toolTip_.parent.removeChild(toolTip_);
@@ -55,12 +55,12 @@ public class _P_u extends Sprite {
 
     private function draw():void {
         graphics.clear();
-        var _local1:uint = 0x363636;
+        var unusedColor:uint = 0x363636;
         if (this.selected_) {
             graphics.lineStyle(1, 0xFFFFFF);
-            _local1 = 0x7F7F7F;
+            unusedColor = 0x7F7F7F;
         }
-        graphics.beginFill(((this._68) ? 0x565656 : 0x363636), 1);
+        graphics.beginFill(((this.hovered_) ? 0x565656 : 0x363636), 1);
         graphics.drawRect(2, 2, (WIDTH - 4), (HEIGHT - 4));
         if (this.selected_) {
             graphics.lineStyle();
@@ -68,26 +68,26 @@ public class _P_u extends Sprite {
         graphics.endFill();
     }
 
-    private function onAddedToStage(_arg1:Event):void {
+    private function onAddedToStage(event:Event):void {
         addEventListener(MouseEvent.MOUSE_OVER, this.onMouseOver);
         addEventListener(MouseEvent.ROLL_OUT, this.onRollOut);
     }
 
-    private function onRemovedFromStage(_arg1:Event):void {
+    private function onRemovedFromStage(event:Event):void {
         removeEventListener(MouseEvent.MOUSE_OVER, this.onMouseOver);
         removeEventListener(MouseEvent.ROLL_OUT, this.onRollOut);
     }
 
-    private function onMouseOver(_arg1:Event):void {
-        this._68 = true;
+    private function onMouseOver(event:Event):void {
+        this.hovered_ = true;
         this.draw();
-        this._V_B_(this.getToolTip());
+        this.showToolTip(this.getToolTip());
     }
 
-    private function onRollOut(_arg1:Event):void {
-        this._68 = false;
+    private function onRollOut(event:Event):void {
+        this.hovered_ = false;
         this.draw();
-        this._X_S_();
+        this.hideToolTip();
     }
 
 }
