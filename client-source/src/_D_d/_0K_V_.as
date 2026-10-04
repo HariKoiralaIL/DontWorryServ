@@ -182,20 +182,20 @@ public class _0K_V_ extends _05p {
         var _local2:Object = {};
         if (_arg1 != null) {
             _local3 = _arg1._5F_;
-            if (_local3[_M_u._6h] != -1) {
-                _local4 = _pf._6H_(_local3[_M_u._6h]);
+            if (_local3[MapLayer.GROUND] != -1) {
+                _local4 = _pf._6H_(_local3[MapLayer.GROUND]);
                 _local2["ground"] = _local4;
             }
-            if (_local3[_M_u._S_E_] != -1) {
-                _local4 = ObjectLibrary._6H_(_local3[_M_u._S_E_]);
+            if (_local3[MapLayer.OBJECT] != -1) {
+                _local4 = ObjectLibrary._6H_(_local3[MapLayer.OBJECT]);
                 _local5 = {"id": _local4};
                 if (_arg1._fi != null) {
                     _local5["name"] = _arg1._fi;
                 }
                 _local2["objs"] = [_local5];
             }
-            if (_local3[_M_u._0G_m] != -1) {
-                _local4 = _sn._6H_(_local3[_M_u._0G_m]);
+            if (_local3[MapLayer.REGION] != -1) {
+                _local4 = _sn._6H_(_local3[MapLayer.REGION]);
                 _local2["regions"] = [
                     {"id": _local4}
                 ];
@@ -342,14 +342,14 @@ public class _0K_V_ extends _05p {
                 _local12 = _local7[_local8.readShort()];
                 if (_local12.hasOwnProperty("ground")) {
                     _local9 = _pf._pb[_local12["ground"]];
-                    this._09l._2F_(_local11, _local10, _M_u._6h, _local9);
+                    this._09l._2F_(_local11, _local10, MapLayer.GROUND, _local9);
                 }
                 _local13 = _local12["objs"];
                 if (_local13 != null) {
                     for each (_local15 in _local13) {
                         if (ObjectLibrary._pb.hasOwnProperty(_local15["id"])) {
                             _local9 = ObjectLibrary._pb[_local15["id"]];
-                            this._09l._2F_(_local11, _local10, _M_u._S_E_, _local9);
+                            this._09l._2F_(_local11, _local10, MapLayer.OBJECT, _local9);
                             if (_local15.hasOwnProperty("name")) {
                                 this._09l._N_F_(_local11, _local10, _local15["name"]);
                             }
@@ -360,7 +360,7 @@ public class _0K_V_ extends _05p {
                 if (_local14 != null) {
                     for each (_local16 in _local14) {
                         _local9 = _sn._pb[_local16["id"]];
-                        this._09l._2F_(_local11, _local10, _M_u._0G_m, _local9);
+                        this._09l._2F_(_local11, _local10, MapLayer.REGION, _local9);
                     }
                 }
                 _local11++;
