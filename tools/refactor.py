@@ -3,7 +3,8 @@
 usage: refactor.py SPEC.json [--src client-source/src] [--dry]
 Spec keys:
   package_map : {oldPkg: newPkg}                (moves dirs, rewrites package/import/FQN)
-  classes     : {oldClass: newClass}            (global; class names are unique repo-wide)
+  classes     : {oldClass: newClass}            (global unless listed in class_scope)
+  class_scope : {oldClass: dirUnderSrc}         (restrict a class rename to one dir; use when the token is also a member name elsewhere)
   members     : [{old,new,files:[oldClassName,...]|"*"}]   files = classes whose files get the rename;
                 "*" = every file (only for tokens declared in exactly one file)
   locals      : {"auto": true, "scope": [oldClassNames], "overrides": [{class,func,old,new}]}
@@ -47,9 +48,12 @@ W = lambda tok: re.compile(r'(?<![\w$])' + re.escape(tok) + r'(?![\w$])')
 log = collections.defaultdict(list)
 
 # 1. classes (global)
+cscope = spec.get('class_scope', {})   # {oldClass: dirUnderSrc} -> only rewrite files inside that dir (token reused as a member elsewhere)
 for old, new in spec.get('classes', {}).items():
     rx = W(old)
+    pref = os.path.normpath(os.path.join(SRC, cscope[old])) + os.sep if old in cscope else None
     for p, v in files.items():
+        if pref and not os.path.normpath(p).startswith(pref): continue
         n = len(rx.findall(v[0]))
         if n: v[0] = rx.sub(new, v[0]); log['class ' + old].append((p, n))
 
@@ -139,6 +143,7 @@ def functions(s):
     return res, clean
 
 loc = spec.get('locals', {})
+cls_new_ = spec.get('classes', {}); inv_ = {v: k for k, v in cls_new_.items()}
 renamed_locals = 0
 if loc.get('auto'):
     scope = [orig[c] for c in (loc.get('scope') or spec.get('batch', [])) if c in orig]
@@ -154,8 +159,11 @@ if loc.get('auto'):
             for m in re.finditer(r'(?:\(|,|\bvar)\s*(_(?:arg|local)\d+)\s*:\s*([\w.]+(?:\.<[\w.]+>)?)', seg):
                 decl.setdefault(m.group(1), m.group(2))
             names = {}; taken = set()
+            base = os.path.basename(p)[:-3]
+            cls_ok = {base, cls_new_.get(base, base)}
+            fn_ok = {fname, inv_.get(fname, fname)}
             for o in ov:
-                if o['class'] == os.path.basename(p)[:-3] and o['func'] == fname and o['old'] in decl:
+                if o['class'] in cls_ok and o['func'] in fn_ok and (o['old'] in decl or W(o['old']).search(seg)):
                     names[o['old']] = o['new']; taken.add(o['new'])
             for tok, ty in decl.items():
                 if tok in names: continue

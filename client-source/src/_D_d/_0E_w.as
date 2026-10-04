@@ -26,7 +26,7 @@ public class _0E_w extends _P_u {
     public var _hI_:XML;
 
     override protected function getToolTip():ToolTip {
-        return (new _D_M_(this._hI_));
+        return (new RegionToolTip(this._hI_));
     }
 
 }

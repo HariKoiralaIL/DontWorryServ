@@ -20,7 +20,7 @@ import flash.display.BitmapData;
 import com.company.assembleegameclient.map._ik;
 import com.company.assembleegameclient.map._M_X_;
 
-import _D_d._0E_2;
+import _D_d.GroundToolTip;
 
 import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
@@ -51,7 +51,7 @@ internal class _Q_S_ extends _P_u {
     private var _G_m:Shape;
 
     override protected function getToolTip():ToolTip {
-        return (new _0E_2(this._5b));
+        return (new GroundToolTip(this._5b));
     }
 
 }

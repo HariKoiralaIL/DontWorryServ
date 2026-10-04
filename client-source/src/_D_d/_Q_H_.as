@@ -11,7 +11,7 @@ import com.company.assembleegameclient.objects.ObjectLibrary;
 import flash.display.BitmapData;
 import flash.display.Bitmap;
 
-import _D_d._9o;
+import _D_d.ObjectToolTip;
 
 import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
@@ -33,7 +33,7 @@ internal class _Q_H_ extends _P_u {
     public var _J_i:XML;
 
     override protected function getToolTip():ToolTip {
-        return (new _9o(this._J_i));
+        return (new ObjectToolTip(this._J_i));
     }
 
 }
