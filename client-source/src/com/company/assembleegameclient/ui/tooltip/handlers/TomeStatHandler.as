@@ -1,10 +1,10 @@
 ﻿// Decompiled by AS3 Sorcerer 1.99
 // http://www.as3sorcerer.com/
 
-//_05H_._A_Y_
+//com.company.assembleegameclient.ui.tooltip.handlers.TomeStatHandler
 
-package _05H_ {
-public class _A_Y_ extends _U_y {
+package com.company.assembleegameclient.ui.tooltip.handlers {
+public class TomeStatHandler extends SlotStatHandler {
 
     override protected function compareSlots(itemXML:XML, curItemXML:XML):void {
         var nova:XMLList;
@@ -19,7 +19,7 @@ public class _A_Y_ extends _U_y {
         var effectText:String;
         nova = itemXML.Activate.(text() == "HealNova");
         otherNova = curItemXML.Activate.(text() == "HealNova");
-        _t4 = "";
+        tooltipText = "";
         if ((((nova.length() == 1)) && ((otherNova.length() == 1)))) {
             range = int(itemXML.Activate.@range);
             otherRange = int(curItemXML.Activate.@range);
@@ -31,22 +31,22 @@ public class _A_Y_ extends _U_y {
                 range = 6;
             }
             effectText = (((amount + " HP within ") + range) + " sqrs\n");
-            _t4 = (_t4 + ("Party Heal: " + _qF_(effectText, _qy((wavg - otherWavg)))));
-            _5n[nova.toXMLString()] = true;
+            tooltipText = (tooltipText + ("Party Heal: " + colorize(effectText, compareColor((wavg - otherWavg)))));
+            handledXml[nova.toXMLString()] = true;
         }
         if (itemXML.@id == "Tome of Purification") {
             tag = itemXML.Activate.(text() == "RemoveNegativeConditions")[0];
-            _t4 = (_t4 + _qF_("Removes negative conditions\n", _0C_1));
-            _5n[tag.toXMLString()] = true;
+            tooltipText = (tooltipText + colorize("Removes negative conditions\n", PURPLE));
+            handledXml[tag.toXMLString()] = true;
         } else {
             if (itemXML.@id == "Tome of Holy Protection") {
                 tag = itemXML.Activate.(text() == "ConditionEffectSelf")[0];
-                _t4 = (_t4 + ("Effect on Self:\n" + _qF_((("Armored for " + tag.@duration) + " secs\n"), _0C_1)));
-                _5n[tag.toXMLString()] = true;
+                tooltipText = (tooltipText + ("Effect on Self:\n" + colorize((("Armored for " + tag.@duration) + " secs\n"), PURPLE)));
+                handledXml[tag.toXMLString()] = true;
             }
         }
     }
 
 }
-}//package _05H_
+}//package com.company.assembleegameclient.ui.tooltip.handlers
 

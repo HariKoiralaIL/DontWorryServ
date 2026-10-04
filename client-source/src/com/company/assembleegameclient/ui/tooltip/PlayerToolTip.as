@@ -16,10 +16,10 @@ import flash.filters.DropShadowFilter;
 
 public class PlayerToolTip extends ToolTip {
 
-    public function PlayerToolTip(_arg1:Player) {
+    public function PlayerToolTip(player:Player) {
         var _local2:int;
         super(0x2A2A2A, 0.5, 0xFFFFFF, 1);
-        this.player_ = _arg1;
+        this.player_ = player;
         this.playerEntry_ = new ui_playerslist(0xB3B3B3, true, this.player_);
         addChild(this.playerEntry_);
         _local2 = 34;
@@ -28,7 +28,7 @@ public class PlayerToolTip extends ToolTip {
         this.starDisplay_.y = _local2;
         addChild(this.starDisplay_);
         _local2 = (_local2 + 30);
-        if (((!((_arg1.guildName_ == null))) && (!((_arg1.guildName_ == ""))))) {
+        if (((!((player.guildName_ == null))) && (!((player.guildName_ == ""))))) {
             this.guildDisplay_ = new _L_N_(this.player_.guildName_, this.player_.guildRank_, 136);
             this.guildDisplay_.x = 6;
             this.guildDisplay_.y = (_local2 - 2);

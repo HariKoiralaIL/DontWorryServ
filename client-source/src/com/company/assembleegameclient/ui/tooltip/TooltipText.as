@@ -6,9 +6,9 @@
 package com.company.assembleegameclient.ui.tooltip {
 public class TooltipText {
 
-    public static const _rJ_:String = "#00FF00";
-    public static const _at:String = "#FF0000";
-    public static const _iF_:String = "#FFFF8F";
+    public static const GREEN:String = "#00FF00";
+    public static const RED:String = "#FF0000";
+    public static const YELLOW:String = "#FFFF8F";
 
     public static function colorize(_arg1:String, _arg2:String):String {
         return ('<font color="' + _arg2 + '">' + _arg1 + "</font>");
@@ -19,14 +19,14 @@ public class TooltipText {
         return (int(_local2 * 10) == 0 ? int(_arg1).toString() : _arg1.toFixed(1));
     }
 
-    public static function _qy(_arg1:Number):String {
+    public static function compareColor(_arg1:Number):String {
         if (_arg1 < 0) {
-            return (_at);
+            return (RED);
         }
         if (_arg1 > 0) {
-            return (_rJ_);
+            return (GREEN);
         }
-        return (_iF_);
+        return (YELLOW);
     }
 
 }

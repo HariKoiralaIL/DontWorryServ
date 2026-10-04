@@ -10,12 +10,12 @@ public class SlotTooltipData {
 
     public function SlotTooltipData() {
         this.text = "";
-        this._5n = new Dictionary(true);
-        this._P_3 = new Dictionary(true);
+        this.handledXml = new Dictionary(true);
+        this.onEquipText = new Dictionary(true);
     }
     public var text:String;
-    public var _5n:Dictionary;
-    public var _P_3:Dictionary;
+    public var handledXml:Dictionary;
+    public var onEquipText:Dictionary;
 }
 }//package com.company.assembleegameclient.ui.tooltip
 

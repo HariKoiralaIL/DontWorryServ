@@ -1,70 +1,70 @@
 ﻿// Decompiled by AS3 Sorcerer 1.99
 // http://www.as3sorcerer.com/
 
-//_05H_._09A_
+//com.company.assembleegameclient.ui.tooltip.handlers.WeaponStatHandler
 
-package _05H_ {
+package com.company.assembleegameclient.ui.tooltip.handlers {
 import com.company.assembleegameclient.ui.tooltip.TooltipText;
 
-public class _09A_ extends _U_y {
+public class WeaponStatHandler extends SlotStatHandler {
 
     private var itemXML:XML;
     private var curItemXML:XML;
     private var itemData:Object;
     private var curItemData:Object;
-    private var _E_y:XML;
-    private var _0F_j:XML;
+    private var projectileXml:XML;
+    private var curProjectileXml:XML;
 
-    override protected function compareSlotsData(_arg1:XML, _arg2:XML, _arg3:Object, _arg4:Object):void {
+    override protected function compareSlotsData(xml2:XML, xml:XML, _arg3:Object, _arg4:Object):void {
         var _local3:String;
-        this.itemXML = _arg1;
-        this.curItemXML = _arg2;
+        this.itemXML = xml2;
+        this.curItemXML = xml;
         this.itemData = _arg3;
         this.curItemData = _arg4;
         _local3 = "";
-        _t4 = "";
-        if (_arg1.hasOwnProperty("NumProjectiles")) {
-            _local3 = this._go();
-            _t4 = (_t4 + _local3);
-            _5n[_arg1.NumProjectiles.toXMLString()] = _local3;
+        tooltipText = "";
+        if (xml2.hasOwnProperty("NumProjectiles")) {
+            _local3 = this.numShotsLine();
+            tooltipText = (tooltipText + _local3);
+            handledXml[xml2.NumProjectiles.toXMLString()] = _local3;
         }
-        if (_arg1.hasOwnProperty("Projectile")) {
-            _local3 = this._56();
-            _t4 = (_t4 + _local3);
-            _5n[_arg1.Projectile.toXMLString()] = _local3;
+        if (xml2.hasOwnProperty("Projectile")) {
+            _local3 = this.rangeLines();
+            tooltipText = (tooltipText + _local3);
+            handledXml[xml2.Projectile.toXMLString()] = _local3;
         }
-        this._R_J_();
+        this.rateOfFireLine();
     }
 
-    private function _56():String {
-        var _local1:String = this._wD_();
-        var _local2:Number = ((Number(this._E_y.Speed) * Number(this._E_y.LifetimeMS)) / 10000);
-        var _local3:Number = ((Number(this._0F_j.Speed) * Number(this._0F_j.LifetimeMS)) / 10000);
+    private function rangeLines():String {
+        var _local1:String = this.damageLine();
+        var _local2:Number = ((Number(this.projectileXml.Speed) * Number(this.projectileXml.LifetimeMS)) / 10000);
+        var _local3:Number = ((Number(this.curProjectileXml.Speed) * Number(this.curProjectileXml.LifetimeMS)) / 10000);
         var _local4:String = TooltipText.formatNumber(_local2);
-        _local1 = (_local1 + (_qF_("Projectile Range: ", _u8) + _qF_((_local4 + "\n"), _qy((_local2 - _local3)))));
-        if (this._E_y.hasOwnProperty("MultiHit")) {
-            _local1 = (_local1 + _qF_("Shots hit multiple targets\n", _iF_));
+        _local1 = (_local1 + (colorize("Projectile Range: ", GRAY) + colorize((_local4 + "\n"), compareColor((_local2 - _local3)))));
+        if (this.projectileXml.hasOwnProperty("MultiHit")) {
+            _local1 = (_local1 + colorize("Shots hit multiple targets\n", YELLOW));
         }
-        if (this._E_y.hasOwnProperty("PassesCover")) {
-            _local1 = (_local1 + _qF_("Shots pass through obstacles\n", _iF_));
+        if (this.projectileXml.hasOwnProperty("PassesCover")) {
+            _local1 = (_local1 + colorize("Shots pass through obstacles\n", YELLOW));
         }
         return (_local1);
     }
 
-    private function _go():String {
+    private function numShotsLine():String {
         var _local1:int = int(this.itemXML.NumProjectiles);
         var _local2:int = int(this.curItemXML.NumProjectiles);
-        var _local3:String = _qy((_local1 - _local2));
-        return (((_qF_("Number of Shots: ", _u8) + _qF_(_local1.toString(), _local3)) + "\n"));
+        var _local3:String = compareColor((_local1 - _local2));
+        return (((colorize("Number of Shots: ", GRAY) + colorize(_local1.toString(), _local3)) + "\n"));
     }
 
-    private function _wD_():String {
+    private function damageLine():String {
         var _local1:Boolean = false;
         var _local9:int = 0;
         var _local10:int = 0;
-        this._E_y = XML(this.itemXML.Projectile);
-        var _local2:int = int(this._E_y.MinDamage);
-        var _local3:int = int(this._E_y.MaxDamage);
+        this.projectileXml = XML(this.itemXML.Projectile);
+        var _local2:int = int(this.projectileXml.MinDamage);
+        var _local3:int = int(this.projectileXml.MaxDamage);
         var customMin:int = (this.itemData != null && this.itemData.hasOwnProperty("MinDamage")) ? int(this.itemData.MinDamage) : 0;
         var customMax:int = (this.itemData != null && this.itemData.hasOwnProperty("MaxDamage")) ? int(this.itemData.MaxDamage) : 0;
         var addString:String = (customMin != 0 && customMax != 0) ? " <font color=\"#" + (customMin > 0 || customMax > 0 ? "1CABFF" : "FF6863") + "\">(" + (customMin > 0 ? "+" : "-") + customMin + "-" + customMax + " DMG)</font>"
@@ -81,9 +81,9 @@ public class _09A_ extends _U_y {
         }
         var _local4:Number = ((_local3 + _local2) / 2);
         trace(_local4);
-        this._0F_j = XML(this.curItemXML.Projectile);
-        var _local5:int = int(this._0F_j.MinDamage);
-        var _local6:int = int(this._0F_j.MaxDamage);
+        this.curProjectileXml = XML(this.curItemXML.Projectile);
+        var _local5:int = int(this.curProjectileXml.MinDamage);
+        var _local6:int = int(this.curProjectileXml.MaxDamage);
         var customMin2:int = (this.curItemData != null && this.curItemData.hasOwnProperty("MinDamage")) ? int(this.curItemData.MinDamage) : 0;
         var customMax2:int = (this.curItemData != null && this.curItemData.hasOwnProperty("MaxDamage")) ? int(this.curItemData.MaxDamage) : 0;
         _local5 += customMin2;
@@ -99,11 +99,11 @@ public class _09A_ extends _U_y {
         var _local8:String = (((_local2 == _local3)) ? _local2 : ((_local2 + " - ") + _local3)).toString();
         var _local11:int = (_local9 - _local10);
         var _local12:String = (_local9 < 0 ? "-" : "+") + _local9.toString();
-        return (((_qF_("Attack Damage: ", _u8) + _qF_(_local8, _qy((_local4 - _local7)))) + addString + "\n")) +
-                (_local1 ? (_qF_("Damage Multiplier: ", _u8) + _qF_(_local12, _qy(_local11)) + "%\n") : "");
+        return (((colorize("Attack Damage: ", GRAY) + colorize(_local8, compareColor((_local4 - _local7)))) + addString + "\n")) +
+                (_local1 ? (colorize("Damage Multiplier: ", GRAY) + colorize(_local12, compareColor(_local11)) + "%\n") : "");
     }
 
-    private function _R_J_():void {
+    private function rateOfFireLine():void {
         if ((((this.itemXML.RateOfFire.length() == 0)) || ((this.curItemXML.RateOfFire.length() == 0)))) {
             return;
         }
@@ -114,16 +114,16 @@ public class _09A_ extends _U_y {
         if (_local4 == 0) {
             return;
         }
-        var _local5:String = _qy(_local4);
+        var _local5:String = compareColor(_local4);
         var _local6:String = _local4.toString();
         if (_local4 > 0) {
             _local6 = ("+" + _local6);
         }
-        _local6 = _qF_((_local6 + "%"), _local5);
-        _t4 = (_t4 + (("Rate of Fire: " + _local6) + "\n"));
-        _5n[this.itemXML.RateOfFire[0].toXMLString()];
+        _local6 = colorize((_local6 + "%"), _local5);
+        tooltipText = (tooltipText + (("Rate of Fire: " + _local6) + "\n"));
+        handledXml[this.itemXML.RateOfFire[0].toXMLString()];
     }
 
 }
-}//package _05H_
+}//package com.company.assembleegameclient.ui.tooltip.handlers
 

@@ -1,10 +1,10 @@
 ﻿// Decompiled by AS3 Sorcerer 1.99
 // http://www.as3sorcerer.com/
 
-//_05H_._X_7
+//com.company.assembleegameclient.ui.tooltip.handlers.TrapStatHandler
 
-package _05H_ {
-public class _X_7 extends _U_y {
+package com.company.assembleegameclient.ui.tooltip.handlers {
+public class TrapStatHandler extends SlotStatHandler {
 
     override protected function compareSlots(itemXML:XML, curItemXML:XML):void {
         var trap:XML;
@@ -21,15 +21,15 @@ public class _X_7 extends _U_y {
         var otherAvg:Number;
         var textColor:String;
         var compositeHtml:String;
-        trap = this._sZ_(itemXML);
-        otherTrap = this._sZ_(curItemXML);
-        _t4 = "";
+        trap = this.findTrap(itemXML);
+        otherTrap = this.findTrap(curItemXML);
+        tooltipText = "";
         if (((!((trap == null))) && (!((otherTrap == null))))) {
             if (itemXML.@id == "Coral Venom Trap") {
                 tag = itemXML.Activate.(text() == "Trap")[0];
                 text = ((((((tag.@totalDamage + " HP within ") + tag.@radius) + " sqrs\n") + "Paralyzed for ") + tag.@condDuration) + " seconds\n");
-                _t4 = (_t4 + ("Trap: " + _qF_(text, _0C_1)));
-                _5n[tag.toXMLString()] = true;
+                tooltipText = (tooltipText + ("Trap: " + colorize(text, PURPLE)));
+                handledXml[tag.toXMLString()] = true;
             } else {
                 radius = Number(trap.@radius);
                 otherRadius = Number(otherTrap.@radius);
@@ -39,15 +39,15 @@ public class _X_7 extends _U_y {
                 otherDuration = int(otherTrap.@condDuration);
                 avg = (((0.33 * radius) + (0.33 * damage)) + (0.33 * duration));
                 otherAvg = (((0.33 * otherRadius) + (0.33 * otherDamage)) + (0.33 * otherDuration));
-                textColor = _qy((avg - otherAvg));
+                textColor = compareColor((avg - otherAvg));
                 compositeHtml = ((((((damage + " HP within ") + radius) + " sqrs\n") + " Slowed for ") + duration) + " seconds\n");
-                _t4 = (_t4 + ("Trap: " + _qF_(compositeHtml, textColor)));
-                _5n[trap.toXMLString()] = true;
+                tooltipText = (tooltipText + ("Trap: " + colorize(compositeHtml, textColor)));
+                handledXml[trap.toXMLString()] = true;
             }
         }
     }
 
-    private function _sZ_(xml:XML):XML {
+    private function findTrap(xml:XML):XML {
         var matches:XMLList;
         matches = xml.Activate.(text() == "Trap");
         if (matches.length() >= 1) {
@@ -57,5 +57,5 @@ public class _X_7 extends _U_y {
     }
 
 }
-}//package _05H_
+}//package com.company.assembleegameclient.ui.tooltip.handlers
 

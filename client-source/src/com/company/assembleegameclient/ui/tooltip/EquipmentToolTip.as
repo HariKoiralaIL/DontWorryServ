@@ -55,21 +55,21 @@ package com.company.assembleegameclient.ui.tooltip {
       return (_local2);
     }
 
-    public function EquipmentToolTip(_arg1:int, player:Player, containerType:int, ownerId:String, stackCount:uint = 1, ownedByPlayer:Boolean = false, itemData:Object = null) {
+    public function EquipmentToolTip(objectType:int, player:Player, containerType:int, ownerId:String, stackCount:uint = 1, ownedByPlayer:Boolean = false, itemData:Object = null) {
       var _local9:uint;
       this.player_ = player;
       this.ownerId_ = ownerId;
       this.stackCount_ = stackCount;
       this.ownedByPlayer_ = ownedByPlayer;
       this.itemData_ = itemData;
-      this.playerCanUse_ = (player != null ? ObjectLibrary._d1(_arg1, player) : false);
-      this.meetsLevel = ObjectLibrary.checkLevelRequirement(_arg1, player);
+      this.playerCanUse_ = (player != null ? ObjectLibrary._d1(objectType, player) : false);
+      this.meetsLevel = ObjectLibrary.checkLevelRequirement(objectType, player);
       var _local7:uint = ((((this.playerCanUse_ && this.meetsLevel) || ((this.player_ == null)))) ? 0x2A2A2A : 5578255);
       var _local8:uint = ((((this.playerCanUse_ && this.meetsLevel) || ((player == null)))) ? 0x9B9B9B : 10965039);
       super(_local7, 1, _local8, 1, true);
       this.slotHandlers_ = new SlotHandlers();
-      this.objectType_ = _arg1;
-      this.itemXml_ = ObjectLibrary._Q_F_[_arg1];
+      this.objectType_ = objectType;
+      this.itemXml_ = ObjectLibrary._Q_F_[objectType];
       this.playerHasSlot_ = this.player_ != null ? ObjectLibrary._01j(this.objectType_, this.player_) : false;
       this.effects_ = new Vector.<Effect>();
       this.containerType_ = containerType;
@@ -273,30 +273,30 @@ package com.company.assembleegameclient.ui.tooltip {
       addChild(this.nameText_);
     }
 
-    private function addLine(_arg1:int, lineIndex:int):void {
+    private function addLine(lineY:int, lineIndex:int):void {
       switch (lineIndex) {
         case 0:
           this.line_ = new _return((TOOLTIP_WIDTH - 12), 0x2D2D2D);
           this.line_.x = 8;
-          this.line_.y = _arg1;
+          this.line_.y = lineY;
           addChild(this.line_);
           return;
         case 1:
           this.line1_ = new _return((TOOLTIP_WIDTH - 12), 0x2D2D2D);
           this.line1_.x = 8;
-          this.line1_.y = _arg1;
+          this.line1_.y = lineY;
           addChild(this.line1_);
           return;
         case 2:
           this.line2_ = new _return((TOOLTIP_WIDTH - 12), 0x2D2D2D);
           this.line2_.x = 8;
-          this.line2_.y = _arg1;
+          this.line2_.y = lineY;
           addChild(this.line2_);
           return;
         case 3:
           this.line3_ = new _return((TOOLTIP_WIDTH - 12), 0x2D2D2D);
           this.line3_.x = 8;
-          this.line3_.y = _arg1;
+          this.line3_.y = lineY;
           addChild(this.line3_);
           return;
       }
@@ -322,7 +322,7 @@ package com.company.assembleegameclient.ui.tooltip {
     }
 
     private function initProjs():void {
-      if (((this.itemXml_.hasOwnProperty("NumProjectiles")) && (!((this.slotData_._5n.hasOwnProperty(this.itemXml_.NumProjectiles.toXMLString()) == true))))) {
+      if (((this.itemXml_.hasOwnProperty("NumProjectiles")) && (!((this.slotData_.handledXml.hasOwnProperty(this.itemXml_.NumProjectiles.toXMLString()) == true))))) {
         this.effects_.push(new Effect("Number of Shots", this.itemXml_.NumProjectiles));
       }
     }
@@ -335,17 +335,17 @@ package com.company.assembleegameclient.ui.tooltip {
       if (this.itemXml_.hasOwnProperty("FameBonus")) {
         _local1 = int(this.itemXml_.FameBonus);
         _local2 = (_local1 + "%");
-        _local3 = ((this.playerCanUse_ && this.meetsLevel) ? TooltipText._rJ_ : TooltipText._iF_);
+        _local3 = ((this.playerCanUse_ && this.meetsLevel) ? TooltipText.GREEN : TooltipText.YELLOW);
         if (((!((this.curItemXML == null))) && (this.curItemXML.hasOwnProperty("FameBonus")))) {
           _local4 = int(this.curItemXML.FameBonus.text());
-          _local3 = TooltipText._qy((_local1 - _local4));
+          _local3 = TooltipText.compareColor((_local1 - _local4));
         }
         this.effects_.push(new Effect("Fame Bonus", TooltipText.colorize(_local2, _local3)));
       }
     }
 
     private function initMpCost():void {
-      if (this.itemXml_.hasOwnProperty("MpCost") && !this.slotData_._5n[this.itemXml_.MpCost[0].toXMLString()]) {
+      if (this.itemXml_.hasOwnProperty("MpCost") && !this.slotData_.handledXml[this.itemXml_.MpCost[0].toXMLString()]) {
         if (this.itemXml_.hasOwnProperty("MpEndCost"))
           this.effects_.push(new Effect("MP Cost", this.itemXml_.MpEndCost));
         else
@@ -367,7 +367,7 @@ package com.company.assembleegameclient.ui.tooltip {
       var xml2:XML;
       var _local6:Boolean;
       var _local7:int;
-      if (((this.itemXml_.hasOwnProperty("Projectile")) && ((this.slotData_._5n.hasOwnProperty(this.itemXml_.Projectile.toXMLString()) == false)))) {
+      if (((this.itemXml_.hasOwnProperty("Projectile")) && ((this.slotData_.handledXml.hasOwnProperty(this.itemXml_.Projectile.toXMLString()) == false)))) {
         xml = XML(this.itemXml_.Projectile);
         _local2 = int(xml.MinDamage);
         _local3 = int(xml.MaxDamage);
@@ -399,7 +399,7 @@ package com.company.assembleegameclient.ui.tooltip {
           this.effects_.push(new Effect("", "Shots pass through obstacles"));
         }
         for each (xml2 in xml.ConditionEffect) {
-          if (this.slotData_._5n[xml2.toXMLString()] == null) {
+          if (this.slotData_.handledXml[xml2.toXMLString()] == null) {
             this.effects_.push(new Effect("Projectile Effect", (((this.itemXml_.Projectile.ConditionEffect + " for ") + this.itemXml_.Projectile.ConditionEffect.@duration) + " secs")));
           }
         }
@@ -412,7 +412,7 @@ package com.company.assembleegameclient.ui.tooltip {
       var _local3:int;
       var _local4:int;
       for each (xml in this.itemXml_.Activate) {
-        if (this.slotData_._5n[xml.toXMLString()] != true) {
+        if (this.slotData_.handledXml[xml.toXMLString()] != true) {
           var _local6:String = xml.toString();
           switch (_local6) {
             case "ConditionEffectAura":
@@ -492,7 +492,7 @@ package com.company.assembleegameclient.ui.tooltip {
           this.effects_.push(new Effect("On Equip", ""));
           _local2 = false;
         }
-        _local3 = this.slotData_._P_3[xml.toXMLString()];
+        _local3 = this.slotData_.onEquipText[xml.toXMLString()];
         if (_local3 != null) {
           this.effects_.push(new Effect("", (_local3)));
         } else {
@@ -503,11 +503,11 @@ package com.company.assembleegameclient.ui.tooltip {
       }
     }
 
-    private function statHandler(_arg1:XML):String {
-      var _local2:int = int(_arg1.@stat);
-      var _local3:int = int(_arg1.@amount);
+    private function statHandler(xml3:XML):String {
+      var _local2:int = int(xml3.@stat);
+      var _local3:int = int(xml3.@amount);
       var _local4:String = (_local3 > -1) ? "+" : "";
-      return ('<font color="' + textColour(_arg1) + '">' + (_local4 + String(_local3) + " ") + StatData._W_H_(_local2) + '</font>');
+      return ('<font color="' + textColour(xml3) + '">' + (_local4 + String(_local3) + " ") + StatData._W_H_(_local2) + '</font>');
     }
 
     private function textColour(activateXML:XML):String {
@@ -523,7 +523,7 @@ package com.company.assembleegameclient.ui.tooltip {
       if (((!((otherMatches == null))) && ((otherMatches.length() == 1)))) {
         match = XML(otherMatches[0]);
         otherAmount = int(match.@amount);
-        textColor = TooltipText._qy((amount - otherAmount));
+        textColor = TooltipText.compareColor((amount - otherAmount));
       }
       if (amount < 0) {
         textColor = "#FF0000";

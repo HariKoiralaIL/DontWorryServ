@@ -90,7 +90,7 @@ public class ToolTip extends Sprite {
         }
     }
 
-    private function onAddedToStage(_arg1:Event):void {
+    private function onAddedToStage(event:Event):void {
         this.draw();
         if (this.followMouse_) {
             this.position();
@@ -98,13 +98,13 @@ public class ToolTip extends Sprite {
         }
     }
 
-    private function onRemovedFromStage(_arg1:Event):void {
+    private function onRemovedFromStage(event:Event):void {
         if (this.followMouse_) {
             removeEventListener(Event.ENTER_FRAME, this.onEnterFrame);
         }
     }
 
-    private function onEnterFrame(_arg1:Event):void {
+    private function onEnterFrame(event:Event):void {
         this.position();
     }
 

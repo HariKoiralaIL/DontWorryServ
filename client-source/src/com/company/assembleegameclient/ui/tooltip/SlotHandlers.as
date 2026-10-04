@@ -4,31 +4,31 @@
 //com.company.assembleegameclient.ui.tooltip.SlotHandlers
 
 package com.company.assembleegameclient.ui.tooltip {
-import _05H_._09A_;
-import _05H_._M_K_;
+import com.company.assembleegameclient.ui.tooltip.handlers.WeaponStatHandler;
+import com.company.assembleegameclient.ui.tooltip.handlers.ArmorStatHandler;
 
 import com.company.assembleegameclient.ui.Slot;
 
-import _05H_._A_Y_;
-import _05H_._zr;
-import _05H_._04E_;
-import _05H_._implements;
-import _05H_._L_m;
-import _05H_._F_o;
-import _05H_._oE_;
-import _05H_._J_5;
-import _05H_._M_;
-import _05H_._X_7;
-import _05H_._vD_;
-import _05H_._5q;
-import _05H_._W_C_;
-import _05H_._U_y;
+import com.company.assembleegameclient.ui.tooltip.handlers.TomeStatHandler;
+import com.company.assembleegameclient.ui.tooltip.handlers.ShieldStatHandler;
+import com.company.assembleegameclient.ui.tooltip.handlers.SpellStatHandler;
+import com.company.assembleegameclient.ui.tooltip.handlers.SealStatHandler;
+import com.company.assembleegameclient.ui.tooltip.handlers.CloakStatHandler;
+import com.company.assembleegameclient.ui.tooltip.handlers.QuiverStatHandler;
+import com.company.assembleegameclient.ui.tooltip.handlers.HelmStatHandler;
+import com.company.assembleegameclient.ui.tooltip.handlers.PoisonStatHandler;
+import com.company.assembleegameclient.ui.tooltip.handlers.SkullStatHandler;
+import com.company.assembleegameclient.ui.tooltip.handlers.TrapStatHandler;
+import com.company.assembleegameclient.ui.tooltip.handlers.OrbStatHandler;
+import com.company.assembleegameclient.ui.tooltip.handlers.PrismStatHandler;
+import com.company.assembleegameclient.ui.tooltip.handlers.ScepterStatHandler;
+import com.company.assembleegameclient.ui.tooltip.handlers.SlotStatHandler;
 
 public class SlotHandlers {
 
     public function SlotHandlers() {
-        var weapons_:_09A_ = new _09A_();
-        var armors_:_M_K_ = new _M_K_();
+        var weapons_:WeaponStatHandler = new WeaponStatHandler();
+        var armors_:ArmorStatHandler = new ArmorStatHandler();
         this.hash = {};
 
         /* Weapons */
@@ -48,33 +48,33 @@ public class SlotHandlers {
         this.hash[Slot.heavyArmor_] = armors_;
 
         /* Abilities */
-        this.hash[Slot.tome_] = new _A_Y_();
-        this.hash[Slot.shield_] = new _zr();
-        this.hash[Slot.spell_] = new _04E_();
-        this.hash[Slot.holySeal_] = new _implements();
-        this.hash[Slot.cloak_] = new _L_m();
-        this.hash[Slot.quiver_] = new _F_o();
-        this.hash[Slot.helm_] = new _oE_();
-        this.hash[Slot.poison_] = new _J_5();
-        this.hash[Slot.skull_] = new _M_();
-        this.hash[Slot.trap_] = new _X_7();
-        this.hash[Slot.orb_] = new _vD_();
-        this.hash[Slot.prism_] = new _5q();
-        this.hash[Slot.scepter_] = new _W_C_();
-        this.hash[Slot.heart_] = new _oE_();
+        this.hash[Slot.tome_] = new TomeStatHandler();
+        this.hash[Slot.shield_] = new ShieldStatHandler();
+        this.hash[Slot.spell_] = new SpellStatHandler();
+        this.hash[Slot.holySeal_] = new SealStatHandler();
+        this.hash[Slot.cloak_] = new CloakStatHandler();
+        this.hash[Slot.quiver_] = new QuiverStatHandler();
+        this.hash[Slot.helm_] = new HelmStatHandler();
+        this.hash[Slot.poison_] = new PoisonStatHandler();
+        this.hash[Slot.skull_] = new SkullStatHandler();
+        this.hash[Slot.trap_] = new TrapStatHandler();
+        this.hash[Slot.orb_] = new OrbStatHandler();
+        this.hash[Slot.prism_] = new PrismStatHandler();
+        this.hash[Slot.scepter_] = new ScepterStatHandler();
+        this.hash[Slot.heart_] = new HelmStatHandler();
     }
     private var hash:Object;
 
-    public function buildData(_arg1:XML, xml:XML, _arg3:Object, _arg4:Object):SlotTooltipData {
-        var _local3:int = int(_arg1.SlotType);
-        var _U_y2:_U_y = this.hash[_local3];
+    public function buildData(xml2:XML, xml:XML, _arg3:Object, _arg4:Object):SlotTooltipData {
+        var _local3:int = int(xml2.SlotType);
+        var _U_y2:SlotStatHandler = this.hash[_local3];
         var slotTooltipData:SlotTooltipData = new SlotTooltipData();
         if (_U_y2 != null) {
-            _U_y2._N_Q_(_arg1, xml);
-            _U_y2._NQ_d_(_arg1, xml, _arg3, _arg4);
-            slotTooltipData.text = _U_y2._t4;
-            slotTooltipData._5n = _U_y2._5n;
-            slotTooltipData._P_3 = _U_y2._P_3;
+            _U_y2._N_Q_(xml2, xml);
+            _U_y2.compareWithData(xml2, xml, _arg3, _arg4);
+            slotTooltipData.text = _U_y2.tooltipText;
+            slotTooltipData.handledXml = _U_y2.handledXml;
+            slotTooltipData.onEquipText = _U_y2.onEquipText;
         }
         return (slotTooltipData);
     }

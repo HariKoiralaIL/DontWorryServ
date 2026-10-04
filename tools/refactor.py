@@ -149,7 +149,7 @@ if loc.get('auto'):
         edits = []   # (start,end,newtext)
         newtext = list(t)
         for fname, s0, e0 in fns:
-            seg = clean[s0:e0]
+            seg = clean[s0 - 1:e0]
             decl = {}
             for m in re.finditer(r'(?:\(|,|\bvar)\s*(_(?:arg|local)\d+)\s*:\s*([\w.]+(?:\.<[\w.]+>)?)', seg):
                 decl.setdefault(m.group(1), m.group(2))

@@ -13,7 +13,7 @@ import com.company.assembleegameclient.objects.GameObject;
 
 public class QuestToolTip extends ToolTip {
 
-    public function QuestToolTip(_arg1:GameObject) {
+    public function QuestToolTip(gameObject:GameObject) {
         super(6036765, 1, 16549442, 1, false);
         this.text_ = new SimpleText(22, 16549442, false, 0, 0, "Myriad Pro");
         this.text_.setBold(true);
@@ -23,7 +23,7 @@ public class QuestToolTip extends ToolTip {
         this.text_.x = 0;
         this.text_.y = 0;
         addChild(this.text_);
-        this.playerEntry_ = new ui_playerslist(0xB3B3B3, true, _arg1);
+        this.playerEntry_ = new ui_playerslist(0xB3B3B3, true, gameObject);
         this.playerEntry_.x = 0;
         this.playerEntry_.y = 32;
         addChild(this.playerEntry_);

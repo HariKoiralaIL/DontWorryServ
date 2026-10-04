@@ -1,10 +1,10 @@
 ﻿// Decompiled by AS3 Sorcerer 1.99
 // http://www.as3sorcerer.com/
 
-//_05H_._J_5
+//com.company.assembleegameclient.ui.tooltip.handlers.PoisonStatHandler
 
-package _05H_ {
-public class _J_5 extends _U_y {
+package com.company.assembleegameclient.ui.tooltip.handlers {
+public class PoisonStatHandler extends SlotStatHandler {
 
     override protected function compareSlots(itemXML:XML, curItemXML:XML):void {
         var activate:XMLList;
@@ -20,7 +20,7 @@ public class _J_5 extends _U_y {
         var text:String;
         activate = itemXML.Activate.(text() == "PoisonGrenade");
         otherActivate = curItemXML.Activate.(text() == "PoisonGrenade");
-        _t4 = "";
+        tooltipText = "";
         if ((((activate.length() == 1)) && ((otherActivate.length() == 1)))) {
             damage = int(activate[0].@totalDamage);
             otherDamage = int(otherActivate[0].@totalDamage);
@@ -31,11 +31,11 @@ public class _J_5 extends _U_y {
             avg = (((0.33 * damage) + (0.33 * radius)) + (0.33 * duration));
             otherAvg = (((0.33 * otherDamage) + (0.33 * otherRadius)) + (0.33 * otherDuration));
             text = (((((damage + " HP over ") + duration) + " secs within ") + radius) + " sqrs\n");
-            _t4 = (_t4 + ("Poison Grenade: " + _qF_(text, _qy((avg - otherAvg)))));
-            _5n[activate[0].toXMLString()] = true;
+            tooltipText = (tooltipText + ("Poison Grenade: " + colorize(text, compareColor((avg - otherAvg)))));
+            handledXml[activate[0].toXMLString()] = true;
         }
     }
 
 }
-}//package _05H_
+}//package com.company.assembleegameclient.ui.tooltip.handlers
 

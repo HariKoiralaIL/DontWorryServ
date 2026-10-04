@@ -1,10 +1,10 @@
 ﻿// Decompiled by AS3 Sorcerer 1.99
 // http://www.as3sorcerer.com/
 
-//_05H_._W_C_
+//com.company.assembleegameclient.ui.tooltip.handlers.ScepterStatHandler
 
-package _05H_ {
-public class _W_C_ extends _U_y {
+package com.company.assembleegameclient.ui.tooltip.handlers {
+public class ScepterStatHandler extends SlotStatHandler {
 
     override protected function compareSlots(itemXML:XML, curItemXML:XML):void {
         var result:XMLList;
@@ -20,25 +20,25 @@ public class _W_C_ extends _U_y {
         var htmlStr:String;
         result = itemXML.Activate.(text() == "Lightning");
         otherResult = curItemXML.Activate.(text() == "Lightning");
-        _t4 = "";
+        tooltipText = "";
         if ((((result.length() == 1)) && ((otherResult.length() == 1)))) {
             damage = int(result[0].@totalDamage);
             otherDamage = int(otherResult[0].@totalDamage);
-            textColor = _qy((damage - otherDamage));
+            textColor = compareColor((damage - otherDamage));
             targets = int(result[0].@maxTargets);
             otherTargets = int(otherResult[0].@maxTargets);
-            _t4 = (_t4 + ("Lightning: " + _qF_((((damage + " to ") + targets) + " targets\n"), _qy((damage - otherDamage)))));
-            _5n[result[0].toXMLString()] = true;
+            tooltipText = (tooltipText + ("Lightning: " + colorize((((damage + " to ") + targets) + " targets\n"), compareColor((damage - otherDamage)))));
+            handledXml[result[0].toXMLString()] = true;
         }
         if (itemXML.Activate.@condEffect) {
             condition = itemXML.Activate.@condEffect;
             duration = itemXML.Activate.@condDuration;
             compositeStr = ((((" " + condition) + " for ") + duration) + " secs\n");
-            htmlStr = ("Shot Effect:\n" + _qF_(compositeStr, _iF_));
-            _t4 = (_t4 + htmlStr);
+            htmlStr = ("Shot Effect:\n" + colorize(compositeStr, YELLOW));
+            tooltipText = (tooltipText + htmlStr);
         }
     }
 
 }
-}//package _05H_
+}//package com.company.assembleegameclient.ui.tooltip.handlers
 
