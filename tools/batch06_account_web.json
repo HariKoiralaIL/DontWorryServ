@@ -1,0 +1,40 @@
+{
+ "batch": ["_0H_i", "_02U_", "WebAccount"],
+ "package_map": {"_00g": "com.company.assembleegameclient.account.web"},
+ "classes": {
+  "_0H_i": "PurchaseMediator",
+  "_02U_": "WebPaymentCommand"
+ },
+ "members": [
+  {"old": "_000",  "new": "GAME_NETWORK",         "classes": ["WebAccount"], "users": true},
+  {"old": "_oF_",  "new": "GAME_NETWORK_USER_ID", "classes": ["WebAccount"], "users": false},
+  {"old": "_03R_", "new": "PLAY_PLATFORM",        "classes": ["WebAccount"], "users": false},
+  {"old": "_8U_",  "new": "entryTag_",            "classes": ["WebAccount"], "users": false},
+
+  {"old": "_02Z_", "new": "showPaymentMethods",   "classes": ["_0H_i"], "users": true},
+  {"old": "_04Z_", "new": "purchaseCommand",      "classes": ["_0H_i"], "users": true},
+  {"old": "_8i",   "new": "startPurchase",        "classes": ["_0H_i"], "users": true},
+  {"old": "_d0",   "new": "showBonus",            "classes": ["_0H_i", "_4a"], "users": true},
+
+  {"old": "_0J_E_", "new": "offers",
+   "classes": ["_0H_i", "_px", "_4a", "_0E_v", "_02U_", "_02R_", "_A_R_"], "users": false, "force": true},
+  {"old": "_yI_",  "new": "currencyPrefix",
+   "classes": ["_0H_i", "_4a", "_A__", "_02R_", "_A_R_"], "users": false, "force": true},
+  {"old": "_Q_W_", "new": "currencySuffix",
+   "classes": ["_0H_i", "_4a", "_A__", "_02R_", "_A_R_"], "users": false, "force": true}
+ ],
+ "locals": {
+  "auto": true,
+  "overrides": [
+   {"class": "WebAccount", "func": "internalLoad",      "old": "_arg2",   "new": "callback"},
+   {"class": "WebAccount", "func": "modify",            "old": "_arg1",   "new": "guid"},
+   {"class": "WebAccount", "func": "modify",            "old": "_arg2",   "new": "password"},
+   {"class": "WebAccount", "func": "modify",            "old": "_arg3",   "new": "secret"},
+   {"class": "WebAccount", "func": "reportIntStat",     "old": "_arg1",   "new": "statName"},
+   {"class": "WebAccount", "func": "reportIntStat",     "old": "_arg2",   "new": "value"},
+   {"class": "WebAccount", "func": "showInGameRegister","old": "_local2", "new": "registerDialog"},
+   {"class": "WebPaymentCommand", "func": "execute", "old": "_local1", "new": "method"},
+   {"class": "WebPaymentCommand", "func": "execute", "old": "_local2", "new": "url"}
+  ]
+ }
+}

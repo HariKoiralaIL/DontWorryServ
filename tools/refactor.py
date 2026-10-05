@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Apply a rename spec to the decompiled AS3 client source.
 usage: refactor.py SPEC.json [--src client-source/src] [--dry]
+Member entry flag `force`: skip the shared-token guards (use only after checking each listed file by hand).
 Spec keys:
   package_map : {oldPkg: newPkg}                (moves dirs, rewrites package/import/FQN)
   classes     : {oldClass: newClass}            (global unless listed in class_scope)
@@ -91,6 +92,7 @@ for ent in spec.get('members', []):
     if ent.get('users'):
         for c in ent['classes']: scope |= users[c]
     outside = declared.get(ent['old'], set()) - scope - BATCH
+    if ent.get('force'): outside = set()   # caller verified by hand that every file in `classes` uses the token with one meaning
     if outside and ent.get('users'):
         print('REFUSED (public, shared token) %s -> %s: also declared in %s' % (ent['old'], ent['new'], sorted(outside)[:3])); continue
     if outside:   # token reused by obfuscator elsewhere: only OK if every use inside scope is own-member (bare or this.)

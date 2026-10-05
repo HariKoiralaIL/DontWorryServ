@@ -6,7 +6,7 @@
 package _qN_ {
 import flash.display.LoaderInfo;
 
-import _00g.WebAccount;
+import com.company.assembleegameclient.account.web.WebAccount;
 
 import flash.display.Stage;
 

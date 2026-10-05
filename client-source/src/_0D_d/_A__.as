@@ -34,8 +34,8 @@ public class _A__ extends Sprite implements _xY_ {
 
     public function _A__(_arg1:Offer, _arg2:String, _arg3:String) {
         this.offer = _arg1;
-        this._yI_ = _arg2;
-        this._Q_W_ = _arg3;
+        this.currencyPrefix = _arg2;
+        this.currencySuffix = _arg3;
         this._A_q();
         this._hA_();
         this._k_();
@@ -48,8 +48,8 @@ public class _A__ extends Sprite implements _xY_ {
         addEventListener(MouseEvent.ROLL_OUT, this.onRollOut);
     }
     public var offer:Offer;
-    public var _yI_:String;
-    public var _Q_W_:String;
+    public var currencyPrefix:String;
+    public var currencySuffix:String;
     private var background:_R_h;
     private var container:Sprite;
     private var _01X_:_ii;
@@ -124,7 +124,7 @@ public class _A__ extends Sprite implements _xY_ {
 
     private function _M_M_():void {
         this._fu = new SimpleText(18, 0xFFFFFF, false, 0, 0, "Myriad Pro");
-        this._fu.text = ((this._yI_ + this.offer.price_) + this._Q_W_);
+        this._fu.text = ((this.currencyPrefix + this.offer.price_) + this.currencySuffix);
         this._fu.setBold(true);
         this._fu.updateMetrics();
         this._fu.x = 200;

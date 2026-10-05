@@ -25,16 +25,16 @@ import _mv._F_8;
 public class _4a extends Sprite {
 
     public function _4a(_arg1:Offers, _arg2:String, _arg3:String) {
-        this._0J_E_ = _arg1;
-        this._yI_ = _arg2;
-        this._Q_W_ = _arg3;
+        this.offers = _arg1;
+        this.currencyPrefix = _arg2;
+        this.currencySuffix = _arg3;
         this._08F_();
         this._V_8();
         this._Y_o();
     }
-    private var _0J_E_:Offers;
-    private var _yI_:String;
-    private var _Q_W_:String;
+    private var offers:Offers;
+    private var currencyPrefix:String;
+    private var currencySuffix:String;
     private var _W_P_:Vector.<_A__>;
     private var _rF_:_5P_;
 
@@ -42,7 +42,7 @@ public class _4a extends Sprite {
         return ((this._rF_._rq() as _A__));
     }
 
-    public function _d0(_arg1:Boolean):void {
+    public function showBonus(_arg1:Boolean):void {
         var _local2:int = this._W_P_.length;
         while (_local2--) {
             this._W_P_[_local2].showBonus(_arg1);
@@ -50,17 +50,17 @@ public class _4a extends Sprite {
     }
 
     private function _08F_():void {
-        var _local1:int = this._0J_E_.offerList.length;
+        var _local1:int = this.offers.offerList.length;
         this._W_P_ = new Vector.<_A__>(_local1, true);
         var _local2:int;
         while (_local2 < _local1) {
-            this._W_P_[_local2] = this._i7(this._0J_E_.offerList[_local2]);
+            this._W_P_[_local2] = this._i7(this.offers.offerList[_local2]);
             _local2++;
         }
     }
 
     private function _i7(_arg1:Offer):_A__ {
-        var _local2:_A__ = new _A__(_arg1, this._yI_, this._Q_W_);
+        var _local2:_A__ = new _A__(_arg1, this.currencyPrefix, this.currencySuffix);
         _local2.addEventListener(MouseEvent.CLICK, this._0A_U_);
         addChild(_local2);
         return (_local2);
