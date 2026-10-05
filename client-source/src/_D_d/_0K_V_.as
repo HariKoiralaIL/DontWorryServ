@@ -70,20 +70,20 @@ public class _0K_V_ extends _05p {
         this._mL_.x = 4;
         this._mL_.y = ((600 - _wY_.HEIGHT) - 10);
         addChild(this._mL_);
-        this._mu = new _01c(new <String>["Ground", "Objects", "Regions"], _E_m.WIDTH, 26);
+        this._mu = new _01c(new <String>["Ground", "Objects", "Regions"], Chooser.WIDTH, 26);
         this._mu.x = ((this._09l.x + _N_g._0K_6) + 4);
         this._mu.y = _r0;
         this._mu.addEventListener(Event.CHANGE, this._W_L_);
         addChild(this._mu);
-        this._D_F_ = new _0H_J_();
+        this._D_F_ = new GroundChooser();
         this._D_F_.x = this._mu.x;
         this._D_F_.y = ((this._mu.y + this._mu.height) + 4);
         this._X_4 = this._D_F_;
         addChild(this._D_F_);
-        this._qS_ = new _02i();
+        this._qS_ = new ObjectChooser();
         this._qS_.x = this._mu.x;
         this._qS_.y = ((this._mu.y + this._mu.height) + 4);
-        this._2u = new _4g();
+        this._2u = new RegionChooser();
         this._2u.x = this._mu.x;
         this._2u.y = ((this._mu.y + this._mu.height) + 4);
 
@@ -94,10 +94,10 @@ public class _0K_V_ extends _05p {
     public var _09l:_N_g;
     public var _mL_:_wY_;
     public var _mu:_01c;
-    public var _D_F_:_0H_J_;
-    public var _qS_:_02i;
-    public var _2u:_4g;
-    public var _X_4:_E_m;
+    public var _D_F_:GroundChooser;
+    public var _qS_:ObjectChooser;
+    public var _2u:RegionChooser;
+    public var _X_4:Chooser;
     public var filename_:String = null;
     private var _G_T_:_03X_;
     private var _E_s:FileReference = null;
@@ -212,17 +212,17 @@ public class _0K_V_ extends _05p {
         _local2 = _arg1.tiles_[0];
         switch (this._kg._P_b()) {
             case _H_4._3O_:
-                this._qX_(_arg1.tiles_, this._X_4._09V_, this._X_4._N_T_());
+                this._qX_(_arg1.tiles_, this._X_4.layer_, this._X_4.getSelectedType());
                 break;
             case _H_4._001:
-                this._qX_(_arg1.tiles_, this._X_4._09V_, -1);
+                this._qX_(_arg1.tiles_, this._X_4.layer_, -1);
                 break;
             case _H_4._mt:
-                _local3 = this._09l.getType(_local2.x_, _local2.y_, this._X_4._09V_);
+                _local3 = this._09l.getType(_local2.x_, _local2.y_, this._X_4.layer_);
                 if (_local3 == -1) {
                     return;
                 }
-                this._X_4._mB_(_local3);
+                this._X_4.selectType(_local3);
                 this._kg._0G_A_(_H_4._3O_);
                 break;
             case _H_4._X_V_:

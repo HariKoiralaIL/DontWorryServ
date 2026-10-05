@@ -1,0 +1,50 @@
+{
+ "batch": ["_P_u", "_Q_S_", "_Q_H_", "_0E_w", "_M_u"],
+ "classes": {
+  "_P_u": "ChooserElement",
+  "_Q_S_": "GroundElement",
+  "_Q_H_": "ObjectElement",
+  "_0E_w": "RegionElement",
+  "_M_u": "MapLayer"
+ },
+ "members": [
+  {"old": "_6h",   "new": "GROUND",      "classes": ["_M_u"], "users": true},
+  {"old": "_S_E_", "new": "OBJECT",      "classes": ["_M_u"], "users": true},
+  {"old": "_0G_m", "new": "REGION",      "classes": ["_M_u"], "users": true},
+  {"old": "_0G_D_","new": "NUM_LAYERS",  "classes": ["_M_u"], "users": true},
+  {"old": "_0K_Q_","new": "EMPTY_TYPES", "classes": ["_M_u"], "users": true},
+
+  {"old": "_68",   "new": "hovered_",    "classes": ["_P_u"], "users": false},
+  {"old": "_V_B_", "new": "showToolTip", "classes": ["_P_u"], "users": false},
+  {"old": "_X_S_", "new": "hideToolTip", "classes": ["_P_u"], "users": false},
+
+  {"old": "_5b",   "new": "groundXml_",  "classes": ["_Q_S_"], "users": false},
+  {"old": "_G_m",  "new": "preview_",    "classes": ["_Q_S_"], "users": false},
+  {"old": "_J_c",  "new": "UV_COORDS",   "classes": ["_Q_S_"], "users": false},
+  {"old": "_0L_L_","new": "PREVIEW_SCALE","classes": ["_Q_S_"], "users": false},
+  {"old": "_J_i",  "new": "objectXml_",  "classes": ["_Q_H_"], "users": false},
+  {"old": "_hI_",  "new": "regionXml_",  "classes": ["_0E_w"], "users": false}
+ ],
+ "locals": {
+  "auto": true,
+  "overrides": [
+   {"class": "ChooserElement", "func": "ChooserElement", "old": "_arg1", "new": "type"},
+   {"class": "ChooserElement", "func": "setSelected",    "old": "_arg1", "new": "selected"},
+   {"class": "ChooserElement", "func": "draw",           "old": "_local1", "new": "unusedColor"},
+
+   {"class": "GroundElement", "func": "GroundElement", "old": "_arg1",   "new": "groundXml"},
+   {"class": "GroundElement", "func": "GroundElement", "old": "_local2", "new": "graphicsData"},
+   {"class": "GroundElement", "func": "GroundElement", "old": "_local3", "new": "camera"},
+   {"class": "GroundElement", "func": "GroundElement", "old": "_local4", "new": "texture"},
+   {"class": "GroundElement", "func": "GroundElement", "old": "_local5", "new": "squareFace"},
+
+   {"class": "ObjectElement", "func": "ObjectElement", "old": "_arg1",   "new": "objectXml"},
+   {"class": "ObjectElement", "func": "ObjectElement", "old": "_local2", "new": "texture"},
+   {"class": "ObjectElement", "func": "ObjectElement", "old": "_local3", "new": "bitmap"},
+   {"class": "ObjectElement", "func": "ObjectElement", "old": "_local4", "new": "scale"},
+
+   {"class": "RegionElement", "func": "RegionElement", "old": "_arg1",   "new": "regionXml"},
+   {"class": "RegionElement", "func": "RegionElement", "old": "_local2", "new": "swatch"}
+  ]
+ }
+}

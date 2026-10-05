@@ -1,0 +1,582 @@
+From abdd0bb52617b6ff179416c8196c7973347cdffa Mon Sep 17 00:00:00 2001
+From: refactor <refactor@local>
+Date: Sun, 4 Oct 2026 23:30:58 +0000
+Subject: [PATCH] refactor(client): batch 3 - map editor tooltips (_D_d:
+ _0E_2/_9o/_D_M_ -> Ground/Object/RegionToolTip)
+
+- add class_scope to refactor.py (_0E_2 is also ConditionEffect._0E_2, so the class rename is limited to _D_d)
+- locals overrides now also match untyped locals
+---
+ client-source/src/_D_d/GroundToolTip.as | 65 ++++++++++++++++++
+ client-source/src/_D_d/ObjectToolTip.as | 91 +++++++++++++++++++++++++
+ client-source/src/_D_d/RegionToolTip.as | 32 +++++++++
+ client-source/src/_D_d/_0E_2.as         | 65 ------------------
+ client-source/src/_D_d/_0E_w.as         |  2 +-
+ client-source/src/_D_d/_9o.as           | 91 -------------------------
+ client-source/src/_D_d/_D_M_.as         | 32 ---------
+ client-source/src/_D_d/_Q_H_.as         |  4 +-
+ client-source/src/_D_d/_Q_S_.as         |  4 +-
+ tools/batch03_map_tooltips.json         | 27 ++++++++
+ tools/refactor.py                       | 12 +++-
+ 11 files changed, 230 insertions(+), 195 deletions(-)
+ create mode 100644 client-source/src/_D_d/GroundToolTip.as
+ create mode 100644 client-source/src/_D_d/ObjectToolTip.as
+ create mode 100644 client-source/src/_D_d/RegionToolTip.as
+ delete mode 100644 client-source/src/_D_d/_0E_2.as
+ delete mode 100644 client-source/src/_D_d/_9o.as
+ delete mode 100644 client-source/src/_D_d/_D_M_.as
+ create mode 100644 tools/batch03_map_tooltips.json
+
+diff --git a/client-source/src/_D_d/GroundToolTip.as b/client-source/src/_D_d/GroundToolTip.as
+new file mode 100644
+index 0000000..3f30214
+--- /dev/null
++++ b/client-source/src/_D_d/GroundToolTip.as
+@@ -0,0 +1,65 @@
++﻿// Decompiled by AS3 Sorcerer 1.99
++// http://www.as3sorcerer.com/
++
++//_D_d.GroundToolTip
++
++package _D_d {
++import com.company.assembleegameclient.ui.tooltip.ToolTip;
++
++import com.company.ui.SimpleText;
++
++import flash.filters.DropShadowFilter;
++
++public class GroundToolTip extends ToolTip {
++
++    private static const TOOLTIP_WIDTH:int = 180;
++
++    public function GroundToolTip(groundXml:XML) {
++        super(0x2A2A2A, 1, 0x9B9B9B, 1, true);
++        this.nameText_ = new SimpleText(16, 0xFFFFFF, false, (TOOLTIP_WIDTH - 4), 0, "Myriad Pro");
++        this.nameText_.setBold(true);
++        this.nameText_.wordWrap = true;
++        this.nameText_.text = String(groundXml.@id);
++        this.nameText_._08S_();
++        this.nameText_.filters = [new DropShadowFilter(0, 0, 0, 0.5, 12, 12)];
++        this.nameText_.x = 0;
++        this.nameText_.y = 0;
++        addChild(this.nameText_);
++        var description = "";
++        if (groundXml.hasOwnProperty("Speed")) {
++            description = (description + (("Speed: " + Number(groundXml.Speed).toFixed(2)) + "\n"));
++        } else {
++            description = (description + "Speed: 1.00\n");
++        }
++        if (groundXml.hasOwnProperty("NoWalk")) {
++            description = (description + "Unwalkable\n");
++        }
++        if (groundXml.hasOwnProperty("Push")) {
++            description = (description + "Push\n");
++        }
++        if (groundXml.hasOwnProperty("Sink")) {
++            description = (description + "Sink\n");
++        }
++        if (groundXml.hasOwnProperty("Sinking")) {
++            description = (description + "Sinking\n");
++        }
++        if (groundXml.hasOwnProperty("Animate")) {
++            description = (description + "Animated\n");
++        }
++        if (groundXml.hasOwnProperty("RandomOffset")) {
++            description = (description + "Randomized\n");
++        }
++        this.descriptionText_ = new SimpleText(14, 0xB3B3B3, false, TOOLTIP_WIDTH, 0, "Myriad Pro");
++        this.descriptionText_.wordWrap = true;
++        this.descriptionText_.text = String(description);
++        this.descriptionText_._08S_();
++        this.descriptionText_.filters = [new DropShadowFilter(0, 0, 0, 0.5, 12, 12)];
++        this.descriptionText_.x = 0;
++        this.descriptionText_.y = (this.nameText_.height + 2);
++        addChild(this.descriptionText_);
++    }
++    private var nameText_:SimpleText;
++    private var descriptionText_:SimpleText;
++}
++}//package _D_d
++
+diff --git a/client-source/src/_D_d/ObjectToolTip.as b/client-source/src/_D_d/ObjectToolTip.as
+new file mode 100644
+index 0000000..5330908
+--- /dev/null
++++ b/client-source/src/_D_d/ObjectToolTip.as
+@@ -0,0 +1,91 @@
++﻿// Decompiled by AS3 Sorcerer 1.99
++// http://www.as3sorcerer.com/
++
++//_D_d.ObjectToolTip
++
++package _D_d {
++import com.company.assembleegameclient.ui.tooltip.ToolTip;
++
++import com.company.ui.SimpleText;
++
++import flash.filters.DropShadowFilter;
++
++public class ObjectToolTip extends ToolTip {
++
++    private static const TOOLTIP_WIDTH:int = 180;
++
++    public function ObjectToolTip(objectXml:XML) {
++        var projectileXml:XML;
++        super(0x2A2A2A, 1, 0x9B9B9B, 1, true);
++        this.nameText_ = new SimpleText(16, 0xFFFFFF, false, (TOOLTIP_WIDTH - 4), 0, "Myriad Pro");
++        this.nameText_.setBold(true);
++        this.nameText_.wordWrap = true;
++        this.nameText_.text = String(objectXml.@id);
++        this.nameText_._08S_();
++        this.nameText_.filters = [new DropShadowFilter(0, 0, 0, 0.5, 12, 12)];
++        this.nameText_.x = 0;
++        this.nameText_.y = 0;
++        addChild(this.nameText_);
++        var description = "";
++        if (objectXml.hasOwnProperty("Group")) {
++            description = (description + (("Group: " + objectXml.Group) + "\n"));
++        }
++        if (objectXml.hasOwnProperty("Static")) {
++            description = (description + "Static\n");
++        }
++        if (objectXml.hasOwnProperty("Enemy")) {
++            description = (description + "Enemy\n");
++            if (objectXml.hasOwnProperty("MaxHitPoints")) {
++                description = (description + (("MaxHitPoints: " + objectXml.MaxHitPoints) + "\n"));
++            }
++            if (objectXml.hasOwnProperty("Defense")) {
++                description = (description + (("Defense: " + objectXml.Defense) + "\n"));
++            }
++        }
++        if (objectXml.hasOwnProperty("God")) {
++            description = (description + "God\n");
++        }
++        if (objectXml.hasOwnProperty("Quest")) {
++            description = (description + "Quest\n");
++        }
++        if (objectXml.hasOwnProperty("Hero")) {
++            description = (description + "Hero\n");
++        }
++        if (objectXml.hasOwnProperty("Encounter")) {
++            description = (description + "Encounter\n");
++        }
++        if (objectXml.hasOwnProperty("Level")) {
++            description = (description + (("Level: " + objectXml.Level) + "\n"));
++        }
++        if (objectXml.hasOwnProperty("Terrain")) {
++            description = (description + (("Terrain: " + objectXml.Terrain) + "\n"));
++        }
++        for each (projectileXml in objectXml.Projectile) {
++            description = (description + (((((((((("Projectile " + projectileXml.@id) + ": ") + projectileXml.ObjectId) + "\n") + "\tDamage: ") + projectileXml.Damage) + "\n") + "\tSpeed: ") + projectileXml.Speed) + "\n"));
++            if (projectileXml.hasOwnProperty("PassesCover")) {
++                description = (description + "\tPassesCover\n");
++            }
++            if (projectileXml.hasOwnProperty("MultiHit")) {
++                description = (description + "\tMultiHit\n");
++            }
++            if (projectileXml.hasOwnProperty("ConditionEffect")) {
++                description = (description + (((("\t" + projectileXml.ConditionEffect) + " for ") + projectileXml.ConditionEffect.@duration) + " secs\n"));
++            }
++            if (projectileXml.hasOwnProperty("Parametric")) {
++                description = (description + "\tParametric\n");
++            }
++        }
++        this.descriptionText_ = new SimpleText(14, 0xB3B3B3, false, TOOLTIP_WIDTH, 0, "Myriad Pro");
++        this.descriptionText_.wordWrap = true;
++        this.descriptionText_.text = String(description);
++        this.descriptionText_._08S_();
++        this.descriptionText_.filters = [new DropShadowFilter(0, 0, 0, 0.5, 12, 12)];
++        this.descriptionText_.x = 0;
++        this.descriptionText_.y = (this.nameText_.height + 2);
++        addChild(this.descriptionText_);
++    }
++    private var nameText_:SimpleText;
++    private var descriptionText_:SimpleText;
++}
++}//package _D_d
++
+diff --git a/client-source/src/_D_d/RegionToolTip.as b/client-source/src/_D_d/RegionToolTip.as
+new file mode 100644
+index 0000000..cf8edae
+--- /dev/null
++++ b/client-source/src/_D_d/RegionToolTip.as
+@@ -0,0 +1,32 @@
++﻿// Decompiled by AS3 Sorcerer 1.99
++// http://www.as3sorcerer.com/
++
++//_D_d.RegionToolTip
++
++package _D_d {
++import com.company.assembleegameclient.ui.tooltip.ToolTip;
++
++import com.company.ui.SimpleText;
++
++import flash.filters.DropShadowFilter;
++
++public class RegionToolTip extends ToolTip {
++
++    private static const TOOLTIP_WIDTH:int = 180;
++
++    public function RegionToolTip(regionXml:XML) {
++        super(0x363636, 1, 0x9B9B9B, 1, true);
++        this.nameText_ = new SimpleText(16, 0xFFFFFF, false, (TOOLTIP_WIDTH - 4), 0, "Myriad Pro");
++        this.nameText_.setBold(true);
++        this.nameText_.wordWrap = true;
++        this.nameText_.text = String(regionXml.@id);
++        this.nameText_._08S_();
++        this.nameText_.filters = [new DropShadowFilter(0, 0, 0, 0.5, 12, 12)];
++        this.nameText_.x = 0;
++        this.nameText_.y = 0;
++        addChild(this.nameText_);
++    }
++    private var nameText_:SimpleText;
++}
++}//package _D_d
++
+diff --git a/client-source/src/_D_d/_0E_2.as b/client-source/src/_D_d/_0E_2.as
+deleted file mode 100644
+index 4312b66..0000000
+--- a/client-source/src/_D_d/_0E_2.as
++++ /dev/null
+@@ -1,65 +0,0 @@
+-﻿// Decompiled by AS3 Sorcerer 1.99
+-// http://www.as3sorcerer.com/
+-
+-//_D_d._0E_2
+-
+-package _D_d {
+-import com.company.assembleegameclient.ui.tooltip.ToolTip;
+-
+-import com.company.ui.SimpleText;
+-
+-import flash.filters.DropShadowFilter;
+-
+-public class _0E_2 extends ToolTip {
+-
+-    private static const _be:int = 180;
+-
+-    public function _0E_2(_arg1:XML) {
+-        super(0x2A2A2A, 1, 0x9B9B9B, 1, true);
+-        this._P_V_ = new SimpleText(16, 0xFFFFFF, false, (_be - 4), 0, "Myriad Pro");
+-        this._P_V_.setBold(true);
+-        this._P_V_.wordWrap = true;
+-        this._P_V_.text = String(_arg1.@id);
+-        this._P_V_._08S_();
+-        this._P_V_.filters = [new DropShadowFilter(0, 0, 0, 0.5, 12, 12)];
+-        this._P_V_.x = 0;
+-        this._P_V_.y = 0;
+-        addChild(this._P_V_);
+-        var _local2 = "";
+-        if (_arg1.hasOwnProperty("Speed")) {
+-            _local2 = (_local2 + (("Speed: " + Number(_arg1.Speed).toFixed(2)) + "\n"));
+-        } else {
+-            _local2 = (_local2 + "Speed: 1.00\n");
+-        }
+-        if (_arg1.hasOwnProperty("NoWalk")) {
+-            _local2 = (_local2 + "Unwalkable\n");
+-        }
+-        if (_arg1.hasOwnProperty("Push")) {
+-            _local2 = (_local2 + "Push\n");
+-        }
+-        if (_arg1.hasOwnProperty("Sink")) {
+-            _local2 = (_local2 + "Sink\n");
+-        }
+-        if (_arg1.hasOwnProperty("Sinking")) {
+-            _local2 = (_local2 + "Sinking\n");
+-        }
+-        if (_arg1.hasOwnProperty("Animate")) {
+-            _local2 = (_local2 + "Animated\n");
+-        }
+-        if (_arg1.hasOwnProperty("RandomOffset")) {
+-            _local2 = (_local2 + "Randomized\n");
+-        }
+-        this._C_G_ = new SimpleText(14, 0xB3B3B3, false, _be, 0, "Myriad Pro");
+-        this._C_G_.wordWrap = true;
+-        this._C_G_.text = String(_local2);
+-        this._C_G_._08S_();
+-        this._C_G_.filters = [new DropShadowFilter(0, 0, 0, 0.5, 12, 12)];
+-        this._C_G_.x = 0;
+-        this._C_G_.y = (this._P_V_.height + 2);
+-        addChild(this._C_G_);
+-    }
+-    private var _P_V_:SimpleText;
+-    private var _C_G_:SimpleText;
+-}
+-}//package _D_d
+-
+diff --git a/client-source/src/_D_d/_0E_w.as b/client-source/src/_D_d/_0E_w.as
+index 141d744..ed043de 100644
+--- a/client-source/src/_D_d/_0E_w.as
++++ b/client-source/src/_D_d/_0E_w.as
+@@ -26,7 +26,7 @@ public class _0E_w extends _P_u {
+     public var _hI_:XML;
+ 
+     override protected function getToolTip():ToolTip {
+-        return (new _D_M_(this._hI_));
++        return (new RegionToolTip(this._hI_));
+     }
+ 
+ }
+diff --git a/client-source/src/_D_d/_9o.as b/client-source/src/_D_d/_9o.as
+deleted file mode 100644
+index c3fe99a..0000000
+--- a/client-source/src/_D_d/_9o.as
++++ /dev/null
+@@ -1,91 +0,0 @@
+-﻿// Decompiled by AS3 Sorcerer 1.99
+-// http://www.as3sorcerer.com/
+-
+-//_D_d._9o
+-
+-package _D_d {
+-import com.company.assembleegameclient.ui.tooltip.ToolTip;
+-
+-import com.company.ui.SimpleText;
+-
+-import flash.filters.DropShadowFilter;
+-
+-public class _9o extends ToolTip {
+-
+-    private static const _be:int = 180;
+-
+-    public function _9o(_arg1:XML) {
+-        var _local3:XML;
+-        super(0x2A2A2A, 1, 0x9B9B9B, 1, true);
+-        this._P_V_ = new SimpleText(16, 0xFFFFFF, false, (_be - 4), 0, "Myriad Pro");
+-        this._P_V_.setBold(true);
+-        this._P_V_.wordWrap = true;
+-        this._P_V_.text = String(_arg1.@id);
+-        this._P_V_._08S_();
+-        this._P_V_.filters = [new DropShadowFilter(0, 0, 0, 0.5, 12, 12)];
+-        this._P_V_.x = 0;
+-        this._P_V_.y = 0;
+-        addChild(this._P_V_);
+-        var _local2 = "";
+-        if (_arg1.hasOwnProperty("Group")) {
+-            _local2 = (_local2 + (("Group: " + _arg1.Group) + "\n"));
+-        }
+-        if (_arg1.hasOwnProperty("Static")) {
+-            _local2 = (_local2 + "Static\n");
+-        }
+-        if (_arg1.hasOwnProperty("Enemy")) {
+-            _local2 = (_local2 + "Enemy\n");
+-            if (_arg1.hasOwnProperty("MaxHitPoints")) {
+-                _local2 = (_local2 + (("MaxHitPoints: " + _arg1.MaxHitPoints) + "\n"));
+-            }
+-            if (_arg1.hasOwnProperty("Defense")) {
+-                _local2 = (_local2 + (("Defense: " + _arg1.Defense) + "\n"));
+-            }
+-        }
+-        if (_arg1.hasOwnProperty("God")) {
+-            _local2 = (_local2 + "God\n");
+-        }
+-        if (_arg1.hasOwnProperty("Quest")) {
+-            _local2 = (_local2 + "Quest\n");
+-        }
+-        if (_arg1.hasOwnProperty("Hero")) {
+-            _local2 = (_local2 + "Hero\n");
+-        }
+-        if (_arg1.hasOwnProperty("Encounter")) {
+-            _local2 = (_local2 + "Encounter\n");
+-        }
+-        if (_arg1.hasOwnProperty("Level")) {
+-            _local2 = (_local2 + (("Level: " + _arg1.Level) + "\n"));
+-        }
+-        if (_arg1.hasOwnProperty("Terrain")) {
+-            _local2 = (_local2 + (("Terrain: " + _arg1.Terrain) + "\n"));
+-        }
+-        for each (_local3 in _arg1.Projectile) {
+-            _local2 = (_local2 + (((((((((("Projectile " + _local3.@id) + ": ") + _local3.ObjectId) + "\n") + "\tDamage: ") + _local3.Damage) + "\n") + "\tSpeed: ") + _local3.Speed) + "\n"));
+-            if (_local3.hasOwnProperty("PassesCover")) {
+-                _local2 = (_local2 + "\tPassesCover\n");
+-            }
+-            if (_local3.hasOwnProperty("MultiHit")) {
+-                _local2 = (_local2 + "\tMultiHit\n");
+-            }
+-            if (_local3.hasOwnProperty("ConditionEffect")) {
+-                _local2 = (_local2 + (((("\t" + _local3.ConditionEffect) + " for ") + _local3.ConditionEffect.@duration) + " secs\n"));
+-            }
+-            if (_local3.hasOwnProperty("Parametric")) {
+-                _local2 = (_local2 + "\tParametric\n");
+-            }
+-        }
+-        this._C_G_ = new SimpleText(14, 0xB3B3B3, false, _be, 0, "Myriad Pro");
+-        this._C_G_.wordWrap = true;
+-        this._C_G_.text = String(_local2);
+-        this._C_G_._08S_();
+-        this._C_G_.filters = [new DropShadowFilter(0, 0, 0, 0.5, 12, 12)];
+-        this._C_G_.x = 0;
+-        this._C_G_.y = (this._P_V_.height + 2);
+-        addChild(this._C_G_);
+-    }
+-    private var _P_V_:SimpleText;
+-    private var _C_G_:SimpleText;
+-}
+-}//package _D_d
+-
+diff --git a/client-source/src/_D_d/_D_M_.as b/client-source/src/_D_d/_D_M_.as
+deleted file mode 100644
+index 23c6b53..0000000
+--- a/client-source/src/_D_d/_D_M_.as
++++ /dev/null
+@@ -1,32 +0,0 @@
+-﻿// Decompiled by AS3 Sorcerer 1.99
+-// http://www.as3sorcerer.com/
+-
+-//_D_d._D_M_
+-
+-package _D_d {
+-import com.company.assembleegameclient.ui.tooltip.ToolTip;
+-
+-import com.company.ui.SimpleText;
+-
+-import flash.filters.DropShadowFilter;
+-
+-public class _D_M_ extends ToolTip {
+-
+-    private static const _be:int = 180;
+-
+-    public function _D_M_(_arg1:XML) {
+-        super(0x363636, 1, 0x9B9B9B, 1, true);
+-        this._P_V_ = new SimpleText(16, 0xFFFFFF, false, (_be - 4), 0, "Myriad Pro");
+-        this._P_V_.setBold(true);
+-        this._P_V_.wordWrap = true;
+-        this._P_V_.text = String(_arg1.@id);
+-        this._P_V_._08S_();
+-        this._P_V_.filters = [new DropShadowFilter(0, 0, 0, 0.5, 12, 12)];
+-        this._P_V_.x = 0;
+-        this._P_V_.y = 0;
+-        addChild(this._P_V_);
+-    }
+-    private var _P_V_:SimpleText;
+-}
+-}//package _D_d
+-
+diff --git a/client-source/src/_D_d/_Q_H_.as b/client-source/src/_D_d/_Q_H_.as
+index 4bf9c83..154ad45 100644
+--- a/client-source/src/_D_d/_Q_H_.as
++++ b/client-source/src/_D_d/_Q_H_.as
+@@ -11,7 +11,7 @@ import com.company.assembleegameclient.objects.ObjectLibrary;
+ import flash.display.BitmapData;
+ import flash.display.Bitmap;
+ 
+-import _D_d._9o;
++import _D_d.ObjectToolTip;
+ 
+ import com.company.assembleegameclient.ui.tooltip.ToolTip;
+ 
+@@ -33,7 +33,7 @@ internal class _Q_H_ extends _P_u {
+     public var _J_i:XML;
+ 
+     override protected function getToolTip():ToolTip {
+-        return (new _9o(this._J_i));
++        return (new ObjectToolTip(this._J_i));
+     }
+ 
+ }
+diff --git a/client-source/src/_D_d/_Q_S_.as b/client-source/src/_D_d/_Q_S_.as
+index 0ed5537..5227f0a 100644
+--- a/client-source/src/_D_d/_Q_S_.as
++++ b/client-source/src/_D_d/_Q_S_.as
+@@ -20,7 +20,7 @@ import flash.display.BitmapData;
+ import com.company.assembleegameclient.map._ik;
+ import com.company.assembleegameclient.map._M_X_;
+ 
+-import _D_d._0E_2;
++import _D_d.GroundToolTip;
+ 
+ import com.company.assembleegameclient.ui.tooltip.ToolTip;
+ 
+@@ -51,7 +51,7 @@ internal class _Q_S_ extends _P_u {
+     private var _G_m:Shape;
+ 
+     override protected function getToolTip():ToolTip {
+-        return (new _0E_2(this._5b));
++        return (new GroundToolTip(this._5b));
+     }
+ 
+ }
+diff --git a/tools/batch03_map_tooltips.json b/tools/batch03_map_tooltips.json
+new file mode 100644
+index 0000000..df55d75
+--- /dev/null
++++ b/tools/batch03_map_tooltips.json
+@@ -0,0 +1,27 @@
++{
++ "batch": ["_0E_2", "_9o", "_D_M_"],
++ "classes": {
++  "_0E_2": "GroundToolTip",
++  "_9o": "ObjectToolTip",
++  "_D_M_": "RegionToolTip"
++ },
++ "class_scope": {
++  "_0E_2": "_D_d"
++ },
++ "members": [
++  {"old": "_be",  "new": "TOOLTIP_WIDTH",    "classes": ["_0E_2", "_9o", "_D_M_"], "users": false},
++  {"old": "_P_V_", "new": "nameText_",        "classes": ["_0E_2", "_9o", "_D_M_"], "users": false},
++  {"old": "_C_G_", "new": "descriptionText_", "classes": ["_0E_2", "_9o"],          "users": false}
++ ],
++ "locals": {
++  "auto": true,
++  "overrides": [
++   {"class": "GroundToolTip", "func": "GroundToolTip", "old": "_arg1",   "new": "groundXml"},
++   {"class": "GroundToolTip", "func": "GroundToolTip", "old": "_local2", "new": "description"},
++   {"class": "ObjectToolTip", "func": "ObjectToolTip", "old": "_arg1",   "new": "objectXml"},
++   {"class": "ObjectToolTip", "func": "ObjectToolTip", "old": "_local2", "new": "description"},
++   {"class": "ObjectToolTip", "func": "ObjectToolTip", "old": "_local3", "new": "projectileXml"},
++   {"class": "RegionToolTip", "func": "RegionToolTip", "old": "_arg1",   "new": "regionXml"}
++  ]
++ }
++}
+diff --git a/tools/refactor.py b/tools/refactor.py
+index fe03702..461b1f6 100644
+--- a/tools/refactor.py
++++ b/tools/refactor.py
+@@ -3,7 +3,8 @@
+ usage: refactor.py SPEC.json [--src client-source/src] [--dry]
+ Spec keys:
+   package_map : {oldPkg: newPkg}                (moves dirs, rewrites package/import/FQN)
+-  classes     : {oldClass: newClass}            (global; class names are unique repo-wide)
++  classes     : {oldClass: newClass}            (global unless listed in class_scope)
++  class_scope : {oldClass: dirUnderSrc}         (restrict a class rename to one dir; use when the token is also a member name elsewhere)
+   members     : [{old,new,files:[oldClassName,...]|"*"}]   files = classes whose files get the rename;
+                 "*" = every file (only for tokens declared in exactly one file)
+   locals      : {"auto": true, "scope": [oldClassNames], "overrides": [{class,func,old,new}]}
+@@ -47,9 +48,12 @@ W = lambda tok: re.compile(r'(?<![\w$])' + re.escape(tok) + r'(?![\w$])')
+ log = collections.defaultdict(list)
+ 
+ # 1. classes (global)
++cscope = spec.get('class_scope', {})   # {oldClass: dirUnderSrc} -> only rewrite files inside that dir (token reused as a member elsewhere)
+ for old, new in spec.get('classes', {}).items():
+     rx = W(old)
++    pref = os.path.normpath(os.path.join(SRC, cscope[old])) + os.sep if old in cscope else None
+     for p, v in files.items():
++        if pref and not os.path.normpath(p).startswith(pref): continue
+         n = len(rx.findall(v[0]))
+         if n: v[0] = rx.sub(new, v[0]); log['class ' + old].append((p, n))
+ 
+@@ -139,6 +143,7 @@ def functions(s):
+     return res, clean
+ 
+ loc = spec.get('locals', {})
++cls_new_ = spec.get('classes', {}); inv_ = {v: k for k, v in cls_new_.items()}
+ renamed_locals = 0
+ if loc.get('auto'):
+     scope = [orig[c] for c in (loc.get('scope') or spec.get('batch', [])) if c in orig]
+@@ -154,8 +159,11 @@ if loc.get('auto'):
+             for m in re.finditer(r'(?:\(|,|\bvar)\s*(_(?:arg|local)\d+)\s*:\s*([\w.]+(?:\.<[\w.]+>)?)', seg):
+                 decl.setdefault(m.group(1), m.group(2))
+             names = {}; taken = set()
++            base = os.path.basename(p)[:-3]
++            cls_ok = {base, cls_new_.get(base, base)}
++            fn_ok = {fname, inv_.get(fname, fname)}
+             for o in ov:
+-                if o['class'] == os.path.basename(p)[:-3] and o['func'] == fname and o['old'] in decl:
++                if o['class'] in cls_ok and o['func'] in fn_ok and (o['old'] in decl or W(o['old']).search(seg)):
+                     names[o['old']] = o['new']; taken.add(o['new'])
+             for tok, ty in decl.items():
+                 if tok in names: continue
+-- 
+2.43.0
+

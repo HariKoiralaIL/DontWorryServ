@@ -1,0 +1,857 @@
+From 595ef60ca629cb3a3ca40d72da023ddb061b22fc Mon Sep 17 00:00:00 2001
+From: refactor <refactor@local>
+Date: Sun, 4 Oct 2026 23:50:59 +0000
+Subject: [PATCH] refactor(client): batch 4 - map editor chooser elements
+ (_P_u/_Q_S_/_Q_H_/_0E_w/_M_u ->
+ ChooserElement/Ground/Object/RegionElement/MapLayer)
+
+---
+ .../src/_D_d/{_P_u.as => ChooserElement.as}   | 44 +++++++-------
+ client-source/src/_D_d/GroundElement.as       | 59 +++++++++++++++++++
+ client-source/src/_D_d/MapLayer.as            | 19 ++++++
+ client-source/src/_D_d/ObjectElement.as       | 41 +++++++++++++
+ client-source/src/_D_d/RegionElement.as       | 34 +++++++++++
+ client-source/src/_D_d/_02i.as                |  8 +--
+ client-source/src/_D_d/_0E_w.as               | 34 -----------
+ client-source/src/_D_d/_0H_J_.as              |  8 +--
+ client-source/src/_D_d/_0K_V_.as              | 18 +++---
+ client-source/src/_D_d/_11.as                 |  2 +-
+ client-source/src/_D_d/_4g.as                 |  6 +-
+ client-source/src/_D_d/_E_m.as                | 20 +++----
+ client-source/src/_D_d/_M_u.as                | 19 ------
+ client-source/src/_D_d/_N_g.as                | 14 ++---
+ client-source/src/_D_d/_Q_H_.as               | 41 -------------
+ client-source/src/_D_d/_Q_S_.as               | 59 -------------------
+ client-source/src/_D_d/_wY_.as                |  8 +--
+ tools/batch04_chooser_elements.json           | 50 ++++++++++++++++
+ 18 files changed, 267 insertions(+), 217 deletions(-)
+ rename client-source/src/_D_d/{_P_u.as => ChooserElement.as} (63%)
+ create mode 100644 client-source/src/_D_d/GroundElement.as
+ create mode 100644 client-source/src/_D_d/MapLayer.as
+ create mode 100644 client-source/src/_D_d/ObjectElement.as
+ create mode 100644 client-source/src/_D_d/RegionElement.as
+ delete mode 100644 client-source/src/_D_d/_0E_w.as
+ delete mode 100644 client-source/src/_D_d/_M_u.as
+ delete mode 100644 client-source/src/_D_d/_Q_H_.as
+ delete mode 100644 client-source/src/_D_d/_Q_S_.as
+ create mode 100644 tools/batch04_chooser_elements.json
+
+diff --git a/client-source/src/_D_d/_P_u.as b/client-source/src/_D_d/ChooserElement.as
+similarity index 63%
+rename from client-source/src/_D_d/_P_u.as
+rename to client-source/src/_D_d/ChooserElement.as
+index 6f9efc8..a20d39c 100644
+--- a/client-source/src/_D_d/_P_u.as
++++ b/client-source/src/_D_d/ChooserElement.as
+@@ -1,7 +1,7 @@
+ ﻿// Decompiled by AS3 Sorcerer 1.99
+ // http://www.as3sorcerer.com/
+ 
+-//_D_d._P_u
++//_D_d.ChooserElement
+ 
+ package _D_d {
+ import flash.display.Sprite;
+@@ -11,36 +11,36 @@ import com.company.assembleegameclient.ui.tooltip.ToolTip;
+ import flash.events.Event;
+ import flash.events.MouseEvent;
+ 
+-public class _P_u extends Sprite {
++public class ChooserElement extends Sprite {
+ 
+     public static const WIDTH:int = 50;
+     public static const HEIGHT:int = 50;
+ 
+     protected static var toolTip_:ToolTip = null;
+ 
+-    public function _P_u(_arg1:int) {
+-        this.type_ = _arg1;
++    public function ChooserElement(type:int) {
++        this.type_ = type;
+         addEventListener(Event.ADDED_TO_STAGE, this.onAddedToStage);
+         addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
+     }
+     public var type_:int;
+     protected var selected_:Boolean = false;
+-    protected var _68:Boolean = false;
++    protected var hovered_:Boolean = false;
+ 
+-    public function setSelected(_arg1:Boolean):void {
+-        this.selected_ = _arg1;
++    public function setSelected(selected:Boolean):void {
++        this.selected_ = selected;
+         this.draw();
+     }
+ 
+-    protected function _V_B_(_arg1:ToolTip):void {
+-        this._X_S_();
+-        toolTip_ = _arg1;
++    protected function showToolTip(toolTip:ToolTip):void {
++        this.hideToolTip();
++        toolTip_ = toolTip;
+         if (toolTip_ != null) {
+             stage.addChild(toolTip_);
+         }
+     }
+ 
+-    protected function _X_S_():void {
++    protected function hideToolTip():void {
+         if (toolTip_ != null) {
+             if (toolTip_.parent != null) {
+                 toolTip_.parent.removeChild(toolTip_);
+@@ -55,12 +55,12 @@ public class _P_u extends Sprite {
+ 
+     private function draw():void {
+         graphics.clear();
+-        var _local1:uint = 0x363636;
++        var unusedColor:uint = 0x363636;
+         if (this.selected_) {
+             graphics.lineStyle(1, 0xFFFFFF);
+-            _local1 = 0x7F7F7F;
++            unusedColor = 0x7F7F7F;
+         }
+-        graphics.beginFill(((this._68) ? 0x565656 : 0x363636), 1);
++        graphics.beginFill(((this.hovered_) ? 0x565656 : 0x363636), 1);
+         graphics.drawRect(2, 2, (WIDTH - 4), (HEIGHT - 4));
+         if (this.selected_) {
+             graphics.lineStyle();
+@@ -68,26 +68,26 @@ public class _P_u extends Sprite {
+         graphics.endFill();
+     }
+ 
+-    private function onAddedToStage(_arg1:Event):void {
++    private function onAddedToStage(event:Event):void {
+         addEventListener(MouseEvent.MOUSE_OVER, this.onMouseOver);
+         addEventListener(MouseEvent.ROLL_OUT, this.onRollOut);
+     }
+ 
+-    private function onRemovedFromStage(_arg1:Event):void {
++    private function onRemovedFromStage(event:Event):void {
+         removeEventListener(MouseEvent.MOUSE_OVER, this.onMouseOver);
+         removeEventListener(MouseEvent.ROLL_OUT, this.onRollOut);
+     }
+ 
+-    private function onMouseOver(_arg1:Event):void {
+-        this._68 = true;
++    private function onMouseOver(event:Event):void {
++        this.hovered_ = true;
+         this.draw();
+-        this._V_B_(this.getToolTip());
++        this.showToolTip(this.getToolTip());
+     }
+ 
+-    private function onRollOut(_arg1:Event):void {
+-        this._68 = false;
++    private function onRollOut(event:Event):void {
++        this.hovered_ = false;
+         this.draw();
+-        this._X_S_();
++        this.hideToolTip();
+     }
+ 
+ }
+diff --git a/client-source/src/_D_d/GroundElement.as b/client-source/src/_D_d/GroundElement.as
+new file mode 100644
+index 0000000..e293fd8
+--- /dev/null
++++ b/client-source/src/_D_d/GroundElement.as
+@@ -0,0 +1,59 @@
++﻿// Decompiled by AS3 Sorcerer 1.99
++// http://www.as3sorcerer.com/
++
++//_D_d.GroundElement
++
++package _D_d {
++import _D_d.ChooserElement;
++
++import flash.display.Shape;
++import flash.display.IGraphicsData;
++
++import com.company.assembleegameclient.map._0D_v;
++
++import flash.geom.Rectangle;
++
++import com.company.assembleegameclient.map._pf;
++
++import flash.display.BitmapData;
++
++import com.company.assembleegameclient.map._ik;
++import com.company.assembleegameclient.map._M_X_;
++
++import _D_d.GroundToolTip;
++
++import com.company.assembleegameclient.ui.tooltip.ToolTip;
++
++import _D_d.*;
++
++internal class GroundElement extends ChooserElement {
++
++    private static const UV_COORDS:Vector.<Number> = new <Number>[0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0];
++    private static const PREVIEW_SCALE:Number = 0.6;
++
++    public function GroundElement(groundXml:XML) {
++        super(int(groundXml.@type));
++        this.groundXml_ = groundXml;
++        var graphicsData:Vector.<IGraphicsData> = new Vector.<IGraphicsData>();
++        var camera:_0D_v = new _0D_v();
++        camera._K_(0.5, 0.5, 12, (Math.PI / 4), new Rectangle(-100, -100, 200, 200), false);
++        var texture:BitmapData = _pf.getBitmapData(type_);
++        var squareFace:_ik = new _ik(texture, UV_COORDS, 0, 0, _M_X_._0I_7, 0, 0);
++        squareFace.draw(graphicsData, camera, 0);
++        this.preview_ = new Shape();
++        this.preview_.graphics.drawGraphicsData(graphicsData);
++        this.preview_.scaleX = (this.preview_.scaleY = PREVIEW_SCALE);
++        this.preview_.x = (WIDTH / 2);
++        this.preview_.y = (HEIGHT / 2);
++        addChild(this.preview_);
++    }
++    public var groundXml_:XML;
++    private var preview_:Shape;
++
++    override protected function getToolTip():ToolTip {
++        return (new GroundToolTip(this.groundXml_));
++    }
++
++}
++}//package _D_d
++
+diff --git a/client-source/src/_D_d/MapLayer.as b/client-source/src/_D_d/MapLayer.as
+new file mode 100644
+index 0000000..4e715f6
+--- /dev/null
++++ b/client-source/src/_D_d/MapLayer.as
+@@ -0,0 +1,19 @@
++﻿// Decompiled by AS3 Sorcerer 1.99
++// http://www.as3sorcerer.com/
++
++//_D_d.MapLayer
++
++package _D_d {
++
++
++public class MapLayer {
++
++    public static const GROUND:int = 0;
++    public static const OBJECT:int = 1;
++    public static const REGION:int = 2;
++    public static const NUM_LAYERS:int = 3;
++    public static const EMPTY_TYPES:Vector.<int> = new <int>[-1, -1, -1];
++
++}
++}//package _D_d
++
+diff --git a/client-source/src/_D_d/ObjectElement.as b/client-source/src/_D_d/ObjectElement.as
+new file mode 100644
+index 0000000..b1cbbcd
+--- /dev/null
++++ b/client-source/src/_D_d/ObjectElement.as
+@@ -0,0 +1,41 @@
++﻿// Decompiled by AS3 Sorcerer 1.99
++// http://www.as3sorcerer.com/
++
++//_D_d.ObjectElement
++
++package _D_d {
++import _D_d.ChooserElement;
++
++import com.company.assembleegameclient.objects.ObjectLibrary;
++
++import flash.display.BitmapData;
++import flash.display.Bitmap;
++
++import _D_d.ObjectToolTip;
++
++import com.company.assembleegameclient.ui.tooltip.ToolTip;
++
++import _D_d.*;
++
++internal class ObjectElement extends ChooserElement {
++
++    public function ObjectElement(objectXml:XML) {
++        super(int(objectXml.@type));
++        this.objectXml_ = objectXml;
++        var texture:BitmapData = ObjectLibrary.getRedrawnTextureFromType(type_, 100, true, false);
++        var bitmap:Bitmap = new Bitmap(texture);
++        var scale:Number = ((WIDTH - 4) / Math.max(bitmap.width, bitmap.height));
++        bitmap.scaleX = (bitmap.scaleY = scale);
++        bitmap.x = ((WIDTH / 2) - (bitmap.width / 2));
++        bitmap.y = ((HEIGHT / 2) - (bitmap.height / 2));
++        addChild(bitmap);
++    }
++    public var objectXml_:XML;
++
++    override protected function getToolTip():ToolTip {
++        return (new ObjectToolTip(this.objectXml_));
++    }
++
++}
++}//package _D_d
++
+diff --git a/client-source/src/_D_d/RegionElement.as b/client-source/src/_D_d/RegionElement.as
+new file mode 100644
+index 0000000..6061881
+--- /dev/null
++++ b/client-source/src/_D_d/RegionElement.as
+@@ -0,0 +1,34 @@
++﻿// Decompiled by AS3 Sorcerer 1.99
++// http://www.as3sorcerer.com/
++
++//_D_d.RegionElement
++
++package _D_d {
++import flash.display.Shape;
++
++import com.company.assembleegameclient.map._sn;
++
++import com.company.assembleegameclient.ui.tooltip.ToolTip;
++
++public class RegionElement extends ChooserElement {
++
++    public function RegionElement(regionXml:XML) {
++        super(int(regionXml.@type));
++        this.regionXml_ = regionXml;
++        var swatch:Shape = new Shape();
++        swatch.graphics.beginFill(_sn.getColor(type_), 0.5);
++        swatch.graphics.drawRect(0, 0, (WIDTH - 8), (HEIGHT - 8));
++        swatch.graphics.endFill();
++        swatch.x = ((WIDTH / 2) - (swatch.width / 2));
++        swatch.y = ((HEIGHT / 2) - (swatch.height / 2));
++        addChild(swatch);
++    }
++    public var regionXml_:XML;
++
++    override protected function getToolTip():ToolTip {
++        return (new RegionToolTip(this.regionXml_));
++    }
++
++}
++}//package _D_d
++
+diff --git a/client-source/src/_D_d/_02i.as b/client-source/src/_D_d/_02i.as
+index 8161fae..59d4c82 100644
+--- a/client-source/src/_D_d/_02i.as
++++ b/client-source/src/_D_d/_02i.as
+@@ -4,7 +4,7 @@
+ //_D_d._02i
+ 
+ package _D_d {
+-import _D_d._M_u;
++import _D_d.MapLayer;
+ 
+ import com.company.assembleegameclient.objects.ObjectLibrary;
+ import com.company.util._L_2;
+@@ -17,8 +17,8 @@ internal class _02i extends _E_m {
+         var _local1:String;
+         var _local3:int;
+         var _local4:XML;
+-        var _local5:_Q_H_;
+-        super(_M_u._S_E_);
++        var _local5:ObjectElement;
++        super(MapLayer.OBJECT);
+         var _local2:Vector.<String> = new Vector.<String>();
+         for (_local1 in ObjectLibrary._pb) {
+             _local2.push(_local1);
+@@ -28,7 +28,7 @@ internal class _02i extends _E_m {
+             _local3 = ObjectLibrary._pb[_local1];
+             _local4 = ObjectLibrary._Q_F_[_local3];
+             if (!((((_local4.hasOwnProperty("Item")) || (_local4.hasOwnProperty("Player")))) || ((_local4.Class == "Projectile")))) {
+-                _local5 = new _Q_H_(_local4);
++                _local5 = new ObjectElement(_local4);
+                 _08M_(_local5);
+             }
+         }
+diff --git a/client-source/src/_D_d/_0E_w.as b/client-source/src/_D_d/_0E_w.as
+deleted file mode 100644
+index ed043de..0000000
+--- a/client-source/src/_D_d/_0E_w.as
++++ /dev/null
+@@ -1,34 +0,0 @@
+-﻿// Decompiled by AS3 Sorcerer 1.99
+-// http://www.as3sorcerer.com/
+-
+-//_D_d._0E_w
+-
+-package _D_d {
+-import flash.display.Shape;
+-
+-import com.company.assembleegameclient.map._sn;
+-
+-import com.company.assembleegameclient.ui.tooltip.ToolTip;
+-
+-public class _0E_w extends _P_u {
+-
+-    public function _0E_w(_arg1:XML) {
+-        super(int(_arg1.@type));
+-        this._hI_ = _arg1;
+-        var _local2:Shape = new Shape();
+-        _local2.graphics.beginFill(_sn.getColor(type_), 0.5);
+-        _local2.graphics.drawRect(0, 0, (WIDTH - 8), (HEIGHT - 8));
+-        _local2.graphics.endFill();
+-        _local2.x = ((WIDTH / 2) - (_local2.width / 2));
+-        _local2.y = ((HEIGHT / 2) - (_local2.height / 2));
+-        addChild(_local2);
+-    }
+-    public var _hI_:XML;
+-
+-    override protected function getToolTip():ToolTip {
+-        return (new RegionToolTip(this._hI_));
+-    }
+-
+-}
+-}//package _D_d
+-
+diff --git a/client-source/src/_D_d/_0H_J_.as b/client-source/src/_D_d/_0H_J_.as
+index a7d346c..168aef6 100644
+--- a/client-source/src/_D_d/_0H_J_.as
++++ b/client-source/src/_D_d/_0H_J_.as
+@@ -4,7 +4,7 @@
+ //_D_d._0H_J_
+ 
+ package _D_d {
+-import _D_d._M_u;
++import _D_d.MapLayer;
+ 
+ import com.company.assembleegameclient.map._pf;
+ import com.company.util._L_2;
+@@ -16,8 +16,8 @@ internal class _0H_J_ extends _E_m {
+     public function _0H_J_() {
+         var _local1:String;
+         var _local3:int;
+-        var _local4:_Q_S_;
+-        super(_M_u._6h);
++        var _local4:GroundElement;
++        super(MapLayer.GROUND);
+         var _local2:Vector.<String> = new Vector.<String>();
+         for (_local1 in _pf._pb) {
+             _local2.push(_local1);
+@@ -25,7 +25,7 @@ internal class _0H_J_ extends _E_m {
+         _local2.sort(_L_2._L_O_);
+         for each (_local1 in _local2) {
+             _local3 = _pf._pb[_local1];
+-            _local4 = new _Q_S_(_pf._Q_F_[_local3]);
++            _local4 = new GroundElement(_pf._Q_F_[_local3]);
+             _08M_(_local4);
+         }
+     }
+diff --git a/client-source/src/_D_d/_0K_V_.as b/client-source/src/_D_d/_0K_V_.as
+index 90455a3..3e15806 100644
+--- a/client-source/src/_D_d/_0K_V_.as
++++ b/client-source/src/_D_d/_0K_V_.as
+@@ -182,20 +182,20 @@ public class _0K_V_ extends _05p {
+         var _local2:Object = {};
+         if (_arg1 != null) {
+             _local3 = _arg1._5F_;
+-            if (_local3[_M_u._6h] != -1) {
+-                _local4 = _pf._6H_(_local3[_M_u._6h]);
++            if (_local3[MapLayer.GROUND] != -1) {
++                _local4 = _pf._6H_(_local3[MapLayer.GROUND]);
+                 _local2["ground"] = _local4;
+             }
+-            if (_local3[_M_u._S_E_] != -1) {
+-                _local4 = ObjectLibrary._6H_(_local3[_M_u._S_E_]);
++            if (_local3[MapLayer.OBJECT] != -1) {
++                _local4 = ObjectLibrary._6H_(_local3[MapLayer.OBJECT]);
+                 _local5 = {"id": _local4};
+                 if (_arg1._fi != null) {
+                     _local5["name"] = _arg1._fi;
+                 }
+                 _local2["objs"] = [_local5];
+             }
+-            if (_local3[_M_u._0G_m] != -1) {
+-                _local4 = _sn._6H_(_local3[_M_u._0G_m]);
++            if (_local3[MapLayer.REGION] != -1) {
++                _local4 = _sn._6H_(_local3[MapLayer.REGION]);
+                 _local2["regions"] = [
+                     {"id": _local4}
+                 ];
+@@ -342,14 +342,14 @@ public class _0K_V_ extends _05p {
+                 _local12 = _local7[_local8.readShort()];
+                 if (_local12.hasOwnProperty("ground")) {
+                     _local9 = _pf._pb[_local12["ground"]];
+-                    this._09l._2F_(_local11, _local10, _M_u._6h, _local9);
++                    this._09l._2F_(_local11, _local10, MapLayer.GROUND, _local9);
+                 }
+                 _local13 = _local12["objs"];
+                 if (_local13 != null) {
+                     for each (_local15 in _local13) {
+                         if (ObjectLibrary._pb.hasOwnProperty(_local15["id"])) {
+                             _local9 = ObjectLibrary._pb[_local15["id"]];
+-                            this._09l._2F_(_local11, _local10, _M_u._S_E_, _local9);
++                            this._09l._2F_(_local11, _local10, MapLayer.OBJECT, _local9);
+                             if (_local15.hasOwnProperty("name")) {
+                                 this._09l._N_F_(_local11, _local10, _local15["name"]);
+                             }
+@@ -360,7 +360,7 @@ public class _0K_V_ extends _05p {
+                 if (_local14 != null) {
+                     for each (_local16 in _local14) {
+                         _local9 = _sn._pb[_local16["id"]];
+-                        this._09l._2F_(_local11, _local10, _M_u._0G_m, _local9);
++                        this._09l._2F_(_local11, _local10, MapLayer.REGION, _local9);
+                     }
+                 }
+                 _local11++;
+diff --git a/client-source/src/_D_d/_11.as b/client-source/src/_D_d/_11.as
+index ac68450..2420da5 100644
+--- a/client-source/src/_D_d/_11.as
++++ b/client-source/src/_D_d/_11.as
+@@ -24,7 +24,7 @@ public class _11 {
+ 
+     public function isEmpty():Boolean {
+         var _local1:int;
+-        while (_local1 < _M_u._0G_D_) {
++        while (_local1 < MapLayer.NUM_LAYERS) {
+             if (this._5F_[_local1] != -1) {
+                 return (false);
+             }
+diff --git a/client-source/src/_D_d/_4g.as b/client-source/src/_D_d/_4g.as
+index cad2ac2..fc9c893 100644
+--- a/client-source/src/_D_d/_4g.as
++++ b/client-source/src/_D_d/_4g.as
+@@ -10,10 +10,10 @@ public class _4g extends _E_m {
+ 
+     public function _4g() {
+         var _local1:XML;
+-        var _local2:_0E_w;
+-        super(_M_u._0G_m);
++        var _local2:RegionElement;
++        super(MapLayer.REGION);
+         for each (_local1 in _sn._Q_F_) {
+-            _local2 = new _0E_w(_local1);
++            _local2 = new RegionElement(_local1);
+             _08M_(_local2);
+         }
+     }
+diff --git a/client-source/src/_D_d/_E_m.as b/client-source/src/_D_d/_E_m.as
+index 6166c15..7387d19 100644
+--- a/client-source/src/_D_d/_E_m.as
++++ b/client-source/src/_D_d/_E_m.as
+@@ -10,7 +10,7 @@ import flash.display.IGraphicsData;
+ 
+ import com.company.util.GraphicHelper;
+ 
+-import _D_d._P_u;
++import _D_d.ChooserElement;
+ 
+ import com.company.assembleegameclient.ui._0K_B_;
+ 
+@@ -33,7 +33,7 @@ internal class _E_m extends Sprite {
+     private static const _xo:int = 20;
+ 
+     public function _E_m(_arg1:int) {
+-        this._oX_ = new Vector.<_P_u>();
++        this._oX_ = new Vector.<ChooserElement>();
+         this.outlineFill_ = new GraphicsSolidFill(0xFFFFFF, 1);
+         this._0y = new GraphicsStroke(1, false, LineScaleMode.NORMAL, CapsStyle.NONE, JointStyle.ROUND, 3, this.outlineFill_);
+         this._vV_ = new GraphicsSolidFill(0x363636, 1);
+@@ -59,12 +59,12 @@ internal class _E_m extends Sprite {
+         addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
+     }
+     public var _09V_:int;
+-    public var selected_:_P_u;
++    public var selected_:ChooserElement;
+     private var graphicsData_:Vector.<IGraphicsData>;
+     private var _Y_i:Sprite;
+     private var _E_k:_0K_B_;
+     private var mask_:Shape;
+-    private var _oX_:Vector.<_P_u>;
++    private var _oX_:Vector.<ChooserElement>;
+     private var outlineFill_:GraphicsSolidFill;
+     private var _0y:GraphicsStroke;
+     private var _vV_:GraphicsSolidFill;
+@@ -75,7 +75,7 @@ internal class _E_m extends Sprite {
+     }
+ 
+     public function _mB_(_arg1:int):void {
+-        var _local2:_P_u;
++        var _local2:ChooserElement;
+         for each (_local2 in this._oX_) {
+             if (_local2.type_ == _arg1) {
+                 this.setSelected(_local2);
+@@ -84,11 +84,11 @@ internal class _E_m extends Sprite {
+         }
+     }
+ 
+-    protected function _08M_(_arg1:_P_u):void {
++    protected function _08M_(_arg1:ChooserElement):void {
+         var _local2:int;
+         _local2 = this._oX_.length;
+-        _arg1.x = ((((_local2 % 2)) == 0) ? 0 : (2 + _P_u.WIDTH));
+-        _arg1.y = ((int((_local2 / 2)) * _P_u.HEIGHT) + 6);
++        _arg1.x = ((((_local2 % 2)) == 0) ? 0 : (2 + ChooserElement.WIDTH));
++        _arg1.y = ((int((_local2 / 2)) * ChooserElement.HEIGHT) + 6);
+         this._Y_i.addChild(_arg1);
+         if (_local2 == 0) {
+             this.setSelected(_arg1);
+@@ -97,7 +97,7 @@ internal class _E_m extends Sprite {
+         this._oX_.push(_arg1);
+     }
+ 
+-    protected function setSelected(_arg1:_P_u):void {
++    protected function setSelected(_arg1:ChooserElement):void {
+         if (this.selected_ != null) {
+             this.selected_.setSelected(false);
+         }
+@@ -112,7 +112,7 @@ internal class _E_m extends Sprite {
+     }
+ 
+     protected function onMouseDown(_arg1:MouseEvent):void {
+-        var _local2:_P_u = (_arg1.currentTarget as _P_u);
++        var _local2:ChooserElement = (_arg1.currentTarget as ChooserElement);
+         this.setSelected(_local2);
+     }
+ 
+diff --git a/client-source/src/_D_d/_M_u.as b/client-source/src/_D_d/_M_u.as
+deleted file mode 100644
+index fedecdf..0000000
+--- a/client-source/src/_D_d/_M_u.as
++++ /dev/null
+@@ -1,19 +0,0 @@
+-﻿// Decompiled by AS3 Sorcerer 1.99
+-// http://www.as3sorcerer.com/
+-
+-//_D_d._M_u
+-
+-package _D_d {
+-
+-
+-public class _M_u {
+-
+-    public static const _6h:int = 0;
+-    public static const _S_E_:int = 1;
+-    public static const _0G_m:int = 2;
+-    public static const _0G_D_:int = 3;
+-    public static const _0K_Q_:Vector.<int> = new <int>[-1, -1, -1];
+-
+-}
+-}//package _D_d
+-
+diff --git a/client-source/src/_D_d/_N_g.as b/client-source/src/_D_d/_N_g.as
+index 09fd856..93b6910 100644
+--- a/client-source/src/_D_d/_N_g.as
++++ b/client-source/src/_D_d/_N_g.as
+@@ -32,7 +32,7 @@ import flash.ui.Keyboard;
+ 
+ import com.company.util._H_V_;
+ 
+-import _D_d._M_u;
++import _D_d.MapLayer;
+ 
+ import com.company.assembleegameclient.map._pf;
+ import com.company.assembleegameclient.objects.ObjectLibrary;
+@@ -340,20 +340,20 @@ internal class _N_g extends Sprite {
+         if (_arg3 == null) {
+             return;
+         }
+-        if (_arg3._5F_[_M_u._6h] != -1) {
+-            _local5 = _pf.getBitmapData(_arg3._5F_[_M_u._6h]);
++        if (_arg3._5F_[MapLayer.GROUND] != -1) {
++            _local5 = _pf.getBitmapData(_arg3._5F_[MapLayer.GROUND]);
+             this._ym.copyTo(_local5, _local5.rect, _local4);
+         }
+-        if (_arg3._5F_[_M_u._S_E_] != -1) {
+-            _local6 = ObjectLibrary.getTextureFromType(_arg3._5F_[_M_u._S_E_]);
++        if (_arg3._5F_[MapLayer.OBJECT] != -1) {
++            _local6 = ObjectLibrary.getTextureFromType(_arg3._5F_[MapLayer.OBJECT]);
+             if ((((_local6 == null)) || ((_local6 == this._F_l)))) {
+                 this._ym.copyTo(this._bd, this._bd.rect, _local4);
+             } else {
+                 this._ym.copyTo(_local6, _local6.rect, _local4);
+             }
+         }
+-        if (_arg3._5F_[_M_u._0G_m] != -1) {
+-            _local7 = _sn.getColor(_arg3._5F_[_M_u._0G_m]);
++        if (_arg3._5F_[MapLayer.REGION] != -1) {
++            _local7 = _sn.getColor(_arg3._5F_[MapLayer.REGION]);
+             this._0s.setPixel32(_arg1, _arg2, (0x5F000000 | _local7));
+         }
+     }
+diff --git a/client-source/src/_D_d/_Q_H_.as b/client-source/src/_D_d/_Q_H_.as
+deleted file mode 100644
+index 154ad45..0000000
+--- a/client-source/src/_D_d/_Q_H_.as
++++ /dev/null
+@@ -1,41 +0,0 @@
+-﻿// Decompiled by AS3 Sorcerer 1.99
+-// http://www.as3sorcerer.com/
+-
+-//_D_d._Q_H_
+-
+-package _D_d {
+-import _D_d._P_u;
+-
+-import com.company.assembleegameclient.objects.ObjectLibrary;
+-
+-import flash.display.BitmapData;
+-import flash.display.Bitmap;
+-
+-import _D_d.ObjectToolTip;
+-
+-import com.company.assembleegameclient.ui.tooltip.ToolTip;
+-
+-import _D_d.*;
+-
+-internal class _Q_H_ extends _P_u {
+-
+-    public function _Q_H_(_arg1:XML) {
+-        super(int(_arg1.@type));
+-        this._J_i = _arg1;
+-        var _local2:BitmapData = ObjectLibrary.getRedrawnTextureFromType(type_, 100, true, false);
+-        var _local3:Bitmap = new Bitmap(_local2);
+-        var _local4:Number = ((WIDTH - 4) / Math.max(_local3.width, _local3.height));
+-        _local3.scaleX = (_local3.scaleY = _local4);
+-        _local3.x = ((WIDTH / 2) - (_local3.width / 2));
+-        _local3.y = ((HEIGHT / 2) - (_local3.height / 2));
+-        addChild(_local3);
+-    }
+-    public var _J_i:XML;
+-
+-    override protected function getToolTip():ToolTip {
+-        return (new ObjectToolTip(this._J_i));
+-    }
+-
+-}
+-}//package _D_d
+-
+diff --git a/client-source/src/_D_d/_Q_S_.as b/client-source/src/_D_d/_Q_S_.as
+deleted file mode 100644
+index 5227f0a..0000000
+--- a/client-source/src/_D_d/_Q_S_.as
++++ /dev/null
+@@ -1,59 +0,0 @@
+-﻿// Decompiled by AS3 Sorcerer 1.99
+-// http://www.as3sorcerer.com/
+-
+-//_D_d._Q_S_
+-
+-package _D_d {
+-import _D_d._P_u;
+-
+-import flash.display.Shape;
+-import flash.display.IGraphicsData;
+-
+-import com.company.assembleegameclient.map._0D_v;
+-
+-import flash.geom.Rectangle;
+-
+-import com.company.assembleegameclient.map._pf;
+-
+-import flash.display.BitmapData;
+-
+-import com.company.assembleegameclient.map._ik;
+-import com.company.assembleegameclient.map._M_X_;
+-
+-import _D_d.GroundToolTip;
+-
+-import com.company.assembleegameclient.ui.tooltip.ToolTip;
+-
+-import _D_d.*;
+-
+-internal class _Q_S_ extends _P_u {
+-
+-    private static const _J_c:Vector.<Number> = new <Number>[0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0];
+-    private static const _0L_L_:Number = 0.6;
+-
+-    public function _Q_S_(_arg1:XML) {
+-        super(int(_arg1.@type));
+-        this._5b = _arg1;
+-        var _local2:Vector.<IGraphicsData> = new Vector.<IGraphicsData>();
+-        var _local3:_0D_v = new _0D_v();
+-        _local3._K_(0.5, 0.5, 12, (Math.PI / 4), new Rectangle(-100, -100, 200, 200), false);
+-        var _local4:BitmapData = _pf.getBitmapData(type_);
+-        var _local5:_ik = new _ik(_local4, _J_c, 0, 0, _M_X_._0I_7, 0, 0);
+-        _local5.draw(_local2, _local3, 0);
+-        this._G_m = new Shape();
+-        this._G_m.graphics.drawGraphicsData(_local2);
+-        this._G_m.scaleX = (this._G_m.scaleY = _0L_L_);
+-        this._G_m.x = (WIDTH / 2);
+-        this._G_m.y = (HEIGHT / 2);
+-        addChild(this._G_m);
+-    }
+-    public var _5b:XML;
+-    private var _G_m:Shape;
+-
+-    override protected function getToolTip():ToolTip {
+-        return (new GroundToolTip(this._5b));
+-    }
+-
+-}
+-}//package _D_d
+-
+diff --git a/client-source/src/_D_d/_wY_.as b/client-source/src/_D_d/_wY_.as
+index 4cb9a1e..52b7a70 100644
+--- a/client-source/src/_D_d/_wY_.as
++++ b/client-source/src/_D_d/_wY_.as
+@@ -90,10 +90,10 @@ public class _wY_ extends Sprite {
+         }
+         this._01h._08S_();
+         var _local3:_11 = this._09l._p_(_local2.x, _local2.y);
+-        var _local4:Vector.<int> = (((_local3 == null)) ? _M_u._0K_Q_ : _local3._5F_);
+-        var _local5:String = (((_local4[_M_u._6h] == -1)) ? "None" : _pf._6H_(_local4[_M_u._6h]));
+-        var _local6:String = (((_local4[_M_u._S_E_] == -1)) ? "None" : ObjectLibrary._6H_(_local4[_M_u._S_E_]));
+-        var _local7:String = (((_local4[_M_u._0G_m] == -1)) ? "None" : _sn._6H_(_local4[_M_u._0G_m]));
++        var _local4:Vector.<int> = (((_local3 == null)) ? MapLayer.EMPTY_TYPES : _local3._5F_);
++        var _local5:String = (((_local4[MapLayer.GROUND] == -1)) ? "None" : _pf._6H_(_local4[MapLayer.GROUND]));
++        var _local6:String = (((_local4[MapLayer.OBJECT] == -1)) ? "None" : ObjectLibrary._6H_(_local4[MapLayer.OBJECT]));
++        var _local7:String = (((_local4[MapLayer.REGION] == -1)) ? "None" : _sn._6H_(_local4[MapLayer.REGION]));
+         this._Y_W_.text = (((((((("<span class='in'>" + "Ground: ") + _local5) + "\nObject: ") + _local6) + (((((_local3 == null)) || ((_local3._fi == null)))) ? "" : ((" (" + _local3._fi) + ")"))) + "\nRegion: ") + _local7) + "</span>");
+         this._Y_W_._08S_();
+     }
+diff --git a/tools/batch04_chooser_elements.json b/tools/batch04_chooser_elements.json
+new file mode 100644
+index 0000000..2ce4955
+--- /dev/null
++++ b/tools/batch04_chooser_elements.json
+@@ -0,0 +1,50 @@
++{
++ "batch": ["_P_u", "_Q_S_", "_Q_H_", "_0E_w", "_M_u"],
++ "classes": {
++  "_P_u": "ChooserElement",
++  "_Q_S_": "GroundElement",
++  "_Q_H_": "ObjectElement",
++  "_0E_w": "RegionElement",
++  "_M_u": "MapLayer"
++ },
++ "members": [
++  {"old": "_6h",   "new": "GROUND",      "classes": ["_M_u"], "users": true},
++  {"old": "_S_E_", "new": "OBJECT",      "classes": ["_M_u"], "users": true},
++  {"old": "_0G_m", "new": "REGION",      "classes": ["_M_u"], "users": true},
++  {"old": "_0G_D_","new": "NUM_LAYERS",  "classes": ["_M_u"], "users": true},
++  {"old": "_0K_Q_","new": "EMPTY_TYPES", "classes": ["_M_u"], "users": true},
++
++  {"old": "_68",   "new": "hovered_",    "classes": ["_P_u"], "users": false},
++  {"old": "_V_B_", "new": "showToolTip", "classes": ["_P_u"], "users": false},
++  {"old": "_X_S_", "new": "hideToolTip", "classes": ["_P_u"], "users": false},
++
++  {"old": "_5b",   "new": "groundXml_",  "classes": ["_Q_S_"], "users": false},
++  {"old": "_G_m",  "new": "preview_",    "classes": ["_Q_S_"], "users": false},
++  {"old": "_J_c",  "new": "UV_COORDS",   "classes": ["_Q_S_"], "users": false},
++  {"old": "_0L_L_","new": "PREVIEW_SCALE","classes": ["_Q_S_"], "users": false},
++  {"old": "_J_i",  "new": "objectXml_",  "classes": ["_Q_H_"], "users": false},
++  {"old": "_hI_",  "new": "regionXml_",  "classes": ["_0E_w"], "users": false}
++ ],
++ "locals": {
++  "auto": true,
++  "overrides": [
++   {"class": "ChooserElement", "func": "ChooserElement", "old": "_arg1", "new": "type"},
++   {"class": "ChooserElement", "func": "setSelected",    "old": "_arg1", "new": "selected"},
++   {"class": "ChooserElement", "func": "draw",           "old": "_local1", "new": "unusedColor"},
++
++   {"class": "GroundElement", "func": "GroundElement", "old": "_arg1",   "new": "groundXml"},
++   {"class": "GroundElement", "func": "GroundElement", "old": "_local2", "new": "graphicsData"},
++   {"class": "GroundElement", "func": "GroundElement", "old": "_local3", "new": "camera"},
++   {"class": "GroundElement", "func": "GroundElement", "old": "_local4", "new": "texture"},
++   {"class": "GroundElement", "func": "GroundElement", "old": "_local5", "new": "squareFace"},
++
++   {"class": "ObjectElement", "func": "ObjectElement", "old": "_arg1",   "new": "objectXml"},
++   {"class": "ObjectElement", "func": "ObjectElement", "old": "_local2", "new": "texture"},
++   {"class": "ObjectElement", "func": "ObjectElement", "old": "_local3", "new": "bitmap"},
++   {"class": "ObjectElement", "func": "ObjectElement", "old": "_local4", "new": "scale"},
++
++   {"class": "RegionElement", "func": "RegionElement", "old": "_arg1",   "new": "regionXml"},
++   {"class": "RegionElement", "func": "RegionElement", "old": "_local2", "new": "swatch"}
++  ]
++ }
++}
+-- 
+2.43.0
+

@@ -1,0 +1,27 @@
+{
+ "batch": ["_0E_2", "_9o", "_D_M_"],
+ "classes": {
+  "_0E_2": "GroundToolTip",
+  "_9o": "ObjectToolTip",
+  "_D_M_": "RegionToolTip"
+ },
+ "class_scope": {
+  "_0E_2": "_D_d"
+ },
+ "members": [
+  {"old": "_be",  "new": "TOOLTIP_WIDTH",    "classes": ["_0E_2", "_9o", "_D_M_"], "users": false},
+  {"old": "_P_V_", "new": "nameText_",        "classes": ["_0E_2", "_9o", "_D_M_"], "users": false},
+  {"old": "_C_G_", "new": "descriptionText_", "classes": ["_0E_2", "_9o"],          "users": false}
+ ],
+ "locals": {
+  "auto": true,
+  "overrides": [
+   {"class": "GroundToolTip", "func": "GroundToolTip", "old": "_arg1",   "new": "groundXml"},
+   {"class": "GroundToolTip", "func": "GroundToolTip", "old": "_local2", "new": "description"},
+   {"class": "ObjectToolTip", "func": "ObjectToolTip", "old": "_arg1",   "new": "objectXml"},
+   {"class": "ObjectToolTip", "func": "ObjectToolTip", "old": "_local2", "new": "description"},
+   {"class": "ObjectToolTip", "func": "ObjectToolTip", "old": "_local3", "new": "projectileXml"},
+   {"class": "RegionToolTip", "func": "RegionToolTip", "old": "_arg1",   "new": "regionXml"}
+  ]
+ }
+}
