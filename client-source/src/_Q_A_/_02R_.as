@@ -10,13 +10,13 @@ import flash.display.Graphics;
 
 import com.company.assembleegameclient.appengine._02k;
 
-import _00g._0H_i;
+import com.company.assembleegameclient.account.web.PurchaseMediator;
 
 import flash.events.Event;
 
 import com.company.assembleegameclient.util.offer.Offers;
 
-import _00g._02U_;
+import com.company.assembleegameclient.account.web.WebPaymentCommand;
 
 import _0D_d._A_R_;
 
@@ -41,15 +41,15 @@ public class _02R_ extends Sprite {
     private var _2m:Boolean;
 
     private function _nK_(_arg1:_8C_):void {
-        var _local2:_0H_i = new _0H_i();
+        var _local2:PurchaseMediator = new PurchaseMediator();
         _local2.addEventListener(Event.CANCEL, this.onCancel);
         _local2.addEventListener(Event.COMPLETE, this.onComplete);
-        _local2._0J_E_ = new Offers(XML(_arg1.data_));
-        _local2._yI_ = "$";
-        _local2._Q_W_ = "";
-        _local2._d0 = true;
-        _local2._02Z_ = true;
-        _local2._04Z_ = new _02U_();
+        _local2.offers = new Offers(XML(_arg1.data_));
+        _local2.currencyPrefix = "$";
+        _local2.currencySuffix = "";
+        _local2.showBonus = true;
+        _local2.showPaymentMethods = true;
+        _local2.purchaseCommand = new WebPaymentCommand();
         var _local3:_A_R_ = new _A_R_(_local2);
         addChild(_local3);
     }

@@ -4,7 +4,7 @@
 //_0D_d._A_R_
 
 package _0D_d {
-import _00g._0H_i;
+import com.company.assembleegameclient.account.web.PurchaseMediator;
 
 import com.company.assembleegameclient.ui._7f;
 
@@ -27,12 +27,12 @@ public class _A_R_ extends Frame {
     private static const _jA_:String = "Buy Now";
     private static const WIDTH:int = 550;
 
-    public function _A_R_(_arg1:_0H_i) {
+    public function _A_R_(_arg1:PurchaseMediator) {
         super(TITLE, _lQ_, _j8, _E_N_, WIDTH);
         this.mediator = _arg1;
         this._08Z_();
     }
-    private var mediator:_0H_i;
+    private var mediator:PurchaseMediator;
     private var _8K_:_mo;
     private var _9c:_4a;
     private var _0B_q:_7f;
@@ -45,7 +45,7 @@ public class _A_R_ extends Frame {
     }
 
     private function _sO_():void {
-        if (!this.mediator._02Z_) {
+        if (!this.mediator.showPaymentMethods) {
             return;
         }
         this._mN_();
@@ -80,8 +80,8 @@ public class _A_R_ extends Frame {
     }
 
     private function _U_u():void {
-        this._9c = new _4a(this.mediator._0J_E_, this.mediator._yI_, this.mediator._Q_W_);
-        this._9c._d0(this.mediator._d0);
+        this._9c = new _4a(this.mediator.offers, this.mediator.currencyPrefix, this.mediator.currencySuffix);
+        this._9c.showBonus(this.mediator.showBonus);
         _0D_6(_Y_2);
         _W_z(this._9c);
     }
@@ -100,7 +100,7 @@ public class _A_R_ extends Frame {
             this.mediator.paymentMethod = this._8K_._rq();
         }
         this.mediator.offer = this._9c._iU_().offer;
-        this.mediator._8i();
+        this.mediator.startPurchase();
     }
 
     protected function onCancel(_arg1:MouseEvent):void {

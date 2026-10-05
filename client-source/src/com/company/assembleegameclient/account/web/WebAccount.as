@@ -1,9 +1,9 @@
 ﻿// Decompiled by AS3 Sorcerer 1.99
 // http://www.as3sorcerer.com/
 
-//_00g.WebAccount
+//com.company.assembleegameclient.account.web.WebAccount
 
-package _00g {
+package com.company.assembleegameclient.account.web {
 import _qN_.Account;
 
 import flash.external.ExternalInterface;
@@ -36,19 +36,19 @@ import mx.utils.UIDUtil;
 
 public class WebAccount extends Account {
 
-    public static const _000:String = "seraphsdominion";
-    private static const _oF_:String = "";
-    private static const _03R_:String = "seraphsdominion";
+    public static const GAME_NETWORK:String = "seraphsdominion";
+    private static const GAME_NETWORK_USER_ID:String = "";
+    private static const PLAY_PLATFORM:String = "seraphsdominion";
 
     public function WebAccount() {
         try {
-            this._8U_ = ExternalInterface.call("rotmg.UrlLib.getParam", "entrypt");
+            this.entryTag_ = ExternalInterface.call("rotmg.UrlLib.getParam", "entrypt");
         } catch (error:Error) {
         }
     }
     private var guid_:String = null;
     private var password_:String = null;
-    private var _8U_:String = "";
+    private var entryTag_:String = "";
 
     override public function guid():String {
         return (this.guid_);
@@ -69,35 +69,35 @@ public class WebAccount extends Account {
         return (!((this.password() == "")));
     }
 
-    override protected function internalLoad(_arg1:Stage, _arg2:Function):void {
-        var _local3:SharedObject;
+    override protected function internalLoad(stage:Stage, callback:Function):void {
+        var sharedObject:SharedObject;
         this.guid_ = null;
         this.password_ = null;
         try {
-            _local3 = SharedObject.getLocal("SeraphsDominion", "/");
-            if (_local3.data.hasOwnProperty("GUID")) {
-                this.guid_ = _local3.data["GUID"];
+            sharedObject = SharedObject.getLocal("SeraphsDominion", "/");
+            if (sharedObject.data.hasOwnProperty("GUID")) {
+                this.guid_ = sharedObject.data["GUID"];
             }
-            if (_local3.data.hasOwnProperty("Password")) {
-                this.password_ = _local3.data["Password"];
+            if (sharedObject.data.hasOwnProperty("Password")) {
+                this.password_ = sharedObject.data["Password"];
             }
         } catch (error:Error) {
         }
         if (this.guid_ == null) {
             this.modify(GUID.create(), null, null);
         }
-        (_arg2());
+        (callback());
     }
 
-    override public function modify(_arg1:String, _arg2:String, _arg3:String):void {
-        var _local4:SharedObject;
-        this.guid_ = _arg1;
-        this.password_ = _arg2;
+    override public function modify(guid:String, password:String, secret:String):void {
+        var sharedObject:SharedObject;
+        this.guid_ = guid;
+        this.password_ = password;
         try {
-            _local4 = SharedObject.getLocal("SeraphsDominion", "/");
-            _local4.data["GUID"] = this.guid_;
-            _local4.data["Password"] = this.password_;
-            _local4.flush();
+            sharedObject = SharedObject.getLocal("SeraphsDominion", "/");
+            sharedObject.data["GUID"] = this.guid_;
+            sharedObject.data["Password"] = this.password_;
+            sharedObject.flush();
         } catch (error:Error) {
         }
     }
@@ -109,7 +109,7 @@ public class WebAccount extends Account {
         Parameters.save();
     }
 
-    override public function reportIntStat(_arg1:String, _arg2:int):void {
+    override public function reportIntStat(statName:String, value:int):void {
     }
 
     override public function newAccountText():_9j {
@@ -120,39 +120,39 @@ public class WebAccount extends Account {
         return (new _ak(false));
     }
 
-    override public function showInGameRegister(_arg1:Stage):void {
-        var _local2:_0A_c = new _0A_c();
-        _arg1.addChild(_local2);
+    override public function showInGameRegister(stage:Stage):void {
+        var registerDialog:_0A_c = new _0A_c();
+        stage.addChild(registerDialog);
     }
 
     override public function cacheOffers():void {
         _02k._U_t("/credits", null);
     }
 
-    override public function showMoneyManagement(_arg1:Stage):void {
+    override public function showMoneyManagement(stage:Stage):void {
         if (!this.isRegistered()) {
-            _arg1.addChild(new _2k(("In order to buy Gold " + ", you must be a registered user.")));
+            stage.addChild(new _2k(("In order to buy Gold " + ", you must be a registered user.")));
             return;
         }
-        _arg1.addChild(new _02R_());
+        stage.addChild(new _02R_());
     }
 
     override public function gameNetworkUserId():String {
-        return (_oF_);
+        return (GAME_NETWORK_USER_ID);
     }
 
     override public function gameNetwork():String {
-        return (_000);
+        return (GAME_NETWORK);
     }
 
     override public function playPlatform():String {
-        return (_03R_);
+        return (PLAY_PLATFORM);
     }
 
     override public function entrytag():String {
-        return (this._8U_);
+        return (this.entryTag_);
     }
 
 }
-}//package _00g
+}//package com.company.assembleegameclient.account.web
 
