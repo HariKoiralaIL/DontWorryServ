@@ -1,0 +1,49 @@
+{
+ "batch": ["_E_m", "_0H_J_", "_02i", "_4g"],
+ "classes": {
+  "_E_m": "Chooser",
+  "_0H_J_": "GroundChooser",
+  "_02i": "ObjectChooser",
+  "_4g": "RegionChooser"
+ },
+ "members": [
+  {"old": "_09V_", "new": "layer_",           "classes": ["_E_m", "_N_2"], "users": true},
+  {"old": "_N_T_", "new": "getSelectedType",  "classes": ["_E_m"], "users": true},
+  {"old": "_mB_",  "new": "selectType",       "classes": ["_E_m"], "users": true},
+  {"old": "_08M_", "new": "addElement",       "classes": ["_E_m"], "users": true},
+
+  {"old": "_Y_i",  "new": "content_",         "classes": ["_E_m"], "users": false},
+  {"old": "_E_k",  "new": "scrollBar_",       "classes": ["_E_m"], "users": false},
+  {"old": "_oX_",  "new": "elements_",        "classes": ["_E_m"], "users": false},
+  {"old": "_xo",   "new": "SCROLLBAR_WIDTH",  "classes": ["_E_m"], "users": false},
+  {"old": "_0y",   "new": "outlineStroke_",   "classes": ["_E_m"], "users": false},
+  {"old": "_vV_",  "new": "backgroundFill_",  "classes": ["_E_m"], "users": false},
+  {"old": "_rC_",  "new": "drawBackground",   "classes": ["_E_m"], "users": false},
+  {"old": "_A_E_", "new": "onScroll",         "classes": ["_E_m"], "users": false},
+  {"old": "_lb",   "new": "onMouseWheel",     "classes": ["_E_m"], "users": false}
+ ],
+ "locals": {
+  "auto": true,
+  "overrides": [
+   {"class": "Chooser", "func": "Chooser",      "old": "_arg1",   "new": "layer"},
+   {"class": "Chooser", "func": "Chooser",      "old": "_local2", "new": "maskShape"},
+   {"class": "Chooser", "func": "selectType",   "old": "_arg1",   "new": "type"},
+   {"class": "Chooser", "func": "selectType",   "old": "_local2", "new": "element"},
+   {"class": "Chooser", "func": "addElement",   "old": "_arg1",   "new": "element"},
+   {"class": "Chooser", "func": "addElement",   "old": "_local2", "new": "index"},
+   {"class": "Chooser", "func": "setSelected",  "old": "_arg1",   "new": "element"},
+   {"class": "Chooser", "func": "onMouseDown",  "old": "_local2", "new": "element"},
+
+   {"class": "GroundChooser", "func": "GroundChooser", "old": "_local1", "new": "id"},
+   {"class": "GroundChooser", "func": "GroundChooser", "old": "_local2", "new": "sortedIds"},
+   {"class": "GroundChooser", "func": "GroundChooser", "old": "_local3", "new": "type"},
+
+   {"class": "ObjectChooser", "func": "ObjectChooser", "old": "_local1", "new": "id"},
+   {"class": "ObjectChooser", "func": "ObjectChooser", "old": "_local2", "new": "sortedIds"},
+   {"class": "ObjectChooser", "func": "ObjectChooser", "old": "_local3", "new": "type"},
+   {"class": "ObjectChooser", "func": "ObjectChooser", "old": "_local4", "new": "objectXml"},
+
+   {"class": "RegionChooser", "func": "RegionChooser", "old": "_local1", "new": "regionXml"}
+  ]
+ }
+}

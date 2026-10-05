@@ -12,23 +12,23 @@ public class _N_2 extends _P_2 {
         this.map_ = _arg1;
         this.x_ = _arg2;
         this.y_ = _arg3;
-        this._09V_ = _arg4;
+        this.layer_ = _arg4;
         this._0A_S_ = _arg5;
         this._B_Y_ = _arg6;
     }
     private var map_:_N_g;
     private var x_:int;
     private var y_:int;
-    private var _09V_:int;
+    private var layer_:int;
     private var _0A_S_:int;
     private var _B_Y_:int;
 
     override public function execute():void {
-        this.map_._2F_(this.x_, this.y_, this._09V_, this._B_Y_);
+        this.map_._2F_(this.x_, this.y_, this.layer_, this._B_Y_);
     }
 
     override public function unexecute():void {
-        this.map_._2F_(this.x_, this.y_, this._09V_, this._0A_S_);
+        this.map_._2F_(this.x_, this.y_, this.layer_, this._0A_S_);
     }
 
 }
