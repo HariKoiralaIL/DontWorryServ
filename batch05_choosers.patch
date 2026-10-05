@@ -1,0 +1,712 @@
+From 52a51fb51dc6d854d8ffe6307127e5509aba72f1 Mon Sep 17 00:00:00 2001
+From: refactor <refactor@local>
+Date: Mon, 5 Oct 2026 00:03:03 +0000
+Subject: [PATCH] refactor(client): batch 5 - map editor choosers
+ (_E_m/_0H_J_/_02i/_4g -> Chooser/Ground/Object/RegionChooser, _09V_ ->
+ layer_)
+
+---
+ client-source/src/_D_d/Chooser.as       | 145 ++++++++++++++++++++++++
+ client-source/src/_D_d/GroundChooser.as |  34 ++++++
+ client-source/src/_D_d/ObjectChooser.as |  38 +++++++
+ client-source/src/_D_d/RegionChooser.as |  22 ++++
+ client-source/src/_D_d/_02i.as          |  38 -------
+ client-source/src/_D_d/_0H_J_.as        |  34 ------
+ client-source/src/_D_d/_0K_V_.as        |  24 ++--
+ client-source/src/_D_d/_4g.as           |  22 ----
+ client-source/src/_D_d/_E_m.as          | 145 ------------------------
+ client-source/src/_D_d/_N_2.as          |   8 +-
+ tools/batch05_choosers.json             |  49 ++++++++
+ 11 files changed, 304 insertions(+), 255 deletions(-)
+ create mode 100644 client-source/src/_D_d/Chooser.as
+ create mode 100644 client-source/src/_D_d/GroundChooser.as
+ create mode 100644 client-source/src/_D_d/ObjectChooser.as
+ create mode 100644 client-source/src/_D_d/RegionChooser.as
+ delete mode 100644 client-source/src/_D_d/_02i.as
+ delete mode 100644 client-source/src/_D_d/_0H_J_.as
+ delete mode 100644 client-source/src/_D_d/_4g.as
+ delete mode 100644 client-source/src/_D_d/_E_m.as
+ create mode 100644 tools/batch05_choosers.json
+
+diff --git a/client-source/src/_D_d/Chooser.as b/client-source/src/_D_d/Chooser.as
+new file mode 100644
+index 0000000..62f7c9e
+--- /dev/null
++++ b/client-source/src/_D_d/Chooser.as
+@@ -0,0 +1,145 @@
++﻿// Decompiled by AS3 Sorcerer 1.99
++// http://www.as3sorcerer.com/
++
++//_D_d.Chooser
++
++package _D_d {
++import flash.display.Sprite;
++
++import flash.display.IGraphicsData;
++
++import com.company.util.GraphicHelper;
++
++import _D_d.ChooserElement;
++
++import com.company.assembleegameclient.ui._0K_B_;
++
++import flash.display.Shape;
++import flash.display.GraphicsSolidFill;
++import flash.display.GraphicsStroke;
++import flash.display.GraphicsPath;
++import flash.display.LineScaleMode;
++import flash.display.CapsStyle;
++import flash.display.JointStyle;
++import flash.events.Event;
++import flash.events.MouseEvent;
++
++import _D_d.*;
++
++internal class Chooser extends Sprite {
++
++    public static const WIDTH:int = 136;
++    public static const HEIGHT:int = 480;
++    private static const SCROLLBAR_WIDTH:int = 20;
++
++    public function Chooser(layer:int) {
++        this.elements_ = new Vector.<ChooserElement>();
++        this.outlineFill_ = new GraphicsSolidFill(0xFFFFFF, 1);
++        this.outlineStroke_ = new GraphicsStroke(1, false, LineScaleMode.NORMAL, CapsStyle.NONE, JointStyle.ROUND, 3, this.outlineFill_);
++        this.backgroundFill_ = new GraphicsSolidFill(0x363636, 1);
++        this.path_ = new GraphicsPath(new Vector.<int>(), new Vector.<Number>());
++        this.graphicsData_ = new <IGraphicsData>[outlineStroke_, backgroundFill_, path_, GraphicHelper.END_FILL, GraphicHelper._H_B_];
++        super();
++        this.layer_ = layer;
++        this.drawBackground();
++        this.content_ = new Sprite();
++        this.content_.x = 4;
++        this.content_.y = 6;
++        addChild(this.content_);
++        this.scrollBar_ = new _0K_B_(SCROLLBAR_WIDTH, (HEIGHT - 8));
++        this.scrollBar_.x = ((WIDTH - SCROLLBAR_WIDTH) - 6);
++        this.scrollBar_.y = 4;
++        this.scrollBar_.addEventListener(Event.CHANGE, this.onScroll);
++        var maskShape:Shape = new Shape();
++        maskShape.graphics.beginFill(0);
++        maskShape.graphics.drawRect(0, 2, ((Chooser.WIDTH - SCROLLBAR_WIDTH) - 4), (Chooser.HEIGHT - 4));
++        addChild(maskShape);
++        this.content_.mask = maskShape;
++        addEventListener(Event.ADDED_TO_STAGE, this.onAddedToStage);
++        addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
++    }
++    public var layer_:int;
++    public var selected_:ChooserElement;
++    private var graphicsData_:Vector.<IGraphicsData>;
++    private var content_:Sprite;
++    private var scrollBar_:_0K_B_;
++    private var mask_:Shape;
++    private var elements_:Vector.<ChooserElement>;
++    private var outlineFill_:GraphicsSolidFill;
++    private var outlineStroke_:GraphicsStroke;
++    private var backgroundFill_:GraphicsSolidFill;
++    private var path_:GraphicsPath;
++
++    public function getSelectedType():int {
++        return (this.selected_.type_);
++    }
++
++    public function selectType(type:int):void {
++        var element:ChooserElement;
++        for each (element in this.elements_) {
++            if (element.type_ == type) {
++                this.setSelected(element);
++                return;
++            }
++        }
++    }
++
++    protected function addElement(element:ChooserElement):void {
++        var index:int;
++        index = this.elements_.length;
++        element.x = ((((index % 2)) == 0) ? 0 : (2 + ChooserElement.WIDTH));
++        element.y = ((int((index / 2)) * ChooserElement.HEIGHT) + 6);
++        this.content_.addChild(element);
++        if (index == 0) {
++            this.setSelected(element);
++        }
++        element.addEventListener(MouseEvent.MOUSE_DOWN, this.onMouseDown);
++        this.elements_.push(element);
++    }
++
++    protected function setSelected(element:ChooserElement):void {
++        if (this.selected_ != null) {
++            this.selected_.setSelected(false);
++        }
++        this.selected_ = element;
++        this.selected_.setSelected(true);
++    }
++
++    private function drawBackground():void {
++        GraphicHelper._0L_6(this.path_);
++        GraphicHelper.drawUI(0, 0, WIDTH, HEIGHT, 4, [1, 1, 1, 1], this.path_);
++        graphics.drawGraphicsData(this.graphicsData_);
++    }
++
++    protected function onMouseDown(mouseEvent:MouseEvent):void {
++        var element:ChooserElement = (mouseEvent.currentTarget as ChooserElement);
++        this.setSelected(element);
++    }
++
++    protected function onScroll(event:Event):void {
++        this.content_.y = (6 - (this.scrollBar_._Q_D_() * ((this.content_.height + 12) - HEIGHT)));
++    }
++
++    protected function onAddedToStage(event:Event):void {
++        addEventListener(MouseEvent.MOUSE_WHEEL, this.onMouseWheel);
++        this.scrollBar_._fA_(HEIGHT, this.content_.height);
++        addChild(this.scrollBar_);
++    }
++
++    protected function onRemovedFromStage(event:Event):void {
++        removeEventListener(MouseEvent.MOUSE_WHEEL, this.onMouseWheel);
++    }
++
++    protected function onMouseWheel(mouseEvent:MouseEvent):void {
++        if (mouseEvent.delta > 0) {
++            this.scrollBar_._d9();
++        } else {
++            if (mouseEvent.delta < 0) {
++                this.scrollBar_._tE_();
++            }
++        }
++    }
++
++}
++}//package _D_d
++
+diff --git a/client-source/src/_D_d/GroundChooser.as b/client-source/src/_D_d/GroundChooser.as
+new file mode 100644
+index 0000000..d0f00a3
+--- /dev/null
++++ b/client-source/src/_D_d/GroundChooser.as
+@@ -0,0 +1,34 @@
++﻿// Decompiled by AS3 Sorcerer 1.99
++// http://www.as3sorcerer.com/
++
++//_D_d.GroundChooser
++
++package _D_d {
++import _D_d.MapLayer;
++
++import com.company.assembleegameclient.map._pf;
++import com.company.util._L_2;
++
++import _D_d.*;
++
++internal class GroundChooser extends Chooser {
++
++    public function GroundChooser() {
++        var id:String;
++        var type:int;
++        var groundElement:GroundElement;
++        super(MapLayer.GROUND);
++        var sortedIds:Vector.<String> = new Vector.<String>();
++        for (id in _pf._pb) {
++            sortedIds.push(id);
++        }
++        sortedIds.sort(_L_2._L_O_);
++        for each (id in sortedIds) {
++            type = _pf._pb[id];
++            groundElement = new GroundElement(_pf._Q_F_[type]);
++            addElement(groundElement);
++        }
++    }
++}
++}//package _D_d
++
+diff --git a/client-source/src/_D_d/ObjectChooser.as b/client-source/src/_D_d/ObjectChooser.as
+new file mode 100644
+index 0000000..7ee4644
+--- /dev/null
++++ b/client-source/src/_D_d/ObjectChooser.as
+@@ -0,0 +1,38 @@
++﻿// Decompiled by AS3 Sorcerer 1.99
++// http://www.as3sorcerer.com/
++
++//_D_d.ObjectChooser
++
++package _D_d {
++import _D_d.MapLayer;
++
++import com.company.assembleegameclient.objects.ObjectLibrary;
++import com.company.util._L_2;
++
++import _D_d.*;
++
++internal class ObjectChooser extends Chooser {
++
++    public function ObjectChooser() {
++        var id:String;
++        var type:int;
++        var objectXml:XML;
++        var objectElement:ObjectElement;
++        super(MapLayer.OBJECT);
++        var sortedIds:Vector.<String> = new Vector.<String>();
++        for (id in ObjectLibrary._pb) {
++            sortedIds.push(id);
++        }
++        sortedIds.sort(_L_2._L_O_);
++        for each (id in sortedIds) {
++            type = ObjectLibrary._pb[id];
++            objectXml = ObjectLibrary._Q_F_[type];
++            if (!((((objectXml.hasOwnProperty("Item")) || (objectXml.hasOwnProperty("Player")))) || ((objectXml.Class == "Projectile")))) {
++                objectElement = new ObjectElement(objectXml);
++                addElement(objectElement);
++            }
++        }
++    }
++}
++}//package _D_d
++
+diff --git a/client-source/src/_D_d/RegionChooser.as b/client-source/src/_D_d/RegionChooser.as
+new file mode 100644
+index 0000000..5b735e4
+--- /dev/null
++++ b/client-source/src/_D_d/RegionChooser.as
+@@ -0,0 +1,22 @@
++﻿// Decompiled by AS3 Sorcerer 1.99
++// http://www.as3sorcerer.com/
++
++//_D_d.RegionChooser
++
++package _D_d {
++import com.company.assembleegameclient.map._sn;
++
++public class RegionChooser extends Chooser {
++
++    public function RegionChooser() {
++        var regionXml:XML;
++        var regionElement:RegionElement;
++        super(MapLayer.REGION);
++        for each (regionXml in _sn._Q_F_) {
++            regionElement = new RegionElement(regionXml);
++            addElement(regionElement);
++        }
++    }
++}
++}//package _D_d
++
+diff --git a/client-source/src/_D_d/_02i.as b/client-source/src/_D_d/_02i.as
+deleted file mode 100644
+index 59d4c82..0000000
+--- a/client-source/src/_D_d/_02i.as
++++ /dev/null
+@@ -1,38 +0,0 @@
+-﻿// Decompiled by AS3 Sorcerer 1.99
+-// http://www.as3sorcerer.com/
+-
+-//_D_d._02i
+-
+-package _D_d {
+-import _D_d.MapLayer;
+-
+-import com.company.assembleegameclient.objects.ObjectLibrary;
+-import com.company.util._L_2;
+-
+-import _D_d.*;
+-
+-internal class _02i extends _E_m {
+-
+-    public function _02i() {
+-        var _local1:String;
+-        var _local3:int;
+-        var _local4:XML;
+-        var _local5:ObjectElement;
+-        super(MapLayer.OBJECT);
+-        var _local2:Vector.<String> = new Vector.<String>();
+-        for (_local1 in ObjectLibrary._pb) {
+-            _local2.push(_local1);
+-        }
+-        _local2.sort(_L_2._L_O_);
+-        for each (_local1 in _local2) {
+-            _local3 = ObjectLibrary._pb[_local1];
+-            _local4 = ObjectLibrary._Q_F_[_local3];
+-            if (!((((_local4.hasOwnProperty("Item")) || (_local4.hasOwnProperty("Player")))) || ((_local4.Class == "Projectile")))) {
+-                _local5 = new ObjectElement(_local4);
+-                _08M_(_local5);
+-            }
+-        }
+-    }
+-}
+-}//package _D_d
+-
+diff --git a/client-source/src/_D_d/_0H_J_.as b/client-source/src/_D_d/_0H_J_.as
+deleted file mode 100644
+index 168aef6..0000000
+--- a/client-source/src/_D_d/_0H_J_.as
++++ /dev/null
+@@ -1,34 +0,0 @@
+-﻿// Decompiled by AS3 Sorcerer 1.99
+-// http://www.as3sorcerer.com/
+-
+-//_D_d._0H_J_
+-
+-package _D_d {
+-import _D_d.MapLayer;
+-
+-import com.company.assembleegameclient.map._pf;
+-import com.company.util._L_2;
+-
+-import _D_d.*;
+-
+-internal class _0H_J_ extends _E_m {
+-
+-    public function _0H_J_() {
+-        var _local1:String;
+-        var _local3:int;
+-        var _local4:GroundElement;
+-        super(MapLayer.GROUND);
+-        var _local2:Vector.<String> = new Vector.<String>();
+-        for (_local1 in _pf._pb) {
+-            _local2.push(_local1);
+-        }
+-        _local2.sort(_L_2._L_O_);
+-        for each (_local1 in _local2) {
+-            _local3 = _pf._pb[_local1];
+-            _local4 = new GroundElement(_pf._Q_F_[_local3]);
+-            _08M_(_local4);
+-        }
+-    }
+-}
+-}//package _D_d
+-
+diff --git a/client-source/src/_D_d/_0K_V_.as b/client-source/src/_D_d/_0K_V_.as
+index 3e15806..43a4480 100644
+--- a/client-source/src/_D_d/_0K_V_.as
++++ b/client-source/src/_D_d/_0K_V_.as
+@@ -70,20 +70,20 @@ public class _0K_V_ extends _05p {
+         this._mL_.x = 4;
+         this._mL_.y = ((600 - _wY_.HEIGHT) - 10);
+         addChild(this._mL_);
+-        this._mu = new _01c(new <String>["Ground", "Objects", "Regions"], _E_m.WIDTH, 26);
++        this._mu = new _01c(new <String>["Ground", "Objects", "Regions"], Chooser.WIDTH, 26);
+         this._mu.x = ((this._09l.x + _N_g._0K_6) + 4);
+         this._mu.y = _r0;
+         this._mu.addEventListener(Event.CHANGE, this._W_L_);
+         addChild(this._mu);
+-        this._D_F_ = new _0H_J_();
++        this._D_F_ = new GroundChooser();
+         this._D_F_.x = this._mu.x;
+         this._D_F_.y = ((this._mu.y + this._mu.height) + 4);
+         this._X_4 = this._D_F_;
+         addChild(this._D_F_);
+-        this._qS_ = new _02i();
++        this._qS_ = new ObjectChooser();
+         this._qS_.x = this._mu.x;
+         this._qS_.y = ((this._mu.y + this._mu.height) + 4);
+-        this._2u = new _4g();
++        this._2u = new RegionChooser();
+         this._2u.x = this._mu.x;
+         this._2u.y = ((this._mu.y + this._mu.height) + 4);
+ 
+@@ -94,10 +94,10 @@ public class _0K_V_ extends _05p {
+     public var _09l:_N_g;
+     public var _mL_:_wY_;
+     public var _mu:_01c;
+-    public var _D_F_:_0H_J_;
+-    public var _qS_:_02i;
+-    public var _2u:_4g;
+-    public var _X_4:_E_m;
++    public var _D_F_:GroundChooser;
++    public var _qS_:ObjectChooser;
++    public var _2u:RegionChooser;
++    public var _X_4:Chooser;
+     public var filename_:String = null;
+     private var _G_T_:_03X_;
+     private var _E_s:FileReference = null;
+@@ -212,17 +212,17 @@ public class _0K_V_ extends _05p {
+         _local2 = _arg1.tiles_[0];
+         switch (this._kg._P_b()) {
+             case _H_4._3O_:
+-                this._qX_(_arg1.tiles_, this._X_4._09V_, this._X_4._N_T_());
++                this._qX_(_arg1.tiles_, this._X_4.layer_, this._X_4.getSelectedType());
+                 break;
+             case _H_4._001:
+-                this._qX_(_arg1.tiles_, this._X_4._09V_, -1);
++                this._qX_(_arg1.tiles_, this._X_4.layer_, -1);
+                 break;
+             case _H_4._mt:
+-                _local3 = this._09l.getType(_local2.x_, _local2.y_, this._X_4._09V_);
++                _local3 = this._09l.getType(_local2.x_, _local2.y_, this._X_4.layer_);
+                 if (_local3 == -1) {
+                     return;
+                 }
+-                this._X_4._mB_(_local3);
++                this._X_4.selectType(_local3);
+                 this._kg._0G_A_(_H_4._3O_);
+                 break;
+             case _H_4._X_V_:
+diff --git a/client-source/src/_D_d/_4g.as b/client-source/src/_D_d/_4g.as
+deleted file mode 100644
+index fc9c893..0000000
+--- a/client-source/src/_D_d/_4g.as
++++ /dev/null
+@@ -1,22 +0,0 @@
+-﻿// Decompiled by AS3 Sorcerer 1.99
+-// http://www.as3sorcerer.com/
+-
+-//_D_d._4g
+-
+-package _D_d {
+-import com.company.assembleegameclient.map._sn;
+-
+-public class _4g extends _E_m {
+-
+-    public function _4g() {
+-        var _local1:XML;
+-        var _local2:RegionElement;
+-        super(MapLayer.REGION);
+-        for each (_local1 in _sn._Q_F_) {
+-            _local2 = new RegionElement(_local1);
+-            _08M_(_local2);
+-        }
+-    }
+-}
+-}//package _D_d
+-
+diff --git a/client-source/src/_D_d/_E_m.as b/client-source/src/_D_d/_E_m.as
+deleted file mode 100644
+index 7387d19..0000000
+--- a/client-source/src/_D_d/_E_m.as
++++ /dev/null
+@@ -1,145 +0,0 @@
+-﻿// Decompiled by AS3 Sorcerer 1.99
+-// http://www.as3sorcerer.com/
+-
+-//_D_d._E_m
+-
+-package _D_d {
+-import flash.display.Sprite;
+-
+-import flash.display.IGraphicsData;
+-
+-import com.company.util.GraphicHelper;
+-
+-import _D_d.ChooserElement;
+-
+-import com.company.assembleegameclient.ui._0K_B_;
+-
+-import flash.display.Shape;
+-import flash.display.GraphicsSolidFill;
+-import flash.display.GraphicsStroke;
+-import flash.display.GraphicsPath;
+-import flash.display.LineScaleMode;
+-import flash.display.CapsStyle;
+-import flash.display.JointStyle;
+-import flash.events.Event;
+-import flash.events.MouseEvent;
+-
+-import _D_d.*;
+-
+-internal class _E_m extends Sprite {
+-
+-    public static const WIDTH:int = 136;
+-    public static const HEIGHT:int = 480;
+-    private static const _xo:int = 20;
+-
+-    public function _E_m(_arg1:int) {
+-        this._oX_ = new Vector.<ChooserElement>();
+-        this.outlineFill_ = new GraphicsSolidFill(0xFFFFFF, 1);
+-        this._0y = new GraphicsStroke(1, false, LineScaleMode.NORMAL, CapsStyle.NONE, JointStyle.ROUND, 3, this.outlineFill_);
+-        this._vV_ = new GraphicsSolidFill(0x363636, 1);
+-        this.path_ = new GraphicsPath(new Vector.<int>(), new Vector.<Number>());
+-        this.graphicsData_ = new <IGraphicsData>[_0y, _vV_, path_, GraphicHelper.END_FILL, GraphicHelper._H_B_];
+-        super();
+-        this._09V_ = _arg1;
+-        this._rC_();
+-        this._Y_i = new Sprite();
+-        this._Y_i.x = 4;
+-        this._Y_i.y = 6;
+-        addChild(this._Y_i);
+-        this._E_k = new _0K_B_(_xo, (HEIGHT - 8));
+-        this._E_k.x = ((WIDTH - _xo) - 6);
+-        this._E_k.y = 4;
+-        this._E_k.addEventListener(Event.CHANGE, this._A_E_);
+-        var _local2:Shape = new Shape();
+-        _local2.graphics.beginFill(0);
+-        _local2.graphics.drawRect(0, 2, ((_E_m.WIDTH - _xo) - 4), (_E_m.HEIGHT - 4));
+-        addChild(_local2);
+-        this._Y_i.mask = _local2;
+-        addEventListener(Event.ADDED_TO_STAGE, this.onAddedToStage);
+-        addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
+-    }
+-    public var _09V_:int;
+-    public var selected_:ChooserElement;
+-    private var graphicsData_:Vector.<IGraphicsData>;
+-    private var _Y_i:Sprite;
+-    private var _E_k:_0K_B_;
+-    private var mask_:Shape;
+-    private var _oX_:Vector.<ChooserElement>;
+-    private var outlineFill_:GraphicsSolidFill;
+-    private var _0y:GraphicsStroke;
+-    private var _vV_:GraphicsSolidFill;
+-    private var path_:GraphicsPath;
+-
+-    public function _N_T_():int {
+-        return (this.selected_.type_);
+-    }
+-
+-    public function _mB_(_arg1:int):void {
+-        var _local2:ChooserElement;
+-        for each (_local2 in this._oX_) {
+-            if (_local2.type_ == _arg1) {
+-                this.setSelected(_local2);
+-                return;
+-            }
+-        }
+-    }
+-
+-    protected function _08M_(_arg1:ChooserElement):void {
+-        var _local2:int;
+-        _local2 = this._oX_.length;
+-        _arg1.x = ((((_local2 % 2)) == 0) ? 0 : (2 + ChooserElement.WIDTH));
+-        _arg1.y = ((int((_local2 / 2)) * ChooserElement.HEIGHT) + 6);
+-        this._Y_i.addChild(_arg1);
+-        if (_local2 == 0) {
+-            this.setSelected(_arg1);
+-        }
+-        _arg1.addEventListener(MouseEvent.MOUSE_DOWN, this.onMouseDown);
+-        this._oX_.push(_arg1);
+-    }
+-
+-    protected function setSelected(_arg1:ChooserElement):void {
+-        if (this.selected_ != null) {
+-            this.selected_.setSelected(false);
+-        }
+-        this.selected_ = _arg1;
+-        this.selected_.setSelected(true);
+-    }
+-
+-    private function _rC_():void {
+-        GraphicHelper._0L_6(this.path_);
+-        GraphicHelper.drawUI(0, 0, WIDTH, HEIGHT, 4, [1, 1, 1, 1], this.path_);
+-        graphics.drawGraphicsData(this.graphicsData_);
+-    }
+-
+-    protected function onMouseDown(_arg1:MouseEvent):void {
+-        var _local2:ChooserElement = (_arg1.currentTarget as ChooserElement);
+-        this.setSelected(_local2);
+-    }
+-
+-    protected function _A_E_(_arg1:Event):void {
+-        this._Y_i.y = (6 - (this._E_k._Q_D_() * ((this._Y_i.height + 12) - HEIGHT)));
+-    }
+-
+-    protected function onAddedToStage(_arg1:Event):void {
+-        addEventListener(MouseEvent.MOUSE_WHEEL, this._lb);
+-        this._E_k._fA_(HEIGHT, this._Y_i.height);
+-        addChild(this._E_k);
+-    }
+-
+-    protected function onRemovedFromStage(_arg1:Event):void {
+-        removeEventListener(MouseEvent.MOUSE_WHEEL, this._lb);
+-    }
+-
+-    protected function _lb(_arg1:MouseEvent):void {
+-        if (_arg1.delta > 0) {
+-            this._E_k._d9();
+-        } else {
+-            if (_arg1.delta < 0) {
+-                this._E_k._tE_();
+-            }
+-        }
+-    }
+-
+-}
+-}//package _D_d
+-
+diff --git a/client-source/src/_D_d/_N_2.as b/client-source/src/_D_d/_N_2.as
+index 2bebc84..9d31239 100644
+--- a/client-source/src/_D_d/_N_2.as
++++ b/client-source/src/_D_d/_N_2.as
+@@ -12,23 +12,23 @@ public class _N_2 extends _P_2 {
+         this.map_ = _arg1;
+         this.x_ = _arg2;
+         this.y_ = _arg3;
+-        this._09V_ = _arg4;
++        this.layer_ = _arg4;
+         this._0A_S_ = _arg5;
+         this._B_Y_ = _arg6;
+     }
+     private var map_:_N_g;
+     private var x_:int;
+     private var y_:int;
+-    private var _09V_:int;
++    private var layer_:int;
+     private var _0A_S_:int;
+     private var _B_Y_:int;
+ 
+     override public function execute():void {
+-        this.map_._2F_(this.x_, this.y_, this._09V_, this._B_Y_);
++        this.map_._2F_(this.x_, this.y_, this.layer_, this._B_Y_);
+     }
+ 
+     override public function unexecute():void {
+-        this.map_._2F_(this.x_, this.y_, this._09V_, this._0A_S_);
++        this.map_._2F_(this.x_, this.y_, this.layer_, this._0A_S_);
+     }
+ 
+ }
+diff --git a/tools/batch05_choosers.json b/tools/batch05_choosers.json
+new file mode 100644
+index 0000000..cc0b35b
+--- /dev/null
++++ b/tools/batch05_choosers.json
+@@ -0,0 +1,49 @@
++{
++ "batch": ["_E_m", "_0H_J_", "_02i", "_4g"],
++ "classes": {
++  "_E_m": "Chooser",
++  "_0H_J_": "GroundChooser",
++  "_02i": "ObjectChooser",
++  "_4g": "RegionChooser"
++ },
++ "members": [
++  {"old": "_09V_", "new": "layer_",           "classes": ["_E_m", "_N_2"], "users": true},
++  {"old": "_N_T_", "new": "getSelectedType",  "classes": ["_E_m"], "users": true},
++  {"old": "_mB_",  "new": "selectType",       "classes": ["_E_m"], "users": true},
++  {"old": "_08M_", "new": "addElement",       "classes": ["_E_m"], "users": true},
++
++  {"old": "_Y_i",  "new": "content_",         "classes": ["_E_m"], "users": false},
++  {"old": "_E_k",  "new": "scrollBar_",       "classes": ["_E_m"], "users": false},
++  {"old": "_oX_",  "new": "elements_",        "classes": ["_E_m"], "users": false},
++  {"old": "_xo",   "new": "SCROLLBAR_WIDTH",  "classes": ["_E_m"], "users": false},
++  {"old": "_0y",   "new": "outlineStroke_",   "classes": ["_E_m"], "users": false},
++  {"old": "_vV_",  "new": "backgroundFill_",  "classes": ["_E_m"], "users": false},
++  {"old": "_rC_",  "new": "drawBackground",   "classes": ["_E_m"], "users": false},
++  {"old": "_A_E_", "new": "onScroll",         "classes": ["_E_m"], "users": false},
++  {"old": "_lb",   "new": "onMouseWheel",     "classes": ["_E_m"], "users": false}
++ ],
++ "locals": {
++  "auto": true,
++  "overrides": [
++   {"class": "Chooser", "func": "Chooser",      "old": "_arg1",   "new": "layer"},
++   {"class": "Chooser", "func": "Chooser",      "old": "_local2", "new": "maskShape"},
++   {"class": "Chooser", "func": "selectType",   "old": "_arg1",   "new": "type"},
++   {"class": "Chooser", "func": "selectType",   "old": "_local2", "new": "element"},
++   {"class": "Chooser", "func": "addElement",   "old": "_arg1",   "new": "element"},
++   {"class": "Chooser", "func": "addElement",   "old": "_local2", "new": "index"},
++   {"class": "Chooser", "func": "setSelected",  "old": "_arg1",   "new": "element"},
++   {"class": "Chooser", "func": "onMouseDown",  "old": "_local2", "new": "element"},
++
++   {"class": "GroundChooser", "func": "GroundChooser", "old": "_local1", "new": "id"},
++   {"class": "GroundChooser", "func": "GroundChooser", "old": "_local2", "new": "sortedIds"},
++   {"class": "GroundChooser", "func": "GroundChooser", "old": "_local3", "new": "type"},
++
++   {"class": "ObjectChooser", "func": "ObjectChooser", "old": "_local1", "new": "id"},
++   {"class": "ObjectChooser", "func": "ObjectChooser", "old": "_local2", "new": "sortedIds"},
++   {"class": "ObjectChooser", "func": "ObjectChooser", "old": "_local3", "new": "type"},
++   {"class": "ObjectChooser", "func": "ObjectChooser", "old": "_local4", "new": "objectXml"},
++
++   {"class": "RegionChooser", "func": "RegionChooser", "old": "_local1", "new": "regionXml"}
++  ]
++ }
++}
+-- 
+2.43.0
+
