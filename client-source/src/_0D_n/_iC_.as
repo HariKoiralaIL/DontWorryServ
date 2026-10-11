@@ -4,16 +4,16 @@
 //_0D_n._iC_
 
 package _0D_n {
-import _Z_6._sR_;
+import com.company.json.JSONCodec;
 
 public class _iC_ implements _throw {
 
     public function _I_7(_arg1:Object):String {
-        return (_sR_.encode(_arg1));
+        return (JSONCodec.encode(_arg1));
     }
 
     public function parse(_arg1:String):Object {
-        return (_sR_.decode(_arg1));
+        return (JSONCodec.decode(_arg1));
     }
 
 }
