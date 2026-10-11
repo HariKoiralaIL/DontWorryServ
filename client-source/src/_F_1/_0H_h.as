@@ -11,7 +11,7 @@ import signals.Signal;
 import com.company.ui.SimpleText;
 import com.company.rotmg.graphics.StackedLogoR;
 
-import _02t._R_f;
+import com.company.backgrounds.TitleBackground;
 
 import com.company.rotmg.graphics.ScreenGraphic;
 

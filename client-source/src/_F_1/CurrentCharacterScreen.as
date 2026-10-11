@@ -4,7 +4,7 @@
 //_F_1.CurrentCharacterScreen
 
 package _F_1 {
-    import _02t._R_f;
+    import com.company.backgrounds.TitleBackground;
     import client.ui.frames.NewAccountNameOverlay;
     import _0L_C_._4B_;
     import _0L_C_._qO_;

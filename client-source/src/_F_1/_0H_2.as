@@ -4,7 +4,7 @@
 //_F_1._0H_2
 
 package _F_1 {
-import _02t._R_f;
+import com.company.backgrounds.TitleBackground;
 
 import signals.Signal;
 

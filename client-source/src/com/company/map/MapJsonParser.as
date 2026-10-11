@@ -1,6 +1,6 @@
 package com.company.map {
-import _0D_n._throw;
-import _0D_n._P_I_;
+import com.company.json.IJsonParser;
+import com.company.json.JsonParserLocator;
 
 import com.company.assembleegameclient.map._X_l;
 import com.company.util.IntPoint;
@@ -18,7 +18,7 @@ import com.company.assembleegameclient.objects.ObjectLibrary;
 // _pf._pb (ground type lookup), ObjectLibrary._pb/_075, props_._0M_t(), BasicObject._7y().
 public class MapJsonParser {
 
-    private static const json:_throw = _P_I_._dJ_();
+    private static const json:IJsonParser = JsonParserLocator.getInstance();
 
     // Formerly _0L_k
     public static function loadMap(jsonStr:String):_X_l {

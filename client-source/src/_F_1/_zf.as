@@ -8,7 +8,7 @@ import flash.display.Sprite;
 
 import com.company.ui.SimpleText;
 
-import _02t._R_f;
+import com.company.backgrounds.TitleBackground;
 
 import com.company.rotmg.graphics.ScreenGraphic;
 
@@ -18,7 +18,7 @@ import flash.filters.DropShadowFilter;
 public class _zf extends Sprite {
 
     public function _zf() {
-        addChild(new _R_f());
+        addChild(new TitleBackground());
         //addChild(new ScreenGraphic());
         this.text = new SimpleText(35, 0xFFFFFF, false, 0, 0, "Myriad Pro");
         this.text.y = 300;

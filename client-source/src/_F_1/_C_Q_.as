@@ -4,7 +4,7 @@
 //_F_1._C_Q_
 
 package _F_1 {
-import _02t._R_f;
+import com.company.backgrounds.TitleBackground;
 
 import constants.Buttons;
 
@@ -29,7 +29,7 @@ public class _C_Q_ extends _05p {
     private static const webUrl_:String = "http://bledixon.com/forums";
 
     public function _C_Q_() {
-        addChild(new _R_f());
+        addChild(new TitleBackground());
         super(_C_Q_);
 //        addChild(new TitleScreenGraphic());
         this._ft = new Signal(String);

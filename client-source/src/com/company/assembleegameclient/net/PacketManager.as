@@ -1619,7 +1619,7 @@ package com.company.assembleegameclient.net {
 
     private function inviteToParty(_arg1:InvitedToParty):void {
       if (Parameters.data_.showGuildInvitePopup) {
-        this.gs_._V_1._U_T_._j(new PartyInvitePanel(this.gs_, _arg1.name_, _arg1.partyID_));
+        this.gs_._V_1._U_T_.setOverridePanel(new PartyInvitePanel(this.gs_, _arg1.name_, _arg1.partyID_));
       }
       this.gs_.textBox_.addText("", "You have been invited by " + _arg1.name_ + " to join a party.\nIf you wish to join, type \"/party join " + _arg1.name_ + "\"");
     }

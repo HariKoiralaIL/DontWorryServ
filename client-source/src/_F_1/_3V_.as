@@ -13,7 +13,7 @@ import flash.display.Shape;
 
 import com.company.assembleegameclient.ui._0K_B_;
 
-import _02t._R_f;
+import com.company.backgrounds.TitleBackground;
 
 import flash.filters.DropShadowFilter;
 import flash.display.Graphics;
