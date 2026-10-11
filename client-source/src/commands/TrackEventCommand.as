@@ -1,7 +1,7 @@
 package commands {
 
-import services._6E_;
-import services._fn;
+import services.AnalyticsEvent;
+import services.AnalyticsTracker;
 
 /**
  * Forwards an analytics event to the tracker.
@@ -9,12 +9,12 @@ import services._fn;
 public class TrackEventCommand {
 
     [Inject]
-    public var analytics:_6E_;
+    public var analytics:AnalyticsTracker;
     [Inject]
-    public var event:_fn;
+    public var event:AnalyticsEvent;
 
     public function execute():void {
-        this.analytics.trackEvent(this.event.category, this.event._lC_, this.event._9g, this.event.value);
+        this.analytics.trackEvent(this.event.category, this.event.action, this.event.label, this.event.value);
     }
 
 }

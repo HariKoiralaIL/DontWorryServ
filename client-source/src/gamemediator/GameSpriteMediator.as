@@ -27,9 +27,8 @@ import flash.events.Event;
 //  - going back to the character screen when the game ends or the client is out of date,
 //  - starting a new game session when the server asks the client to reconnect.
 //
-// NOTE: the injected signal types (_D_m, _M_d, _01W_, _dd, _08i, _0I_H_, _G_J_), the event
-// types (_j_, _D_X_) and the view member mui_._vB_ come from other packages and keep their
-// obfuscated names. The names given to the injected fields below are inferred from how
+// NOTE: the injected signal types (_D_m, _M_d, _01W_, _dd, _08i, _0I_H_, _G_J_) and the view
+// member mui_._vB_ come from other packages and keep their obfuscated names. The names given to the injected fields below are inferred from how
 // they are used and may need adjusting once those packages are refactored.
 public class GameSpriteMediator extends Mediator {
 

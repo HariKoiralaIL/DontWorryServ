@@ -4,8 +4,8 @@
 //_F_1._05p
 
 package _F_1 {
-import _9R_._B_w;
-import _9R_._W_h;
+import client.events.MoneyChangedEvent;
+import client.events.AccountChangedEvent;
 
 import com.company.assembleegameclient.ui.tooltip.RankToolTip;
 
@@ -60,8 +60,8 @@ public class _05p extends Sprite {
     }
 
     public function destroy():void {
-        stage.removeEventListener(_B_w.MONEY_CHANGED, this._L_u);
-        stage.removeEventListener(_W_h.ACCOUNT_CHANGED, this._sU_);
+        stage.removeEventListener(MoneyChangedEvent.MONEY_CHANGED, this._L_u);
+        stage.removeEventListener(AccountChangedEvent.ACCOUNT_CHANGED, this._sU_);
     }
 
     public function _0j():void {
@@ -112,8 +112,8 @@ public class _05p extends Sprite {
         stage;
         this._0_4.x = ((800 - this._0_4.width) - 10);
         this._0_4.y = 2;
-        stage.addEventListener(_B_w.MONEY_CHANGED, this._L_u);
-        stage.addEventListener(_W_h.ACCOUNT_CHANGED, this._sU_);
+        stage.addEventListener(MoneyChangedEvent.MONEY_CHANGED, this._L_u);
+        stage.addEventListener(AccountChangedEvent.ACCOUNT_CHANGED, this._sU_);
     }
 
     protected function onMouseOver(_arg1:MouseEvent):void {

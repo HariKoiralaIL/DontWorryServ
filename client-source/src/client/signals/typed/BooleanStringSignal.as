@@ -1,8 +1,8 @@
 package client.signals.typed {
-import signals._aJ_;
+import signals.Signal;
 
 /** Signal carrying a Boolean and a String. */
-public class BooleanStringSignal extends _aJ_ {
+public class BooleanStringSignal extends Signal {
 
     public function BooleanStringSignal() {
         super(Boolean, String);
