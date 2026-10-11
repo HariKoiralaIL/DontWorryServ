@@ -1,5 +1,5 @@
 package mapeditor {
-import client.config._05p;
+import _F_1._05p;
 
 import _zm.DropdownBox;
 
