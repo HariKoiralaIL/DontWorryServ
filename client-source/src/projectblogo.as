@@ -22,7 +22,7 @@ package {
 
   import client.ui.tooltips.TooltipConfig;
 
-  import _T_o.SingletonMappingExtension;
+  import com.company.extension.SingletonMappingExtension;
 
   import client.config.UIConfig;
 
