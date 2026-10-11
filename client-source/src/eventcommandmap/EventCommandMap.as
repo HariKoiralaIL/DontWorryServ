@@ -9,13 +9,13 @@ import commands.ICommandCenter;
 import commands.ICommandTrigger;
 import commands.ICommandMapper;
 import commands.ICommandUnmapper;
-import _j1._X_y;
+import commands.event.IEventCommandMap;
 
 /**
  * Maps commands to events. One EventCommandTrigger is created and cached per
  * (event type, event class) pair.
  */
-public class EventCommandMap implements _X_y {
+public class EventCommandMap implements IEventCommandMap {
 
     private const triggers:Dictionary = new Dictionary();
 
@@ -34,10 +34,8 @@ public class EventCommandMap implements _X_y {
         var trigger:ICommandTrigger = this.triggers[key] = this.triggers[key] || this.createTrigger(eventType, eventClass);
         return this.commandCenter.map(trigger);
     }
-
-    // Implements the (obfuscated) unmap method declared by interface _X_y,
-    // so the name has to stay until that interface is renamed.
-    public function _1Y_(eventType:String, eventClass:Class = null):ICommandUnmapper {
+    
+    public function unmap(eventType:String, eventClass:Class = null):ICommandUnmapper {
         return this.commandCenter.unmap(this.getTrigger(eventType, eventClass));
     }
 

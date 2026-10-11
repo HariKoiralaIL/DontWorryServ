@@ -6,7 +6,7 @@ import robotlegs.bender.framework.api.IContext;
 import robotlegs.bender.framework.api.IExtension;
 
 import robotlegs.bender.framework.impl.UID;
-import _j1._X_y;
+import commands.event.IEventCommandMap;
 
 /**
  * Context extension that makes the event command map available for
@@ -17,7 +17,7 @@ public class EventCommandMapExtension implements IExtension {
     private const uid:String = UID.create(EventCommandMapExtension);
 
     public function extend(context:IContext):void {
-        context.injector.map(_X_y).toSingleton(EventCommandMap);
+        context.injector.map(IEventCommandMap).toSingleton(EventCommandMap);
     }
 
     public function toString():String {
