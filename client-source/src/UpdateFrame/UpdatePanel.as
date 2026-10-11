@@ -3,7 +3,7 @@
  */
 package UpdateFrame {
 
-  import _panels.*;
+  import client.ui.panels.*;
   import com.company.assembleegameclient.game.GameSprite;
   import com.company.assembleegameclient.parameters.Parameters;
   import com.company.assembleegameclient.ui.FrameHolder;

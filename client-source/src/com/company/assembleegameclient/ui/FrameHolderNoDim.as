@@ -7,7 +7,7 @@ package com.company.assembleegameclient.ui {
 import flash.display.Sprite;
 import flash.display.Shape;
 
-import _0D_d.Frame;
+import client.ui.frames.Frame;
 
 import flash.display.Graphics;
 import flash.events.Event;

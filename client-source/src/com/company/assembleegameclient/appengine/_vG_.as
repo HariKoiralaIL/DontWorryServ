@@ -9,7 +9,7 @@ import flash.events.ErrorEvent;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.util._gv;
 
-import _qN_.Account;
+import account.Account;
 
 public class _vG_ {
 
@@ -42,7 +42,7 @@ public class _vG_ {
             _local7 = new _0B_u(Parameters._fK_(), "/clientError", false);
             _local7.sendRequest("add", {
                 "text": _local6,
-                "guid": Account._get().guid()
+                "guid": Account.getInstance().guid()
             });
         } else {
             trace(_local4);

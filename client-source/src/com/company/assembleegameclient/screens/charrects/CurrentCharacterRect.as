@@ -18,11 +18,11 @@ import com.company.ui.SimpleText;
 
 import flash.display.Sprite;
 
-import _sp._aJ_;
+import signals.Signal;
 
 import com.company.assembleegameclient.objects.ObjectLibrary;
 
-import _S_K_._u3;
+import _S_K_.NativeRelaySignal;
 
 import flash.events.MouseEvent;
 import flash.events.Event;
@@ -40,7 +40,7 @@ import com.company.rotmg.graphics.DeleteXGraphic;
 
 import com.company.assembleegameclient.ui.tooltip.CharacterToolTip;
 
-import _0I_S_._09s;
+import events.DeleteCharacterEvent;
 
 import flash.display.BitmapData;
 
@@ -63,16 +63,16 @@ import com.company.util.BitmapUtil;
         this.makeClassNameText();
         this.makeTagline();
         this.makeDeleteButton();
-        this.selected = new _u3(this.selectContainer, MouseEvent.CLICK).mapTo(this.character);
-        this.deleteCharacter = new _u3(this.deleteButton, MouseEvent.CLICK).mapTo(this.character);
+        this.selected = new NativeRelaySignal(this.selectContainer, MouseEvent.CLICK).mapTo(this.character);
+        this.deleteCharacter = new NativeRelaySignal(this.deleteButton, MouseEvent.CLICK).mapTo(this.character);
         addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
     }
     public var _name:String;
     public var character:SavedCharacter;
     public var characterStats:_0A_H_;
     public var playerXML:XML;
-    public var selected:_aJ_;
-    public var deleteCharacter:_aJ_;
+    public var selected:Signal;
+    public var deleteCharacter:Signal;
     private var selectContainer:DisplayObjectContainer;
     private var bitmap:Bitmap;
     private var classNameText:SimpleText;
@@ -180,7 +180,7 @@ import com.company.util.BitmapUtil;
 
     private function onDeleteDown(_arg1:MouseEvent):void {
         _arg1.stopImmediatePropagation();
-        dispatchEvent(new _09s(this.character));
+        dispatchEvent(new DeleteCharacterEvent(this.character));
     }
 
 }

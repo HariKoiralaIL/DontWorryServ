@@ -19,7 +19,7 @@ import flash.events.Event;
 
 import com.company.assembleegameclient.ui.tooltip.EquipmentToolTip;
 
-import _ke._U_c;
+import constants.ActorType;
 
 
 public class _ec extends Sprite {
@@ -191,7 +191,7 @@ public class _ec extends Sprite {
 
     private function onMouseOver(_arg1:Event):void {
         var _local2:_2j = (_arg1.currentTarget as _2j);
-        this._V_B_(new EquipmentToolTip(_local2.item_, this.gs_.map_.player_, -1, _U_c.OTHER_PLAYER, _local2.id, false, _local2.data_));
+        this._V_B_(new EquipmentToolTip(_local2.item_, this.gs_.map_.player_, -1, ActorType.OTHER_PLAYER, _local2.id, false, _local2.data_));
     }
 
     private function onRollOut(_arg1:Event):void {

@@ -1,5 +1,5 @@
 package robotlegs.bender.framework.impl {
-import _qj._pn;
+import matchers.Matcher;
 
 /**
  * Passes objects through a list of (matcher, handler) pairs.
@@ -8,7 +8,7 @@ public class ObjectProcessor {
 
     private const _handlers:Array = [];
 
-    public function addObjectHandler(matcher:_pn, handler:Function):void {
+    public function addObjectHandler(matcher:Matcher, handler:Function):void {
         _handlers.push(new ObjectHandler(matcher, handler));
     }
 
@@ -22,14 +22,14 @@ public class ObjectProcessor {
 }
 }
 
-import _qj._pn;
+import matchers.Matcher;
 
 class ObjectHandler {
 
-    private var _matcher:_pn;
+    private var _matcher:Matcher;
     private var _handler:Function;
 
-    public function ObjectHandler(matcher:_pn, handler:Function) {
+    public function ObjectHandler(matcher:Matcher, handler:Function) {
         _matcher = matcher;
         _handler = handler;
     }

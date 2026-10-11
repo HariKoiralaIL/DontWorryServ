@@ -3,7 +3,7 @@
  */
 package UpdateFrame {
 
-  import _0D_d.*;
+  import client.ui.frames.*;
   import com.company.assembleegameclient.game.GameSprite;
   import flash.events.Event;
   import flash.events.MouseEvent;

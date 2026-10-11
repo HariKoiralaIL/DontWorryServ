@@ -2,7 +2,7 @@
  * Created by Thelzar on 7/20/2014.
  */
 package com.company.assembleegameclient.util {
-import _sp._aJ_;
+import signals.Signal;
 
 import flash.display.Sprite;
 import flash.events.MouseEvent;
@@ -13,7 +13,7 @@ public class _str152 extends Sprite {
 
     public static var _str2539:Class = EmbeddedAssets_btnEmbed_;
 
-    public const event:_aJ_ = new _aJ_();
+    public const event:Signal = new Signal();
 
     public var disabled:Boolean = false;
 

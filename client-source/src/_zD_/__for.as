@@ -4,23 +4,23 @@
 //_zD_.__for
 
 package _zD_ {
-import _0_j._kW_;
+import spriteeditor.SpriteEditorScreen;
 
-import _C__._cM_;
+import robotlegs.bender.bundles.mvcs.Mediator;
 
 import _F_1._C_Q_;
 
-import _W_D_._0I_H_;
+import env.ServerListState;
 
 import _U_5._dd;
 
-import _05Z_._08i;
+import client.signals.typed.GameInitSignal;
 
-import _ke.Buttons;
+import constants.Buttons;
 
 import _0L_C_._qO_;
 
-import _04w._07V_;
+import client.game.GameInitData;
 
 import com.company.assembleegameclient.parameters.Parameters;
 
@@ -29,26 +29,26 @@ import _F_1._0H_h;
 import _F_1._01_;
 import _F_1._3V_;
 
-import _D_d._hj;
+import mapeditor.MapEditorScreen;
 
 import flash.events.Event;
 import flash.net.URLRequest;
 import flash.net.navigateToURL;
 
-public class __for extends _cM_ {
+public class __for extends Mediator {
 
     [Inject]
     public var view:_C_Q_;
     [Inject]
-    public var _eJ_:_0I_H_;
+    public var _eJ_:ServerListState;
     [Inject]
     public var _T__:_dd;
     [Inject]
-    public var _D_u:_08i;
+    public var _D_u:GameInitSignal;
 
     override public function initialize():void {
         this.view._ft.add(this._F_A_);
-        this.view.initialize(this._eJ_._T_1);
+        this.view.initialize(this._eJ_.servers);
     }
 
     override public function destroy():void {
@@ -86,8 +86,8 @@ public class __for extends _cM_ {
 
     private function _04P_():void {
         var _local1:_qO_;
-        var _local2:_07V_;
-        if (((Parameters.isTesting) && ((this._eJ_._T_1.servers_.length == 0)))) {
+        var _local2:GameInitData;
+        if (((Parameters.isTesting) && ((this._eJ_.servers.servers_.length == 0)))) {
             if (Parameters._I_O_()) {
                 _local1 = new _qO_(((("Your account doesn't exist anymore, please make a new.  " + 'Please play on <font color="#7777EE">') + '<a href="bledixon.com/webclient">') + "bledixon.com/webclient</a></font>."), "No Testing Servers", null, null, "/noTestingServers");
             } else {
@@ -96,14 +96,14 @@ public class __for extends _cM_ {
             this.view.stage.addChild(_local1);
             return;
         }
-        if (((Parameters.data_.needsTutorial) && ((this._eJ_._T_1.nextCharId_ == 1)))) {
+        if (((Parameters.data_.needsTutorial) && ((this._eJ_.servers.nextCharId_ == 1)))) {
             Parameters.data_.playerObjectType = 770;
             Parameters.save();
-            _local2 = new _07V_();
-            _local2._0_E_ = true;
-            _local2.charId = this._eJ_._T_1.nextCharId_;
-            _local2._f2 = -1;
-            _local2._05d = true;
+            _local2 = new GameInitData();
+            _local2.createCharacter = true;
+            _local2.charId = this._eJ_.servers.nextCharId_;
+            _local2.keyTime = -1;
+            _local2.isNewGame = true;
             this._D_u.dispatch(_local2);
         } else {
             this._T__.dispatch(new CurrentCharacterScreen());
@@ -127,11 +127,11 @@ public class __for extends _cM_ {
     }
 
     private function _0E_r():void {
-        this._T__.dispatch(new _hj());
+        this._T__.dispatch(new MapEditorScreen());
     }
 
     private function _1E_r():void {
-        this._T__.dispatch(new _kW_());
+        this._T__.dispatch(new SpriteEditorScreen());
     }
 
     private function _uz():void {

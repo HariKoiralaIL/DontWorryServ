@@ -6,7 +6,7 @@
 package _0L_C_ {
 import flash.events.Event;
 
-import _qN_.Account;
+import account.Account;
 
 public class _2k extends _qO_ {
 
@@ -21,7 +21,7 @@ public class _2k extends _qO_ {
     }
 
     private function _mO_(_arg1:Event):void {
-        Account._get().showInGameRegister(stage);
+        Account.getInstance().showInGameRegister(stage);
         parent.removeChild(this);
     }
 

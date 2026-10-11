@@ -12,7 +12,7 @@ import com.company.assembleegameclient.appengine.Server_list;
 
 import _F_1._05p;
 
-import _sp._aJ_;
+import signals.Signal;
 
 import com.company.assembleegameclient.appengine.SavedCharacter;
 
@@ -24,12 +24,12 @@ import flash.events.Event;
 
 import _0L_C_._tc;
 
-import _qN_.Account;
+import account.Account;
 
 import _0L_C_._0G_H_;
 import _0L_C_._0G_y;
 
-import _zo._mS_;
+import events.TextErrorEvent;
 
 import _0L_C_._Z_t;
 
@@ -44,7 +44,7 @@ public class CharacterRectList extends Sprite {
         super();
         this.charList_ = _arg1;
         this.screen_ = _arg2;
-        this.newCharacter = new _aJ_();
+        this.newCharacter = new Signal();
         var _local3:int = 4;
         var _local4:int = 4;
         for each (_local5 in _arg1.savedChars_) {
@@ -72,8 +72,8 @@ public class CharacterRectList extends Sprite {
         _local6.y = _local4;
         addChild(_local6);
     }
-    public var newCharacter:_aJ_;
-    public var deleteCharacter:_aJ_;
+    public var newCharacter:Signal;
+    public var deleteCharacter:Signal;
     private var charList_:Server_list;
     private var screen_:_05p;
 
@@ -88,7 +88,7 @@ public class CharacterRectList extends Sprite {
 
     private function onBuyCharSlot(_arg1:Event):void {
         var _local3:_tc;
-        if (!Account._get().isRegistered()) {
+        if (!Account.getInstance().isRegistered()) {
             _local3 = new _tc();
             _local3.addEventListener(_qO_.BUTTON1_EVENT, this.onCancel);
             _local3.addEventListener(_qO_.BUTTON2_EVENT, this.onDialogRegister);
@@ -100,7 +100,7 @@ public class CharacterRectList extends Sprite {
             return;
         }
         var _local2:_0G_y = new _0G_y(this.charList_.nextCharSlotPrice_);
-        _local2.addEventListener(_mS_.TEXT_ERROR, this.onDialogError);
+        _local2.addEventListener(TextErrorEvent.TEXT_ERROR, this.onDialogError);
         this.screen_.addChild(_local2);
     }
 
@@ -110,10 +110,10 @@ public class CharacterRectList extends Sprite {
         this.screen_._0j();
     }
 
-    private function onDialogError(_arg1:_mS_):void {
+    private function onDialogError(_arg1:TextErrorEvent):void {
         var _local2:_qO_ = (_arg1.currentTarget as _qO_);
         this.screen_.removeChild(_local2);
-        var _local3:_Z_t = new _Z_t(_arg1.text_);
+        var _local3:_Z_t = new _Z_t(_arg1.text);
         this.screen_.addChild(_local3);
     }
 

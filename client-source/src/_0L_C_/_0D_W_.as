@@ -6,7 +6,7 @@
 package _0L_C_ {
 import flash.display.Sprite;
 
-import _sp._aJ_;
+import signals.Signal;
 
 import flash.events.Event;
 
@@ -17,11 +17,11 @@ public class _0D_W_ extends Sprite {
     private const _M_4:String = _qO_.BUTTON2_EVENT;
 
     public function _0D_W_() {
-        this.deleteCharacter = new _aJ_();
-        this.cancel = new _aJ_();
+        this.deleteCharacter = new Signal();
+        this.cancel = new Signal();
     }
-    public var deleteCharacter:_aJ_;
-    public var cancel:_aJ_;
+    public var deleteCharacter:Signal;
+    public var cancel:Signal;
 
     public function _02C_(_arg1:String, _arg2:String):void {
         var _local3:String = this._cR_.replace("${NAME}", _arg1).replace("${DISPLAYID}", _arg2);

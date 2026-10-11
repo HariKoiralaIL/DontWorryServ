@@ -4,9 +4,9 @@
 //com.company.assembleegameclient.util.loadEmbeds
 
 package com.company.assembleegameclient.util {
-  import _vf._5T_;
-  import _vf._Q_P_;
-  import _vf._str434;
+  import audio.SoundEffects;
+  import audio.SfxSettings;
+  import audio.ILoadable;
   import com.company.assembleegameclient.engine3d._B_5;
   import com.company.assembleegameclient.map._pf;
   import com.company.assembleegameclient.map._sn;
@@ -20,10 +20,10 @@ package com.company.assembleegameclient.util {
 
   import zerorealms.rotmg.assets.AssetEmbeds;
   import zerorealms.rotmg.assets.DataEmbeds;
-  import _0C_P_.Options;
+  import optionsscreen.Options;
 
   public class loadEmbeds {
-    public var _str8553:_str434;
+    public var _str8553:ILoadable;
 
     public function loadEmbeds() {
       this._str8553 = new _str437();
@@ -42,7 +42,7 @@ package com.company.assembleegameclient.util {
       Parameters.load();
       Options.refreshCursor();
       this._str8553.load();
-      _Q_P_.load();
+      SfxSettings.load();
     }
 
     private function initFile():void{
@@ -124,16 +124,16 @@ package com.company.assembleegameclient.util {
       _0B_c.add("chars8x8rPets1", new AssetEmbeds.chars8x8rPets1Embed_().bitmapData, new AssetEmbeds.chars8x8rPets1MaskEmbed_().bitmapData, 8, 8, 56, 8, _lJ_.RIGHT);
     }
     private function initAudio():void{
-      _5T_.load("button_click");
-      _5T_.load("death_screen");
-      _5T_.load("enter_realm");
-      _5T_.load("error");
-      _5T_.load("inventory_move_item");
-      _5T_.load("level_up");
-      _5T_.load("loot_appears");
-      _5T_.load("no_mana");
-      _5T_.load("use_key");
-      _5T_.load("use_potion");
+      SoundEffects.load("button_click");
+      SoundEffects.load("death_screen");
+      SoundEffects.load("enter_realm");
+      SoundEffects.load("error");
+      SoundEffects.load("inventory_move_item");
+      SoundEffects.load("level_up");
+      SoundEffects.load("loot_appears");
+      SoundEffects.load("no_mana");
+      SoundEffects.load("use_key");
+      SoundEffects.load("use_potion");
     }
     private function initModels():void{
       var _local1:String;

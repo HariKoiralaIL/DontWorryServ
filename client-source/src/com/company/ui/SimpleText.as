@@ -4,7 +4,7 @@
 //com.company.ui.SimpleText
 
 package com.company.ui {
-import _0_p._q7;
+import robotlegs.bender.framework.api.IMessageDispatcher;
 
 import _zD_.__else;
 

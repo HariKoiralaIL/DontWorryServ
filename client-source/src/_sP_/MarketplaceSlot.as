@@ -4,7 +4,7 @@
 package _sP_ {
     import com.company.assembleegameclient.ui.tooltip.EquipmentToolTip;
 
-    import _ke._U_c;
+    import constants.ActorType;
 
     import com.company.assembleegameclient.game.GameSprite;
 
@@ -137,7 +137,7 @@ import flash.display.Sprite;
         private function onMouseOver(e:MouseEvent):void {
             this._9();
             if(this.item_ != -1 && ObjectLibrary._6H_(this.item_) != null) {
-                this.toolTip_ = new EquipmentToolTip(this.item_, this.gs_.map_.player_, -1, _U_c.NPC, 1, false, this.data_);
+                this.toolTip_ = new EquipmentToolTip(this.item_, this.gs_.map_.player_, -1, ActorType.NPC, 1, false, this.data_);
                 stage.addChild(this.toolTip_);
             }
         }

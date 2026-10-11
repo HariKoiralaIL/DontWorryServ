@@ -1,7 +1,7 @@
-package matchers {
-import _qj._pn;
+﻿package matchers {
+import matchers.Matcher;
 
-public function equalTo(value:Object):_pn {
+public function equalTo(value:Object):Matcher {
     return new IsEqual(value);
 }
 }

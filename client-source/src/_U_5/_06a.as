@@ -4,11 +4,11 @@
 //_U_5._06a
 
 package _U_5 {
-import _sp._aJ_;
+import signals.Signal;
 
 import _011.Death;
 
-public class _06a extends _aJ_ {
+public class _06a extends Signal {
 
     public function _06a() {
         super(Death);

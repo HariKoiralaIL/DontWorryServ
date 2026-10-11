@@ -9,7 +9,7 @@ import flash.events.EventDispatcher;
 import com.company.assembleegameclient.util.offer.Offers;
 import com.company.assembleegameclient.util.offer.Offer;
 
-import _qN_._px;
+import account.PurchaseOfferCommand;
 
 import flash.events.Event;
 
@@ -22,7 +22,7 @@ public class PurchaseMediator extends EventDispatcher {
     public var currencySuffix:String;
     public var offer:Offer;
     public var paymentMethod:String;
-    public var purchaseCommand:_px;
+    public var purchaseCommand:PurchaseOfferCommand;
 
     public function startPurchase():void {
         this.purchaseCommand.offers = this.offers;

@@ -6,7 +6,7 @@
 package _0K_m {
 import com.company.assembleegameclient.objects._Z_H_;
 
-import _0_P_._0F_7;
+import spriteanimation.AnimationsData;
 
 public class _7g {
 
@@ -23,7 +23,7 @@ public class _7g {
             this.duration_ = Number(_arg1.Duration);
         }
         if (_arg1.hasOwnProperty("Animation")) {
-            this._fe = new _0F_7(_arg1);
+            this._fe = new AnimationsData(_arg1);
         }
     }
     public var id_:String;
@@ -31,7 +31,7 @@ public class _7g {
     public var size_:int = 100;
     public var z_:Number = 0;
     public var duration_:Number = 0;
-    public var _fe:_0F_7 = null;
+    public var _fe:AnimationsData = null;
 }
 }//package _0K_m
 

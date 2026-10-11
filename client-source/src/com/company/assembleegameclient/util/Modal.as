@@ -2,9 +2,9 @@
  * Created by Thelzar on 7/20/2014.
  */
 package com.company.assembleegameclient.util {
-import _S_K_._u1;
+import _S_K_.NativeSignal;
 
-import _sp._aJ_;
+import signals.Signal;
 
 import com.company.assembleegameclient.game.GameSprite;
 
@@ -30,15 +30,15 @@ public class Modal extends Sprite {
     private const closeButton:_str152 = ObjectLibrary._str2799(Modal.WIDTH);
     private const buyButton:_u5 = new _u5("Buy for ", 16, 0, Currency.INVALID);
 
-    private var _str8496:_u1;
+    private var _str8496:NativeSignal;
     private var object:SellableObject;
-    public var event:_aJ_;
+    public var event:Signal;
     public var open:Boolean;
     public var _str8497:int;
 
     public var gs_:GameSprite;
 
-    public function Modal(_arg1:_aJ_, _arg2:SellableObject, _arg3:Number, _arg4:GameSprite) {
+    public function Modal(_arg1:Signal, _arg2:SellableObject, _arg3:Number, _arg4:GameSprite) {
         Modal.isClosed = false;
         this.event = _arg1;
         this.object = _arg2;
@@ -88,7 +88,7 @@ public class Modal extends Sprite {
     }
     private function events():void{
         this.closeButton.event.add(this.onCloseClick);
-        this._str8496 = new _u1(this.buyButton, MouseEvent.CLICK, MouseEvent);
+        this._str8496 = new NativeSignal(this.buyButton, MouseEvent.CLICK, MouseEvent);
         this._str8496.add(this._str8498);;
     }
     private function _str1776():void{

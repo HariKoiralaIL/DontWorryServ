@@ -8,7 +8,7 @@ import com.company.assembleegameclient.net.messages.data._Q_0;
 
 import flash.utils.IDataInput;
 
-public class _06N_ extends _01Q_ {
+public class ICommandUnmapper extends _01Q_ {
 
     public static const _7A_:int = 0;
     public static const _x0:int = 1;
@@ -28,7 +28,7 @@ public class _06N_ extends _01Q_ {
     public static const _0_1:int = 15;
     public static const _g8:int = 16;
 
-    public function _06N_(_arg1:uint) {
+    public function ICommandUnmapper(_arg1:uint) {
         this.pos1_ = new _Q_0();
         this.pos2_ = new _Q_0();
         super(_arg1);

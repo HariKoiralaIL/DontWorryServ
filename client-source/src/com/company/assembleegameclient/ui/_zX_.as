@@ -12,8 +12,8 @@ import flash.filters.GlowFilter;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.util.AssetLibrary;
 
-import _vf._gs;
-import _vf._Q_P_;
+import audio.MusicManager;
+import audio.SfxSettings;
 
 public class _zX_ extends Sprite {
 
@@ -35,8 +35,8 @@ public class _zX_ extends Sprite {
 
     private function _iK_(_arg1:MouseEvent):void {
         var _local2 = !(((Parameters.data_.playMusic) || (Parameters.data_.playSFX)));
-        _gs._continue(_local2);
-        _Q_P_._2c(_local2);
+        MusicManager.setMusicEnabled(_local2);
+        SfxSettings.setSfxEnabled(_local2);
         Parameters.data_.playPewPew = _local2;
         Parameters.save();
         this._P_P_();

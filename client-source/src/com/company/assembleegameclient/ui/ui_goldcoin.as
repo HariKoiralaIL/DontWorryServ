@@ -25,7 +25,7 @@ import flash.events.MouseEvent;
 
 import com.company.assembleegameclient.parameters.Parameters;
 
-import _qN_.Account;
+import account.Account;
 
 public class ui_goldcoin extends Sprite {
 
@@ -78,7 +78,7 @@ public class ui_goldcoin extends Sprite {
 
     private function _D_7(_arg1:MouseEvent):void {
         if (!this._sx || this._sx._vw() || Parameters.data_.clickForGold == true) {
-            Account._get().showMoneyManagement(stage);
+            Account.getInstance().showMoneyManagement(stage);
         }
     }
 

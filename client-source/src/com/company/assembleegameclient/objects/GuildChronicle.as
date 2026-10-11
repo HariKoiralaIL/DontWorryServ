@@ -4,11 +4,11 @@
 //com.company.assembleegameclient.objects.GuildChronicle
 
 package com.company.assembleegameclient.objects {
-import _panels._f;
+import client.ui.panels.GuildChroniclePanel;
 
 import com.company.assembleegameclient.game.GameSprite;
 
-import _panels.Panel;
+import client.ui.panels.Panel;
 
 public class GuildChronicle extends GameObject implements _G_4 {
 
@@ -18,7 +18,7 @@ public class GuildChronicle extends GameObject implements _G_4 {
     }
 
     public function getPanel(_arg1:GameSprite):Panel {
-        return (new _f(_arg1));
+        return (new GuildChroniclePanel(_arg1));
     }
 
 }

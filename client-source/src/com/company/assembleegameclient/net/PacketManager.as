@@ -40,12 +40,12 @@ package com.company.assembleegameclient.net {
   import _011._ic;
   import _011._qe;
 
-  import _015._6T_;
-  import _015._O_P_;
+  import mapoverlay.SpeechBalloon;
+  import mapoverlay.CharacterStatusText;
 
-  import _05R_.GTween;
+  import com.gskinner.motion.GTween;
 
-  import _05Z_._D_m;
+  import client.signals.typed.BooleanSignal;
 
   import _0A_g.*;
   import _0A_g.Buy;
@@ -84,8 +84,8 @@ package com.company.assembleegameclient.net {
   import _0A_g._tN_;
   import _0A_g._vp;
 
-  import _0D_d.ItemResultBox;
-  import _0D_d.TextInputForm;
+  import client.ui.frames.ItemResultBox;
+  import client.ui.frames.TextInputForm;
 
   import _0K_m.*;
   import _0K_m.FlowEffect;
@@ -109,34 +109,34 @@ package com.company.assembleegameclient.net {
   import _0L_C_._gE_;
   import _0L_C_._qO_;
 
-  import _0M_H_._W_O_;
-  import _0M_H_._sN_;
+  import client.signals.EmptySignal;
+  import client.signals.DataSignalB;
 
-  import _0_p._q7;
+  import robotlegs.bender.framework.api.IMessageDispatcher;
 
-  import _8Q_._1l;
+  import client.enums.PositionSlot;
 
-  import _9R_._3E_;
-  import _9R_._D_X_;
-  import _9R_._J_F_;
-  import _9R_._j_;
+  import client.events.NameResultEvent;
+  import client.events.ClientUpdateEvent;
+  import client.events.ResultEvent;
+  import client.events.ReconnectEvent;
 
-  import _G_A_._8P_;
+  import config.InjectorLocator;
 
-  import _panels.PartyInvitePanel;
+  import client.ui.panels.PartyInvitePanel;
 
-  import _panels._L_k;
-  import _panels._o0;
+  import client.ui.panels.TradeRequestPanel;
+  import client.ui.panels.GuildInvitePanel;
 
   import _U_5._06a;
   import _U_5._zz;
 
-  import _qN_.Account;
+  import account.Account;
 
-  import _vf._5T_;
-  import _vf._gs;
+  import audio.SoundEffects;
+  import audio.MusicManager;
 
-  import _yY_._pz;
+  import thrownobjects.ThrownObjectSpawner;
 
   import com.company.assembleegameclient.game.GameSprite;
   import com.company.assembleegameclient.map._X_l;
@@ -534,7 +534,7 @@ package com.company.assembleegameclient.net {
       _arg2.equipment_[_arg3] = _arg5.equipment_[_arg6];
       _arg5.equipment_[_arg6] = _local9;
       _arg5.equipData_[_arg6] = _local10;
-      _5T_.play("inventory_move_item");
+      SoundEffects.play("inventory_move_item");
       return (true);
     }
 
@@ -875,7 +875,7 @@ package com.company.assembleegameclient.net {
 
     private function _G_r(_arg1:_Y_G_):void {
       if (Parameters.data_.showTradePopup) {
-        this.gs_._V_1._U_T_._j(new _L_k(this.gs_, _arg1.name_));
+        this.gs_._V_1._U_T_.setOverridePanel(new TradeRequestPanel(this.gs_, _arg1.name_));
       }
       this.gs_.textBox_.addText("", ((((_arg1.name_ + " wants to ") + 'trade with you.  Type "/trade ') + _arg1.name_) + '" to trade.'));
     }
@@ -946,7 +946,7 @@ package com.company.assembleegameclient.net {
     private function _L_x(_arg1:Notification):void {
       var _local2:GameObject = this.gs_.map_.goDict_[_arg1.objectId_];
       if (_local2 != null) {
-        this.gs_.map_.mapOverlay_.addChild(new _O_P_(_local2, _arg1.text_, _arg1.color_, 2000));
+        this.gs_.map_.mapOverlay_.addChild(new CharacterStatusText(_local2, _arg1.text_, _arg1.color_, 2000));
         if ((((_local2 == this.gs_.map_.player_)) && ((_arg1.text_ == "Quest Complete!")))) {
           this.gs_.map_.quest_.completed();
         }
@@ -956,19 +956,19 @@ package com.company.assembleegameclient.net {
     private function _nG_(_arg1:_iD_):void {
       switch (_arg1.text) {
         case "yellow":
-          _sN_.instance.dispatch(_1l._0v);
+          DataSignalB.instance.dispatch(PositionSlot.SLOT_3);
           return;
         case "red":
-          _sN_.instance.dispatch(_1l._05c);
+          DataSignalB.instance.dispatch(PositionSlot.SLOT_2);
           return;
         case "green":
-          _sN_.instance.dispatch(_1l._h2);
+          DataSignalB.instance.dispatch(PositionSlot.SLOT_1);
           return;
         case "purple":
-          _sN_.instance.dispatch(_1l._M_C_);
+          DataSignalB.instance.dispatch(PositionSlot.SLOT_0);
           return;
         case "showKeyUI":
-          _W_O_.instance.dispatch();
+          EmptySignal.instance.dispatch();
           return;
         case "beginnersPackage":
           return;
@@ -1078,7 +1078,7 @@ package com.company.assembleegameclient.net {
         case ShowEffect._g8:
           _local5 = _arg1.pos1_._6g();
           _local6 = _arg1.pos2_._6g();
-          _local4 = new _pz(_arg1.pos2_._6g(), _arg1.pos1_._6g());
+          _local4 = new ThrownObjectSpawner(_arg1.pos2_._6g(), _arg1.pos1_._6g());
           _local2.addObj(_local4, _local5.x, _local5.y);
           return;
       }
@@ -1441,7 +1441,7 @@ package com.company.assembleegameclient.net {
               }
             }
           }
-          this.gs_.map_.mapOverlay_.addSpeechBalloon(new _6T_(_local3, _local2, _local4[0], 1, _local4[1], 1, _local4[2], _arg1.bubbleTime_, false, true));
+          this.gs_.map_.mapOverlay_.addSpeechBalloon(new SpeechBalloon(_local3, _local2, _local4[0], 1, _local4[1], 1, _local4[2], _arg1.bubbleTime_, false, true));
         }
       }
       if ((_local2) || !Parameters.data_.hidePlayerChat || (this.chatCheck(_arg1.name_))) {
@@ -1467,14 +1467,14 @@ package com.company.assembleegameclient.net {
     }
 
     private function _v6():void {
-      _5T_.play("error");
+      SoundEffects.play("error");
       this.gs_._V_1._02y._e9.refresh();
       this.gs_._V_1._02y.equips_.refresh();
       this.gs_._V_1._U_T_.redraw();
     }
 
     private function _X_3(_arg1:_8_):void {
-      var _local2:_j_ = new _j_(new Server(_arg1.name_, _arg1.host_ != "" ? _arg1.host_ : this.server_.address_, _arg1.host_ != "" ? _arg1.port_ : this.server_.port_), _arg1.gameId_, this._96, this.charId_, _arg1.keyTime_, _arg1.key_);
+      var _local2:ReconnectEvent = new ReconnectEvent(new Server(_arg1.name_, _arg1.host_ != "" ? _arg1.host_ : this.server_.address_, _arg1.host_ != "" ? _arg1.port_ : this.server_.port_), _arg1.gameId_, this._96, this.charId_, _arg1.keyTime_, _arg1.key_);
       this.gs_.dispatchEvent(_local2);
     }
 
@@ -1514,14 +1514,14 @@ package com.company.assembleegameclient.net {
     }
 
     private function _038(_arg1:Death):void {
-      _vf._gs.reload("Death");
+      audio.MusicManager.reload("Death");
       var _local2:BitmapData = new BitmapData(800, 600);
       _local2.draw(this.gs_);
       _arg1.background = _local2;
       if (this.gs_.isEditor) {
         return;
       }
-      _8P_._V_O_().getInstance(_06a).dispatch(_arg1);
+      InjectorLocator.getInjector().getInstance(_06a).dispatch(_arg1);
     }
 
     private function _cN_(_arg1:BuyResult):void {
@@ -1587,23 +1587,23 @@ package com.company.assembleegameclient.net {
     }
 
     private function _0D_s(_arg1:NameResult):void {
-      this.gs_.dispatchEvent(new _3E_(_arg1));
+      this.gs_.dispatchEvent(new NameResultEvent(_arg1));
     }
 
     private function _Z_g(_arg1:_ic):void {
       if (_arg1.errorText_ != "")
         this.gs_.textBox_.addText(Parameters.SendError, _arg1.errorText_);
-      this.gs_.dispatchEvent(new _J_F_(_arg1.success_, _arg1.errorText_));
+      this.gs_.dispatchEvent(new ResultEvent(_arg1.success_, _arg1.errorText_));
     }
 
     private function marketTradeResult(_arg1:MarketTradeResult):void {
       if (_arg1.errorText_ != "")
         this.gs_.textBox_.addText(_arg1.success_ ? "" : Parameters.SendError, _arg1.errorText_);
-      this.gs_.dispatchEvent(new _J_F_(_arg1.success_, _arg1.errorText_, _J_F_.market_));
+      this.gs_.dispatchEvent(new ResultEvent(_arg1.success_, _arg1.errorText_, ResultEvent.MARKET_RESULT));
     }
 
     private function _oA_(_arg1:_0F_u):void {
-      Account._get().reportIntStat(_arg1.name_, _arg1.value_);
+      Account.getInstance().reportIntStat(_arg1.name_, _arg1.value_);
     }
 
     private function _J_0(_arg1:File):void {
@@ -1612,7 +1612,7 @@ package com.company.assembleegameclient.net {
 
     private function _cS_(_arg1:InvitedToGuild):void {
       if (Parameters.data_.showGuildInvitePopup) {
-        this.gs_._V_1._U_T_._j(new _o0(this.gs_, _arg1.name_, _arg1.guildName_));
+        this.gs_._V_1._U_T_.setOverridePanel(new GuildInvitePanel(this.gs_, _arg1.name_, _arg1.guildName_));
       }
       this.gs_.textBox_.addText("", (((((("You have been invited by " + _arg1.name_) + " to join the guild ") + _arg1.guildName_) + '.\n  If you wish to join type "/join ') + _arg1.guildName_) + '"'));
     }
@@ -1699,7 +1699,7 @@ package com.company.assembleegameclient.net {
     }
 
     private function switchMusic(_arg1:SwitchMusic):void {
-      _vf._gs.reload(_arg1.music_);
+      audio.MusicManager.reload(_arg1.music_);
     }
 
     private function itemResult(_arg1:ItemResult):void {
@@ -1719,19 +1719,19 @@ package com.company.assembleegameclient.net {
       _local2._5c2_ = "bledixon.com";
       _local2.buildVersion_ = Parameters.clientVersion;
       _local2.gameId_ = this.gameId_;
-      _local2.guid_ = this._J_X_(Account._get().guid());
-      _local2.password_ = this._J_X_(Account._get().password());
-      _local2.secret_ = this._J_X_(Account._get().secret());
+      _local2.guid_ = this._J_X_(Account.getInstance().guid());
+      _local2.password_ = this._J_X_(Account.getInstance().password());
+      _local2.secret_ = this._J_X_(Account.getInstance().secret());
       _local2.keyTime_ = this.keyTime_;
       _local2.key_.length = 0;
       if (this.key_ != null) {
         _local2.key_.writeBytes(this.key_);
       }
       _local2._2B_ = (((this._2B_ == null)) ? "" : this._2B_);
-      _local2._8U_ = Account._get().entrytag();
-      _local2._yt = Account._get().gameNetwork();
-      _local2._J_k = Account._get().gameNetworkUserId();
-      _local2.playPlatform = Account._get().playPlatform();
+      _local2._8U_ = Account.getInstance().entrytag();
+      _local2._yt = Account.getInstance().gameNetwork();
+      _local2._J_k = Account.getInstance().gameNetworkUserId();
+      _local2.playPlatform = Account.getInstance().playPlatform();
       this._08.sendMessage(_local2);
     }
 
@@ -1766,7 +1766,7 @@ package com.company.assembleegameclient.net {
     private function _Y_h(_arg1:Event):void {
       var _local2:_qO_ = (_arg1.currentTarget as _qO_);
       _local2.parent.removeChild(_local2);
-      this.gs_.dispatchEvent(new _D_X_());
+      this.gs_.dispatchEvent(new ClientUpdateEvent());
     }
 
   }

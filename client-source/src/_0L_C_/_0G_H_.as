@@ -4,7 +4,7 @@
 //_0L_C_._0G_H_
 
 package _0L_C_ {
-import _qN_.Account;
+import account.Account;
 
 import flash.events.Event;
 

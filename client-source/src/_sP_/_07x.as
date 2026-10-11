@@ -17,7 +17,7 @@ import flash.events.Event;
 
 import com.company.assembleegameclient.objects.Player;
 
-import _9R_._J_F_;
+import client.events.ResultEvent;
 
 import _0L_C_._qO_;
 
@@ -70,12 +70,12 @@ public class _07x extends Sprite {
 
     private function _R_Y_(_arg1:_k6):void {
         this._03C_();
-        this.gs_.addEventListener(_J_F_._hx, this._C_L_);
+        this.gs_.addEventListener(ResultEvent.GUILD_RESULT, this._C_L_);
         this.gs_.gsc_._k8(_arg1.name_, _arg1._S_e);
     }
 
-    private function _C_L_(_arg1:_J_F_):void {
-        this.gs_.removeEventListener(_J_F_._hx, this._C_L_);
+    private function _C_L_(_arg1:ResultEvent):void {
+        this.gs_.removeEventListener(ResultEvent.GUILD_RESULT, this._C_L_);
         if (!_arg1.success_) {
             this._L_I_(_arg1.errorText_);
         } else {
@@ -85,12 +85,12 @@ public class _07x extends Sprite {
 
     private function _B_P_(_arg1:_k6):void {
         this._03C_();
-        this.gs_.addEventListener(_J_F_._hx, this._X_s);
+        this.gs_.addEventListener(ResultEvent.GUILD_RESULT, this._X_s);
         this.gs_.gsc_.guildRemove(_arg1.name_);
     }
 
-    private function _X_s(_arg1:_J_F_):void {
-        this.gs_.removeEventListener(_J_F_._hx, this._X_s);
+    private function _X_s(_arg1:ResultEvent):void {
+        this.gs_.removeEventListener(ResultEvent.GUILD_RESULT, this._X_s);
         if (!_arg1.success_) {
             this._L_I_(_arg1.errorText_);
         } else {

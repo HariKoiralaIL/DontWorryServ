@@ -1,4 +1,4 @@
-﻿package _0C_P_ {
+﻿package optionsscreen {
 
 import flash.display.BitmapData;
 import flash.display.Sprite;
@@ -16,8 +16,8 @@ import flash.ui.MouseCursorData;
 
 import _F_1._H_o;
 
-import _vf.SfxSettings;
-import _vf.MusicManager;
+import audio.SfxSettings;
+import audio.MusicManager;
 
 import com.company.assembleegameclient.game.GameSprite;
 import com.company.assembleegameclient.parameters.Parameters;
@@ -133,10 +133,10 @@ public class Options extends Sprite {
                 this.addSoundOptions();
                 return;
             case op_antilag:
-                this.AntilagOptions();
+                this.addAntiLagOptions();
                 return;
             case op_extras:
-                this.extraOptions();
+                this.addExtraOptions();
                 return;
         }
     }
@@ -239,7 +239,7 @@ public class Options extends Sprite {
         }
     }
 
-    private function AntilagOptions():void {
+    private function addAntiLagOptions():void {
         this.addOption(new ChoiceOption("disableAllyProjectiles", new <String>["On", "Off"], [true, false], "Disable Ally Projectiles", "You don't see other Projectiles anymore", null));
         this.addOption(new ChoiceOption("disableWeather", new <String>["On", "Off"], [true, false], "Disable Weather", "Disables Weather", null));
         this.addOption(new ChoiceOption("HideOtherPlayers", new <String>["On", "Off"], [true, false], "Disable Other Players", "Other Players are invisible", null));
@@ -248,7 +248,7 @@ public class Options extends Sprite {
         this.addOption(new ChoiceOption("forceLowQuality", new <String>["On", "Off"], [true, false], "Force Low Quality", "Forces Low Quality", null));
     }
 
-    private function extraOptions():void {
+    private function addExtraOptions():void {
         this.addOption(new ChoiceOption("rotationSpeed", new <String>["Slow", "Normal", "Fast", "Hyper"], [0.001, 0.003, 0.007, 0.01], "Manage Rotation Speed", "Changes the speed you rotate the camera", null));
         this.addOption(new ChoiceOption("togglePercentage", new <String>["On", "Off"], [true, false], "Show HP/MP Percentage", "Display HP/MP as percent values", this.onBarTextChange));
         this.addOption(new ChoiceOption("blureffect", new <String>["On", "Off"], [true, false], "Motion Blur", "Enable a Motion Blur to make the game look even better", null));
@@ -408,4 +408,4 @@ public class Options extends Sprite {
     }
 
 }
-}//package _0C_P_
+}//package optionsscreen

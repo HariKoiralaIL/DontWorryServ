@@ -4,28 +4,28 @@
 //_zD_._N_N_
 
 package _zD_ {
-import _C__._cM_;
+import robotlegs.bender.bundles.mvcs.Mediator;
 
 import _F_1._01_;
 
-import _W_D_._0I_H_;
+import env.ServerListState;
 
 import _U_5._dd;
 
 import _F_1._C_Q_;
 
-public class _N_N_ extends _cM_ {
+public class _N_N_ extends Mediator {
 
     [Inject]
     public var view:_01_;
     [Inject]
-    public var _eJ_:_0I_H_;
+    public var _eJ_:ServerListState;
     [Inject]
     public var _T__:_dd;
 
     override public function initialize():void {
         this.view._4s.add(this._G_P_);
-        this.view.initialize(this._eJ_._T_1);
+        this.view.initialize(this._eJ_.servers);
     }
 
     override public function destroy():void {

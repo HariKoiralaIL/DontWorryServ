@@ -4,12 +4,12 @@
 //com.company.assembleegameclient.objects.GuildChronicle
 
 package com.company.assembleegameclient.objects {
-  import _panels.MarketPanel;
-  import _panels._f;
+  import client.ui.panels.MarketPanel;
+  import client.ui.panels.GuildChroniclePanel;
 
   import com.company.assembleegameclient.game.GameSprite;
 
-  import _panels.Panel;
+  import client.ui.panels.Panel;
 
   public class MarketplaceGround extends GameObject implements _G_4 {
 

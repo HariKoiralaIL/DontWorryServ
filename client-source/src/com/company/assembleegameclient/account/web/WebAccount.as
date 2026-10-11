@@ -4,7 +4,7 @@
 //com.company.assembleegameclient.account.web.WebAccount
 
 package com.company.assembleegameclient.account.web {
-import _qN_.Account;
+import account.Account;
 
 import flash.external.ExternalInterface;
 import flash.net.NetworkInterface;
@@ -16,21 +16,21 @@ import flash.display.Stage;
 
 import com.company.assembleegameclient.parameters.Parameters;
 
-import _Q_A_._jz;
+import account.ui.AccountStatusText;
 
-import _qN_._9j;
+import account.AccountTextView;
 
-import _Q_A_._ak;
+import account.ui.AccountOverlay;
 
 import flash.display.Sprite;
 
-import _Q_A_._0A_c;
+import account.ui.RegisterOverlay;
 
 import com.company.assembleegameclient.appengine._02k;
 
 import _0L_C_._2k;
 
-import _Q_A_._02R_;
+import account.ui.PurchaseCreditsDialog;
 
 import mx.utils.UIDUtil;
 
@@ -112,16 +112,16 @@ public class WebAccount extends Account {
     override public function reportIntStat(statName:String, value:int):void {
     }
 
-    override public function newAccountText():_9j {
-        return (new _jz());
+    override public function newAccountText():AccountTextView {
+        return (new AccountStatusText());
     }
 
     override public function newAccountManagement():Sprite {
-        return (new _ak(false));
+        return (new AccountOverlay(false));
     }
 
     override public function showInGameRegister(stage:Stage):void {
-        var registerDialog:_0A_c = new _0A_c();
+        var registerDialog:RegisterOverlay = new RegisterOverlay();
         stage.addChild(registerDialog);
     }
 
@@ -134,7 +134,7 @@ public class WebAccount extends Account {
             stage.addChild(new _2k(("In order to buy Gold " + ", you must be a registered user.")));
             return;
         }
-        stage.addChild(new _02R_());
+        stage.addChild(new PurchaseCreditsDialog());
     }
 
     override public function gameNetworkUserId():String {

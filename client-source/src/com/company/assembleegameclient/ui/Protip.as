@@ -16,7 +16,7 @@ import com.company.assembleegameclient.parameters.Parameters;
 import flash.filters.DropShadowFilter;
 import flash.events.TimerEvent;
 
-import _05R_.GTween;
+import com.gskinner.motion.GTween;
 
 public class Protip extends Sprite {
 

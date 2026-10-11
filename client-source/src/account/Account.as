@@ -1,101 +1,112 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
+package account
+{
+    import com.company.assembleegameclient.account.web.WebAccount;
+    import com.company.assembleegameclient.parameters.Parameters;
 
-//_qN_.Account
+    import flash.display.Sprite;
+    import flash.display.Stage;
 
-package _qN_ {
-import flash.display.LoaderInfo;
+    public class Account
+    {
+        private static var instance_:Account = null;
 
-import com.company.assembleegameclient.account.web.WebAccount;
-
-import flash.display.Stage;
-
-import com.company.assembleegameclient.parameters.Parameters;
-
-import flash.display.Sprite;
-
-public class Account {
-
-    private static var _N_7:Account = null;
-
-    public static function load(_arg1:Stage, _arg2:Function):void {
-        _N_7 = new WebAccount();
-        _N_7.internalLoad(_arg1, _arg2);
-    }
-
-    public static function _get():Account {
-        if (_N_7 == null) {
-            _N_7 = new WebAccount();
+        public static function load(stage:Stage, onLoaded:Function):void
+        {
+            instance_ = new WebAccount();
+            instance_.internalLoad(stage, onLoaded);
         }
-        return (_N_7);
-    }
 
-    public function guid():String {
-        return (null);
-    }
+        public static function getInstance():Account
+        {
+            if (instance_ == null)
+            {
+                instance_ = new WebAccount();
+            }
+            return instance_;
+        }
 
-    public function password():String {
-        return ("");
-    }
+        public function guid():String
+        {
+            return null;
+        }
 
-    public function secret():String {
-        return ("");
-    }
+        public function password():String
+        {
+            return "";
+        }
 
-    public function credentials():Object {
-        return (null);
-    }
+        public function secret():String
+        {
+            return "";
+        }
 
-    public function isRegistered():Boolean {
-        return (false);
-    }
+        public function credentials():Object
+        {
+            return null;
+        }
 
-    public function modify(_arg1:String, _arg2:String, _arg3:String):void {
-    }
+        public function isRegistered():Boolean
+        {
+            return false;
+        }
 
-    public function clear():void {
-        Parameters._hk = true;
-    }
+        public function modify(guid:String, password:String, secret:String):void
+        {
+        }
 
-    public function reportIntStat(_arg1:String, _arg2:int):void {
-    }
+        public function clear():void
+        {
+            Parameters._hk = true;
+        }
 
-    public function newAccountText():_9j {
-        return (null);
-    }
+        public function reportIntStat(name:String, value:int):void
+        {
+        }
 
-    public function newAccountManagement():Sprite {
-        return (null);
-    }
+        public function newAccountText():AccountTextView
+        {
+            return null;
+        }
 
-    public function showInGameRegister(_arg1:Stage):void {
-    }
+        public function newAccountManagement():Sprite
+        {
+            return null;
+        }
 
-    public function cacheOffers():void {
-    }
+        public function showInGameRegister(stage:Stage):void
+        {
+        }
 
-    public function showMoneyManagement(_arg1:Stage):void {
-    }
+        public function cacheOffers():void
+        {
+        }
 
-    public function gameNetworkUserId():String {
-        return ("");
-    }
+        public function showMoneyManagement(stage:Stage):void
+        {
+        }
 
-    public function gameNetwork():String {
-        return (null);
-    }
+        public function gameNetworkUserId():String
+        {
+            return "";
+        }
 
-    public function playPlatform():String {
-        return (null);
-    }
+        public function gameNetwork():String
+        {
+            return null;
+        }
 
-    public function entrytag():String {
-        return (null);
-    }
+        public function playPlatform():String
+        {
+            return null;
+        }
 
-    protected function internalLoad(_arg1:Stage, _arg2:Function):void {
-    }
+        public function entrytag():String
+        {
+            return null;
+        }
 
+        protected function internalLoad(stage:Stage, onLoaded:Function):void
+        {
+        }
+    }
 }
-}//package _qN_
-

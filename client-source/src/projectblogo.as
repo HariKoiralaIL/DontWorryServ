@@ -5,26 +5,26 @@
 
 package {
 
-  import _05G_._X_G_;
+  import client.config.SpriteEditorConfig;
 
-  import _0_p._L_y;
+  import robotlegs.bender.framework.api.IContext;
 
-  import _9u._074;
+  import client.config.PaymentConfig;
 
-  import _C_5._tt;
+  import gamestart.GameConfig;
 
-  import _C__._07U_;
+  import robotlegs.bender.bundles.mvcs.AppBundle;
 
-  import _G_A_._8P_;
-  import _G_A_._F_y;
+  import config.InjectorLocator;
+  import config.ApplicationConfig;
 
-  import _I_j._V_4;
+  import beginnersoffer.BeginnersOfferConfig;
 
-  import _R_Q_._0K_S_;
+  import client.ui.tooltips.TooltipConfig;
 
-  import _T_o._083;
+  import _T_o.SingletonMappingExtension;
 
-  import _U_._K_a;
+  import client.config.UIConfig;
 
   import _U_5._D_c;
 
@@ -52,7 +52,7 @@ package {
       public static var sHeight:Number = 600;
       public static var primStage:Stage;
 
-        protected var context:_L_y;
+        protected var context:IContext;
 
         public function projectblogo() {
             this.randomizeLoaderHeader();
@@ -101,7 +101,7 @@ package {
             this._i1();
             new loadEmbeds().load();
             stage.scaleMode = StageScaleMode.NO_SCALE;
-            this.context._O_R_.getInstance(_D_c).dispatch();
+            this.context.injector.getInstance(_D_c).dispatch();
             primStage = stage;
             this._06p();
             if(Parameters.data_.forceLowQuality)
@@ -113,15 +113,15 @@ package {
             Parameters.root = stage.root;
         }
         private function _i1():void {
-            this.context = new _8P_();
-            this.context._O_R_.map(LoaderInfo)._q3(root.stage.root.loaderInfo);
+            this.context = new InjectorLocator();
+            this.context.injector.map(LoaderInfo).toValue(root.stage.root.loaderInfo);
             var _local1:Dispatcher = new Dispatcher(this);
-            this.context._O_R_.map(Dispatcher)._q3(_local1);
-            this.context.extend(_07U_).extend(_083)
-                    .configure(_F_y).configure(_074)
-                    .configure(_tt).configure(_K_a)
-                    .configure(_0K_S_).configure(_V_4)
-                    .configure(_X_G_)
+            this.context.injector.map(Dispatcher).toValue(_local1);
+            this.context.extend(AppBundle).extend(SingletonMappingExtension)
+                    .configure(ApplicationConfig).configure(PaymentConfig)
+                    .configure(GameConfig).configure(UIConfig)
+                    .configure(TooltipConfig).configure(BeginnersOfferConfig)
+                    .configure(SpriteEditorConfig)
                     .configure(this);
         }
         private function _06p():void {

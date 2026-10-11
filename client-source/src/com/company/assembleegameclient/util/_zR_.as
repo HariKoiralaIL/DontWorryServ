@@ -7,7 +7,7 @@ package com.company.assembleegameclient.util {
 
 import flash.net.URLVariables;
 
-import _qN_.Account;
+import account.Account;
 
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.util.offer.Offer;
@@ -40,7 +40,7 @@ public class _zR_ {
         var _local4:URLVariables = new URLVariables();
         _local4["tok"] = _arg1;
         _local4["exp"] = _arg2;
-        _local4["guid"] = Account._get().guid();
+        _local4["guid"] = Account.getInstance().guid();
         _local4["provider"] = this._q;
         switch (this._q) {
             /*case "co":

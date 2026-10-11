@@ -2,8 +2,8 @@
  * Created by club5_000 on 9/21/2014.
  */
 package _sP_ {
-    import _0D_d.DataChooser;
-    import _0D_d.TextInput;
+    import client.ui.frames.DataChooser;
+    import client.ui.frames.TextInput;
 
     import com.company.assembleegameclient.game.GameSprite;
     import com.company.assembleegameclient.objects.ObjectLibrary;

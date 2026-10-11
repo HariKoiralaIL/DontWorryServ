@@ -1,8 +1,8 @@
 /**
  * Created by Michael on 12.02.2017.
  */
-import _0D_d.Crafting;
-import _0D_d.Frame;
+import client.ui.frames.Crafting;
+import client.ui.frames.Frame;
 
 import com.company.assembleegameclient.game.GameSprite;
 import com.company.assembleegameclient.objects.GameObject;

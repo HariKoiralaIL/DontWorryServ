@@ -26,9 +26,9 @@ import com.company.assembleegameclient.ui.tooltip.TitleDescriptionToolTip;
 import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 
-import _ke._U_c;
+import constants.ActorType;
 
-import _vf._5T_;
+import audio.SoundEffects;
 
 public class _E_6 extends Slot {
 
@@ -173,7 +173,7 @@ public class _E_6 extends Slot {
             this._04q = true;
         }
         this._e9.gs_.gsc_.useItem(getTimer(), this._e9._iA_.objectId_, this.id_, this.objectType_, 0, 0);
-        _5T_.play("use_potion");
+        SoundEffects.play("use_potion");
         this._X_6();
     }
 
@@ -202,12 +202,12 @@ public class _E_6 extends Slot {
         if (this._e9.gs_) {
             if ((this._e9._iA_ is Player)) {
                 if (this._e9._iA_ == this._e9.gs_.map_.player_) {
-                    this._Y_K_ = _U_c.CURRENT_PLAYER;
+                    this._Y_K_ = ActorType.CURRENT_PLAYER;
                 } else {
-                    this._Y_K_ = _U_c.OTHER_PLAYER;
+                    this._Y_K_ = ActorType.OTHER_PLAYER;
                 }
             } else {
-                this._Y_K_ = _U_c.NPC;
+                this._Y_K_ = ActorType.NPC;
             }
         }
     }

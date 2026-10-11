@@ -4,14 +4,14 @@
 //com.company.assembleegameclient.map._X_l
 
 package com.company.assembleegameclient.map {
-import _015._0C_Q_;
+import mapoverlay.MapOverlay;
 
 import MapBackgrounds.Background;
 
 
-import _fh._zh;
+import arrows.ArrowOverlay;
 
-import _vf._gs;
+import audio.MusicManager;
 
 import com.company.assembleegameclient.game.GameSprite;
 import com.company.assembleegameclient.objects.BasicObject;
@@ -52,8 +52,8 @@ public class _X_l extends MapHandler {
         gs_ = _arg1;
         _063 = new _M_9();
         _C_K_ = new _3m();
-        mapOverlay_ = new _0C_Q_();
-        partyOverlay_ = new _zh(this);
+        mapOverlay_ = new MapOverlay();
+        partyOverlay_ = new ArrowOverlay(this);
         party_ = new _ez(this);
         quest_ = new Quest(this);
     }
@@ -76,7 +76,7 @@ public class _X_l extends MapHandler {
         showDisplays_ = _arg6;
         music_ = _arg7;
         weather_ = _arg8;
-        _vf._gs.reload(this.music_);
+        audio.MusicManager.reload(this.music_);
     }
 
     override public function initialize():void {

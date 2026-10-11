@@ -4,7 +4,7 @@
 //com.company.assembleegameclient.ui._0M_Y_
 
 package com.company.assembleegameclient.ui {
-import _sp._aJ_;
+import signals.Signal;
 
 import com.company.assembleegameclient.objects.Player;
 
@@ -19,7 +19,7 @@ import flash.filters.DropShadowFilter;
 
 public class _0M_Y_ extends Sprite {
 
-    public static var options_:_aJ_ = new _aJ_(Boolean);
+    public static var options_:Signal = new Signal(Boolean);
 
     public function _0M_Y_(_arg1:int, _arg2:int, _arg3:uint, _arg4:uint, _arg5:String = null) {
         this._03o = new Sprite();

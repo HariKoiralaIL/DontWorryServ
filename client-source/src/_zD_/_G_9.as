@@ -4,40 +4,40 @@
 //_zD_._G_9
 
 package _zD_ {
-import _C__._cM_;
+import robotlegs.bender.bundles.mvcs.Mediator;
 
 import _0L_C_._s7;
 
 import com.company.assembleegameclient.appengine.SavedCharacter;
 
-import _02b._0F_A_;
+import services.DeleteCharacterTask;
 
 import _U_5._M_d;
 import _U_5._01W_;
 
 import _F_1.CurrentCharacterScreen;
 
-import _4X_._zU_;
+import client.tasks.Task;
 
-public class _G_9 extends _cM_ {
+public class _G_9 extends Mediator {
 
     [Inject]
     public var view:_s7;
     [Inject]
     public var character:SavedCharacter;
     [Inject]
-    public var _yD_:_0F_A_;
+    public var _yD_:DeleteCharacterTask;
     [Inject]
     public var _0D_p:_M_d;
     [Inject]
     public var _0_b:_01W_;
 
     override public function initialize():void {
-        this._yD_._iu.addOnce(this._S_f);
+        this._yD_.completed.addOnce(this._S_f);
         this._yD_.start();
     }
 
-    private function _S_f(_arg1:_zU_, _arg2:Boolean, _arg3:String = ""):void {
+    private function _S_f(_arg1:Task, _arg2:Boolean, _arg3:String = ""):void {
         this.view.parent.removeChild(this.view);
         this._0D_p.dispatch();
         this._0_b.dispatch(new CurrentCharacterScreen());

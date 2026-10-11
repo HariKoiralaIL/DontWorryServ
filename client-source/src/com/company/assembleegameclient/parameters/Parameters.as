@@ -4,7 +4,7 @@
 //com.company.assembleegameclient.parameters.Parameters
 
 package com.company.assembleegameclient.parameters {
-import _yn._07Y_;
+import _yn.StringDecryptor;
 
 import com.company.util._0A_s;
 import com.company.util._H_V_;

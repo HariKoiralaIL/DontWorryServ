@@ -11,7 +11,7 @@ import flash.display.BitmapData;
 import flash.events.MouseEvent;
 import flash.net.FileReference;
 
-import _q8._9l;
+import pngencoder.PNGEncoder;
 
 public class _B_N_ extends Sprite {
 
@@ -48,7 +48,7 @@ public class _B_N_ extends Sprite {
     }
 
     private function _na(_arg1:Event):void {
-        new FileReference().save(_9l.encode(this.bitmap_.bitmapData), "map.png");
+        new FileReference().save(PNGEncoder.encode(this.bitmap_.bitmapData), "map.png");
     }
 
     private function _of(_arg1:Event):void {

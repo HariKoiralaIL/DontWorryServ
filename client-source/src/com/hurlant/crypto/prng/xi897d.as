@@ -3,13 +3,13 @@
  */
 package com.hurlant.crypto.prng {
   import _05G_._X_G_;
-  import _0_p._L_y;
+  import robotlegs.bender.framework.api.IContext;
   import _9u._074;
   import _C_5._tt;
-  import _C__._07U_;
-  import _G_A_._8P_;
-  import _G_A_._F_y;
-  import _I_j._V_4;
+  import robotlegs.bender.bundles.mvcs._07U_;
+  import config._8P_;
+  import config._F_y;
+  import beginnersoffer.BeginnersOfferConfig;
   import _R_Q_._0K_S_;
   import _T_o._083;
   import _U_._K_a;
@@ -42,7 +42,7 @@ package com.hurlant.crypto.prng {
     [Bindable]
     public static var primStage:Stage;
 
-    protected var context:_L_y;
+    protected var context:IContext;
 
     public function xi897d() {
       if (stage) {
@@ -60,7 +60,7 @@ package com.hurlant.crypto.prng {
       this._i1();
       new loadEmbeds().load();
       //stage.scaleMode = StageScaleMode.NO_SCALE;
-      this.context._O_R_.getInstance(_D_c).dispatch();
+      this.context.injector.getInstance(_D_c).dispatch();
       primStage = stage;
       this._06p();
       if(Parameters.data_.forceLowQuality)
@@ -73,13 +73,13 @@ package com.hurlant.crypto.prng {
     }
     private function _i1():void {
       this.context = new _8P_();
-      this.context._O_R_.map(LoaderInfo)._q3(root.stage.root.loaderInfo);
+      this.context.injector.map(LoaderInfo).toValue(root.stage.root.loaderInfo);
       var _local1:Dispatcher = new Dispatcher(this);
-      this.context._O_R_.map(Dispatcher)._q3(_local1);
+      this.context.injector.map(Dispatcher).toValue(_local1);
       this.context.extend(_07U_).extend(_083)
           .configure(_F_y).configure(_074)
           .configure(_tt).configure(_K_a)
-          .configure(_0K_S_).configure(_V_4)
+          .configure(_0K_S_).configure(BeginnersOfferConfig)
           .configure(_X_G_)
           .configure(this);
     }

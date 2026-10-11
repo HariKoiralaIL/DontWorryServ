@@ -6,7 +6,7 @@
 package com.company.assembleegameclient.ui.tooltip {
 
 
-  import _ke._U_c;
+  import constants.ActorType;
 
   import com.company.assembleegameclient.net.messages.data.StatData;
   import com.company.assembleegameclient.objects.GameObject;
@@ -533,7 +533,7 @@ package com.company.assembleegameclient.ui.tooltip {
 
     private function initUse():void {
       this.restrictions_.push(new Restriction("Must be equipped to use", 0xB3B3B3, false));
-      if (((this.ownedByPlayer_) || ((this.ownerId_ == _U_c.CURRENT_PLAYER)))) {
+      if (((this.ownedByPlayer_) || ((this.ownerId_ == ActorType.CURRENT_PLAYER)))) {
         this.restrictions_.push(new Restriction("Double-Click to equip", 0xB3B3B3, false));
       } else {
         this.restrictions_.push(new Restriction("Double-Click to take", 0xB3B3B3, false));
@@ -546,7 +546,7 @@ package com.company.assembleegameclient.ui.tooltip {
 
     private function initUse3():void {
       this.restrictions_.push(new Restriction("Consumed with use", 0xB3B3B3, false));
-      if (((this.ownedByPlayer_) || ((this.ownerId_ == _U_c.CURRENT_PLAYER)))) {
+      if (((this.ownedByPlayer_) || ((this.ownerId_ == ActorType.CURRENT_PLAYER)))) {
         this.restrictions_.push(new Restriction("Double-Click or Shift-Click on item to use", 0xFFFFFF, false));
       } else {
         this.restrictions_.push(new Restriction("Double-Click to take & Shift-Click to use", 0xFFFFFF, false));

@@ -4,11 +4,11 @@
 //com.company.assembleegameclient.objects.NameChanger
 
 package com.company.assembleegameclient.objects {
-import _panels._0K_o;
+import client.ui.panels.NameChangerPanel;
 
 import com.company.assembleegameclient.game.GameSprite;
 
-import _panels.Panel;
+import client.ui.panels.Panel;
 
 public class NameChanger extends GameObject implements _G_4 {
 
@@ -23,7 +23,7 @@ public class NameChanger extends GameObject implements _G_4 {
     }
 
     public function getPanel(_arg1:GameSprite):Panel {
-        return (new _0K_o(_arg1, this._0I_a));
+        return (new NameChangerPanel(_arg1, this._0I_a));
     }
 
 }

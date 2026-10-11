@@ -9,11 +9,11 @@ import flash.display.IGraphicsData;
 
 import com.company.assembleegameclient.map._0D_v;
 
-import _panels._Y_8;
+import client.ui.panels.PortalPanel;
 
 import com.company.assembleegameclient.game.GameSprite;
 
-import _panels.Panel;
+import client.ui.panels.Panel;
 
 public class Portal extends GameObject implements _G_4 {
 
@@ -35,7 +35,7 @@ public class Portal extends GameObject implements _G_4 {
     }
 
     public function getPanel(_arg1:GameSprite):Panel {
-        return (new _Y_8(_arg1, this));
+        return (new PortalPanel(_arg1, this));
     }
 
 }

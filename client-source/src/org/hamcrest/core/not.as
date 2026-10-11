@@ -1,15 +1,15 @@
 package org.hamcrest.core {
-import _g3.equalTo;
+import matchers.equalTo;
 
-import _qj._pn;
+import matchers.Matcher;
 
 /**
  * Creates a matcher that inverts the given matcher. A plain value is
  * treated as equalTo(value).
  */
-public function not(value:Object):_pn {
-    if (value is _pn) {
-        return new IsNot(value as _pn);
+public function not(value:Object):Matcher {
+    if (value is Matcher) {
+        return new IsNot(value as Matcher);
     }
     return not(equalTo(value));
 }

@@ -8,7 +8,7 @@ package com.company.assembleegameclient.objects {
 
     import flash.utils.Dictionary;
 
-    import _0_P_._0F_7;
+    import spriteanimation.AnimationsData;
 
     import flash.utils.getDefinitionByName;
     import flash.display.BitmapData;
@@ -131,7 +131,7 @@ package com.company.assembleegameclient.objects {
                     _5Q_[_local5] = new _Z_H_(XML(_local2.Top));
                 }
                 if (_local2.hasOwnProperty("Animation")) {
-                    _Q_z[_local5] = new _0F_7(_local2);
+                    _Q_z[_local5] = new AnimationsData(_local2);
                 }
             }
         }

@@ -16,7 +16,7 @@ package com.company.assembleegameclient.ui {
 
     import flash.display.Shape;
 
-    import _panels._Q_V_;
+    import client.ui.panels.InteractPanel;
 
     import flash.events.Event;
 
@@ -58,7 +58,7 @@ package com.company.assembleegameclient.ui {
         }
         public var _F_:_ej = null;
         public var _02y:InvTabs;
-        public var _U_T_:_Q_V_;
+        public var _U_T_:InteractPanel;
         public var _6K_:_zg = null;
         public var itemSelect_:ItemSelect = null;
         private var gs_:GameSprite;
@@ -168,7 +168,7 @@ package com.company.assembleegameclient.ui {
             _local1 = this.gs_.map_.player_;
             this._02y = new InvTabs(this.gs_, _local1, 200, 300);
             this._02y.y = 200;
-            this._U_T_ = new _Q_V_(this.gs_, _local1, 200, 135);
+            this._U_T_ = new InteractPanel(this.gs_, _local1, 200, 135);
             this._U_T_.x = 0;
             this._U_T_.y = 475;
         }

@@ -41,17 +41,17 @@ import flash.utils.Dictionary;
 import flash.utils.getQualifiedClassName;
 import flash.utils.getTimer;
 
-import _015._O_P_;
+import mapoverlay.CharacterStatusText;
 
 import _0K_m.ExplosionEffect;
 import _0K_m.HitEffect;
 import _0K_m._I_b;
 
-import _0_P_.Animations;
-import _0_P_._0F_7;
+import spriteanimation.Animations;
+import spriteanimation.AnimationsData;
 
 
-import _vf._5T_;
+import audio.SoundEffects;
 
 public class GameObject extends BasicObject {
 
@@ -109,7 +109,7 @@ public class GameObject extends BasicObject {
         if (_arg1.hasOwnProperty("Model")) {
             this._8J_ = _B_5._um(String(_arg1.Model));
         }
-        var _local3:_0F_7 = ObjectLibrary._Q_z[this.objectType_];
+        var _local3:AnimationsData = ObjectLibrary._Q_z[this.objectType_];
         if (_local3 != null) {
             this._09e = new Animations(_local3);
         }
@@ -466,7 +466,7 @@ public class GameObject extends BasicObject {
     }
 
     public function _05M_(_arg1:int):void {
-        _5T_.play(this.props_._6x[_arg1]);
+        SoundEffects.play(this.props_._6x[_arg1]);
     }
 
     public function _L_S_():Boolean {
@@ -687,7 +687,7 @@ public class GameObject extends BasicObject {
                             break;
                         case ConditionEffect._V_Z_:
                             if (this._z1()) {
-                                map_.mapOverlay_.addChild(new _O_P_(this, "Immune", 0xFF0000, 3000));
+                                map_.mapOverlay_.addChild(new CharacterStatusText(this, "Immune", 0xFF0000, 3000));
                             } else {
                                 _local9 = ConditionEffect.effects_[_local8];
                             }
@@ -696,7 +696,7 @@ public class GameObject extends BasicObject {
                     if (_local9 != null) {
                         if ((this._9B_ | _local9.bit_) != this._9B_) {
                             this._9B_ = (this._9B_ | _local9.bit_);
-                            map_.mapOverlay_.addChild(new _O_P_(this, _local9.name_, 0xFF0000, 3000, _local7));
+                            map_.mapOverlay_.addChild(new CharacterStatusText(this, _local9.name_, 0xFF0000, 3000, _local7));
                             _local7 = (_local7 + 500);
                         }
                     }
@@ -720,7 +720,7 @@ public class GameObject extends BasicObject {
         _local10 = this._093() || (_arg5 != null && _arg5._ko._N_J_);
         if (_arg2 > 0) {
           if (!Parameters.data_["disableDamageText"]) {
-            map_.mapOverlay_.addChild(new _O_P_(this, ("-" + (Parameters.data_["damageInfo"] ? (_arg2 + " [" + HP_ + "]") : _arg2)), ((_local10) ? 0x9000FF : 0xFF0000), 1000));
+            map_.mapOverlay_.addChild(new CharacterStatusText(this, ("-" + (Parameters.data_["damageInfo"] ? (_arg2 + " [" + HP_ + "]") : _arg2)), ((_local10) ? 0x9000FF : 0xFF0000), 1000));
           }
         }
         if (map_.player_ == this && _arg5 != null) {

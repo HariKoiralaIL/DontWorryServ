@@ -24,10 +24,10 @@ import com.company.assembleegameclient.ui._0K_B_;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.util._H_U_;
 
-import _qN_.Account;
+import account.Account;
 
-import _zo._8C_;
-import _zo._mS_;
+import events.GenericDataEvent;
+import events.TextErrorEvent;
 
 import flash.display.Graphics;
 
@@ -58,9 +58,9 @@ import flash.events.Event;
             "offset": _arg2,
             "filter": _arg4
         };
-        _H_U_._t2(_local5, Account._get().credentials());
-        this._3v.addEventListener(_8C_.GENERIC_DATA, this._L_5);
-        this._3v.addEventListener(_mS_.TEXT_ERROR, this._ix);
+        _H_U_._t2(_local5, Account.getInstance().credentials());
+        this._3v.addEventListener(GenericDataEvent.GENERIC_DATA, this._L_5);
+        this._3v.addEventListener(TextErrorEvent.TEXT_ERROR, this._ix);
         this._3v.sendRequest("list", _local5);
     }
 
@@ -178,9 +178,9 @@ import flash.events.Event;
                 "offset": this.offset_,
                 "filter": this.category_
             };
-            _H_U_._t2(_local5, Account._get().credentials());
-            this._3v.addEventListener(_8C_.GENERIC_DATA, this._L_5);
-            this._3v.addEventListener(_mS_.TEXT_ERROR, this._ix);
+            _H_U_._t2(_local5, Account.getInstance().credentials());
+            this._3v.addEventListener(GenericDataEvent.GENERIC_DATA, this._L_5);
+            this._3v.addEventListener(TextErrorEvent.TEXT_ERROR, this._ix);
             this._3v.sendRequest("list", _local5);
         }
     }
@@ -225,9 +225,9 @@ import flash.events.Event;
             "requestItems": e.requestItems_.join(),
             "requestData": JSON.stringify({datas:e.requestData_})
         };
-        _H_U_._t2(_local5, Account._get().credentials());
-        this._3v.addEventListener(_8C_.GENERIC_DATA, this._L_5);
-        this._3v.addEventListener(_mS_.TEXT_ERROR, this._ix);
+        _H_U_._t2(_local5, Account.getInstance().credentials());
+        this._3v.addEventListener(GenericDataEvent.GENERIC_DATA, this._L_5);
+        this._3v.addEventListener(TextErrorEvent.TEXT_ERROR, this._ix);
         this._3v.sendRequest("list", _local5);
     }
 
@@ -261,12 +261,12 @@ import flash.events.Event;
         addChild(this.searchButton_);
     }
 
-    private function _L_5(_arg1:_8C_):void {
-        this.build(XML(_arg1.data_));
+    private function _L_5(_arg1:GenericDataEvent):void {
+        this.build(XML(_arg1.data));
     }
 
-    private function _ix(_arg1:_mS_):void {
-        this._j7.text = _arg1.text_;
+    private function _ix(_arg1:TextErrorEvent):void {
+        this._j7.text = _arg1.text;
     }
 
     private function _A_E_(_arg1:Event):void {

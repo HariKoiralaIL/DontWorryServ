@@ -4,17 +4,17 @@
 //com.company.assembleegameclient.objects.Merchant
 
 package com.company.assembleegameclient.objects {
-import _015._6T_;
+import mapoverlay.SpeechBalloon;
 
-import _05R_.GTween;
+import com.gskinner.motion.GTween;
 
-import _1s._yx;
+import easing.SineEase;
 
 import com.company.assembleegameclient.ui.tooltip.EquipmentToolTip;
 import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 
-import _ke._U_c;
+import constants.ActorType;
 
 import com.company.assembleegameclient.map._0D_v;
 import com.company.assembleegameclient.map._X_l;
@@ -89,9 +89,9 @@ public class Merchant extends SellableObject implements _G_4 {
             if (this._gt == 2147483647) {
                 this.alpha_ = 0;
                 _local5 = new GTween(this, (0.5 * T), {"alpha_": 1});
-                _local6 = new GTween(this, (0.5 * T), {"size_": 150}, {"ease": _yx._O_2});
-                _local6._0E_A_ = new GTween(this, (0.5 * T), {"size_": 100}, {"ease": _yx._J_D_});
-                _local6._0E_A_._04u = true;
+                _local6 = new GTween(this, (0.5 * T), {"size_": 150}, {"ease": SineEase.easeOut});
+                _local6.nextTween = new GTween(this, (0.5 * T), {"size_": 100}, {"ease": SineEase.easeIn});
+                _local6.nextTween.paused = true;
             }
             this._0H_e = false;
         }
@@ -133,7 +133,7 @@ public class Merchant extends SellableObject implements _G_4 {
     }
 
     override public function getTooltip():ToolTip {
-        return (new EquipmentToolTip(this._0E_, map_.player_, -1, _U_c.NPC));
+        return (new EquipmentToolTip(this._0E_, map_.player_, -1, ActorType.NPC));
     }
 
     override public function getIcon():BitmapData {
@@ -162,7 +162,7 @@ public class Merchant extends SellableObject implements _G_4 {
         return (_local3);
     }
 
-    public function _S_i(_arg1:int):_6T_ {
+    public function _S_i(_arg1:int):SpeechBalloon {
         var _local2:String;
         var _local3:uint;
         var _local4:uint;
@@ -203,7 +203,7 @@ public class Merchant extends SellableObject implements _G_4 {
             default:
                 return (null);
         }
-        return (new _6T_(this, _local2, _local3, 1, _local4, 1, _local5, 6, true, false));
+        return (new SpeechBalloon(this, _local2, _local3, 1, _local4, 1, _local5, 6, true, false));
     }
 
     public function getTex1Id(_arg1:int):int {

@@ -4,11 +4,11 @@
 //_U_5._D_L_
 
 package _U_5 {
-import _sp._aJ_;
+import signals.Signal;
 
 import _011.MapInfo;
 
-public class _D_L_ extends _aJ_ {
+public class _D_L_ extends Signal {
 
     private static var instance:_D_L_;
 

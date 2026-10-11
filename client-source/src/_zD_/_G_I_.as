@@ -4,7 +4,7 @@
 //_zD_._G_I_
 
 package _zD_ {
-import _C__._cM_;
+import robotlegs.bender.bundles.mvcs.Mediator;
 
 import com.company.assembleegameclient.screens.charrects.CharacterRectList;
 
@@ -12,7 +12,7 @@ import _U_5._01W_;
 
 import _F_1._0H_2;
 
-public class _G_I_ extends _cM_ {
+public class _G_I_ extends Mediator {
 
     [Inject]
     public var view:CharacterRectList;

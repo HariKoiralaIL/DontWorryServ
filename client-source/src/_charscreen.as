@@ -3,9 +3,9 @@
  */
 package {
 
-  import _02t._lM_;
-  import _02t._lxb_;
-  import _02t._pM_;
+  import menubackgrounds.SeasonalOverlay;
+  import menubackgrounds.CharacterScreenBackground;
+  import menubackgrounds.ScrollingMapBackground;
 
   import com.company.assembleegameclient.ui._zX_;
 
@@ -16,7 +16,7 @@ package {
 
       public function _charscreen()
       {
-        addChild(new _lxb_());
+        addChild(new CharacterScreenBackground());
       }
     }
 }

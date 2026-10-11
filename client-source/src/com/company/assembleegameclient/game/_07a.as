@@ -7,11 +7,11 @@ package com.company.assembleegameclient.game {
 
   import _0A_g.PlayerCheat;
 
-  import _0C_P_.Options;
+  import optionsscreen.Options;
 
-  import _0D_d.GiveBox;
+  import client.ui.frames.GiveBox;
 
-  import _4K_.Stats;
+  import client.debug.Stats;
 
   import _sP_.MarketplaceContainerUI;
 

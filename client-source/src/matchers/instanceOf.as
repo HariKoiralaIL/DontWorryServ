@@ -1,7 +1,7 @@
-package matchers {
-import _qj._pn;
+﻿package matchers {
+import matchers.Matcher;
 
-public function instanceOf(type:Class):_pn {
+public function instanceOf(type:Class):Matcher {
     return new IsInstanceOf(type);
 }
 }

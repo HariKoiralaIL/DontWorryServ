@@ -4,11 +4,11 @@
 //_U_5._057
 
 package _U_5 {
-import _sp._aJ_;
+import signals.Signal;
 
 import com.company.assembleegameclient.appengine.SavedCharacter;
 
-public class _057 extends _aJ_ {
+public class _057 extends Signal {
 
     public function _057() {
         super(SavedCharacter);

@@ -4,11 +4,11 @@
 //com.company.assembleegameclient.objects.GuildRegister
 
 package com.company.assembleegameclient.objects {
-import _panels._04X_;
+import client.ui.panels.GuildRegisterPanel;
 
 import com.company.assembleegameclient.game.GameSprite;
 
-import _panels.Panel;
+import client.ui.panels.Panel;
 
 public class GuildRegister extends GameObject implements _G_4 {
 
@@ -18,7 +18,7 @@ public class GuildRegister extends GameObject implements _G_4 {
     }
 
     public function getPanel(_arg1:GameSprite):Panel {
-        return (new _04X_(_arg1));
+        return (new GuildRegisterPanel(_arg1));
     }
 
 }

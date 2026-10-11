@@ -4,11 +4,11 @@
 //_U_5._sC_
 
 package _U_5 {
-import _sp._aJ_;
+import signals.Signal;
 
 import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
-public class _sC_ extends _aJ_ {
+public class _sC_ extends Signal {
 
     public function _sC_() {
         super(ToolTip);

@@ -6,15 +6,15 @@
 package com.company.assembleegameclient.objects {
 import com.company.util.PointUtil;
 
-import _vf._5T_;
+import audio.SoundEffects;
 
 import com.company.assembleegameclient.map._X_l;
 
-import _panels._sc;
+import client.ui.panels.ContainerPanel;
 
 import com.company.assembleegameclient.game.GameSprite;
 
-import _panels.Panel;
+import client.ui.panels.Panel;
 
 public class Container extends GameObject implements _G_4 {
 
@@ -36,7 +36,7 @@ public class Container extends GameObject implements _G_4 {
         }
         var _local4:Number = PointUtil._R_O_(map_.player_.x_, map_.player_.y_, _arg2, _arg3);
         if (((this._G_B_) && ((_local4 < 10)))) {
-            _5T_.play("loot_appears");
+            SoundEffects.play("loot_appears");
         }
         return (true);
     }
@@ -51,7 +51,7 @@ public class Container extends GameObject implements _G_4 {
     }
 
     public function getPanel(_arg1:GameSprite):Panel {
-        return (new _sc(_arg1, this));
+        return (new ContainerPanel(_arg1, this));
     }
 
 }

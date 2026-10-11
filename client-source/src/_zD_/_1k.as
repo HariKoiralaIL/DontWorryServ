@@ -4,7 +4,7 @@
 //_zD_._1k
 
 package _zD_ {
-import _C__._cM_;
+import robotlegs.bender.bundles.mvcs.Mediator;
 
 import _0L_C_._0G_y;
 
@@ -15,7 +15,7 @@ import flash.events.Event;
 
 import _F_1.CurrentCharacterScreen;
 
-public class _1k extends _cM_ {
+public class _1k extends Mediator {
 
     [Inject]
     public var view:_0G_y;
@@ -25,11 +25,11 @@ public class _1k extends _cM_ {
     public var _0_b:_01W_;
 
     override public function initialize():void {
-        _b6(Event.COMPLETE, this.onComplete);
+        addViewListener(Event.COMPLETE, this.onComplete);
     }
 
     override public function destroy():void {
-        _0E_K_(Event.COMPLETE, this.onComplete);
+        removeViewListener(Event.COMPLETE, this.onComplete);
     }
 
     private function onComplete(_arg1:Event):void {

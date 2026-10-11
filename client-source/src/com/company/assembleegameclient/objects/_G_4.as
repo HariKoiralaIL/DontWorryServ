@@ -6,7 +6,7 @@
 package com.company.assembleegameclient.objects {
 import com.company.assembleegameclient.game.GameSprite;
 
-import _panels.Panel;
+import client.ui.panels.Panel;
 
 public interface _G_4 {
 

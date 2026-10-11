@@ -4,7 +4,7 @@
 //_zD_._uf
 
 package _zD_ {
-import _C__._cM_;
+import robotlegs.bender.bundles.mvcs.Mediator;
 
 import _F_1._E_r;
 
@@ -12,7 +12,7 @@ import _U_5._01W_;
 
 import _F_1._C_Q_;
 
-public class _uf extends _cM_ {
+public class _uf extends Mediator {
 
     [Inject]
     public var view:_E_r;

@@ -4,9 +4,9 @@
 //_U_5._sT_
 
 package _U_5 {
-import _sp._aJ_;
+import signals.Signal;
 
-public class _sT_ extends _aJ_ {
+public class _sT_ extends Signal {
 
 }
 }//package _U_5

@@ -11,7 +11,7 @@ import com.company.ui.SimpleText;
 import flash.filters.DropShadowFilter;
 import flash.events.MouseEvent;
 
-import _vf._5T_;
+import audio.SoundEffects;
 
 public class TextButton extends Sprite {
 
@@ -63,7 +63,7 @@ public class TextButton extends Sprite {
     }
 
     private function onClick(_arg1:MouseEvent):void {
-        _5T_.play("button_click");
+        SoundEffects.play("button_click");
     }
 
 }

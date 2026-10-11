@@ -8,11 +8,11 @@ import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 import flash.display.BitmapData;
 
-import _panels._aR_;
+import client.ui.panels.SellableObjectPanel;
 
 import com.company.assembleegameclient.game.GameSprite;
 
-import _panels.Panel;
+import client.ui.panels.Panel;
 
 public class SellableObject extends GameObject implements _G_4 {
 
@@ -54,7 +54,7 @@ public class SellableObject extends GameObject implements _G_4 {
     }
 
     public function getPanel(_arg1:GameSprite):Panel {
-        return (new _aR_(_arg1, this));
+        return (new SellableObjectPanel(_arg1, this));
     }
 
 }

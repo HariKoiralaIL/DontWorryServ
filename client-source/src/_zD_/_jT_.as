@@ -4,13 +4,13 @@
 //_zD_._jT_
 
 package _zD_ {
-import _C__._cM_;
+import robotlegs.bender.bundles.mvcs.Mediator;
 
 import _F_1._02a;
 
-import _W_D_._0I_H_;
+import env.ServerListState;
 
-import _04w._07V_;
+import client.game.GameInitData;
 
 import _U_5._D_L_;
 
@@ -26,14 +26,14 @@ import com.company.assembleegameclient.util.TextureRedrawer;
 
 import _011.MapInfo;
 
-public class _jT_ extends _cM_ {
+public class _jT_ extends Mediator {
 
     [Inject]
     public var view:_02a;
     [Inject]
-    public var _eJ_:_0I_H_;
+    public var _eJ_:ServerListState;
     [Inject]
-    public var _bK_:_07V_;
+    public var _bK_:GameInitData;
 
     override public function initialize():void {
         _D_L_.getInstance().addOnce(this._07R_);
@@ -50,8 +50,8 @@ public class _jT_ extends _cM_ {
         var _local9:BitmapData;
         var _local10:BitmapData;
         _local2 = null;
-        for each (_local2 in this._eJ_._T_1.savedChars_) {
-            if (this._eJ_._sy == _local2.charId()) break;
+        for each (_local2 in this._eJ_.servers.savedChars_) {
+            if (this._eJ_.count == _local2.charId()) break;
         }
         if (_local2) {
             _local3 = int(_local2._iJ_.ObjectType);

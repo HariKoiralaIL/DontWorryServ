@@ -8,7 +8,7 @@ import flash.display.Sprite;
 
 import mx.core.BitmapAsset;
 
-import _8Q_._1l;
+import client.enums.PositionSlot;
 
 
 public class _Y_w extends Sprite {
@@ -37,14 +37,14 @@ public class _Y_w extends Sprite {
     private var _0D_m:BitmapAsset;
     private var _03r:Vector.<BitmapAsset>;
 
-    public function _09X_(_arg1:_1l):void {
+    public function _09X_(_arg1:PositionSlot):void {
         var _local2:BitmapAsset = this._03r[_arg1.position];
         if (!contains(_local2)) {
             addChild(_local2);
         }
     }
 
-    public function _h5(_arg1:_1l):void {
+    public function _h5(_arg1:PositionSlot):void {
         var _local2:BitmapAsset = this._03r[_arg1.position];
         if (contains(_local2)) {
             removeChild(_local2);

@@ -6,9 +6,9 @@
 package com.company.assembleegameclient.appengine {
 import com.company.assembleegameclient.parameters.Parameters;
 
-import _zo._8C_;
+import events.GenericDataEvent;
 
-import _qN_.Account;
+import account.Account;
 
 import com.company.util._H_U_;
 
@@ -21,12 +21,12 @@ public class _2n extends _0B_u {
     }
 
     public function _H_Q_():void {
-        addEventListener(_8C_.GENERIC_DATA, this._D_D_);
-        var _local1:Object = Account._get().credentials();
+        addEventListener(GenericDataEvent.GENERIC_DATA, this._D_D_);
+        var _local1:Object = Account.getInstance().credentials();
         var _local2:Object = {
-            "game_net_user_id": Account._get().gameNetworkUserId(),
-            "game_net": Account._get().gameNetwork(),
-            "play_platform": Account._get().playPlatform(),
+            "game_net_user_id": Account.getInstance().gameNetworkUserId(),
+            "game_net": Account.getInstance().gameNetwork(),
+            "play_platform": Account.getInstance().playPlatform(),
             "do_login": Parameters._hk
         };
         _H_U_._t2(_local2, _local1);
@@ -35,20 +35,20 @@ public class _2n extends _0B_u {
     }
 
     public function deleteCharacter(_arg1:int):void {
-        addEventListener(_8C_.GENERIC_DATA, this._Q_M_);
+        addEventListener(GenericDataEvent.GENERIC_DATA, this._Q_M_);
         var _local2:Object = {
             "charId": _arg1,
             "reason": 1
         };
-        _H_U_._t2(_local2, Account._get().credentials());
+        _H_U_._t2(_local2, Account.getInstance().credentials());
         sendRequest("delete", _local2);
     }
 
-    private function _D_D_(_arg1:_8C_):void {
-        dispatchEvent(new Server_list(_arg1.data_.toString()));
+    private function _D_D_(_arg1:GenericDataEvent):void {
+        dispatchEvent(new Server_list(_arg1.data.toString()));
     }
 
-    private function _Q_M_(_arg1:_8C_):void {
+    private function _Q_M_(_arg1:GenericDataEvent):void {
         dispatchEvent(new Event(Event.COMPLETE));
     }
 

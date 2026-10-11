@@ -17,7 +17,7 @@ import flash.display.Shape;
 
 import com.company.assembleegameclient.ui.tooltip.PlayerListToolTip;
 
-import _0D_B_._06M_;
+import menus.PlayerListMenu;
 
 import flash.geom.Matrix;
 
@@ -131,7 +131,7 @@ public class _ej extends Sprite {
     public var _tk:Sprite;
     private var _68:Boolean = false;
     private var toolTip_:PlayerListToolTip = null;
-    private var _0G_Y_:_06M_ = null;
+    private var _0G_Y_:PlayerListMenu = null;
     private var _6q:Matrix;
     private var _P_T_:Matrix;
     private var _nC_:Vector.<Player>;
@@ -368,7 +368,7 @@ public class _ej extends Sprite {
         var _local3:int = (this.toolTip_.x + 12);
         var _local4:int = this.toolTip_.y;
         this._false();
-        this._0G_Y_ = new _06M_(this.map_, _local2);
+        this._0G_Y_ = new PlayerListMenu(this.map_, _local2);
         this._0G_Y_.x = _local3;
         this._0G_Y_.y = _local4;
         stage.addChild(this._0G_Y_);

@@ -1,11 +1,11 @@
 package com.company.assembleegameclient.map {
-import _015._0C_Q_;
+import mapoverlay.MapOverlay;
 
 import MapBackgrounds.Background;
 
-import _fh._zh;
+import arrows.ArrowOverlay;
 
-import _vf._gs;
+import audio.MusicManager;
 
 import com.company.assembleegameclient.game.GameSprite;
 import com.company.assembleegameclient.objects.BasicObject;
@@ -52,8 +52,8 @@ public class MapHandler extends Sprite {
     public var weatherBackground_:Background = null;
     public var _063:_M_9 = null;
     public var _C_K_:_3m = null;
-    public var mapOverlay_:_0C_Q_ = null;
-    public var partyOverlay_:_zh = null;
+    public var mapOverlay_:MapOverlay = null;
+    public var partyOverlay_:ArrowOverlay = null;
     public var _0K_A_:Vector.<Square>;
     public var squares_:Vector.<Square>;
     public var _cl:Dictionary;

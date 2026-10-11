@@ -8,7 +8,7 @@ import com.company.assembleegameclient.objects.BasicObject;
 
 import flash.display.BitmapData;
 
-import _0_P_.Animations;
+import spriteanimation.Animations;
 
 import flash.geom.Vector3D;
 import flash.display.GraphicsBitmapFill;

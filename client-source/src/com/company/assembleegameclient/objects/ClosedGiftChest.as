@@ -2,9 +2,9 @@ package com.company.assembleegameclient.objects {
 
   import _011.Text;
 
-  import _panels.Panel;
-  import _panels.TextPanel;
-  import _panels._sc;
+  import client.ui.panels.Panel;
+  import client.ui.panels.TextPanel;
+  import client.ui.panels.ContainerPanel;
 
   import com.company.assembleegameclient.game.GameSprite;
 

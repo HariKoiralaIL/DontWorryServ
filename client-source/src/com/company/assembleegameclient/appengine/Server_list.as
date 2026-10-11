@@ -4,9 +4,9 @@
 //com.company.assembleegameclient.appengine.Server_list
 
 package com.company.assembleegameclient.appengine {
-import _G_A_._8P_;
+import config.InjectorLocator;
 
-import _eZ_._08b;
+import injection.Injector;
 
 import com.company.assembleegameclient.objects.Player;
 
@@ -16,7 +16,7 @@ import com.company.util._0K_N_;
 
 import com.company.assembleegameclient.net.Server;
 
-import _qN_.Account;
+import account.Account;
 
 import com.company.assembleegameclient.util._04d;
 import com.company.assembleegameclient.parameters.Parameters;
@@ -24,7 +24,7 @@ import com.company.assembleegameclient.objects.ObjectLibrary;
 
 import com.company.assembleegameclient.net.*;
 
-import _qN_.*;
+import account.*;
 
 public class Server_list extends Event {
 
@@ -77,7 +77,7 @@ public class Server_list extends Event {
         this._09w();
         this._Q_();
         this._0I_M_();
-        var _local3:_08b = _8P_._V_O_();
+        var _local3:Injector = InjectorLocator.getInjector();
         if (_local3) {
             _local5 = _local3.getInstance(Account);
             _local5.reportIntStat("BestLevel", this._04F_());
@@ -310,12 +310,12 @@ public class Server_list extends Event {
             _local3 = ObjectLibrary._tj[_local2];
             _local4 = int(_local3.@type);
             if (this.isAvailable(_local4)) {
-                Account._get().reportIntStat((_local3.@id + "Unlocked"), 1);
+                Account.getInstance().reportIntStat((_local3.@id + "Unlocked"), 1);
                 _local1++;
             }
             _local2++;
         }
-        Account._get().reportIntStat("ClassesUnlocked", _local1);
+        Account.getInstance().reportIntStat("ClassesUnlocked", _local1);
     }
 
 }

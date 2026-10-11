@@ -4,11 +4,11 @@
 //com.company.assembleegameclient.objects.GuildHallPortal
 
 package com.company.assembleegameclient.objects {
-import _panels._yo;
+import client.ui.panels.GuildHallPanel;
 
 import com.company.assembleegameclient.game.GameSprite;
 
-import _panels.Panel;
+import client.ui.panels.Panel;
 
 public class GuildHallPortal extends GameObject implements _G_4 {
 
@@ -18,7 +18,7 @@ public class GuildHallPortal extends GameObject implements _G_4 {
     }
 
     public function getPanel(_arg1:GameSprite):Panel {
-        return (new _yo(_arg1, this));
+        return (new GuildHallPanel(_arg1, this));
     }
 
 }

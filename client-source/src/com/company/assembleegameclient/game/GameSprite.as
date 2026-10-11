@@ -7,18 +7,18 @@ package com.company.assembleegameclient.game {
 
   import _011.MapInfo;
 
-  import _9R_._B_w;
+  import client.events.MoneyChangedEvent;
 
   import _F_1._02a;
 
   import _U_5._D_L_;
   import _U_5._zz;
 
-  import _nA_._xI_;
+  import beginnersoffer.MenuLinkButton;
 
-  import _qN_.Account;
+  import account.Account;
 
-  import _vf._gs;
+  import audio.MusicManager;
   import flash.geom.Transform;
   import flash.geom.ColorTransform;
   import fl.motion.Color;
@@ -83,10 +83,10 @@ package com.company.assembleegameclient.game {
     public var isNexus_:Boolean = false;
     public var _H_E_:Protip = null;
     public var _0H_R_:_0H__;
-    public var updateButton_:_xI_;
-    public var donateButton_:_xI_;
-    public var discordButton_:_xI_;
-    public var RaidButton_:_xI_;
+    public var updateButton_:MenuLinkButton;
+    public var donateButton_:MenuLinkButton;
+    public var discordButton_:MenuLinkButton;
+    public var RaidButton_:MenuLinkButton;
     public var _pg:_0G_h;
     public var _4v:_L_N_;
     public var _H_t:ui_goldcoin;
@@ -152,13 +152,13 @@ package com.company.assembleegameclient.game {
         }
         this.isNexus_ = (this.map_.name_ == "Nexus" || this.map_.name_ == "Shop" || this.map_.name_ == "Editor");
         var _local1:_0B_u = new _0B_u(Parameters._fK_(), "/log", true, 0);
-        var _local2:Account = Account._get();
+        var _local2:Account = Account.getInstance();
         var _local3:Object = {
             "game_net_user_id": _local2.gameNetworkUserId(),
             "game_net": _local2.gameNetwork(),
             "play_platform": _local2.playPlatform()
         };
-        _H_U_._t2(_local3, Account._get().credentials());
+        _H_U_._t2(_local3, Account.getInstance().credentials());
         if (!this.map_.name_ == "Kitchen" && !this.map_.name_ == "Tutorial" && Parameters.data_.watchForTutorialExit == true) {
             Parameters.data_.watchForTutorialExit = false;
             this._uG_('rotmg.Marketing.track("tutorialComplete")');
@@ -193,8 +193,8 @@ package com.company.assembleegameclient.game {
         this.initRaid();
     }
     private function initDonate():void{
-        var _local3:_xI_;
-        _local3 = new _xI_(true, 14, "Donate", "DONATE");
+        var _local3:MenuLinkButton;
+        _local3 = new MenuLinkButton(true, 14, "Donate", "DONATE");
         _local3.x = 6;
         _local3.y = 34;
         if (this.donateButton_ != null) {
@@ -204,8 +204,8 @@ package com.company.assembleegameclient.game {
         addChild(this.donateButton_);
     } 
     private function initUpdate():void{
-        var _local3:_xI_;
-        _local3 = new _xI_();
+        var _local3:MenuLinkButton;
+        _local3 = new MenuLinkButton();
         _local3.x = 6;
         _local3.y = 34 + 28;
         if (this.updateButton_ != null) {
@@ -215,8 +215,8 @@ package com.company.assembleegameclient.game {
         addChild(this.updateButton_);
     }
     private function initDiscord():void{
-      var _local3:_xI_;
-      _local3 = new _xI_(true, 13, "Discord", "DISCORD");
+      var _local3:MenuLinkButton;
+      _local3 = new MenuLinkButton(true, 13, "Discord", "DISCORD");
       _local3.x = 6;
       _local3.y = 34 + 28 + 28;
       if (this.discordButton_ != null) {
@@ -226,8 +226,8 @@ package com.company.assembleegameclient.game {
       addChild(this.discordButton_);
     }
     private function initRaid():void{
-      var _local3:_xI_;
-      _local3 = new _xI_(true, 12, "New Raid!", "RAID", 0xFF0000, 100);
+      var _local3:MenuLinkButton;
+      _local3 = new MenuLinkButton(true, 12, "New Raid!", "RAID", 0xFF0000, 100);
       _local3.x = 6;
       _local3.y = 34;
       if (this.RaidButton_ != null) {
@@ -303,7 +303,7 @@ package com.company.assembleegameclient.game {
         this.lastUpdate_ = getTimer();
      //   var color:Color = new Color();
      //   color.brightness = Parameters.data_["brightness"];
-        stage.addEventListener(_B_w.MONEY_CHANGED, this._L_u);
+        stage.addEventListener(MoneyChangedEvent.MONEY_CHANGED, this._L_u);
         stage.addEventListener(Event.ENTER_FRAME, this.onEnterFrame);
           if (Parameters.data_["mscale"] == undefined) {
             Parameters.data_["mscale"] = "1.0";
@@ -469,7 +469,7 @@ package com.company.assembleegameclient.game {
         this._0H_R_.stop();
         this.gsc_._08._0F_G_();
         _zz.instance.dispatch();
-        stage.removeEventListener(_B_w.MONEY_CHANGED, this._L_u);
+        stage.removeEventListener(MoneyChangedEvent.MONEY_CHANGED, this._L_u);
         stage.removeEventListener(Event.ENTER_FRAME, this.onEnterFrame);
     }
 
@@ -496,7 +496,7 @@ package com.company.assembleegameclient.game {
       this._qA_ = 0;
       this._bA_ = 0;
     }
-    _gs.updateFade();
+    MusicManager.updateFade();
     this.map_.update(_local2, _local3);
     this.camera_.update(_local3);
     onScreenResize(_arg1);

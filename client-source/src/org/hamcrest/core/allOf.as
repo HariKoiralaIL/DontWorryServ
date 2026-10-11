@@ -1,14 +1,14 @@
 package org.hamcrest.core {
-import _qj._pn;
+import matchers.Matcher;
 
 /**
  * Creates a matcher that matches only if all the given matchers match.
  * Accepts the matchers either as separate arguments or as one Array.
  */
-public function allOf(...matchers):_pn {
-    var matcherList:Array = matchers;
-    if (matchers.length == 1 && matchers[0] is Array) {
-        matcherList = matchers[0];
+public function allOf(...args):Matcher {
+        var matcherList:Array = args;
+        if (args.length == 1 && args[0] is Array) {
+                matcherList = args[0];
     }
     return new AllOfMatcher(matcherList);
 }

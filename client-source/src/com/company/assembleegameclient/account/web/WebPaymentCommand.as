@@ -4,7 +4,7 @@
 //com.company.assembleegameclient.account.web.WebPaymentCommand
 
 package com.company.assembleegameclient.account.web {
-import _qN_._px;
+import account.PurchaseOfferCommand;
 
 import com.company.assembleegameclient.util._zR_;
 import com.company.assembleegameclient.parameters.Parameters;
@@ -13,7 +13,7 @@ import flash.net.navigateToURL;
 import flash.net.URLRequest;
 import flash.events.Event;
 
-public class WebPaymentCommand extends _px {
+public class WebPaymentCommand extends PurchaseOfferCommand {
 
     override public function execute():void {
         var method:_zR_;

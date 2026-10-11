@@ -4,9 +4,9 @@
 //com.company.assembleegameclient.ui.ui_items
 
 package com.company.assembleegameclient.ui {
-import _panels._sc;
+import client.ui.panels.ContainerPanel;
 
-import _vf._5T_;
+import audio.SoundEffects;
 
 import com.company.assembleegameclient.map._X_l;
 import com.company.assembleegameclient.objects.Container;
@@ -73,7 +73,7 @@ public class ui_items extends Sprite {
     private function _08D_(_arg1:_E_6):void {
         if ((((_arg1 == null)) || (!(_arg1._t8(this._0M_X_))))) {
             this._0K_9();
-            _5T_.play("error");
+            SoundEffects.play("error");
             return;
         }
         if (_arg1 == this._03f) {
@@ -83,7 +83,7 @@ public class ui_items extends Sprite {
         var _local2:int = _arg1.objectType_;
         if (((!((_local2 == -1))) && (!(this._03f._t8(_local2))))) {
             this._0K_9();
-            _5T_.play("error");
+            SoundEffects.play("error");
             return;
         }
         if (_local2 == this._0M_X_) {
@@ -101,17 +101,17 @@ public class ui_items extends Sprite {
         }
         if ((((((_arg1._e9._iA_ is Player)) && ((_arg1.id_ < 4)))) && (!(ObjectLibrary._S_d(this._0M_X_, (_arg1._e9._iA_ as Player)))))) {
             this._0K_9();
-            _5T_.play("error");
+            SoundEffects.play("error");
             return;
         }
         if (_arg1._e9._iA_ is Player && (this._03f.id_ < 4) && (_local2 != -1) && !ObjectLibrary.checkLevelRequirement(_local2, (_arg1._e9._iA_ as Player))) {
             this._0K_9();
-            _5T_.play("error");
+            SoundEffects.play("error");
             return;
         }
         if (_arg1._e9._iA_ is Player && (_arg1.id_ < 4) && (this._0M_X_ != -1) && !ObjectLibrary.checkLevelRequirement(this._0M_X_, (_arg1._e9._iA_ as Player))) {
             this._0K_9();
-            _5T_.play("error");
+            SoundEffects.play("error");
             return;
         }
         _0B_w = this._03f._e9.gs_.lastUpdate_;
@@ -121,7 +121,7 @@ public class ui_items extends Sprite {
     }
 
     private function _Y_4():void {
-        var _local6:_sc;
+        var _local6:ContainerPanel;
         var _local7:_E_6;
         var _local1:Player = this._03f._e9.gs_.map_.player_;
         var _local2:GameObject = this._03f._e9._iA_;
@@ -129,14 +129,14 @@ public class ui_items extends Sprite {
         var _local4:Boolean = ObjectLibrary._0H_Z_(this._0M_X_);
         if (((!((_local2 == _local1))) && ((((((_local3 == null)) || (!((_local3.ownerId_ == _local1.accountId_))))) || (_local4))))) {
             this._0K_9();
-            _5T_.play("error");
+            SoundEffects.play("error");
             return;
         }
-        var _local5:Container = (this._03f._e9.gs_._V_1._U_T_._dN_ as Container);
+        var _local5:Container = (this._03f._e9.gs_._V_1._U_T_.currentInteractive as Container);
         if (((!((_local5 == null))) && (((((_local5._X_w()) && (_local4))) || ((((_local5.ownerId_ == -1)) && (!(_local4)))))))) {
-            _local6 = (this._03f._e9.gs_._V_1._U_T_._G_2 as _sc);
-            if (((!((_local6 == null))) && (!((_local6._e9 == null))))) {
-                for each (_local7 in _local6._e9.slots_) {
+            _local6 = (this._03f._e9.gs_._V_1._U_T_.currentPanel as ContainerPanel);
+            if (((!((_local6 == null))) && (!((_local6.inventory == null))))) {
+                for each (_local7 in _local6.inventory.slots_) {
                     if (_local7.objectType_ == -1) {
                         this._08D_(_local7);
                         return;
@@ -171,7 +171,7 @@ public class ui_items extends Sprite {
             _local2 = _local2.parent;
         }
         this._0K_9();
-        _5T_.play("error");
+        SoundEffects.play("error");
     }
 
 }

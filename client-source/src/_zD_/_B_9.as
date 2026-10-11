@@ -4,11 +4,11 @@
 //_zD_._B_9
 
 package _zD_ {
-import _C__._cM_;
+import robotlegs.bender.bundles.mvcs.Mediator;
 
 import com.company.assembleegameclient.ui.InvTabs;
 
-public class _B_9 extends _cM_ {
+public class _B_9 extends Mediator {
 
     public function _B_9() {
         this._06G_ = ["Apple", "Tortilla", "Chainsaw", "Monkey", "Flotilla", "Zephyr", "Ghost", "Tupac", "Alluvial", "Dante", "Soprano", "Godzilla", "Hate", "Freebird", "Desire", "Good", "Nightie", "Osprey"];

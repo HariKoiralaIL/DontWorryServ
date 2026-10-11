@@ -4,11 +4,11 @@
 //_zD_._V_M_
 
 package _zD_ {
-import _C__._cM_;
+import robotlegs.bender.bundles.mvcs.Mediator;
 
 import _F_1._05p;
 
-import _W_D_._0I_H_;
+import env.ServerListState;
 
 import _U_5._sC_;
 import _U_5._sT_;
@@ -21,12 +21,12 @@ import _F_1._C_Q_;
 
 import flash.display.Sprite;
 
-public class _V_M_ extends _cM_ {
+public class _V_M_ extends Mediator {
 
     [Inject]
     public var view:_05p;
     [Inject]
-    public var _eJ_:_0I_H_;
+    public var _eJ_:ServerListState;
     [Inject]
     public var _0C__:_sC_;
     [Inject]

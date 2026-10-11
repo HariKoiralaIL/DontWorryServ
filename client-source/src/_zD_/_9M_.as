@@ -4,30 +4,30 @@
 //_zD_._9M_
 
 package _zD_ {
-import _C__._cM_;
+import robotlegs.bender.bundles.mvcs.Mediator;
 
 import com.company.assembleegameclient.screens.charrects.CurrentCharacterRect;
 
 import _U_5._7e;
 
-import _05Z_._08i;
+import client.signals.typed.GameInitSignal;
 
 import _U_5._V_l;
 
 import com.company.assembleegameclient.appengine.SavedCharacter;
 
-import _02b._fn;
+import services.AnalyticsEvent;
 
-import _04w._07V_;
+import client.game.GameInitData;
 
-public class _9M_ extends _cM_ {
+public class _9M_ extends Mediator {
 
     [Inject]
     public var view:CurrentCharacterRect;
     [Inject]
     public var _o_:_7e;
     [Inject]
-    public var _D_u:_08i;
+    public var _D_u:GameInitSignal;
     [Inject]
     public var _0K_q:_V_l;
 
@@ -47,19 +47,19 @@ public class _9M_ extends _cM_ {
     }
 
     private function _7D_(_arg1:SavedCharacter):void {
-        var _local2:_fn = new _fn();
+        var _local2:AnalyticsEvent = new AnalyticsEvent();
         _local2.category = "character";
-        _local2._lC_ = "select";
-        _local2._9g = _arg1._jp();
+        _local2.action = "select";
+        _local2.label = _arg1._jp();
         _local2.value = _arg1.level();
         this._o_.dispatch(_local2);
     }
 
     private function _nz(_arg1:SavedCharacter):void {
-        var _local2:_07V_ = new _07V_();
-        _local2._0_E_ = false;
+        var _local2:GameInitData = new GameInitData();
+        _local2.createCharacter = false;
         _local2.charId = _arg1.charId();
-        _local2._05d = true;
+        _local2.isNewGame = true;
         this._D_u.dispatch(_local2);
     }
 

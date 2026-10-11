@@ -4,11 +4,11 @@
 //com.company.assembleegameclient.objects.MoneyChanger
 
 package com.company.assembleegameclient.objects {
-import _panels._0D_t;
+import client.ui.panels.BuyGoldPanel;
 
 import com.company.assembleegameclient.game.GameSprite;
 
-import _panels.Panel;
+import client.ui.panels.Panel;
 
 public class MoneyChanger extends GameObject implements _G_4 {
 
@@ -18,7 +18,7 @@ public class MoneyChanger extends GameObject implements _G_4 {
     }
 
     public function getPanel(_arg1:GameSprite):Panel {
-        return (new _0D_t(_arg1));
+        return (new BuyGoldPanel(_arg1));
     }
 
 }

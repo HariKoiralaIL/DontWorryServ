@@ -4,21 +4,21 @@
 //_zD_._0D_L_
 
 package _zD_ {
-import _C__._cM_;
+import robotlegs.bender.bundles.mvcs.Mediator;
 
-import _D_d._hj;
+import mapeditor.MapEditorScreen;
 
-import _W_D_._0I_H_;
+import env.ServerListState;
 
-public class _0D_L_ extends _cM_ {
+public class _0D_L_ extends Mediator {
 
     [Inject]
-    public var view:_hj;
+    public var view:MapEditorScreen;
     [Inject]
-    public var _0I_s:_0I_H_;
+    public var _0I_s:ServerListState;
 
     override public function initialize():void {
-        this.view.initialize(this._0I_s._T_1);
+        this.view.initialize(this._0I_s.servers);
     }
 
 }

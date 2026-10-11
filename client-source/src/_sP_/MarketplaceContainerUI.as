@@ -4,7 +4,7 @@
 //_sP_._07x
 
 package _sP_ {
-    import _0D_d.TextInput;
+    import client.ui.frames.TextInput;
 
     import _sP_.MarketplaceEvent;
 
@@ -22,7 +22,7 @@ import flash.display.Sprite;
 
     import com.company.assembleegameclient.objects.Player;
 
-    import _9R_._J_F_;
+    import client.events.ResultEvent;
 
     import _0L_C_._qO_;
 
@@ -68,8 +68,8 @@ import flash.system.Capabilities;
             stage.addChild(_local2);
         }
 
-        private function _C_L_(_arg1:_J_F_):void {
-            this.gs_.removeEventListener(_J_F_.market_, this._C_L_);
+        private function _C_L_(_arg1:ResultEvent):void {
+            this.gs_.removeEventListener(ResultEvent.MARKET_RESULT, this._C_L_);
             if (!_arg1.success_) {
                 this._L_I_(_arg1.errorText_);
             } else {
@@ -77,8 +77,8 @@ import flash.system.Capabilities;
             }
         }
 
-        private function _X_s(_arg1:_J_F_):void {
-            this.gs_.removeEventListener(_J_F_.market_, this._X_s);
+        private function _X_s(_arg1:ResultEvent):void {
+            this.gs_.removeEventListener(ResultEvent.MARKET_RESULT, this._X_s);
             if (!_arg1.success_) {
                 this._L_I_(_arg1.errorText_);
             } else {
@@ -132,7 +132,7 @@ import flash.system.Capabilities;
             this._P_t.removeEventListener(MarketplaceEvent.TRADE, this.onTrade);
             removeChild(this._P_t);
             this.gs_.gsc_.marketTrade(event.id_);
-            this.gs_.addEventListener(_J_F_.market_, this._C_L_);
+            this.gs_.addEventListener(ResultEvent.MARKET_RESULT, this._C_L_);
         }
 
         private function create(event:MouseEvent):void {
@@ -165,7 +165,7 @@ import flash.system.Capabilities;
             this.create_.removeEventListener(MarketplaceEvent.CREATE, this.createTrade);
             removeChild(this.create_);
             this.gs_.gsc_.marketCreate(event.included_, event.requestItems_, event.requestData_);
-            this.gs_.addEventListener(_J_F_.market_, this._C_L_);
+            this.gs_.addEventListener(ResultEvent.MARKET_RESULT, this._C_L_);
         }
     }
 }//package _sP_

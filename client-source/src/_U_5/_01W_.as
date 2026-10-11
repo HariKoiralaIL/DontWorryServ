@@ -4,11 +4,11 @@
 //_U_5._01W_
 
 package _U_5 {
-import _sp._aJ_;
+import signals.Signal;
 
 import flash.display.Sprite;
 
-public class _01W_ extends _aJ_ {
+public class _01W_ extends Signal {
 
     public function _01W_() {
         super(Sprite);

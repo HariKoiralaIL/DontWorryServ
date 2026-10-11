@@ -19,10 +19,10 @@ import flash.filters.DropShadowFilter;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.util._H_U_;
 
-import _qN_.Account;
+import account.Account;
 
-import _zo._8C_;
-import _zo._mS_;
+import events.GenericDataEvent;
+import events.TextErrorEvent;
 
 import flash.display.Graphics;
 
@@ -50,9 +50,9 @@ public class _if extends Sprite {
             "num": _arg1,
             "offset": _arg2
         };
-        _H_U_._t2(_local5, Account._get().credentials());
-        this._3v.addEventListener(_8C_.GENERIC_DATA, this._L_5);
-        this._3v.addEventListener(_mS_.TEXT_ERROR, this._ix);
+        _H_U_._t2(_local5, Account.getInstance().credentials());
+        this._3v.addEventListener(GenericDataEvent.GENERIC_DATA, this._L_5);
+        this._3v.addEventListener(TextErrorEvent.TEXT_ERROR, this._ix);
         this._3v.sendRequest("listMembers", _local5);
     }
     private var _09O_:int;
@@ -147,11 +147,11 @@ public class _if extends Sprite {
         }
     }
 
-    private function _L_5(_arg1:_8C_):void {
-        this.build(XML(_arg1.data_));
+    private function _L_5(_arg1:GenericDataEvent):void {
+        this.build(XML(_arg1.data));
     }
 
-    private function _ix(_arg1:_mS_):void {
+    private function _ix(_arg1:TextErrorEvent):void {
     }
 
     private function _A_E_(_arg1:Event):void {

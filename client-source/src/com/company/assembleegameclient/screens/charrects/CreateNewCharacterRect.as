@@ -12,7 +12,7 @@ import com.company.ui.SimpleText;
 
 import flash.display.Sprite;
 
-import _sp._aJ_;
+import signals.Signal;
 
 import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.assembleegameclient.appengine.SavedCharacter;
@@ -66,7 +66,7 @@ public class CreateNewCharacterRect extends CharacterRect {
             addChild(this.taglineText_);
         }
     }
-    public var newCharacter:_aJ_;
+    public var newCharacter:Signal;
     private var charList_:Server_list;
     private var bitmap_:Bitmap;
     private var classNameText_:SimpleText;

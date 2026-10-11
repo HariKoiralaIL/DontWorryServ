@@ -4,14 +4,14 @@
 //_U_5._7e
 
 package _U_5 {
-import _sp._aJ_;
+import signals.Signal;
 
-import _02b._fn;
+import services.AnalyticsEvent;
 
-public class _7e extends _aJ_ {
+public class _7e extends Signal {
 
     public function _7e() {
-        super(_fn);
+        super(AnalyticsEvent);
     }
 }
 }//package _U_5

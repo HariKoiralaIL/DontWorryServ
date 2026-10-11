@@ -4,22 +4,22 @@
 //_zD_.__else
 
 package _zD_ {
-import _C__._cM_;
+import robotlegs.bender.bundles.mvcs.Mediator;
 
 import _F_1._0B_m;
 
-import _W_D_._G_J_;
+import env.DeathRecord;
 
 import _U_5._dd;
 
 import _F_1._U_W_;
 
-public class __else extends _cM_ {
+public class __else extends Mediator {
 
     [Inject]
     public var view:_0B_m;
     [Inject]
-    public var _0I_s:_G_J_;
+    public var _0I_s:DeathRecord;
     [Inject]
     public var _T__:_dd;
 
