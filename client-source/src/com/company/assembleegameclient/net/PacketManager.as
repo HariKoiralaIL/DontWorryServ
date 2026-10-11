@@ -128,8 +128,8 @@ package com.company.assembleegameclient.net {
   import client.ui.panels.TradeRequestPanel;
   import client.ui.panels.GuildInvitePanel;
 
-  import _U_5._06a;
-  import _U_5._zz;
+  import game.signals.DeathSignal;
+  import game.signals.SingletonSignal;
 
   import account.Account;
 
@@ -774,7 +774,7 @@ package com.company.assembleegameclient.net {
     }
 
     private function _sM_():void {
-      _zz.instance.dispatch();
+      SingletonSignal.instance.dispatch();
     }
 
     private function create():void {
@@ -1521,7 +1521,7 @@ package com.company.assembleegameclient.net {
       if (this.gs_.isEditor) {
         return;
       }
-      InjectorLocator.getInjector().getInstance(_06a).dispatch(_arg1);
+      InjectorLocator.getInjector().getInstance(DeathSignal).dispatch(_arg1);
     }
 
     private function _cN_(_arg1:BuyResult):void {

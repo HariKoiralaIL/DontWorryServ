@@ -10,7 +10,7 @@ import _F_1._0H_2;
 
 import env.ServerListState;
 
-import _U_5._dd;
+import game.signals.SpriteSignal2;
 
 import client.signals.typed.GameInitSignal;
 
@@ -27,7 +27,7 @@ public class _2H_ extends Mediator {
     [Inject]
     public var _eJ_:ServerListState;
     [Inject]
-    public var _T__:_dd;
+    public var _T__:SpriteSignal2;
     [Inject]
     public var _D_u:GameInitSignal;
 

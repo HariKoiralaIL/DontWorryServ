@@ -26,7 +26,7 @@ package {
 
   import client.config.UIConfig;
 
-  import _U_5._D_c;
+  import game.signals.NoArgSignal3;
 
   import com.company.assembleegameclient.parameters.Parameters;
   import com.company.assembleegameclient.util.Dispatcher;
@@ -101,7 +101,7 @@ package {
             this._i1();
             new loadEmbeds().load();
             stage.scaleMode = StageScaleMode.NO_SCALE;
-            this.context.injector.getInstance(_D_c).dispatch();
+            this.context.injector.getInstance(NoArgSignal3).dispatch();
             primStage = stage;
             this._06p();
             if(Parameters.data_.forceLowQuality)

@@ -8,10 +8,10 @@ import mediators.IMediatorMap;
 
 import commandmap.ISignalCommandMap;
 
-import _U_5._D_c;
-import _U_5._06a;
-import _U_5._V_l;
-import _U_5._057;
+import game.signals.NoArgSignal3;
+import game.signals.DeathSignal;
+import game.signals.SavedCharacterSignal2;
+import game.signals.SavedCharacterSignal;
 
 import screencommands.ChooseInitialScreenCommand;
 import screencommands.ContinueAfterDeathCommand;
@@ -86,10 +86,10 @@ public class UIConfig implements IConfig {
     public var signalCommandMap:ISignalCommandMap;
 
     public function configure():void {
-        this.signalCommandMap.map(_D_c, true).toCommand(ChooseInitialScreenCommand);
-        this.signalCommandMap.map(_06a).toCommand(ContinueAfterDeathCommand);
-        this.signalCommandMap.map(_V_l).toCommand(ShowCharacterOverlayCommand);
-        this.signalCommandMap.map(_057).toCommand(ShowOverlayViewCommand);
+        this.signalCommandMap.map(NoArgSignal3, true).toCommand(ChooseInitialScreenCommand);
+        this.signalCommandMap.map(DeathSignal).toCommand(ContinueAfterDeathCommand);
+        this.signalCommandMap.map(SavedCharacterSignal2).toCommand(ShowCharacterOverlayCommand);
+        this.signalCommandMap.map(SavedCharacterSignal).toCommand(ShowOverlayViewCommand);
         this.mediatorMap.map(_zf).toMediator(_0D_h);
         this.mediatorMap.map(_E_r).toMediator(_uf);
         this.mediatorMap.map(_01_).toMediator(_N_N_);

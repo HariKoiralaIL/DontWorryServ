@@ -6,8 +6,8 @@
 package client.ui.tooltips {
 import robotlegs.bender.bundles.mvcs.Mediator;
 
-import _U_5._sC_;
-import _U_5._sT_;
+import game.signals.ToolTipSignal;
+import game.signals.NoArgSignal5;
 
 import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
@@ -16,9 +16,9 @@ public class ToolTipViewMediator extends Mediator {
     [Inject]
     public var view:ToolTipView;
     [Inject]
-    public var showSignal:_sC_;
+    public var showSignal:ToolTipSignal;
     [Inject]
-    public var hideSignal:_sT_;
+    public var hideSignal:NoArgSignal5;
 
     override public function initialize():void {
         this.showSignal.add(this.onShow);

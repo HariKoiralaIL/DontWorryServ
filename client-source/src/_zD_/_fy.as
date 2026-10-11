@@ -11,8 +11,8 @@ import _F_1._3V_;
 import env.ServerListState;
 import env.DeathRecord;
 
-import _U_5._M_d;
-import _U_5._01W_;
+import game.signals.NoArgSignal4;
+import game.signals.SpriteSignal;
 
 import com.company.assembleegameclient.appengine._0B_u;
 import com.company.assembleegameclient.parameters.Parameters;
@@ -33,9 +33,9 @@ public class _fy extends Mediator {
     [Inject]
     public var _0K_K_:DeathRecord;
     [Inject]
-    public var _0D_p:_M_d;
+    public var _0D_p:NoArgSignal4;
     [Inject]
-    public var _T__:_01W_;
+    public var _T__:SpriteSignal;
     private var timespan:String;
     private var _0K_y:_0B_u;
 

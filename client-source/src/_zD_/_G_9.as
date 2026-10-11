@@ -12,8 +12,8 @@ import com.company.assembleegameclient.appengine.SavedCharacter;
 
 import services.DeleteCharacterTask;
 
-import _U_5._M_d;
-import _U_5._01W_;
+import game.signals.NoArgSignal4;
+import game.signals.SpriteSignal;
 
 import _F_1.CurrentCharacterScreen;
 
@@ -28,9 +28,9 @@ public class _G_9 extends Mediator {
     [Inject]
     public var _yD_:DeleteCharacterTask;
     [Inject]
-    public var _0D_p:_M_d;
+    public var _0D_p:NoArgSignal4;
     [Inject]
-    public var _0_b:_01W_;
+    public var _0_b:SpriteSignal;
 
     override public function initialize():void {
         this._yD_.completed.addOnce(this._S_f);

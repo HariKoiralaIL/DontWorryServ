@@ -4,7 +4,7 @@ package screencommands
 
     import _F_1._E_r;
 
-    import _U_5._dd;
+    import game.signals.SpriteSignal2;
 
     import env.Domain;
 
@@ -15,7 +15,7 @@ package screencommands
         [Inject]
         public var domain:Domain;
         [Inject]
-        public var setScreenSignal:_dd;
+        public var setScreenSignal:SpriteSignal2;
 
         public function execute():void
         {

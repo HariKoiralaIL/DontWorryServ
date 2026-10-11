@@ -8,7 +8,7 @@ import robotlegs.bender.bundles.mvcs.Mediator;
 
 import _F_1._E_r;
 
-import _U_5._01W_;
+import game.signals.SpriteSignal;
 
 import _F_1._C_Q_;
 
@@ -17,7 +17,7 @@ public class _uf extends Mediator {
     [Inject]
     public var view:_E_r;
     [Inject]
-    public var _T__:_01W_;
+    public var _T__:SpriteSignal;
 
     override public function initialize():void {
         this.view._J_b.add(this._E_R_);

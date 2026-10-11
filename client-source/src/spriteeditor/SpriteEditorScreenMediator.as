@@ -3,7 +3,7 @@ import robotlegs.bender.bundles.mvcs.Mediator;
 
 import env.ServerListState;
 
-import _U_5._0_D_;
+import game.signals.StringSignal;
 
 public class SpriteEditorScreenMediator extends Mediator {
 
@@ -12,7 +12,7 @@ public class SpriteEditorScreenMediator extends Mediator {
     [Inject]
     public var serverListState:ServerListState;
     [Inject]
-    public var setScreenSignal:_0_D_;
+    public var setScreenSignal:StringSignal;
 
     override public function initialize():void {
         view.initialize(serverListState.servers);

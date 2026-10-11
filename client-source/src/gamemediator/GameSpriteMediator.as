@@ -11,9 +11,9 @@ import robotlegs.bender.bundles.mvcs.Mediator;
 
 import _F_1.CurrentCharacterScreen;
 
-import _U_5._01W_;
-import _U_5._M_d;
-import _U_5._dd;
+import game.signals.SpriteSignal;
+import game.signals.NoArgSignal4;
+import game.signals.SpriteSignal2;
 
 import env.ServerListState;
 import env.DeathRecord;
@@ -37,11 +37,11 @@ public class GameSpriteMediator extends Mediator {
     [Inject]
     public var inputEnabledSignal:BooleanSignal;      // formerly _0H_j; carries a Boolean, forwarded to view.mui_
     [Inject]
-    public var exitGameSignal:_M_d;          // formerly _0D_p; dispatched before showing the character screen
+    public var exitGameSignal:NoArgSignal4;          // formerly _0D_p; dispatched before showing the character screen
     [Inject]
-    public var setScreenSignal:_01W_;        // formerly _0_b; shows a screen
+    public var setScreenSignal:SpriteSignal;        // formerly _0_b; shows a screen
     [Inject]
-    public var _T__:_dd;                     // unused in this class, name unknown
+    public var _T__:SpriteSignal2;                     // unused in this class, name unknown
     [Inject]
     public var playGameSignal:GameInitSignal;          // formerly _D_u; starts a game from GameInitData
     [Inject]

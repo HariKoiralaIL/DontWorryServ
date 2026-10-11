@@ -8,7 +8,7 @@ import robotlegs.bender.bundles.mvcs.Mediator;
 
 import com.company.assembleegameclient.screens.charrects.CharacterRectList;
 
-import _U_5._01W_;
+import game.signals.SpriteSignal;
 
 import _F_1._0H_2;
 
@@ -17,7 +17,7 @@ public class _G_I_ extends Mediator {
     [Inject]
     public var view:CharacterRectList;
     [Inject]
-    public var _0_b:_01W_;
+    public var _0_b:SpriteSignal;
 
     override public function initialize():void {
         this.view.newCharacter.add(this._8b);

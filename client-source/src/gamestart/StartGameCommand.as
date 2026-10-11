@@ -14,7 +14,7 @@ import client.game.GameInitData;
 import client.tasks.CallbackTask;
 import client.tasks.TaskTracker;
 import client.tasks.SequenceTask;
-import _U_5._dd;
+import game.signals.SpriteSignal2;
 
 /**
  * Starts a game session: records the character's last-used time, then
@@ -25,7 +25,7 @@ import _U_5._dd;
 public class StartGameCommand {
 
     [Inject]
-    public var showViewSignal:_dd;
+    public var showViewSignal:SpriteSignal2;
     [Inject]
     public var initData:GameInitData;
     [Inject]

@@ -9,7 +9,7 @@ import client.tasks.DispatchSignalTask;
 import client.tasks.TaskTracker;
 import client.tasks.SequenceTask;
 import _F_1._zf;
-import _U_5._dd;
+import game.signals.SpriteSignal2;
 
 /**
  * Shows `view`. If the server list is enabled, a placeholder (_zf) is
@@ -21,7 +21,7 @@ public class ShowViewCommand {
     [Inject]
     public var serverListState:ServerListState;
     [Inject]
-    public var showViewSignal:_dd;
+    public var showViewSignal:SpriteSignal2;
     [Inject]
     public var view:Sprite;
     [Inject]

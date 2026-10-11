@@ -10,7 +10,7 @@ import account.Account;
 import env.ServerListState;
 
 import client.tasks.Task;
-import _U_5._bo;
+import game.signals.StringSignal2;
 import events.TextErrorEvent;
 
 /**
@@ -31,7 +31,7 @@ public class LoadCharacterListTask extends Task {
     [Inject]
     public var serverListState:ServerListState;
     [Inject]
-    public var messageSignal:_bo;
+    public var messageSignal:StringSignal2;
 
     private var retryTimer:Timer;
     private var client:_2n;

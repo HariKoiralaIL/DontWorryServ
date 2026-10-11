@@ -14,10 +14,10 @@ import layers.AddViewToLayerSignal;
 
 import offers.IBeginnersOfferModel;
 
-import _U_5._7e;
-import _U_5._M_d;
-import _U_5._01W_;
-import _U_5._dd;
+import game.signals.AnalyticsEventSignal;
+import game.signals.NoArgSignal4;
+import game.signals.SpriteSignal;
+import game.signals.SpriteSignal2;
 
 import client.signals.typed.GameInitSignal;
 
@@ -44,13 +44,13 @@ public class _xF_ extends Mediator {
     [Inject]
     public var beginnersPackage:IBeginnersOfferModel;
     [Inject]
-    public var _o_:_7e;
+    public var _o_:AnalyticsEventSignal;
     [Inject]
-    public var _0D_p:_M_d;
+    public var _0D_p:NoArgSignal4;
     [Inject]
-    public var _0_b:_01W_;
+    public var _0_b:SpriteSignal;
     [Inject]
-    public var _T__:_dd;
+    public var _T__:SpriteSignal2;
     [Inject]
     public var _D_u:GameInitSignal;
 

@@ -10,7 +10,7 @@ import _0L_C_._0D_W_;
 
 import com.company.assembleegameclient.appengine.SavedCharacter;
 
-import _U_5._057;
+import game.signals.SavedCharacterSignal;
 
 public class _Q_q extends Mediator {
 
@@ -19,7 +19,7 @@ public class _Q_q extends Mediator {
     [Inject]
     public var character:SavedCharacter;
     [Inject]
-    public var deleteCharacter:_057;
+    public var deleteCharacter:SavedCharacterSignal;
 
     override public function initialize():void {
         this.view.deleteCharacter.add(this._pk);

@@ -8,11 +8,11 @@ import robotlegs.bender.bundles.mvcs.Mediator;
 
 import com.company.assembleegameclient.screens.charrects.CurrentCharacterRect;
 
-import _U_5._7e;
+import game.signals.AnalyticsEventSignal;
 
 import client.signals.typed.GameInitSignal;
 
-import _U_5._V_l;
+import game.signals.SavedCharacterSignal2;
 
 import com.company.assembleegameclient.appengine.SavedCharacter;
 
@@ -25,11 +25,11 @@ public class _9M_ extends Mediator {
     [Inject]
     public var view:CurrentCharacterRect;
     [Inject]
-    public var _o_:_7e;
+    public var _o_:AnalyticsEventSignal;
     [Inject]
     public var _D_u:GameInitSignal;
     [Inject]
-    public var _0K_q:_V_l;
+    public var _0K_q:SavedCharacterSignal2;
 
     override public function initialize():void {
         this.view.selected.add(this._0A_U_);

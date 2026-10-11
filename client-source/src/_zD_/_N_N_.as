@@ -10,7 +10,7 @@ import _F_1._01_;
 
 import env.ServerListState;
 
-import _U_5._dd;
+import game.signals.SpriteSignal2;
 
 import _F_1._C_Q_;
 
@@ -21,7 +21,7 @@ public class _N_N_ extends Mediator {
     [Inject]
     public var _eJ_:ServerListState;
     [Inject]
-    public var _T__:_dd;
+    public var _T__:SpriteSignal2;
 
     override public function initialize():void {
         this.view._4s.add(this._G_P_);

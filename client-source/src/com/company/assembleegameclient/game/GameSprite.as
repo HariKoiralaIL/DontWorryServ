@@ -11,8 +11,8 @@ package com.company.assembleegameclient.game {
 
   import _F_1._02a;
 
-  import _U_5._D_L_;
-  import _U_5._zz;
+  import game.signals.MapInfoSignal;
+  import game.signals.SingletonSignal;
 
   import beginnersoffer.MenuLinkButton;
 
@@ -123,7 +123,7 @@ package com.company.assembleegameclient.game {
         this._rz.y = 300 - (stage.stageHeight) / (2);
         addChild(this._rz);
         addChild(this.textBox_);
-        _D_L_.getInstance().dispatch(_arg1);
+        MapInfoSignal.getInstance().dispatch(_arg1);
     }
 
     override public function initialize():void {
@@ -468,7 +468,7 @@ package com.company.assembleegameclient.game {
         this._2e = false;
         this._0H_R_.stop();
         this.gsc_._08._0F_G_();
-        _zz.instance.dispatch();
+        SingletonSignal.instance.dispatch();
         stage.removeEventListener(MoneyChangedEvent.MONEY_CHANGED, this._L_u);
         stage.removeEventListener(Event.ENTER_FRAME, this.onEnterFrame);
     }

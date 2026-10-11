@@ -10,7 +10,7 @@ import _F_1._0B_m;
 
 import env.DeathRecord;
 
-import _U_5._dd;
+import game.signals.SpriteSignal2;
 
 import _F_1._U_W_;
 
@@ -21,7 +21,7 @@ public class __else extends Mediator {
     [Inject]
     public var _0I_s:DeathRecord;
     [Inject]
-    public var _T__:_dd;
+    public var _T__:SpriteSignal2;
 
     override public function initialize():void {
         this.view._H_r.add(this._c3);

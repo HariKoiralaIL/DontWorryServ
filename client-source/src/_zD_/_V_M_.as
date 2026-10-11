@@ -10,10 +10,10 @@ import _F_1._05p;
 
 import env.ServerListState;
 
-import _U_5._sC_;
-import _U_5._sT_;
-import _U_5._M_d;
-import _U_5._01W_;
+import game.signals.ToolTipSignal;
+import game.signals.NoArgSignal5;
+import game.signals.NoArgSignal4;
+import game.signals.SpriteSignal;
 
 import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
@@ -28,13 +28,13 @@ public class _V_M_ extends Mediator {
     [Inject]
     public var _eJ_:ServerListState;
     [Inject]
-    public var _0C__:_sC_;
+    public var _0C__:ToolTipSignal;
     [Inject]
-    public var _H_F_:_sT_;
+    public var _H_F_:NoArgSignal5;
     [Inject]
-    public var _0B_a:_M_d;
+    public var _0B_a:NoArgSignal4;
     [Inject]
-    public var _0_b:_01W_;
+    public var _0_b:SpriteSignal;
 
     override public function initialize():void {
         this.view.tooltip.add(this._Y_Y_);

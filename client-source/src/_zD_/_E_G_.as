@@ -8,8 +8,8 @@ import robotlegs.bender.bundles.mvcs.Mediator;
 
 import _0L_C_._Z_t;
 
-import _U_5._M_d;
-import _U_5._01W_;
+import game.signals.NoArgSignal4;
+import game.signals.SpriteSignal;
 
 import flash.events.Event;
 
@@ -20,9 +20,9 @@ public class _E_G_ extends Mediator {
     [Inject]
     public var view:_Z_t;
     [Inject]
-    public var _0B_a:_M_d;
+    public var _0B_a:NoArgSignal4;
     [Inject]
-    public var _0_b:_01W_;
+    public var _0_b:SpriteSignal;
 
     override public function initialize():void {
         addViewListener(Event.COMPLETE, this.onComplete);

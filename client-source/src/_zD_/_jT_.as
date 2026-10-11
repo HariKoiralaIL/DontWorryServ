@@ -12,7 +12,7 @@ import env.ServerListState;
 
 import client.game.GameInitData;
 
-import _U_5._D_L_;
+import game.signals.MapInfoSignal;
 
 import com.company.assembleegameclient.appengine.SavedCharacter;
 import com.company.assembleegameclient.util._lJ_;
@@ -36,7 +36,7 @@ public class _jT_ extends Mediator {
     public var _bK_:GameInitData;
 
     override public function initialize():void {
-        _D_L_.getInstance().addOnce(this._07R_);
+        MapInfoSignal.getInstance().addOnce(this._07R_);
     }
 
     private function _07R_(_arg1:MapInfo):void {

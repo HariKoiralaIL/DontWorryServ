@@ -9,7 +9,7 @@ import robotlegs.bender.bundles.mvcs.Mediator;
 import client.signals.DataSignalB;
 import client.signals.DataSignalA;
 
-import _U_5._zz;
+import game.signals.SingletonSignal;
 
 import client.enums.PositionSlot;
 
@@ -22,7 +22,7 @@ public class _yP_ extends Mediator {
     [Inject]
     public var _h5:DataSignalA;
     [Inject]
-    public var _X_v:_zz;
+    public var _X_v:SingletonSignal;
 
     override public function initialize():void {
         this._09X_.add(this._sg);

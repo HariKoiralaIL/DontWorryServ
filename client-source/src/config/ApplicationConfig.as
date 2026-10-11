@@ -29,19 +29,19 @@ import services.DeleteCharacterTask;
 import services.AnalyticsTracker;
 import services.LoadFameTask;
 import client.tasks.TaskTracker;
-import _U_5._01W_;
-import _U_5._06a;
-import _U_5._0K_2;
-import _U_5._0_D_;
-import _U_5._6J_;
-import _U_5._7e;
-import _U_5._M_d;
-import _U_5._bo;
-import _U_5._D_c;
-import _U_5._dd;
-import _U_5._sC_;
-import _U_5._sT_;
-import _U_5._zz;
+import game.signals.SpriteSignal;
+import game.signals.DeathSignal;
+import game.signals.NoArgSignal;
+import game.signals.StringSignal;
+import game.signals.NoArgSignal2;
+import game.signals.AnalyticsEventSignal;
+import game.signals.NoArgSignal4;
+import game.signals.StringSignal2;
+import game.signals.NoArgSignal3;
+import game.signals.SpriteSignal2;
+import game.signals.ToolTipSignal;
+import game.signals.NoArgSignal5;
+import game.signals.SingletonSignal;
 
 /**
  * The main application config. Sets up the injector mappings (models, services,
@@ -97,13 +97,13 @@ public class ApplicationConfig implements IConfig {
      * so they can simply be uncommented.
      */
     private function mapSignalCommands():void {
-        this.signalCommandMap.map(_D_c, true).toCommand(AllowDomainsCommand);
+        this.signalCommandMap.map(NoArgSignal3, true).toCommand(AllowDomainsCommand);
         //this.signalCommandMap.map(_D_c, true).toCommand(InitAnalyticsCommand);
         //this.signalCommandMap.map(_7e).toCommand(TrackEventCommand);
         //this.signalCommandMap.map(_0_D_).toCommand(TrackPageViewCommand);
-        this.signalCommandMap.map(_M_d).toCommand(EnableServerListCommand);
-        this.signalCommandMap.map(_01W_).toCommand(ShowViewCommand);
-        this.signalCommandMap.map(_06a).toCommand(RecordDeathCommand);
+        this.signalCommandMap.map(NoArgSignal4).toCommand(EnableServerListCommand);
+        this.signalCommandMap.map(SpriteSignal).toCommand(ShowViewCommand);
+        this.signalCommandMap.map(DeathSignal).toCommand(RecordDeathCommand);
     }
 
     /**
@@ -118,13 +118,13 @@ public class ApplicationConfig implements IConfig {
     }
 
     private function mapSignals():void {
-        this.injector.map(_dd).asSingleton();
-        this.injector.map(_6J_).asSingleton();
-        this.injector.map(_0K_2).asSingleton();
-        this.injector.map(_sC_).asSingleton();
-        this.injector.map(_sT_).asSingleton();
-        this.injector.map(_bo).asSingleton();
-        this.injector.map(_zz).toValue(new _zz());
+        this.injector.map(SpriteSignal2).asSingleton();
+        this.injector.map(NoArgSignal2).asSingleton();
+        this.injector.map(NoArgSignal).asSingleton();
+        this.injector.map(ToolTipSignal).asSingleton();
+        this.injector.map(NoArgSignal5).asSingleton();
+        this.injector.map(StringSignal2).asSingleton();
+        this.injector.map(SingletonSignal).toValue(new SingletonSignal());
     }
 
     private function createLayersAndMapMediators():void {

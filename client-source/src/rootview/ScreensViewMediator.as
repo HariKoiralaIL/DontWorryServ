@@ -1,8 +1,8 @@
 package rootview {
 import robotlegs.bender.bundles.mvcs.Mediator;
 
-import _U_5._dd;
-import _U_5._6J_;
+import game.signals.SpriteSignal2;
+import game.signals.NoArgSignal2;
 
 import flash.display.Sprite;
 
@@ -12,10 +12,10 @@ public class ScreensViewMediator extends Mediator {
     public var view:ScreensView;
     /** Signal carrying the screen to show. */
     [Inject]
-    public var setScreenSignal:_dd;
+    public var setScreenSignal:SpriteSignal2;
     /** Signal asking to go back to the previous screen. */
     [Inject]
-    public var showPreviousScreenSignal:_6J_;
+    public var showPreviousScreenSignal:NoArgSignal2;
 
     override public function initialize():void {
         this.setScreenSignal.add(this.onSetScreen);

@@ -5,7 +5,7 @@ package
 {
   import com.company.assembleegameclient.util.loadEmbeds;
   import flash.display.StageScaleMode;
-  import _U_5._D_c;
+  import game.signals.NoArgSignal3;
   import flash.ui.MouseCursorData;
   import flash.events.*;
   import flash.display.BitmapData;

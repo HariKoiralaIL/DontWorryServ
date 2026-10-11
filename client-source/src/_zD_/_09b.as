@@ -11,9 +11,9 @@ import _F_1._U_W_;
 import env.ServerListState;
 import env.DeathRecord;
 
-import _U_5._dd;
-import _U_5._6J_;
-import _U_5._0_D_;
+import game.signals.SpriteSignal2;
+import game.signals.NoArgSignal2;
+import game.signals.StringSignal;
 
 import services.LoadFameTask;
 
@@ -30,11 +30,11 @@ public class _09b extends Mediator {
     [Inject]
     public var _0K_K_:DeathRecord;
     [Inject]
-    public var _T__:_dd;
+    public var _T__:SpriteSignal2;
     [Inject]
-    public var _S_a:_6J_;
+    public var _S_a:NoArgSignal2;
     [Inject]
-    public var _o_:_0_D_;
+    public var _o_:StringSignal;
     [Inject]
     public var fame:LoadFameTask;
 
