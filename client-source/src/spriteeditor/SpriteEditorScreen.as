@@ -15,7 +15,7 @@ import editorcommands.CommandEvent;
 
 import flash.events.Event;
 
-import _tg.LoadCompleteEvent;
+import com.company.events.LoadCompleteEvent;
 
 import com.company.util.IntPoint;
 

@@ -34,7 +34,7 @@ public class EventCommandMap implements IEventCommandMap {
         var trigger:ICommandTrigger = this.triggers[key] = this.triggers[key] || this.createTrigger(eventType, eventClass);
         return this.commandCenter.map(trigger);
     }
-    
+
     public function unmap(eventType:String, eventClass:Class = null):ICommandUnmapper {
         return this.commandCenter.unmap(this.getTrigger(eventType, eventClass));
     }

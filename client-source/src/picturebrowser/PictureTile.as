@@ -1,8 +1,8 @@
 package picturebrowser {
 import client.util.PNGDecoder;
 
-import _tg.AddPictureEvent;
-import _tg.DeletePictureEvent;
+import com.company.events.AddPictureEvent;
+import com.company.events.DeletePictureEvent;
 
 import events.GenericDataEvent;
 

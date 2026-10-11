@@ -1,9 +1,9 @@
 package picturebrowser {
 import _0L_C_._qO_;
 
-import _tg.AddPictureEvent;
-import _tg.DeletePictureEvent;
-import _tg.LoadCompleteEvent;
+import com.company.events.AddPictureEvent;
+import com.company.events.DeletePictureEvent;
+import com.company.events.LoadCompleteEvent;
 
 import com.company.ui.dropdown.DropdownBox;
 

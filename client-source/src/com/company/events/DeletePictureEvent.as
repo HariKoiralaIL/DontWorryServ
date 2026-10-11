@@ -1,4 +1,4 @@
-package _tg {
+package com.company.events {
 import flash.events.Event;
 
 // Formerly _32. Bubbling event asking for a picture to be deleted.

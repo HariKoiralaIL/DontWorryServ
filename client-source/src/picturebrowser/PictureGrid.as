@@ -1,5 +1,5 @@
 package picturebrowser {
-import _tg.LoadCompleteEvent;
+import com.company.events.LoadCompleteEvent;
 
 import flash.display.Sprite;
 import flash.events.MouseEvent;

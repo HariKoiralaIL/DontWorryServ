@@ -1,4 +1,4 @@
-package _tg {
+package com.company.events {
 import flash.display.BitmapData;
 import flash.events.Event;
 
