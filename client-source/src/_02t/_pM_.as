@@ -8,7 +8,7 @@ import MapBackgrounds.Background;
 
 import com.company.map.MapJsonParser;
 
-import _vf._gs;
+import com.company.audio.MusicPlayer;
 
 import com.company.assembleegameclient.map._0D_v;
 import com.company.assembleegameclient.map._X_l;
@@ -72,8 +72,8 @@ public class _pM_ extends Sprite {
         if (_jJ_ > (_sl.x_ + BORDER)) {
             _jJ_ = (_jJ_ - _sl.x_);
         }
-        if (_vf._gs.music_ != "Death" || _vf._gs.music_ != "Menu") _vf._gs.reload("Menu");
-        _vf._gs.updateFade();
+        if (MusicPlayer.music_ != "Death" || MusicPlayer.music_ != "Menu") MusicPlayer.reload("Menu");
+        MusicPlayer.updateFade();
         _0F_q._K_(_jJ_, _U_b, 12, _X_z, _R_m, false);
         _I_k.draw(_0F_q, this.time);
         this._7n = this.time;

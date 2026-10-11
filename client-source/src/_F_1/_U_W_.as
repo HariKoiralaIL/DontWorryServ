@@ -11,7 +11,7 @@ import com.gskinner.motion.GTween;
 import signals.nativesignals.NativeRelaySignal;
 import signals.Signal;
 
-import _vf._5T_;
+import com.company.audio.SoundEffects;
 
 import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.assembleegameclient.util.TextureRedrawer;
@@ -65,7 +65,7 @@ public class _U_W_ extends Sprite {
         this._0M_g.addChild(new Bitmap(_arg1));
         var _local2:GTween = new GTween(this._0M_g, 2, {"alpha": 0});
         _local2.onComplete = this._gl;
-        _5T_.play("death_screen");
+        SoundEffects.play("death_screen");
     }
 
     public function _tC_(_arg1:String, _arg2:int, _arg3:int):void {

@@ -16,7 +16,7 @@ import flash.utils.getTimer;
 
 import com.company.util.MoreColorUtil;
 
-import _vf._5T_;
+import com.company.audio.SoundEffects;
 
 public class _H_o extends Sprite {
 
@@ -84,7 +84,7 @@ public class _H_o extends Sprite {
     }
 
     protected function _09t(_arg1:MouseEvent):void {
-        _5T_.play("button_click");
+        SoundEffects.play("button_click");
     }
 
     public function setText(_arg1:String) {
