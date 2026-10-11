@@ -6,7 +6,7 @@
 package _F_1 {
 import flash.display.Sprite;
 
-import _sp._aJ_;
+import signals.Signal;
 
 import flash.display.Bitmap;
 
@@ -26,7 +26,7 @@ public class _0B_m extends Sprite {
     public static const _00O_:uint = 0xFFC800;
 
     public function _0B_m(_arg1:BitmapData, _arg2:String, _arg3:String, _arg4:String, _arg5:int, _arg6:int, _arg7:int=2) {
-        this._H_r = new _aJ_(int);
+        this._H_r = new Signal(int);
         super();
         switch(_arg7) {
             case 1:
@@ -69,7 +69,7 @@ public class _0B_m extends Sprite {
         addEventListener(MouseEvent.ROLL_OUT, this.onRollOut);
         addEventListener(MouseEvent.MOUSE_DOWN, this.onMouseDown);
     }
-    public var _H_r:_aJ_;
+    public var _H_r:Signal;
     public var _5U_:Bitmap;
     public var _P_V_:SimpleText;
     public var taglineText_:SimpleText;

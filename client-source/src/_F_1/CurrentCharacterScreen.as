@@ -12,7 +12,6 @@ package _F_1 {
     import signals.Signal;
     import beginnersoffer.BeginnersOfferButton;
     import account.Account;
-    import _sp._aJ_;
     import com.company.assembleegameclient.appengine.Server_list;
     import com.company.assembleegameclient.screens.charrects.CharacterRect;
     import com.company.assembleegameclient.ui.TextButton;
@@ -46,19 +45,19 @@ import com.company.googleanalytics.GA;
             }
             this._p6 = new _H_o("main", 22, false);
             super(CurrentCharacterScreen);
-            this._n7 = new _aJ_();
-            this.newCharacter = new _aJ_();
+            this._n7 = new Signal();
+            this.newCharacter = new Signal();
             this.close = new NativeRelaySignal(this._p6, MouseEvent.CLICK);
             this._1V_ = new NativeRelaySignal(this._0G_N_, MouseEvent.CLICK);
-            this.chooseName = new _aJ_();
-            this._D_u = new _aJ_();
+            this.chooseName = new Signal();
+            this._D_u = new Signal();
         }
         public var close:Signal;
-        public var _n7:_aJ_;
-        public var newCharacter:_aJ_;
+        public var _n7:Signal;
+        public var newCharacter:Signal;
         public var _1V_:Signal;
-        public var chooseName:_aJ_;
-        public var _D_u:_aJ_;
+        public var chooseName:Signal;
+        public var _D_u:Signal;
         public var _lR_:BeginnersOfferButton;
         private var model:Server_list;
         private var nameText_:SimpleText;

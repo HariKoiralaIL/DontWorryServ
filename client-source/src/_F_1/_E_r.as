@@ -8,7 +8,7 @@ import flash.display.Sprite;
 
 import com.company.ui.SimpleText;
 
-import _sp._aJ_;
+import signals.Signal;
 
 import com.company.rotmg.graphics.ScreenGraphic;
 
@@ -30,9 +30,9 @@ public class _E_r extends Sprite {
         this._j7.filters = [new DropShadowFilter(0, 0, 0, 1, 4, 4)];
         addChild(this._j7);
         addEventListener(Event.ADDED_TO_STAGE, this.onAddedToStage);
-        this._J_b = new _aJ_();
+        this._J_b = new Signal();
     }
-    public var _J_b:_aJ_;
+    public var _J_b:Signal;
     private var _j7:SimpleText;
 
     private function _D_I_():void {

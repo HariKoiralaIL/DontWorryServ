@@ -13,8 +13,6 @@ import flash.display.Shape;
 
 import com.company.assembleegameclient.ui._0K_B_;
 
-import _sp._aJ_;
-
 import _02t._R_f;
 
 import flash.filters.DropShadowFilter;
@@ -49,8 +47,8 @@ public class _3V_ extends Sprite {
         this.cache_ = {};
         this._C_F_ = new Vector.<_00A_>();
         super();
-        this._8m = new _aJ_();
-        this._T_c = new _aJ_();
+        this._8m = new Signal();
+        this._T_c = new Signal();
         addChild(new _charscreen());
         this._P_V_ = new SimpleText(32, 0xFFFFFF, false, 0, 0, "Myriad Pro");
         this._P_V_.setBold(true);
@@ -101,8 +99,8 @@ public class _3V_ extends Sprite {
         this.close = new NativeRelaySignal(this._045, MouseEvent.CLICK);
     }
     public var close:Signal;
-    public var _8m:_aJ_;
-    public var _T_c:_aJ_;
+    public var _8m:Signal;
+    public var _T_c:Signal;
     private var cache_:Object;
     private var _P_V_:SimpleText;
     private var _j7:SimpleText;

@@ -6,7 +6,7 @@
 package _F_1 {
 import _02t._R_f;
 
-import _sp._aJ_;
+import signals.Signal;
 
 import com.company.assembleegameclient.appengine.Server_list;
 import com.company.assembleegameclient.objects.ObjectLibrary;
@@ -25,11 +25,11 @@ public class _0H_2 extends _05p {
         this._break = {};
         addChild(new _charscreen());
         super(CurrentCharacterScreen);
-        this.play = new _aJ_(int);
-        this.close = new _aJ_();
+        this.play = new Signal(int);
+        this.close = new Signal();
     }
-    public var close:_aJ_;
-    public var play:_aJ_;
+    public var close:Signal;
+    public var play:Signal;
     private var _p6:_H_o;
     private var _H_t:ui_goldcoin;
     private var _H_T_:_1B_v;

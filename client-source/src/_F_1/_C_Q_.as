@@ -10,7 +10,7 @@ import constants.Buttons;
 
 import account.Account;
 
-import _sp._aJ_;
+import signals.Signal;
 
 import com.company.assembleegameclient.appengine.Server_list;
 import com.company.assembleegameclient.objects.Player;
@@ -32,9 +32,9 @@ public class _C_Q_ extends _05p {
         addChild(new _R_f());
         super(_C_Q_);
 //        addChild(new TitleScreenGraphic());
-        this._ft = new _aJ_(String);
+        this._ft = new Signal(String);
     }
-    public var _ft:_aJ_;
+    public var _ft:Signal;
     private var _qR_:_H_o;
     private var _2z:_H_o;
     private var _2x:_H_o;

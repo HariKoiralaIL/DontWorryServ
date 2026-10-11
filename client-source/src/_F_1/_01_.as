@@ -11,7 +11,7 @@ import flash.display.Sprite;
 
 import com.company.assembleegameclient.ui._0K_B_;
 
-import _sp._aJ_;
+import signals.Signal;
 
 import _02t._R_f;
 
@@ -30,10 +30,10 @@ public class _01_ extends _05p {
 
     public function _01_() {
         addChild(new _charscreen());
-        this._4s = new _aJ_();
+        this._4s = new Signal();
         super(_C_Q_);
     }
-    public var _4s:_aJ_;
+    public var _4s:Signal;
     private var _045:_H_o;
     private var _S_w:SimpleText;
     private var _dL_:Shape;

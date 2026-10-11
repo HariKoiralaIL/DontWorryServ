@@ -6,7 +6,7 @@
 package _F_1 {
 import flash.display.Sprite;
 
-import _sp._aJ_;
+import signals.Signal;
 
 import com.company.ui.SimpleText;
 import com.company.rotmg.graphics.StackedLogoR;
@@ -26,7 +26,7 @@ public class _0H_h extends Sprite {
     private static const _088:String = "http://www.wildshadow.com/";
 
     public function _0H_h() {
-        this.close = new _aJ_();
+        this.close = new Signal();
         addChild(new _charscreen());
         //addChild(new ScreenGraphic());
         this._0H_L_ = new SimpleText(16, 0xFFFFFF, false, 0, 0, "Myriad Pro");
@@ -45,7 +45,7 @@ public class _0H_h extends Sprite {
         this._045.addEventListener(MouseEvent.CLICK, this._ly);
         addChild(this._045);
     }
-    public var close:_aJ_;
+    public var close:Signal;
     private var _0H_L_:SimpleText;
     private var _01q:StackedLogoR;
     private var _045:_H_o;
