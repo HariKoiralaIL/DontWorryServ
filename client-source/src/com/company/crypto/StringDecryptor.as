@@ -1,4 +1,4 @@
-package _yn {
+package com.company.crypto {
 
 // Formerly _07Y_. Obfuscator-generated string table: every string is stored as an
 // XTEA-encrypted block of 32-bit words, and decrypt() recovers it at runtime.
