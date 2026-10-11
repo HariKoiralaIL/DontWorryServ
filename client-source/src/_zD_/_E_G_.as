@@ -6,7 +6,7 @@
 package _zD_ {
 import robotlegs.bender.bundles.mvcs.Mediator;
 
-import _0L_C_._Z_t;
+import game.dialogs.ErrorDialog;
 
 import game.signals.NoArgSignal4;
 import game.signals.SpriteSignal;
@@ -18,7 +18,7 @@ import _F_1.CurrentCharacterScreen;
 public class _E_G_ extends Mediator {
 
     [Inject]
-    public var view:_Z_t;
+    public var view:ErrorDialog;
     [Inject]
     public var _0B_a:NoArgSignal4;
     [Inject]

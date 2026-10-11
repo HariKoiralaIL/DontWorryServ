@@ -1,5 +1,5 @@
 package client.ui.panels {
-import _0L_C_._qO_;
+import game.dialogs.Dialog;
 
 import client.ui.frames.CreateGuildFrame;
 
@@ -55,10 +55,10 @@ public class GuildRegisterPanel extends Panel {
             return;
         }
         var player:Player = gs_.map_.player_;
-        var dialog:_qO_ = new _qO_("Are you sure you want to quit:\n" + player.guildName_,
+        var dialog:Dialog = new Dialog("Are you sure you want to quit:\n" + player.guildName_,
                 "Renounce Guild", "No, I'll stay", "Yes, I'll quit", "/renounceGuild");
-        dialog.addEventListener(_qO_.BUTTON1_EVENT, this.onRenounceCancelled);
-        dialog.addEventListener(_qO_.BUTTON2_EVENT, this.onRenounceConfirmed);
+        dialog.addEventListener(Dialog.BUTTON1_EVENT, this.onRenounceCancelled);
+        dialog.addEventListener(Dialog.BUTTON2_EVENT, this.onRenounceConfirmed);
         stage.addChild(dialog);
     }
 
@@ -69,7 +69,7 @@ public class GuildRegisterPanel extends Panel {
     }
 
     private function onRenounceCancelled(event:Event):void {
-        stage.removeChild(event.currentTarget as _qO_);
+        stage.removeChild(event.currentTarget as Dialog);
     }
 
     private function onRenounceConfirmed(event:Event):void {
@@ -78,7 +78,7 @@ public class GuildRegisterPanel extends Panel {
         }
         var player:Player = gs_.map_.player_;
         gs_.gsc_.guildRemove(player.name_);
-        stage.removeChild(event.currentTarget as _qO_);
+        stage.removeChild(event.currentTarget as Dialog);
         visible = false;
     }
 }

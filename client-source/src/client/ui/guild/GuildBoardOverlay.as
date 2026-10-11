@@ -9,7 +9,7 @@ package client.ui.guild {
 
     import com.company.assembleegameclient.appengine._0B_u;
 
-    import _0L_C_._qO_;
+    import game.dialogs.Dialog;
 
     import flash.display.Graphics;
 
@@ -40,7 +40,7 @@ package client.ui.guild {
         private var canEdit:Boolean;
         private var background:Shape;
         private var request:_0B_u;
-        private var statusDialog:_qO_;
+        private var statusDialog:Dialog;
         private var text_:String;
         private var viewer:GuildBoardViewer;
         private var editor:GuildBoardEditor;
@@ -50,7 +50,7 @@ package client.ui.guild {
             this.request.addEventListener(GenericDataEvent.GENERIC_DATA, this.onBoardLoaded);
             this.request.addEventListener(TextErrorEvent.TEXT_ERROR, this.onLoadError);
             this.request.sendRequest("getBoard", Account.getInstance().credentials());
-            this.statusDialog = new _qO_("Loading...", null, null, null, null);
+            this.statusDialog = new Dialog("Loading...", null, null, null, null);
             addChild(this.statusDialog);
             this.background.visible = false;
         }
@@ -105,7 +105,7 @@ package client.ui.guild {
             this.request.sendRequest("setBoard", _local2);
             removeChild(this.editor);
             this.editor = null;
-            this.statusDialog = new _qO_("Saving...", null, null, null, null);
+            this.statusDialog = new Dialog("Saving...", null, null, null, null);
             addChild(this.statusDialog);
             this.background.visible = false;
         }

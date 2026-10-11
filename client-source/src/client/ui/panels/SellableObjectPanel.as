@@ -1,5 +1,5 @@
 package client.ui.panels {
-import _0L_C_._2k;
+import game.dialogs.NotRegisteredDialog;
 
 import account.Account;
 
@@ -126,7 +126,7 @@ public class SellableObjectPanel extends Panel {
 
     private function buy():void {
         if (!Account.getInstance().isRegistered()) {
-            stage.addChild(new _2k("In order to use " + Currency._01r(this.sellable.currency_)
+            stage.addChild(new NotRegisteredDialog("In order to use " + Currency._01r(this.sellable.currency_)
                     + ", you must be a registered user."));
         } else {
             this.modal = new Modal(this.event, this.sellable, this.buyButton.width, gs_);

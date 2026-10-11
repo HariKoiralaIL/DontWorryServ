@@ -6,8 +6,8 @@
 package _F_1 {
     import com.company.backgrounds.TitleBackground;
     import client.ui.frames.NewAccountNameOverlay;
-    import _0L_C_._4B_;
-    import _0L_C_._qO_;
+    import game.dialogs.NameNeedsRegistrationDialog;
+    import game.dialogs.Dialog;
     import signals.nativesignals.NativeRelaySignal;
     import signals.Signal;
     import beginnersoffer.BeginnersOfferButton;
@@ -273,11 +273,11 @@ import com.company.googleanalytics.GA;
         }
 
         private function _fT_(_arg1:Event):void {
-            var _local3:_4B_;
+            var _local3:NameNeedsRegistrationDialog;
             if (!Account.getInstance().isRegistered()) {
-                _local3 = new _4B_();
-                _local3.addEventListener(_qO_.BUTTON1_EVENT, this._4);
-                _local3.addEventListener(_qO_.BUTTON2_EVENT, this.onDialogRegister);
+                _local3 = new NameNeedsRegistrationDialog();
+                _local3.addEventListener(Dialog.BUTTON1_EVENT, this._4);
+                _local3.addEventListener(Dialog.BUTTON2_EVENT, this.onDialogRegister);
                 addChild(_local3);
                 return;
             }
@@ -291,12 +291,12 @@ import com.company.googleanalytics.GA;
         }
 
         private function _4(_arg1:Event):void {
-            var _local2:_qO_ = (_arg1.currentTarget as _qO_);
+            var _local2:Dialog = (_arg1.currentTarget as Dialog);
             removeChild(_local2);
         }
 
         private function onDialogRegister(_arg1:Event):void {
-            var _local2:_qO_ = (_arg1.currentTarget as _qO_);
+            var _local2:Dialog = (_arg1.currentTarget as Dialog);
             removeChild(_local2);
             _0j();
         }

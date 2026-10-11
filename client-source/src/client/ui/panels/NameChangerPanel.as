@@ -1,5 +1,5 @@
 package client.ui.panels {
-import _0L_C_._2k;
+import game.dialogs.NotRegisteredDialog;
 
 import account.Account;
 
@@ -64,7 +64,7 @@ public class NameChangerPanel extends Panel {
             dialog = new FrameHolder(new ChangeNameFrame(gs_, this.hasChosenName));
             visible = false;
         } else {
-            dialog = new _2k("In order to choose an account name, you must be registered");
+            dialog = new NotRegisteredDialog("In order to choose an account name, you must be registered");
         }
         stage.addChild(dialog);
     }

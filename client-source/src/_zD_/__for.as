@@ -18,7 +18,7 @@ import client.signals.typed.GameInitSignal;
 
 import constants.Buttons;
 
-import _0L_C_._qO_;
+import game.dialogs.Dialog;
 
 import client.game.GameInitData;
 
@@ -85,13 +85,13 @@ public class __for extends Mediator {
     }
 
     private function _04P_():void {
-        var _local1:_qO_;
+        var _local1:Dialog;
         var _local2:GameInitData;
         if (((Parameters.isTesting) && ((this._eJ_.servers.servers_.length == 0)))) {
             if (Parameters._I_O_()) {
-                _local1 = new _qO_(((("Your account doesn't exist anymore, please make a new.  " + 'Please play on <font color="#7777EE">') + '<a href="bledixon.com/webclient">') + "bledixon.com/webclient</a></font>."), "No Testing Servers", null, null, "/noTestingServers");
+                _local1 = new Dialog(((("Your account doesn't exist anymore, please make a new.  " + 'Please play on <font color="#7777EE">') + '<a href="bledixon.com/webclient">') + "bledixon.com/webclient</a></font>."), "No Testing Servers", null, null, "/noTestingServers");
             } else {
-                _local1 = new _qO_((((("Project B is currently offline.\n\n" + "Go here for more information:\n") + '<font color="#7777EE">') + '<a href="http://bledixon.com/forums">') + "http://bledixon.com/forums</a></font>."), "The Angelics are Sleeping", null, null, "/offLine");
+                _local1 = new Dialog((((("Project B is currently offline.\n\n" + "Go here for more information:\n") + '<font color="#7777EE">') + '<a href="http://bledixon.com/forums">') + "http://bledixon.com/forums</a></font>."), "The Angelics are Sleeping", null, null, "/offLine");
             }
             this.view.stage.addChild(_local1);
             return;

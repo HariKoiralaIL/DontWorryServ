@@ -24,7 +24,7 @@ import flash.display.Sprite;
 
     import client.events.ResultEvent;
 
-    import _0L_C_._qO_;
+    import game.dialogs.Dialog;
 
     import flash.events.KeyboardEvent;
 import flash.system.Capabilities;
@@ -63,8 +63,8 @@ import flash.system.Capabilities;
         }
 
         private function _L_I_(_arg1:String):void {
-            var _local2:_qO_ = new _qO_(_arg1, "Error", "Ok", null, "/marketError");
-            _local2.addEventListener(_qO_.BUTTON1_EVENT, this._K__);
+            var _local2:Dialog = new Dialog(_arg1, "Error", "Ok", null, "/marketError");
+            _local2.addEventListener(Dialog.BUTTON1_EVENT, this._K__);
             stage.addChild(_local2);
         }
 
@@ -87,7 +87,7 @@ import flash.system.Capabilities;
         }
 
         private function _K__(_arg1:Event):void {
-            var _local2:_qO_ = (_arg1.currentTarget as _qO_);
+            var _local2:Dialog = (_arg1.currentTarget as Dialog);
             stage.removeChild(_local2);
             this._wk();
         }

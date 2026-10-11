@@ -19,7 +19,7 @@ import com.company.assembleegameclient.objects.Player;
 
 import client.events.ResultEvent;
 
-import _0L_C_._qO_;
+import game.dialogs.Dialog;
 
 import flash.events.KeyboardEvent;
 
@@ -58,8 +58,8 @@ public class _07x extends Sprite {
     }
 
     private function _L_I_(_arg1:String):void {
-        var _local2:_qO_ = new _qO_(_arg1, "Error", "Ok", null, "/guildError");
-        _local2.addEventListener(_qO_.BUTTON1_EVENT, this._K__);
+        var _local2:Dialog = new Dialog(_arg1, "Error", "Ok", null, "/guildError");
+        _local2.addEventListener(Dialog.BUTTON1_EVENT, this._K__);
         stage.addChild(_local2);
     }
 
@@ -99,7 +99,7 @@ public class _07x extends Sprite {
     }
 
     private function _K__(_arg1:Event):void {
-        var _local2:_qO_ = (_arg1.currentTarget as _qO_);
+        var _local2:Dialog = (_arg1.currentTarget as Dialog);
         stage.removeChild(_local2);
         this._wk();
     }

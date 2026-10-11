@@ -4,7 +4,7 @@
 //com.company.assembleegameclient.screens.charrects.CharacterRectList
 
 package com.company.assembleegameclient.screens.charrects {
-import _0L_C_._aZ_;
+import game.dialogs.NotEnoughFameDialog;
 
 import flash.display.Sprite;
 
@@ -18,20 +18,20 @@ import com.company.assembleegameclient.appengine.SavedCharacter;
 
 import flash.events.MouseEvent;
 
-import _0L_C_._qO_;
+import game.dialogs.Dialog;
 
 import flash.events.Event;
 
-import _0L_C_._tc;
+import game.dialogs.CharSlotNeedsRegistrationDialog;
 
 import account.Account;
 
-import _0L_C_._0G_H_;
-import _0L_C_._0G_y;
+import game.dialogs.CharSlotNotEnoughGoldDialog;
+import game.dialogs.BuyingCharSlotDialog;
 
 import events.TextErrorEvent;
 
-import _0L_C_._Z_t;
+import game.dialogs.ErrorDialog;
 
 public class CharacterRectList extends Sprite {
 
@@ -78,7 +78,7 @@ public class CharacterRectList extends Sprite {
     private var screen_:_05p;
 
     private function onCancel(_arg1:Event):void {
-        var _local2:_qO_ = (_arg1.currentTarget as _qO_);
+        var _local2:Dialog = (_arg1.currentTarget as Dialog);
         this.screen_.removeChild(_local2);
     }
 
@@ -87,33 +87,33 @@ public class CharacterRectList extends Sprite {
     }
 
     private function onBuyCharSlot(_arg1:Event):void {
-        var _local3:_tc;
+        var _local3:CharSlotNeedsRegistrationDialog;
         if (!Account.getInstance().isRegistered()) {
-            _local3 = new _tc();
-            _local3.addEventListener(_qO_.BUTTON1_EVENT, this.onCancel);
-            _local3.addEventListener(_qO_.BUTTON2_EVENT, this.onDialogRegister);
+            _local3 = new CharSlotNeedsRegistrationDialog();
+            _local3.addEventListener(Dialog.BUTTON1_EVENT, this.onCancel);
+            _local3.addEventListener(Dialog.BUTTON2_EVENT, this.onDialogRegister);
             this.screen_.addChild(_local3);
             return;
         }
         if (this.charList_.fame_ < this.charList_.nextCharSlotPrice_) {
-            this.screen_.addChild(new _aZ_());
+            this.screen_.addChild(new NotEnoughFameDialog());
             return;
         }
-        var _local2:_0G_y = new _0G_y(this.charList_.nextCharSlotPrice_);
+        var _local2:BuyingCharSlotDialog = new BuyingCharSlotDialog(this.charList_.nextCharSlotPrice_);
         _local2.addEventListener(TextErrorEvent.TEXT_ERROR, this.onDialogError);
         this.screen_.addChild(_local2);
     }
 
     private function onDialogRegister(_arg1:Event):void {
-        var _local2:_qO_ = (_arg1.currentTarget as _qO_);
+        var _local2:Dialog = (_arg1.currentTarget as Dialog);
         ((_local2.parent) && (_local2.parent.removeChild(_local2)));
         this.screen_._0j();
     }
 
     private function onDialogError(_arg1:TextErrorEvent):void {
-        var _local2:_qO_ = (_arg1.currentTarget as _qO_);
+        var _local2:Dialog = (_arg1.currentTarget as Dialog);
         this.screen_.removeChild(_local2);
-        var _local3:_Z_t = new _Z_t(_arg1.text);
+        var _local3:ErrorDialog = new ErrorDialog(_arg1.text);
         this.screen_.addChild(_local3);
     }
 

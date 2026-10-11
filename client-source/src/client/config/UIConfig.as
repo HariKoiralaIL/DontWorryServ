@@ -58,10 +58,10 @@ import _zD_._B_9;
 
 import mapeditor.MapEditorScreen;
 
-import _0L_C_._0G_y;
-import _0L_C_._Z_t;
-import _0L_C_._0D_W_;
-import _0L_C_._s7;
+import game.dialogs.BuyingCharSlotDialog;
+import game.dialogs.ErrorDialog;
+import game.dialogs.DeleteCharacterConfirmation;
+import game.dialogs.DeletingCharacterDialog;
 
 import client.signals.DataSignalB;
 import client.signals.DataSignalA;
@@ -102,12 +102,12 @@ public class UIConfig implements IConfig {
         this.mediatorMap.map(MapEditorScreen).toMediator(_0D_L_);
         this.mediatorMap.map(CurrentCharacterRect).toMediator(_9M_);
         this.mediatorMap.map(CharacterRectList).toMediator(_G_I_);
-        this.mediatorMap.map(_0G_y).toMediator(_1k);
-        this.mediatorMap.map(_Z_t).toMediator(_E_G_);
+        this.mediatorMap.map(BuyingCharSlotDialog).toMediator(_1k);
+        this.mediatorMap.map(ErrorDialog).toMediator(_E_G_);
         this.mediatorMap.map(_U_W_).toMediator(_09b);
         this.mediatorMap.map(_0B_m).toMediator(__else);
-        this.mediatorMap.map(_0D_W_).toMediator(_Q_q);
-        this.mediatorMap.map(_s7).toMediator(_G_9);
+        this.mediatorMap.map(DeleteCharacterConfirmation).toMediator(_Q_q);
+        this.mediatorMap.map(DeletingCharacterDialog).toMediator(_G_9);
         this.mediatorMap.map(_02a).toMediator(_jT_);
         this.configureAdditional();
     }

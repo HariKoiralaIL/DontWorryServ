@@ -28,7 +28,7 @@ import account.ui.RegisterOverlay;
 
 import com.company.assembleegameclient.appengine._02k;
 
-import _0L_C_._2k;
+import game.dialogs.NotRegisteredDialog;
 
 import account.ui.PurchaseCreditsDialog;
 
@@ -131,7 +131,7 @@ public class WebAccount extends Account {
 
     override public function showMoneyManagement(stage:Stage):void {
         if (!this.isRegistered()) {
-            stage.addChild(new _2k(("In order to buy Gold " + ", you must be a registered user.")));
+            stage.addChild(new NotRegisteredDialog(("In order to buy Gold " + ", you must be a registered user.")));
             return;
         }
         stage.addChild(new PurchaseCreditsDialog());

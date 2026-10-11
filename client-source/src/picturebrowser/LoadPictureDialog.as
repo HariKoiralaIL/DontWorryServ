@@ -1,5 +1,5 @@
 package picturebrowser {
-import _0L_C_._qO_;
+import game.dialogs.Dialog;
 
 import com.company.events.AddPictureEvent;
 import com.company.events.DeletePictureEvent;
@@ -325,8 +325,8 @@ public class LoadPictureDialog extends Sprite {
 
     private function onDeletePictureRequested(event:DeletePictureEvent):void {
         var dialog:DeletePictureConfirmDialog = new DeletePictureConfirmDialog(event.name_, event.id_);
-        dialog.addEventListener(_qO_.BUTTON1_EVENT, this.onDeleteCancelled);
-        dialog.addEventListener(_qO_.BUTTON2_EVENT, this.onDeleteConfirmed);
+        dialog.addEventListener(Dialog.BUTTON1_EVENT, this.onDeleteCancelled);
+        dialog.addEventListener(Dialog.BUTTON2_EVENT, this.onDeleteConfirmed);
         addChild(dialog);
     }
 

@@ -104,10 +104,10 @@ package com.company.assembleegameclient.net {
   import _0K_m._mn;
   import _0K_m._pK_;
 
-  import _0L_C_._02d;
-  import _0L_C_._aZ_;
-  import _0L_C_._gE_;
-  import _0L_C_._qO_;
+  import game.dialogs.NotEnoughGoldDialog;
+  import game.dialogs.NotEnoughFameDialog;
+  import game.dialogs.NotEnoughKeysDialog;
+  import game.dialogs.Dialog;
 
   import client.signals.EmptySignal;
   import client.signals.DataSignalB;
@@ -1533,13 +1533,13 @@ package com.company.assembleegameclient.net {
       this.outstandingBuy_ = null;
       switch (_arg1.result_) {
         case BuyResult._7a:
-          this.gs_.stage.addChild(new _02d());
+          this.gs_.stage.addChild(new NotEnoughGoldDialog());
           return;
         case BuyResult._0I_C_:
-          this.gs_.stage.addChild(new _aZ_());
+          this.gs_.stage.addChild(new NotEnoughFameDialog());
           return;
         case BuyResult._83_e:
-          this.gs_.stage.addChild(new _gE_());
+          this.gs_.stage.addChild(new NotEnoughKeysDialog());
           return;
         default:
           this.gs_.textBox_.addText((((_arg1.result_ == BuyResult._dV_)) ? Parameters.SendInfo : Parameters.SendError), _arg1.resultString_);
@@ -1666,8 +1666,8 @@ package com.company.assembleegameclient.net {
     }
 
     private function _0z_K_(_arg1:_G_f):void {
-      var _local2:_qO_ = new _qO_("Guest accounts have been disabled for improved security.", "Anti-Guest Guard", "Ok", null, "/noGuests");
-      _local2.addEventListener(_qO_.BUTTON1_EVENT, this._Y_h);
+      var _local2:Dialog = new Dialog("Guest accounts have been disabled for improved security.", "Anti-Guest Guard", "Ok", null, "/noGuests");
+      _local2.addEventListener(Dialog.BUTTON1_EVENT, this._Y_h);
       this.gs_.stage.addChild(_local2);
       this._P_A_ = false;
     }
@@ -1684,8 +1684,8 @@ package com.company.assembleegameclient.net {
     }
 
     private function _ee(_arg1:_G_f):void {
-      var _local2:_qO_ = new _qO_(((("Client version: " + Parameters.clientVersion) + "\nServer version: ") + _arg1.errorDescription_ + "\n\nPlease use one of these links to play: " + '<font color="#7777EE"> <a href="http://bledixon.com/client/WebMain.swf">' + "          Client #1 </a></font>" + '<font color="#7777EE"> <a href="http://bledixon.com/xclient/WebMain.swf">' + "          Client #2</a></font>"), "Client Update Needed", "Ok", null, "/clientUpdate");
-      _local2.addEventListener(_qO_.BUTTON1_EVENT, this._Y_h);
+      var _local2:Dialog = new Dialog(((("Client version: " + Parameters.clientVersion) + "\nServer version: ") + _arg1.errorDescription_ + "\n\nPlease use one of these links to play: " + '<font color="#7777EE"> <a href="http://bledixon.com/client/WebMain.swf">' + "          Client #1 </a></font>" + '<font color="#7777EE"> <a href="http://bledixon.com/xclient/WebMain.swf">' + "          Client #2</a></font>"), "Client Update Needed", "Ok", null, "/clientUpdate");
+      _local2.addEventListener(Dialog.BUTTON1_EVENT, this._Y_h);
       this.gs_.stage.addChild(_local2);
       this._P_A_ = false;
     }
@@ -1764,7 +1764,7 @@ package com.company.assembleegameclient.net {
     }
 
     private function _Y_h(_arg1:Event):void {
-      var _local2:_qO_ = (_arg1.currentTarget as _qO_);
+      var _local2:Dialog = (_arg1.currentTarget as Dialog);
       _local2.parent.removeChild(_local2);
       this.gs_.dispatchEvent(new ClientUpdateEvent());
     }

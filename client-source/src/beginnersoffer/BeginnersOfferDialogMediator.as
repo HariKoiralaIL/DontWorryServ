@@ -1,5 +1,5 @@
 package beginnersoffer {
-import _0L_C_._2k;
+import game.dialogs.NotRegisteredDialog;
 
 import robotlegs.bender.bundles.mvcs.Mediator;
 
@@ -109,7 +109,7 @@ public class BeginnersOfferDialogMediator extends Mediator {
     }
 
     private function showRegistrationRequired():void {
-        this.layers.overlay.addChild(new _2k(NOT_REGISTERED_MESSAGE));
+        this.layers.overlay.addChild(new NotRegisteredDialog(NOT_REGISTERED_MESSAGE));
         this.view.destroy();
     }
 }

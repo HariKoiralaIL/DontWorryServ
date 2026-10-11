@@ -1,10 +1,10 @@
 package picturebrowser {
-import _0L_C_._qO_;
+import game.dialogs.Dialog;
 
 /**
  * "Are you sure?" dialog shown before a picture is deleted on the server.
  */
-public class DeletePictureConfirmDialog extends _qO_ {
+public class DeletePictureConfirmDialog extends Dialog {
 
     private static const TITLE:String = "Delete Picture";
     private static const CANCEL_LABEL:String = "Cancel";

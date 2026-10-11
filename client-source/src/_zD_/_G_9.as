@@ -6,7 +6,7 @@
 package _zD_ {
 import robotlegs.bender.bundles.mvcs.Mediator;
 
-import _0L_C_._s7;
+import game.dialogs.DeletingCharacterDialog;
 
 import com.company.assembleegameclient.appengine.SavedCharacter;
 
@@ -22,7 +22,7 @@ import client.tasks.Task;
 public class _G_9 extends Mediator {
 
     [Inject]
-    public var view:_s7;
+    public var view:DeletingCharacterDialog;
     [Inject]
     public var character:SavedCharacter;
     [Inject]

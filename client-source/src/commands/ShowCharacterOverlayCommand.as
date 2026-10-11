@@ -5,7 +5,7 @@ import com.company.assembleegameclient.appengine.SavedCharacter;
 import rootview.Layers;
 
 import services.DeleteCharacterTask;
-import _0L_C_._0D_W_;
+import game.dialogs.DeleteCharacterConfirmation;
 
 /**
  * Adds the _0D_W_ view to the overlay layer.
@@ -24,7 +24,7 @@ public class ShowCharacterOverlayCommand {
     public var layers:Layers;
 
     public function execute():void {
-        this.layers.overlay.addChild(new _0D_W_());
+        this.layers.overlay.addChild(new DeleteCharacterConfirmation());
     }
 
 }
