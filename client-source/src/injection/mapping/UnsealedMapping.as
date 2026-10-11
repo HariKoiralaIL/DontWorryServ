@@ -1,4 +1,4 @@
-﻿package _Z_4 {
+﻿package injection.mapping {
 
 /** A mapping that can still be sealed to prevent further changes. */
 public interface UnsealedMapping {
@@ -10,4 +10,4 @@ public interface UnsealedMapping {
     function seal():Object;
 
 }
-}//package _Z_4
+}//package injection.mapping

@@ -1,4 +1,4 @@
-﻿package _Z_4 {
+﻿package injection.mapping {
 
 import providers.DependencyProvider;
 
@@ -23,4 +23,4 @@ public interface ProviderlessMapping {
     function seal():Object;
 
 }
-}//package _Z_4
+}//package injection.mapping

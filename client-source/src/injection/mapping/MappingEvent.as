@@ -1,4 +1,4 @@
-﻿package _Z_4 {
+﻿package injection.mapping {
 
 import flash.events.Event;
 
@@ -32,4 +32,4 @@ public class MappingEvent extends Event {
     }
 
 }
-}//package _Z_4
+}//package injection.mapping

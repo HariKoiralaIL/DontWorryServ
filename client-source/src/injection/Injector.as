@@ -15,8 +15,8 @@ package injection
     import injection.InjectorMissingMappingError;
     import injection.InjectorInterfaceConstructionError;
 
-    import _Z_4.InjectionMapping;
-    import _Z_4.MappingEvent;
+    import injection.mapping.InjectionMapping;
+    import injection.mapping.MappingEvent;
 
     import avmplus.DescribeTypeJSON;
 

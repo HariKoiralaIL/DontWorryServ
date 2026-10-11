@@ -1,4 +1,4 @@
-﻿package _Z_4 {
+﻿package injection.mapping {
 
 import injection.Injector;
 import injection.InjectorError;
@@ -17,14 +17,6 @@ import injection.utils.SsInternal;
 /**
  * One mapping in an injector: tells the injector how to satisfy requests for a
  * given class (and optional name). Mappings can be sealed to prevent changes.
- *
- * Unresolved external types (defined elsewhere in the project):
- *   _08b = the injector, _N_p = the injector's error type,
- *   _5d  = a dependency provider, _6_ = class provider (new instance each time),
- *   _uS_ = singleton provider, _rP_ = value provider,
- *   _d5  = a provider that wraps another one (exposes it as .provider),
- *   _yi  = "soft" provider wrapper, _Q_4 = "local-only" provider wrapper,
- *   _4c  = provider wrapper bound to a specific injector.
  */
 public class InjectionMapping implements ProviderlessMapping, UnsealedMapping {
 
@@ -206,4 +198,4 @@ public class InjectionMapping implements ProviderlessMapping, UnsealedMapping {
     }
 
 }
-}//package _Z_4
+}//package injection.mapping
