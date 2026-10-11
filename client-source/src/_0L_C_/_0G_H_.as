@@ -12,7 +12,7 @@ public class _0G_H_ extends _qO_ {
 
     public function _0G_H_(_arg1:int) {
         super(((("Another character slot costs " + _arg1) + " Gold.  ") + "Would you like to buy Gold?"), "Not Enough Gold", "Cancel", "Buy Gold", "/charSlotNeedGold");
-        Account._get().cacheOffers();
+        Account.getInstance().cacheOffers();
         addEventListener(BUTTON1_EVENT, this.onCancel);
         addEventListener(BUTTON2_EVENT, this._8v);
     }
@@ -22,7 +22,7 @@ public class _0G_H_ extends _qO_ {
     }
 
     public function _8v(_arg1:Event):void {
-        Account._get().showMoneyManagement(stage);
+        Account.getInstance().showMoneyManagement(stage);
         parent.removeChild(this);
     }
 

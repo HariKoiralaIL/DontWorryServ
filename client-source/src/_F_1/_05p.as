@@ -45,7 +45,7 @@ public class _05p extends Sprite {
     private var _H_W_:Class;
     private var _B_D_:_0G_h;
     private var _I_Q_:_L_N_;
-    public var _0_4:_9j;
+    public var _0_4:AccountTextView;
     private var _06e:Boolean;
 
     public function _m2(_arg1:String, _arg2:int):void {
@@ -65,7 +65,7 @@ public class _05p extends Sprite {
     }
 
     public function _0j():void {
-        var _local1:Sprite = Account._get().newAccountManagement();
+        var _local1:Sprite = Account.getInstance().newAccountManagement();
         if (_local1 == null) {
             return;
         }
@@ -74,7 +74,7 @@ public class _05p extends Sprite {
     }
 
     private function _fQ_():void {
-        this._0_4 = Account._get().newAccountText();
+        this._0_4 = Account.getInstance().newAccountText();
         this._0_4.addEventListener(AccountTextEvent.ACCOUNT_TEXT_EVENT, this._0L__);
         this._wi.addChild(this._0_4);
     }
@@ -137,14 +137,14 @@ public class _05p extends Sprite {
     }
 
     protected function _0L__(_arg1:AccountTextEvent):void {
-        if (_arg1._Q_j == null) {
+        if (_arg1.textView == null) {
             this._0_4.refresh();
             stage;
             this._0_4.x = ((800 - this._0_4.width) - 10);
             this._03I_.dispatch(this._H_W_);
         } else {
-            _arg1._Q_j.addEventListener(Event.COMPLETE, this.onAccountComplete);
-            addChild(_arg1._Q_j);
+            _arg1.textView.addEventListener(Event.COMPLETE, this.onAccountComplete);
+            addChild(_arg1.textView);
         }
     }
 

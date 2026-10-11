@@ -26,6 +26,7 @@ import com.company.rotmg.graphics.ScreenGraphic;
 import flash.events.MouseEvent;
 
 import _S_K_.NativeRelaySignal;
+import signals.Signal;
 
 import com.company.googleanalytics.GA;
 
@@ -97,9 +98,9 @@ public class _3V_ extends Sprite {
         this._045 = new _H_o("done", 36, false);
         addChild(this._045);
         this.setSelected(((selected_) || (this._C_F_[0])));
-        this.close = new _u3(this._045, MouseEvent.CLICK);
+        this.close = new NativeRelaySignal(this._045, MouseEvent.CLICK);
     }
-    public var close:_aJ_;
+    public var close:Signal;
     public var _8m:_aJ_;
     public var _T_c:_aJ_;
     private var cache_:Object;

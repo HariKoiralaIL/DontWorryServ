@@ -8,7 +8,8 @@ package _F_1 {
     import _0D_d._T_K_;
     import _0L_C_._4B_;
     import _0L_C_._qO_;
-    import _S_K_._u3;
+    import _S_K_.NativeRelaySignal;
+    import signals.Signal;
     import _nA_._ax;
     import account.Account;
     import _sp._aJ_;
@@ -36,7 +37,7 @@ import com.company.googleanalytics.GA;
 
         public function CurrentCharacterScreen() {
             addChild(new _charscreen());
-            if (Account._get().isRegistered()) {
+            if (Account.getInstance().isRegistered()) {
                 this._qR_ = new _H_o("play", 36, true);
                 this._0G_N_ = new _H_o("classes", 22, false);
             } else {
@@ -47,15 +48,15 @@ import com.company.googleanalytics.GA;
             super(CurrentCharacterScreen);
             this._n7 = new _aJ_();
             this.newCharacter = new _aJ_();
-            this.close = new _u3(this._p6, MouseEvent.CLICK);
-            this._1V_ = new _u3(this._0G_N_, MouseEvent.CLICK);
+            this.close = new NativeRelaySignal(this._p6, MouseEvent.CLICK);
+            this._1V_ = new NativeRelaySignal(this._0G_N_, MouseEvent.CLICK);
             this.chooseName = new _aJ_();
             this._D_u = new _aJ_();
         }
-        public var close:_aJ_;
+        public var close:Signal;
         public var _n7:_aJ_;
         public var newCharacter:_aJ_;
-        public var _1V_:_aJ_;
+        public var _1V_:Signal;
         public var chooseName:_aJ_;
         public var _D_u:_aJ_;
         public var _lR_:_ax;
@@ -274,7 +275,7 @@ import com.company.googleanalytics.GA;
 
         private function _fT_(_arg1:Event):void {
             var _local3:_4B_;
-            if (!Account._get().isRegistered()) {
+            if (!Account.getInstance().isRegistered()) {
                 _local3 = new _4B_();
                 _local3.addEventListener(_qO_.BUTTON1_EVENT, this._4);
                 _local3.addEventListener(_qO_.BUTTON2_EVENT, this.onDialogRegister);

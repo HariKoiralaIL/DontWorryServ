@@ -51,7 +51,7 @@ public class _C_Q_ extends _05p {
         super.initialize(_arg1);
         this._T_1 = _arg1;
         this._qR_ = new _H_o(Buttons.PLAY, 36, true);
-        if (!_T_1.servers_.length == 0 || Account._get().isRegistered()) {
+        if (!_T_1.servers_.length == 0 || Account.getInstance().isRegistered()) {
             this._qR_.addEventListener(MouseEvent.CLICK, this._021);
         } else {
             this._qR_.addEventListener(MouseEvent.CLICK, this.reg_);
