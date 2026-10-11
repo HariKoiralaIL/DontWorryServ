@@ -1,4 +1,4 @@
-package _T_Y_ {
+package com.company.log {
 import robotlegs.bender.framework.api.LogLevel;
 import robotlegs.bender.framework.api.IContext;
 import robotlegs.bender.framework.api.ILogTarget;

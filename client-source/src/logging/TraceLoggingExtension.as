@@ -5,7 +5,7 @@ package logging
     import robotlegs.bender.framework.api.IExtension;
     import robotlegs.bender.framework.api.IContext;
 
-    import _T_Y_.TraceLogTarget;
+    import com.company.log.TraceLogTarget;
 
     public class TraceLoggingExtension implements IExtension
     {

@@ -1,4 +1,4 @@
-package _T_Y_ {
+package com.company.log {
 
 // Formerly _08n. Fills "{0}", "{1}", ... placeholders in a message with the given params.
 public class LogMessageFormatter {
