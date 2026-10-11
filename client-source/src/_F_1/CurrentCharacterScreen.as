@@ -8,7 +8,7 @@ package _F_1 {
     import client.ui.frames.NewAccountNameOverlay;
     import _0L_C_._4B_;
     import _0L_C_._qO_;
-    import _S_K_.NativeRelaySignal;
+    import signals.nativesignals.NativeRelaySignal;
     import signals.Signal;
     import beginnersoffer.BeginnersOfferButton;
     import account.Account;

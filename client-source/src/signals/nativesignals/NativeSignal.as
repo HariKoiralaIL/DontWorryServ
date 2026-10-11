@@ -1,4 +1,4 @@
-package _S_K_ {
+package signals.nativesignals {
     import signals.Slot;
     import signals.SlotList;
     import signals.Signal;

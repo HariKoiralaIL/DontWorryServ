@@ -1,5 +1,5 @@
 package purchasedialogs {
-import _S_K_.NativeRelaySignal;
+import signals.nativesignals.NativeRelaySignal;
 
 import com.company.ui.SimpleText;
 

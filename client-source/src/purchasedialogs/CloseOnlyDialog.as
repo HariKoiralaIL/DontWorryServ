@@ -1,5 +1,5 @@
 package purchasedialogs {
-import _S_K_.NativeRelaySignal;
+import signals.nativesignals.NativeRelaySignal;
 
 import flash.display.Sprite;
 import flash.events.MouseEvent;

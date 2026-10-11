@@ -6,7 +6,7 @@
 package _02t {
 import MapBackgrounds.Background;
 
-import _K_D_._mapdetails;
+import com.company.map.MapJsonParser;
 
 import _vf._gs;
 
@@ -44,15 +44,15 @@ public class _pM_ extends Sprite {
     private function _P_i():_X_l {
         var _local1:ByteArray = new _01N_();
         var _local2:String = _local1.readUTFBytes(_local1.length);
-        _sl = _mapdetails._0M_t(_local2);
+        _sl = MapJsonParser.getMapSize(_local2);
         _jJ_ = BORDER;
         _U_b = (BORDER + int(((_sl.y_ - (2 * BORDER)) * Math.random())));
         _0F_q = new _0D_v();
         var _local3:_X_l = new _X_l(null);
         _local3.setProps((_sl.x_ + (2 * BORDER)), _sl.y_, "Background Map", Background._0H_W_, false, false, "Menu", 0);
         _local3.initialize();
-        _mapdetails._T_6(_local2, _local3, 0, 0);
-        _mapdetails._T_6(_local2, _local3, _sl.x_, 0);
+        MapJsonParser.mergeInto(_local2, _local3, 0, 0);
+        MapJsonParser.mergeInto(_local2, _local3, _sl.x_, 0);
         return (_local3);
     }
 

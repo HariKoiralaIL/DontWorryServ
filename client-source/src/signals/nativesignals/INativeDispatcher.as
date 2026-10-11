@@ -1,4 +1,4 @@
-package _S_K_ {
+package signals.nativesignals {
 import signals.IPrioritySignal;
 
 import flash.events.Event;

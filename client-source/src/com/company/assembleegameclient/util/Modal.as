@@ -2,7 +2,7 @@
  * Created by Thelzar on 7/20/2014.
  */
 package com.company.assembleegameclient.util {
-import _S_K_.NativeSignal;
+import signals.nativesignals.NativeSignal;
 
 import signals.Signal;
 

@@ -22,7 +22,7 @@ import signals.Signal;
 
 import com.company.assembleegameclient.objects.ObjectLibrary;
 
-import _S_K_.NativeRelaySignal;
+import signals.nativesignals.NativeRelaySignal;
 
 import flash.events.MouseEvent;
 import flash.events.Event;

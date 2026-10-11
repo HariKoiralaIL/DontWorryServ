@@ -8,7 +8,7 @@ import _02t._R_f;
 
 import com.gskinner.motion.GTween;
 
-import _S_K_.NativeRelaySignal;
+import signals.nativesignals.NativeRelaySignal;
 import signals.Signal;
 
 import _vf._5T_;

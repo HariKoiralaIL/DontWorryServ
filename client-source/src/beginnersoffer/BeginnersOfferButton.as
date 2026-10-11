@@ -1,5 +1,5 @@
 package beginnersoffer {
-import _S_K_.NativeRelaySignal;
+import signals.nativesignals.NativeRelaySignal;
 
 import com.company.assembleegameclient.util.TextureRedrawer;
 import com.company.ui.SimpleText;

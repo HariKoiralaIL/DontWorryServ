@@ -23,7 +23,7 @@ import com.company.rotmg.graphics.ScreenGraphic;
 
 import flash.events.MouseEvent;
 
-import _S_K_.NativeRelaySignal;
+import signals.nativesignals.NativeRelaySignal;
 import signals.Signal;
 
 import com.company.googleanalytics.GA;
