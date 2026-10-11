@@ -1,5 +1,5 @@
 package spriteeditor {
-import _zm.DropdownBox;
+import com.company.ui.dropdown.DropdownBox;
 
 /** Chooses what kind of sprite is being edited. */
 public class ModeDropdown extends DropdownBox {

@@ -1,5 +1,5 @@
 package spriteeditor {
-import _zm.DropdownBox;
+import com.company.ui.dropdown.DropdownBox;
 
 import com.company.util.IntPoint;
 

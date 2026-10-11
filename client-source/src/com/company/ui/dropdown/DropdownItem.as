@@ -1,4 +1,4 @@
-package _zm {
+package com.company.ui.dropdown {
 import com.company.ui.SimpleText;
 
 import flash.display.Sprite;

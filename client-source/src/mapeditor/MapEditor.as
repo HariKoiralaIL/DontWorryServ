@@ -1,7 +1,7 @@
 package mapeditor {
 import _F_1._05p;
 
-import _zm.DropdownBox;
+import com.company.ui.dropdown.DropdownBox;
 
 import client.debug.Stats;
 

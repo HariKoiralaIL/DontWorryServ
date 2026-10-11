@@ -5,7 +5,7 @@ import _tg.AddPictureEvent;
 import _tg.DeletePictureEvent;
 import _tg.LoadCompleteEvent;
 
-import _zm.DropdownBox;
+import com.company.ui.dropdown.DropdownBox;
 
 import events.GenericDataEvent;
 import events.TextErrorEvent;
