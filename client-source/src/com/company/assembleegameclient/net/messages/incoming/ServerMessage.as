@@ -1,5 +1,5 @@
 package com.company.assembleegameclient.net.messages.incoming {
-import com.company.net._098;
+import com.company.net.NetworkMessage;
 
 import flash.utils.IDataOutput;
 
@@ -7,7 +7,7 @@ import flash.utils.IDataOutput;
  * Base class for every message the server sends to the client.
  * Incoming messages are only ever parsed, never written, so serialising one is an error.
  */
-public class ServerMessage extends _098 {
+public class ServerMessage extends NetworkMessage {
 
     public function ServerMessage(id:uint) {
         super(id);

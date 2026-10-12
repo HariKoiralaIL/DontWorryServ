@@ -1,6 +1,6 @@
 package com.company.assembleegameclient.net.messages.outgoing {
 
-    import com.company.net._098;
+    import com.company.net.NetworkMessage;
 
     import flash.utils.IDataInput;
 
@@ -8,7 +8,7 @@ package com.company.assembleegameclient.net.messages.outgoing {
      * Base class for every message the client sends to the server.
      * Outgoing messages are write-only, so parsing is disabled.
      */
-    public class OutgoingMessage extends _098 {
+    public class OutgoingMessage extends NetworkMessage {
 
         public function OutgoingMessage(id:uint) {
             super(id);

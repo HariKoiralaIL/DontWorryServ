@@ -467,7 +467,7 @@ package com.company.assembleegameclient.game {
         }
         this._2e = false;
         this._0H_R_.stop();
-        this.gsc_._08._0F_G_();
+        this.gsc_._08.disconnect();
         SingletonSignal.instance.dispatch();
         stage.removeEventListener(MoneyChangedEvent.MONEY_CHANGED, this._L_u);
         stage.removeEventListener(Event.ENTER_FRAME, this.onEnterFrame);

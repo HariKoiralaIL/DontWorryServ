@@ -164,7 +164,7 @@ package com.company.assembleegameclient.net {
   import com.company.assembleegameclient.util.Currency;
   import com.company.assembleegameclient.util._wW_;
   import com.company.net.ServerConnection;
-  import com.company.net._098;
+  import com.company.net.NetworkMessage;
   import com.company.util.Random;
   import com.company.util._L_2;
   import com.hurlant.crypto.rsa.RSAKey;
@@ -288,92 +288,92 @@ package com.company.assembleegameclient.net {
       this.key_ = _arg7;
       this._2B_ = _arg8;
       this._08 = new ServerConnection(false);
-      this._08._g9(FAILURE, Failure, this._nc);
-      this._08._g9(CREATE_SUCCESS, CreateSuccess, this._cw);
-      this._08._g9(CREATE, Create, null);
-      this._08._g9(PLAYERSHOOT, PlayerShoot, null);
-      this._08._g9(MOVE, Move, null);
-      this._08._g9(PLAYERTEXT, PlayerText, null);
-      this._08._g9(TEXT, Text, this._A_i);
-      this._08._g9(_lE_, ServerPlayerShoot, this._C_i);
-      this._08._g9(DAMAGE, Damage, this._0A_K_);
-      this._08._g9(UPDATE, Update, this._mC_);
-      this._08._g9(_F_3, _098, null);
-      this._08._g9(NOTIFICATION, Notification, this._L_x);
-      this._08._g9(GLOBAL_NOTIFICATION, GlobalNotification, this._nG_);
-      this._08._g9(_29, NewTick, this._02H_);
-      this._08._g9(INVSWAP, InvSwap, null);
-      this._08._g9(USEITEM, UseItem, null);
-      this._08._g9(_0E_H_, ShowEffect, this._V_z);
-      this._08._g9(HELLO, Hello, null);
-      this._08._g9(GOTO, Goto, this._gk);
-      this._08._g9(INVDROP, InvDrop, null);
-      this._08._g9(INVRESULT, InvResult, this._I_I_);
-      this._08._g9(RECONNECT, Reconnect, this._X_3);
-      this._08._g9(PING, Ping, this._94);
-      this._08._g9(PONG, Pong, null);
-      this._08._g9(MAPINFO, MapInfo, this._ju);
-      this._08._g9(LOAD, Load, null);
-      this._08._g9(PIC, Pic, this._F_E_);
-      this._08._g9(SETCONDITION, SetCondition, null);
-      this._08._g9(TELEPORT, Teleport, null);
-      this._08._g9(USEPORTAL, UsePortal, null);
-      this._08._g9(DEATH, Death, this._038);
-      this._08._g9(BUY, Buy, null);
-      this._08._g9(BUYRESULT, BuyResult, this._cN_);
-      this._08._g9(AOE_, AOE, this._06y);
-      this._08._g9(GROUNDDAMAGE, GroundDamage, null);
-      this._08._g9(PLAYERHIT, PlayerHit, null);
-      this._08._g9(ENEMYHIT, EnemyHit, null);
-      this._08._g9(AOEACK, AoeAck, null);
-      this._08._g9(SHOOTACK, ShootAck, null);
-      this._08._g9(OTHERHIT, OtherHit, null);
-      this._08._g9(SQUAREHIT, SquareHit, null);
-      this._08._g9(GOTOACK, GotoAck, null);
-      this._08._g9(EDITACCOUNTLIST, EditAccountList, null);
-      this._08._g9(ACCOUNTLIST, AccountList, this._0J_R_);
-      this._08._g9(QUESTOBJID, QuestObjId, this._fF_);
-      this._08._g9(CHOOSENAME, ChooseName, null);
-      this._08._g9(NAMERESULT, NameResult, this._0D_s);
-      this._08._g9(CREATEGUILD, CreateGuild, null);
-      this._08._g9(_0F_w, CreateGuildResult, this._Z_g);
-      this._08._g9(GUILDREMOVE, GuildRemove, null);
-      this._08._g9(GUILDINVITE, GuildInvite, null);
-      this._08._g9(ALLYSHOOT, AllyShoot, this._P_F_);
-      this._08._g9(_0_k, EnemyShoot, this._0K_7);
-      this._08._g9(REQUESTTRADE, RequestTrade, null);
-      this._08._g9(TRADEREQUESTED, TradeRequested, this._G_r);
-      this._08._g9(TRADESTART, TradeStart, this._47);
-      this._08._g9(CHANGETRADE, ChangeTrade, null);
-      this._08._g9(TRADECHANGED, TradeChanged, this._0D_U_);
-      this._08._g9(ACCEPTTRADE, AcceptTrade, null);
-      this._08._g9(CANCELTRADE, CancelTrade, null);
-      this._08._g9(TRADEDONE, TradeDone, this._2d);
-      this._08._g9(TRADEACCEPTED, TradeAccepted, this._087);
-      this._08._g9(CLIENTSTAT, ClientStat, this._oA_);
-      this._08._g9(CHECKCREDITS, CheckCredits, null);
-      this._08._g9(ESCAPE, Escape, null);
-      this._08._g9(_02h, File, this._J_0);
-      this._08._g9(INVITEDTOGUILD, InvitedToGuild, this._cS_);
-      this._08._g9(JOINGUILD, JoinGuild, null);
-      this._08._g9(CHANGEGUILDRANK, ChangeGuildRank, null);
-      this._08._g9(PLAYSOUND, PlaySound, this._A_C_);
-      this._08._g9(CRAFT, Craft, null);
-      this._08._g9(VISIBULLET, Visibullet, null);
-      this._08._g9(SWITCHMUSIC, SwitchMusic, this.switchMusic);
-      this._08._g9(INVITEDTOPARTY, InvitedToParty, this.inviteToParty);
-      this._08._g9(JOINPARTY, JoinParty, null);
-      this._08._g9(PARTYINVITE, PartyInvite, null);
-      this._08._g9(ITEMSELECTSTART, ItemSelectStart, this.itemSelectStart);
-      this._08._g9(ITEMSELECTRESULT, ItemSelectResult, null);
-      this._08._g9(ITEMRESULT, ItemResult, this.itemResult);
-      this._08._g9(GETTEXTINPUT, GetTextInput, this.showTextInput);
-      this._08._g9(TEXTINPUTRESULT, TextInputResult, null);
-      this._08._g9(GIVEITEM, GiveItem, null);
-      this._08._g9(PLAYERCHEAT, PlayerCheat, null);
-      this._08._g9(MARKETTRADE, MarketTrade, null);
-      this._08._g9(MARKETTRADERESULT, MarketTradeResult, this.marketTradeResult);
-      this._08._g9(MARKETCREATE, MarketCreate, null);
+      this._08.registerMessage(FAILURE, Failure, this._nc);
+      this._08.registerMessage(CREATE_SUCCESS, CreateSuccess, this._cw);
+      this._08.registerMessage(CREATE, Create, null);
+      this._08.registerMessage(PLAYERSHOOT, PlayerShoot, null);
+      this._08.registerMessage(MOVE, Move, null);
+      this._08.registerMessage(PLAYERTEXT, PlayerText, null);
+      this._08.registerMessage(TEXT, Text, this._A_i);
+      this._08.registerMessage(_lE_, ServerPlayerShoot, this._C_i);
+      this._08.registerMessage(DAMAGE, Damage, this._0A_K_);
+      this._08.registerMessage(UPDATE, Update, this._mC_);
+      this._08.registerMessage(_F_3, NetworkMessage, null);
+      this._08.registerMessage(NOTIFICATION, Notification, this._L_x);
+      this._08.registerMessage(GLOBAL_NOTIFICATION, GlobalNotification, this._nG_);
+      this._08.registerMessage(_29, NewTick, this._02H_);
+      this._08.registerMessage(INVSWAP, InvSwap, null);
+      this._08.registerMessage(USEITEM, UseItem, null);
+      this._08.registerMessage(_0E_H_, ShowEffect, this._V_z);
+      this._08.registerMessage(HELLO, Hello, null);
+      this._08.registerMessage(GOTO, Goto, this._gk);
+      this._08.registerMessage(INVDROP, InvDrop, null);
+      this._08.registerMessage(INVRESULT, InvResult, this._I_I_);
+      this._08.registerMessage(RECONNECT, Reconnect, this._X_3);
+      this._08.registerMessage(PING, Ping, this._94);
+      this._08.registerMessage(PONG, Pong, null);
+      this._08.registerMessage(MAPINFO, MapInfo, this._ju);
+      this._08.registerMessage(LOAD, Load, null);
+      this._08.registerMessage(PIC, Pic, this._F_E_);
+      this._08.registerMessage(SETCONDITION, SetCondition, null);
+      this._08.registerMessage(TELEPORT, Teleport, null);
+      this._08.registerMessage(USEPORTAL, UsePortal, null);
+      this._08.registerMessage(DEATH, Death, this._038);
+      this._08.registerMessage(BUY, Buy, null);
+      this._08.registerMessage(BUYRESULT, BuyResult, this._cN_);
+      this._08.registerMessage(AOE_, AOE, this._06y);
+      this._08.registerMessage(GROUNDDAMAGE, GroundDamage, null);
+      this._08.registerMessage(PLAYERHIT, PlayerHit, null);
+      this._08.registerMessage(ENEMYHIT, EnemyHit, null);
+      this._08.registerMessage(AOEACK, AoeAck, null);
+      this._08.registerMessage(SHOOTACK, ShootAck, null);
+      this._08.registerMessage(OTHERHIT, OtherHit, null);
+      this._08.registerMessage(SQUAREHIT, SquareHit, null);
+      this._08.registerMessage(GOTOACK, GotoAck, null);
+      this._08.registerMessage(EDITACCOUNTLIST, EditAccountList, null);
+      this._08.registerMessage(ACCOUNTLIST, AccountList, this._0J_R_);
+      this._08.registerMessage(QUESTOBJID, QuestObjId, this._fF_);
+      this._08.registerMessage(CHOOSENAME, ChooseName, null);
+      this._08.registerMessage(NAMERESULT, NameResult, this._0D_s);
+      this._08.registerMessage(CREATEGUILD, CreateGuild, null);
+      this._08.registerMessage(_0F_w, CreateGuildResult, this._Z_g);
+      this._08.registerMessage(GUILDREMOVE, GuildRemove, null);
+      this._08.registerMessage(GUILDINVITE, GuildInvite, null);
+      this._08.registerMessage(ALLYSHOOT, AllyShoot, this._P_F_);
+      this._08.registerMessage(_0_k, EnemyShoot, this._0K_7);
+      this._08.registerMessage(REQUESTTRADE, RequestTrade, null);
+      this._08.registerMessage(TRADEREQUESTED, TradeRequested, this._G_r);
+      this._08.registerMessage(TRADESTART, TradeStart, this._47);
+      this._08.registerMessage(CHANGETRADE, ChangeTrade, null);
+      this._08.registerMessage(TRADECHANGED, TradeChanged, this._0D_U_);
+      this._08.registerMessage(ACCEPTTRADE, AcceptTrade, null);
+      this._08.registerMessage(CANCELTRADE, CancelTrade, null);
+      this._08.registerMessage(TRADEDONE, TradeDone, this._2d);
+      this._08.registerMessage(TRADEACCEPTED, TradeAccepted, this._087);
+      this._08.registerMessage(CLIENTSTAT, ClientStat, this._oA_);
+      this._08.registerMessage(CHECKCREDITS, CheckCredits, null);
+      this._08.registerMessage(ESCAPE, Escape, null);
+      this._08.registerMessage(_02h, File, this._J_0);
+      this._08.registerMessage(INVITEDTOGUILD, InvitedToGuild, this._cS_);
+      this._08.registerMessage(JOINGUILD, JoinGuild, null);
+      this._08.registerMessage(CHANGEGUILDRANK, ChangeGuildRank, null);
+      this._08.registerMessage(PLAYSOUND, PlaySound, this._A_C_);
+      this._08.registerMessage(CRAFT, Craft, null);
+      this._08.registerMessage(VISIBULLET, Visibullet, null);
+      this._08.registerMessage(SWITCHMUSIC, SwitchMusic, this.switchMusic);
+      this._08.registerMessage(INVITEDTOPARTY, InvitedToParty, this.inviteToParty);
+      this._08.registerMessage(JOINPARTY, JoinParty, null);
+      this._08.registerMessage(PARTYINVITE, PartyInvite, null);
+      this._08.registerMessage(ITEMSELECTSTART, ItemSelectStart, this.itemSelectStart);
+      this._08.registerMessage(ITEMSELECTRESULT, ItemSelectResult, null);
+      this._08.registerMessage(ITEMRESULT, ItemResult, this.itemResult);
+      this._08.registerMessage(GETTEXTINPUT, GetTextInput, this.showTextInput);
+      this._08.registerMessage(TEXTINPUTRESULT, TextInputResult, null);
+      this._08.registerMessage(GIVEITEM, GiveItem, null);
+      this._08.registerMessage(PLAYERCHEAT, PlayerCheat, null);
+      this._08.registerMessage(MARKETTRADE, MarketTrade, null);
+      this._08.registerMessage(MARKETTRADERESULT, MarketTradeResult, this.marketTradeResult);
+      this._08.registerMessage(MARKETCREATE, MarketCreate, null);
       this._08.addEventListener(Event.CONNECT, this._ux);
       this._08.addEventListener(Event.CLOSE, this._of);
       this._08.addEventListener(ErrorEvent.ERROR, this.onError);
@@ -399,8 +399,8 @@ package com.company.assembleegameclient.net {
     public function connect():void {
       this.gs_.textBox_.addText(Parameters.SendClient, ("Connecting to " + this.server_.name_));
       if (Parameters._wZ_) {
-        this._08._7s("rc4", _L_2._Z_S_("311f80691451c71b09a13a2a6e"));
-        this._08._wH_("rc4", _L_2._Z_S_("72c5583cafb6818995cbd74b80"));
+        this._08.setOutgoingCipher("rc4", _L_2._Z_S_("311f80691451c71b09a13a2a6e"));
+        this._08.setIncomingCipher("rc4", _L_2._Z_S_("72c5583cafb6818995cbd74b80"));
       }
       this._08.connect(this.server_.address_, this.server_.port_);
     }
@@ -422,7 +422,7 @@ package com.company.assembleegameclient.net {
     }
 
     public function playerShoot(_arg1:int, _arg2:Projectile):void {
-      var _local3:PlayerShoot = (this._08._Y_E_(PLAYERSHOOT) as PlayerShoot);
+      var _local3:PlayerShoot = (this._08.acquireMessage(PLAYERSHOOT) as PlayerShoot);
       _local3.time_ = _arg1;
       _local3.bulletId_ = _arg2.bulletId_;
       _local3.containerType_ = _arg2.containerType_;
@@ -433,19 +433,19 @@ package com.company.assembleegameclient.net {
     }
 
     public function playerCheatCheck():void {
-      var _local3:PlayerCheat = (this._08._Y_E_(PLAYERCHEAT) as PlayerCheat);
+      var _local3:PlayerCheat = (this._08.acquireMessage(PLAYERCHEAT) as PlayerCheat);
       this._08.sendMessage(_local3);
     }
 
     public function playerHit(_arg1:int, _arg2:int):void {
-      var _local3:PlayerHit = (this._08._Y_E_(PLAYERHIT) as PlayerHit);
+      var _local3:PlayerHit = (this._08.acquireMessage(PLAYERHIT) as PlayerHit);
       _local3.bulletId_ = _arg1;
       _local3.objectId_ = _arg2;
       this._08.sendMessage(_local3);
     }
 
     public function enemyHit(_arg1:int, _arg2:int, _arg3:int, _arg4:Boolean, _arg5:int):void {
-      var _local5:EnemyHit = (this._08._Y_E_(ENEMYHIT) as EnemyHit);
+      var _local5:EnemyHit = (this._08.acquireMessage(ENEMYHIT) as EnemyHit);
       _local5.time_ = _arg1;
       _local5.bulletId_ = _arg2;
       _local5.targetId_ = _arg3;
@@ -455,7 +455,7 @@ package com.company.assembleegameclient.net {
     }
 
     public function otherHit(_arg1:int, _arg2:int, _arg3:int, _arg4:int):void {
-      var _local5:OtherHit = (this._08._Y_E_(OTHERHIT) as OtherHit);
+      var _local5:OtherHit = (this._08.acquireMessage(OTHERHIT) as OtherHit);
       _local5.time_ = _arg1;
       _local5.bulletId_ = _arg2;
       _local5.objectId_ = _arg3;
@@ -464,7 +464,7 @@ package com.company.assembleegameclient.net {
     }
 
     public function squareHit(_arg1:int, _arg2:int, _arg3:int):void {
-      var _local4:SquareHit = (this._08._Y_E_(SQUAREHIT) as SquareHit);
+      var _local4:SquareHit = (this._08.acquireMessage(SQUAREHIT) as SquareHit);
       _local4.time_ = _arg1;
       _local4.bulletId_ = _arg2;
       _local4.objectId_ = _arg3;
@@ -472,7 +472,7 @@ package com.company.assembleegameclient.net {
     }
 
     public function _H_q(_arg1:int, _arg2:Number, _arg3:Number):void {
-      var _local4:AoeAck = (this._08._Y_E_(AOEACK) as AoeAck);
+      var _local4:AoeAck = (this._08.acquireMessage(AOEACK) as AoeAck);
       _local4.time_ = _arg1;
       _local4.position_.x_ = _arg2;
       _local4.position_.y_ = _arg3;
@@ -480,7 +480,7 @@ package com.company.assembleegameclient.net {
     }
 
     public function groundDamage(_arg1:int, _arg2:Number, _arg3:Number):void {
-      var _local4:GroundDamage = (this._08._Y_E_(GROUNDDAMAGE) as GroundDamage);
+      var _local4:GroundDamage = (this._08.acquireMessage(GROUNDDAMAGE) as GroundDamage);
       _local4.time_ = _arg1;
       _local4.position_.x_ = _arg2;
       _local4.position_.y_ = _arg3;
@@ -488,13 +488,13 @@ package com.company.assembleegameclient.net {
     }
 
     public function _eC_(_arg1:int):void {
-      var _local2:ShootAck = (this._08._Y_E_(SHOOTACK) as ShootAck);
+      var _local2:ShootAck = (this._08.acquireMessage(SHOOTACK) as ShootAck);
       _local2.time_ = _arg1;
       this._08.sendMessage(_local2);
     }
 
     public function playerText(_arg1:String):void {
-      var _local2:PlayerText = (this._08._Y_E_(PLAYERTEXT) as PlayerText);
+      var _local2:PlayerText = (this._08.acquireMessage(PLAYERTEXT) as PlayerText);
       _local2.text_ = _arg1;
       this._08.sendMessage(_local2);
     }
@@ -517,7 +517,7 @@ package com.company.assembleegameclient.net {
       if (!gs_) {
         return (false);
       }
-      var _local8:InvSwap = (this._08._Y_E_(INVSWAP) as InvSwap);
+      var _local8:InvSwap = (this._08.acquireMessage(INVSWAP) as InvSwap);
       _local8.time_ = gs_.lastUpdate_;
       _local8.position_.x_ = _arg1.x_;
       _local8.position_.y_ = _arg1.y_;
@@ -539,7 +539,7 @@ package com.company.assembleegameclient.net {
     }
 
     public function _8q(_arg1:int, _arg2:int, _arg3:int):void {
-      var _local4:InvDrop = (this._08._Y_E_(INVDROP) as InvDrop);
+      var _local4:InvDrop = (this._08.acquireMessage(INVDROP) as InvDrop);
       _local4.slotObject_.objectId_ = _arg1;
       _local4.slotObject_.slotId_ = _arg2;
       _local4.slotObject_.objectType_ = _arg3;
@@ -547,7 +547,7 @@ package com.company.assembleegameclient.net {
     }
 
     public function useItem(_arg1:int, _arg2:int, _arg3:int, _arg4:int, _arg5:Number, _arg6:Number):void {
-      var _local7:UseItem = (this._08._Y_E_(USEITEM) as UseItem);
+      var _local7:UseItem = (this._08.acquireMessage(USEITEM) as UseItem);
       _local7.time_ = _arg1;
       _local7.slotObject_.objectId_ = _arg2;
       _local7.slotObject_.slotId_ = _arg3;
@@ -558,7 +558,7 @@ package com.company.assembleegameclient.net {
     }
 
     public function _6v(_arg1:uint, _arg2:Number):void {
-      var _local3:SetCondition = (this._08._Y_E_(SETCONDITION) as SetCondition);
+      var _local3:SetCondition = (this._08.acquireMessage(SETCONDITION) as SetCondition);
       _local3.conditionEffect_ = _arg1;
       _local3.conditionDuration_ = _arg2;
       this._08.sendMessage(_local3);
@@ -573,7 +573,7 @@ package com.company.assembleegameclient.net {
         _local3 = _arg2.x_;
         _local4 = _arg2.y_;
       }
-      var _local5:Move = (this._08._Y_E_(MOVE) as Move);
+      var _local5:Move = (this._08.acquireMessage(MOVE) as Move);
       _local5.tickId_ = _arg1;
       _local5.time_ = this.gs_.lastUpdate_;
       _local5.newPosition_.x_ = _local3;
@@ -595,13 +595,13 @@ package com.company.assembleegameclient.net {
     }
 
     public function teleport(_arg1:int):void {
-      var _local2:Teleport = (this._08._Y_E_(TELEPORT) as Teleport);
+      var _local2:Teleport = (this._08.acquireMessage(TELEPORT) as Teleport);
       _local2.objectId_ = _arg1;
       this._08.sendMessage(_local2);
     }
 
     public function usePortal(_arg1:int):void {
-      var _local2:UsePortal = (this._08._Y_E_(USEPORTAL) as UsePortal);
+      var _local2:UsePortal = (this._08.acquireMessage(USEPORTAL) as UsePortal);
       _local2.objectId_ = _arg1;
       this._08.sendMessage(_local2);
     }
@@ -619,19 +619,19 @@ package com.company.assembleegameclient.net {
         _local3 = ((((this.gs_.charList_.converted_) || ((this.gs_.map_.player_.credits_ > 100)))) || ((_local2.price_ > this.gs_.map_.player_.credits_)));
       }
       this.outstandingBuy_ = new _W_v(_local2.soldObjectInternalName(), _local2.price_, _local2.currency_, _local3);
-      var _local4:Buy = (this._08._Y_E_(BUY) as Buy);
+      var _local4:Buy = (this._08.acquireMessage(BUY) as Buy);
       _local4.objectId_ = _arg1;
       this._08.sendMessage(_local4);
     }
 
     public function _S__(_arg1:int):void {
-      var _local2:GotoAck = (this._08._Y_E_(GOTOACK) as GotoAck);
+      var _local2:GotoAck = (this._08.acquireMessage(GOTOACK) as GotoAck);
       _local2.time_ = _arg1;
       this._08.sendMessage(_local2);
     }
 
     public function _eH_(_arg1:int, _arg2:Boolean, _arg3:int):void {
-      var _local4:EditAccountList = (this._08._Y_E_(EDITACCOUNTLIST) as EditAccountList);
+      var _local4:EditAccountList = (this._08.acquireMessage(EDITACCOUNTLIST) as EditAccountList);
       _local4.accountListId_ = _arg1;
       _local4.add_ = _arg2;
       _local4.objectId_ = _arg3;
@@ -639,62 +639,62 @@ package com.company.assembleegameclient.net {
     }
 
     public function _K_Q_(_arg1:String):void {
-      var _local2:ChooseName = (this._08._Y_E_(CHOOSENAME) as ChooseName);
+      var _local2:ChooseName = (this._08.acquireMessage(CHOOSENAME) as ChooseName);
       _local2.name_ = _arg1;
       this._08.sendMessage(_local2);
     }
 
     public function _S_W_(_arg1:String):void {
-      var _local2:CreateGuild = (this._08._Y_E_(CREATEGUILD) as CreateGuild);
+      var _local2:CreateGuild = (this._08.acquireMessage(CREATEGUILD) as CreateGuild);
       _local2.name_ = _arg1;
       this._08.sendMessage(_local2);
     }
 
     public function guildRemove(_arg1:String):void {
-      var _local2:GuildRemove = (this._08._Y_E_(GUILDREMOVE) as GuildRemove);
+      var _local2:GuildRemove = (this._08.acquireMessage(GUILDREMOVE) as GuildRemove);
       _local2.name_ = _arg1;
       this._08.sendMessage(_local2);
     }
 
     public function _H_X_(_arg1:String):void {
-      var _local2:GuildInvite = (this._08._Y_E_(GUILDINVITE) as GuildInvite);
+      var _local2:GuildInvite = (this._08.acquireMessage(GUILDINVITE) as GuildInvite);
       _local2.name_ = _arg1;
       this._08.sendMessage(_local2);
     }
 
     public function partyInvite(_arg1:String):void {
-      var _local2:PartyInvite = (this._08._Y_E_(PARTYINVITE) as PartyInvite);
+      var _local2:PartyInvite = (this._08.acquireMessage(PARTYINVITE) as PartyInvite);
       _local2.name_ = _arg1;
       this._08.sendMessage(_local2);
     }
 
     public function requestTrade(_arg1:String):void {
-      var _local2:RequestTrade = (this._08._Y_E_(REQUESTTRADE) as RequestTrade);
+      var _local2:RequestTrade = (this._08.acquireMessage(REQUESTTRADE) as RequestTrade);
       _local2.name_ = _arg1;
       this._08.sendMessage(_local2);
     }
 
     public function _rQ_(_arg1:Vector.<Boolean>):void {
-      var _local2:ChangeTrade = (this._08._Y_E_(CHANGETRADE) as ChangeTrade);
+      var _local2:ChangeTrade = (this._08.acquireMessage(CHANGETRADE) as ChangeTrade);
       _local2.offer_ = _arg1;
       this._08.sendMessage(_local2);
     }
 
     public function _E_i(_arg1:Vector.<Boolean>, _arg2:Vector.<Boolean>):void {
-      var _local3:AcceptTrade = (this._08._Y_E_(ACCEPTTRADE) as AcceptTrade);
+      var _local3:AcceptTrade = (this._08.acquireMessage(ACCEPTTRADE) as AcceptTrade);
       _local3.myOffer_ = _arg1;
       _local3.yourOffer_ = _arg2;
       this._08.sendMessage(_local3);
     }
 
     public function selectItem(_arg1:int):void {
-      var _local3:ItemSelectResult = (this._08._Y_E_(ITEMSELECTRESULT) as ItemSelectResult);
+      var _local3:ItemSelectResult = (this._08.acquireMessage(ITEMSELECTRESULT) as ItemSelectResult);
       _local3.slot_ = _arg1;
       this._08.sendMessage(_local3);
     }
 
     public function textInputResult(_arg1:Boolean, _arg2:String, _arg3:String):void {
-      var _local3:TextInputResult = (this._08._Y_E_(TEXTINPUTRESULT) as TextInputResult);
+      var _local3:TextInputResult = (this._08.acquireMessage(TEXTINPUTRESULT) as TextInputResult);
       _local3.success_ = _arg1;
       _local3.action_ = _arg2;
       _local3.input_ = _arg3;
@@ -702,13 +702,13 @@ package com.company.assembleegameclient.net {
     }
 
     public function marketTrade(_arg1:int):void {
-      var _local3:MarketTrade = (this._08._Y_E_(MARKETTRADE) as MarketTrade);
+      var _local3:MarketTrade = (this._08.acquireMessage(MARKETTRADE) as MarketTrade);
       _local3.tradeId_ = _arg1;
       this._08.sendMessage(_local3);
     }
 
     public function marketCreate(_arg1:Vector.<int>, _arg2:Vector.<int>, _arg3:Vector.<Object>):void {
-      var _local3:MarketCreate = (this._08._Y_E_(MARKETCREATE) as MarketCreate);
+      var _local3:MarketCreate = (this._08.acquireMessage(MARKETCREATE) as MarketCreate);
       _local3.includedSlots_ = _arg1;
       _local3.requestItems_ = _arg2;
       _local3.requestData_ = _arg3;
@@ -716,7 +716,7 @@ package com.company.assembleegameclient.net {
     }
 
     public function giveItem(_arg1:int, _arg2:Object):void {
-      var _local3:GiveItem = (this._08._Y_E_(GIVEITEM) as GiveItem);
+      var _local3:GiveItem = (this._08.acquireMessage(GIVEITEM) as GiveItem);
       _local3.itemType_ = _arg1;
       if(_arg2 != null) {
         _local3.itemData_ = _arg2;
@@ -728,44 +728,44 @@ package com.company.assembleegameclient.net {
 
 
     public function __set():void {
-      this._08.sendMessage(this._08._Y_E_(CANCELTRADE));
+      this._08.sendMessage(this._08.acquireMessage(CANCELTRADE));
     }
 
     public function _0J_l():void {
-      this._08.sendMessage(this._08._Y_E_(CHECKCREDITS));
+      this._08.sendMessage(this._08.acquireMessage(CHECKCREDITS));
     }
 
     public function _M_6():void {
-      this._08.sendMessage(this._08._Y_E_(ESCAPE));
+      this._08.sendMessage(this._08.acquireMessage(ESCAPE));
     }
 
     public function joinGuild(_arg1:String):void {
-      var _local2:JoinGuild = (this._08._Y_E_(JOINGUILD) as JoinGuild);
+      var _local2:JoinGuild = (this._08.acquireMessage(JOINGUILD) as JoinGuild);
       _local2.guildName_ = _arg1;
       this._08.sendMessage(_local2);
     }
 
     public function joinParty(_arg1:int):void {
-      var _local2:JoinParty = (this._08._Y_E_(JOINPARTY) as JoinParty);
+      var _local2:JoinParty = (this._08.acquireMessage(JOINPARTY) as JoinParty);
       _local2.partyID_ = _arg1;
       this._08.sendMessage(_local2);
     }
 
     public function _k8(_arg1:String, _arg2:int):void {
-      var _local3:ChangeGuildRank = (this._08._Y_E_(CHANGEGUILDRANK) as ChangeGuildRank);
+      var _local3:ChangeGuildRank = (this._08.acquireMessage(CHANGEGUILDRANK) as ChangeGuildRank);
       _local3.name_ = _arg1;
       _local3.guildRank_ = _arg2;
       this._08.sendMessage(_local3);
     }
 
     public function craftItems(_arg1:int):void {
-      var _loc2_:Craft = this._08._Y_E_(CRAFT) as Craft;
+      var _loc2_:Craft = this._08.acquireMessage(CRAFT) as Craft;
       _loc2_.objectId_ = _arg1;
       this._08.sendMessage(_loc2_);
     }
 
     public function sendVisibullet(_damage:int, _enemyId:int, _bulletId:int, _armorPiercing:Boolean):void {
-      var _packet:Visibullet = this._08._Y_E_(VISIBULLET) as Visibullet;
+      var _packet:Visibullet = this._08.acquireMessage(VISIBULLET) as Visibullet;
       _packet.damage_ = _damage;
       _packet.enemyId_ = _enemyId;
       _packet.bulletId_ = _bulletId;
@@ -778,13 +778,13 @@ package com.company.assembleegameclient.net {
     }
 
     private function create():void {
-      var _local1:Create = (this._08._Y_E_(CREATE) as Create);
+      var _local1:Create = (this._08.acquireMessage(CREATE) as Create);
       _local1.objectType_ = Parameters.data_.playerObjectType;
       this._08.sendMessage(_local1);
     }
 
     private function load():void {
-      var _local1:Load = (this._08._Y_E_(LOAD) as Load);
+      var _local1:Load = (this._08.acquireMessage(LOAD) as Load);
       _local1.charId_ = this.charId_;
       this._08.sendMessage(_local1);
     }
@@ -922,7 +922,7 @@ package com.company.assembleegameclient.net {
     private function _mC_(_arg1:Update):void {
       var _local3:int;
       var _local4:_iZ_;
-      var _local2:_098 = this._08._Y_E_(_F_3);
+      var _local2:NetworkMessage = this._08.acquireMessage(_F_3);
       this._08.sendMessage(_local2);
       _local3 = 0;
       while (_local3 < _arg1.tiles_.length) {
@@ -1479,7 +1479,7 @@ package com.company.assembleegameclient.net {
     }
 
     private function _94(_arg1:Ping):void {
-      var _local2:Pong = (this._08._Y_E_(PONG) as Pong);
+      var _local2:Pong = (this._08.acquireMessage(PONG) as Pong);
       _local2.serial_ = _arg1.serial_;
       _local2.time_ = getTimer();
       this._08.sendMessage(_local2);
@@ -1714,7 +1714,7 @@ package com.company.assembleegameclient.net {
 
     private function _ux(_arg1:Event):void {
       this.gs_.textBox_.addText(Parameters.SendClient, "Enjoy your Stay!");
-      var _local2:Hello = (this._08._Y_E_(HELLO) as Hello);
+      var _local2:Hello = (this._08.acquireMessage(HELLO) as Hello);
       _local2.copyright_ = "450d6aefthfasdt45z4asd78b8227atfh37xdff";
       _local2._5c2_ = "bledixon.com";
       _local2.buildVersion_ = Parameters.clientVersion;
