@@ -1,6 +1,6 @@
 package com.company.assembleegameclient.objects {
 
-  import _011.Text;
+  import com.company.assembleegameclient.net.messages.incoming.Text;
 
   import client.ui.panels.Panel;
   import client.ui.panels.TextPanel;

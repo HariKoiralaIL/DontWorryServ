@@ -1,6 +1,6 @@
 package game.signals {
     import signals.Signal;
-    import _011.Death;
+    import com.company.assembleegameclient.net.messages.incoming.Death;
 
     public class DeathSignal extends Signal {
 

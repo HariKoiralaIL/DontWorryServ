@@ -1,5 +1,5 @@
 package client.ui.screens {
-import _011.MapInfo;
+import com.company.assembleegameclient.net.messages.incoming.MapInfo;
 
 import com.company.ui.SimpleText;
 

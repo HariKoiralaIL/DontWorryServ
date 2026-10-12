@@ -1,6 +1,6 @@
 package com.company.assembleegameclient.ui {
 
-  import _011.ItemSelectStart;
+  import com.company.assembleegameclient.net.messages.incoming.ItemSelectStart;
 
   import optionsscreen.Options;
 

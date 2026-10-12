@@ -10,7 +10,7 @@ import flash.utils.Dictionary;
 
 import com.company.util.PointUtil;
 
-import _011._0K_U_;
+import com.company.assembleegameclient.net.messages.incoming.AccountList;
 
 public class _ez {
 
@@ -82,7 +82,7 @@ public class _ez {
         this.map_.gs_.gsc_._eH_(0, false, _arg1.objectId_);
     }
 
-    public function setStars(_arg1:_0K_U_):void {
+    public function setStars(_arg1:AccountList):void {
         var _local3:int;
         var _local2:int;
         while (_local2 < _arg1.accountIds_.length) {
@@ -106,7 +106,7 @@ public class _ez {
         this.map_.gs_.gsc_._eH_(1, false, _arg1.objectId_);
     }
 
-    public function setIgnores(_arg1:_0K_U_):void {
+    public function setIgnores(_arg1:AccountList):void {
         var _local3:int;
         this._0M_w = new Dictionary(true);
         var _local2:int;

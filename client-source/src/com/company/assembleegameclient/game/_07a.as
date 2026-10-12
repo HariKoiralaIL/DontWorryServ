@@ -5,7 +5,7 @@
 
 package com.company.assembleegameclient.game {
 
-  import _0A_g.PlayerCheat;
+  import com.company.assembleegameclient.net.messages.outgoing.PlayerCheat;
 
   import optionsscreen.Options;
 

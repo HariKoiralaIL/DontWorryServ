@@ -4,7 +4,7 @@
 //com.company.assembleegameclient.ui._0B_X_
 
 package com.company.assembleegameclient.ui {
-    import _011.ItemSelectStart;
+    import com.company.assembleegameclient.net.messages.incoming.ItemSelectStart;
 
   import com.company.assembleegameclient.parameters.Parameters;
 
@@ -20,9 +20,9 @@ package com.company.assembleegameclient.ui {
 
     import flash.events.Event;
 
-    import _011._S_M_;
-    import _011._Z_J_;
-    import _011._qe;
+    import com.company.assembleegameclient.net.messages.incoming.TradeStart;
+    import com.company.assembleegameclient.net.messages.incoming.TradeChanged;
+    import com.company.assembleegameclient.net.messages.incoming.TradeAccepted;
 
     import com.company.util._O_m;
     import com.company.assembleegameclient.objects.Player;
@@ -88,7 +88,7 @@ package com.company.assembleegameclient.ui {
             }
         }
 
-        public function _0L_v(_arg1:_S_M_):void {
+        public function _0L_v(_arg1:TradeStart):void {
             if (this._6K_ != null) {
                 return;
             }
@@ -104,7 +104,7 @@ package com.company.assembleegameclient.ui {
             this._02y.selectItems(_arg1);
         }
 
-        public function _ss(_arg1:_Z_J_):void {
+        public function _ss(_arg1:TradeChanged):void {
             if (this._6K_ == null) {
                 return;
             }
@@ -115,7 +115,7 @@ package com.company.assembleegameclient.ui {
             this._0L_A_();
         }
 
-        public function _mH_(_arg1:_qe):void {
+        public function _mH_(_arg1:TradeAccepted):void {
             if (this._6K_ == null) {
                 return;
             }

@@ -1,5 +1,5 @@
 package ui.mediators {
-import _011.MapInfo;
+import com.company.assembleegameclient.net.messages.incoming.MapInfo;
 
 import client.ui.screens.MapLoadingOverlay;
 

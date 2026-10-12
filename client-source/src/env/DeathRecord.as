@@ -1,5 +1,5 @@
 package env {
-import _011.Death;
+import com.company.assembleegameclient.net.messages.incoming.Death;
 
 public class DeathRecord {
 

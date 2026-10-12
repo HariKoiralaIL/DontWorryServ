@@ -11,7 +11,7 @@ import com.company.assembleegameclient.game.GameSprite;
 import flash.events.Event;
 import flash.events.MouseEvent;
 
-import _011._S_M_;
+import com.company.assembleegameclient.net.messages.incoming.TradeStart;
 
 
 public class _zg extends Sprite {
@@ -19,7 +19,7 @@ public class _zg extends Sprite {
     public static const WIDTH:int = 200;
     public static const HEIGHT:int = 400;
 
-    public function _zg(_arg1:GameSprite, _arg2:_S_M_) {
+    public function _zg(_arg1:GameSprite, _arg2:TradeStart) {
         this.gs_ = _arg1;
         var _local3:String = this.gs_.map_.player_.name_;
         this._rl = new _eb(_arg1, _local3, _arg2.myItems_, true);

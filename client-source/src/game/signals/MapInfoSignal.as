@@ -1,6 +1,6 @@
 package game.signals {
     import signals.Signal;
-    import _011.MapInfo;
+    import com.company.assembleegameclient.net.messages.incoming.MapInfo;
 
     public class MapInfoSignal extends Signal {
 

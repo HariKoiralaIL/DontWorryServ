@@ -5,7 +5,7 @@ import com.company.assembleegameclient.parameters.Parameters;
 import env.DeathRecord;
 import env.ServerListState;
 
-import _011.Death;
+import com.company.assembleegameclient.net.messages.incoming.Death;
 
 /**
  * Stores the latest death info on the shared DeathRecord and clears

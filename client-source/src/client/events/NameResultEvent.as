@@ -1,5 +1,5 @@
 package client.events {
-import _011.NameResult;
+import com.company.assembleegameclient.net.messages.incoming.NameResult;
 
 import flash.events.Event;
 

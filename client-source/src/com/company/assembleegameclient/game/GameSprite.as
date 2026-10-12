@@ -5,7 +5,7 @@
 
 package com.company.assembleegameclient.game {
 
-  import _011.MapInfo;
+  import com.company.assembleegameclient.net.messages.incoming.MapInfo;
 
   import client.events.MoneyChangedEvent;
 

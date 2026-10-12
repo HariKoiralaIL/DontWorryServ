@@ -4,41 +4,41 @@
 //com.company.assembleegameclient.net.PacketManager
 
 package com.company.assembleegameclient.net {
-  import _011.*;
-  import _011.AOE;
-  import _011.BuyResult;
-  import _011.Damage;
-  import _011.Death;
-  import _011.File;
-  import _011.Goto;
-  import _011.InvResult;
-  import _011.InvitedToGuild;
-  import _011.MapInfo;
-  import _011.NameResult;
-  import _011.Notification;
-  import _011.Pic;
-  import _011.ShowEffect;
-  import _011.Text;
-  import _011.Update;
-  import _011._0F_I_;
-  import _011._0F_u;
-  import _011._0K_U_;
-  import _011._0_l;
-  import _011._8_;
-  import _011._A_L_;
-  import _011._C_3;
-  import _011._G_f;
-  import _011._I_o;
-  import _011._S_M_;
-  import _011._T_m;
-  import _011._T_n;
-  import _011._Y_F_;
-  import _011._Y_G_;
-  import _011._Z_J_;
-  import _011._bB_;
-  import _011.GlobalNotification;
-  import _011._ic;
-  import _011._qe;
+  import com.company.assembleegameclient.net.messages.incoming.*;
+  import com.company.assembleegameclient.net.messages.incoming.AOE;
+  import com.company.assembleegameclient.net.messages.incoming.BuyResult;
+  import com.company.assembleegameclient.net.messages.incoming.Damage;
+  import com.company.assembleegameclient.net.messages.incoming.Death;
+  import com.company.assembleegameclient.net.messages.incoming.File;
+  import com.company.assembleegameclient.net.messages.incoming.Goto;
+  import com.company.assembleegameclient.net.messages.incoming.InvResult;
+  import com.company.assembleegameclient.net.messages.incoming.InvitedToGuild;
+  import com.company.assembleegameclient.net.messages.incoming.MapInfo;
+  import com.company.assembleegameclient.net.messages.incoming.NameResult;
+  import com.company.assembleegameclient.net.messages.incoming.Notification;
+  import com.company.assembleegameclient.net.messages.incoming.Pic;
+  import com.company.assembleegameclient.net.messages.incoming.ShowEffect;
+  import com.company.assembleegameclient.net.messages.incoming.Text;
+  import com.company.assembleegameclient.net.messages.incoming.Update;
+  import com.company.assembleegameclient.net.messages.incoming.Ping;
+  import com.company.assembleegameclient.net.messages.incoming.ClientStat;
+  import com.company.assembleegameclient.net.messages.incoming.AccountList;
+  import com.company.assembleegameclient.net.messages.incoming.NewTick;
+  import com.company.assembleegameclient.net.messages.incoming.Reconnect;
+  import com.company.assembleegameclient.net.messages.incoming.TradeDone;
+  import com.company.assembleegameclient.net.messages.incoming.EnemyShoot;
+  import com.company.assembleegameclient.net.messages.incoming.Failure;
+  import com.company.assembleegameclient.net.messages.incoming.AllyShoot;
+  import com.company.assembleegameclient.net.messages.incoming.TradeStart;
+  import com.company.assembleegameclient.net.messages.incoming.ServerPlayerShoot;
+  import com.company.assembleegameclient.net.messages.incoming.CreateSuccess;
+  import com.company.assembleegameclient.net.messages.incoming.QuestObjId;
+  import com.company.assembleegameclient.net.messages.incoming.TradeRequested;
+  import com.company.assembleegameclient.net.messages.incoming.TradeChanged;
+  import com.company.assembleegameclient.net.messages.incoming.PlaySound;
+  import com.company.assembleegameclient.net.messages.incoming.GlobalNotification;
+  import com.company.assembleegameclient.net.messages.incoming.CreateGuildResult;
+  import com.company.assembleegameclient.net.messages.incoming.TradeAccepted;
 
   import mapoverlay.SpeechBalloon;
   import mapoverlay.CharacterStatusText;
@@ -47,42 +47,42 @@ package com.company.assembleegameclient.net {
 
   import client.signals.typed.BooleanSignal;
 
-  import _0A_g.*;
-  import _0A_g.Buy;
-  import _0A_g.Create;
-  import _0A_g.Teleport;
-  import _0A_g._03l;
-  import _0A_g._09F_;
-  import _0A_g._0A_1;
-  import _0A_g._0B_y;
-  import _0A_g._0C_7;
-  import _0A_g._0C_G_;
-  import _0A_g._0F_i;
-  import _0A_g._0G_8;
-  import _0A_g._0I_8;
-  import _0A_g._0L_P_;
-  import _0A_g._2q;
-  import _0A_g._99;
-  import _0A_g._I_s;
-  import _0A_g._J_I_;
-  import _0A_g._K_w;
-  import _0A_g._L_F_;
-  import _0A_g._U_2;
-  import _0A_g._V_3;
-  import _0A_g._W_c;
-  import _0A_g._X_c;
-  import _0A_g._bG_;
-  import _0A_g._fI_;
-  import _0A_g._hJ_;
-  import _0A_g._kL_;
-  import _0A_g._kT_;
-  import _0A_g._mw;
-  import _0A_g._ns;
-  import _0A_g._oy;
-  import _0A_g._pa;
-  import _0A_g._r5;
-  import _0A_g._tN_;
-  import _0A_g._vp;
+  import com.company.assembleegameclient.net.messages.outgoing.*;
+  import com.company.assembleegameclient.net.messages.outgoing.Buy;
+  import com.company.assembleegameclient.net.messages.outgoing.Create;
+  import com.company.assembleegameclient.net.messages.outgoing.Teleport;
+  import com.company.assembleegameclient.net.messages.outgoing.UsePortal;
+  import com.company.assembleegameclient.net.messages.outgoing.ChangeGuildRank;
+  import com.company.assembleegameclient.net.messages.outgoing.AcceptTrade;
+  import com.company.assembleegameclient.net.messages.outgoing.Hello;
+  import com.company.assembleegameclient.net.messages.outgoing.EditAccountList;
+  import com.company.assembleegameclient.net.messages.outgoing.InvDrop;
+  import com.company.assembleegameclient.net.messages.outgoing.Escape;
+  import com.company.assembleegameclient.net.messages.outgoing.JoinGuild;
+  import com.company.assembleegameclient.net.messages.outgoing.ShootAck;
+  import com.company.assembleegameclient.net.messages.outgoing.PlayerShoot;
+  import com.company.assembleegameclient.net.messages.outgoing.ChangeTrade;
+  import com.company.assembleegameclient.net.messages.outgoing.InvSwap;
+  import com.company.assembleegameclient.net.messages.outgoing.RequestTrade;
+  import com.company.assembleegameclient.net.messages.outgoing.EnemyHit;
+  import com.company.assembleegameclient.net.messages.outgoing.GroundDamage;
+  import com.company.assembleegameclient.net.messages.outgoing.PlayerHit;
+  import com.company.assembleegameclient.net.messages.outgoing.CreateGuild;
+  import com.company.assembleegameclient.net.messages.outgoing.GuildInvite;
+  import com.company.assembleegameclient.net.messages.outgoing.Move;
+  import com.company.assembleegameclient.net.messages.outgoing.CheckCredits;
+  import com.company.assembleegameclient.net.messages.outgoing.AoeAck;
+  import com.company.assembleegameclient.net.messages.outgoing.UseItem;
+  import com.company.assembleegameclient.net.messages.outgoing.SquareHit;
+  import com.company.assembleegameclient.net.messages.outgoing.Pong;
+  import com.company.assembleegameclient.net.messages.outgoing.OtherHit;
+  import com.company.assembleegameclient.net.messages.outgoing.SetCondition;
+  import com.company.assembleegameclient.net.messages.outgoing.GotoAck;
+  import com.company.assembleegameclient.net.messages.outgoing.ChooseName;
+  import com.company.assembleegameclient.net.messages.outgoing.PlayerText;
+  import com.company.assembleegameclient.net.messages.outgoing.Load;
+  import com.company.assembleegameclient.net.messages.outgoing.GuildRemove;
+  import com.company.assembleegameclient.net.messages.outgoing.CancelTrade;
 
   import client.ui.frames.ItemResultBox;
   import client.ui.frames.TextInputForm;
@@ -288,76 +288,76 @@ package com.company.assembleegameclient.net {
       this.key_ = _arg7;
       this._2B_ = _arg8;
       this._08 = new ServerConnection(false);
-      this._08._g9(FAILURE, _G_f, this._nc);
-      this._08._g9(CREATE_SUCCESS, _T_n, this._cw);
+      this._08._g9(FAILURE, Failure, this._nc);
+      this._08._g9(CREATE_SUCCESS, CreateSuccess, this._cw);
       this._08._g9(CREATE, Create, null);
-      this._08._g9(PLAYERSHOOT, _0L_P_, null);
-      this._08._g9(MOVE, _W_c, null);
-      this._08._g9(PLAYERTEXT, _pa, null);
+      this._08._g9(PLAYERSHOOT, PlayerShoot, null);
+      this._08._g9(MOVE, Move, null);
+      this._08._g9(PLAYERTEXT, PlayerText, null);
       this._08._g9(TEXT, Text, this._A_i);
-      this._08._g9(_lE_, _T_m, this._C_i);
+      this._08._g9(_lE_, ServerPlayerShoot, this._C_i);
       this._08._g9(DAMAGE, Damage, this._0A_K_);
       this._08._g9(UPDATE, Update, this._mC_);
       this._08._g9(_F_3, _098, null);
       this._08._g9(NOTIFICATION, Notification, this._L_x);
-      this._08._g9(GLOBAL_NOTIFICATION, _iD_, this._nG_);
-      this._08._g9(_29, _0_l, this._02H_);
-      this._08._g9(INVSWAP, _99, null);
-      this._08._g9(USEITEM, _fI_, null);
+      this._08._g9(GLOBAL_NOTIFICATION, GlobalNotification, this._nG_);
+      this._08._g9(_29, NewTick, this._02H_);
+      this._08._g9(INVSWAP, InvSwap, null);
+      this._08._g9(USEITEM, UseItem, null);
       this._08._g9(_0E_H_, ShowEffect, this._V_z);
-      this._08._g9(HELLO, _0B_y, null);
+      this._08._g9(HELLO, Hello, null);
       this._08._g9(GOTO, Goto, this._gk);
-      this._08._g9(INVDROP, _0C_G_, null);
+      this._08._g9(INVDROP, InvDrop, null);
       this._08._g9(INVRESULT, InvResult, this._I_I_);
-      this._08._g9(RECONNECT, _8_, this._X_3);
-      this._08._g9(PING, _0F_I_, this._94);
-      this._08._g9(PONG, _kL_, null);
+      this._08._g9(RECONNECT, Reconnect, this._X_3);
+      this._08._g9(PING, Ping, this._94);
+      this._08._g9(PONG, Pong, null);
       this._08._g9(MAPINFO, MapInfo, this._ju);
-      this._08._g9(LOAD, _r5, null);
+      this._08._g9(LOAD, Load, null);
       this._08._g9(PIC, Pic, this._F_E_);
-      this._08._g9(SETCONDITION, _mw, null);
+      this._08._g9(SETCONDITION, SetCondition, null);
       this._08._g9(TELEPORT, Teleport, null);
-      this._08._g9(USEPORTAL, _03l, null);
+      this._08._g9(USEPORTAL, UsePortal, null);
       this._08._g9(DEATH, Death, this._038);
       this._08._g9(BUY, Buy, null);
       this._08._g9(BUYRESULT, BuyResult, this._cN_);
       this._08._g9(AOE_, AOE, this._06y);
-      this._08._g9(GROUNDDAMAGE, _K_w, null);
-      this._08._g9(PLAYERHIT, _L_F_, null);
-      this._08._g9(ENEMYHIT, _J_I_, null);
-      this._08._g9(AOEACK, _bG_, null);
-      this._08._g9(SHOOTACK, _0I_8, null);
-      this._08._g9(OTHERHIT, _kT_, null);
-      this._08._g9(SQUAREHIT, _hJ_, null);
-      this._08._g9(GOTOACK, _ns, null);
-      this._08._g9(EDITACCOUNTLIST, _0C_7, null);
-      this._08._g9(ACCOUNTLIST, _0K_U_, this._0J_R_);
-      this._08._g9(QUESTOBJID, _Y_F_, this._fF_);
-      this._08._g9(CHOOSENAME, _oy, null);
+      this._08._g9(GROUNDDAMAGE, GroundDamage, null);
+      this._08._g9(PLAYERHIT, PlayerHit, null);
+      this._08._g9(ENEMYHIT, EnemyHit, null);
+      this._08._g9(AOEACK, AoeAck, null);
+      this._08._g9(SHOOTACK, ShootAck, null);
+      this._08._g9(OTHERHIT, OtherHit, null);
+      this._08._g9(SQUAREHIT, SquareHit, null);
+      this._08._g9(GOTOACK, GotoAck, null);
+      this._08._g9(EDITACCOUNTLIST, EditAccountList, null);
+      this._08._g9(ACCOUNTLIST, AccountList, this._0J_R_);
+      this._08._g9(QUESTOBJID, QuestObjId, this._fF_);
+      this._08._g9(CHOOSENAME, ChooseName, null);
       this._08._g9(NAMERESULT, NameResult, this._0D_s);
-      this._08._g9(CREATEGUILD, _U_2, null);
-      this._08._g9(_0F_w, _ic, this._Z_g);
-      this._08._g9(GUILDREMOVE, _tN_, null);
-      this._08._g9(GUILDINVITE, _V_3, null);
-      this._08._g9(ALLYSHOOT, _I_o, this._P_F_);
-      this._08._g9(_0_k, _C_3, this._0K_7);
-      this._08._g9(REQUESTTRADE, _I_s, null);
-      this._08._g9(TRADEREQUESTED, _Y_G_, this._G_r);
-      this._08._g9(TRADESTART, _S_M_, this._47);
-      this._08._g9(CHANGETRADE, _2q, null);
-      this._08._g9(TRADECHANGED, _Z_J_, this._0D_U_);
-      this._08._g9(ACCEPTTRADE, _0A_1, null);
-      this._08._g9(CANCELTRADE, _vp, null);
-      this._08._g9(TRADEDONE, _A_L_, this._2d);
-      this._08._g9(TRADEACCEPTED, _qe, this._087);
-      this._08._g9(CLIENTSTAT, _0F_u, this._oA_);
-      this._08._g9(CHECKCREDITS, _X_c, null);
-      this._08._g9(ESCAPE, _0F_i, null);
+      this._08._g9(CREATEGUILD, CreateGuild, null);
+      this._08._g9(_0F_w, CreateGuildResult, this._Z_g);
+      this._08._g9(GUILDREMOVE, GuildRemove, null);
+      this._08._g9(GUILDINVITE, GuildInvite, null);
+      this._08._g9(ALLYSHOOT, AllyShoot, this._P_F_);
+      this._08._g9(_0_k, EnemyShoot, this._0K_7);
+      this._08._g9(REQUESTTRADE, RequestTrade, null);
+      this._08._g9(TRADEREQUESTED, TradeRequested, this._G_r);
+      this._08._g9(TRADESTART, TradeStart, this._47);
+      this._08._g9(CHANGETRADE, ChangeTrade, null);
+      this._08._g9(TRADECHANGED, TradeChanged, this._0D_U_);
+      this._08._g9(ACCEPTTRADE, AcceptTrade, null);
+      this._08._g9(CANCELTRADE, CancelTrade, null);
+      this._08._g9(TRADEDONE, TradeDone, this._2d);
+      this._08._g9(TRADEACCEPTED, TradeAccepted, this._087);
+      this._08._g9(CLIENTSTAT, ClientStat, this._oA_);
+      this._08._g9(CHECKCREDITS, CheckCredits, null);
+      this._08._g9(ESCAPE, Escape, null);
       this._08._g9(_02h, File, this._J_0);
       this._08._g9(INVITEDTOGUILD, InvitedToGuild, this._cS_);
-      this._08._g9(JOINGUILD, _0G_8, null);
-      this._08._g9(CHANGEGUILDRANK, _09F_, null);
-      this._08._g9(PLAYSOUND, _bB_, this._A_C_);
+      this._08._g9(JOINGUILD, JoinGuild, null);
+      this._08._g9(CHANGEGUILDRANK, ChangeGuildRank, null);
+      this._08._g9(PLAYSOUND, PlaySound, this._A_C_);
       this._08._g9(CRAFT, Craft, null);
       this._08._g9(VISIBULLET, Visibullet, null);
       this._08._g9(SWITCHMUSIC, SwitchMusic, this.switchMusic);
@@ -422,7 +422,7 @@ package com.company.assembleegameclient.net {
     }
 
     public function playerShoot(_arg1:int, _arg2:Projectile):void {
-      var _local3:_0L_P_ = (this._08._Y_E_(PLAYERSHOOT) as _0L_P_);
+      var _local3:PlayerShoot = (this._08._Y_E_(PLAYERSHOOT) as PlayerShoot);
       _local3.time_ = _arg1;
       _local3.bulletId_ = _arg2.bulletId_;
       _local3.containerType_ = _arg2.containerType_;
@@ -438,14 +438,14 @@ package com.company.assembleegameclient.net {
     }
 
     public function playerHit(_arg1:int, _arg2:int):void {
-      var _local3:_L_F_ = (this._08._Y_E_(PLAYERHIT) as _L_F_);
+      var _local3:PlayerHit = (this._08._Y_E_(PLAYERHIT) as PlayerHit);
       _local3.bulletId_ = _arg1;
       _local3.objectId_ = _arg2;
       this._08.sendMessage(_local3);
     }
 
     public function enemyHit(_arg1:int, _arg2:int, _arg3:int, _arg4:Boolean, _arg5:int):void {
-      var _local5:_J_I_ = (this._08._Y_E_(ENEMYHIT) as _J_I_);
+      var _local5:EnemyHit = (this._08._Y_E_(ENEMYHIT) as EnemyHit);
       _local5.time_ = _arg1;
       _local5.bulletId_ = _arg2;
       _local5.targetId_ = _arg3;
@@ -455,7 +455,7 @@ package com.company.assembleegameclient.net {
     }
 
     public function otherHit(_arg1:int, _arg2:int, _arg3:int, _arg4:int):void {
-      var _local5:_kT_ = (this._08._Y_E_(OTHERHIT) as _kT_);
+      var _local5:OtherHit = (this._08._Y_E_(OTHERHIT) as OtherHit);
       _local5.time_ = _arg1;
       _local5.bulletId_ = _arg2;
       _local5.objectId_ = _arg3;
@@ -464,7 +464,7 @@ package com.company.assembleegameclient.net {
     }
 
     public function squareHit(_arg1:int, _arg2:int, _arg3:int):void {
-      var _local4:_hJ_ = (this._08._Y_E_(SQUAREHIT) as _hJ_);
+      var _local4:SquareHit = (this._08._Y_E_(SQUAREHIT) as SquareHit);
       _local4.time_ = _arg1;
       _local4.bulletId_ = _arg2;
       _local4.objectId_ = _arg3;
@@ -472,7 +472,7 @@ package com.company.assembleegameclient.net {
     }
 
     public function _H_q(_arg1:int, _arg2:Number, _arg3:Number):void {
-      var _local4:_bG_ = (this._08._Y_E_(AOEACK) as _bG_);
+      var _local4:AoeAck = (this._08._Y_E_(AOEACK) as AoeAck);
       _local4.time_ = _arg1;
       _local4.position_.x_ = _arg2;
       _local4.position_.y_ = _arg3;
@@ -480,7 +480,7 @@ package com.company.assembleegameclient.net {
     }
 
     public function groundDamage(_arg1:int, _arg2:Number, _arg3:Number):void {
-      var _local4:_K_w = (this._08._Y_E_(GROUNDDAMAGE) as _K_w);
+      var _local4:GroundDamage = (this._08._Y_E_(GROUNDDAMAGE) as GroundDamage);
       _local4.time_ = _arg1;
       _local4.position_.x_ = _arg2;
       _local4.position_.y_ = _arg3;
@@ -488,13 +488,13 @@ package com.company.assembleegameclient.net {
     }
 
     public function _eC_(_arg1:int):void {
-      var _local2:_0I_8 = (this._08._Y_E_(SHOOTACK) as _0I_8);
+      var _local2:ShootAck = (this._08._Y_E_(SHOOTACK) as ShootAck);
       _local2.time_ = _arg1;
       this._08.sendMessage(_local2);
     }
 
     public function playerText(_arg1:String):void {
-      var _local2:_pa = (this._08._Y_E_(PLAYERTEXT) as _pa);
+      var _local2:PlayerText = (this._08._Y_E_(PLAYERTEXT) as PlayerText);
       _local2.text_ = _arg1;
       this._08.sendMessage(_local2);
     }
@@ -517,7 +517,7 @@ package com.company.assembleegameclient.net {
       if (!gs_) {
         return (false);
       }
-      var _local8:_99 = (this._08._Y_E_(INVSWAP) as _99);
+      var _local8:InvSwap = (this._08._Y_E_(INVSWAP) as InvSwap);
       _local8.time_ = gs_.lastUpdate_;
       _local8.position_.x_ = _arg1.x_;
       _local8.position_.y_ = _arg1.y_;
@@ -539,7 +539,7 @@ package com.company.assembleegameclient.net {
     }
 
     public function _8q(_arg1:int, _arg2:int, _arg3:int):void {
-      var _local4:_0C_G_ = (this._08._Y_E_(INVDROP) as _0C_G_);
+      var _local4:InvDrop = (this._08._Y_E_(INVDROP) as InvDrop);
       _local4.slotObject_.objectId_ = _arg1;
       _local4.slotObject_.slotId_ = _arg2;
       _local4.slotObject_.objectType_ = _arg3;
@@ -547,7 +547,7 @@ package com.company.assembleegameclient.net {
     }
 
     public function useItem(_arg1:int, _arg2:int, _arg3:int, _arg4:int, _arg5:Number, _arg6:Number):void {
-      var _local7:_fI_ = (this._08._Y_E_(USEITEM) as _fI_);
+      var _local7:UseItem = (this._08._Y_E_(USEITEM) as UseItem);
       _local7.time_ = _arg1;
       _local7.slotObject_.objectId_ = _arg2;
       _local7.slotObject_.slotId_ = _arg3;
@@ -558,7 +558,7 @@ package com.company.assembleegameclient.net {
     }
 
     public function _6v(_arg1:uint, _arg2:Number):void {
-      var _local3:_mw = (this._08._Y_E_(SETCONDITION) as _mw);
+      var _local3:SetCondition = (this._08._Y_E_(SETCONDITION) as SetCondition);
       _local3.conditionEffect_ = _arg1;
       _local3.conditionDuration_ = _arg2;
       this._08.sendMessage(_local3);
@@ -573,7 +573,7 @@ package com.company.assembleegameclient.net {
         _local3 = _arg2.x_;
         _local4 = _arg2.y_;
       }
-      var _local5:_W_c = (this._08._Y_E_(MOVE) as _W_c);
+      var _local5:Move = (this._08._Y_E_(MOVE) as Move);
       _local5.tickId_ = _arg1;
       _local5.time_ = this.gs_.lastUpdate_;
       _local5.newPosition_.x_ = _local3;
@@ -601,7 +601,7 @@ package com.company.assembleegameclient.net {
     }
 
     public function usePortal(_arg1:int):void {
-      var _local2:_03l = (this._08._Y_E_(USEPORTAL) as _03l);
+      var _local2:UsePortal = (this._08._Y_E_(USEPORTAL) as UsePortal);
       _local2.objectId_ = _arg1;
       this._08.sendMessage(_local2);
     }
@@ -625,13 +625,13 @@ package com.company.assembleegameclient.net {
     }
 
     public function _S__(_arg1:int):void {
-      var _local2:_ns = (this._08._Y_E_(GOTOACK) as _ns);
+      var _local2:GotoAck = (this._08._Y_E_(GOTOACK) as GotoAck);
       _local2.time_ = _arg1;
       this._08.sendMessage(_local2);
     }
 
     public function _eH_(_arg1:int, _arg2:Boolean, _arg3:int):void {
-      var _local4:_0C_7 = (this._08._Y_E_(EDITACCOUNTLIST) as _0C_7);
+      var _local4:EditAccountList = (this._08._Y_E_(EDITACCOUNTLIST) as EditAccountList);
       _local4.accountListId_ = _arg1;
       _local4.add_ = _arg2;
       _local4.objectId_ = _arg3;
@@ -639,25 +639,25 @@ package com.company.assembleegameclient.net {
     }
 
     public function _K_Q_(_arg1:String):void {
-      var _local2:_oy = (this._08._Y_E_(CHOOSENAME) as _oy);
+      var _local2:ChooseName = (this._08._Y_E_(CHOOSENAME) as ChooseName);
       _local2.name_ = _arg1;
       this._08.sendMessage(_local2);
     }
 
     public function _S_W_(_arg1:String):void {
-      var _local2:_U_2 = (this._08._Y_E_(CREATEGUILD) as _U_2);
+      var _local2:CreateGuild = (this._08._Y_E_(CREATEGUILD) as CreateGuild);
       _local2.name_ = _arg1;
       this._08.sendMessage(_local2);
     }
 
     public function guildRemove(_arg1:String):void {
-      var _local2:_tN_ = (this._08._Y_E_(GUILDREMOVE) as _tN_);
+      var _local2:GuildRemove = (this._08._Y_E_(GUILDREMOVE) as GuildRemove);
       _local2.name_ = _arg1;
       this._08.sendMessage(_local2);
     }
 
     public function _H_X_(_arg1:String):void {
-      var _local2:_V_3 = (this._08._Y_E_(GUILDINVITE) as _V_3);
+      var _local2:GuildInvite = (this._08._Y_E_(GUILDINVITE) as GuildInvite);
       _local2.name_ = _arg1;
       this._08.sendMessage(_local2);
     }
@@ -669,19 +669,19 @@ package com.company.assembleegameclient.net {
     }
 
     public function requestTrade(_arg1:String):void {
-      var _local2:_I_s = (this._08._Y_E_(REQUESTTRADE) as _I_s);
+      var _local2:RequestTrade = (this._08._Y_E_(REQUESTTRADE) as RequestTrade);
       _local2.name_ = _arg1;
       this._08.sendMessage(_local2);
     }
 
     public function _rQ_(_arg1:Vector.<Boolean>):void {
-      var _local2:_2q = (this._08._Y_E_(CHANGETRADE) as _2q);
+      var _local2:ChangeTrade = (this._08._Y_E_(CHANGETRADE) as ChangeTrade);
       _local2.offer_ = _arg1;
       this._08.sendMessage(_local2);
     }
 
     public function _E_i(_arg1:Vector.<Boolean>, _arg2:Vector.<Boolean>):void {
-      var _local3:_0A_1 = (this._08._Y_E_(ACCEPTTRADE) as _0A_1);
+      var _local3:AcceptTrade = (this._08._Y_E_(ACCEPTTRADE) as AcceptTrade);
       _local3.myOffer_ = _arg1;
       _local3.yourOffer_ = _arg2;
       this._08.sendMessage(_local3);
@@ -740,7 +740,7 @@ package com.company.assembleegameclient.net {
     }
 
     public function joinGuild(_arg1:String):void {
-      var _local2:_0G_8 = (this._08._Y_E_(JOINGUILD) as _0G_8);
+      var _local2:JoinGuild = (this._08._Y_E_(JOINGUILD) as JoinGuild);
       _local2.guildName_ = _arg1;
       this._08.sendMessage(_local2);
     }
@@ -752,7 +752,7 @@ package com.company.assembleegameclient.net {
     }
 
     public function _k8(_arg1:String, _arg2:int):void {
-      var _local3:_09F_ = (this._08._Y_E_(CHANGEGUILDRANK) as _09F_);
+      var _local3:ChangeGuildRank = (this._08._Y_E_(CHANGEGUILDRANK) as ChangeGuildRank);
       _local3.name_ = _arg1;
       _local3.guildRank_ = _arg2;
       this._08.sendMessage(_local3);
@@ -784,7 +784,7 @@ package com.company.assembleegameclient.net {
     }
 
     private function load():void {
-      var _local1:_r5 = (this._08._Y_E_(LOAD) as _r5);
+      var _local1:Load = (this._08._Y_E_(LOAD) as Load);
       _local1.charId_ = this.charId_;
       this._08.sendMessage(_local1);
     }
@@ -798,7 +798,7 @@ package com.company.assembleegameclient.net {
       return (Base64.encodeByteArray(_local4));
     }
 
-    private function _cw(_arg1:_T_n):void {
+    private function _cw(_arg1:CreateSuccess):void {
       this._5z = _arg1.objectId_;
       this.charId_ = _arg1.charId_;
       this.gs_.initialize();
@@ -822,7 +822,7 @@ package com.company.assembleegameclient.net {
       }
     }
 
-    private function _C_i(_arg1:_T_m):void {
+    private function _C_i(_arg1:ServerPlayerShoot):void {
       var _local2 = (_arg1.ownerId_ == this._5z);
       var _local3:GameObject = this.gs_.map_.goDict_[_arg1.ownerId_];
       if ((((_local3 == null)) || (_local3._aE_))) {
@@ -840,7 +840,7 @@ package com.company.assembleegameclient.net {
       }
     }
 
-    private function _P_F_(_arg1:_I_o):void {
+    private function _P_F_(_arg1:AllyShoot):void {
       var _local2:GameObject = this.gs_.map_.goDict_[_arg1.ownerId_];
       if ((((_local2 == null)) || (_local2._aE_) || (Parameters.data_.disableAllyProjectiles))) {
         return;
@@ -852,7 +852,7 @@ package com.company.assembleegameclient.net {
       _local2.setAttack(_arg1.containerType_, _arg1.angle_);
     }
 
-    private function _0K_7(_arg1:_C_3):void {
+    private function _0K_7(_arg1:EnemyShoot):void {
       var _local4:Projectile;
       var _local5:Number;
       var _local2:GameObject = this.gs_.map_.goDict_[_arg1.ownerId_];
@@ -873,14 +873,14 @@ package com.company.assembleegameclient.net {
       _local2.setAttack(_local2.objectType_, (_arg1.angle_ + (_arg1.angleInc_ * ((_arg1.numShots_ - 1) / 2))));
     }
 
-    private function _G_r(_arg1:_Y_G_):void {
+    private function _G_r(_arg1:TradeRequested):void {
       if (Parameters.data_.showTradePopup) {
         this.gs_._V_1._U_T_.setOverridePanel(new TradeRequestPanel(this.gs_, _arg1.name_));
       }
       this.gs_.textBox_.addText("", ((((_arg1.name_ + " wants to ") + 'trade with you.  Type "/trade ') + _arg1.name_) + '" to trade.'));
     }
 
-    private function _47(_arg1:_S_M_):void {
+    private function _47(_arg1:TradeStart):void {
       this.gs_._V_1._0L_v(_arg1);
     }
 
@@ -888,16 +888,16 @@ package com.company.assembleegameclient.net {
       this.gs_._V_1.selectItem(_arg1);
     }
 
-    private function _0D_U_(_arg1:_Z_J_):void {
+    private function _0D_U_(_arg1:TradeChanged):void {
       this.gs_._V_1._ss(_arg1);
     }
 
-    private function _2d(_arg1:_A_L_):void {
+    private function _2d(_arg1:TradeDone):void {
       this.gs_._V_1._A_a();
       this.gs_.textBox_.addText("", _arg1.description_);
     }
 
-    private function _087(_arg1:_qe):void {
+    private function _087(_arg1:TradeAccepted):void {
       this.gs_._V_1._mH_(_arg1);
     }
 
@@ -953,7 +953,7 @@ package com.company.assembleegameclient.net {
       }
     }
 
-    private function _nG_(_arg1:_iD_):void {
+    private function _nG_(_arg1:GlobalNotification):void {
       switch (_arg1.text) {
         case "yellow":
           DataSignalB.instance.dispatch(PositionSlot.SLOT_3);
@@ -975,7 +975,7 @@ package com.company.assembleegameclient.net {
       }
     }
 
-    private function _02H_(_arg1:_0_l):void {
+    private function _02H_(_arg1:NewTick):void {
       var _local3:ObjectStatusData;
       if (this._0l != null) {
         this._0l._06m();
@@ -995,87 +995,87 @@ package com.company.assembleegameclient.net {
       var _local6:Point;
       var _local2:_X_l = this.gs_.map_;
       switch (_arg1.effectType_) {
-        case ShowEffect._x0:
+        case ShowEffect.HEAL_EFFECT:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           if (_local3 == null) break;
           _local2.addObj(new AuraEffect(_local3, _arg1.color_), _local3.x_, _local3.y_);
           return;
-        case ShowEffect._0A_T_:
+        case ShowEffect.TELEPORT_EFFECT:
           _local2.addObj(new TeleportEffect(), _arg1.pos1_.x_, _arg1.pos1_.y_);
           return;
-        case ShowEffect._04t:
+        case ShowEffect.STREAM_EFFECT:
           _local4 = new StreamEffect(_arg1.pos1_, _arg1.pos2_, _arg1.color_);
           _local2.addObj(_local4, _arg1.pos1_.x_, _arg1.pos1_.y_);
           return;
-        case ShowEffect._hn:
+        case ShowEffect.THROW_EFFECT:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           _local5 = (((_local3) != null) ? new Point(_local3.x_, _local3.y_) : _arg1.pos2_._6g());
           _local4 = new ThrowEffect(_local5, _arg1.pos1_._6g(), _arg1.color_);
           _local2.addObj(_local4, _local5.x, _local5.y);
           return;
-        case ShowEffect._e8:
+        case ShowEffect.NOVA_EFFECT:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           if (_local3 == null) break;
           _local4 = new NovaEffect(_local3, _arg1.pos1_.x_, _arg1.color_);
           _local2.addObj(_local4, _local3.x_, _local3.y_);
           return;
-        case ShowEffect._X_k:
+        case ShowEffect.POISON_EFFECT:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           if (_local3 == null) break;
           _local4 = new SparkEffect(_local3, _arg1.color_);
           _local2.addObj(_local4, _local3.x_, _local3.y_);
           return;
-        case ShowEffect._4C_:
+        case ShowEffect.LINE_EFFECT:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           if (_local3 == null) break;
           _local4 = new LineEffect(_local3, _arg1.pos1_, _arg1.color_);
           _local2.addObj(_local4, _arg1.pos1_.x_, _arg1.pos1_.y_);
           return;
-        case ShowEffect._each_:
+        case ShowEffect.BURST_EFFECT:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           if (_local3 == null) break;
           _local4 = new BurstEffect(_local3, _arg1.pos1_, _arg1.pos2_, _arg1.color_);
           _local2.addObj(_local4, _arg1.pos1_.x_, _arg1.pos1_.y_);
           return;
-        case ShowEffect._ow:
+        case ShowEffect.FLOW_EFFECT:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           if (_local3 == null) break;
           _local4 = new FlowEffect(_arg1.pos1_, _local3, _arg1.color_);
           _local2.addObj(_local4, _arg1.pos1_.x_, _arg1.pos1_.y_);
           return;
-        case ShowEffect._010:
+        case ShowEffect.RING_EFFECT:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           if (_local3 == null) break;
           _local4 = new RingEffect(_local3, _arg1.pos1_.x_, _arg1.color_);
           _local2.addObj(_local4, _local3.x_, _local3.y_);
           return;
-        case ShowEffect._eY_:
+        case ShowEffect.LIGHTNING_EFFECT:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           if (_local3 == null) break;
           _local4 = new LightningEffect(_local3, _arg1.pos1_, _arg1.color_, _arg1.pos2_.x_);
           _local2.addObj(_local4, _local3.x_, _local3.y_);
           return;
-        case ShowEffect._dP_:
+        case ShowEffect.COLLAPSE_EFFECT:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           if (_local3 == null) break;
           _local4 = new CollapseEffect(_local3, _arg1.pos1_, _arg1.pos2_, _arg1.color_);
           _local2.addObj(_local4, _arg1.pos1_.x_, _arg1.pos1_.y_);
           return;
-        case ShowEffect._L_3:
+        case ShowEffect.CONEBLAST_EFFECT:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           if (_local3 == null) break;
           _local4 = new ConeBlastEffect(_local3, _arg1.pos1_, _arg1.pos2_.x_, _arg1.color_);
           _local2.addObj(_local4, _local3.x_, _local3.y_);
           return;
-        case ShowEffect._Z_u:
+        case ShowEffect.JITTER_EFFECT:
           this.gs_.camera_._uE_();
           return;
-        case ShowEffect._0_1:
+        case ShowEffect.FLASH_EFFECT:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           if (_local3 == null) break;
           _local3._B_t = new _T_f(getTimer(), _arg1.color_, _arg1.pos1_.x_, _arg1.pos1_.y_);
           return;
-        case ShowEffect._g8:
+        case ShowEffect.THROW_PROJECTILE_EFFECT:
           _local5 = _arg1.pos1_._6g();
           _local6 = _arg1.pos2_._6g();
           _local4 = new ThrownObjectSpawner(_arg1.pos2_._6g(), _arg1.pos1_._6g());
@@ -1473,13 +1473,13 @@ package com.company.assembleegameclient.net {
       this.gs_._V_1._U_T_.redraw();
     }
 
-    private function _X_3(_arg1:_8_):void {
+    private function _X_3(_arg1:Reconnect):void {
       var _local2:ReconnectEvent = new ReconnectEvent(new Server(_arg1.name_, _arg1.host_ != "" ? _arg1.host_ : this.server_.address_, _arg1.host_ != "" ? _arg1.port_ : this.server_.port_), _arg1.gameId_, this._96, this.charId_, _arg1.keyTime_, _arg1.key_);
       this.gs_.dispatchEvent(_local2);
     }
 
-    private function _94(_arg1:_0F_I_):void {
-      var _local2:_kL_ = (this._08._Y_E_(PONG) as _kL_);
+    private function _94(_arg1:Ping):void {
+      var _local2:Pong = (this._08._Y_E_(PONG) as Pong);
       _local2.serial_ = _arg1.serial_;
       _local2.time_ = getTimer();
       this._08.sendMessage(_local2);
@@ -1525,28 +1525,28 @@ package com.company.assembleegameclient.net {
     }
 
     private function _cN_(_arg1:BuyResult):void {
-      if (_arg1.result_ == BuyResult._dV_) {
+      if (_arg1.result_ == BuyResult.RESULT_0) {
         if (this.outstandingBuy_ != null) {
           this.outstandingBuy_._06m();
         }
       }
       this.outstandingBuy_ = null;
       switch (_arg1.result_) {
-        case BuyResult._7a:
+        case BuyResult.RESULT_3:
           this.gs_.stage.addChild(new NotEnoughGoldDialog());
           return;
-        case BuyResult._0I_C_:
+        case BuyResult.RESULT_6:
           this.gs_.stage.addChild(new NotEnoughFameDialog());
           return;
-        case BuyResult._83_e:
+        case BuyResult.RESULT_9:
           this.gs_.stage.addChild(new NotEnoughKeysDialog());
           return;
         default:
-          this.gs_.textBox_.addText((((_arg1.result_ == BuyResult._dV_)) ? Parameters.SendInfo : Parameters.SendError), _arg1.resultString_);
+          this.gs_.textBox_.addText((((_arg1.result_ == BuyResult.RESULT_0)) ? Parameters.SendInfo : Parameters.SendError), _arg1.resultString_);
       }
     }
 
-    private function _0J_R_(_arg1:_0K_U_):void {
+    private function _0J_R_(_arg1:AccountList):void {
       if (_arg1.accountListId_ == 0) {
         this.gs_.map_.party_.setStars(_arg1);
       }
@@ -1555,7 +1555,7 @@ package com.company.assembleegameclient.net {
       }
     }
 
-    private function _fF_(_arg1:_Y_F_):void {
+    private function _fF_(_arg1:QuestObjId):void {
       this.gs_.map_.quest_.setObject(_arg1.objectId_);
     }
 
@@ -1590,7 +1590,7 @@ package com.company.assembleegameclient.net {
       this.gs_.dispatchEvent(new NameResultEvent(_arg1));
     }
 
-    private function _Z_g(_arg1:_ic):void {
+    private function _Z_g(_arg1:CreateGuildResult):void {
       if (_arg1.errorText_ != "")
         this.gs_.textBox_.addText(Parameters.SendError, _arg1.errorText_);
       this.gs_.dispatchEvent(new ResultEvent(_arg1.success_, _arg1.errorText_));
@@ -1602,7 +1602,7 @@ package com.company.assembleegameclient.net {
       this.gs_.dispatchEvent(new ResultEvent(_arg1.success_, _arg1.errorText_, ResultEvent.MARKET_RESULT));
     }
 
-    private function _oA_(_arg1:_0F_u):void {
+    private function _oA_(_arg1:ClientStat):void {
       Account.getInstance().reportIntStat(_arg1.name_, _arg1.value_);
     }
 
@@ -1624,7 +1624,7 @@ package com.company.assembleegameclient.net {
       this.gs_.textBox_.addText("", "You have been invited by " + _arg1.name_ + " to join a party.\nIf you wish to join, type \"/party join " + _arg1.name_ + "\"");
     }
 
-    private function _A_C_(_arg1:_bB_):void {
+    private function _A_C_(_arg1:PlaySound):void {
       var _local2:GameObject = this.gs_.map_.goDict_[_arg1.ownerId_];
       if (_local2 == null) {
         return;
@@ -1638,21 +1638,21 @@ package com.company.assembleegameclient.net {
       this._0c.start();
     }
 
-    private function _nc(_arg1:_G_f):void {
+    private function _nc(_arg1:Failure):void {
       switch (_arg1.errorId_) {
-        case _G_f._00Z_:
+        case Failure.INCORRECT_VERSION:
           this._ee(_arg1);
           return;
-        case _G_f._C_w:
+        case Failure.BAD_KEY:
           this._0H_6(_arg1);
           return;
-        case _G_f._oo:
+        case Failure.INVALID_TELEPORT_TARGET:
           this._0K_Z_(_arg1);
           return;
-        case _G_f._0G_:
+        case Failure.EMAIL_VERIFICATION_NEEDED:
           this._0z_K_(_arg1);
           return;
-        case _G_f._Rf_:
+        case Failure.TELEPORT_REALM_BLOCK:
           this._ga1(_arg1);
           return;
         default:
@@ -1660,37 +1660,37 @@ package com.company.assembleegameclient.net {
       }
     }
 
-    private function _ga1(_arg1:_G_f):void {
+    private function _ga1(_arg1:Failure):void {
       this._P_A_ = false;
       this.gs_.dispatchEvent(new Event(Event.COMPLETE));
     }
 
-    private function _0z_K_(_arg1:_G_f):void {
+    private function _0z_K_(_arg1:Failure):void {
       var _local2:Dialog = new Dialog("Guest accounts have been disabled for improved security.", "Anti-Guest Guard", "Ok", null, "/noGuests");
       _local2.addEventListener(Dialog.BUTTON1_EVENT, this._Y_h);
       this.gs_.stage.addChild(_local2);
       this._P_A_ = false;
     }
 
-    private function _0K_Z_(_arg1:_G_f):void {
+    private function _0K_Z_(_arg1:Failure):void {
       this.gs_.textBox_.addText(Parameters.SendError, _arg1.errorDescription_);
       this.gs_.map_.player_.nextTeleportAt_ = 0;
     }
 
-    private function _0H_6(_arg1:_G_f):void {
+    private function _0H_6(_arg1:Failure):void {
       this.gs_.textBox_.addText(Parameters.SendError, _arg1.errorDescription_);
       this._P_A_ = false;
       this.gs_.dispatchEvent(new Event(Event.COMPLETE));
     }
 
-    private function _ee(_arg1:_G_f):void {
+    private function _ee(_arg1:Failure):void {
       var _local2:Dialog = new Dialog(((("Client version: " + Parameters.clientVersion) + "\nServer version: ") + _arg1.errorDescription_ + "\n\nPlease use one of these links to play: " + '<font color="#7777EE"> <a href="http://bledixon.com/client/WebMain.swf">' + "          Client #1 </a></font>" + '<font color="#7777EE"> <a href="http://bledixon.com/xclient/WebMain.swf">' + "          Client #2</a></font>"), "Client Update Needed", "Ok", null, "/clientUpdate");
       _local2.addEventListener(Dialog.BUTTON1_EVENT, this._Y_h);
       this.gs_.stage.addChild(_local2);
       this._P_A_ = false;
     }
 
-    private function _0M_G_(_arg1:_G_f):void {
+    private function _0M_G_(_arg1:Failure):void {
       this.gs_.textBox_.addText(Parameters.SendError, _arg1.errorDescription_);
     }
 
@@ -1714,7 +1714,7 @@ package com.company.assembleegameclient.net {
 
     private function _ux(_arg1:Event):void {
       this.gs_.textBox_.addText(Parameters.SendClient, "Enjoy your Stay!");
-      var _local2:_0B_y = (this._08._Y_E_(HELLO) as _0B_y);
+      var _local2:Hello = (this._08._Y_E_(HELLO) as Hello);
       _local2.copyright_ = "450d6aefthfasdt45z4asd78b8227atfh37xdff";
       _local2._5c2_ = "bledixon.com";
       _local2.buildVersion_ = Parameters.clientVersion;
@@ -1727,7 +1727,7 @@ package com.company.assembleegameclient.net {
       if (this.key_ != null) {
         _local2.key_.writeBytes(this.key_);
       }
-      _local2._2B_ = (((this._2B_ == null)) ? "" : this._2B_);
+      _local2.mapJSON_ = (((this._2B_ == null)) ? "" : this._2B_);
       _local2._8U_ = Account.getInstance().entrytag();
       _local2._yt = Account.getInstance().gameNetwork();
       _local2._J_k = Account.getInstance().gameNetworkUserId();
