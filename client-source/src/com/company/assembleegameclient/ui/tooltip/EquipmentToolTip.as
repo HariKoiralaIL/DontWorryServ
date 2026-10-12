@@ -468,10 +468,10 @@ package com.company.assembleegameclient.ui.tooltip {
             case "IncrementStat":
               _local3 = int(xml.@stat);
               _local4 = int(xml.@amount);
-              if (((!((_local3 == StatData._V_A_))) && (!((_local3 == StatData._aC_))))) {
-                _local2 = ("Permanently increases " + StatData._W_H_(_local3));
+              if (((!((_local3 == StatData.HP_STAT))) && (!((_local3 == StatData.MP_STAT))))) {
+                _local2 = ("Permanently increases " + StatData.statToName(_local3));
               } else {
-                _local2 = ((("+" + _local4) + " ") + StatData._W_H_(_local3));
+                _local2 = ((("+" + _local4) + " ") + StatData.statToName(_local3));
               }
               this.effects_.push(new Effect("", _local2));
               break;
@@ -507,7 +507,7 @@ package com.company.assembleegameclient.ui.tooltip {
       var _local2:int = int(xml3.@stat);
       var _local3:int = int(xml3.@amount);
       var _local4:String = (_local3 > -1) ? "+" : "";
-      return ('<font color="' + textColour(xml3) + '">' + (_local4 + String(_local3) + " ") + StatData._W_H_(_local2) + '</font>');
+      return ('<font color="' + textColour(xml3) + '">' + (_local4 + String(_local3) + " ") + StatData.statToName(_local2) + '</font>');
     }
 
     private function textColour(activateXML:XML):String {
@@ -625,7 +625,7 @@ package com.company.assembleegameclient.ui.tooltip {
         if (xml.toString() == "Stat") {
           _local4 = int(xml.@stat);
           _local5 = int(xml.@value);
-          this.restrictions_.push(new Restriction("Requires " + StatData._W_H_(_local4) + " of " + _local5, (_local3 ? 0xB3B3B3 : 16549442), !_local3));
+          this.restrictions_.push(new Restriction("Requires " + StatData.statToName(_local4) + " of " + _local5, (_local3 ? 0xB3B3B3 : 16549442), !_local3));
         }
       }
     }

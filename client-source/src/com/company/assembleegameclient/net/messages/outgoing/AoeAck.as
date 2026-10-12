@@ -1,16 +1,16 @@
 package com.company.assembleegameclient.net.messages.outgoing {
 
-    import com.company.assembleegameclient.net.messages.data._Q_0;
+    import com.company.assembleegameclient.net.messages.data.LocationData;
 
     import flash.utils.IDataOutput;
 
     public class AoeAck extends OutgoingMessage {
 
         public var time_:int;
-        public var position_:_Q_0;
+        public var position_:LocationData;
 
         public function AoeAck(id:uint) {
-            this.position_ = new _Q_0();
+            this.position_ = new LocationData();
             super(id);
         }
 

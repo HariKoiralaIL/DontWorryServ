@@ -1,6 +1,6 @@
 package particleeffects {
 
-    import com.company.assembleegameclient.net.messages.data._Q_0;
+    import com.company.assembleegameclient.net.messages.data.LocationData;
     import com.company.assembleegameclient.parameters.Parameters;
 
     import flash.geom.Point;
@@ -14,7 +14,7 @@ package particleeffects {
         public var end_:Point;
         public var color_:int;
 
-        public function StreamEffect(start:_Q_0, end:_Q_0, color:int) {
+        public function StreamEffect(start:LocationData, end:LocationData, color:int) {
             this.start_ = new Point(start.x_, start.y_);
             this.end_ = new Point(end.x_, end.y_);
             this.color_ = color;

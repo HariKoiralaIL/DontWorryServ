@@ -1,25 +1,17 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.net.messages.data.StatData
-
 package com.company.assembleegameclient.net.messages.data {
 import flash.utils.IDataInput;
 import flash.utils.IDataOutput;
 
 public class StatData {
 
-    public static const _0I_1:int = 0;
-    public static const _V_A_:int = 1;
-    public static const _g0:int = 2;
-    public static const _079:int = 3;
-    public static const _aC_:int = 4;
-    public static const _K_P_:int = 5;
-    public static const _0_8:int = 6;
-    public static const _70:int = 7;
-    public static const _0R_:int = 20;
-    public static const _sw:int = 21;
-    public static const _00l:int = 22;
+    public static const MAX_HP_STAT:int = 0;
+    public static const HP_STAT:int = 1;
+    public static const SIZE_STAT:int = 2;
+    public static const MAX_MP_STAT:int = 3;
+    public static const MP_STAT:int = 4;
+    public static const NEXT_LEVEL_EXP_STAT:int = 5;
+    public static const EXP_STAT:int = 6;
+    public static const LEVEL_STAT:int = 7;
     public static const INVENTORY_0_STAT:int = 8;
     public static const INVENTORY_1_STAT:int = 9;
     public static const INVENTORY_2_STAT:int = 10;
@@ -32,46 +24,49 @@ public class StatData {
     public static const INVENTORY_9_STAT:int = 17;
     public static const INVENTORY_10_STAT:int = 18;
     public static const INVENTORY_11_STAT:int = 19;
-    public static const _S_2:int = 26;
-    public static const _0G_F_:int = 27;
-    public static const _0J_z:int = 28;
-    public static const _x_:int = 29;
-    public static const _s9:int = 30;
-    public static const _hK_:int = 31;
+    public static const ATTACK_STAT:int = 20;
+    public static const DEFENSE_STAT:int = 21;
+    public static const SPEED_STAT:int = 22;
+    public static const VITALITY_STAT:int = 26;
+    public static const WISDOM_STAT:int = 27;
+    public static const DEXTERITY_STAT:int = 28;
+    public static const CONDITION_STAT:int = 29;
+    public static const NUM_STARS_STAT:int = 30;
+    public static const NAME_STAT:int = 31;
     public static const TEX1_STAT:int = 32;
     public static const TEX2_STAT:int = 33;
-    public static const _K_u:int = 34;
-    public static const _Q_c:int = 35;
-    public static const _h1:int = 36;
-    public static const _1m:int = 37;
-    public static const _Z_N_:int = 38;
-    public static const _0M_V_:int = 39;
-    public static const _06_:int = 40;
-    public static const _3y:int = 41;
-    public static const _e7:int = 42;
-    public static const _ud:int = 43;
-    public static const _V_c:int = 44;
-    public static const _H_I_:int = 45;
-    public static const _P_z:int = 46;
-    public static const _vc:int = 47;
-    public static const _06o:int = 48;
-    public static const _07D_:int = 49;
-    public static const _7F_:int = 50;
-    public static const _rx:int = 51;
-    public static const _wT_:int = 52;
-    public static const _0M_9:int = 53;
-    public static const _0E_c:int = 54;
-    public static const _4z:int = 55;
-    public static const _m0:int = 56;
-    public static const _03k:int = 57;
-    public static const _dR_:int = 58;
-    public static const _095:int = 59;
-    public static const _hi:int = 60;
-    public static const _0F_5:int = 61;
-    public static const _07q:int = 62;
-    public static const _L_i:int = 63;
-    public static const _5J_:int = 64;
-    public static const _bk:int = 65;
+    public static const MERCHANDISE_TYPE_STAT:int = 34;
+    public static const CREDITS_STAT:int = 35;
+    public static const MERCHANDISE_PRICE_STAT:int = 36;
+    public static const ACTIVE_STAT:int = 37;
+    public static const ACCOUNT_ID_STAT:int = 38;
+    public static const FAME_STAT:int = 39;
+    public static const MERCHANDISE_CURRENCY_STAT:int = 40;
+    public static const CONNECT_STAT:int = 41;
+    public static const MERCHANDISE_COUNT_STAT:int = 42;
+    public static const MERCHANDISE_MINS_LEFT_STAT:int = 43;
+    public static const MERCHANDISE_DISCOUNT_STAT:int = 44;
+    public static const MERCHANDISE_RANK_REQ_STAT:int = 45;
+    public static const MAX_HP_BOOST_STAT:int = 46;
+    public static const MAX_MP_BOOST_STAT:int = 47;
+    public static const ATTACK_BOOST_STAT:int = 48;
+    public static const DEFENSE_BOOST_STAT:int = 49;
+    public static const SPEED_BOOST_STAT:int = 50;
+    public static const VITALITY_BOOST_STAT:int = 51;
+    public static const WISDOM_BOOST_STAT:int = 52;
+    public static const DEXTERITY_BOOST_STAT:int = 53;
+    public static const OWNER_ACCOUNT_ID_STAT:int = 54;
+    public static const RANK_REQUIRED_STAT:int = 55;
+    public static const NAME_CHOSEN_STAT:int = 56;
+    public static const CURR_FAME_STAT:int = 57;
+    public static const NEXT_CLASS_QUEST_FAME_STAT:int = 58;
+    public static const LEGENDARY_RANK_STAT:int = 59;
+    public static const SINK_LEVEL_STAT:int = 60;
+    public static const ALT_TEXTURE_STAT:int = 61;
+    public static const GUILD_NAME_STAT:int = 62;
+    public static const GUILD_RANK_STAT:int = 63;
+    public static const BREATH_STAT:int = 64;
+    public static const XP_BOOSTED_STAT:int = 65;
     public static const SKIN_STAT:int = 66;
     public static const PVP_STAT:int = 67;
     public static const TEAM_STAT:int = 68;
@@ -92,88 +87,58 @@ public class StatData {
     public static const INVDATA_10_STAT:int = 83;
     public static const INVDATA_11_STAT:int = 84;
     public static const EFFECT_STAT:int = 85;
+    // Ids 86-119 are unused here (extra backpack / inventory-data slots in vanilla).
     public static const _luckData:int = 120;
     public static const _critData:int = 121;
     public static const _luckBonus:int = 120;
     public static const _critBonus:int = 121;
-   /* public static const Backpack1_0:int = 86;
-    public static const Backpack1_1:int = 87;
-    public static const Backpack1_2:int = 88;
-    public static const Backpack1_3:int = 89;
-    public static const Backpack1_4:int = 90;
-    public static const Backpack1_5:int = 91;
-    public static const Backpack1_6:int = 92;
-    public static const Backpack1_7:int = 93;
-    public static const Backpack2_0:int = 94;
-    public static const Backpack2_1:int = 95;
-    public static const Backpack2_2:int = 96;
-    public static const Backpack2_3:int = 97;
-    public static const Backpack2_4:int = 98;
-    public static const Backpack2_5:int = 99;
-    public static const Backpack2_6:int = 100;
-    public static const Backpack2_7:int = 101;
-    public static const HasBackpack1:int = 102;
-    public static const HasBackpack2:int = 103;
-    public static const InvData12:int = 104;
-    public static const InvData13:int = 105;
-    public static const InvData14:int = 106;
-    public static const InvData15:int = 107;
-    public static const InvData16:int = 108;
-    public static const InvData17:int = 109;
-    public static const InvData18:int = 110;
-    public static const InvData19:int = 111;
-    public static const InvData20:int = 112;
-    public static const InvData21:int = 113;
-    public static const InvData22:int = 114;
-    public static const InvData23:int = 115;
-    public static const InvData24:int = 116;
-    public static const InvData25:int = 117;
-    public static const InvData26:int = 118;
-    public static const InvData27:int = 119; */
 
-    public static function _W_H_(_arg1:int):String {
-        switch (_arg1) {
-            case _0I_1:
-                return ("Maximum HP");
-            case _V_A_:
-                return ("HP");
-            case _g0:
-                return ("Size");
-            case _079:
-                return ("Maximum MP");
-            case _aC_:
-                return ("MP");
-            case _0_8:
-                return ("XP");
-            case _70:
-                return ("Level");
-            case _0R_:
-                return ("Attack");
-            case _sw:
-                return ("Defense");
-            case _00l:
-                return ("Speed");
-            case _S_2:
-                return ("Vitality");
-            case _0G_F_:
-                return ("Wisdom");
-            case _0J_z:
-                return ("Dexterity");
+    public var statType_:uint = 0;
+    public var statValue_:int;
+    public var strStatValue_:String;
+
+    /** Display name for the stats shown in tooltips. */
+    public static function statToName(statType:int):String {
+        switch (statType) {
+            case MAX_HP_STAT:
+                return "Maximum HP";
+            case HP_STAT:
+                return "HP";
+            case SIZE_STAT:
+                return "Size";
+            case MAX_MP_STAT:
+                return "Maximum MP";
+            case MP_STAT:
+                return "MP";
+            case EXP_STAT:
+                return "XP";
+            case LEVEL_STAT:
+                return "Level";
+            case ATTACK_STAT:
+                return "Attack";
+            case DEFENSE_STAT:
+                return "Defense";
+            case SPEED_STAT:
+                return "Speed";
+            case VITALITY_STAT:
+                return "Vitality";
+            case WISDOM_STAT:
+                return "Wisdom";
+            case DEXTERITY_STAT:
+                return "Dexterity";
             case _luckData:
-              return ("Luck");
+                return "Luck";
             case _critData:
-              return ("Critical");
+                return "Critical";
         }
-        return ("Unknown Stat");
+        return "Unknown Stat";
     }
-    public var _0F_4:uint = 0;
-    public var _h:int;
-    public var _3x:String;
 
-    public function _I_3():Boolean {
-        switch (this._0F_4) {
-            case _hK_:
-            case _07q:
+    /** True for stats whose value is sent as a UTF string instead of an int. */
+    public function isUTFStat():Boolean {
+        switch (this.statType_) {
+            case NAME_STAT:
+            case GUILD_NAME_STAT:
             case INVDATA_0_STAT:
             case INVDATA_1_STAT:
             case INVDATA_2_STAT:
@@ -186,53 +151,36 @@ public class StatData {
             case INVDATA_9_STAT:
             case INVDATA_10_STAT:
             case INVDATA_11_STAT:
-         /*   case InvData12:
-            case InvData13:
-            case InvData14:
-            case InvData15:
-            case InvData16:
-            case InvData17:
-            case InvData18:
-            case InvData19:
-            case InvData20:
-            case InvData21:
-            case InvData22:
-            case InvData23:
-            case InvData24:
-            case InvData25:
-            case InvData26:
-            case InvData27: */
             case EFFECT_STAT:
-                return (true);
+                return true;
         }
-        return (false);
+        return false;
     }
 
-    public function parseFromInput(_arg1:IDataInput):void {
-        this._0F_4 = _arg1.readUnsignedByte();
-        if (!this._I_3()) {
-            this._h = _arg1.readInt();
+    public function parseFromInput(input:IDataInput):void {
+        this.statType_ = input.readUnsignedByte();
+        if (!this.isUTFStat()) {
+            this.statValue_ = input.readInt();
         } else {
-            this._3x = _arg1.readUTF();
+            this.strStatValue_ = input.readUTF();
         }
     }
 
-    public function writeToOutput(_arg1:IDataOutput):void {
-        _arg1.writeByte(this._0F_4);
-        if (!this._I_3()) {
-            _arg1.writeInt(this._h);
+    public function writeToOutput(output:IDataOutput):void {
+        output.writeByte(this.statType_);
+        if (!this.isUTFStat()) {
+            output.writeInt(this.statValue_);
         } else {
-            _arg1.writeUTF(this._3x);
+            output.writeUTF(this.strStatValue_);
         }
     }
 
     public function toString():String {
-        if (!this._I_3()) {
-            return ((((("[" + this._0F_4) + ": ") + this._h) + "]"));
+        if (!this.isUTFStat()) {
+            return "[" + this.statType_ + ": " + this.statValue_ + "]";
         }
-        return ((((("[" + this._0F_4) + ': "') + this._3x) + '"]'));
+        return "[" + this.statType_ + ': "' + this.strStatValue_ + '"]';
     }
 
 }
-}//package com.company.assembleegameclient.net.messages.data
-
+}

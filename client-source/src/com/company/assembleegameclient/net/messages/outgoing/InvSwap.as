@@ -1,21 +1,21 @@
 package com.company.assembleegameclient.net.messages.outgoing {
 
-    import com.company.assembleegameclient.net.messages.data._0_3;
-    import com.company.assembleegameclient.net.messages.data._Q_0;
+    import com.company.assembleegameclient.net.messages.data.SlotObjectData;
+    import com.company.assembleegameclient.net.messages.data.LocationData;
 
     import flash.utils.IDataOutput;
 
     public class InvSwap extends OutgoingMessage {
 
         public var time_:int;
-        public var position_:_Q_0;
-        public var slotObject1_:_0_3;
-        public var slotObject2_:_0_3;
+        public var position_:LocationData;
+        public var slotObject1_:SlotObjectData;
+        public var slotObject2_:SlotObjectData;
 
         public function InvSwap(id:uint) {
-            this.position_ = new _Q_0();
-            this.slotObject1_ = new _0_3();
-            this.slotObject2_ = new _0_3();
+            this.position_ = new LocationData();
+            this.slotObject1_ = new SlotObjectData();
+            this.slotObject2_ = new SlotObjectData();
             super(id);
         }
 

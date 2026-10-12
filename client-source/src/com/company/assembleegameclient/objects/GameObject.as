@@ -9,7 +9,7 @@ import com.company.assembleegameclient.engine3d.Object3D;
 import com.company.assembleegameclient.map.Square;
 import com.company.assembleegameclient.map.GameCamera;
 import com.company.assembleegameclient.map.GameMap;
-import com.company.assembleegameclient.net.messages.data._Q_0;
+import com.company.assembleegameclient.net.messages.data.LocationData;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.util.ConditionEffect;
 import com.company.assembleegameclient.util.TextureRedrawer;
@@ -599,7 +599,7 @@ public class GameObject extends BasicObject {
         return (_local1);
     }
 
-    public function _F_Y_(_arg1:_Q_0):Number {
+    public function _F_Y_(_arg1:LocationData):Number {
         var _local2:Number = (_arg1.x_ - x_);
         var _local3:Number = (_arg1.y_ - y_);
         return (Math.sqrt(((_local2 * _local2) + (_local3 * _local3))));

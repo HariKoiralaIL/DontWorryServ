@@ -1,6 +1,6 @@
 package particleeffects {
 
-    import com.company.assembleegameclient.net.messages.data._Q_0;
+    import com.company.assembleegameclient.net.messages.data.LocationData;
     import com.company.assembleegameclient.objects.GameObject;
     import com.company.assembleegameclient.parameters.Parameters;
 
@@ -15,11 +15,11 @@ package particleeffects {
         private static const CONE_ANGLE:Number = (Math.PI / 3);
 
         public var start_:Point;
-        public var aimTarget_:_Q_0;
+        public var aimTarget_:LocationData;
         public var effectRadius_:Number;
         public var color_:int;
 
-        public function ConeBlastEffect(go:GameObject, target:_Q_0, radius:Number, color:int) {
+        public function ConeBlastEffect(go:GameObject, target:LocationData, radius:Number, color:int) {
             this.start_ = new Point(go.x_, go.y_);
             this.aimTarget_ = target;
             this.effectRadius_ = radius;

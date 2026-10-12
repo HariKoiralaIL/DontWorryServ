@@ -11,7 +11,7 @@ import com.company.assembleegameclient.ui.tooltip.ToolTip;
 import com.company.assembleegameclient.game.GameSprite;
 import com.company.ui.SimpleText;
 
-import com.company.assembleegameclient.net.messages.data._35;
+import com.company.assembleegameclient.net.messages.data.TradeItem;
 
 import flash.filters.DropShadowFilter;
 import flash.events.MouseEvent;
@@ -45,8 +45,8 @@ public class _ec extends Sprite {
 
     private static var _fO_:ToolTip = null;
 
-    public function _ec(_arg1:GameSprite, _arg2:String, _arg3:Vector.<_35>, _arg4:Boolean) {
-        var _local6:_35;
+    public function _ec(_arg1:GameSprite, _arg2:String, _arg3:Vector.<TradeItem>, _arg4:Boolean) {
+        var _local6:TradeItem;
         var _local7:_2j;
         this.slots_ = new Vector.<_2j>();
         super();
@@ -70,14 +70,14 @@ public class _ec extends Sprite {
         var _local5:int;
         while (_local5 < _arg3.length) {
             _local6 = _arg3[_local5];
-            _local7 = new _2j(_local6.item_, _local6._var, _local6.included_, _local6._01T_, (_local5 - 3), _xV_[_local5], _local5, JSON.parse(_local6.data_));
+            _local7 = new _2j(_local6.item_, _local6.tradeable_, _local6.included_, _local6.slotType_, (_local5 - 3), _xV_[_local5], _local5, JSON.parse(_local6.data_));
             _local7.x = (int((_local5 % 4)) * (Slot.WIDTH + 4));
             _local7.y = ((int((_local5 / 4)) * (Slot.HEIGHT + 4)) + 46);
             if (_local6.item_ != -1) {
                 _local7.addEventListener(MouseEvent.MOUSE_OVER, this.onMouseOver);
                 _local7.addEventListener(MouseEvent.ROLL_OUT, this.onRollOut);
             }
-            if (((_arg4) && (_local6._var))) {
+            if (((_arg4) && (_local6.tradeable_))) {
                 _local7.addEventListener(MouseEvent.MOUSE_DOWN, this.__do);
             }
             this.slots_.push(_local7);

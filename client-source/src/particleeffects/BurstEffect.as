@@ -1,6 +1,6 @@
 package particleeffects {
 
-    import com.company.assembleegameclient.net.messages.data._Q_0;
+    import com.company.assembleegameclient.net.messages.data.LocationData;
     import com.company.assembleegameclient.objects.GameObject;
     import com.company.assembleegameclient.parameters.Parameters;
 
@@ -17,7 +17,7 @@ package particleeffects {
         public var color_:int;
 
         // 'go' is unused but kept so existing call sites keep working.
-        public function BurstEffect(go:GameObject, center:_Q_0, edgePoint:_Q_0, color:int) {
+        public function BurstEffect(go:GameObject, center:LocationData, edgePoint:LocationData, color:int) {
             this.center_ = new Point(center.x_, center.y_);
             this.edgePoint_ = new Point(edgePoint.x_, edgePoint.y_);
             this.color_ = color;

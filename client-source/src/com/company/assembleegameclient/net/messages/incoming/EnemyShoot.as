@@ -1,5 +1,5 @@
 package com.company.assembleegameclient.net.messages.incoming {
-import com.company.assembleegameclient.net.messages.data._Q_0;
+import com.company.assembleegameclient.net.messages.data.LocationData;
 import flash.utils.IDataInput;
 
 /**
@@ -10,14 +10,14 @@ public class EnemyShoot extends ServerMessage {
     public var bulletId_:uint;
     public var ownerId_:int;
     public var bulletType_:int;
-    public var startingPos_:_Q_0;
+    public var startingPos_:LocationData;
     public var angle_:Number;
     public var damage_:int;
     public var numShots_:int;
     public var angleInc_:Number;
 
     public function EnemyShoot(id:uint) {
-        this.startingPos_ = new _Q_0();
+        this.startingPos_ = new LocationData();
         super(id);
     }
 

@@ -1,19 +1,19 @@
 package com.company.assembleegameclient.net.messages.outgoing {
 
-    import com.company.assembleegameclient.net.messages.data._0_3;
-    import com.company.assembleegameclient.net.messages.data._Q_0;
+    import com.company.assembleegameclient.net.messages.data.SlotObjectData;
+    import com.company.assembleegameclient.net.messages.data.LocationData;
 
     import flash.utils.IDataOutput;
 
     public class UseItem extends OutgoingMessage {
 
         public var time_:int;
-        public var slotObject_:_0_3;
-        public var itemUsePos_:_Q_0;
+        public var slotObject_:SlotObjectData;
+        public var itemUsePos_:LocationData;
 
         public function UseItem(id:uint) {
-            this.slotObject_ = new _0_3();
-            this.itemUsePos_ = new _Q_0();
+            this.slotObject_ = new SlotObjectData();
+            this.itemUsePos_ = new LocationData();
             super(id);
         }
 

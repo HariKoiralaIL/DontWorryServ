@@ -1,6 +1,6 @@
 package particleeffects {
 
-    import com.company.assembleegameclient.net.messages.data._Q_0;
+    import com.company.assembleegameclient.net.messages.data.LocationData;
     import com.company.assembleegameclient.objects.GameObject;
     import com.company.assembleegameclient.util._04d;
 
@@ -14,7 +14,7 @@ package particleeffects {
         public var color_:int;
         public var particleSize_:int;
 
-        public function LightningEffect(go:GameObject, target:_Q_0, color:int, particleSize:int) {
+        public function LightningEffect(go:GameObject, target:LocationData, color:int, particleSize:int) {
             this.start_ = new Point(go.x_, go.y_);
             this.end_ = new Point(target.x_, target.y_);
             this.color_ = color;

@@ -1,5 +1,5 @@
 package com.company.assembleegameclient.net.messages.incoming {
-import com.company.assembleegameclient.net.messages.data._Q_0;
+import com.company.assembleegameclient.net.messages.data.LocationData;
 import flash.utils.IDataInput;
 
 /**
@@ -8,10 +8,10 @@ import flash.utils.IDataInput;
 public class Goto extends ServerMessage {
 
     public var objectId_:int;
-    public var pos_:_Q_0;
+    public var pos_:LocationData;
 
     public function Goto(id:uint) {
-        this.pos_ = new _Q_0();
+        this.pos_ = new LocationData();
         super(id);
     }
 

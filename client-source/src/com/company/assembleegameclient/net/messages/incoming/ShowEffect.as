@@ -1,5 +1,5 @@
 package com.company.assembleegameclient.net.messages.incoming {
-import com.company.assembleegameclient.net.messages.data._Q_0;
+import com.company.assembleegameclient.net.messages.data.LocationData;
 import flash.utils.IDataInput;
 
 /**
@@ -27,13 +27,13 @@ public class ShowEffect extends ServerMessage {
 
     public var effectType_:uint;
     public var targetObjectId_:int;
-    public var pos1_:_Q_0;
-    public var pos2_:_Q_0;
+    public var pos1_:LocationData;
+    public var pos2_:LocationData;
     public var color_:int;
 
     public function ShowEffect(id:uint) {
-        this.pos1_ = new _Q_0();
-        this.pos2_ = new _Q_0();
+        this.pos1_ = new LocationData();
+        this.pos2_ = new LocationData();
         super(id);
     }
 

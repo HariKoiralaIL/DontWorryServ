@@ -346,23 +346,23 @@ package com.company.assembleegameclient.objects {
             if (_arg1.toString() == "Stat") {
                 _local3 = int(_arg1.@value);
                 switch (int(_arg1.@stat)) {
-                    case StatData._0I_1:
+                    case StatData.MAX_HP_STAT:
                         return ((_arg2.maxHP_ >= _local3));
-                    case StatData._079:
+                    case StatData.MAX_MP_STAT:
                         return ((_arg2.maxMP_ >= _local3));
-                    case StatData._70:
+                    case StatData.LEVEL_STAT:
                         return ((_arg2.level_ >= _local3));
-                    case StatData._0R_:
+                    case StatData.ATTACK_STAT:
                         return ((_arg2.attack_ >= _local3));
-                    case StatData._sw:
+                    case StatData.DEFENSE_STAT:
                         return ((_arg2.defense_ >= _local3));
-                    case StatData._00l:
+                    case StatData.SPEED_STAT:
                         return ((_arg2.speed_ >= _local3));
-                    case StatData._S_2:
+                    case StatData.VITALITY_STAT:
                         return ((_arg2.vitality_ >= _local3));
-                    case StatData._0G_F_:
+                    case StatData.WISDOM_STAT:
                         return ((_arg2.wisdom_ >= _local3));
-                    case StatData._0J_z:
+                    case StatData.DEXTERITY_STAT:
                         return ((_arg2.dexterity_ >= _local3));
                     case StatData._luckData:
                         return ((_arg2.luck_ >= _local3));

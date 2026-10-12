@@ -1,7 +1,7 @@
 package com.company.assembleegameclient.net.messages.outgoing {
 
-    import com.company.assembleegameclient.net.messages.data._Q_0;
-    import com.company.assembleegameclient.net.messages.data._jg;
+    import com.company.assembleegameclient.net.messages.data.LocationData;
+    import com.company.assembleegameclient.net.messages.data.MoveRecord;
 
     import flash.utils.IDataOutput;
 
@@ -9,12 +9,12 @@ package com.company.assembleegameclient.net.messages.outgoing {
 
         public var tickId_:int;
         public var time_:int;
-        public var newPosition_:_Q_0;
-        public var records_:Vector.<_jg>;
+        public var newPosition_:LocationData;
+        public var records_:Vector.<MoveRecord>;
 
         public function Move(id:uint) {
-            this.newPosition_ = new _Q_0();
-            this.records_ = new Vector.<_jg>();
+            this.newPosition_ = new LocationData();
+            this.records_ = new Vector.<MoveRecord>();
             super(id);
         }
 

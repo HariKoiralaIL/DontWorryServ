@@ -1,6 +1,6 @@
 package com.company.assembleegameclient.net.messages.incoming {
-import com.company.assembleegameclient.net.messages.data._0H_9;
-import com.company.assembleegameclient.net.messages.data._iZ_;
+import com.company.assembleegameclient.net.messages.data.ObjectData;
+import com.company.assembleegameclient.net.messages.data.GroundTileData;
 import com.company.assembleegameclient.util._wW_;
 import flash.utils.IDataInput;
 
@@ -9,13 +9,13 @@ import flash.utils.IDataInput;
  */
 public class Update extends ServerMessage {
 
-    public var tiles_:Vector.<_iZ_>;
-    public var newObjs_:Vector.<_0H_9>;
+    public var tiles_:Vector.<GroundTileData>;
+    public var newObjs_:Vector.<ObjectData>;
     public var drops_:Vector.<int>;
 
     public function Update(id:uint) {
-        this.tiles_ = new Vector.<_iZ_>();
-        this.newObjs_ = new Vector.<_0H_9>();
+        this.tiles_ = new Vector.<GroundTileData>();
+        this.newObjs_ = new Vector.<ObjectData>();
         this.drops_ = new Vector.<int>();
         super(id);
     }
@@ -29,7 +29,7 @@ public class Update extends ServerMessage {
         }
         this.tiles_.length = Math.min(count, this.tiles_.length);
         while (this.tiles_.length < count) {
-            this.tiles_.push((_wW_._B_1(_iZ_) as _iZ_));
+            this.tiles_.push((_wW_._B_1(GroundTileData) as GroundTileData));
         }
         for (i = 0; i < count; i++) {
             this.tiles_[i].parseFromInput(data);
@@ -41,7 +41,7 @@ public class Update extends ServerMessage {
         }
         this.newObjs_.length = Math.min(count, this.newObjs_.length);
         while (this.newObjs_.length < count) {
-            this.newObjs_.push((_wW_._B_1(_0H_9) as _0H_9));
+            this.newObjs_.push((_wW_._B_1(ObjectData) as ObjectData));
         }
         for (i = 0; i < count; i++) {
             this.newObjs_[i].parseFromInput(data);

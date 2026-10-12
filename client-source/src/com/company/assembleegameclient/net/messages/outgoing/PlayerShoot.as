@@ -1,6 +1,6 @@
 package com.company.assembleegameclient.net.messages.outgoing {
 
-    import com.company.assembleegameclient.net.messages.data._Q_0;
+    import com.company.assembleegameclient.net.messages.data.LocationData;
 
     import flash.utils.IDataOutput;
 
@@ -9,11 +9,11 @@ package com.company.assembleegameclient.net.messages.outgoing {
         public var time_:int;
         public var bulletId_:uint;
         public var containerType_:int;
-        public var startingPos_:_Q_0;
+        public var startingPos_:LocationData;
         public var angle_:Number;
 
         public function PlayerShoot(id:uint) {
-            this.startingPos_ = new _Q_0();
+            this.startingPos_ = new LocationData();
             super(id);
         }
 

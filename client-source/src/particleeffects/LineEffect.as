@@ -1,6 +1,6 @@
 package particleeffects {
 
-    import com.company.assembleegameclient.net.messages.data._Q_0;
+    import com.company.assembleegameclient.net.messages.data.LocationData;
     import com.company.assembleegameclient.objects.GameObject;
     import com.company.assembleegameclient.parameters.Parameters;
     import com.company.assembleegameclient.util._04d;
@@ -16,7 +16,7 @@ package particleeffects {
         public var end_:Point;
         public var color_:int;
 
-        public function LineEffect(go:GameObject, target:_Q_0, color:int) {
+        public function LineEffect(go:GameObject, target:LocationData, color:int) {
             this.start_ = new Point(go.x_, go.y_);
             this.end_ = new Point(target.x_, target.y_);
             this.color_ = color;

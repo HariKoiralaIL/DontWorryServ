@@ -1,6 +1,6 @@
 package com.company.assembleegameclient.game {
 
-import com.company.assembleegameclient.net.messages.data._jg;
+import com.company.assembleegameclient.net.messages.data.MoveRecord;
 
 /**
  * Keeps a short history of the player's position, at most one record per
@@ -15,10 +15,10 @@ public class MoveRecords {
     private static const MAX_SLOT:int = 10;
 
     public var lastClearTime_:int = -1;
-    public var records_:Vector.<_jg>;
+    public var records_:Vector.<MoveRecord>;
 
     public function MoveRecords() {
-        this.records_ = new Vector.<_jg>();
+        this.records_ = new Vector.<MoveRecord>();
     }
 
     /** Adds a position sample taken at `time`. (Original name: _F_5) */
@@ -30,9 +30,9 @@ public class MoveRecords {
         if (slot < 1 || slot > MAX_SLOT) {
             return;
         }
-        var last:_jg = (this.records_.length > 0) ? this.records_[this.records_.length - 1] : null;
+        var last:MoveRecord = (this.records_.length > 0) ? this.records_[this.records_.length - 1] : null;
         if (last == null || slot != this.getSlot(last.time_)) {
-            this.records_.push(new _jg(time, x, y));
+            this.records_.push(new MoveRecord(time, x, y));
             return;
         }
         // Same slot as the previous record: keep whichever sample is closer to the slot centre.

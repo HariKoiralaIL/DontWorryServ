@@ -1,6 +1,6 @@
 package particleeffects {
 
-    import com.company.assembleegameclient.net.messages.data._Q_0;
+    import com.company.assembleegameclient.net.messages.data.LocationData;
     import com.company.assembleegameclient.objects.GameObject;
     import com.company.assembleegameclient.parameters.Parameters;
 
@@ -15,7 +15,7 @@ package particleeffects {
         public var go_:GameObject;
         public var color_:int;
 
-        public function FlowEffect(start:_Q_0, go:GameObject, color:int) {
+        public function FlowEffect(start:LocationData, go:GameObject, color:int) {
             this.start_ = new Point(start.x_, start.y_);
             this.go_ = go;
             this.color_ = color;

@@ -1,5 +1,5 @@
 package com.company.assembleegameclient.net.messages.incoming {
-import com.company.assembleegameclient.net.messages.data._35;
+import com.company.assembleegameclient.net.messages.data.TradeItem;
 import com.company.assembleegameclient.util._wW_;
 import flash.utils.IDataInput;
 
@@ -8,13 +8,13 @@ import flash.utils.IDataInput;
  */
 public class TradeStart extends ServerMessage {
 
-    public var myItems_:Vector.<_35>;
+    public var myItems_:Vector.<TradeItem>;
     public var yourName_:String;
-    public var yourItems_:Vector.<_35>;
+    public var yourItems_:Vector.<TradeItem>;
 
     public function TradeStart(id:uint) {
-        this.myItems_ = new Vector.<_35>();
-        this.yourItems_ = new Vector.<_35>();
+        this.myItems_ = new Vector.<TradeItem>();
+        this.yourItems_ = new Vector.<TradeItem>();
         super(id);
     }
 
@@ -27,7 +27,7 @@ public class TradeStart extends ServerMessage {
         }
         this.myItems_.length = Math.min(count, this.myItems_.length);
         while (this.myItems_.length < count) {
-            this.myItems_.push((_wW_._B_1(_35) as _35));
+            this.myItems_.push((_wW_._B_1(TradeItem) as TradeItem));
         }
         for (i = 0; i < count; i++) {
             this.myItems_[i].parseFromInput(data);
@@ -39,7 +39,7 @@ public class TradeStart extends ServerMessage {
         }
         this.yourItems_.length = Math.min(count, this.yourItems_.length);
         while (this.yourItems_.length < count) {
-            this.yourItems_.push((_wW_._B_1(_35) as _35));
+            this.yourItems_.push((_wW_._B_1(TradeItem) as TradeItem));
         }
         for (i = 0; i < count; i++) {
             this.yourItems_[i].parseFromInput(data);
