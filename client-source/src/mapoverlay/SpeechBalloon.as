@@ -1,5 +1,5 @@
 package mapoverlay {
-import com.company.assembleegameclient.map._0D_v;
+import com.company.assembleegameclient.map.GameCamera;
 import com.company.assembleegameclient.objects.GameObject;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.util.GraphicHelper;
@@ -90,7 +90,7 @@ public class SpeechBalloon extends Sprite implements IMapOverlayElement {
         visible = false;
     }
 
-    public function draw(camera:_0D_v, time:int):Boolean {
+    public function draw(camera:GameCamera, time:int):Boolean {
         if (this.startTime_ == 0) {
             this.startTime_ = time;
         }

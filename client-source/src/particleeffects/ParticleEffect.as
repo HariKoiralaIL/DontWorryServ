@@ -1,6 +1,6 @@
 package particleeffects {
 
-    import com.company.assembleegameclient.map._0D_v;
+    import com.company.assembleegameclient.map.GameCamera;
     import com.company.assembleegameclient.objects.GameObject;
 
     import flash.display.IGraphicsData;
@@ -48,7 +48,7 @@ package particleeffects {
             return false;
         }
 
-        override public function draw(graphicsData:Vector.<IGraphicsData>, camera:_0D_v, time:int):void {
+        override public function draw(graphicsData:Vector.<IGraphicsData>, camera:GameCamera, time:int):void {
         }
 
     }

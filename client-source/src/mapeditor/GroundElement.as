@@ -1,8 +1,8 @@
 package mapeditor {
-import com.company.assembleegameclient.map._0D_v;
-import com.company.assembleegameclient.map._M_X_;
-import com.company.assembleegameclient.map._ik;
-import com.company.assembleegameclient.map._pf;
+import com.company.assembleegameclient.map.GameCamera;
+import com.company.assembleegameclient.map.AnimateProperties;
+import com.company.assembleegameclient.map.SquareFace;
+import com.company.assembleegameclient.map.GroundLibrary;
 import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 import flash.display.BitmapData;
@@ -19,10 +19,10 @@ internal class GroundElement extends ChooserElement {
         super(int(groundXml.@type));
         this.groundXml_ = groundXml;
         var graphicsData:Vector.<IGraphicsData> = new Vector.<IGraphicsData>();
-        var camera:_0D_v = new _0D_v();
-        camera._K_(0.5, 0.5, 12, (Math.PI / 4), new Rectangle(-100, -100, 200, 200), false);
-        var texture:BitmapData = _pf.getBitmapData(type_);
-        var squareFace:_ik = new _ik(texture, UV_COORDS, 0, 0, _M_X_._0I_7, 0, 0);
+        var camera:GameCamera = new GameCamera();
+        camera.configure(0.5, 0.5, 12, (Math.PI / 4), new Rectangle(-100, -100, 200, 200), false);
+        var texture:BitmapData = GroundLibrary.getBitmapData(type_);
+        var squareFace:SquareFace = new SquareFace(texture, UV_COORDS, 0, 0, AnimateProperties.NONE, 0, 0);
         squareFace.draw(graphicsData, camera, 0);
         this.preview_ = new Shape();
         this.preview_.graphics.drawGraphicsData(graphicsData);

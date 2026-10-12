@@ -17,7 +17,7 @@ import flash.geom.Utils3D;
 
 import flash.display.IGraphicsData;
 
-import com.company.assembleegameclient.map._0D_v;
+import com.company.assembleegameclient.map.GameCamera;
 import com.company.assembleegameclient.engine3d.Object3D;
 
 public class ConnectedObject extends GameObject {
@@ -77,7 +77,7 @@ public class ConnectedObject extends GameObject {
     }
     protected var rotation_:int = 0;
 
-    override public function draw(_arg1:Vector.<IGraphicsData>, _arg2:_0D_v, _arg3:int):void {
+    override public function draw(_arg1:Vector.<IGraphicsData>, _arg2:GameCamera, _arg3:int):void {
         var _local4:ObjectFace3D;
         var _local5:int;
         var _local6:int;

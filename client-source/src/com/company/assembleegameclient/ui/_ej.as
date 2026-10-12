@@ -7,7 +7,7 @@ package com.company.assembleegameclient.ui {
 import flash.display.Sprite;
 import flash.utils.Dictionary;
 
-import com.company.assembleegameclient.map._X_l;
+import com.company.assembleegameclient.map.GameMap;
 
 import flash.geom.Rectangle;
 import flash.geom.Point;
@@ -31,7 +31,7 @@ import flash.geom.ColorTransform;
 import flash.events.MouseEvent;
 
 import com.company.assembleegameclient.objects.GameObject;
-import com.company.assembleegameclient.map._pf;
+import com.company.assembleegameclient.map.GroundLibrary;
 
 import flash.display.Graphics;
 
@@ -57,7 +57,7 @@ public class _ej extends Sprite {
         return (_H_L_[_local2]);
     }
 
-    public function _ej(_arg1:_X_l, _arg2:int, _arg3:int) {
+    public function _ej(_arg1:GameMap, _arg2:int, _arg3:int) {
         var _local6:Bitmap;
         this._M_R_ = new Vector.<Number>();
         this._6q = new Matrix();
@@ -116,7 +116,7 @@ public class _ej extends Sprite {
         addEventListener(MouseEvent.CLICK, this._R_B_);
         this._ze();
     }
-    public var map_:_X_l;
+    public var map_:GameMap;
     public var w_:int;
     public var h_:int;
     public var _Q_B_:Number = 0;
@@ -158,7 +158,7 @@ public class _ej extends Sprite {
     }
 
     public function setGroundTile(_arg1:int, _arg2:int, _arg3:uint):void {
-        var _local4:uint = _pf.getColor(_arg3);
+        var _local4:uint = GroundLibrary.getColor(_arg3);
         this._02q.setPixel(_arg1, _arg2, _local4);
     }
 

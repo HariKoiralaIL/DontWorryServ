@@ -1,5 +1,5 @@
 package com.company.assembleegameclient.engine3d {
-import com.company.assembleegameclient.map._0D_v;
+import com.company.assembleegameclient.map.GameCamera;
 import com.company.util.Trig;
 
 import flash.display.BitmapData;
@@ -42,14 +42,14 @@ public class Billboard {
     }
 
     public function draw(graphicsData:Vector.<IGraphicsData>, worldPosition:Vector3D, rotation:Number,
-                         worldToScreen:Matrix3D, camera:_0D_v, texture:BitmapData, color:uint = 0):void {
+                         worldToScreen:Matrix3D, camera:GameCamera, texture:BitmapData, color:uint = 0):void {
         this.projected_ = Utils3D.projectVector(worldToScreen, worldPosition);
         if (this.projected_.w < 0) {
             return;
         }
         var px:Number = this.projected_.x;
         var py:Number = this.projected_.y;
-        var depthScale:Number = this.projected_.w * Math.sin((camera._uo.fieldOfView / 2) * Trig._km);
+        var depthScale:Number = this.projected_.w * Math.sin((camera.perspective_.fieldOfView / 2) * Trig._km);
         var half:Number = this.size_ / depthScale;
 
         this.data_.length = 0;

@@ -16,7 +16,7 @@ package MapBackgrounds {
 
   import flash.display.Sprite;
 
-  import com.company.assembleegameclient.map._0D_v;
+  import com.company.assembleegameclient.map.GameCamera;
 
 public class Background extends Sprite {
 
@@ -72,7 +72,7 @@ public class Background extends Sprite {
     mapy_ = _arg2;
   }
 
-  public function draw(_arg1:_0D_v, _arg2:int):void {
+  public function draw(_arg1:GameCamera, _arg2:int):void {
   }
 
   public function update():void {

@@ -1,5 +1,5 @@
 package com.company.assembleegameclient.engine3d {
-import com.company.assembleegameclient.map._0D_v;
+import com.company.assembleegameclient.map.GameCamera;
 
 import flash.display.BitmapData;
 import flash.display.IGraphicsData;
@@ -72,7 +72,7 @@ public class Object3D {
             this.worldVertices_[offset + 2]);
     }
 
-    public function draw(graphicsData:Vector.<IGraphicsData>, camera:_0D_v, color:uint, texture:BitmapData):void {
+    public function draw(graphicsData:Vector.<IGraphicsData>, camera:GameCamera, color:uint, texture:BitmapData):void {
         Utils3D.projectVectors(camera.wToS_, this.worldVertices_, this.screenVertices_, this.uvts_);
         for each (var face:ObjectFace3D in this.faces_) {
             face.draw(graphicsData, color, texture);

@@ -1,8 +1,8 @@
 package arrows
 {
     import com.company.assembleegameclient.map.Quest;
-    import com.company.assembleegameclient.map._0D_v;
-    import com.company.assembleegameclient.map._X_l;
+    import com.company.assembleegameclient.map.GameCamera;
+    import com.company.assembleegameclient.map.GameMap;
     import com.company.assembleegameclient.objects.GameObject;
     import com.company.assembleegameclient.parameters.Parameters;
     import com.company.assembleegameclient.ui.tooltip.PortraitToolTip;
@@ -14,15 +14,15 @@ package arrows
 
     public class QuestArrow extends ScreenArrow
     {
-        public var map_:_X_l;
+        public var map_:GameMap;
 
-        public function QuestArrow(map:_X_l)
+        public function QuestArrow(map:GameMap)
         {
             super(0xF98441, 0xC52222, true);
             this.map_ = map;
         }
 
-        override public function draw(time:int, camera:_0D_v):void
+        override public function draw(time:int, camera:GameCamera):void
         {
             var hadQuestToolTip:Boolean;
             var wantsQuestToolTip:Boolean;

@@ -8,7 +8,7 @@ import com.company.util.PointUtil;
 
 import audio.SoundEffects;
 
-import com.company.assembleegameclient.map._X_l;
+import com.company.assembleegameclient.map.GameMap;
 
 import client.ui.panels.ContainerPanel;
 
@@ -27,7 +27,7 @@ public class Container extends GameObject implements _G_4 {
     public var _G_B_:Boolean;
     public var ownerId_:int;
 
-    override public function addTo(_arg1:_X_l, _arg2:Number, _arg3:Number):Boolean {
+    override public function addTo(_arg1:GameMap, _arg2:Number, _arg3:Number):Boolean {
         if (!super.addTo(_arg1, _arg2, _arg3)) {
             return (false);
         }

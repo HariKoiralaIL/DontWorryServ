@@ -1,5 +1,5 @@
 package com.company.assembleegameclient.engine3d {
-import com.company.assembleegameclient.map._0D_v;
+import com.company.assembleegameclient.map.GameCamera;
 import com.company.assembleegameclient.util.TextureRedrawer;
 import com.company.util.GraphicHelper;
 import com.company.util._09Q_;
@@ -89,7 +89,7 @@ public class Face3D {
     }
 
     /** Projects and queues the face; returns false if it was culled. */
-    public function draw(graphicsData:Vector.<IGraphicsData>, camera:_0D_v):Boolean {
+    public function draw(graphicsData:Vector.<IGraphicsData>, camera:GameCamera):Boolean {
         Utils3D.projectVectors(camera.wToS_, this.vertices_, this.screenVertices_, this.uvts_);
         if (this.cullBackFaces_) {
             var s:Vector.<Number> = this.screenVertices_;

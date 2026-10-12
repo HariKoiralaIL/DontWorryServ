@@ -1,5 +1,5 @@
 package mapoverlay {
-import com.company.assembleegameclient.map._0D_v;
+import com.company.assembleegameclient.map.GameCamera;
 
 import flash.display.Sprite;
 import flash.utils.Dictionary;
@@ -30,7 +30,7 @@ public class MapOverlay extends Sprite {
         addChild(balloon);
     }
 
-    public function draw(camera:_0D_v, time:int):void {
+    public function draw(camera:GameCamera, time:int):void {
         var element:IMapOverlayElement;
         var index:int = 0;
         while (index < numChildren) {

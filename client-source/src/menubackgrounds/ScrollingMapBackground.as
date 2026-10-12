@@ -6,8 +6,8 @@ import flash.geom.Rectangle;
 import flash.utils.ByteArray;
 import flash.utils.getTimer;
 
-import com.company.assembleegameclient.map._0D_v;
-import com.company.assembleegameclient.map._X_l;
+import com.company.assembleegameclient.map.GameCamera;
+import com.company.assembleegameclient.map.GameMap;
 import com.company.util.IntPoint;
 
 import MapBackgrounds.Background;
@@ -32,11 +32,11 @@ public class ScrollingMapBackground extends Sprite {
     private static const SCROLL_SPEED:Number = 1 / 1000;
     private static const MAP_DATA:Class = MenuBackgroundMapData;
 
-    private static var map:_X_l;
+    private static var map:GameMap;
     private static var mapSize:IntPoint;
     private static var cameraX:Number;
     private static var cameraY:Number;
-    private static var camera:_0D_v;
+    private static var camera:GameCamera;
 
     private var lastTime:int;
 
@@ -45,14 +45,14 @@ public class ScrollingMapBackground extends Sprite {
         addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
     }
 
-    private function createMap():_X_l {
+    private function createMap():GameMap {
         var data:ByteArray = new MAP_DATA();
         var json:String = data.readUTFBytes(data.length);
         mapSize = MapLoader.getMapSize(json);
         cameraX = BORDER;
         cameraY = BORDER + int((mapSize.y_ - 2 * BORDER) * Math.random());
-        camera = new _0D_v();
-        var newMap:_X_l = new _X_l(null);
+        camera = new GameCamera();
+        var newMap:GameMap = new GameMap(null);
         newMap.setProps(mapSize.x_ + 2 * BORDER, mapSize.y_, "Background Map", Background._0H_W_, false, false, "Menu", 0);
         newMap.initialize();
         MapLoader.loadInto(json, newMap, 0, 0);

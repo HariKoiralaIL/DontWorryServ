@@ -1,7 +1,7 @@
 package particleeffects {
 
     import com.company.assembleegameclient.map.Square;
-    import com.company.assembleegameclient.map._0D_v;
+    import com.company.assembleegameclient.map.GameCamera;
     import com.company.assembleegameclient.objects.BasicObject;
     import com.company.assembleegameclient.util.TextureRedrawer;
     import com.company.util.GraphicHelper;
@@ -54,7 +54,7 @@ package particleeffects {
             return true;
         }
 
-        override public function draw(graphicsData:Vector.<IGraphicsData>, camera:_0D_v, time:int):void {
+        override public function draw(graphicsData:Vector.<IGraphicsData>, camera:GameCamera, time:int):void {
             var frame:BitmapData;
             var texture:BitmapData = this.texture_;
             if (this.animation_ != null) {

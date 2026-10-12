@@ -1,7 +1,7 @@
 package particleeffects {
 
     import com.company.assembleegameclient.map.Square;
-    import com.company.assembleegameclient.map._0D_v;
+    import com.company.assembleegameclient.map.GameCamera;
     import com.company.assembleegameclient.objects.BasicObject;
     import com.company.assembleegameclient.util.TextureRedrawer;
     import com.company.util.GraphicHelper;
@@ -30,7 +30,7 @@ package particleeffects {
             this.setSize(size);
         }
 
-        override public function draw(graphicsData:Vector.<IGraphicsData>, camera:_0D_v, time:int):void {
+        override public function draw(graphicsData:Vector.<IGraphicsData>, camera:GameCamera, time:int):void {
             var texture:BitmapData = TextureRedrawer.redrawSolidSquare(this.color_, this.size_);
             var halfW:Number = texture.width / 2;
             var halfH:Number = texture.height / 2;

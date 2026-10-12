@@ -3,8 +3,8 @@ package maploading
     import jsonserializer.JsonSerializerProvider;
     import jsonserializer.IJsonSerializer;
 
-    import com.company.assembleegameclient.map._X_l;
-    import com.company.assembleegameclient.map._pf;
+    import com.company.assembleegameclient.map.GameMap;
+    import com.company.assembleegameclient.map.GroundLibrary;
     import com.company.assembleegameclient.objects.BasicObject;
     import com.company.assembleegameclient.objects.GameObject;
     import com.company.assembleegameclient.objects.ObjectLibrary;
@@ -17,17 +17,17 @@ package maploading
     {
         private static const jsonParser_:IJsonSerializer = JsonSerializerProvider.getSerializer();
 
-        public static function loadMap(json:String):_X_l
+        public static function loadMap(json:String):GameMap
         {
             var mapData:Object = jsonParser_.parse(json);
-            var map:_X_l = new _X_l(null);
+            var map:GameMap = new GameMap(null);
             map.setProps(mapData["width"], mapData["height"], mapData["name"], mapData["back"], false, false, "Menu", 0);
             map.initialize();
             fillMap(mapData, map, 0, 0);
             return map;
         }
 
-        public static function loadInto(json:String, map:_X_l, offsetX:int, offsetY:int):void
+        public static function loadInto(json:String, map:GameMap, offsetX:int, offsetY:int):void
         {
             var mapData:Object = jsonParser_.parse(json);
             fillMap(mapData, map, offsetX, offsetY);
@@ -47,7 +47,7 @@ package maploading
             return obj;
         }
 
-        private static function fillMap(mapData:Object, map:_X_l, offsetX:int, offsetY:int):void
+        private static function fillMap(mapData:Object, map:GameMap, offsetX:int, offsetY:int):void
         {
             var x:int;
             var y:int;
@@ -70,7 +70,7 @@ package maploading
                     }
                     if (tileData.hasOwnProperty("ground"))
                     {
-                        groundType = _pf._pb[tileData["ground"]];
+                        groundType = GroundLibrary.idToType_[tileData["ground"]];
                         map.setGroundTile(x, y, groundType);
                     }
                     objectsData = tileData["objs"];

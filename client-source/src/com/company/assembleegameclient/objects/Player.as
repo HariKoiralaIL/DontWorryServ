@@ -20,7 +20,7 @@ import audio.SoundEffects;
 import com.company.assembleegameclient.appengine.CharListEvent;
 
 import com.company.assembleegameclient.map.Square;
-import com.company.assembleegameclient.map._0D_v;
+import com.company.assembleegameclient.map.GameCamera;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.tutorial.Tutorial;
 import com.company.assembleegameclient.tutorial.doneAction;
@@ -112,7 +112,7 @@ import flash.utils.getTimer;
         return (_local5);
     }
 
-    private static function _091(_arg1:Number, _arg2:_0D_v):int {
+    private static function _091(_arg1:Number, _arg2:GameCamera):int {
         var _local4:int;
         var _local3:Number = Trig._V_r((_arg1 - _arg2.angleRad_));
         if ((((_local3 > (Math.PI / 4))) && ((_local3 < ((3 * Math.PI) / 4))))) {
@@ -333,7 +333,7 @@ import flash.utils.getTimer;
         return (_local2);
     }
 
-    override public function draw(_arg1:Vector.<IGraphicsData>, _arg2:_0D_v, _arg3:int):void {
+    override public function draw(_arg1:Vector.<IGraphicsData>, _arg2:GameCamera, _arg3:int):void {
         if(Parameters.data_.HideOtherPlayers) {
           if(this != map_.player_) {
             return;
@@ -357,7 +357,7 @@ import flash.utils.getTimer;
         }
     }
 
-    override protected function getTexture(_arg1:_0D_v, _arg2:int):BitmapData {
+    override protected function getTexture(_arg1:GameCamera, _arg2:int):BitmapData {
         var _local10:int;
         var _local11:Dictionary;
         var _local12:Number;
@@ -386,7 +386,7 @@ import flash.utils.getTimer;
             this._ur();
         }
         var _local5:_J_H_ = _yN_.imageFromFacing(_N_V_, _arg1, _local4, _local3);
-        if (_arg1._kN_) {
+        if (_arg1.isHallucinating_) {
             _local5 = new _J_H_(_1g(), null);
         }
         var _local6:int = tex1Id_;
@@ -692,7 +692,7 @@ import flash.utils.getTimer;
 
     public function _M_S_(_arg1:Number, _arg2:Number):Boolean {
         var _local3:Square = map_.getSquare(_arg1, _arg2);
-        if (((!((_0H_B_ == _local3))) && ((((_local3 == null)) || (!(_local3._0C_D_())))))) {
+        if (((!((_0H_B_ == _local3))) && ((((_local3 == null)) || (!(_local3.isWalkable())))))) {
             return (false);
         }
         var _local4:Number = (_arg1 - int(_arg1));
@@ -752,7 +752,7 @@ import flash.utils.getTimer;
 
     public function _01w():void {
         var _local1:Square = map_.getSquare(x_, y_);
-        if (_local1.props_._rr) {
+        if (_local1.props_.sinking_) {
             _0F_ = Math.min((_0F_ + 1), Parameters._K_5);
             this._W_V_ = (0.1 + ((1 - (_0F_ / Parameters._K_5)) * (_local1.props_.speed_ - 0.1)));
         } else {
@@ -886,14 +886,14 @@ import flash.utils.getTimer;
         return (!(((_9B_ & ConditionEffect._gY_) == 0)));
     }
 
-    override public function drawShadow(_arg1:Vector.<IGraphicsData>, _arg2:_0D_v, _arg3:int):void {
+    override public function drawShadow(_arg1:Vector.<IGraphicsData>, _arg2:GameCamera, _arg3:int):void {
         if(this != this.map_.player_ && this.map_.player_.canBeHitBy(this) && this._di()) {
             return;
         }
         super.drawShadow(_arg1, _arg2, _arg3);
     }
 
-    protected function _071(_arg1:Vector.<IGraphicsData>, _arg2:_0D_v, _arg3:int):void {
+    protected function _071(_arg1:Vector.<IGraphicsData>, _arg2:GameCamera, _arg3:int):void {
         var _local8:Number;
         var _local9:Number;
         if (this._K_Y_ == null) {

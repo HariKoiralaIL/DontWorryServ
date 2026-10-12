@@ -7,8 +7,8 @@ package com.company.assembleegameclient.objects {
 import com.company.assembleegameclient.engine3d.MeshModel;
 import com.company.assembleegameclient.engine3d.Object3D;
 import com.company.assembleegameclient.map.Square;
-import com.company.assembleegameclient.map._0D_v;
-import com.company.assembleegameclient.map._X_l;
+import com.company.assembleegameclient.map.GameCamera;
+import com.company.assembleegameclient.map.GameMap;
 import com.company.assembleegameclient.net.messages.data._Q_0;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.util.ConditionEffect;
@@ -265,7 +265,7 @@ public class GameObject extends BasicObject {
         }
     }
 
-    override public function addTo(_arg1:_X_l, _arg2:Number, _arg3:Number):Boolean {
+    override public function addTo(_arg1:GameMap, _arg2:Number, _arg3:Number):Boolean {
         map_ = _arg1;
         this._Z_M_.x = (this._52.x = _arg2);
         this._Z_M_.y = (this._52.y = _arg3);
@@ -323,7 +323,7 @@ public class GameObject extends BasicObject {
         return (true);
     }
 
-    override public function draw(_arg1:Vector.<IGraphicsData>, _arg2:_0D_v, _arg3:int):void {
+    override public function draw(_arg1:Vector.<IGraphicsData>, _arg2:GameCamera, _arg3:int):void {
         var _local4:BitmapData = this.getTexture(_arg2, _arg3);
         if (this.props_._Z_L_) {
             if (_0H_B_.faces_.length == 0) {
@@ -366,7 +366,7 @@ public class GameObject extends BasicObject {
         }
     }
 
-    override public function drawShadow(_arg1:Vector.<IGraphicsData>, _arg2:_0D_v, _arg3:int):void {
+    override public function drawShadow(_arg1:Vector.<IGraphicsData>, _arg2:GameCamera, _arg3:int):void {
         if (this._J_4 == null) {
             this._J_4 = new GraphicsGradientFill(GradientType.RADIAL, [this.props_._G_c, this.props_._G_c], [0.5, 0], null, new Matrix());
             this._P_C_ = new GraphicsPath(GraphicHelper._H_2, new Vector.<Number>());
@@ -728,7 +728,7 @@ public class GameObject extends BasicObject {
         }
     }
 
-    public function _oL_(_arg1:Vector.<IGraphicsData>, _arg2:_0D_v):void {
+    public function _oL_(_arg1:Vector.<IGraphicsData>, _arg2:GameCamera):void {
         if (this._U_g == null) {
             this.nameText_ = this._T_L_(this.name_);
             this._U_g = this.generateNameBitmapData(this.nameText_);
@@ -771,7 +771,7 @@ public class GameObject extends BasicObject {
         this._W_J_ = getTimer();
     }
 
-    public function _wz(_arg1:Vector.<IGraphicsData>, _arg2:_0D_v, _arg3:int):void {
+    public function _wz(_arg1:Vector.<IGraphicsData>, _arg2:GameCamera, _arg3:int):void {
         var _local9:BitmapData;
         var _local10:GraphicsBitmapFill;
         var _local11:GraphicsPath;
@@ -839,7 +839,7 @@ public class GameObject extends BasicObject {
         return (this._07u);
     }
 
-    protected function getTexture(_arg1:_0D_v, _arg2:int):BitmapData {
+    protected function getTexture(_arg1:GameCamera, _arg2:int):BitmapData {
         var _local6:Number;
         var _local7:int;
         var _local8:_J_H_;
@@ -886,7 +886,7 @@ public class GameObject extends BasicObject {
         if (((this.props_._Z_L_) || (!((this._8J_ == null))))) {
             return (_local3);
         }
-        if (_arg1._kN_) {
+        if (_arg1.isHallucinating_) {
             _local11 = (((_local3 == null)) ? 8 : _local3.width);
             _local3 = this._1g();
             _local5 = null;

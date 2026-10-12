@@ -8,7 +8,7 @@ import client.ui.panels.ContainerPanel;
 
 import audio.SoundEffects;
 
-import com.company.assembleegameclient.map._X_l;
+import com.company.assembleegameclient.map.GameMap;
 import com.company.assembleegameclient.objects.Container;
 import com.company.assembleegameclient.objects.GameObject;
 import com.company.assembleegameclient.objects.ObjectLibrary;
@@ -164,7 +164,7 @@ public class ui_items extends Sprite {
                 this._08D_((_local2 as _E_6));
                 return;
             }
-            if ((((_local2 is _X_l)) || ((_local2 is ui_chat)))) {
+            if ((((_local2 is GameMap)) || ((_local2 is ui_chat)))) {
                 this._Y_4();
                 return;
             }

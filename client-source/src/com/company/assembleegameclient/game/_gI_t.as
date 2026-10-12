@@ -2,8 +2,8 @@ package com.company.assembleegameclient.game {
 import com.company.assembleegameclient.net.messages.incoming.MapInfo;
 
 import com.company.assembleegameclient.map.MapHandler;
-import com.company.assembleegameclient.map._0D_v;
-import com.company.assembleegameclient.map._X_l;
+import com.company.assembleegameclient.map.GameCamera;
+import com.company.assembleegameclient.map.GameMap;
 import com.company.assembleegameclient.net.PacketManager;
 import com.company.assembleegameclient.objects.GameObject;
 import com.company.assembleegameclient.tutorial.Tutorial;
@@ -18,12 +18,12 @@ public class _gI_t extends Sprite {
     public var lastUpdate_:int = 0;
     public var moveRecords_:_uw;
     //public var map:MapHandler;
-    public var camera_:_0D_v;
+    public var camera_:GameCamera;
     public var gsc_:PacketManager;
 
     public function _gI_t() {
         this.moveRecords_ = new _uw();
-        this.camera_ = new _0D_v();
+        this.camera_ = new GameCamera();
         super();
     }
     public function initialize():void{

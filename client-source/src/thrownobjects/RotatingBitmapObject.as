@@ -1,6 +1,6 @@
 package thrownobjects {
 import com.company.assembleegameclient.map.Square;
-import com.company.assembleegameclient.map._0D_v;
+import com.company.assembleegameclient.map.GameCamera;
 import com.company.assembleegameclient.objects.BasicObject;
 import com.company.util.GraphicHelper;
 
@@ -13,7 +13,7 @@ import flash.geom.Matrix;
 // Formerly _0H_Q_. A map object drawn as a single bitmap quad that can spin
 // around its center. Has no shadow.
 //
-// NOTE: _bY_ (projected position), _P_m, _7y(), _0H_B_ and the _0D_v type come from
+// NOTE: _bY_ (projected position), _P_m, _7y(), _0H_B_ and the GameCamera type come from
 // BasicObject / its package and keep their obfuscated names until those are refactored.
 public class RotatingBitmapObject extends BasicObject {
 
@@ -34,10 +34,10 @@ public class RotatingBitmapObject extends BasicObject {
         z_ = z;
     }
 
-    override public function drawShadow(graphicsData:Vector.<IGraphicsData>, camera:_0D_v, time:int):void {
+    override public function drawShadow(graphicsData:Vector.<IGraphicsData>, camera:GameCamera, time:int):void {
     }
 
-    override public function draw(graphicsData:Vector.<IGraphicsData>, camera:_0D_v, time:int):void {
+    override public function draw(graphicsData:Vector.<IGraphicsData>, camera:GameCamera, time:int):void {
         var w:int = this.bitmap_.width;
         var h:int = this.bitmap_.height;
         var left:Number = _bY_[3] - w / 2;

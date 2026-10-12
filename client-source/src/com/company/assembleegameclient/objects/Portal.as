@@ -7,7 +7,7 @@ package com.company.assembleegameclient.objects {
 
 import flash.display.IGraphicsData;
 
-import com.company.assembleegameclient.map._0D_v;
+import com.company.assembleegameclient.map.GameCamera;
 
 import client.ui.panels.PortalPanel;
 
@@ -27,7 +27,7 @@ public class Portal extends GameObject implements _G_4 {
     public var _xq:Boolean;
     public var _09S_:Boolean = true;
 
-    override public function draw(_arg1:Vector.<IGraphicsData>, _arg2:_0D_v, _arg3:int):void {
+    override public function draw(_arg1:Vector.<IGraphicsData>, _arg2:GameCamera, _arg3:int):void {
         super.draw(_arg1, _arg2, _arg3);
         if (this._0J_A_) {
             _oL_(_arg1, _arg2);

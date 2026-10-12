@@ -6,8 +6,8 @@
 package com.company.assembleegameclient.objects {
 import com.company.assembleegameclient.engine3d.Billboard;
 import com.company.assembleegameclient.map.Square;
-import com.company.assembleegameclient.map._0D_v;
-import com.company.assembleegameclient.map._X_l;
+import com.company.assembleegameclient.map.GameCamera;
+import com.company.assembleegameclient.map.GameMap;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.tutorial.Tutorial;
 import com.company.assembleegameclient.tutorial.doneAction;
@@ -85,7 +85,7 @@ public class Projectile extends BasicObject {
     private var _0L_7:Point;
     private var _08V_:Vector3D;
 
-    override public function addTo(_arg1:_X_l, _arg2:Number, _arg3:Number):Boolean {
+    override public function addTo(_arg1:GameMap, _arg2:Number, _arg3:Number):Boolean {
         var _local4:Player;
         this._R_i = _arg2;
         this._J_Y_ = _arg3;
@@ -183,7 +183,7 @@ public class Projectile extends BasicObject {
         return (true);
     }
 
-    override public function draw(_arg1:Vector.<IGraphicsData>, _arg2:_0D_v, _arg3:int):void {
+    override public function draw(_arg1:Vector.<IGraphicsData>, _arg2:GameCamera, _arg3:int):void {
         var _local6:uint;
         var _local7:uint;
         if (!Parameters._Q_w) {
@@ -233,7 +233,7 @@ public class Projectile extends BasicObject {
         }
     }
 
-    override public function drawShadow(_arg1:Vector.<IGraphicsData>, _arg2:_0D_v, _arg3:int):void {
+    override public function drawShadow(_arg1:Vector.<IGraphicsData>, _arg2:GameCamera, _arg3:int):void {
         if (!Parameters._Q_w) {
             return;
         }

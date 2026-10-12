@@ -1,6 +1,6 @@
 package mapeditor {
-import com.company.assembleegameclient.map._pf;
-import com.company.assembleegameclient.map._sn;
+import com.company.assembleegameclient.map.GroundLibrary;
+import com.company.assembleegameclient.map.RegionLibrary;
 import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.util.AssetLibrary;
 import com.company.util.IntPoint;
@@ -343,7 +343,7 @@ internal class MapCanvas extends Sprite {
             return;
         }
         if (tile.types_[MapLayer.GROUND] != -1) {
-            groundTexture = _pf.getBitmapData(tile.types_[MapLayer.GROUND]);
+            groundTexture = GroundLibrary.getBitmapData(tile.types_[MapLayer.GROUND]);
             this.tileTextures_.copyTo(groundTexture, groundTexture.rect, tileRect);
         }
         if (tile.types_[MapLayer.OBJECT] != -1) {
@@ -355,7 +355,7 @@ internal class MapCanvas extends Sprite {
             }
         }
         if (tile.types_[MapLayer.REGION] != -1) {
-            regionColor = _sn.getColor(tile.types_[MapLayer.REGION]);
+            regionColor = RegionLibrary.getColor(tile.types_[MapLayer.REGION]);
             this.regionMap_.setPixel32(tileX, tileY, (0x5F000000 | regionColor));
         }
     }

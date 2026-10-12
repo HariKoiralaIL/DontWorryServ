@@ -4,12 +4,12 @@
 //com.company.assembleegameclient.objects.BasicObject
 
 package com.company.assembleegameclient.objects {
-import com.company.assembleegameclient.map._X_l;
+import com.company.assembleegameclient.map.GameMap;
 import com.company.assembleegameclient.map.Square;
 
 import flash.display.IGraphicsData;
 
-import com.company.assembleegameclient.map._0D_v;
+import com.company.assembleegameclient.map.GameCamera;
 
 
 public class BasicObject {
@@ -26,7 +26,7 @@ public class BasicObject {
         super();
         this.clear();
     }
-    public var map_:_X_l;
+    public var map_:GameMap;
     public var _0H_B_:Square;
     public var objectId_:int;
     public var x_:Number;
@@ -63,13 +63,13 @@ public class BasicObject {
         return (true);
     }
 
-    public function draw(_arg1:Vector.<IGraphicsData>, _arg2:_0D_v, _arg3:int):void {
+    public function draw(_arg1:Vector.<IGraphicsData>, _arg2:GameCamera, _arg3:int):void {
     }
 
-    public function drawShadow(_arg1:Vector.<IGraphicsData>, _arg2:_0D_v, _arg3:int):void {
+    public function drawShadow(_arg1:Vector.<IGraphicsData>, _arg2:GameCamera, _arg3:int):void {
     }
 
-    public function _0E_T_(_arg1:_0D_v):void {
+    public function _0E_T_(_arg1:GameCamera):void {
         this._050.length = 0;
         this._050.push(this.x_, this.y_, 0, this.x_, this.y_, this.z_);
         this._bY_.length = 0;
@@ -77,7 +77,7 @@ public class BasicObject {
         this.sortVal_ = this._bY_[1];
     }
 
-    public function addTo(_arg1:_X_l, _arg2:Number, _arg3:Number):Boolean {
+    public function addTo(_arg1:GameMap, _arg2:Number, _arg3:Number):Boolean {
         this.map_ = _arg1;
         this._0H_B_ = this.map_.getSquare(_arg2, _arg3);
         if (this._0H_B_ == null) {

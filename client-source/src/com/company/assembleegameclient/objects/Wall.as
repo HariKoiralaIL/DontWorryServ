@@ -14,7 +14,7 @@ import com.company.assembleegameclient.map.Square;
 
 import flash.display.IGraphicsData;
 
-import com.company.assembleegameclient.map._0D_v;
+import com.company.assembleegameclient.map.GameCamera;
 
 
 public class Wall extends GameObject {
@@ -52,7 +52,7 @@ public class Wall extends GameObject {
         return (BitmapUtil._B_n(this._0A_0));
     }
 
-    override public function draw(_arg1:Vector.<IGraphicsData>, _arg2:_0D_v, _arg3:int):void {
+    override public function draw(_arg1:Vector.<IGraphicsData>, _arg2:GameCamera, _arg3:int):void {
         var _local6:BitmapData;
         var _local7:Face3D;
         var _local8:Square;

@@ -1,6 +1,6 @@
 package particleeffects {
 
-    import com.company.assembleegameclient.map._0D_v;
+    import com.company.assembleegameclient.map.GameCamera;
     import com.company.assembleegameclient.objects.BasicObject;
     import com.company.util.GraphicHelper;
     import com.company.util._G_;
@@ -45,7 +45,7 @@ package particleeffects {
             objectId_ = _7y();
         }
 
-        override public function draw(graphicsData:Vector.<IGraphicsData>, camera:_0D_v, time:int):void {
+        override public function draw(graphicsData:Vector.<IGraphicsData>, camera:GameCamera, time:int):void {
             this.bitmapFill_.bitmapData = _G_._0C_m(this.bitmapData_, this.alpha_);
             var halfW:Number = (this.bitmapFill_.bitmapData.width / 2);
             var halfH:Number = (this.bitmapFill_.bitmapData.height / 2);

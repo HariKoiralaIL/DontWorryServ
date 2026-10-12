@@ -1,6 +1,6 @@
 package mapeditor {
-import com.company.assembleegameclient.map._pf;
-import com.company.assembleegameclient.map._sn;
+import com.company.assembleegameclient.map.GroundLibrary;
+import com.company.assembleegameclient.map.RegionLibrary;
 import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.ui.SimpleText;
 import com.company.util.GraphicHelper;
@@ -83,9 +83,9 @@ public class TileInfoPanel extends Sprite {
         this.positionText_._08S_();
         var tile:MapTile = this.map_.getTile(selection.x, selection.y);
         var types:Vector.<int> = ((tile == null) ? MapLayer.EMPTY_TYPES : tile.types_);
-        var groundName:String = ((types[MapLayer.GROUND] == -1) ? "None" : _pf._6H_(types[MapLayer.GROUND]));
+        var groundName:String = ((types[MapLayer.GROUND] == -1) ? "None" : GroundLibrary.getIdFromType(types[MapLayer.GROUND]));
         var objectName:String = ((types[MapLayer.OBJECT] == -1) ? "None" : ObjectLibrary._6H_(types[MapLayer.OBJECT]));
-        var regionName:String = ((types[MapLayer.REGION] == -1) ? "None" : _sn._6H_(types[MapLayer.REGION]));
+        var regionName:String = ((types[MapLayer.REGION] == -1) ? "None" : RegionLibrary.getIdFromType(types[MapLayer.REGION]));
         var customName:String = (((tile == null) || (tile.objectName_ == null)) ? "" : ((" (" + tile.objectName_) + ")"));
         this.tileText_.text = ((((((((("<span class='in'>" + "Ground: ") + groundName) + "\nObject: ") + objectName) + customName) + "\nRegion: ") + regionName) + "</span>"));
         this.tileText_._08S_();

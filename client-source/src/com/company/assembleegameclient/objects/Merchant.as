@@ -16,8 +16,8 @@ import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 import constants.ActorType;
 
-import com.company.assembleegameclient.map._0D_v;
-import com.company.assembleegameclient.map._X_l;
+import com.company.assembleegameclient.map.GameCamera;
+import com.company.assembleegameclient.map.GameMap;
 import com.company.ui.SimpleText;
 import com.company.util.IntPoint;
 
@@ -65,7 +65,7 @@ public class Merchant extends SellableObject implements _G_4 {
         this._z5 = 0;
     }
 
-    override public function addTo(_arg1:_X_l, _arg2:Number, _arg3:Number):Boolean {
+    override public function addTo(_arg1:GameMap, _arg2:Number, _arg3:Number):Boolean {
         if (!super.addTo(_arg1, _arg2, _arg3)) {
             return (false);
         }
@@ -150,7 +150,7 @@ public class Merchant extends SellableObject implements _G_4 {
         return (_local1);
     }
 
-    override protected function getTexture(_arg1:_0D_v, _arg2:int):BitmapData {
+    override protected function getTexture(_arg1:GameCamera, _arg2:int):BitmapData {
         if ((((this.alpha_ == 1)) && ((size_ == 100)))) {
             return (this.merchandiseTexture_);
         }

@@ -11,7 +11,7 @@ import flash.text.TextFormatAlign;
 import flash.display.BitmapData;
 
 import com.company.assembleegameclient.util.TextureRedrawer;
-import com.company.assembleegameclient.map._0D_v;
+import com.company.assembleegameclient.map.GameCamera;
 
 public class Sign extends GameObject {
 
@@ -20,7 +20,7 @@ public class Sign extends GameObject {
         texture_ = null;
     }
 
-    override protected function getTexture(_arg1:_0D_v, _arg2:int):BitmapData {
+    override protected function getTexture(_arg1:GameCamera, _arg2:int):BitmapData {
         if (texture_ != null) {
             return (texture_);
         }

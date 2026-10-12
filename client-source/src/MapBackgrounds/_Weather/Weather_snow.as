@@ -4,7 +4,7 @@
 package MapBackgrounds._Weather {
   import MapBackgrounds.Background;
 
-  import com.company.assembleegameclient.map._0D_v;
+  import com.company.assembleegameclient.map.GameCamera;
   import com.company.util.AssetLibrary;
   import com.company.util._kp;
 
@@ -28,7 +28,7 @@ package MapBackgrounds._Weather {
         _local1++;
       }
     }
-    override public function draw(_arg1:_0D_v, _arg2:int):void{
+    override public function draw(_arg1:GameCamera, _arg2:int):void{
       var _local3:SnowStar;
       this.graphicsData_.length = 0;
       for each (_local3 in this._P_j)
@@ -68,7 +68,7 @@ import flash.display.GraphicsBitmapFill;
 import flash.display.GraphicsPath;
 import flash.geom.Matrix;
 import flash.display.IGraphicsData;
-import com.company.assembleegameclient.map._0D_v;
+import com.company.assembleegameclient.map.GameCamera;
 
 
 class SnowStar {
@@ -98,7 +98,7 @@ class SnowStar {
     this.w_ = (this.bitmap_.width * this.scale_);
     this.h_ = (this.bitmap_.height * this.scale_);
   }
-  public function draw(_arg1:Vector.<IGraphicsData>, _arg2:_0D_v, _arg3:int):void{
+  public function draw(_arg1:Vector.<IGraphicsData>, _arg2:GameCamera, _arg3:int):void{
 
     var _local4:Number = ((this.x_ * Math.cos(-(_arg2.angleRad_))) - (this.y_ * Math.sin(-(_arg2.angleRad_))));
     var _local5:Number = ((this.x_ * Math.sin(-(_arg2.angleRad_))) + (this.y_ * Math.cos(-(_arg2.angleRad_))));

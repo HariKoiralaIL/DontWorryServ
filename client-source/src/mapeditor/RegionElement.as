@@ -1,5 +1,5 @@
 package mapeditor {
-import com.company.assembleegameclient.map._sn;
+import com.company.assembleegameclient.map.RegionLibrary;
 import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
 import flash.display.Shape;
@@ -10,7 +10,7 @@ public class RegionElement extends ChooserElement {
         super(int(regionXml.@type));
         this.regionXml_ = regionXml;
         var swatch:Shape = new Shape();
-        swatch.graphics.beginFill(_sn.getColor(type_), 0.5);
+        swatch.graphics.beginFill(RegionLibrary.getColor(type_), 0.5);
         swatch.graphics.drawRect(0, 0, (WIDTH - 8), (HEIGHT - 8));
         swatch.graphics.endFill();
         swatch.x = ((WIDTH / 2) - (swatch.width / 2));

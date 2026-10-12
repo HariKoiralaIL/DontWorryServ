@@ -1,6 +1,6 @@
 package menus
 {
-    import com.company.assembleegameclient.map._X_l;
+    import com.company.assembleegameclient.map.GameMap;
     import com.company.assembleegameclient.objects.Player;
     import com.company.assembleegameclient.parameters.Parameters;
     import com.company.assembleegameclient.ui._return;
@@ -11,13 +11,13 @@ package menus
 
     public class PlayerListMenu extends Menu
     {
-        public var map_:_X_l;
+        public var map_:GameMap;
         public var players_:Vector.<Player>;
         public var teleportOption_:MenuOption;
         public var divider_:_return;
         private var playerRows_:Vector.<ui_playerslist> = new Vector.<ui_playerslist>();
 
-        public function PlayerListMenu(map:_X_l, players:Vector.<Player>)
+        public function PlayerListMenu(map:GameMap, players:Vector.<Player>)
         {
             var player:Player;
             var row:ui_playerslist;

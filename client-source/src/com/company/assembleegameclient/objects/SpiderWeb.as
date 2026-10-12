@@ -7,7 +7,7 @@ package com.company.assembleegameclient.objects {
 
 import flash.display.IGraphicsData;
 
-import com.company.assembleegameclient.map._0D_v;
+import com.company.assembleegameclient.map.GameCamera;
 import com.company.assembleegameclient.map.Square;
 
 public class SpiderWeb extends GameObject {
@@ -17,7 +17,7 @@ public class SpiderWeb extends GameObject {
     }
     private var _qZ_:Boolean = false;
 
-    override public function draw(_arg1:Vector.<IGraphicsData>, _arg2:_0D_v, _arg3:int):void {
+    override public function draw(_arg1:Vector.<IGraphicsData>, _arg2:GameCamera, _arg3:int):void {
         if (!this._qZ_) {
             this._qZ_ = this._mj();
         }

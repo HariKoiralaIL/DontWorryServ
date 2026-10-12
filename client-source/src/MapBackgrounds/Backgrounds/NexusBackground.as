@@ -20,7 +20,7 @@ import com.company.util.GraphicHelper;
 import flash.display.BitmapDataChannel;
 import flash.geom.Rectangle;
 
-import com.company.assembleegameclient.map._0D_v;
+import com.company.assembleegameclient.map.GameCamera;
 
 
 public class NexusBackground extends Background {
@@ -42,7 +42,7 @@ public class NexusBackground extends Background {
     private var bitmapFill_:GraphicsBitmapFill;
     private var path_:GraphicsPath;
 
-    override public function draw(_arg1:_0D_v, _arg2:int):void {
+    override public function draw(_arg1:GameCamera, _arg2:int):void {
 //        this.graphicsData_.length = 0;
 //        var _local3:Matrix = this.bitmapFill_.matrix;
 //        _local3.identity();
@@ -60,7 +60,7 @@ public class NexusBackground extends Background {
 //        graphics.drawGraphicsData(this.graphicsData_);
     }
 
-    private function _0E_O_(_arg1:_0D_v, _arg2:int):void {
+    private function _0E_O_(_arg1:GameCamera, _arg2:int):void {
         var _local4:Island;
         var _local3:int;
         while (_local3 < this._co.length) {
@@ -84,7 +84,7 @@ import com.company.util.AssetLibrary;
 
 import MapBackgrounds.Backgrounds.NexusBackground;
 
-import com.company.assembleegameclient.map._0D_v;
+import com.company.assembleegameclient.map.GameCamera;
 
 import flash.display.IGraphicsData;
 
@@ -108,7 +108,7 @@ class Island {
         this.bitmapData_ = AssetLibrary.getImage("stars");
     }
 
-    public function draw(_arg1:_0D_v, _arg2:int, _arg3:Vector.<IGraphicsData>):void {
+    public function draw(_arg1:GameCamera, _arg2:int, _arg3:Vector.<IGraphicsData>):void {
         var _local4:int = (_arg2 - this.startTime_);
         var _local5:Number = (this.center_.x + (_local4 * NexusBackground._cP_.x));
         var _local6:Number = (this.center_.y + (_local4 * NexusBackground._cP_.y));

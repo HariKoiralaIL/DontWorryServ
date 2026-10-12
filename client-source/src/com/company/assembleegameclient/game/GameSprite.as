@@ -24,8 +24,8 @@ package com.company.assembleegameclient.game {
   import fl.motion.Color;
   import com.company.assembleegameclient.appengine.AppEngineClient;
   import com.company.assembleegameclient.appengine.CharListEvent;
-  import com.company.assembleegameclient.map._0D_v;
-  import com.company.assembleegameclient.map._X_l;
+  import com.company.assembleegameclient.map.GameCamera;
+  import com.company.assembleegameclient.map.GameMap;
   import com.company.assembleegameclient.net.Server;
   import com.company.assembleegameclient.net.PacketManager;
   import com.company.assembleegameclient.objects.Player;
@@ -57,11 +57,11 @@ package com.company.assembleegameclient.game {
     protected static const _oj:ColorMatrixFilter = new ColorMatrixFilter(MoreColorUtil._0M_l);
 
     public function GameSprite(_arg1:Server, _arg2:int, _arg3:Boolean, _arg4:int, _arg5:int, _arg6:ByteArray, _arg7:CharListEvent, _arg8:String) {
-        this.camera_ = new _0D_v();
+        this.camera_ = new GameCamera();
         this.moveRecords_ = new _uw();
         super();
         this.charList_ = _arg7;
-        this.map_ = new _X_l(this);
+        this.map_ = new GameMap(this);
         addChild(this.map_);
         this.gsc_ = new PacketManager(this, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg8);
         this.mui_ = new _07a(this);
@@ -73,7 +73,7 @@ package com.company.assembleegameclient.game {
         addEventListener(Event.ADDED_TO_STAGE, this.onAddedToStage);
         addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
     }
-    //public var camera_:_0D_v;
+    //public var camera_:GameCamera;
     //public var gsc_:PacketManager;
     //public var mui_:_07a;
     public var textBox_:ui_chat;
@@ -94,17 +94,17 @@ package com.company.assembleegameclient.game {
     //public var isEditor:Boolean;
     //public var lastUpdate_:int = 0;
     //public var moveRecords_:_uw;
-    private var map:_X_l;
+    private var map:GameMap;
     private var _bA_:int = 0;
     private var _qA_:int = 0;
     private var _rz:MapLoadingScreen;
     private var _2e:Boolean;
 
-    public function get map_():_X_l {
+    public function get map_():GameMap {
         return (this.map);
     }
 
-    public function set map_(_arg1:_X_l):void {
+    public function set map_(_arg1:GameMap):void {
         this.map = _arg1;
     }
 
@@ -502,7 +502,7 @@ package com.company.assembleegameclient.game {
     onScreenResize(_arg1);
     var _local4:Player = this.map_.player_;
     if (_local4 != null) {
-      this.camera_._K_g(_local4);
+      this.camera_.configureForPlayer(_local4);
       this.map_.draw(this.camera_, _local2);
       this._H_t.draw(_local4.credits_, _local4.fame_);
       this._H_T_.draw(_local4.keys_);

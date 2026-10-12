@@ -8,8 +8,8 @@ package com.company.assembleegameclient.util {
   import audio.SfxSettings;
   import audio.ILoadable;
   import com.company.assembleegameclient.engine3d.MeshModel;
-  import com.company.assembleegameclient.map._pf;
-  import com.company.assembleegameclient.map._sn;
+  import com.company.assembleegameclient.map.GroundLibrary;
+  import com.company.assembleegameclient.map.RegionLibrary;
   import com.company.assembleegameclient.objects.ObjectLibrary;
   import com.company.assembleegameclient.parameters.Parameters;
   import com.company.util.AssetLibrary;
@@ -147,12 +147,12 @@ package com.company.assembleegameclient.util {
     }
     private function initParticles():void{
       var _local1:XML = XML(new AssetEmbeds.particlesEmbed_());
-      _pf._nY_(_local1);
+      GroundLibrary.parseFromXML(_local1);
     }
     private function initTiles():void{
       var _local1:*;
       for each (_local1 in DataEmbeds._R_k) {
-        _pf._nY_(XML(_local1));
+        GroundLibrary.parseFromXML(XML(_local1));
       }
     }
     private function initObjects():void{
@@ -164,7 +164,7 @@ package com.company.assembleegameclient.util {
     private function initRegions():void{
       var _local1:*;
       for each (_local1 in DataEmbeds._l5) {
-        _sn._nY_(XML(_local1));
+        RegionLibrary.parseFromXML(XML(_local1));
       }
     }
   }

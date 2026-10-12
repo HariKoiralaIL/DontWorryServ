@@ -5,8 +5,8 @@ import com.company.ui.dropdown.DropdownBox;
 
 import client.debug.Stats;
 
-import com.company.assembleegameclient.map._pf;
-import com.company.assembleegameclient.map._sn;
+import com.company.assembleegameclient.map.GroundLibrary;
+import com.company.assembleegameclient.map.RegionLibrary;
 import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.util.IntPoint;
 import com.company.util._O_m;
@@ -185,7 +185,7 @@ public class MapEditor extends BaseScreen {
         if (tile != null) {
             types = tile.types_;
             if (types[MapLayer.GROUND] != -1) {
-                id = _pf._6H_(types[MapLayer.GROUND]);
+                id = GroundLibrary.getIdFromType(types[MapLayer.GROUND]);
                 json["ground"] = id;
             }
             if (types[MapLayer.OBJECT] != -1) {
@@ -197,7 +197,7 @@ public class MapEditor extends BaseScreen {
                 json["objs"] = [objectJson];
             }
             if (types[MapLayer.REGION] != -1) {
-                id = _sn._6H_(types[MapLayer.REGION]);
+                id = RegionLibrary.getIdFromType(types[MapLayer.REGION]);
                 json["regions"] = [
                     {"id": id}
                 ];
@@ -352,7 +352,7 @@ public class MapEditor extends BaseScreen {
             while (tileX < bounds.right) {
                 tileJson = dict[data.readShort()];
                 if (tileJson.hasOwnProperty("ground")) {
-                    type = _pf._pb[tileJson["ground"]];
+                    type = GroundLibrary.idToType_[tileJson["ground"]];
                     this.map_.setType(tileX, tileY, MapLayer.GROUND, type);
                 }
                 objectsJson = tileJson["objs"];
@@ -370,7 +370,7 @@ public class MapEditor extends BaseScreen {
                 regionsJson = tileJson["regions"];
                 if (regionsJson != null) {
                     for each (regionJson in regionsJson) {
-                        type = _sn._pb[regionJson["id"]];
+                        type = RegionLibrary.idToType_[regionJson["id"]];
                         this.map_.setType(tileX, tileY, MapLayer.REGION, type);
                     }
                 }

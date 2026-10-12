@@ -139,8 +139,8 @@ package com.company.assembleegameclient.net {
   import thrownobjects.ThrownObjectSpawner;
 
   import com.company.assembleegameclient.game.GameSprite;
-  import com.company.assembleegameclient.map._X_l;
-  import com.company.assembleegameclient.map._pf;
+  import com.company.assembleegameclient.map.GameMap;
+  import com.company.assembleegameclient.map.GroundLibrary;
   import com.company.assembleegameclient.net.messages.data.*;
   import com.company.assembleegameclient.net.messages.data.ObjectStatusData;
   import com.company.assembleegameclient.net.messages.data.StatData;
@@ -807,11 +807,11 @@ package com.company.assembleegameclient.net {
 
     private function _0A_K_(_arg1:Damage):void {
       var _local5:int;
-      var _local2:_X_l = this.gs_.map_;
+      var _local2:GameMap = this.gs_.map_;
       var _local3:Projectile;
       if ((((_arg1.objectId_ >= 0)) && ((_arg1.bulletId_ > 0)))) {
         _local5 = Projectile._61(_arg1.objectId_, _arg1.bulletId_);
-        _local3 = (_local2._cl[_local5] as Projectile);
+        _local3 = (_local2.boDict_[_local5] as Projectile);
         if (((!((_local3 == null))) && (!(_local3._ko._0C_c)))) {
           _local2.removeObj(_local5);
         }
@@ -902,7 +902,7 @@ package com.company.assembleegameclient.net {
     }
 
     private function _lu(_arg1:_0H_9):void {
-      var _local2:_X_l = this.gs_.map_;
+      var _local2:GameMap = this.gs_.map_;
       var _local3:GameObject = ObjectLibrary._075(_arg1.objectType_);
       if (_local3 == null) {
         return;
@@ -980,7 +980,7 @@ package com.company.assembleegameclient.net {
       if (this._0l != null) {
         this._0l._06m();
       }
-      var _local2:_X_l = this.gs_.map_;
+      var _local2:GameMap = this.gs_.map_;
       this.move(_arg1.tickId_, _local2.player_);
       for each (_local3 in _arg1.statuses_) {
         this._9s(_local3, _arg1.tickTime_, _arg1.tickId_);
@@ -993,7 +993,7 @@ package com.company.assembleegameclient.net {
       var _local4:ParticleEffect;
       var _local5:Point;
       var _local6:Point;
-      var _local2:_X_l = this.gs_.map_;
+      var _local2:GameMap = this.gs_.map_;
       switch (_arg1.effectType_) {
         case ShowEffect.HEAL_EFFECT:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
@@ -1068,7 +1068,7 @@ package com.company.assembleegameclient.net {
           _local2.addObj(_local4, _local3.x_, _local3.y_);
           return;
         case ShowEffect.JITTER_EFFECT:
-          this.gs_.camera_._uE_();
+          this.gs_.camera_.startShake();
           return;
         case ShowEffect.FLASH_EFFECT:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
@@ -1381,7 +1381,7 @@ package com.company.assembleegameclient.net {
       var _local8:int;
       var _local9:int;
       var _local10:Array;
-      var _local4:_X_l = this.gs_.map_;
+      var _local4:GameMap = this.gs_.map_;
       var _local5:GameObject = _local4.goDict_[_arg1.objectId_];
       if (_local5 == null) {
         return;
@@ -1487,7 +1487,7 @@ package com.company.assembleegameclient.net {
 
     private function _7N_(_arg1:String):void {
       var _local2:XML = XML(_arg1);
-      _pf._nY_(_local2);
+      GroundLibrary.parseFromXML(_local2);
       ObjectLibrary._nY_(_local2);
     }
 

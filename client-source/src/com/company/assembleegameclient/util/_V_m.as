@@ -13,12 +13,12 @@ import flash.utils.ByteArray;
 import flash.display.BitmapData;
 
 import com.company.assembleegameclient.parameters.Parameters;
-import com.company.assembleegameclient.map._pf;
+import com.company.assembleegameclient.map.GroundLibrary;
 import com.company.assembleegameclient.map.Square;
-import com.company.assembleegameclient.map._X_l;
+import com.company.assembleegameclient.map.GameMap;
 import com.company.util.AssetLibrary;
 import com.company.util.BitmapUtil;
-import com.company.assembleegameclient.map._C_O_;
+import com.company.assembleegameclient.map.GroundProperties;
 import com.company.util.PointUtil;
 
 
@@ -63,7 +63,7 @@ public class _V_m {
         if (_arg1.tileType_ == 253) {
             _local3 = _nP_(_arg1);
         } else {
-            if (_arg1.props_._0H_U_) {
+            if (_arg1.props_.hasEdge_) {
                 _local3 = _y0(_arg1);
             } else {
                 _local3 = _00P_(_arg1);
@@ -81,7 +81,7 @@ public class _V_m {
             _local4[_local3] = _local5;
             return (_local5);
         }
-        if (_arg1.props_._0H_U_) {
+        if (_arg1.props_.hasEdge_) {
             _local5 = _0D_A_(_local3);
             _local4[_local3] = _local5;
             return (_local5);
@@ -122,7 +122,7 @@ public class _V_m {
             _local4[_local3] = null;
             return (null);
         }
-        var _local10:BitmapData = _pf.getBitmapData(_arg1.tileType_);
+        var _local10:BitmapData = GroundLibrary.getBitmapData(_arg1.tileType_);
         if (_arg2) {
             _local5 = _local10.clone();
         } else {
@@ -149,23 +149,23 @@ public class _V_m {
         var _local10:BitmapData;
         if ((((_arg5 == _arg6)) && ((_arg5 == _arg8)))) {
             _local10 = _arg4[_pR_].random();
-            _local9 = _pf.getBitmapData(_arg7);
+            _local9 = GroundLibrary.getBitmapData(_arg7);
         } else {
             if (((!((_arg5 == _arg6))) && (!((_arg5 == _arg8))))) {
                 if (_arg6 != _arg8) {
-                    _arg1.copyPixels(_pf.getBitmapData(_arg6), _arg2, _arg3, _arg4[INNERP1].random(), p0, true);
-                    _arg1.copyPixels(_pf.getBitmapData(_arg8), _arg2, _arg3, _arg4[INNERP2].random(), p0, true);
+                    _arg1.copyPixels(GroundLibrary.getBitmapData(_arg6), _arg2, _arg3, _arg4[INNERP1].random(), p0, true);
+                    _arg1.copyPixels(GroundLibrary.getBitmapData(_arg8), _arg2, _arg3, _arg4[INNERP2].random(), p0, true);
                     return;
                 }
                 _local10 = _arg4[__in].random();
-                _local9 = _pf.getBitmapData(_arg6);
+                _local9 = GroundLibrary.getBitmapData(_arg6);
             } else {
                 if (_arg5 != _arg6) {
                     _local10 = _arg4[SIDE0].random();
-                    _local9 = _pf.getBitmapData(_arg6);
+                    _local9 = GroundLibrary.getBitmapData(_arg6);
                 } else {
                     _local10 = _arg4[SIDE1].random();
-                    _local9 = _pf.getBitmapData(_arg8);
+                    _local9 = GroundLibrary.getBitmapData(_arg8);
                 }
             }
         }
@@ -176,7 +176,7 @@ public class _V_m {
         var _local6:int;
         var _local7:Square;
         var _local2:ByteArray = new ByteArray();
-        var _local3:_X_l = _arg1.map_;
+        var _local3:GameMap = _arg1.map_;
         var _local4:uint = _arg1.tileType_;
         var _local5:int = (_arg1.y_ - 1);
         while (_local5 <= (_arg1.y_ + 1)) {
@@ -186,7 +186,7 @@ public class _V_m {
                     _local2.writeByte(_local4);
                 } else {
                     _local7 = _local3.squares_[(_local6 + (_local5 * _local3.width_))];
-                    if ((((_local7 == null)) || ((_local7.props_._9r <= _arg1.props_._9r)))) {
+                    if ((((_local7 == null)) || ((_local7.props_.blendPriority_ <= _arg1.props_.blendPriority_)))) {
                         _local2.writeByte(_local4);
                     } else {
                         _local2.writeByte(_local7.tileType_);
@@ -228,20 +228,20 @@ public class _V_m {
         var _local17:Square;
         var _local2:ByteArray = new ByteArray();
         _local2.length = 4;
-        var _local3:_X_l = _arg1.map_;
+        var _local3:GameMap = _arg1.map_;
         var _local4:int = _arg1.x_;
         var _local5:int = _arg1.y_;
         var _local6:Square = _local3.lookupSquare(_local4, (_local5 - 1));
         var _local7:Square = _local3.lookupSquare((_local4 - 1), _local5);
         var _local8:Square = _local3.lookupSquare((_local4 + 1), _local5);
         var _local9:Square = _local3.lookupSquare(_local4, (_local5 + 1));
-        var _local10:int = (((_local6) != null) ? _local6.props_._O_q : -1);
-        var _local11:int = (((_local7) != null) ? _local7.props_._O_q : -1);
-        var _local12:int = (((_local8) != null) ? _local8.props_._O_q : -1);
-        var _local13:int = (((_local9) != null) ? _local9.props_._O_q : -1);
+        var _local10:int = (((_local6) != null) ? _local6.props_.compositePriority_ : -1);
+        var _local11:int = (((_local7) != null) ? _local7.props_.compositePriority_ : -1);
+        var _local12:int = (((_local8) != null) ? _local8.props_.compositePriority_ : -1);
+        var _local13:int = (((_local9) != null) ? _local9.props_.compositePriority_ : -1);
         if ((((_local10 < 0)) && ((_local11 < 0)))) {
             _local14 = _local3.lookupSquare((_local4 - 1), (_local5 - 1));
-            _local2[0] = (((((_local14 == null)) || ((_local14.props_._O_q < 0)))) ? 0xFF : _local14.tileType_);
+            _local2[0] = (((((_local14 == null)) || ((_local14.props_.compositePriority_ < 0)))) ? 0xFF : _local14.tileType_);
         } else {
             if (_local10 < _local11) {
                 _local2[0] = _local7.tileType_;
@@ -251,7 +251,7 @@ public class _V_m {
         }
         if ((((_local10 < 0)) && ((_local12 < 0)))) {
             _local15 = _local3.lookupSquare((_local4 + 1), (_local5 - 1));
-            _local2[1] = (((((_local15 == null)) || ((_local15.props_._O_q < 0)))) ? 0xFF : _local15.tileType_);
+            _local2[1] = (((((_local15 == null)) || ((_local15.props_.compositePriority_ < 0)))) ? 0xFF : _local15.tileType_);
         } else {
             if (_local10 < _local12) {
                 _local2[1] = _local8.tileType_;
@@ -261,7 +261,7 @@ public class _V_m {
         }
         if ((((_local11 < 0)) && ((_local13 < 0)))) {
             _local16 = _local3.lookupSquare((_local4 - 1), (_local5 + 1));
-            _local2[2] = (((((_local16 == null)) || ((_local16.props_._O_q < 0)))) ? 0xFF : _local16.tileType_);
+            _local2[2] = (((((_local16 == null)) || ((_local16.props_.compositePriority_ < 0)))) ? 0xFF : _local16.tileType_);
         } else {
             if (_local11 < _local13) {
                 _local2[2] = _local9.tileType_;
@@ -271,7 +271,7 @@ public class _V_m {
         }
         if ((((_local12 < 0)) && ((_local13 < 0)))) {
             _local17 = _local3.lookupSquare((_local4 + 1), (_local5 + 1));
-            _local2[3] = (((((_local17 == null)) || ((_local17.props_._O_q < 0)))) ? 0xFF : _local17.tileType_);
+            _local2[3] = (((((_local17 == null)) || ((_local17.props_.compositePriority_ < 0)))) ? 0xFF : _local17.tileType_);
         } else {
             if (_local12 < _local13) {
                 _local2[3] = _local9.tileType_;
@@ -286,19 +286,19 @@ public class _V_m {
         var _local3:BitmapData;
         var _local2:BitmapData = new BitmapData(8, 8, false, 0);
         if (_arg1[0] != 0xFF) {
-            _local3 = _pf.getBitmapData(_arg1[0]);
+            _local3 = GroundLibrary.getBitmapData(_arg1[0]);
             _local2.copyPixels(_local3, RECT0, POINT0);
         }
         if (_arg1[1] != 0xFF) {
-            _local3 = _pf.getBitmapData(_arg1[1]);
+            _local3 = GroundLibrary.getBitmapData(_arg1[1]);
             _local2.copyPixels(_local3, RECT1, POINT1);
         }
         if (_arg1[2] != 0xFF) {
-            _local3 = _pf.getBitmapData(_arg1[2]);
+            _local3 = GroundLibrary.getBitmapData(_arg1[2]);
             _local2.copyPixels(_local3, RECT2, POINT2);
         }
         if (_arg1[3] != 0xFF) {
-            _local3 = _pf.getBitmapData(_arg1[3]);
+            _local3 = GroundLibrary.getBitmapData(_arg1[3]);
             _local2.copyPixels(_local3, RECT3, POINT3);
         }
         return (_local2);
@@ -309,9 +309,9 @@ public class _V_m {
         var _local8:Square;
         var _local9:Boolean;
         var _local2:ByteArray = new ByteArray();
-        var _local3:_X_l = _arg1.map_;
+        var _local3:GameMap = _arg1.map_;
         var _local4:Boolean;
-        var _local5:Boolean = _arg1.props_._M_e;
+        var _local5:Boolean = _arg1.props_.sameTypeEdgeMode_;
         var _local6:int = (_arg1.y_ - 1);
         while (_local6 <= (_arg1.y_ + 1)) {
             _local7 = (_arg1.x_ - 1);
@@ -336,11 +336,11 @@ public class _V_m {
     }
 
     private static function _0D_A_(_arg1:ByteArray):BitmapData {
-        var _local2:BitmapData = _pf.getBitmapData(_arg1[4]);
+        var _local2:BitmapData = GroundLibrary.getBitmapData(_arg1[4]);
         var _local3:BitmapData = _local2.clone();
-        var _local4:_C_O_ = _pf._020[_arg1[4]];
-        var _local5:Vector.<BitmapData> = _local4._yf();
-        var _local6:Vector.<BitmapData> = _local4._05n();
+        var _local4:GroundProperties = GroundLibrary.propsLibrary_[_arg1[4]];
+        var _local5:Vector.<BitmapData> = _local4.getEdgeTextures();
+        var _local6:Vector.<BitmapData> = _local4.getInnerCornerTextures();
         var _local7:int = 1;
         while (_local7 < 8) {
             if (!_arg1[_local7]) {

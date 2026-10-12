@@ -2,7 +2,7 @@ package arrows
 {
     import menus.Menu;
 
-    import com.company.assembleegameclient.map._0D_v;
+    import com.company.assembleegameclient.map.GameCamera;
     import com.company.assembleegameclient.objects.GameObject;
     import com.company.assembleegameclient.ui.tooltip.ToolTip;
     import com.company.util.Trig;
@@ -79,7 +79,7 @@ package arrows
             this.extraObjects_.push(go);
         }
 
-        public function draw(time:int, camera:_0D_v):void
+        public function draw(time:int, camera:GameCamera):void
         {
             if (this.go_ == null)
             {
@@ -87,10 +87,10 @@ package arrows
                 return;
             }
             this.go_._0E_T_(camera);
-            var bounds:Rectangle = camera._F_L_;
+            var bounds:Rectangle = camera.clipRect_;
             var dx:Number = this.go_._bY_[0];
             var dy:Number = this.go_._bY_[1];
-            if (!_E_I_._S_1(camera._F_L_, 0, 0, dx, dy, this.screenPoint_))
+            if (!_E_I_._S_1(camera.clipRect_, 0, 0, dx, dy, this.screenPoint_))
             {
                 this.go_ = null;
                 visible = false;

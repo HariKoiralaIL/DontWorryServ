@@ -11,7 +11,7 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 
 import com.company.util.Trig;
-import com.company.assembleegameclient.map._0D_v;
+import com.company.assembleegameclient.map.GameCamera;
 
 
 public class _lJ_ {
@@ -118,7 +118,7 @@ public class _lJ_ {
         return (_local7[_local8]);
     }
 
-    public function imageFromFacing(_arg1:Number, _arg2:_0D_v, _arg3:int, _arg4:Number):_J_H_ {
+    public function imageFromFacing(_arg1:Number, _arg2:GameCamera, _arg3:int, _arg4:Number):_J_H_ {
         var _local5:Number = Trig._V_r((_arg1 - _arg2.angleRad_));
         var _local6:int = (int(((_local5 / _gD_) + 4)) % 8);
         var _local7:Vector.<int> = _n9[_local6];

@@ -1,7 +1,7 @@
 package arrows
 {
-    import com.company.assembleegameclient.map._0D_v;
-    import com.company.assembleegameclient.map._X_l;
+    import com.company.assembleegameclient.map.GameCamera;
+    import com.company.assembleegameclient.map.GameMap;
     import com.company.assembleegameclient.objects.Player;
     import com.company.assembleegameclient.objects._ez;
 
@@ -10,11 +10,11 @@ package arrows
 
     public class ArrowOverlay extends Sprite
     {
-        public var map_:_X_l;
+        public var map_:GameMap;
         public var partyArrows_:Vector.<PartyMemberArrow> = null;
         public var questArrow_:QuestArrow;
 
-        public function ArrowOverlay(map:_X_l)
+        public function ArrowOverlay(map:GameMap)
         {
             var arrow:PartyMemberArrow;
             super();
@@ -31,7 +31,7 @@ package arrows
             addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
         }
 
-        public function draw(camera:_0D_v, time:int):void
+        public function draw(camera:GameCamera, time:int):void
         {
             var arrow:PartyMemberArrow;
             var member:Player;
