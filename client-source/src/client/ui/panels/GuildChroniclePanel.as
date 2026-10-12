@@ -1,5 +1,5 @@
 package client.ui.panels {
-import _sP_._07x;
+import game.guild.GuildContainerUI;
 
 import com.company.assembleegameclient.game.GameSprite;
 
@@ -13,7 +13,7 @@ public class GuildChroniclePanel extends ButtonPanel {
 
     override protected function onButtonClick(event:MouseEvent):void {
         gs_.mui_.clearInput();
-        gs_.addChild(new _07x(gs_));
+        gs_.addChild(new GuildContainerUI(gs_));
     }
 }
 }

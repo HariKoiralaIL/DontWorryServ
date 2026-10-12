@@ -1,5 +1,5 @@
-package client.ui.panels {
-import _sP_.MarketplaceContainerUI;
+﻿package client.ui.panels {
+import game.marketplace.MarketplaceContainerUI;
 
 import com.company.assembleegameclient.game.GameSprite;
 

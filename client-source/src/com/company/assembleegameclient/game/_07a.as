@@ -13,7 +13,7 @@ package com.company.assembleegameclient.game {
 
   import client.debug.Stats;
 
-  import _sP_.MarketplaceContainerUI;
+  import game.marketplace.MarketplaceContainerUI;
 
   import com.company.assembleegameclient.map.Square;
   import com.company.assembleegameclient.objects.Player;

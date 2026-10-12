@@ -5,7 +5,7 @@
 
 package com.company.assembleegameclient.ui {
 
-    import _sP_.MarketplaceContainerUI;
+    import game.marketplace.MarketplaceContainerUI;
 
     import flash.display.Sprite;
 
