@@ -875,30 +875,30 @@ package com.company.assembleegameclient.net {
 
     private function _G_r(_arg1:TradeRequested):void {
       if (Parameters.data_.showTradePopup) {
-        this.gs_._V_1._U_T_.setOverridePanel(new TradeRequestPanel(this.gs_, _arg1.name_));
+        this.gs_.hudView_._U_T_.setOverridePanel(new TradeRequestPanel(this.gs_, _arg1.name_));
       }
       this.gs_.textBox_.addText("", ((((_arg1.name_ + " wants to ") + 'trade with you.  Type "/trade ') + _arg1.name_) + '" to trade.'));
     }
 
     private function _47(_arg1:TradeStart):void {
-      this.gs_._V_1._0L_v(_arg1);
+      this.gs_.hudView_._0L_v(_arg1);
     }
 
     private function itemSelectStart(_arg1:ItemSelectStart):void {
-      this.gs_._V_1.selectItem(_arg1);
+      this.gs_.hudView_.selectItem(_arg1);
     }
 
     private function _0D_U_(_arg1:TradeChanged):void {
-      this.gs_._V_1._ss(_arg1);
+      this.gs_.hudView_._ss(_arg1);
     }
 
     private function _2d(_arg1:TradeDone):void {
-      this.gs_._V_1._A_a();
+      this.gs_.hudView_._A_a();
       this.gs_.textBox_.addText("", _arg1.description_);
     }
 
     private function _087(_arg1:TradeAccepted):void {
-      this.gs_._V_1._mH_(_arg1);
+      this.gs_.hudView_._mH_(_arg1);
     }
 
     private function _lu(_arg1:_0H_9):void {
@@ -915,7 +915,7 @@ package com.company.assembleegameclient.net {
       }
       this._9s(_local4, 0, -1);
       if (((((_local3.props_.static_) && (_local3.props_.occupySquare_))) && (!(_local3.props_._ia)))) {
-        this.gs_._V_1._F_._0A_R_(_local3.x_, _local3.y_, _local3);
+        this.gs_.hudView_._F_._0A_R_(_local3.x_, _local3.y_, _local3);
       }
     }
 
@@ -928,7 +928,7 @@ package com.company.assembleegameclient.net {
       while (_local3 < _arg1.tiles_.length) {
         _local4 = _arg1.tiles_[_local3];
         this.gs_.map_.setGroundTile(_local4.x_, _local4.y_, _local4.type_);
-        this.gs_._V_1._F_.setGroundTile(_local4.x_, _local4.y_, _local4.type_);
+        this.gs_.hudView_._F_.setGroundTile(_local4.x_, _local4.y_, _local4.type_);
         _local3++;
       }
       _local3 = 0;
@@ -1468,9 +1468,9 @@ package com.company.assembleegameclient.net {
 
     private function _v6():void {
       SoundEffects.play("error");
-      this.gs_._V_1._02y._e9.refresh();
-      this.gs_._V_1._02y.equips_.refresh();
-      this.gs_._V_1._U_T_.redraw();
+      this.gs_.hudView_._02y._e9.refresh();
+      this.gs_.hudView_._02y.equips_.refresh();
+      this.gs_.hudView_._U_T_.redraw();
     }
 
     private function _X_3(_arg1:Reconnect):void {
@@ -1500,7 +1500,7 @@ package com.company.assembleegameclient.net {
       for each (_local3 in _arg1.extraXML_) {
         this._7N_(_local3);
       }
-      this.gs_._S_z(_arg1);
+      this.gs_.applyMapInfo(_arg1);
       this._7G_ = new Random(_arg1.fp_);
       if (this._96) {
         this.create();
@@ -1612,14 +1612,14 @@ package com.company.assembleegameclient.net {
 
     private function _cS_(_arg1:InvitedToGuild):void {
       if (Parameters.data_.showGuildInvitePopup) {
-        this.gs_._V_1._U_T_.setOverridePanel(new GuildInvitePanel(this.gs_, _arg1.name_, _arg1.guildName_));
+        this.gs_.hudView_._U_T_.setOverridePanel(new GuildInvitePanel(this.gs_, _arg1.name_, _arg1.guildName_));
       }
       this.gs_.textBox_.addText("", (((((("You have been invited by " + _arg1.name_) + " to join the guild ") + _arg1.guildName_) + '.\n  If you wish to join type "/join ') + _arg1.guildName_) + '"'));
     }
 
     private function inviteToParty(_arg1:InvitedToParty):void {
       if (Parameters.data_.showGuildInvitePopup) {
-        this.gs_._V_1._U_T_.setOverridePanel(new PartyInvitePanel(this.gs_, _arg1.name_, _arg1.partyID_));
+        this.gs_.hudView_._U_T_.setOverridePanel(new PartyInvitePanel(this.gs_, _arg1.name_, _arg1.partyID_));
       }
       this.gs_.textBox_.addText("", "You have been invited by " + _arg1.name_ + " to join a party.\nIf you wish to join, type \"/party join " + _arg1.name_ + "\"");
     }

@@ -77,7 +77,7 @@ public class ui_goldcoin extends Sprite {
     }
 
     private function _D_7(_arg1:MouseEvent):void {
-        if (!this._sx || this._sx._vw() || Parameters.data_.clickForGold == true) {
+        if (!this._sx || this._sx.isSafeMap() || Parameters.data_.clickForGold == true) {
             Account.getInstance().showMoneyManagement(stage);
         }
     }

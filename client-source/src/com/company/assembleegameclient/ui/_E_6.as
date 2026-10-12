@@ -383,11 +383,11 @@ public class _E_6 extends Slot {
     }
 
     private function _A_P_():Inventory {
-        return (this._e9.gs_._V_1._02y._e9);
+        return (this._e9.gs_.hudView_._02y._e9);
     }
 
     private function equipInv():Inventory {
-        return (this._e9.gs_._V_1._02y.equips_);
+        return (this._e9.gs_.hudView_._02y.equips_);
     }
 
     private function onAddedToStage(_arg1:Event):void {

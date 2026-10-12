@@ -130,7 +130,7 @@ public class GameInputHandler {
     }
 
     private function useItem(slot:int):void {
-        var sidebar:* = this.gs_._V_1;
+        var sidebar:* = this.gs_.hudView_;
         if (sidebar._02y == null || sidebar._02y._e9 == null) {
             return;
         }
@@ -154,7 +154,7 @@ public class GameInputHandler {
     private function toggleHud():void {
         Parameters._0F_o = !Parameters._0F_o;
         var visible:Boolean = !Parameters._0F_o;
-        this.gs_._V_1.visible = visible;
+        this.gs_.hudView_.visible = visible;
         this.gs_.textBox_._01P_.visible = visible;
     }
 
@@ -234,13 +234,13 @@ public class GameInputHandler {
     }
 
     private function onMouseWheel(event:MouseEvent):void {
-        if (this.gs_ == null || this.gs_._V_1 == null || this.gs_._V_1._F_ == null) {
+        if (this.gs_ == null || this.gs_.hudView_ == null || this.gs_.hudView_._F_ == null) {
             return;
         }
         if (event.delta > 0) {
-            this.gs_._V_1._F_._K_r();   // minimap zoom in
+            this.gs_.hudView_._F_._K_r();   // minimap zoom in
         } else {
-            this.gs_._V_1._F_._w_();    // minimap zoom out
+            this.gs_.hudView_._F_._w_();    // minimap zoom out
         }
     }
 
@@ -308,12 +308,12 @@ public class GameInputHandler {
             case Parameters.data_.useInvSlot7: this.useItem(6); break;
             case Parameters.data_.useInvSlot8: this.useItem(7); break;
             case Parameters.data_.miniMapZoomOut:
-                if (this.gs_._V_1._F_ == null) break;
-                this.gs_._V_1._F_._w_();
+                if (this.gs_.hudView_._F_ == null) break;
+                this.gs_.hudView_._F_._w_();
                 break;
             case Parameters.data_.miniMapZoomIn:
-                if (this.gs_._V_1._F_ == null) break;
-                this.gs_._V_1._F_._K_r();
+                if (this.gs_.hudView_._F_ == null) break;
+                this.gs_.hudView_._F_._K_r();
                 break;
             case Parameters.data_.togglePerformanceStats:
                 this.togglePerformanceStats();
@@ -336,8 +336,8 @@ public class GameInputHandler {
                 this.toggleFullscreen(stage);
                 break;
             case Parameters.data_.switchTabs:
-                if (this.gs_._V_1._02y == null) break;
-                this.gs_._V_1._02y.nextTab();
+                if (this.gs_.hudView_._02y == null) break;
+                this.gs_.hudView_._02y.nextTab();
                 break;
             case Parameters.data_.marketHotkey:
                 this.clearInput();
