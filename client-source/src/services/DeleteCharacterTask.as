@@ -3,7 +3,7 @@ package services {
 import flash.events.Event;
 
 import com.company.assembleegameclient.appengine.SavedCharacter;
-import com.company.assembleegameclient.appengine._2n;
+import com.company.assembleegameclient.appengine.CharacterClient;
 
 import client.tasks.Task;
 import events.TextErrorEvent;
@@ -20,7 +20,7 @@ public class DeleteCharacterTask extends Task {
     public var character:SavedCharacter;
 
     override protected function startTask():void {
-        var client:_2n = new _2n(2);
+        var client:CharacterClient = new CharacterClient(2);
         client.addEventListener(Event.COMPLETE, this.handleDeleted);
         client.addEventListener(TextErrorEvent.TEXT_ERROR, this.handleError);
         client.deleteCharacter(this.character.charId());

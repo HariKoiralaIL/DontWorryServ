@@ -1,6 +1,6 @@
 package offers {
 
-import com.company.assembleegameclient.appengine._0B_u;
+import com.company.assembleegameclient.appengine.AppEngineClient;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.util._04d;
 import com.company.assembleegameclient.util.offer.Offer;
@@ -46,7 +46,7 @@ public class BeginnersOfferModel implements IBeginnersOfferModel {
     }
 
     public function requestTimeLeft():void {
-        var client:_0B_u = new _0B_u(Parameters._fK_(), "/account", true);
+        var client:AppEngineClient = new AppEngineClient(Parameters._fK_(), "/account", true);
         client.addEventListener(GenericDataEvent.GENERIC_DATA, this.handleTimeLeftLoaded);
         var params:Object = {};
         _H_U_._t2(params, Account.getInstance().credentials());

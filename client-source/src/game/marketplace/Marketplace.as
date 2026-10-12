@@ -1,7 +1,7 @@
 package game.marketplace {
     import account.Account;
 
-    import com.company.assembleegameclient.appengine._0B_u;
+    import com.company.assembleegameclient.appengine.AppEngineClient;
     import com.company.assembleegameclient.game.GameSprite;
     import com.company.assembleegameclient.parameters.Parameters;
     import com.company.assembleegameclient.ui.TextButton;
@@ -43,7 +43,7 @@ package game.marketplace {
         public var search_:MarketplaceSearch;
 
         private var gs_:GameSprite;
-        private var request_:_0B_u;
+        private var request_:AppEngineClient;
         private var loadingText_:SimpleText;
         private var titleText_:SimpleText;
         private var divider_:Shape;
@@ -100,7 +100,7 @@ package game.marketplace {
 
         private function loadOffers(params:Object):void {
             this.showLoading();
-            this.request_ = new _0B_u(Parameters._fK_(), "/market", true, 2);
+            this.request_ = new AppEngineClient(Parameters._fK_(), "/market", true, 2);
             _H_U_._t2(params, Account.getInstance().credentials());
             this.request_.addEventListener(GenericDataEvent.GENERIC_DATA, this.onOffersLoaded);
             this.request_.addEventListener(TextErrorEvent.TEXT_ERROR, this.onLoadError);

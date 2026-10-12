@@ -43,7 +43,7 @@ public class CurrentCharacterRectMediator extends Mediator {
         var analyticsEvent:AnalyticsEvent = new AnalyticsEvent();
         analyticsEvent.category = "character";
         analyticsEvent.action = "select";
-        analyticsEvent.label = character._jp();
+        analyticsEvent.label = character.displayId();
         analyticsEvent.value = character.level();
         this.analyticsEventSignal.dispatch(analyticsEvent);
     }

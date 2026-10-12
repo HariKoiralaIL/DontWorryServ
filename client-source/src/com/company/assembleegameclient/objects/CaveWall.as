@@ -178,9 +178,9 @@ public class CaveWall extends ConnectedObject {
         var _local5:Vector3D;
         var _local6:int;
         var _local7:int;
-        var _local4:int = (_8J_.vL_.length / 3);
+        var _local4:int = (_8J_.vertices_.length / 3);
         for each (_local5 in _args) {
-            _8J_.vL_.push(_local5.x, _local5.y, _local5.z);
+            _8J_.vertices_.push(_local5.x, _local5.y, _local5.z);
         }
         _local6 = _8J_.faces_.length;
         if (_args.length == 4) {
@@ -214,7 +214,7 @@ public class CaveWall extends ConnectedObject {
         if (((!((_arg1 == null))) || (!((_arg2 == null))))) {
             _local7 = _local6;
             while (_local7 < _8J_.faces_.length) {
-                _8J_.faces_[_local7].normalL_ = _arg1;
+                _8J_.faces_[_local7].localNormal_ = _arg1;
                 _8J_.faces_[_local7].texture_ = _arg2;
                 _local7++;
             }

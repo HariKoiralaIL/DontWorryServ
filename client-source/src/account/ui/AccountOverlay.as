@@ -3,7 +3,7 @@ import account.Account;
 
 import client.ui.frames.Frame;
 
-import com.company.assembleegameclient.appengine._0B_u;
+import com.company.assembleegameclient.appengine.AppEngineClient;
 import com.company.assembleegameclient.parameters.Parameters;
 
 import flash.display.Graphics;
@@ -17,7 +17,7 @@ import events.TextErrorEvent;
 public class AccountOverlay extends Sprite {
 
     private var currentFrame:Frame = null;
-    private var verifyRequest:_0B_u = null;
+    private var verifyRequest:AppEngineClient = null;
     private var background:Shape;
 
     public function AccountOverlay(showSignIn:Boolean) {
@@ -45,7 +45,7 @@ public class AccountOverlay extends Sprite {
 
     private function verifyCredentials():void {
         removeCurrentFrame();
-        verifyRequest = new _0B_u(Parameters._fK_(), "/account", true);
+        verifyRequest = new AppEngineClient(Parameters._fK_(), "/account", true);
         verifyRequest.addEventListener(GenericDataEvent.GENERIC_DATA, onVerified);
         verifyRequest.addEventListener(TextErrorEvent.TEXT_ERROR, onVerifyError);
         verifyRequest.sendRequest("verify", Account.getInstance().credentials());

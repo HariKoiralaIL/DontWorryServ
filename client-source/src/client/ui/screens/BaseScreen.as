@@ -6,7 +6,7 @@ import account.AccountTextView;
 import client.events.AccountChangedEvent;
 import client.events.MoneyChangedEvent;
 
-import com.company.assembleegameclient.appengine.Server_list;
+import com.company.assembleegameclient.appengine.CharListEvent;
 import com.company.assembleegameclient.ui._0G_h;
 import com.company.assembleegameclient.ui._L_N_;
 import com.company.assembleegameclient.ui.tooltip.RankToolTip;
@@ -76,7 +76,7 @@ public class BaseScreen extends Sprite {
         addChild(management);
     }
 
-    public function initialize(model:Server_list):void {
+    public function initialize(model:CharListEvent):void {
         if (this.initialized) {
             return;
         }

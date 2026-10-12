@@ -18,9 +18,9 @@ public class _ik {
         this._zT_ = _arg3;
         this._P_U_ = _arg4;
         if (((!((this._zT_ == 0))) || (!((this._P_U_ == 0))))) {
-            this.face_._0C_q.length = 0;
-            this.face_._0C_q.push((0 + this._zT_), (0 + this._P_U_), 0, (1 + this._zT_), (0 + this._P_U_), 0, (1 + this._zT_), (1 + this._P_U_), 0, (0 + this._zT_), (1 + this._P_U_), 0);
-            this.face_._B_A_(this.face_._0C_q);
+            this.face_.uvts_.length = 0;
+            this.face_.uvts_.push((0 + this._zT_), (0 + this._P_U_), 0, (1 + this._zT_), (0 + this._P_U_), 0, (1 + this._zT_), (1 + this._P_U_), 0, (0 + this._zT_), (1 + this._P_U_), 0);
+            this.face_.setUVs(this.face_.uvts_);
             this.face_.bitmapFill_.repeat = true;
         }
         this.animate_ = _arg5;
@@ -58,9 +58,9 @@ public class _ik {
                     _local5 = (this._P_U_ + ((this.animateDy_ * _arg3) / 1000));
                     break;
             }
-            this.face_._0C_q.length = 0;
-            this.face_._0C_q.push((0 + _local4), (0 + _local5), 0, (1 + _local4), (0 + _local5), 0, (1 + _local4), (1 + _local5), 0, (0 + _local4), (1 + _local5), 0);
-            this.face_._B_A_(this.face_._0C_q);
+            this.face_.uvts_.length = 0;
+            this.face_.uvts_.push((0 + _local4), (0 + _local5), 0, (1 + _local4), (0 + _local5), 0, (1 + _local4), (1 + _local5), 0, (0 + _local4), (1 + _local5), 0);
+            this.face_.setUVs(this.face_.uvts_);
         }
         return (this.face_.draw(_arg1, _arg2));
     }

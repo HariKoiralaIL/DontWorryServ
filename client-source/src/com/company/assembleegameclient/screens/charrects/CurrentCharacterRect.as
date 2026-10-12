@@ -9,7 +9,7 @@ import com.company.assembleegameclient.ui.tooltip.ToolTip;
     import client.ui.screens.CharacterBox;
 
     import com.company.assembleegameclient.appengine.SavedCharacter;
-import com.company.assembleegameclient.appengine._0A_H_;
+import com.company.assembleegameclient.appengine.ClassStats;
 
 import flash.display.DisplayObjectContainer;
 import flash.display.Bitmap;
@@ -52,7 +52,7 @@ import com.company.util.BitmapUtil;
 
     private static var toolTip_:ToolTip = null;
 
-    public function CurrentCharacterRect(_arg1:String, _arg2:SavedCharacter, _arg3:_0A_H_) {
+    public function CurrentCharacterRect(_arg1:String, _arg2:SavedCharacter, _arg3:ClassStats) {
         super(0x2e2e2c, 0x4a4946);
         this._name = _arg1;
         this.character = _arg2;
@@ -69,7 +69,7 @@ import com.company.util.BitmapUtil;
     }
     public var _name:String;
     public var character:SavedCharacter;
-    public var characterStats:_0A_H_;
+    public var characterStats:ClassStats;
     public var playerXML:XML;
     public var selected:Signal;
     public var deleteCharacter:Signal;
@@ -113,7 +113,7 @@ import com.company.util.BitmapUtil;
     }
 
     private function getNextStarFame():int {
-        return (_Z_B_._F_U_((((this.characterStats == null)) ? 0 : this.characterStats._0D_E_()), this.character.fame()));
+        return (_Z_B_._F_U_((((this.characterStats == null)) ? 0 : this.characterStats.bestFame()), this.character.fame()));
     }
 
     private function makeTaglineIcon():void {
@@ -165,7 +165,7 @@ import com.company.util.BitmapUtil;
     override protected function onMouseOver(_arg1:MouseEvent):void {
         super.onMouseOver(_arg1);
         this.removeToolTip();
-        toolTip_ = new CharacterToolTip(this._name, this.character._iJ_, this.characterStats);
+        toolTip_ = new CharacterToolTip(this._name, this.character.charXML_, this.characterStats);
         stage.addChild(toolTip_);
     }
 

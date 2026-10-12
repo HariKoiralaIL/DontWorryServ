@@ -1,5 +1,5 @@
 package client.ui.screens {
-import com.company.assembleegameclient.appengine.Server_list;
+import com.company.assembleegameclient.appengine.CharListEvent;
 import com.company.assembleegameclient.ui._0K_B_;
 import com.company.ui.SimpleText;
 
@@ -33,7 +33,7 @@ public class ServersScreen extends BaseScreen {
         super(TitleScreen);
     }
 
-    override public function initialize(model:Server_list):void {
+    override public function initialize(model:CharListEvent):void {
         super.initialize(model);
         this.titleText = new SimpleText(18, 0xB3B3B3, false, 0, 0, "Myriad Pro");
         this.titleText.setBold(true);

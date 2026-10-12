@@ -8,7 +8,7 @@ import game.dialogs.NotEnoughFameDialog;
 
 import flash.display.Sprite;
 
-import com.company.assembleegameclient.appengine.Server_list;
+import com.company.assembleegameclient.appengine.CharListEvent;
 
 import client.ui.screens.BaseScreen;
 
@@ -35,7 +35,7 @@ import game.dialogs.ErrorDialog;
 
 public class CharacterRectList extends Sprite {
 
-    public function CharacterRectList(_arg1:Server_list, _arg2:BaseScreen) {
+    public function CharacterRectList(_arg1:CharListEvent, _arg2:BaseScreen) {
         var _local5:SavedCharacter;
         var _local6:BuyCharacterRect;
         var _local7:CurrentCharacterRect;
@@ -56,7 +56,7 @@ public class CharacterRectList extends Sprite {
         }
         if (_arg1.hasAvailableCharSlot() && _arg1.servers_.length != 0) {
             _local8 = 0;
-            while (_local8 < _arg1._rv()) {
+            while (_local8 < _arg1.availableCharSlots()) {
                 _local9 = new CreateNewCharacterRect(_arg1);
                 _local9.addEventListener(MouseEvent.MOUSE_DOWN, this.onNewChar);
                 _local9.x = _local3;
@@ -74,7 +74,7 @@ public class CharacterRectList extends Sprite {
     }
     public var newCharacter:Signal;
     public var deleteCharacter:Signal;
-    private var charList_:Server_list;
+    private var charList_:CharListEvent;
     private var screen_:BaseScreen;
 
     private function onCancel(_arg1:Event):void {

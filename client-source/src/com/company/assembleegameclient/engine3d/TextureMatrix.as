@@ -1,73 +1,58 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.engine3d.TextureMatrix
-
 package com.company.assembleegameclient.engine3d {
 import flash.display.BitmapData;
 import flash.geom.Matrix;
 
-
+/** Maps a texture onto a projected polygon using its first, second and last vertices. */
 public class TextureMatrix {
 
-    public function TextureMatrix(_arg1:BitmapData, _arg2:Vector.<Number>) {
-        this.tToS_ = new Matrix();
-        this.tempMatrix_ = new Matrix();
-        super();
-        this.texture_ = _arg1;
-        this._Z_Z_(_arg2);
-    }
     public var texture_:BitmapData = null;
-    public var tToS_:Matrix;
-    private var _K_4:Matrix = null;
-    private var tempMatrix_:Matrix;
+    public var tToS_:Matrix = new Matrix();
+    private var inverseBasis_:Matrix = null;
+    private var tempMatrix_:Matrix = new Matrix();
 
-    public function _B_A_(_arg1:Vector.<Number>):void {
-        this._Z_Z_(_arg1);
+    public function TextureMatrix(texture:BitmapData, uvts:Vector.<Number>) {
+        this.texture_ = texture;
+        this.setUVs(uvts);
     }
 
-    public function _8d(_arg1:Vector.<Number>):void {
-        this.calculateTextureMatrix(_arg1);
+    /** Recomputes the inverse texture-space basis from [u,v,t,...] coordinates. */
+    public function setUVs(uvts:Vector.<Number>):void {
+        if (this.texture_ == null) {
+            this.inverseBasis_ = null;
+            return;
+        }
+        var last:int = uvts.length - 3;
+        var w:Number = this.texture_.width;
+        var h:Number = this.texture_.height;
+        var u0:Number = uvts[0] * w;
+        var v0:Number = uvts[1] * h;
+        var u1:Number = uvts[3] * w;
+        var v1:Number = uvts[4] * h;
+        var u2:Number = uvts[last] * w;
+        var v2:Number = uvts[last + 1] * h;
+        this.inverseBasis_ = new Matrix(u1 - u0, v1 - v0, u2 - u0, v2 - v0, u0, v0);
+        this.inverseBasis_.invert();
     }
 
-    public function calculateTextureMatrix(_arg1:Vector.<Number>):void {
-        this.tToS_.a = this._K_4.a;
-        this.tToS_.b = this._K_4.b;
-        this.tToS_.c = this._K_4.c;
-        this.tToS_.d = this._K_4.d;
-        this.tToS_.tx = this._K_4.tx;
-        this.tToS_.ty = this._K_4.ty;
-        var _local2:int = (_arg1.length - 2);
-        var _local3:int = (_local2 + 1);
-        this.tempMatrix_.a = (_arg1[2] - _arg1[0]);
-        this.tempMatrix_.b = (_arg1[3] - _arg1[1]);
-        this.tempMatrix_.c = (_arg1[_local2] - _arg1[0]);
-        this.tempMatrix_.d = (_arg1[_local3] - _arg1[1]);
-        this.tempMatrix_.tx = _arg1[0];
-        this.tempMatrix_.ty = _arg1[1];
+    /** Computes tToS_ for the given projected [x,y,...] screen vertices. */
+    public function calculateTextureMatrix(screenVertices:Vector.<Number>):void {
+        var m:Matrix = this.inverseBasis_;
+        this.tToS_.a = m.a;
+        this.tToS_.b = m.b;
+        this.tToS_.c = m.c;
+        this.tToS_.d = m.d;
+        this.tToS_.tx = m.tx;
+        this.tToS_.ty = m.ty;
+        var lastX:int = screenVertices.length - 2;
+        var lastY:int = lastX + 1;
+        this.tempMatrix_.a = screenVertices[2] - screenVertices[0];
+        this.tempMatrix_.b = screenVertices[3] - screenVertices[1];
+        this.tempMatrix_.c = screenVertices[lastX] - screenVertices[0];
+        this.tempMatrix_.d = screenVertices[lastY] - screenVertices[1];
+        this.tempMatrix_.tx = screenVertices[0];
+        this.tempMatrix_.ty = screenVertices[1];
         this.tToS_.concat(this.tempMatrix_);
     }
 
-    public function _Z_Z_(_arg1:Vector.<Number>):void {
-        if (this.texture_ == null) {
-            this._K_4 = null;
-            return;
-        }
-        var _local2:int = (_arg1.length - 3);
-        var _local3:Number = (_arg1[0] * this.texture_.width);
-        var _local4:Number = (_arg1[1] * this.texture_.height);
-        var _local5:Number = (_arg1[3] * this.texture_.width);
-        var _local6:Number = (_arg1[4] * this.texture_.height);
-        var _local7:Number = (_arg1[_local2] * this.texture_.width);
-        var _local8:Number = (_arg1[(_local2 + 1)] * this.texture_.height);
-        var _local9:Number = (_local5 - _local3);
-        var _local10:Number = (_local6 - _local4);
-        var _local11:Number = (_local7 - _local3);
-        var _local12:Number = (_local8 - _local4);
-        this._K_4 = new Matrix(_local9, _local10, _local11, _local12, _local3, _local4);
-        this._K_4.invert();
-    }
-
 }
-}//package com.company.assembleegameclient.engine3d
-
+}

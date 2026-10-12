@@ -26,7 +26,7 @@ import flash.display.Sprite;
 
 import account.ui.RegisterOverlay;
 
-import com.company.assembleegameclient.appengine._02k;
+import com.company.assembleegameclient.appengine.OffersLoader;
 
 import game.dialogs.NotRegisteredDialog;
 
@@ -126,7 +126,7 @@ public class WebAccount extends Account {
     }
 
     override public function cacheOffers():void {
-        _02k._U_t("/credits", null);
+        OffersLoader.load("/credits", null);
     }
 
     override public function showMoneyManagement(stage:Stage):void {

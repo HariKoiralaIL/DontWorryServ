@@ -17,7 +17,7 @@ import particleeffects.HealingEffect;
 
 import audio.SoundEffects;
 
-import com.company.assembleegameclient.appengine.Server_list;
+import com.company.assembleegameclient.appengine.CharListEvent;
 
 import com.company.assembleegameclient.map.Square;
 import com.company.assembleegameclient.map._0D_v;

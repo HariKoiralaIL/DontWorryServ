@@ -22,12 +22,12 @@ import flash.filters.DropShadowFilter;
 
 import com.company.assembleegameclient.util._Z_B_;
 import com.company.assembleegameclient.objects.ObjectLibrary;
-import com.company.assembleegameclient.appengine.Server_list;
-import com.company.assembleegameclient.appengine._0A_H_;
+import com.company.assembleegameclient.appengine.CharListEvent;
+import com.company.assembleegameclient.appengine.ClassStats;
 
 public class ClassToolTip extends ToolTip {
 
-    public function ClassToolTip(xml2:XML, server_list:Server_list, _0a_h_:_0A_H_) {
+    public function ClassToolTip(xml2:XML, server_list:CharListEvent, _0a_h_:ClassStats) {
         var _local9:int;
         var _local10:int;
         var xml:XML;
@@ -69,15 +69,15 @@ public class ClassToolTip extends ToolTip {
         this.divider_.y = height;
         addChild(this.divider_);
         if (_local8) {
-            _local9 = (((_0a_h_ == null)) ? 0 : _0a_h_._lr());
+            _local9 = (((_0a_h_ == null)) ? 0 : _0a_h_.numStars());
             this.statsText_ = new SimpleText(12, 6206769, false, 0, 0, "Myriad Pro");
-            this.statsText_.text = ((((((_local9 + " of " + _Z_B_._yJ_.length + " C-Quests Completed\n") + "Best Level Achieved: ") + (((_0a_h_) != null) ? _0a_h_.bestLevel() : 0)) + "\n") + "Best Fame Achieved: ") + (((_0a_h_) != null) ? _0a_h_._0D_E_() : 0));
+            this.statsText_.text = ((((((_local9 + " of " + _Z_B_._yJ_.length + " C-Quests Completed\n") + "Best Level Achieved: ") + (((_0a_h_) != null) ? _0a_h_.bestLevel() : 0)) + "\n") + "Best Fame Achieved: ") + (((_0a_h_) != null) ? _0a_h_.bestFame() : 0));
             this.statsText_.updateMetrics();
             this.statsText_.filters = [new DropShadowFilter(0, 0, 0)];
             this.statsText_.x = 8;
             this.statsText_.y = (height - 2);
             addChild(this.statsText_);
-            _local10 = _Z_B_._F_U_((((_0a_h_ == null)) ? 0 : _0a_h_._0D_E_()), 0);
+            _local10 = _Z_B_._F_U_((((_0a_h_ == null)) ? 0 : _0a_h_.bestFame()), 0);
             if (_local10 > 0) {
                 this.nextGoalText_ = new SimpleText(10, 16549442, false, 174, 0, "Myriad Pro");
                 this.nextGoalText_.text = (((("Next Goal: Earn " + _local10) + " Fame\n") + "  with a ") + xml2.@id);

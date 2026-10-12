@@ -4,7 +4,7 @@
 //client.ui.frames.NewAccountNameFrame
 
 package client.ui.frames {
-import com.company.assembleegameclient.appengine._0B_u;
+import com.company.assembleegameclient.appengine.AppEngineClient;
 import com.company.util._H_V_;
 
 import flash.events.KeyboardEvent;
@@ -38,7 +38,7 @@ public class NewAccountNameFrame extends Frame {
         this.addEventListener(Event.REMOVED_FROM_STAGE, this.onRemoved);
     }
     private var name_:TextInput;
-    private var request:_0B_u = null;
+    private var request:AppEngineClient = null;
 
     private function onCancel(_arg1:MouseEvent):void {
         stage.focus = null;
@@ -50,7 +50,7 @@ public class NewAccountNameFrame extends Frame {
             this.name_.setError("Name too short");
             return;
         }
-        var _local2:_0B_u = new _0B_u(Parameters._fK_(), "/account", true);
+        var _local2:AppEngineClient = new AppEngineClient(Parameters._fK_(), "/account", true);
         _local2.addEventListener(GenericDataEvent.GENERIC_DATA, this.onNameSet);
         _local2.addEventListener(TextErrorEvent.TEXT_ERROR, this.onNameError);
         var _local3:Object = {"name": this.name_.text()};

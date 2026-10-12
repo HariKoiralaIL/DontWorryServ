@@ -19,7 +19,7 @@ public class DeleteCharacterConfirmationMediator extends Mediator {
     override public function initialize():void {
         this.view.deleteCharacter.add(this.onDeleteConfirmed);
         this.view.cancel.add(this.closeDialog);
-        this.view.show(this.character.name(), this.character._jp());
+        this.view.show(this.character.name(), this.character.displayId());
     }
 
     override public function destroy():void {

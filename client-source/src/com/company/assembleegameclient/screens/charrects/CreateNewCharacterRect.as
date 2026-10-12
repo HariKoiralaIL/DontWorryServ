@@ -4,7 +4,7 @@
 //com.company.assembleegameclient.screens.charrects.CreateNewCharacterRect
 
 package com.company.assembleegameclient.screens.charrects {
-import com.company.assembleegameclient.appengine.Server_list;
+import com.company.assembleegameclient.appengine.CharListEvent;
 
 import flash.display.Bitmap;
 
@@ -31,7 +31,7 @@ import flash.geom.ColorTransform;
 
 public class CreateNewCharacterRect extends CharacterRect {
 
-    public function CreateNewCharacterRect(_arg1:Server_list) {
+    public function CreateNewCharacterRect(_arg1:CharListEvent) {
         super(0x4C4C4C, 0x606060);
         this.charList_ = _arg1;
         var _local2:XML = ObjectLibrary._tj[int((ObjectLibrary._tj.length * Math.random()))];
@@ -67,7 +67,7 @@ public class CreateNewCharacterRect extends CharacterRect {
         }
     }
     public var newCharacter:Signal;
-    private var charList_:Server_list;
+    private var charList_:CharListEvent;
     private var bitmap_:Bitmap;
     private var classNameText_:SimpleText;
     private var taglineIcon_:Sprite;

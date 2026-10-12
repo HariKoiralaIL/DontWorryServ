@@ -97,7 +97,7 @@ public class Square {
         }
         for each (_local4 in this.faces_) {
             if (!_local4.draw(_arg1, _arg2, _arg3)) {
-                if (_local4.face_.vout_[1] < _arg2._F_L_.bottom) {
+                if (_local4.face_.screenVertices_[1] < _arg2._F_L_.bottom) {
                     this._P_k = 0;
                 }
                 return;

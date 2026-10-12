@@ -1,6 +1,6 @@
 package client.ui.screens {
-import com.company.assembleegameclient.appengine.Server_list;
-import com.company.assembleegameclient.appengine._vt;
+import com.company.assembleegameclient.appengine.CharListEvent;
+    import com.company.assembleegameclient.appengine.NewsEntry;
 
 import flash.display.Sprite;
 
@@ -16,9 +16,9 @@ public class News extends Sprite {
     private var items:Vector.<NewsItem> = new Vector.<NewsItem>();
     private var containsDeaths:Boolean = false;
 
-    public function News(model:Server_list, mode:int) {
+    public function News(model:CharListEvent, mode:int) {
         super();
-        for each (var entry:_vt in model._tZ_) {
+        for each (var entry:NewsEntry in model.newsItems_) {
             switch (mode) {
                 case MODE_NEWS:
                     if (!entry.isDeath()) {
@@ -47,8 +47,8 @@ public class News extends Sprite {
         addChild(item);
     }
 
-    private function createItem(entry:_vt, model:Server_list, mode:int):NewsItem {
-        return new NewsItem(entry.getIcon(), entry._O_k, entry._03P_, entry._qh, entry._W_e, model.accountId_, mode);
+    private function createItem(entry:NewsEntry, model:CharListEvent, mode:int):NewsItem {
+        return new NewsItem(entry.getIcon(), entry.title_, entry.tagline_, entry.link_, entry.date_, model.accountId_, mode);
     }
 
 }

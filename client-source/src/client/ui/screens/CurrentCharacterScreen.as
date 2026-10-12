@@ -5,7 +5,7 @@ import beginnersoffer.BeginnersOfferButton;
 
 import client.ui.frames.NewAccountNameOverlay;
 
-import com.company.assembleegameclient.appengine.Server_list;
+import com.company.assembleegameclient.appengine.CharListEvent;
 import com.company.assembleegameclient.ui._0K_B_;
 import com.company.assembleegameclient.ui._1B_v;
 import com.company.assembleegameclient.ui.TextButton;
@@ -43,7 +43,7 @@ public class CurrentCharacterScreen extends BaseScreen {
     public var playGame:Signal;
     public var beginnersOfferButton:BeginnersOfferButton;
 
-    private var model:Server_list;
+    private var model:CharListEvent;
     private var nameText:SimpleText;
     private var chooseNameButton:TextButton;
     private var goldCoinDisplay:ui_goldcoin;
@@ -87,13 +87,13 @@ public class CurrentCharacterScreen extends BaseScreen {
         addChild(this.beginnersOfferButton);
     }
 
-    override public function initialize(model:Server_list):void {
+    override public function initialize(model:CharListEvent):void {
         super.initialize(model);
         this.model = model;
         this.buildUI(model);
     }
 
-    private function buildUI(model:Server_list):void {
+    private function buildUI(model:CharListEvent):void {
         this.buildName();
         this.buildCurrencies();
         this.buildNewsText();
@@ -106,7 +106,7 @@ public class CurrentCharacterScreen extends BaseScreen {
         }
         this.buildCharacters();
         this.buildNavBar();
-        if (!model._hv) {
+        if (!model.nameChosen_) {
             this.buildChooseName();
         }
     }

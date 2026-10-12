@@ -2,7 +2,7 @@ package gamestart {
 
 import flash.utils.ByteArray;
 
-import com.company.assembleegameclient.appengine.Server_list;
+import com.company.assembleegameclient.appengine.CharListEvent;
 import com.company.assembleegameclient.game.GameSprite;
 import com.company.assembleegameclient.net.Server;
 import com.company.assembleegameclient.parameters.Parameters;
@@ -58,8 +58,8 @@ public class StartGameCommand {
     }
 
     private function showGameSprite():void {
-        var servers:Server_list = this.serverListState.servers;
-        var server:Server = this.initData.server || servers._04D_();
+        var servers:CharListEvent = this.serverListState.servers;
+        var server:Server = this.initData.server || servers.getBestServer();
         var gameId:int = this.initData.isNewGame ? this.getNewGameId() : this.initData.gameId;
         var createCharacter:Boolean = this.initData.createCharacter;
         var charId:int = this.initData.charId;

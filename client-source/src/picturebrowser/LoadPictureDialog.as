@@ -12,7 +12,7 @@ import events.TextErrorEvent;
 
 import account.Account;
 
-import com.company.assembleegameclient.appengine._0B_u;
+import com.company.assembleegameclient.appengine.AppEngineClient;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.ui.TextButton;
 import com.company.assembleegameclient.ui._7f;
@@ -207,7 +207,7 @@ public class LoadPictureDialog extends Sprite {
     }
 
     private function search(offset:int):void {
-        var request:_0B_u = new _0B_u(Parameters._fK_(), PICTURE_PATH, false);
+        var request:AppEngineClient = new AppEngineClient(Parameters._fK_(), PICTURE_PATH, false);
         request.addEventListener(GenericDataEvent.GENERIC_DATA, this.onSearchResults);
         request.addEventListener(TextErrorEvent.TEXT_ERROR, this.onSearchError);
         var params:Object = {};
@@ -358,7 +358,7 @@ public class LoadPictureDialog extends Sprite {
         var dialog:DeletePictureConfirmDialog = (event.target as DeletePictureConfirmDialog);
         dialog.parent.removeChild(dialog);
         this.pictureGrid.visible = false;
-        var request:_0B_u = new _0B_u(Parameters._fK_(), PICTURE_PATH, false);
+        var request:AppEngineClient = new AppEngineClient(Parameters._fK_(), PICTURE_PATH, false);
         request.addEventListener(GenericDataEvent.GENERIC_DATA, this.onDeleteComplete);
         var params:Object = {"id": dialog.pictureId.toString()};
         _H_U_._t2(params, Account.getInstance().credentials());

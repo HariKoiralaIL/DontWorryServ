@@ -7,7 +7,7 @@ package com.company.assembleegameclient.util {
   import audio.SoundEffects;
   import audio.SfxSettings;
   import audio.ILoadable;
-  import com.company.assembleegameclient.engine3d._B_5;
+  import com.company.assembleegameclient.engine3d.MeshModel;
   import com.company.assembleegameclient.map._pf;
   import com.company.assembleegameclient.map._sn;
   import com.company.assembleegameclient.objects.ObjectLibrary;
@@ -142,7 +142,7 @@ package com.company.assembleegameclient.util {
       for (_local1 in AssetEmbeds.models_) {
         _local2 = AssetEmbeds.models_[_local1];
         _local3 = _local2.readUTFBytes(_local2.length);
-        _B_5._08y(_local1, _local3);
+        MeshModel.parseObj(_local1, _local3);
       }
     }
     private function initParticles():void{

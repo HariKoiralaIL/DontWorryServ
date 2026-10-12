@@ -2,7 +2,7 @@ package account.ui {
 import client.ui.frames.Frame;
 import client.ui.frames.TextInput;
 
-import com.company.assembleegameclient.appengine._0B_u;
+import com.company.assembleegameclient.appengine.AppEngineClient;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.ui.TextButton;
 import com.company.util._H_V_;
@@ -42,7 +42,7 @@ internal class ForgotPasswordFrame extends Frame {
             emailInput.setError("Not a valid email address");
             return;
         }
-        var request:_0B_u = new _0B_u(Parameters._fK_(), "/account", true);
+        var request:AppEngineClient = new AppEngineClient(Parameters._fK_(), "/account", true);
         request.addEventListener(GenericDataEvent.GENERIC_DATA, onSent);
         request.addEventListener(TextErrorEvent.TEXT_ERROR, onError);
         request.sendRequest("forgotPassword", {"email": emailInput.text()});

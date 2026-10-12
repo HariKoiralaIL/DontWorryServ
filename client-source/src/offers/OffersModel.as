@@ -1,6 +1,6 @@
 package offers {
 
-import com.company.assembleegameclient.appengine._02k;
+import com.company.assembleegameclient.appengine.OffersLoader;
 import com.company.assembleegameclient.util.offer.Offers;
 
 import signals.Signal;
@@ -17,7 +17,7 @@ public class OffersModel implements IOffersModel {
     }
 
     public function loadOffers():void {
-        _02k._U_t(this.getOffersPath(), this.handleOffersLoaded);
+        OffersLoader.load(this.getOffersPath(), this.handleOffersLoaded);
     }
 
     public function getOffers():Offers {

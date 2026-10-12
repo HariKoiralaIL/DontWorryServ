@@ -1,5 +1,5 @@
 package client.ui.screens {
-import com.company.assembleegameclient.appengine.Server_list;
+import com.company.assembleegameclient.appengine.CharListEvent;
 import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.assembleegameclient.ui.ui_goldcoin;
 
@@ -31,7 +31,7 @@ public class NewCharacterScreen extends BaseScreen {
         this.close = new Signal();
     }
 
-    override public function initialize(model:Server_list):void {
+    override public function initialize(model:CharListEvent):void {
         super.initialize(model);
         this.backButton = new MenuButton("back", 36, false);
         this.backButton.addEventListener(MouseEvent.CLICK, this.onBackClick);
@@ -46,7 +46,7 @@ public class NewCharacterScreen extends BaseScreen {
         this.goldCoinDisplay.y = 20;
     }
 
-    private function buildCharacterBoxes(model:Server_list):void {
+    private function buildCharacterBoxes(model:CharListEvent):void {
         var index:int = 0;
         while (index < ObjectLibrary._tj.length) {
             var playerXML:XML = ObjectLibrary._tj[index];

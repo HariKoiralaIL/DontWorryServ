@@ -3,7 +3,7 @@ import account.Account;
 
 import client.ui.frames.Frame;
 
-import com.company.assembleegameclient.appengine._0B_u;
+import com.company.assembleegameclient.appengine.AppEngineClient;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.ui.TextButton;
 import com.company.ui.SimpleText;
@@ -64,7 +64,7 @@ internal class CurrentAccountFrame extends Frame {
     }
 
     private function onResendVerify(event:MouseEvent):void {
-        var request:_0B_u = new _0B_u(Parameters._fK_(), "/account", true);
+        var request:AppEngineClient = new AppEngineClient(Parameters._fK_(), "/account", true);
         request.addEventListener(GenericDataEvent.GENERIC_DATA, onVerifySent);
         request.addEventListener(TextErrorEvent.TEXT_ERROR, onVerifyError);
         request.sendRequest("sendVerifyEmail", Account.getInstance().credentials());

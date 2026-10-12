@@ -186,8 +186,8 @@ public class ConnectedWall extends ConnectedObject {
     }
 
     protected function _0E_b(_arg1:Vector3D, _arg2:Vector3D, _arg3:Vector3D, _arg4:Vector3D, _arg5:BitmapData, _arg6:Boolean, _arg7:Boolean):void {
-        var _local8:int = (_8J_.vL_.length / 3);
-        _8J_.vL_.push(_arg1.x, _arg1.y, _arg1.z, _arg2.x, _arg2.y, _arg2.z, _arg3.x, _arg3.y, _arg3.z, _arg4.x, _arg4.y, _arg4.z);
+        var _local8:int = (_8J_.vertices_.length / 3);
+        _8J_.vertices_.push(_arg1.x, _arg1.y, _arg1.z, _arg2.x, _arg2.y, _arg2.z, _arg3.x, _arg3.y, _arg3.z, _arg4.x, _arg4.y, _arg4.z);
         var _local9:Number = ((_arg6) ? (-((this._0D_V_ - this._R_x)) / ((1 - (this._0D_V_ - this._R_x)) - ((_arg7) ? (this._0D_V_ - this._R_x) : 0))) : 0);
         _8J_.uvts_.push(0, 0, 0, 1, 0, 0, 1, 1, 0, _local9, 1, 0);
         var _local10:ObjectFace3D = new ObjectFace3D(_8J_, new <int>[_local8, (_local8 + 1), (_local8 + 2), (_local8 + 3)]);
@@ -197,8 +197,8 @@ public class ConnectedWall extends ConnectedObject {
     }
 
     protected function _hc(_arg1:Vector3D, _arg2:Vector3D, _arg3:Vector3D, _arg4:Vector3D, _arg5:BitmapData, _arg6:Vector3D, _arg7:Boolean):void {
-        var _local8:int = (_8J_.vL_.length / 3);
-        _8J_.vL_.push(_arg1.x, _arg1.y, _arg1.z, _arg2.x, _arg2.y, _arg2.z, _arg3.x, _arg3.y, _arg3.z, _arg4.x, _arg4.y, _arg4.z);
+        var _local8:int = (_8J_.vertices_.length / 3);
+        _8J_.vertices_.push(_arg1.x, _arg1.y, _arg1.z, _arg2.x, _arg2.y, _arg2.z, _arg3.x, _arg3.y, _arg3.z, _arg4.x, _arg4.y, _arg4.z);
         if (_arg7) {
             _8J_.uvts_.push((-0.5 + this._R_x), 0, 0, 0, 0, 0, 0, 0, 0, (-0.5 + this._0D_V_), 1, 0);
         } else {
@@ -207,16 +207,16 @@ public class ConnectedWall extends ConnectedObject {
         var _local9:ObjectFace3D = new ObjectFace3D(_8J_, new <int>[_local8, (_local8 + 1), (_local8 + 2), (_local8 + 3)]);
         _local9.texture_ = _arg5;
         _local9.bitmapFill_.repeat = this._3A_;
-        _local9.normalL_ = _arg6;
+        _local9.localNormal_ = _arg6;
         _8J_.faces_.push(_local9);
     }
 
     protected function _H_m(_arg1:Array, _arg2:Vector.<Number>, _arg3:BitmapData):void {
-        var _local4:int = (_8J_.vL_.length / 3);
+        var _local4:int = (_8J_.vertices_.length / 3);
         var _local5:Vector.<int> = new Vector.<int>();
         var _local6:uint;
         while (_local6 < _arg1.length) {
-            _8J_.vL_.push(_arg1[_local6].x, _arg1[_local6].y, _arg1[_local6].z);
+            _8J_.vertices_.push(_arg1[_local6].x, _arg1[_local6].y, _arg1[_local6].z);
             _local5.push((_local4 + _local6));
             if (_local6 == 0) {
                 _8J_.uvts_.push(_arg2[0], _arg2[1], 0);

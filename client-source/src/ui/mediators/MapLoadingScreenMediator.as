@@ -71,7 +71,7 @@ public class MapLoadingScreenMediator extends Mediator {
 
     /** Animated texture of the character's class, or of its skin when it has one. */
     private function getAnimatedChar(character:SavedCharacter):_lJ_ {
-        var classXml:XML = ObjectLibrary._Q_F_[int(character._iJ_.ObjectType)];
+        var classXml:XML = ObjectLibrary._Q_F_[int(character.charXML_.ObjectType)];
         var animatedChar:_lJ_ = _0B_c._J_v(String(classXml.AnimatedTexture.File), int(classXml.AnimatedTexture.Index));
         var skinType:int = character.skin();
         if (skinType != -1) {

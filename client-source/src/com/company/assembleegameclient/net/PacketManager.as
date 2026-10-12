@@ -1399,7 +1399,7 @@ package com.company.assembleegameclient.net {
       if (((!((_local7 == null))) && (!((_local8 == -1))))) {
         if (_local7.level_ > _local8) {
           if (_local6) {
-            _local10 = this.gs_.charList_._B_7(_local7.objectType_, _local7.level_);
+            _local10 = this.gs_.charList_.classesUnlockedBy(_local7.objectType_, _local7.level_);
             _local7._ut(!((_local10.length == 0)));
           } else {
             _local7._x1("Level Up!");

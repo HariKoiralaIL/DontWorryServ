@@ -1,8 +1,3 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.appengine.SavedCharacter
-
 package com.company.assembleegameclient.appengine {
 import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.assembleegameclient.parameters.Parameters;
@@ -17,91 +12,95 @@ import flash.geom.ColorTransform;
 
 public class SavedCharacter {
 
-    public static function getImage(_arg1:SavedCharacter, _arg2:XML, _arg3:int, _arg4:int, _arg5:Number, _arg6:Boolean, _arg7:Boolean):BitmapData {
-        //var _local8:_lJ_ = _0B_c._J_v(String(_arg2.AnimatedTexture.File), int(_arg2.AnimatedTexture.Index));
-        //var _local9:_J_H_ = _local8.imageFromDir(_arg3, _arg4, _arg5);
-        var _local10:int = (((_arg1) != null) ? _arg1.tex1() : null);
-        var _local11:int = (((_arg1) != null) ? _arg1.tex2() : null);
-        var _skin:int = (_arg1 != null ? _arg1.skin() : -1);
-        var _local8:_lJ_ = _0B_c._J_v(String(_arg2.AnimatedTexture.File), int(_arg2.AnimatedTexture.Index));
-        if (_skin != -1) {
-            var _skinx:XML = ObjectLibrary._Q_F_[_arg1.skin()];
-            if (_skinx != null)
-                _local8 = _0B_c._J_v(String(_skinx.AnimatedTexture.File), int(_skinx.AnimatedTexture.Index));
-        }
-        var _local9:_J_H_ = _local8.imageFromDir(_arg3, _arg4, _arg5);
-        var _local12:BitmapData = TextureRedrawer.resize(_local9.image_, _local9.mask_, 100, false, _local10, _local11);
-        _local12 = TextureRedrawer.outlineGlow(_local12, 0, 0);
-        if (!_arg6) {
-            _local12 = _G_._B_2(_local12, new ColorTransform(0, 0, 0, 0.5, 0, 0, 0, 0));
-        } else {
-            if (!_arg7) {
-                _local12 = _G_._B_2(_local12, new ColorTransform(0.75, 0.75, 0.75, 1, 0, 0, 0, 0));
-            }
-        }
-        return (_local12);
-    }
+    private static const NO_SKIN:int = -1;
 
-    public static function _N_Q_(_arg1:SavedCharacter, _arg2:SavedCharacter):Number {
-        var _local3:Number = ((Parameters.data_.charIdUseMap.hasOwnProperty(_arg1.charId())) ? Parameters.data_.charIdUseMap[_arg1.charId()] : 0);
-        var _local4:Number = ((Parameters.data_.charIdUseMap.hasOwnProperty(_arg2.charId())) ? Parameters.data_.charIdUseMap[_arg2.charId()] : 0);
-        if (_local3 != _local4) {
-            return ((_local4 - _local3));
-        }
-        return ((_arg2._zG_() - _arg1._zG_()));
-    }
-
-    public function SavedCharacter(_arg1:XML, _arg2:String) {
-        this._iJ_ = _arg1;
-        this.name_ = _arg2;
-    }
-    public var _iJ_:XML;
+    public var charXML_:XML;
     public var name_:String = null;
 
+    public function SavedCharacter(charXML:XML, name:String) {
+        this.charXML_ = charXML;
+        this.name_ = name;
+    }
+
+    public static function getImage(savedChar:SavedCharacter, playerXML:XML, dir:int, action:int, p:Number, available:Boolean, selected:Boolean):BitmapData {
+        var tex1:int = (savedChar != null) ? savedChar.tex1() : 0;
+        var tex2:int = (savedChar != null) ? savedChar.tex2() : 0;
+        var animChar:_lJ_ = getAnimatedChar(playerXML);
+        if (savedChar != null && savedChar.skin() != NO_SKIN) {
+            var skinXML:XML = ObjectLibrary._Q_F_[savedChar.skin()];
+            if (skinXML != null) {
+                animChar = getAnimatedChar(skinXML);
+            }
+        }
+        var frame:_J_H_ = animChar.imageFromDir(dir, action, p);
+        var image:BitmapData = TextureRedrawer.resize(frame.image_, frame.mask_, 100, false, tex1, tex2);
+        image = TextureRedrawer.outlineGlow(image, 0, 0);
+        if (!available) {
+            image = _G_._B_2(image, new ColorTransform(0, 0, 0, 0.5, 0, 0, 0, 0));
+        } else if (!selected) {
+            image = _G_._B_2(image, new ColorTransform(0.75, 0.75, 0.75, 1, 0, 0, 0, 0));
+        }
+        return image;
+    }
+
+    private static function getAnimatedChar(xml:XML):_lJ_ {
+        return _0B_c._J_v(String(xml.AnimatedTexture.File), int(xml.AnimatedTexture.Index));
+    }
+
+    /** Sort comparator: most-used characters first, then highest exp. */
+    public static function compareByUsage(a:SavedCharacter, b:SavedCharacter):Number {
+        var useMap:Object = Parameters.data_.charIdUseMap;
+        var usesA:Number = useMap.hasOwnProperty(a.charId()) ? useMap[a.charId()] : 0;
+        var usesB:Number = useMap.hasOwnProperty(b.charId()) ? useMap[b.charId()] : 0;
+        if (usesA != usesB) {
+            return usesB - usesA;
+        }
+        return b.exp() - a.exp();
+    }
+
     public function charId():int {
-        return (int(this._iJ_.@id));
+        return int(this.charXML_.@id);
     }
 
     public function name():String {
-        return (this.name_);
+        return this.name_;
     }
 
     public function objectType():int {
-        return (int(this._iJ_.ObjectType));
+        return int(this.charXML_.ObjectType);
     }
 
     public function level():int {
-        return (int(this._iJ_.Level));
+        return int(this.charXML_.Level);
     }
 
     public function tex1():int {
-        return (int(this._iJ_.Tex1));
+        return int(this.charXML_.Tex1);
     }
 
     public function tex2():int {
-        return (int(this._iJ_.Tex2));
+        return int(this.charXML_.Tex2);
     }
 
     public function skin():int {
-        return (int(this._iJ_.Skin));
+        return int(this.charXML_.Skin);
     }
 
-    public function _zG_():int {
-        return (int(this._iJ_.Exp));
+    public function exp():int {
+        return int(this.charXML_.Exp);
     }
 
     public function fame():int {
-        return (int(this._iJ_.CurrentFame));
+        return int(this.charXML_.CurrentFame);
     }
 
-    public function _jp():String {
-        return (ObjectLibrary._0D_N_[this.objectType()]);
+    public function displayId():String {
+        return ObjectLibrary._0D_N_[this.objectType()];
     }
 
     public function toString():String {
-        return ((("SavedCharacter: {" + this._iJ_) + "}"));
+        return "SavedCharacter: {" + this.charXML_ + "}";
     }
 
 }
-}//package com.company.assembleegameclient.appengine
-
+}

@@ -5,7 +5,7 @@ import flash.display.DisplayObjectContainer;
 import flash.display.LoaderInfo;
 import flash.events.IEventDispatcher;
 
-import com.company.assembleegameclient.appengine._vG_;
+import com.company.assembleegameclient.appengine.ClientErrorReporter;
 
 import flash.events.ErrorEvent;
 
@@ -49,7 +49,7 @@ public class UncaughtErrorMediator extends Mediator {
 
     private function onUncaughtError(event:ErrorEvent):void {
         event.preventDefault();
-        _vG_._A_U_(event["error"]);
+        ClientErrorReporter.report(event["error"]);
     }
 
 }

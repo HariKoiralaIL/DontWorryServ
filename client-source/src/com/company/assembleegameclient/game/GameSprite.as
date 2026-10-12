@@ -22,8 +22,8 @@ package com.company.assembleegameclient.game {
   import flash.geom.Transform;
   import flash.geom.ColorTransform;
   import fl.motion.Color;
-  import com.company.assembleegameclient.appengine._0B_u;
-  import com.company.assembleegameclient.appengine.Server_list;
+  import com.company.assembleegameclient.appengine.AppEngineClient;
+  import com.company.assembleegameclient.appengine.CharListEvent;
   import com.company.assembleegameclient.map._0D_v;
   import com.company.assembleegameclient.map._X_l;
   import com.company.assembleegameclient.net.Server;
@@ -56,7 +56,7 @@ package com.company.assembleegameclient.game {
     public static const _0F_s:Number = new Date().time;
     protected static const _oj:ColorMatrixFilter = new ColorMatrixFilter(MoreColorUtil._0M_l);
 
-    public function GameSprite(_arg1:Server, _arg2:int, _arg3:Boolean, _arg4:int, _arg5:int, _arg6:ByteArray, _arg7:Server_list, _arg8:String) {
+    public function GameSprite(_arg1:Server, _arg2:int, _arg3:Boolean, _arg4:int, _arg5:int, _arg6:ByteArray, _arg7:CharListEvent, _arg8:String) {
         this.camera_ = new _0D_v();
         this.moveRecords_ = new _uw();
         super();
@@ -79,7 +79,7 @@ package com.company.assembleegameclient.game {
     public var textBox_:ui_chat;
     public var _V_1:_0B_X_;
     //public var tutorial_:Tutorial;
-    public var charList_:Server_list;
+    public var charList_:CharListEvent;
     public var isNexus_:Boolean = false;
     public var _H_E_:Protip = null;
     public var _0H_R_:_0H__;
@@ -151,7 +151,7 @@ package com.company.assembleegameclient.game {
             addChild(this._4v);
         }
         this.isNexus_ = (this.map_.name_ == "Nexus" || this.map_.name_ == "Shop" || this.map_.name_ == "Editor");
-        var _local1:_0B_u = new _0B_u(Parameters._fK_(), "/log", true, 0);
+        var _local1:AppEngineClient = new AppEngineClient(Parameters._fK_(), "/log", true, 0);
         var _local2:Account = Account.getInstance();
         var _local3:Object = {
             "game_net_user_id": _local2.gameNetworkUserId(),

@@ -1,7 +1,7 @@
 package game.guild {
     import account.Account;
 
-    import com.company.assembleegameclient.appengine._0B_u;
+    import com.company.assembleegameclient.appengine.AppEngineClient;
     import com.company.assembleegameclient.parameters.Parameters;
     import com.company.assembleegameclient.ui._0K_B_;
     import com.company.assembleegameclient.util._07E_;
@@ -33,7 +33,7 @@ package game.guild {
         private var offset_:int;
         private var playerName_:String;
         private var playerRank_:int;
-        private var request_:_0B_u;
+        private var request_:AppEngineClient;
         private var loadingText_:SimpleText;
         private var titleText_:SimpleText;
         private var fameText_:SimpleText;
@@ -60,7 +60,7 @@ package game.guild {
             this.loadingText_.y = ((STAGE_HEIGHT / 2) - (this.loadingText_.height / 2));
             addChild(this.loadingText_);
 
-            this.request_ = new _0B_u(Parameters._fK_(), "/guild", true, 2);
+            this.request_ = new AppEngineClient(Parameters._fK_(), "/guild", true, 2);
             var params:Object = {
                 "num": count,
                 "offset": offset

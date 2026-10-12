@@ -3,8 +3,8 @@ package services {
 import flash.events.TimerEvent;
 import flash.utils.Timer;
 
-import com.company.assembleegameclient.appengine.Server_list;
-import com.company.assembleegameclient.appengine._2n;
+import com.company.assembleegameclient.appengine.CharListEvent;
+import com.company.assembleegameclient.appengine.CharacterClient;
 
 import account.Account;
 import env.ServerListState;
@@ -34,17 +34,17 @@ public class LoadCharacterListTask extends Task {
     public var messageSignal:StringSignal2;
 
     private var retryTimer:Timer;
-    private var client:_2n;
+    private var client:CharacterClient;
 
     override protected function startTask():void {
-        this.client = new _2n();
+        this.client = new CharacterClient();
         this.client.addEventListener(TextErrorEvent.TEXT_ERROR, this.handleError);
-        this.client.addEventListener(Server_list.SAVED_CHARS_LIST, this.handleListLoaded);
+        this.client.addEventListener(CharListEvent.SAVED_CHARS_LIST, this.handleListLoaded);
         this.requestList();
     }
 
     private function requestList():void {
-        this.client._H_Q_();
+        this.client.requestCharList();
     }
 
     private function clearAccountAndRetry():void {
@@ -77,8 +77,8 @@ public class LoadCharacterListTask extends Task {
         this.requestList();
     }
 
-    private function handleListLoaded(list:Server_list):void {
-        this.serverListState.servers = new Server_list(list._Q_I_);
+    private function handleListLoaded(list:CharListEvent):void {
+        this.serverListState.servers = new CharListEvent(list.xml_);
         this.serverListState.enabled = false;
         complete(true);
         if (this.retryTimer != null) {

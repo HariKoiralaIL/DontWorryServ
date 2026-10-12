@@ -1,7 +1,7 @@
 package client.ui.screens {
 import com.company.assembleegameclient.appengine.SavedCharacter;
-import com.company.assembleegameclient.appengine.Server_list;
-import com.company.assembleegameclient.appengine._0A_H_;
+import com.company.assembleegameclient.appengine.CharListEvent;
+import com.company.assembleegameclient.appengine.ClassStats;
 import com.company.assembleegameclient.ui.tooltip.ClassToolTip;
 import com.company.assembleegameclient.ui.tooltip.ToolTip;
 import com.company.assembleegameclient.util._Z_B_;
@@ -33,8 +33,8 @@ public class CharacterBox extends Sprite {
     private static const SPIN_DIRECTIONS:Array = [_lJ_.DOWN, _lJ_.RIGHT, _lJ_.UP, _lJ_.LEFT];
 
     public var playerXML_:XML = null;
-    public var charStats_:_0A_H_;
-    public var charList_:Server_list;
+    public var charStats_:ClassStats;
+    public var charList_:CharListEvent;
     /** True when the class is unlocked for this account. */
     public var available:Boolean;
     public var curSpinPos:int = 0;
@@ -46,7 +46,7 @@ public class CharacterBox extends Sprite {
     private var lockedText:SimpleText;
     private var classNameText_:SimpleText;
 
-    public function CharacterBox(playerXML:XML, charStats:_0A_H_, charList:Server_list) {
+    public function CharacterBox(playerXML:XML, charStats:ClassStats, charList:CharListEvent) {
         super();
         this.playerXML_ = playerXML;
         this.charStats_ = charStats;
@@ -79,7 +79,7 @@ public class CharacterBox extends Sprite {
             addChild(this.lockedText);
             this.classNameText_.y = 78;
         } else {
-            var stars:Sprite = this.buildStars(_Z_B_._lr(this.charList_._0D_E_(this.objectType())), _Z_B_._yJ_.length);
+            var stars:Sprite = this.buildStars(_Z_B_._lr(this.charList_.bestFame(this.objectType())), _Z_B_._yJ_.length);
             stars.y = 60;
             stars.x = ((this.boxGraphic.width / 2) - (stars.width / 2));
             stars.filters = [new DropShadowFilter(0, 0, 0, 1, 4, 4)];

@@ -1,55 +1,60 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.appengine.RemoteTexture
-
 package com.company.assembleegameclient.appengine {
-import flash.net.URLLoaderDataFormat;
+import client.util.PNGDecoder;
+
+import com.company.assembleegameclient.parameters.Parameters;
 
 import events.GenericDataEvent;
 import events.TextErrorEvent;
 
-import client.util.PNGDecoder;
-
-import flash.utils.ByteArray;
 import flash.display.BitmapData;
-
-import com.company.assembleegameclient.parameters.Parameters;
+import flash.net.URLLoaderDataFormat;
+import flash.utils.ByteArray;
 
 public class RemoteTexture {
 
-    private static const _E_o:Number = Number(new Date().time);
+    private static const TESTING_HOST:String = "rotmgtesting.appspot.com";
+    private static const PRODUCTION_HOST:String = "realmofthemadgod.appspot.com";
+    private static const CACHE_BUSTER:Number = Number(new Date().time);
 
-    public function RemoteTexture(_arg1:String, _arg2:String, _arg3:Function):void {
-        this.id_ = _arg1;
-        this._Z_Q_ = _arg2;
-        this.callback_ = _arg3;
-    }
     public var id_:String;
-    public var _Z_Q_:String;
+    public var instance_:String;
     public var callback_:Function;
 
+    public function RemoteTexture(id:String, instance:String, callback:Function) {
+        this.id_ = id;
+        this.instance_ = instance;
+        this.callback_ = callback;
+    }
+
     public function run():void {
-        var _local1:String = ((this._Z_Q_ == "testing") ? "rotmgtesting.appspot.com" : (this._Z_Q_ == "production") ? "realmofthemadgod.appspot.com" : Parameters._fK_());
-        var _local2:_0B_u = new _0B_u(_local1, "/picture", false);
-        _local2._R_z(URLLoaderDataFormat.BINARY);
-        _local2.addEventListener(GenericDataEvent.GENERIC_DATA, this.onURLLoadComplete);
-        _local2.addEventListener(TextErrorEvent.TEXT_ERROR, this.onError);
-        _local2.sendRequest("get", {
+        var client:AppEngineClient = new AppEngineClient(this.getHost(), "/picture", false);
+        client.setDataFormat(URLLoaderDataFormat.BINARY);
+        client.addEventListener(GenericDataEvent.GENERIC_DATA, this.onComplete);
+        client.addEventListener(TextErrorEvent.TEXT_ERROR, this.onError);
+        client.sendRequest("get", {
             "id": this.id_,
-            "instance": this._Z_Q_,
-            "time": _E_o
+            "instance": this.instance_,
+            "time": CACHE_BUSTER
         });
     }
 
-    public function onURLLoadComplete(_arg1:GenericDataEvent):void {
-        var _local2:BitmapData = PNGDecoder.decodeImage((_arg1.data as ByteArray));
-        this.callback_(_local2);
+    private function getHost():String {
+        if (this.instance_ == "testing") {
+            return TESTING_HOST;
+        }
+        if (this.instance_ == "production") {
+            return PRODUCTION_HOST;
+        }
+        return Parameters._fK_();
     }
 
-    public function onError(_arg1:TextErrorEvent):void {
+    private function onComplete(event:GenericDataEvent):void {
+        this.callback_(PNGDecoder.decodeImage(event.data as ByteArray));
+    }
+
+    private function onError(event:TextErrorEvent):void {
+        // intentionally ignored: texture simply isn't delivered
     }
 
 }
-}//package com.company.assembleegameclient.appengine
-
+}

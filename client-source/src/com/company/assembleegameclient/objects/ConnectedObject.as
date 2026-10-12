@@ -18,7 +18,7 @@ import flash.geom.Utils3D;
 import flash.display.IGraphicsData;
 
 import com.company.assembleegameclient.map._0D_v;
-import com.company.assembleegameclient.engine3d._uZ_;
+import com.company.assembleegameclient.engine3d.Object3D;
 
 public class ConnectedObject extends GameObject {
 
@@ -86,10 +86,10 @@ public class ConnectedObject extends GameObject {
         if (_8J_ == null) {
             this._08U_();
         }
-        Utils3D.projectVectors(_arg2.wToS_, _8J_.vW_, _8J_.vS_, _8J_.uvts_);
+        Utils3D.projectVectors(_arg2.wToS_, _8J_.worldVertices_, _8J_.screenVertices_, _8J_.uvts_);
         for each (_local4 in _8J_.faces_) {
-            _local5 = (((_local4._0F_3.x > 0.4)) ? 1 : (((_local4._0F_3.x < -0.4)) ? -1 : 0));
-            _local6 = (((_local4._0F_3.y > 0.4)) ? 1 : (((_local4._0F_3.y < -0.4)) ? -1 : 0));
+            _local5 = (((_local4.normal_.x > 0.4)) ? 1 : (((_local4.normal_.x < -0.4)) ? -1 : 0));
+            _local6 = (((_local4.normal_.y > 0.4)) ? 1 : (((_local4.normal_.y < -0.4)) ? -1 : 0));
             _local7 = _local4.texture_;
             if (((!((_local5 == 0))) || (!((_local6 == 0))))) {
                 _local8 = map_.lookupSquare((x_ + _local5), (y_ + _local6));
@@ -102,7 +102,7 @@ public class ConnectedObject extends GameObject {
     }
 
     public function _08U_():void {
-        _8J_ = new _uZ_();
+        _8J_ = new Object3D();
         var _local1:ConnectedResults = _0D_(_O_l);
         if (_local1 == null) {
             _8J_ = null;

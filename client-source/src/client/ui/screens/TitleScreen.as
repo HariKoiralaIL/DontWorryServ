@@ -1,7 +1,7 @@
 package client.ui.screens {
 import account.Account;
 
-import com.company.assembleegameclient.appengine.Server_list;
+import com.company.assembleegameclient.appengine.CharListEvent;
 import com.company.assembleegameclient.objects.Player;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.backgrounds.TitleBackground;
@@ -32,7 +32,7 @@ public class TitleScreen extends BaseScreen {
     private var forumsButton:MenuButton;
     private var versionText:SimpleText;
     private var copyrightText:SimpleText;
-    private var model:Server_list;
+    private var model:CharListEvent;
 
     public function TitleScreen() {
         addChild(new TitleBackground());
@@ -40,7 +40,7 @@ public class TitleScreen extends BaseScreen {
         this.buttonClicked = new Signal(String);
     }
 
-    override public function initialize(model:Server_list):void {
+    override public function initialize(model:CharListEvent):void {
         super.initialize(model);
         this.model = model;
         this.buildButtons();

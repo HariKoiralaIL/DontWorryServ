@@ -15,11 +15,11 @@ import com.company.assembleegameclient.objects.ObjectLibrary;
 import flash.filters.DropShadowFilter;
 
 import com.company.assembleegameclient.util._Z_B_;
-import com.company.assembleegameclient.appengine._0A_H_;
+import com.company.assembleegameclient.appengine.ClassStats;
 
 public class CharacterToolTip extends ToolTip {
 
-    public function CharacterToolTip(_arg1:String, xml:XML, _0a_h_:_0A_H_) {
+    public function CharacterToolTip(_arg1:String, xml:XML, _0a_h_:ClassStats) {
         super(0x2A2A2A, 1, 0xFFFFFF, 1);
         var _local4:int = int(xml.ObjectType);
         var xml2:XML = ObjectLibrary._Q_F_[_local4];
@@ -42,15 +42,15 @@ public class CharacterToolTip extends ToolTip {
         this.divider_.x = 6;
         this.divider_.y = 228;
         addChild(this.divider_);
-        var _local6:int = (((_0a_h_ == null)) ? 0 : _0a_h_._lr());
+        var _local6:int = (((_0a_h_ == null)) ? 0 : _0a_h_.numStars());
         this.statsText_ = new SimpleText(12, 6206769, false, 0, 0, "CHIP SB");
-        this.statsText_.text = ((((((_local6 + " of " + _Z_B_._yJ_.length + " C-Quests Completed\n") + "Best Level Achieved: ") + (((_0a_h_) != null) ? _0a_h_.bestLevel() : 0)) + "\n") + "Best Fame Achieved: ") + (((_0a_h_) != null) ? _0a_h_._0D_E_() : 0));
+        this.statsText_.text = ((((((_local6 + " of " + _Z_B_._yJ_.length + " C-Quests Completed\n") + "Best Level Achieved: ") + (((_0a_h_) != null) ? _0a_h_.bestLevel() : 0)) + "\n") + "Best Fame Achieved: ") + (((_0a_h_) != null) ? _0a_h_.bestFame() : 0));
         this.statsText_.updateMetrics();
         this.statsText_.filters = [new DropShadowFilter(0, 0, 0)];
         this.statsText_.x = 8;
         this.statsText_.y = (height - 2);
         addChild(this.statsText_);
-        var _local7:int = _Z_B_._F_U_((((_0a_h_ == null)) ? 0 : _0a_h_._0D_E_()), 0);
+        var _local7:int = _Z_B_._F_U_((((_0a_h_ == null)) ? 0 : _0a_h_.bestFame()), 0);
         if (_local7 > 0) {
             this.nextGoalText_ = new SimpleText(10, 16549442, false, 174, 0, "CHIP SB");
             this.nextGoalText_.text = (((("Next Goal: Earn " + _local7) + " Fame\n") + "  with a ") + xml2.@id);

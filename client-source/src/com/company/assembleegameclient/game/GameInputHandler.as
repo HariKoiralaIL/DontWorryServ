@@ -433,7 +433,7 @@ public class GameInputHandler {
         if (this.gs_.stage.focus != null) {
             return;
         }
-        if (this.gs_.charList_._V_v) {
+        if (this.gs_.charList_.isAdmin_) {
             this.clearInput();
             var giveBox:GiveBox = new GiveBox(this.gs_);
             this.gs_.stage.addChild(new FrameHolder(giveBox));

@@ -15,13 +15,13 @@ import com.company.assembleegameclient.ui._u5;
 import flash.display.BitmapData;
 
 import com.company.util.BitmapUtil;
-import com.company.assembleegameclient.appengine.Server_list;
+import com.company.assembleegameclient.appengine.CharListEvent;
 
 import flash.display.Graphics;
 
 public class BuyCharacterRect extends CharacterRect {
 
-    public function BuyCharacterRect(_arg1:Server_list) {
+    public function BuyCharacterRect(_arg1:CharListEvent) {
         super(0x2e2e2c, 0x4a4946);
         var _local2:Shape = this.buildIcon();
         _local2.x = 35;

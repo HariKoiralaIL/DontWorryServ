@@ -4,8 +4,8 @@
 //com.company.assembleegameclient.objects.GameObject
 
 package com.company.assembleegameclient.objects {
-import com.company.assembleegameclient.engine3d._B_5;
-import com.company.assembleegameclient.engine3d._uZ_;
+import com.company.assembleegameclient.engine3d.MeshModel;
+import com.company.assembleegameclient.engine3d.Object3D;
 import com.company.assembleegameclient.map.Square;
 import com.company.assembleegameclient.map._0D_v;
 import com.company.assembleegameclient.map._X_l;
@@ -107,7 +107,7 @@ public class GameObject extends BasicObject {
             this._dE_ = (this.texture_.height / 8);
         }
         if (_arg1.hasOwnProperty("Model")) {
-            this._8J_ = _B_5._um(String(_arg1.Model));
+            this._8J_ = MeshModel.createObject3D(String(_arg1.Model));
         }
         var _local3:AnimationsData = ObjectLibrary._Q_z[this.objectType_];
         if (_local3 != null) {
@@ -154,7 +154,7 @@ public class GameObject extends BasicObject {
     public var texture_:BitmapData = null;
     public var mask_:BitmapData = null;
     public var _07_:Vector.<_Z_H_> = null;
-    public var _8J_:_uZ_ = null;
+    public var _8J_:Object3D = null;
     public var effect_:ParticleEffect = null;
     public var _09e:Animations = null;
     public var _aE_:Boolean = false;
@@ -329,7 +329,7 @@ public class GameObject extends BasicObject {
             if (_0H_B_.faces_.length == 0) {
                 return;
             }
-            this.path_.data = _0H_B_.faces_[0].face_.vout_;
+            this.path_.data = _0H_B_.faces_[0].face_.screenVertices_;
             this.bitmapFill_.bitmapData = _local4;
             _0H_B_.baseTexMatrix_.calculateTextureMatrix(this.path_.data);
             this.bitmapFill_.matrix = _0H_B_.baseTexMatrix_.tToS_;

@@ -1,9 +1,9 @@
 package env {
-import com.company.assembleegameclient.appengine.Server_list;
+import com.company.assembleegameclient.appengine.CharListEvent;
 
 public class ServerListState {
 
-    public var servers:Server_list;
+    public var servers:CharListEvent;
     public var enabled:Boolean;
     public var count:int;
 

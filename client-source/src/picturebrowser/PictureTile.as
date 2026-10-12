@@ -6,7 +6,7 @@ import com.company.events.DeletePictureEvent;
 
 import events.GenericDataEvent;
 
-import com.company.assembleegameclient.appengine._0B_u;
+import com.company.assembleegameclient.appengine.AppEngineClient;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.ui.tooltip.TitleDescriptionToolTip;
 import com.company.assembleegameclient.ui.tooltip.ToolTip;
@@ -136,8 +136,8 @@ public class PictureTile extends Sprite {
     }
 
     private function sendRequest():void {
-        var request:_0B_u = new _0B_u(Parameters._fK_(), PICTURE_PATH, false);
-        request._R_z(URLLoaderDataFormat.BINARY);
+        var request:AppEngineClient = new AppEngineClient(Parameters._fK_(), PICTURE_PATH, false);
+        request.setDataFormat(URLLoaderDataFormat.BINARY);
         request.addEventListener(GenericDataEvent.GENERIC_DATA, this.onURLLoadComplete);
         request.sendRequest("get", {"id": this.id.toString()});
     }

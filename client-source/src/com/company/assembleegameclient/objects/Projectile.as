@@ -4,7 +4,7 @@
 //com.company.assembleegameclient.objects.Projectile
 
 package com.company.assembleegameclient.objects {
-import com.company.assembleegameclient.engine3d._0I_4;
+import com.company.assembleegameclient.engine3d.Billboard;
 import com.company.assembleegameclient.map.Square;
 import com.company.assembleegameclient.map._0D_v;
 import com.company.assembleegameclient.map._X_l;
@@ -55,7 +55,7 @@ public class Projectile extends BasicObject {
     }
 
     public function Projectile() {
-        this._ey = new _0I_4(100);
+        this._ey = new Billboard(100);
         this._0L_7 = new Point();
         this._08V_ = new Vector3D();
         this._J_4 = new GraphicsGradientFill(GradientType.RADIAL, [0, 0], [0.5, 0], null, new Matrix());
@@ -79,7 +79,7 @@ public class Projectile extends BasicObject {
     public var startTime_:int;
     public var angle_:Number = 0;
     public var _08H_:Dictionary;
-    public var _ey:_0I_4;
+    public var _ey:Billboard;
     protected var _J_4:GraphicsGradientFill;
     protected var _P_C_:GraphicsPath;
     private var _0L_7:Point;
@@ -274,7 +274,7 @@ public class Projectile extends BasicObject {
         } else {
             _local8 = ObjectLibrary._P_N_(this.containerType_);
         }
-        this._ey._H_9((8 * (_local8 / 100)));
+        this._ey.setSize((8 * (_local8 / 100)));
         this.damage_ = 0;
     }
 

@@ -67,11 +67,11 @@ public class DoubleWall extends GameObject {
             _local7 = this.faces_[_local5];
             _local8 = map_.lookupSquare((x_ + _oZ_[_local5]), (y_ + _a3[_local5]));
             if ((((((_local8 == null)) || ((_local8.texture_ == null)))) || (((((!((_local8 == null))) && ((_local8.obj_ is DoubleWall)))) && (!(_local8.obj_._aE_)))))) {
-                _local7._0z = true;
+                _local7.useSolidFill_ = true;
             } else {
-                _local7._0z = false;
+                _local7.useSolidFill_ = false;
                 if (_09e != null) {
-                    _local7._E_O_(_local4);
+                    _local7.setTexture(_local4);
                 }
             }
             _local7.draw(_arg1, _arg2);

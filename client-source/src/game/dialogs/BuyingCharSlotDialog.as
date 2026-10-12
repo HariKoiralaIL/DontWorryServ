@@ -1,7 +1,7 @@
 package game.dialogs {
     import account.Account;
 
-    import com.company.assembleegameclient.appengine._0B_u;
+    import com.company.assembleegameclient.appengine.AppEngineClient;
     import com.company.assembleegameclient.parameters.Parameters;
 
     import events.GenericDataEvent;
@@ -17,7 +17,7 @@ package game.dialogs {
         public function BuyingCharSlotDialog(price:int) {
             super("Buying Character Slot...", null, null, null, "/buyingCharSlot");
             this.price_ = price;
-            var request:_0B_u = new _0B_u(Parameters._fK_(), "/account", true, 2);
+            var request:AppEngineClient = new AppEngineClient(Parameters._fK_(), "/account", true, 2);
             request.addEventListener(GenericDataEvent.GENERIC_DATA, this.onPurchaseSuccess);
             request.addEventListener(TextErrorEvent.TEXT_ERROR, this.onPurchaseError);
             request.sendRequest("purchaseCharSlot", Account.getInstance().credentials());

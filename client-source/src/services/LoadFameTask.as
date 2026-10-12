@@ -3,7 +3,7 @@ package services {
 import flash.events.TimerEvent;
 import flash.utils.Timer;
 
-import com.company.assembleegameclient.appengine._0B_u;
+import com.company.assembleegameclient.appengine.AppEngineClient;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.util._str954;
 
@@ -37,7 +37,7 @@ public class LoadFameTask extends Task {
     public var killedBy:String;
     public var totalFame:int;
 
-    private var client:_0B_u;
+    private var client:AppEngineClient;
     private var retryTimer:Timer;
 
     override protected function startTask():void {
@@ -45,7 +45,7 @@ public class LoadFameTask extends Task {
     }
 
     private function requestFame():void {
-        this.client = new _0B_u(Parameters._fK_(), "/char", true);
+        this.client = new AppEngineClient(Parameters._fK_(), "/char", true);
         this.client.addEventListener(GenericDataEvent.GENERIC_DATA, this.handleDataLoaded);
         this.client.addEventListener(TextErrorEvent.TEXT_ERROR, this.handleError);
         this.client.sendRequest("fame", this.createRequestParams());

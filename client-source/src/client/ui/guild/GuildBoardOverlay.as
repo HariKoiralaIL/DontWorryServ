@@ -7,7 +7,7 @@ package client.ui.guild {
     import flash.display.Sprite;
     import flash.display.Shape;
 
-    import com.company.assembleegameclient.appengine._0B_u;
+    import com.company.assembleegameclient.appengine.AppEngineClient;
 
     import game.dialogs.Dialog;
 
@@ -39,14 +39,14 @@ package client.ui.guild {
         }
         private var canEdit:Boolean;
         private var background:Shape;
-        private var request:_0B_u;
+        private var request:AppEngineClient;
         private var statusDialog:Dialog;
         private var text_:String;
         private var viewer:GuildBoardViewer;
         private var editor:GuildBoardEditor;
 
         private function load():void {
-            this.request = new _0B_u(Parameters._fK_(), "/guild", true);
+            this.request = new AppEngineClient(Parameters._fK_(), "/guild", true);
             this.request.addEventListener(GenericDataEvent.GENERIC_DATA, this.onBoardLoaded);
             this.request.addEventListener(TextErrorEvent.TEXT_ERROR, this.onLoadError);
             this.request.sendRequest("getBoard", Account.getInstance().credentials());
@@ -97,7 +97,7 @@ package client.ui.guild {
         }
 
         private function onEditorSave(_arg1:Event):void {
-            this.request = new _0B_u(Parameters._fK_(), "/guild", true);
+            this.request = new AppEngineClient(Parameters._fK_(), "/guild", true);
             this.request.addEventListener(GenericDataEvent.GENERIC_DATA, this.onBoardSaved);
             this.request.addEventListener(TextErrorEvent.TEXT_ERROR, this.onSaveError);
             var _local2:Object = {"board": this.editor.getText()};

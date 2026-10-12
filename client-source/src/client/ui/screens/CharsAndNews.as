@@ -1,5 +1,5 @@
 package client.ui.screens {
-import com.company.assembleegameclient.appengine.Server_list;
+import com.company.assembleegameclient.appengine.CharListEvent;
 import com.company.assembleegameclient.screens.charrects.CharacterRectList;
 
 import flash.display.Graphics;
@@ -24,7 +24,7 @@ public class CharsAndNews extends Sprite {
     public var list_:Sprite = new Sprite();
     public var news_:News;
 
-    public function CharsAndNews(model:Server_list, screen:BaseScreen, state:int) {
+    public function CharsAndNews(model:CharListEvent, screen:BaseScreen, state:int) {
         super();
         switch (state) {
             case STATE_CHARACTERS:

@@ -4,7 +4,7 @@ import client.ui.frames.BuyGoldFrame;
 
 import com.company.assembleegameclient.account.web.PurchaseMediator;
 import com.company.assembleegameclient.account.web.WebPaymentCommand;
-import com.company.assembleegameclient.appengine._02k;
+import com.company.assembleegameclient.appengine.OffersLoader;
 import com.company.assembleegameclient.util.offer.Offers;
 
 import flash.display.Graphics;
@@ -25,7 +25,7 @@ public class PurchaseCreditsDialog extends Sprite {
         g.drawRect(0, 0, 800, 600);
         g.endFill();
         addChild(background);
-        _02k._U_t("/credits", onOffersLoaded);
+        OffersLoader.load("/credits", onOffersLoaded);
     }
 
     private function onOffersLoaded(event:GenericDataEvent):void {
