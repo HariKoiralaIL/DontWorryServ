@@ -8,7 +8,7 @@ import services.LoadCharacterListTask;
 import client.tasks.DispatchSignalTask;
 import client.tasks.TaskTracker;
 import client.tasks.SequenceTask;
-import _F_1._zf;
+import client.ui.screens.LoadingScreen;
 import game.signals.SpriteSignal2;
 
 /**
@@ -38,7 +38,7 @@ public class ShowViewCommand {
     }
 
     private function showAfterPreload():void {
-        this.showViewSignal.dispatch(new _zf());
+        this.showViewSignal.dispatch(new LoadingScreen());
         var taskGroup:SequenceTask = new SequenceTask();
         taskGroup.add(this.preloadTask);
         taskGroup.add(new DispatchSignalTask(this.showViewSignal, this.view));

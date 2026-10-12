@@ -1,7 +1,7 @@
 package ui.mediators {
 import _011.MapInfo;
 
-import _F_1._02a;
+import client.ui.screens.MapLoadingOverlay;
 
 import client.game.GameInitData;
 
@@ -31,7 +31,7 @@ public class MapLoadingScreenMediator extends Mediator {
     private static const FRAME_SECOND:Number = 0.5;
 
     [Inject]
-    public var view:_02a;
+    public var view:MapLoadingScreen;
     [Inject]
     public var serverList:ServerListState;
     /** Unused; kept so dependency injection behaves exactly as before. */

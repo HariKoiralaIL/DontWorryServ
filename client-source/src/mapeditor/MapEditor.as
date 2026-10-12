@@ -1,5 +1,5 @@
 package mapeditor {
-import _F_1._05p;
+import client.ui.screens.BaseScreen;
 
 import com.company.ui.dropdown.DropdownBox;
 
@@ -30,7 +30,7 @@ import jsonserializer.JsonSerializerProvider;
  * The map editor screen: toolbar, map canvas, info panel and the
  * ground / object / region palettes. Handles undo/redo, save, load and test.
  */
-public class MapEditor extends _05p {
+public class MapEditor extends BaseScreen {
 
     private static const MAP_Y:int = ((600 - MapCanvas.VIEW_SIZE) - 10);
     public static const STATS:Stats = new Stats();
@@ -80,8 +80,8 @@ public class MapEditor extends _05p {
         this.regionChooser_.x = this.layerDropdown_.x;
         this.regionChooser_.y = ((this.layerDropdown_.y + this.layerDropdown_.height) + 4);
 
-        super._0_4.x = ((800 - super._0_4.width) - 10);
-        super._0_4.y = 2;
+        super.accountText.x = ((800 - super.accountText.width) - 10);
+        super.accountText.y = 2;
     }
     public var toolbar_:EditorToolbar;
     public var map_:MapCanvas;

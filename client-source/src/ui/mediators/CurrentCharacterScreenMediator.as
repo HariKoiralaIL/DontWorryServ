@@ -1,7 +1,7 @@
 package ui.mediators {
-import _F_1.CurrentCharacterScreen;
-import _F_1._0H_2;
-import _F_1._C_Q_;
+import client.ui.screens.CurrentCharacterScreen;
+import client.ui.screens.NewCharacterScreen;
+import client.ui.screens.TitleScreen;
 
 import client.game.GameInitData;
 import client.signals.typed.GameInitSignal;
@@ -50,27 +50,27 @@ public class CurrentCharacterScreenMediator extends Mediator {
     override public function initialize():void {
         this.trackDailyJoinDate();
         this.view.close.add(this.onClose);
-        this.view._n7.add(this.onBeginnersOfferClicked);
+        this.view.unusedSignal.add(this.onBeginnersOfferClicked);
         this.view.newCharacter.add(this.onNewCharacter);
-        this.view._1V_.add(this.onNewCharacter);
+        this.view.showClasses.add(this.onNewCharacter);
         this.view.chooseName.add(this.onChooseName);
-        this.view._D_u.add(this.onPlayFirstCharacter);
+        this.view.playGame.add(this.onPlayFirstCharacter);
         this.view.initialize(this.serverList.servers);
         if (this.beginnersPackage.shouldShowNow()) {
             this.addViewToLayerSignal.dispatch();
         }
         if (this.beginnersPackage.isAvailable()) {
-            this.view._u_();
+            this.view.showBeginnersOffer();
         }
     }
 
     override public function destroy():void {
         this.view.close.remove(this.onClose);
-        this.view._n7.remove(this.onBeginnersOfferClicked);
+        this.view.unusedSignal.remove(this.onBeginnersOfferClicked);
         this.view.newCharacter.remove(this.onNewCharacter);
         this.view.chooseName.remove(this.onChooseName);
-        this.view._1V_.remove(this.onNewCharacter);
-        this.view._D_u.remove(this.onPlayFirstCharacter);
+        this.view.showClasses.remove(this.onNewCharacter);
+        this.view.playGame.remove(this.onPlayFirstCharacter);
     }
 
     /** Sends the "joinDate" analytics event at most once per day. */
@@ -87,7 +87,7 @@ public class CurrentCharacterScreenMediator extends Mediator {
     }
 
     private function onNewCharacter():void {
-        this.changeScreenSignal.dispatch(new _0H_2());
+        this.changeScreenSignal.dispatch(new NewCharacterScreen());
     }
 
     private function onBeginnersOfferClicked():void {
@@ -95,7 +95,7 @@ public class CurrentCharacterScreenMediator extends Mediator {
     }
 
     private function onClose():void {
-        this.changeScreenSignal.dispatch(new _C_Q_());
+        this.changeScreenSignal.dispatch(new TitleScreen());
     }
 
     private function onChooseName():void {

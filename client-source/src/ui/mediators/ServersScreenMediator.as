@@ -1,6 +1,6 @@
 package ui.mediators {
-import _F_1._01_;
-import _F_1._C_Q_;
+import client.ui.screens.ServersScreen;
+import client.ui.screens.TitleScreen;
 
 import env.ServerListState;
 
@@ -12,23 +12,23 @@ import robotlegs.bender.bundles.mvcs.Mediator;
 public class ServersScreenMediator extends Mediator {
 
     [Inject]
-    public var view:_01_;
+    public var view:ServersScreen;
     [Inject]
     public var serverList:ServerListState;
     [Inject]
     public var changeScreenSignal:SpriteSignal2;
 
     override public function initialize():void {
-        this.view._4s.add(this.onClose);
+        this.view.done.add(this.onClose);
         this.view.initialize(this.serverList.servers);
     }
 
     override public function destroy():void {
-        this.view._4s.remove(this.onClose);
+        this.view.done.remove(this.onClose);
     }
 
     private function onClose():void {
-        this.changeScreenSignal.dispatch(new _C_Q_());
+        this.changeScreenSignal.dispatch(new TitleScreen());
     }
 
 }

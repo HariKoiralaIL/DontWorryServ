@@ -1,5 +1,5 @@
 package spriteeditor {
-import _F_1._05p;
+import client.ui.screens.BaseScreen;
 
 import editorcommands.CommandQueue;
 
@@ -41,7 +41,7 @@ import texturesave.SaveTextureDialog;
  * The editing mode (objects / characters / textiles) decides which size dropdown,
  * canvas and preview classes are used.
  */
-public class SpriteEditorScreen extends _05p {
+public class SpriteEditorScreen extends BaseScreen {
 
     private static const MODE_DROPDOWN_X:int = 240;
     private static const DROPDOWN_Y:int = 32;

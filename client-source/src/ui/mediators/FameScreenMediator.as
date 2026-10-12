@@ -1,6 +1,6 @@
 package ui.mediators {
-import _F_1._3V_;
-import _F_1._U_W_;
+import client.ui.screens.LegendsScreen;
+import client.ui.screens.DeathScreen;
 
 import client.tasks.Task;
 
@@ -24,7 +24,7 @@ public class FameScreenMediator extends Mediator {
     private static const FAME_PAGE:String = "/fame";
 
     [Inject]
-    public var view:_U_W_;
+    public var view:DeathScreen;
     [Inject]
     public var serverList:ServerListState;
     [Inject]
@@ -39,10 +39,10 @@ public class FameScreenMediator extends Mediator {
     public var fame:LoadFameTask;
 
     override public function initialize():void {
-        this.view._0M_S_.add(this.onClose);
-        this.view._yK_(!this.deathRecord._sr);
+        this.view.continueClicked.add(this.onClose);
+        this.view.setSkipAnimation(!this.deathRecord._sr);
         if (this.deathRecord.info && this.deathRecord.info.background) {
-            this.view._K_f(this.deathRecord.info.background);
+            this.view.playDeathFade(this.deathRecord.info.background);
         }
         this.trackPageSignal.dispatch(FAME_PAGE);
         this.configureFameRequest();
@@ -51,7 +51,7 @@ public class FameScreenMediator extends Mediator {
     }
 
     override public function destroy():void {
-        this.view._0M_S_.remove(this.onClose);
+        this.view.continueClicked.remove(this.onClose);
         if (this.deathRecord.info) {
             if (this.deathRecord.info.background) {
                 this.deathRecord.info.background.dispose();
@@ -73,15 +73,15 @@ public class FameScreenMediator extends Mediator {
     }
 
     private function onFameLoaded(task:Task, isOk:Boolean, error:String = ""):void {
-        this.view._tC_(this.fame.name, this.fame.level, this.fame.objectType);
-        this.view._ec(this.fame.createdOn, this.fame.killedBy);
-        this.view._sQ_(this.fame.character);
-        this.view._0__(this.fame.totalFame, this.fame.xml);
+        this.view.setTitle(this.fame.name, this.fame.level, this.fame.objectType);
+        this.view.setDeathInfo(this.fame.createdOn, this.fame.killedBy);
+        this.view.setCharacterPortrait(this.fame.character);
+        this.view.setStats(this.fame.totalFame, this.fame.xml);
     }
 
     private function onClose():void {
         if (this.deathRecord._sr) {
-            this.changeScreenSignal.dispatch(new _3V_());
+            this.changeScreenSignal.dispatch(new LegendsScreen());
         } else {
             this.backSignal.dispatch();
         }

@@ -6,7 +6,7 @@
 package com.company.assembleegameclient.screens.charrects {
 import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
-    import _F_1.CharacterBox;
+    import client.ui.screens.CharacterBox;
 
     import com.company.assembleegameclient.appengine.SavedCharacter;
 import com.company.assembleegameclient.appengine._0A_H_;

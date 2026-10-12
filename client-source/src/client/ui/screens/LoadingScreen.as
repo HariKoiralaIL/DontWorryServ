@@ -1,25 +1,19 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//_F_1._zf
-
-package _F_1 {
-import flash.display.Sprite;
-
+package client.ui.screens {
+import com.company.backgrounds.TitleBackground;
 import com.company.ui.SimpleText;
 
-import com.company.backgrounds.TitleBackground;
-
-import com.company.rotmg.graphics.ScreenGraphic;
-
-import flash.text.TextFieldAutoSize;
+import flash.display.Sprite;
 import flash.filters.DropShadowFilter;
+import flash.text.TextFieldAutoSize;
 
-public class _zf extends Sprite {
+/** Title background with a centred, replaceable loading message. */
+public class LoadingScreen extends Sprite {
 
-    public function _zf() {
+    private var text:SimpleText;
+
+    public function LoadingScreen() {
+        super();
         addChild(new TitleBackground());
-        //addChild(new ScreenGraphic());
         this.text = new SimpleText(35, 0xFFFFFF, false, 0, 0, "Myriad Pro");
         this.text.y = 300;
         this.text.setBold(true);
@@ -29,14 +23,11 @@ public class _zf extends Sprite {
         this.text.filters = [new DropShadowFilter(0, 0, 0, 1, 4, 4)];
         addChild(this.text);
     }
-    private var text:SimpleText;
 
-    public function _02C_(_arg1:String):void {
-        this.text.htmlText = _arg1;
-        stage;
+    public function setMessage(html:String):void {
+        this.text.htmlText = html;
         this.text.x = ((800 - this.text.width) * 0.5);
     }
 
 }
-}//package _F_1
-
+}

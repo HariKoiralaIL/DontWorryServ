@@ -8,16 +8,16 @@ import com.company.ui.SimpleText;
 import flash.events.MouseEvent;
 import flash.filters.DropShadowFilter;
 
-import _F_1._H_o;
+import client.ui.screens.MenuButton;
 
 public class AccountStatusText extends AccountTextView {
 
     private static const FONT_SIZE:int = 18;
 
     private var statusText:SimpleText = null;
-    private var primaryLink:_H_o = null;
+    private var primaryLink:MenuButton = null;
     private var separatorText:SimpleText = null;
-    private var secondaryLink:_H_o = null;
+    private var secondaryLink:MenuButton = null;
 
     public function AccountStatusText() {
         refresh();
@@ -28,13 +28,13 @@ public class AccountStatusText extends AccountTextView {
         statusText = new SimpleText(FONT_SIZE, 0xFFFFFF, false, 0, 0, "Myriad Pro");
         if (!Account.getInstance().isRegistered()) {
             statusText.text = "guest account - ";
-            primaryLink = new _H_o("register", FONT_SIZE, false);
+            primaryLink = new MenuButton("register", FONT_SIZE, false);
             primaryLink.addEventListener(MouseEvent.CLICK, onRegisterClick);
-            secondaryLink = new _H_o("log in", FONT_SIZE, false);
+            secondaryLink = new MenuButton("log in", FONT_SIZE, false);
             secondaryLink.addEventListener(MouseEvent.CLICK, onLogInClick);
         } else {
             statusText.text = "logged in as " + Account.getInstance().guid() + " - ";
-            primaryLink = new _H_o("log out", FONT_SIZE, false);
+            primaryLink = new MenuButton("log out", FONT_SIZE, false);
             primaryLink.addEventListener(MouseEvent.CLICK, onLogOutClick);
         }
         statusText.updateMetrics();

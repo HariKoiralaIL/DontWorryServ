@@ -1,5 +1,5 @@
 package ui.mediators {
-import _F_1._0H_2;
+import client.ui.screens.NewCharacterScreen;
 
 import com.company.assembleegameclient.screens.charrects.CharacterRectList;
 
@@ -24,7 +24,7 @@ public class CharacterRectListMediator extends Mediator {
     }
 
     private function onNewCharacter():void {
-        this.setScreenSignal.dispatch(new _0H_2());
+        this.setScreenSignal.dispatch(new NewCharacterScreen());
     }
 
 }

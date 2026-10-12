@@ -10,7 +10,7 @@ import flash.display.Sprite;
 
 import com.company.assembleegameclient.appengine.Server_list;
 
-import _F_1._05p;
+import client.ui.screens.BaseScreen;
 
 import signals.Signal;
 
@@ -35,7 +35,7 @@ import game.dialogs.ErrorDialog;
 
 public class CharacterRectList extends Sprite {
 
-    public function CharacterRectList(_arg1:Server_list, _arg2:_05p) {
+    public function CharacterRectList(_arg1:Server_list, _arg2:BaseScreen) {
         var _local5:SavedCharacter;
         var _local6:BuyCharacterRect;
         var _local7:CurrentCharacterRect;
@@ -75,7 +75,7 @@ public class CharacterRectList extends Sprite {
     public var newCharacter:Signal;
     public var deleteCharacter:Signal;
     private var charList_:Server_list;
-    private var screen_:_05p;
+    private var screen_:BaseScreen;
 
     private function onCancel(_arg1:Event):void {
         var _local2:Dialog = (_arg1.currentTarget as Dialog);
@@ -107,7 +107,7 @@ public class CharacterRectList extends Sprite {
     private function onDialogRegister(_arg1:Event):void {
         var _local2:Dialog = (_arg1.currentTarget as Dialog);
         ((_local2.parent) && (_local2.parent.removeChild(_local2)));
-        this.screen_._0j();
+        this.screen_.openAccountManagement();
     }
 
     private function onDialogError(_arg1:TextErrorEvent):void {

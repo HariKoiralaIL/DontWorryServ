@@ -9,7 +9,7 @@ package com.company.assembleegameclient.game {
 
   import client.events.MoneyChangedEvent;
 
-  import _F_1._02a;
+  import client.ui.screens.MapLoadingOverlay;
 
   import game.signals.MapInfoSignal;
   import game.signals.SingletonSignal;
@@ -97,7 +97,7 @@ package com.company.assembleegameclient.game {
     private var map:_X_l;
     private var _bA_:int = 0;
     private var _qA_:int = 0;
-    private var _rz:_02a;
+    private var _rz:MapLoadingScreen;
     private var _2e:Boolean;
 
     public function get map_():_X_l {
@@ -115,7 +115,7 @@ package com.company.assembleegameclient.game {
 
     public function _dO_(_arg1:MapInfo):void {
         if (!this._rz) {
-            this._rz = new _02a();
+            this._rz = new MapLoadingScreen();
         }
         this._rz.width = stage.stageWidth;
         this._rz.height = stage.stageHeight;

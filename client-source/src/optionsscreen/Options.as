@@ -14,7 +14,7 @@ import flash.ui.Mouse;
 import flash.ui.MouseCursor;
 import flash.ui.MouseCursorData;
 
-import _F_1._H_o;
+import client.ui.screens.MenuButton;
 
 import audio.SfxSettings;
 import audio.MusicManager;
@@ -44,9 +44,9 @@ public class Options extends Sprite {
 
     private var gs_:GameSprite;
     private var titleText:SimpleText;
-    private var continueButton:_H_o;
-    private var resetButton:_H_o;
-    private var homeButton:_H_o;
+    private var continueButton:MenuButton;
+    private var resetButton:MenuButton;
+    private var homeButton:MenuButton;
     private var tabs:Vector.<OptionsTabTitle> = new Vector.<OptionsTabTitle>();
     private var selected_:OptionsTabTitle = null;
 
@@ -76,13 +76,13 @@ public class Options extends Sprite {
         this.titleText.y = 8;
         addChild(this.titleText);
         //addChild(new ScreenGraphic());
-        this.continueButton = new _H_o("continue", 36, false);
+        this.continueButton = new MenuButton("continue", 36, false);
         this.continueButton.addEventListener(MouseEvent.CLICK, this.onContinueClick);
         addChild(this.continueButton);
-        this.resetButton = new _H_o("reset to defaults", 22, false);
+        this.resetButton = new MenuButton("reset to defaults", 22, false);
         this.resetButton.addEventListener(MouseEvent.CLICK, this.onResetClick);
         addChild(this.resetButton);
-        this.homeButton = new _H_o("back to home", 22, false);
+        this.homeButton = new MenuButton("back to home", 22, false);
         this.homeButton.addEventListener(MouseEvent.CLICK, this.onHomeClick);
         addChild(this.homeButton);
         var tabX:int = 14;

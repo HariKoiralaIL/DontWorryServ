@@ -1,6 +1,6 @@
 package ui.mediators {
-import _F_1._05p;
-import _F_1._C_Q_;
+import client.ui.screens.BaseScreen;
+import client.ui.screens.TitleScreen;
 
 import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
@@ -22,7 +22,7 @@ import robotlegs.bender.bundles.mvcs.Mediator;
 public class TooltipScreenMediator extends Mediator {
 
     [Inject]
-    public var view:_05p;
+    public var view:BaseScreen;
     /** Unused; kept so dependency injection behaves exactly as before. */
     [Inject]
     public var serverList:ServerListState;
@@ -37,12 +37,12 @@ public class TooltipScreenMediator extends Mediator {
 
     override public function initialize():void {
         this.view.tooltip.add(this.onToolTip);
-        this.view._03I_.add(this.onChangeScreen);
+        this.view.reloadScreen.add(this.onChangeScreen);
     }
 
     override public function destroy():void {
         this.view.tooltip.remove(this.onToolTip);
-        this.view._03I_.remove(this.onChangeScreen);
+        this.view.reloadScreen.remove(this.onChangeScreen);
         this.view.destroy();
         this.hideToolTipSignal.dispatch();
     }
@@ -52,7 +52,7 @@ public class TooltipScreenMediator extends Mediator {
     }
 
     private function onChangeScreen(screenClass:Class):void {
-        var targetClass:Class = (screenClass != null) ? screenClass : _C_Q_;
+        var targetClass:Class = (screenClass != null) ? screenClass : TitleScreen;
         var screen:Sprite = new targetClass();
         this.reloadCharListSignal.dispatch();
         this.setScreenSignal.dispatch(screen);

@@ -1,6 +1,6 @@
 package ui.mediators {
-import _F_1._0H_h;
-import _F_1._C_Q_;
+import client.ui.screens.CreditsScreen;
+import client.ui.screens.TitleScreen;
 
 import game.signals.SpriteSignal2;
 
@@ -10,7 +10,7 @@ import robotlegs.bender.bundles.mvcs.Mediator;
 public class CreditsScreenMediator extends Mediator {
 
     [Inject]
-    public var view:_0H_h;
+    public var view:CreditsScreen;
     [Inject]
     public var changeScreenSignal:SpriteSignal2;
 
@@ -24,7 +24,7 @@ public class CreditsScreenMediator extends Mediator {
     }
 
     private function onClose():void {
-        this.changeScreenSignal.dispatch(new _C_Q_());
+        this.changeScreenSignal.dispatch(new TitleScreen());
     }
 
 }

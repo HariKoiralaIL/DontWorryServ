@@ -1,6 +1,6 @@
 package ui.mediators {
-import _F_1._0B_m;
-import _F_1._U_W_;
+import client.ui.screens.NewsItem;
+import client.ui.screens.DeathScreen;
 
 import env.DeathRecord;
 
@@ -15,24 +15,24 @@ import robotlegs.bender.bundles.mvcs.Mediator;
 public class AccountCharactersScreenMediator extends Mediator {
 
     [Inject]
-    public var view:_0B_m;
+    public var view:NewsItem;
     [Inject]
     public var deathRecord:DeathRecord;
     [Inject]
     public var changeScreenSignal:SpriteSignal2;
 
     override public function initialize():void {
-        this.view._H_r.add(this.onCharacterSelected);
+        this.view.fameClicked.add(this.onCharacterSelected);
     }
 
     override public function destroy():void {
-        this.view._H_r.remove(this.onCharacterSelected);
+        this.view.fameClicked.remove(this.onCharacterSelected);
     }
 
     private function onCharacterSelected(charId:int):void {
         this.deathRecord._Z__ = this.view.accountId;
         this.deathRecord._J_u = charId;
-        this.changeScreenSignal.dispatch(new _U_W_());
+        this.changeScreenSignal.dispatch(new DeathScreen());
     }
 
 }

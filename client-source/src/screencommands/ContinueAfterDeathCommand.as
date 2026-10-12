@@ -6,7 +6,7 @@ package screencommands
     import client.tasks.TaskTracker;
     import client.tasks.SequenceTask;
 
-    import _F_1._U_W_;
+    import client.ui.screens.DeathScreen;
 
     import game.signals.SpriteSignal2;
 
@@ -34,7 +34,7 @@ package screencommands
             }
             else
             {
-                this.setScreenSignal.dispatch(new _U_W_());
+                this.setScreenSignal.dispatch(new DeathScreen());
             }
         }
 
@@ -43,7 +43,7 @@ package screencommands
             this.deathRecord._dA_ = true;
             var sequence:SequenceTask = new SequenceTask();
             sequence.add(this.promptTask);
-            sequence.add(new DispatchSignalTask(this.setScreenSignal, new _U_W_()));
+            sequence.add(new DispatchSignalTask(this.setScreenSignal, new DeathScreen()));
             this.taskMonitor.add(sequence);
             sequence.start();
         }

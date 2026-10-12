@@ -1,5 +1,5 @@
 package game.marketplace {
-    import _F_1._H_o;
+    import client.ui.screens.MenuButton;
 
     import client.events.ResultEvent;
 
@@ -20,8 +20,8 @@ package game.marketplace {
         private var gs_:GameSprite;
         private var marketplace_:Marketplace;
         private var create_:MarketplaceCreate;
-        private var closeButton_:_H_o;
-        private var newTradeButton_:_H_o;
+        private var closeButton_:MenuButton;
+        private var newTradeButton_:MenuButton;
         private var category_:String = Marketplace.CATEGORY_ALL;
 
         public function MarketplaceContainerUI(gs:GameSprite) {
@@ -32,8 +32,8 @@ package game.marketplace {
             graphics.drawRect(0, 0, MarketplaceLayout.STAGE_WIDTH, MarketplaceLayout.STAGE_HEIGHT);
             graphics.endFill();
             this.showMarketplace();
-            this.closeButton_ = new _H_o("close", 36, false);
-            this.newTradeButton_ = new _H_o("create", 22, false);
+            this.closeButton_ = new MenuButton("close", 36, false);
+            this.newTradeButton_ = new MenuButton("create", 22, false);
             this.closeButton_.addEventListener(MouseEvent.CLICK, this.onCloseClick);
             this.newTradeButton_.addEventListener(MouseEvent.CLICK, this.onNewTradeClick);
             addChild(this.closeButton_);

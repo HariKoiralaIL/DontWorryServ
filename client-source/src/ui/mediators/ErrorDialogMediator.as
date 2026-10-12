@@ -1,5 +1,5 @@
 package ui.mediators {
-import _F_1.CurrentCharacterScreen;
+import client.ui.screens.CurrentCharacterScreen;
 
 import flash.events.Event;
 

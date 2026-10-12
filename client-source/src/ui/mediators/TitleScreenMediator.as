@@ -1,9 +1,9 @@
 package ui.mediators {
-import _F_1.CurrentCharacterScreen;
-import _F_1._01_;
-import _F_1._0H_h;
-import _F_1._3V_;
-import _F_1._C_Q_;
+import client.ui.screens.CurrentCharacterScreen;
+import client.ui.screens.ServersScreen;
+import client.ui.screens.CreditsScreen;
+import client.ui.screens.LegendsScreen;
+import client.ui.screens.TitleScreen;
 
 import client.game.GameInitData;
 import client.signals.typed.GameInitSignal;
@@ -44,7 +44,7 @@ public class TitleScreenMediator extends Mediator {
             '<font color="#7777EE"><a href="http://bledixon.com/forums">http://bledixon.com/forums</a></font>.';
 
     [Inject]
-    public var view:_C_Q_;
+    public var view:TitleScreen;
     [Inject]
     public var serverList:ServerListState;
     [Inject]
@@ -53,12 +53,12 @@ public class TitleScreenMediator extends Mediator {
     public var gameInitSignal:GameInitSignal;
 
     override public function initialize():void {
-        this.view._ft.add(this.onButtonClicked);
+        this.view.buttonClicked.add(this.onButtonClicked);
         this.view.initialize(this.serverList.servers);
     }
 
     override public function destroy():void {
-        this.view._ft.remove(this.onButtonClicked);
+        this.view.buttonClicked.remove(this.onButtonClicked);
     }
 
     public function onButtonClicked(button:String):void {
@@ -67,16 +67,16 @@ public class TitleScreenMediator extends Mediator {
                 this.onPlay();
                 break;
             case Buttons.SERVERS:
-                this.showScreen(new _01_());
+                this.showScreen(new ServersScreen());
                 break;
             case Buttons.CREDITS:
-                this.showScreen(new _0H_h());
+                this.showScreen(new CreditsScreen());
                 break;
             case Buttons.ACCOUNT:
-                this.view._0j();
+                this.view.openAccountManagement();
                 break;
             case Buttons.LEGENDS:
-                this.showScreen(new _3V_());
+                this.showScreen(new LegendsScreen());
                 break;
             case Buttons.EDITOR:
                 this.showScreen(new MapEditorScreen());

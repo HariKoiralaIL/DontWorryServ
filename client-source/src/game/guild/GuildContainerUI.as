@@ -1,5 +1,5 @@
 package game.guild {
-    import _F_1._H_o;
+    import client.ui.screens.MenuButton;
 
     import client.events.ResultEvent;
 
@@ -18,7 +18,7 @@ package game.guild {
 
         private var gs_:GameSprite;
         private var memberList_:GuildMemberList;
-        private var continueButton_:_H_o;
+        private var continueButton_:MenuButton;
 
         public function GuildContainerUI(gs:GameSprite) {
             super();
@@ -28,7 +28,7 @@ package game.guild {
             graphics.drawRect(0, 0, 800, 600);
             graphics.endFill();
             this.showMemberList();
-            this.continueButton_ = new _H_o("continue", 36, false);
+            this.continueButton_ = new MenuButton("continue", 36, false);
             this.continueButton_.addEventListener(MouseEvent.CLICK, this.onContinueClick);
             addChild(this.continueButton_);
             addEventListener(Event.ADDED_TO_STAGE, this.onAddedToStage);

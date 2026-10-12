@@ -1,6 +1,6 @@
 package ui.mediators {
-import _F_1.CurrentCharacterScreen;
-import _F_1._0H_2;
+import client.ui.screens.CurrentCharacterScreen;
+import client.ui.screens.NewCharacterScreen;
 
 import client.game.GameInitData;
 import client.signals.typed.GameInitSignal;
@@ -17,7 +17,7 @@ import robotlegs.bender.bundles.mvcs.Mediator;
 public class NewCharacterScreenMediator extends Mediator {
 
     [Inject]
-    public var view:_0H_2;
+    public var view:NewCharacterScreen;
     [Inject]
     public var serverList:ServerListState;
     [Inject]

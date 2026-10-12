@@ -9,7 +9,7 @@ import client.events.ReconnectEvent;
 
 import robotlegs.bender.bundles.mvcs.Mediator;
 
-import _F_1.CurrentCharacterScreen;
+import client.ui.screens.CurrentCharacterScreen;
 
 import game.signals.SpriteSignal;
 import game.signals.NoArgSignal4;

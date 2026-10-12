@@ -2,7 +2,7 @@ package screencommands
 {
     import rootview.PlayAtMessage;
 
-    import _F_1._E_r;
+    import client.ui.screens.AccountLoadingScreen;
 
     import game.signals.SpriteSignal2;
 
@@ -24,7 +24,7 @@ package screencommands
 
         private function createInitialScreen():Sprite
         {
-            return this.domain.isAllowed() ? new _E_r() : new PlayAtMessage();
+            return this.domain.isAllowed() ? new AccountLoadingScreen() : new PlayAtMessage();
         }
     }
 }

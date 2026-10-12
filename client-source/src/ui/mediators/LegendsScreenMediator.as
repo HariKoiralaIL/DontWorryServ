@@ -1,8 +1,8 @@
 package ui.mediators {
-import _F_1.CurrentCharacterScreen;
-import _F_1._3V_;
-import _F_1._C_Q_;
-import _F_1._U_W_;
+import client.ui.screens.CurrentCharacterScreen;
+import client.ui.screens.LegendsScreen;
+import client.ui.screens.TitleScreen;
+import client.ui.screens.DeathScreen;
 
 import com.company.assembleegameclient.appengine._0B_u;
 import com.company.assembleegameclient.parameters.Parameters;
@@ -28,7 +28,7 @@ public class LegendsScreenMediator extends Mediator {
     private static const NO_CHARACTER:int = -1;
 
     [Inject]
-    public var view:_3V_;
+    public var view:LegendsScreen;
     [Inject]
     public var serverList:ServerListState;
     [Inject]
@@ -47,16 +47,16 @@ public class LegendsScreenMediator extends Mediator {
         this.appEngineClient.addEventListener(GenericDataEvent.GENERIC_DATA, this.onLegendsLoaded);
         this.appEngineClient.addEventListener(TextErrorEvent.TEXT_ERROR, this.onLoadError);
         this.view.close.add(this.onClose);
-        this.view._8m.add(this.onTimespanChanged);
-        this.view._T_c.add(this.onEntrySelected);
+        this.view.timespanSelected.add(this.onTimespanChanged);
+        this.view.characterSelected.add(this.onEntrySelected);
         this.loadLegends();
         this.view.initialize();
     }
 
     override public function destroy():void {
         this.view.close.remove(this.onClose);
-        this.view._8m.remove(this.onTimespanChanged);
-        this.view._T_c.remove(this.onEntrySelected);
+        this.view.timespanSelected.remove(this.onTimespanChanged);
+        this.view.characterSelected.remove(this.onEntrySelected);
     }
 
     private function onClose():void {
@@ -65,7 +65,7 @@ public class LegendsScreenMediator extends Mediator {
             this.reloadCharListSignal.dispatch();
             this.setScreenSignal.dispatch(new CurrentCharacterScreen());
         } else {
-            this.setScreenSignal.dispatch(new _C_Q_());
+            this.setScreenSignal.dispatch(new TitleScreen());
         }
     }
 
@@ -88,15 +88,15 @@ public class LegendsScreenMediator extends Mediator {
         this.deathRecord._sr = false;
         this.deathRecord._Z__ = accountId;
         this.deathRecord._J_u = charId;
-        this.setScreenSignal.dispatch(new _U_W_());
+        this.setScreenSignal.dispatch(new DeathScreen());
     }
 
     public function onLegendsLoaded(event:GenericDataEvent):void {
-        this.view._0d(XML(event.data));
+        this.view.showFameList(XML(event.data));
     }
 
     private function onLoadError(event:TextErrorEvent):void {
-        this.view._cC_(event.text);
+        this.view.onLoadError(event.text);
     }
 
 }
