@@ -6,11 +6,11 @@
 package com.company.assembleegameclient.objects {
 import mapoverlay.CharacterStatusText;
 
-import _0K_m.LevelUpEffect;
-import _0K_m._0H_T_;
-import _0K_m._4m;
-    import _0K_m._D_J_;
-    import _0K_m._I_b;
+import particleeffects.LevelUpEffect;
+import particleeffects.AuraEffect;
+import particleeffects.HealingEffect;
+    import particleeffects.EffectProperties;
+    import particleeffects.ParticleEffect;
 
     import account.Account;
 
@@ -145,7 +145,7 @@ import flash.utils.getTimer;
         this._uR_ = int(_arg1.MaxHitPoints.@max);
         this._dt = int(_arg1.MaxMagicPoints.@max);
         _qm = new Dictionary();
-        unusualEffects_ = new Vector.<_I_b>();
+        unusualEffects_ = new Vector.<ParticleEffect>();
     }
     public var accountId_:int = -1;
     public var credits_:int = 0;
@@ -209,7 +209,7 @@ import flash.utils.getTimer;
     protected var _ky:Number = 0;
     protected var _D_k:Point = null;
     protected var _W_V_:Number = 1;
-    protected var _nE_:_4m = null;
+    protected var _nE_:HealingEffect = null;
     protected var _0D_8:Merchant = null;
     private var _sd:BitmapData = null;
     private var _7U_:Boolean = true;
@@ -220,7 +220,7 @@ import flash.utils.getTimer;
     private var _K_Y_:GraphicsPath = null;
     private var prevEffect_:String = "";
     private var effString_:String = "";
-    private var unusualEffects_:Vector.<_I_b> = null;
+    private var unusualEffects_:Vector.<ParticleEffect> = null;
 
     override public function moveTo(_arg1:Number, _arg2:Number):Boolean {
         var _local3:Boolean = super.moveTo(_arg1, _arg2);
@@ -235,31 +235,31 @@ import flash.utils.getTimer;
         var _local6:int;
         if(prevEffect_ != effString_) {
             prevEffect_ = effString_;
-            for each(var _effect:_I_b in unusualEffects_) {
+            for each(var _effect:ParticleEffect in unusualEffects_) {
                 map_.removeObj(_effect.objectId_);
             }
-            this.unusualEffects_ = new Vector.<_I_b>();
+            this.unusualEffects_ = new Vector.<ParticleEffect>();
             var _effXML:XML = XML(this.effString_);
             if(_effXML.name() == "Effects") {
                 for each(var _childEff:XML in _effXML.children()) {
-                    var _newEff:_I_b = _I_b._Y_B_(new _D_J_(_childEff), this);
+                    var _newEff:ParticleEffect = ParticleEffect.fromProps(new EffectProperties(_childEff), this);
                     if(_newEff != null) {
                         this.unusualEffects_.push(_newEff);
                     }
                 }
             } else {
-                var _newEff:_I_b = _I_b._Y_B_(new _D_J_(XML(this.effString_)), this);
+                var _newEff:ParticleEffect = ParticleEffect.fromProps(new EffectProperties(XML(this.effString_)), this);
                 if(_newEff != null) {
                     this.unusualEffects_.push(_newEff);
                 }
             }
-            for each(var _effect:_I_b in unusualEffects_) {
+            for each(var _effect:ParticleEffect in unusualEffects_) {
                 map_.addObj(_effect, x_, y_);
             }
         }
         if (((_00c()) && (!(isPaused())))) {
             if (this._nE_ == null) {
-                this._nE_ = new _4m(this);
+                this._nE_ = new HealingEffect(this);
                 map_.addObj(this._nE_, x_, y_);
             }
         } else {
@@ -586,7 +586,7 @@ import flash.utils.getTimer;
     }
 
     public function _oK_():void {
-        map_.addObj(new _0H_T_(this, 0xFFFFFF), x_, y_);
+        map_.addObj(new AuraEffect(this, 0xFFFFFF), x_, y_);
     }
 
     public function _0I_I_(_arg1:int):void {

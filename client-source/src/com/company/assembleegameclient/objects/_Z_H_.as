@@ -10,7 +10,7 @@ import com.company.assembleegameclient.util._lJ_;
 
 import flash.utils.Dictionary;
 
-import _0K_m._D_J_;
+import particleeffects.EffectProperties;
 
 import com.company.assembleegameclient.util._J_H_;
 import com.company.assembleegameclient.appengine.RemoteTexture;
@@ -58,7 +58,7 @@ public class _Z_H_ {
     public var _07_:Vector.<_Z_H_> = null;
     public var _V_N_:Dictionary = null;
     public var _0Y_:int;
-    public var _0L_G_:_D_J_ = null;
+    public var _0L_G_:EffectProperties = null;
 
     public function getTexture(_arg1:int = 0):BitmapData {
         if (this._07_ == null) {
@@ -87,7 +87,7 @@ public class _Z_H_ {
                 this.mask_ = AssetLibrary._xK_(String(_arg1.File), int(_arg1.Index));
                 return;
             case "Effect":
-                this._0L_G_ = new _D_J_(_arg1);
+                this._0L_G_ = new EffectProperties(_arg1);
                 return;
             case "AnimatedTexture":
                 this._yN_ = _0B_c._J_v(String(_arg1.File), int(_arg1.Index));

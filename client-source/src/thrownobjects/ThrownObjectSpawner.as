@@ -1,12 +1,12 @@
 package thrownobjects {
-import _0K_m._I_b;
+import particleeffects.ParticleEffect;
 
 import flash.geom.Point;
 
 // Formerly _pz. A one-shot effect: on its first update it spawns a ThrownObject
 // travelling from start to end, then removes itself (update returns false).
 // (Not to be confused with _0K_m.ThrowEffect, which is a different class.)
-public class ThrownObjectSpawner extends _I_b {
+public class ThrownObjectSpawner extends ParticleEffect {
 
     private static const FLIGHT_TIME_MS:int = 1500;
 

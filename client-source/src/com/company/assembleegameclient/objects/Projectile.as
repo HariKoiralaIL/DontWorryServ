@@ -28,8 +28,8 @@ import flash.geom.Point;
 import flash.geom.Vector3D;
 import flash.utils.Dictionary;
 
-import _0K_m.HitEffect;
-import _0K_m._06s;
+import particleeffects.HitEffect;
+import particleeffects.SparkParticle;
 
 
 public class Projectile extends BasicObject {
@@ -226,9 +226,9 @@ public class Projectile extends BasicObject {
         this._ey.draw(_arg1, this._08V_, (((this.angle_ - _arg2.angleRad_) + this.props_._g_) + _local5), _arg2.wToS_, _arg2, _local4);
         if (this._ko._H_i) {
           if (!Parameters.data_["disableParticles"]) {
-            map_.addObj(new _06s(100, this._ko.trailColor_, 600, 0.5, _04d._F_e(3), _04d._F_e(3)), x_, y_);
-            map_.addObj(new _06s(100, this._ko.trailColor_, 600, 0.5, _04d._F_e(3), _04d._F_e(3)), x_, y_);
-            map_.addObj(new _06s(100, this._ko.trailColor_, 600, 0.5, _04d._F_e(3), _04d._F_e(3)), x_, y_);
+            map_.addObj(new SparkParticle(100, this._ko.trailColor_, 600, 0.5, _04d._F_e(3), _04d._F_e(3)), x_, y_);
+            map_.addObj(new SparkParticle(100, this._ko.trailColor_, 600, 0.5, _04d._F_e(3), _04d._F_e(3)), x_, y_);
+            map_.addObj(new SparkParticle(100, this._ko.trailColor_, 600, 0.5, _04d._F_e(3), _04d._F_e(3)), x_, y_);
           }
         }
     }

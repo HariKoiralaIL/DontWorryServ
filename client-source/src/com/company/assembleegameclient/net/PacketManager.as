@@ -87,22 +87,22 @@ package com.company.assembleegameclient.net {
   import client.ui.frames.ItemResultBox;
   import client.ui.frames.TextInputForm;
 
-  import _0K_m.*;
-  import _0K_m.FlowEffect;
-  import _0K_m.StreamEffect;
-  import _0K_m.TeleportEffect;
-  import _0K_m.ThrowEffect;
-  import _0K_m._040;
-  import _0K_m._0H_T_;
-  import _0K_m._0I_o;
-  import _0K_m._0S_;
-  import _0K_m._9h;
-  import _0K_m._C_e;
-  import _0K_m._I_b;
-  import _0K_m._Q_s;
-  import _0K_m._l2;
-  import _0K_m._mn;
-  import _0K_m._pK_;
+  import particleeffects.*;
+  import particleeffects.FlowEffect;
+  import particleeffects.StreamEffect;
+  import particleeffects.TeleportEffect;
+  import particleeffects.ThrowEffect;
+  import particleeffects.RingEffect;
+  import particleeffects.AuraEffect;
+  import particleeffects.LineEffect;
+  import particleeffects.CollapseEffect;
+  import particleeffects.LightningEffect;
+  import particleeffects.BurstEffect;
+  import particleeffects.ParticleEffect;
+  import particleeffects.NovaEffect;
+  import particleeffects.SparkEffect;
+  import particleeffects.ConeBlastEffect;
+  import particleeffects.AoeEffect;
 
   import game.dialogs.NotEnoughGoldDialog;
   import game.dialogs.NotEnoughFameDialog;
@@ -990,7 +990,7 @@ package com.company.assembleegameclient.net {
 
     private function _V_z(_arg1:ShowEffect):void {
       var _local3:GameObject;
-      var _local4:_I_b;
+      var _local4:ParticleEffect;
       var _local5:Point;
       var _local6:Point;
       var _local2:_X_l = this.gs_.map_;
@@ -998,7 +998,7 @@ package com.company.assembleegameclient.net {
         case ShowEffect._x0:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           if (_local3 == null) break;
-          _local2.addObj(new _0H_T_(_local3, _arg1.color_), _local3.x_, _local3.y_);
+          _local2.addObj(new AuraEffect(_local3, _arg1.color_), _local3.x_, _local3.y_);
           return;
         case ShowEffect._0A_T_:
           _local2.addObj(new TeleportEffect(), _arg1.pos1_.x_, _arg1.pos1_.y_);
@@ -1016,25 +1016,25 @@ package com.company.assembleegameclient.net {
         case ShowEffect._e8:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           if (_local3 == null) break;
-          _local4 = new _Q_s(_local3, _arg1.pos1_.x_, _arg1.color_);
+          _local4 = new NovaEffect(_local3, _arg1.pos1_.x_, _arg1.color_);
           _local2.addObj(_local4, _local3.x_, _local3.y_);
           return;
         case ShowEffect._X_k:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           if (_local3 == null) break;
-          _local4 = new _l2(_local3, _arg1.color_);
+          _local4 = new SparkEffect(_local3, _arg1.color_);
           _local2.addObj(_local4, _local3.x_, _local3.y_);
           return;
         case ShowEffect._4C_:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           if (_local3 == null) break;
-          _local4 = new _0I_o(_local3, _arg1.pos1_, _arg1.color_);
+          _local4 = new LineEffect(_local3, _arg1.pos1_, _arg1.color_);
           _local2.addObj(_local4, _arg1.pos1_.x_, _arg1.pos1_.y_);
           return;
         case ShowEffect._each_:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           if (_local3 == null) break;
-          _local4 = new _C_e(_local3, _arg1.pos1_, _arg1.pos2_, _arg1.color_);
+          _local4 = new BurstEffect(_local3, _arg1.pos1_, _arg1.pos2_, _arg1.color_);
           _local2.addObj(_local4, _arg1.pos1_.x_, _arg1.pos1_.y_);
           return;
         case ShowEffect._ow:
@@ -1046,25 +1046,25 @@ package com.company.assembleegameclient.net {
         case ShowEffect._010:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           if (_local3 == null) break;
-          _local4 = new _040(_local3, _arg1.pos1_.x_, _arg1.color_);
+          _local4 = new RingEffect(_local3, _arg1.pos1_.x_, _arg1.color_);
           _local2.addObj(_local4, _local3.x_, _local3.y_);
           return;
         case ShowEffect._eY_:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           if (_local3 == null) break;
-          _local4 = new _9h(_local3, _arg1.pos1_, _arg1.color_, _arg1.pos2_.x_);
+          _local4 = new LightningEffect(_local3, _arg1.pos1_, _arg1.color_, _arg1.pos2_.x_);
           _local2.addObj(_local4, _local3.x_, _local3.y_);
           return;
         case ShowEffect._dP_:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           if (_local3 == null) break;
-          _local4 = new _0S_(_local3, _arg1.pos1_, _arg1.pos2_, _arg1.color_);
+          _local4 = new CollapseEffect(_local3, _arg1.pos1_, _arg1.pos2_, _arg1.color_);
           _local2.addObj(_local4, _arg1.pos1_.x_, _arg1.pos1_.y_);
           return;
         case ShowEffect._L_3:
           _local3 = _local2.goDict_[_arg1.targetObjectId_];
           if (_local3 == null) break;
-          _local4 = new _mn(_local3, _arg1.pos1_, _arg1.pos2_.x_, _arg1.color_);
+          _local4 = new ConeBlastEffect(_local3, _arg1.pos1_, _arg1.pos2_.x_, _arg1.color_);
           _local2.addObj(_local4, _local3.x_, _local3.y_);
           return;
         case ShowEffect._Z_u:
@@ -1567,7 +1567,7 @@ package com.company.assembleegameclient.net {
         this._H_q(this.gs_.lastUpdate_, 0, 0);
         return;
       }
-      var _local3:_pK_ = new _pK_(_arg1.pos_._6g(), _arg1.radius_, 0xFF0000);
+      var _local3:AoeEffect = new AoeEffect(_arg1.pos_._6g(), _arg1.radius_, 0xFF0000);
       this.gs_.map_.addObj(_local3, _arg1.pos_.x_, _arg1.pos_.y_);
       if (((_local2._0C_4()) || (_local2.isPaused()))) {
         this._H_q(this.gs_.lastUpdate_, _local2.x_, _local2.y_);

@@ -43,9 +43,9 @@ import flash.utils.getTimer;
 
 import mapoverlay.CharacterStatusText;
 
-import _0K_m.ExplosionEffect;
-import _0K_m.HitEffect;
-import _0K_m._I_b;
+import particleeffects.ExplosionEffect;
+import particleeffects.HitEffect;
+import particleeffects.ParticleEffect;
 
 import spriteanimation.Animations;
 import spriteanimation.AnimationsData;
@@ -101,7 +101,7 @@ public class GameObject extends BasicObject {
         this._yN_ = _local2._yN_;
         this._07_ = _local2._07_;
         if (_local2._0L_G_ != null) {
-            this.effect_ = _I_b._Y_B_(_local2._0L_G_, this);
+            this.effect_ = ParticleEffect.fromProps(_local2._0L_G_, this);
         }
         if (this.texture_ != null) {
             this._dE_ = (this.texture_.height / 8);
@@ -155,7 +155,7 @@ public class GameObject extends BasicObject {
     public var mask_:BitmapData = null;
     public var _07_:Vector.<_Z_H_> = null;
     public var _8J_:_uZ_ = null;
-    public var effect_:_I_b = null;
+    public var effect_:ParticleEffect = null;
     public var _09e:Animations = null;
     public var _aE_:Boolean = false;
     public var maxHP_:int = 200;
@@ -412,7 +412,7 @@ public class GameObject extends BasicObject {
             this.effect_ = null;
         }
         if (_local3._0L_G_ != null) {
-            this.effect_ = _I_b._Y_B_(_local3._0L_G_, this);
+            this.effect_ = ParticleEffect.fromProps(_local3._0L_G_, this);
             if (map_ != null) {
                 map_.addObj(this.effect_, x_, y_);
             }
