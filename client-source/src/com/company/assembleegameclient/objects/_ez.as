@@ -72,14 +72,14 @@ public class _ez {
     public function lockPlayer(_arg1:Player):void {
         this.starred_[_arg1.accountId_] = 1;
         this.lastUpdate_ = int.MIN_VALUE;
-        this.map_.gs_.gsc_._eH_(0, true, _arg1.objectId_);
+        this.map_.gs_.gsc_.editAccountList(0, true, _arg1.objectId_);
     }
 
     public function unlockPlayer(_arg1:Player):void {
         delete this.starred_[_arg1.accountId_];
         _arg1.starred_ = false;
         this.lastUpdate_ = int.MIN_VALUE;
-        this.map_.gs_.gsc_._eH_(0, false, _arg1.objectId_);
+        this.map_.gs_.gsc_.editAccountList(0, false, _arg1.objectId_);
     }
 
     public function setStars(_arg1:AccountList):void {
@@ -96,14 +96,14 @@ public class _ez {
     public function ignorePlayer(_arg1:Player):void {
         this._0M_w[_arg1.accountId_] = 1;
         this.lastUpdate_ = int.MIN_VALUE;
-        this.map_.gs_.gsc_._eH_(1, true, _arg1.objectId_);
+        this.map_.gs_.gsc_.editAccountList(1, true, _arg1.objectId_);
     }
 
     public function unignorePlayer(_arg1:Player):void {
         delete this._0M_w[_arg1.accountId_];
         _arg1._0M_w = false;
         this.lastUpdate_ = int.MIN_VALUE;
-        this.map_.gs_.gsc_._eH_(1, false, _arg1.objectId_);
+        this.map_.gs_.gsc_.editAccountList(1, false, _arg1.objectId_);
     }
 
     public function setIgnores(_arg1:AccountList):void {

@@ -316,7 +316,7 @@ package com.company.assembleegameclient.ui {
     }
 
     private function _Q_C_(_arg1:MouseEvent):void {
-      this.gs_.gsc_._M_6();
+      this.gs_.gsc_.escape();
       //GA.global().trackEvent("enterPortal", "Nexus Button");
       Parameters.data_.needsRandomRealm = false;
       Parameters.save();

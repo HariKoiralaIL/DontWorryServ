@@ -10,7 +10,7 @@ import client.events.MoneyChangedEvent;
 import com.company.assembleegameclient.appengine.AppEngineClient;
 import com.company.assembleegameclient.appengine.CharListEvent;
 import com.company.assembleegameclient.map.GameMap;
-import com.company.assembleegameclient.net.PacketManager;
+import com.company.assembleegameclient.net.GameServerClient;
 import com.company.assembleegameclient.net.Server;
 import com.company.assembleegameclient.net.messages.incoming.MapInfo;
 import com.company.assembleegameclient.objects.Player;
@@ -72,7 +72,7 @@ public class GameSprite extends BaseGameSprite {
         this.charList_ = charList;
         this.map_ = new GameMap(this);
         addChild(this.map_);
-        this.gsc_ = new PacketManager(this, server, gameId, createCharacter, charId, keyTime, keyBytes, mapJSON);
+        this.gsc_ = new GameServerClient(this, server, gameId, createCharacter, charId, keyTime, keyBytes, mapJSON);
         this.mui_ = new GameInputHandler(this);
         this.textBox_ = new ui_chat(this, 600, 600);
         addChild(this.textBox_);
@@ -229,7 +229,7 @@ public class GameSprite extends BaseGameSprite {
         }
         this.isOnStage = false;
         this.idleWatcher_.stop();
-        this.gsc_._08.disconnect();
+        this.gsc_.connection_.disconnect();
         SingletonSignal.instance.dispatch();
         stage.removeEventListener(MoneyChangedEvent.MONEY_CHANGED, this.onMoneyChanged);
         stage.removeEventListener(Event.ENTER_FRAME, this.onEnterFrame);
@@ -377,7 +377,7 @@ public class GameSprite extends BaseGameSprite {
     }
 
     private function onMoneyChanged(event:Event):void {
-        this.gsc_._0J_l();
+        this.gsc_.checkCredits();
     }
 
     private function onEnterFrame(event:Event):void {

@@ -35,7 +35,7 @@ public class CreateGuildFrame extends Frame {
 
     private function onCreate(_arg1:MouseEvent):void {
         this.gs_.addEventListener(ResultEvent.GUILD_RESULT, this.onGuildResult);
-        this.gs_.gsc_._S_W_(this.name_.text());
+        this.gs_.gsc_.createGuild(this.name_.text());
         disableInput();
     }
 

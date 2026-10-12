@@ -100,17 +100,17 @@ public class _zg extends Sprite {
     }
 
     private function _E_u(_arg1:Event):void {
-        this.gs_.gsc_._rQ_(this._rl._ao());
+        this.gs_.gsc_.changeTrade(this._rl._ao());
         this._55();
     }
 
     private function _0G_U_(_arg1:MouseEvent):void {
-        this.gs_.gsc_.__set();
+        this.gs_.gsc_.cancelTrade();
         dispatchEvent(new Event(Event.CANCEL));
     }
 
     private function _nk(_arg1:MouseEvent):void {
-        this.gs_.gsc_._E_i(this._rl._ao(), this._8F_._ao());
+        this.gs_.gsc_.acceptTrade(this._rl._ao(), this._8F_._ao());
         this._rl._07t(_eb._Q_p);
     }
 

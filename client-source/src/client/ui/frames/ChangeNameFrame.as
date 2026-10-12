@@ -61,7 +61,7 @@ public class ChangeNameFrame extends Frame {
 
     private function onChoose(_arg1:MouseEvent):void {
         this.gs_.addEventListener(NameResultEvent.NAMERESULTEVENT, this.onNameResult);
-        this.gs_.gsc_._K_Q_(this.name_.text());
+        this.gs_.gsc_.chooseName(this.name_.text());
         disableInput();
     }
 

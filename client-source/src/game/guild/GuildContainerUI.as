@@ -65,7 +65,7 @@ package game.guild {
         private function onSetRank(e:GuildMemberEvent):void {
             this.removeMemberList();
             this.gs_.addEventListener(ResultEvent.GUILD_RESULT, this.onGuildResult);
-            this.gs_.gsc_._k8(e.name_, e.rank_);
+            this.gs_.gsc_.changeGuildRank(e.name_, e.rank_);
         }
 
         private function onRemoveMember(e:GuildMemberEvent):void {

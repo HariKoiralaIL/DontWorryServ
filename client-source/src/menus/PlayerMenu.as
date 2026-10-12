@@ -84,7 +84,7 @@ package menus
 
         private function onInvite(event:Event):void
         {
-            this.gs_.gsc_._H_X_(this.playerName_);
+            this.gs_.gsc_.guildInvite(this.playerName_);
             remove();
         }
 

@@ -140,13 +140,13 @@ public class GameInputHandler {
     private function togglePerformanceStats():void {
         if (this.gs_.contains(stats)) {
             this.gs_.removeChild(stats);
-            this.gs_.removeChild(this.gs_.gsc_._0l);
-            this.gs_.gsc_._rT_();
+            this.gs_.removeChild(this.gs_.gsc_.jitterDisplay_);
+            this.gs_.gsc_.destroyJitterDisplay();
         } else {
             this.gs_.addChild(stats);
-            this.gs_.gsc_._9G_();
-            this.gs_.gsc_._0l.y = stats.height;
-            this.gs_.addChild(this.gs_.gsc_._0l);
+            this.gs_.gsc_.createJitterDisplay();
+            this.gs_.gsc_.jitterDisplay_.y = stats.height;
+            this.gs_.addChild(this.gs_.gsc_.jitterDisplay_);
         }
     }
 
@@ -320,7 +320,7 @@ public class GameInputHandler {
                 break;
             case Parameters.data_.escapeToNexus:
             case Parameters.data_.escapeToNexus2:
-                this.gs_.gsc_._M_6();
+                this.gs_.gsc_.escape();
                 Parameters.data_.needsRandomRealm = false;
                 Parameters.save();
                 break;

@@ -4,7 +4,7 @@
 //com.company.assembleegameclient.ui._E_6
 
 package com.company.assembleegameclient.ui {
-import com.company.assembleegameclient.net.PacketManager;
+import com.company.assembleegameclient.net.GameServerClient;
 import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.assembleegameclient.objects.Player;
 import com.company.assembleegameclient.parameters.Parameters;
@@ -366,7 +366,7 @@ public class _E_6 extends Slot {
 
     private function _0A_v(_arg1:_E_6):void {
         var _local2:int = _arg1._e9.gs_.lastUpdate_;
-        var _local3:PacketManager = this._gw();
+        var _local3:GameServerClient = this._gw();
         var _local4:Player = this._v5();
         //_local3.invSwap(_local2, _local4.x_, _local4.y_, this._e9._iA_.objectId_, this.id_, this.objectType_, _arg1._e9._iA_.objectId_, _arg1.id_, _arg1.objectType_);
         _local3.invSwap(_local4, this._e9._iA_, this.id_, this.objectType_, _arg1._e9._iA_, _arg1.id_, _arg1.objectType_);
@@ -374,7 +374,7 @@ public class _E_6 extends Slot {
         this._X_6();
     }
 
-    private function _gw():PacketManager {
+    private function _gw():GameServerClient {
         return (this._e9.gs_.gsc_);
     }
 

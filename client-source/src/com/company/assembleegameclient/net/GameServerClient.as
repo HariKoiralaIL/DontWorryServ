@@ -692,25 +692,25 @@ public class GameServerClient {
 
     private function onConnect(e:Event):void {
         this.gs_.textBox_.addText(Parameters.SendClient, "Enjoy your Stay!");
-        var account:Account = Account.getInstance();
+        var acc:Account = Account.getInstance();
         var hello:Hello = this.connection_.acquireMessage(HELLO) as Hello;
         hello.copyright_ = HELLO_COPYRIGHT;
         hello._5c2_ = HELLO_HOST;
         hello.buildVersion_ = Parameters.clientVersion;
         hello.gameId_ = this.gameId_;
-        hello.guid_ = this.rsaEncrypt(account.guid());
-        hello.password_ = this.rsaEncrypt(account.password());
-        hello.secret_ = this.rsaEncrypt(account.secret());
+        hello.guid_ = this.rsaEncrypt(acc.guid());
+        hello.password_ = this.rsaEncrypt(acc.password());
+        hello.secret_ = this.rsaEncrypt(acc.secret());
         hello.keyTime_ = this.keyTime_;
         hello.key_.length = 0;
         if (this.key_ != null) {
             hello.key_.writeBytes(this.key_);
         }
         hello.mapJSON_ = this.mapJSON_ == null ? "" : this.mapJSON_;
-        hello._8U_ = account.entrytag();
-        hello._yt = account.gameNetwork();
-        hello._J_k = account.gameNetworkUserId();
-        hello.playPlatform = account.playPlatform();
+        hello._8U_ = acc.entrytag();
+        hello._yt = acc.gameNetwork();
+        hello._J_k = acc.gameNetworkUserId();
+        hello.playPlatform = acc.playPlatform();
         this.connection_.sendMessage(hello);
     }
 

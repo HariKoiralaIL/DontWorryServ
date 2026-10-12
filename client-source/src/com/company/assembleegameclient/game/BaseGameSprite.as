@@ -1,7 +1,7 @@
 package com.company.assembleegameclient.game {
 
 import com.company.assembleegameclient.map.GameCamera;
-import com.company.assembleegameclient.net.PacketManager;
+import com.company.assembleegameclient.net.GameServerClient;
 import com.company.assembleegameclient.net.messages.incoming.MapInfo;
 import com.company.assembleegameclient.objects.GameObject;
 import com.company.assembleegameclient.tutorial.Tutorial;
@@ -20,7 +20,7 @@ public class BaseGameSprite extends Sprite {
     public var lastUpdate_:int = 0;
     public var moveRecords_:MoveRecords;
     public var camera_:GameCamera;
-    public var gsc_:PacketManager;
+    public var gsc_:GameServerClient;
 
     public function BaseGameSprite() {
         super();

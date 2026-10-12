@@ -144,7 +144,7 @@ public class ui_items extends Sprite {
                 }
             }
         }
-        this._03f._e9.gs_.gsc_._8q(this._03f._e9._iA_.objectId_, this._03f.id_, this._0M_X_);
+        this._03f._e9.gs_.gsc_.invDrop(this._03f._e9._iA_.objectId_, this._03f.id_, this._0M_X_);
     }
 
     private function _0K_9():void {

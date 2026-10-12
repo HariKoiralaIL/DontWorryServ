@@ -166,7 +166,7 @@ public class CharListEvent extends Event {
         var bestDistance:Number = Number.MAX_VALUE;
         var bestPriority:int = int.MAX_VALUE;
         for each (var server:Server in this.servers_) {
-            if (server._02s() && !this.isAdmin_) {
+            if (server.isFull() && !this.isAdmin_) {
                 continue;
             }
             if (server.name_ == Parameters.data_.preferredServer) {

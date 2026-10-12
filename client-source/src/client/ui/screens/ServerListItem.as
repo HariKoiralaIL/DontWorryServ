@@ -52,10 +52,10 @@ public class ServerListItem extends Sprite {
     private function buildStatus(server:Server):void {
         var color:uint = COLOR_NORMAL;
         var label:String = "Normal";
-        if (server._02s()) {
+        if (server.isFull()) {
             color = COLOR_FULL;
             label = "Full";
-        } else if (server._0J_m()) {
+        } else if (server.isCrowded()) {
             color = COLOR_CROWDED;
             label = "Crowded";
         }
