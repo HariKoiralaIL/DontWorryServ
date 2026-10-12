@@ -15,7 +15,7 @@ import account.AccountTextEvent;
 
 import signals.Signal;
 
-import _zD_._xF_;
+import ui.mediators.CurrentCharacterScreenMediator;
 
 import com.company.assembleegameclient.appengine.Server_list;
 import com.company.assembleegameclient.ui._0G_h;

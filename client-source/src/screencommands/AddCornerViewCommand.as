@@ -1,6 +1,6 @@
 package screencommands
 {
-    import _zD_._Y_w;
+    import ui.mediators.KeyPanel;
 
     import flash.display.DisplayObjectContainer;
 
@@ -11,7 +11,7 @@ package screencommands
 
         public function execute():void
         {
-            var view:_Y_w = new _Y_w();
+            var view:KeyPanel = new KeyPanel();
             view.x = 4;
             view.y = 4;
             this.contextView.addChild(view);

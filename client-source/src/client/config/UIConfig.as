@@ -33,28 +33,28 @@ import _F_1._U_W_;
 import _F_1._0B_m;
 import _F_1._02a;
 
-import _zD_._0D_h;
-import _zD_._uf;
-import _zD_._N_N_;
-import _zD_._0F_Q_;
-import _zD_._xF_;
-import _zD_._V_M_;
-import _zD_.__for;
-import _zD_._fy;
-import _zD_._2H_;
-import _zD_._0D_L_;
-import _zD_._9M_;
-import _zD_._G_I_;
-import _zD_._1k;
-import _zD_._E_G_;
-import _zD_._09b;
-import _zD_.__else;
-import _zD_._Q_q;
-import _zD_._G_9;
-import _zD_._jT_;
-import _zD_._Y_w;
-import _zD_._yP_;
-import _zD_._B_9;
+import ui.mediators.HtmlTextMediator;
+import ui.mediators.BackToTitleMediator;
+import ui.mediators.ServersScreenMediator;
+import ui.mediators.CreditsScreenMediator;
+import ui.mediators.CurrentCharacterScreenMediator;
+import ui.mediators.TooltipScreenMediator;
+import ui.mediators.TitleScreenMediator;
+import ui.mediators.LegendsScreenMediator;
+import ui.mediators.NewCharacterScreenMediator;
+import ui.mediators.MapEditorScreenMediator;
+import ui.mediators.CurrentCharacterRectMediator;
+import ui.mediators.CharacterRectListMediator;
+import ui.mediators.BuyingCharSlotDialogMediator;
+import ui.mediators.ErrorDialogMediator;
+import ui.mediators.FameScreenMediator;
+import ui.mediators.AccountCharactersScreenMediator;
+import ui.mediators.DeleteCharacterConfirmationMediator;
+import ui.mediators.DeletingCharacterDialogMediator;
+import ui.mediators.MapLoadingScreenMediator;
+import ui.mediators.KeyPanel;
+import ui.mediators.KeyPanelMediator;
+import ui.mediators.InvTabsMediator;
 
 import mapeditor.MapEditorScreen;
 
@@ -90,25 +90,25 @@ public class UIConfig implements IConfig {
         this.signalCommandMap.map(DeathSignal).toCommand(ContinueAfterDeathCommand);
         this.signalCommandMap.map(SavedCharacterSignal2).toCommand(ShowCharacterOverlayCommand);
         this.signalCommandMap.map(SavedCharacterSignal).toCommand(ShowOverlayViewCommand);
-        this.mediatorMap.map(_zf).toMediator(_0D_h);
-        this.mediatorMap.map(_E_r).toMediator(_uf);
-        this.mediatorMap.map(_01_).toMediator(_N_N_);
-        this.mediatorMap.map(_0H_h).toMediator(_0F_Q_);
-        this.mediatorMap.map(CurrentCharacterScreen).toMediator(_xF_);
-        this.mediatorMap.map(_05p).toMediator(_V_M_);
-        this.mediatorMap.map(_C_Q_).toMediator(__for);
-        this.mediatorMap.map(_3V_).toMediator(_fy);
-        this.mediatorMap.map(_0H_2).toMediator(_2H_);
-        this.mediatorMap.map(MapEditorScreen).toMediator(_0D_L_);
-        this.mediatorMap.map(CurrentCharacterRect).toMediator(_9M_);
-        this.mediatorMap.map(CharacterRectList).toMediator(_G_I_);
-        this.mediatorMap.map(BuyingCharSlotDialog).toMediator(_1k);
-        this.mediatorMap.map(ErrorDialog).toMediator(_E_G_);
-        this.mediatorMap.map(_U_W_).toMediator(_09b);
-        this.mediatorMap.map(_0B_m).toMediator(__else);
-        this.mediatorMap.map(DeleteCharacterConfirmation).toMediator(_Q_q);
-        this.mediatorMap.map(DeletingCharacterDialog).toMediator(_G_9);
-        this.mediatorMap.map(_02a).toMediator(_jT_);
+        this.mediatorMap.map(_zf).toMediator(HtmlTextMediator);
+        this.mediatorMap.map(_E_r).toMediator(BackToTitleMediator);
+        this.mediatorMap.map(_01_).toMediator(ServersScreenMediator);
+        this.mediatorMap.map(_0H_h).toMediator(CreditsScreenMediator);
+        this.mediatorMap.map(CurrentCharacterScreen).toMediator(CurrentCharacterScreenMediator);
+        this.mediatorMap.map(_05p).toMediator(TooltipScreenMediator);
+        this.mediatorMap.map(_C_Q_).toMediator(TitleScreenMediator);
+        this.mediatorMap.map(_3V_).toMediator(LegendsScreenMediator);
+        this.mediatorMap.map(_0H_2).toMediator(NewCharacterScreenMediator);
+        this.mediatorMap.map(MapEditorScreen).toMediator(MapEditorScreenMediator);
+        this.mediatorMap.map(CurrentCharacterRect).toMediator(CurrentCharacterRectMediator);
+        this.mediatorMap.map(CharacterRectList).toMediator(CharacterRectListMediator);
+        this.mediatorMap.map(BuyingCharSlotDialog).toMediator(BuyingCharSlotDialogMediator);
+        this.mediatorMap.map(ErrorDialog).toMediator(ErrorDialogMediator);
+        this.mediatorMap.map(_U_W_).toMediator(FameScreenMediator);
+        this.mediatorMap.map(_0B_m).toMediator(AccountCharactersScreenMediator);
+        this.mediatorMap.map(DeleteCharacterConfirmation).toMediator(DeleteCharacterConfirmationMediator);
+        this.mediatorMap.map(DeletingCharacterDialog).toMediator(DeletingCharacterDialogMediator);
+        this.mediatorMap.map(_02a).toMediator(MapLoadingScreenMediator);
         this.configureAdditional();
     }
 
@@ -116,8 +116,8 @@ public class UIConfig implements IConfig {
         this.injector.map(DataSignalB).toValue(new DataSignalB());
         this.injector.map(DataSignalA).toValue(new DataSignalA());
         this.signalCommandMap.map(EmptySignal).toCommand(AddCornerViewCommand);
-        this.mediatorMap.map(_Y_w).toMediator(_yP_);
-        this.mediatorMap.map(InvTabs).toMediator(_B_9);
+        this.mediatorMap.map(KeyPanel).toMediator(KeyPanelMediator);
+        this.mediatorMap.map(InvTabs).toMediator(InvTabsMediator);
     }
 
 }
