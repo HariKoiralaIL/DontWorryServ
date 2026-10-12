@@ -1,42 +1,34 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.tutorial.Step
-
 package com.company.assembleegameclient.tutorial {
-
 
 public class Step {
 
-    public function Step(_arg1:XML) {
-        var _local2:XML;
-        var _local3:XML;
-        var _local4:XML;
-        this._0J_b = new Vector.<UIDrawBox>();
-        this._06F_ = new Vector.<UIDrawArrow>();
-        this._I_2 = new Vector.<Requirement>();
-        super();
-        for each (_local2 in _arg1.UIDrawBox) {
-            this._0J_b.push(new UIDrawBox(_local2));
-        }
-        for each (_local3 in _arg1.UIDrawArrow) {
-            this._06F_.push(new UIDrawArrow(_local3));
-        }
-        for each (_local4 in _arg1.Requirement) {
-            this._I_2.push(new Requirement(_local4));
-        }
-    }
     public var text_:String;
     public var action_:String;
-    public var _0J_b:Vector.<UIDrawBox>;
-    public var _06F_:Vector.<UIDrawArrow>;
-    public var _I_2:Vector.<Requirement>;
-    public var _n:int = 0;
+    public var boxes_:Vector.<UIDrawBox>;
+    public var arrows_:Vector.<UIDrawArrow>;
+    public var requirements_:Vector.<Requirement>;
+    /** getTimer() value when all requirements were first met; 0 while unmet. */
+    public var startTime_:int = 0;
+
+    public function Step(xml:XML) {
+        this.boxes_ = new Vector.<UIDrawBox>();
+        this.arrows_ = new Vector.<UIDrawArrow>();
+        this.requirements_ = new Vector.<Requirement>();
+        super();
+        for each (var boxXml:XML in xml.UIDrawBox) {
+            this.boxes_.push(new UIDrawBox(boxXml));
+        }
+        for each (var arrowXml:XML in xml.UIDrawArrow) {
+            this.arrows_.push(new UIDrawArrow(arrowXml));
+        }
+        for each (var reqXml:XML in xml.Requirement) {
+            this.requirements_.push(new Requirement(reqXml));
+        }
+    }
 
     public function toString():String {
-        return ((("[" + this.text_) + "]"));
+        return "[" + this.text_ + "]";
     }
 
 }
-}//package com.company.assembleegameclient.tutorial
-
+}

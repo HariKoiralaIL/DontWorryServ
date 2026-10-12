@@ -53,7 +53,7 @@ public class PortalPanel extends Panel {
     }
 
     private function enterPortal():void {
-        doneAction(gs_, Tutorial._Y_5);
+        doneAction(gs_, Tutorial.ENTER_PORTAL);
         gs_.gsc_.usePortal(this.portal_.objectId_);
     }
 

@@ -1,16 +1,11 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.tutorial.doneAction
-
 package com.company.assembleegameclient.tutorial {
 import com.company.assembleegameclient.game.GameSprite;
 
-public function doneAction(_arg1:GameSprite, _arg2:String):void {
-    if (_arg1.tutorial_ == null) {
+/** Notifies the active tutorial (if any) that the player performed an action. */
+public function doneAction(gs:GameSprite, action:String):void {
+    if (gs.tutorial_ == null) {
         return;
     }
-    _arg1.tutorial_.doneAction(_arg2);
+    gs.tutorial_.doneAction(action);
 }
-}//package com.company.assembleegameclient.tutorial
-
+}

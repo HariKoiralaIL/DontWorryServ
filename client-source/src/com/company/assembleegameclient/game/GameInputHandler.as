@@ -210,7 +210,7 @@ public class GameInputHandler {
             player.useAltWeapon(event.localX, event.localY);
             return;
         }
-        doneAction(this.gs_, Tutorial._9Z_);
+        doneAction(this.gs_, Tutorial.ATTACK);
         player._O_7(Math.atan2(event.localY, event.localX)); // also handles the (Unstable) debuff
         this.mouseDown = true;
     }
@@ -245,7 +245,7 @@ public class GameInputHandler {
     }
 
     private function onEnterFrame(event:Event):void {
-        doneAction(this.gs_, Tutorial._xX_);
+        doneAction(this.gs_, Tutorial.UPDATE);
         if (this.inputEnabled && (this.mouseDown || this.autofire)) {
             var player:Player = this.gs_.map_.player_;
             if (player != null) {
@@ -264,29 +264,29 @@ public class GameInputHandler {
         var player:Player = this.gs_.map_.player_;
         switch (event.keyCode) {
             case Parameters.data_.moveUp:
-                doneAction(this.gs_, Tutorial._04m);
+                doneAction(this.gs_, Tutorial.MOVE_FORWARD);
                 this.moveUpHeld = true;
                 break;
             case Parameters.data_.moveDown:
-                doneAction(this.gs_, Tutorial._03b);
+                doneAction(this.gs_, Tutorial.MOVE_BACKWARD);
                 this.moveDownHeld = true;
                 break;
             case Parameters.data_.moveLeft:
-                doneAction(this.gs_, Tutorial._S_B_);
+                doneAction(this.gs_, Tutorial.MOVE_LEFT);
                 this.moveLeftHeld = true;
                 break;
             case Parameters.data_.moveRight:
-                doneAction(this.gs_, Tutorial._0A_j);
+                doneAction(this.gs_, Tutorial.MOVE_RIGHT);
                 this.moveRightHeld = true;
                 break;
             case Parameters.data_.rotateLeft:
                 if (!Parameters.data_.allowRotation) break;
-                doneAction(this.gs_, Tutorial._0B_d);
+                doneAction(this.gs_, Tutorial.ROTATE_LEFT);
                 this.rotateLeftHeld = true;
                 break;
             case Parameters.data_.rotateRight:
                 if (!Parameters.data_.allowRotation) break;
-                doneAction(this.gs_, Tutorial._95);
+                doneAction(this.gs_, Tutorial.ROTATE_RIGHT);
                 this.rotateRightHeld = true;
                 break;
             case Parameters.data_.resetToDefaultCameraAngle:

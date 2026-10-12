@@ -157,7 +157,7 @@ public class Projectile extends BasicObject {
                 if (_local6.HP_ <= _local8) {
                     _local9 = true;
                     if (_local6.props_.isEnemy_) {
-                        doneAction(map_.gs_, Tutorial._05O_);
+                        doneAction(map_.gs_, Tutorial.KILL);
                     }
                 }
                 if (_local6 == map_.player_) {

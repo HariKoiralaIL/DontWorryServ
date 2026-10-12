@@ -319,7 +319,7 @@ package com.company.assembleegameclient.ui {
                     if (this._bn.text.length != 0) {
                         if (((!(this._2T_(this._bn.text))) && (!((this.gs_.map_.player_ == null))))) {
                             this.gs_.gsc_.playerText(this._bn.text);
-                            doneAction(this.gs_, Tutorial._X_I_);
+                            doneAction(this.gs_, Tutorial.TEXT);
                         }
                         if (this.prevMsg[2] != null && this.prevMsg[3] != this.prevMsg[2] && this.prevMsg[2] != "") {
                             this.prevMsg[3] = this.prevMsg[2];

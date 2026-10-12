@@ -1015,7 +1015,7 @@ import flash.utils.getTimer;
         if (_local4 < (_W_J_ + this._y4)) {
             return;
         }
-        doneAction(map_.gs_, Tutorial._9Z_);
+        doneAction(map_.gs_, Tutorial.ATTACK);
         map_.gs_.gsc_.playerCheatCheck();
         _M_r = _arg1;
         _W_J_ = _local4;
