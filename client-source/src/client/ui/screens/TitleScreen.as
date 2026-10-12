@@ -79,7 +79,7 @@ public class TitleScreen extends BaseScreen {
     private function buildFooter():void {
         var prefix:String;
         if (Parameters.isTesting) {
-            prefix = (Parameters._I_O_() ? "Project B " : "");
+            prefix = (Parameters.isTestingDomain() ? "Project B " : "");
         } else {
             prefix = '<font color="#FF1493">DEVELOPMENT</font> ';
         }

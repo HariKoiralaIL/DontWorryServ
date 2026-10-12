@@ -13,7 +13,7 @@ public class CharacterClient extends AppEngineClient {
     private static const DELETE_REASON:int = 1;
 
     public function CharacterClient(maxRetries:int = 0) {
-        super(Parameters._fK_(), "/char", true, maxRetries);
+        super(Parameters.serverAddress(), "/char", true, maxRetries);
     }
 
     public function requestCharList():void {

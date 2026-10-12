@@ -71,7 +71,7 @@ package com.company.assembleegameclient.ui {
             this._bn.height = 18;
             mouseEnabled = false;
             mouseChildren = false;
-            this.addText(Parameters.SendClient, Parameters._02Q_());
+            this.addText(Parameters.SendClient, Parameters.buildLabel());
             addEventListener(Event.ADDED_TO_STAGE, this.onAddedToStage);
             addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
         }

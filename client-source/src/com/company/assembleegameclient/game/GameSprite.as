@@ -134,7 +134,7 @@ public class GameSprite extends BaseGameSprite {
             addChild(this.guildText_);
         }
         this.isNexus_ = (this.map_.name_ == "Nexus" || this.map_.name_ == "Shop" || this.map_.name_ == "Editor");
-        var logClient:AppEngineClient = new AppEngineClient(Parameters._fK_(), "/log", true, 0);
+        var logClient:AppEngineClient = new AppEngineClient(Parameters.serverAddress(), "/log", true, 0);
         var acct:Account = Account.getInstance();
         var logParams:Object = {
             "game_net_user_id": acct.gameNetworkUserId(),

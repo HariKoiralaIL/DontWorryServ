@@ -46,7 +46,7 @@ package client.ui.guild {
         private var editor:GuildBoardEditor;
 
         private function load():void {
-            this.request = new AppEngineClient(Parameters._fK_(), "/guild", true);
+            this.request = new AppEngineClient(Parameters.serverAddress(), "/guild", true);
             this.request.addEventListener(GenericDataEvent.GENERIC_DATA, this.onBoardLoaded);
             this.request.addEventListener(TextErrorEvent.TEXT_ERROR, this.onLoadError);
             this.request.sendRequest("getBoard", Account.getInstance().credentials());
@@ -97,7 +97,7 @@ package client.ui.guild {
         }
 
         private function onEditorSave(_arg1:Event):void {
-            this.request = new AppEngineClient(Parameters._fK_(), "/guild", true);
+            this.request = new AppEngineClient(Parameters.serverAddress(), "/guild", true);
             this.request.addEventListener(GenericDataEvent.GENERIC_DATA, this.onBoardSaved);
             this.request.addEventListener(TextErrorEvent.TEXT_ERROR, this.onSaveError);
             var _local2:Object = {"board": this.editor.getText()};

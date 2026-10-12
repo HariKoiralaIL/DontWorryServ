@@ -54,7 +54,7 @@ internal class SignInFrame extends Frame {
             passwordInput.setError("Password too short");
             return;
         }
-        var request:AppEngineClient = new AppEngineClient(Parameters._fK_(), "/account", true);
+        var request:AppEngineClient = new AppEngineClient(Parameters.serverAddress(), "/account", true);
         request.addEventListener(GenericDataEvent.GENERIC_DATA, onSignInSuccess);
         request.addEventListener(TextErrorEvent.TEXT_ERROR, onSignInError);
         request.sendRequest("verify", {

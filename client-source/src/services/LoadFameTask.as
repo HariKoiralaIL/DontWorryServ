@@ -45,7 +45,7 @@ public class LoadFameTask extends Task {
     }
 
     private function requestFame():void {
-        this.client = new AppEngineClient(Parameters._fK_(), "/char", true);
+        this.client = new AppEngineClient(Parameters.serverAddress(), "/char", true);
         this.client.addEventListener(GenericDataEvent.GENERIC_DATA, this.handleDataLoaded);
         this.client.addEventListener(TextErrorEvent.TEXT_ERROR, this.handleError);
         this.client.sendRequest("fame", this.createRequestParams());

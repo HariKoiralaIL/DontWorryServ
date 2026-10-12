@@ -207,7 +207,7 @@ public class LoadPictureDialog extends Sprite {
     }
 
     private function search(offset:int):void {
-        var request:AppEngineClient = new AppEngineClient(Parameters._fK_(), PICTURE_PATH, false);
+        var request:AppEngineClient = new AppEngineClient(Parameters.serverAddress(), PICTURE_PATH, false);
         request.addEventListener(GenericDataEvent.GENERIC_DATA, this.onSearchResults);
         request.addEventListener(TextErrorEvent.TEXT_ERROR, this.onSearchError);
         var params:Object = {};
@@ -358,7 +358,7 @@ public class LoadPictureDialog extends Sprite {
         var dialog:DeletePictureConfirmDialog = (event.target as DeletePictureConfirmDialog);
         dialog.parent.removeChild(dialog);
         this.pictureGrid.visible = false;
-        var request:AppEngineClient = new AppEngineClient(Parameters._fK_(), PICTURE_PATH, false);
+        var request:AppEngineClient = new AppEngineClient(Parameters.serverAddress(), PICTURE_PATH, false);
         request.addEventListener(GenericDataEvent.GENERIC_DATA, this.onDeleteComplete);
         var params:Object = {"id": dialog.pictureId.toString()};
         _H_U_._t2(params, Account.getInstance().credentials());

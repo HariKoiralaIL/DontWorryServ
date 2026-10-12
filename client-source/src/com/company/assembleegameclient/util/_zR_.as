@@ -52,7 +52,7 @@ public class _zR_ {
                 _local4["paymentid"] = this._iV_;
                 break;
         }
-        return (((("http://" + Parameters._fK_()) + "/credits/add?") + _local4.toString()));
+        return (((("http://" + Parameters.serverAddress()) + "/credits/add?") + _local4.toString()));
     }
 
 }

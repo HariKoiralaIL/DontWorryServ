@@ -42,7 +42,7 @@ internal class ForgotPasswordFrame extends Frame {
             emailInput.setError("Not a valid email address");
             return;
         }
-        var request:AppEngineClient = new AppEngineClient(Parameters._fK_(), "/account", true);
+        var request:AppEngineClient = new AppEngineClient(Parameters.serverAddress(), "/account", true);
         request.addEventListener(GenericDataEvent.GENERIC_DATA, onSent);
         request.addEventListener(TextErrorEvent.TEXT_ERROR, onError);
         request.sendRequest("forgotPassword", {"email": emailInput.text()});

@@ -60,7 +60,7 @@ package game.guild {
             this.loadingText_.y = ((STAGE_HEIGHT / 2) - (this.loadingText_.height / 2));
             addChild(this.loadingText_);
 
-            this.request_ = new AppEngineClient(Parameters._fK_(), "/guild", true, 2);
+            this.request_ = new AppEngineClient(Parameters.serverAddress(), "/guild", true, 2);
             var params:Object = {
                 "num": count,
                 "offset": offset

@@ -43,7 +43,7 @@ public class LegendsScreenMediator extends Mediator {
 
     override public function initialize():void {
         this.timespan = DEFAULT_TIMESPAN;
-        this.appEngineClient = new AppEngineClient(Parameters._fK_(), "/fame", true, 2);
+        this.appEngineClient = new AppEngineClient(Parameters.serverAddress(), "/fame", true, 2);
         this.appEngineClient.addEventListener(GenericDataEvent.GENERIC_DATA, this.onLegendsLoaded);
         this.appEngineClient.addEventListener(TextErrorEvent.TEXT_ERROR, this.onLoadError);
         this.view.close.add(this.onClose);

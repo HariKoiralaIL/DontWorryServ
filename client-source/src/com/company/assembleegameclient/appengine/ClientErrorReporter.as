@@ -26,11 +26,11 @@ public class ClientErrorReporter {
             return;
         }
         if (Parameters.sendErrors) {
-            var text:String = "Build: " + Parameters._02Q_() + "\n"
+            var text:String = "Build: " + Parameters.buildLabel() + "\n"
                     + "message: " + message + "\n"
                     + "stackTrace: " + stackTrace + "\n"
                     + _gv._00f();
-            var client:AppEngineClient = new AppEngineClient(Parameters._fK_(), "/clientError", false);
+            var client:AppEngineClient = new AppEngineClient(Parameters.serverAddress(), "/clientError", false);
             client.sendRequest("add", {
                 "text": text,
                 "guid": Account.getInstance().guid()

@@ -45,7 +45,7 @@ public class RemoteTexture {
         if (this.instance_ == "production") {
             return PRODUCTION_HOST;
         }
-        return Parameters._fK_();
+        return Parameters.serverAddress();
     }
 
     private function onComplete(event:GenericDataEvent):void {

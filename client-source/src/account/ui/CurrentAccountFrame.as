@@ -64,7 +64,7 @@ internal class CurrentAccountFrame extends Frame {
     }
 
     private function onResendVerify(event:MouseEvent):void {
-        var request:AppEngineClient = new AppEngineClient(Parameters._fK_(), "/account", true);
+        var request:AppEngineClient = new AppEngineClient(Parameters.serverAddress(), "/account", true);
         request.addEventListener(GenericDataEvent.GENERIC_DATA, onVerifySent);
         request.addEventListener(TextErrorEvent.TEXT_ERROR, onVerifyError);
         request.sendRequest("sendVerifyEmail", Account.getInstance().credentials());

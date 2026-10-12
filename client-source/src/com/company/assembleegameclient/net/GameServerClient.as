@@ -309,7 +309,7 @@ public class GameServerClient {
 
     public function connect():void {
         this.gs_.textBox_.addText(Parameters.SendClient, "Connecting to " + this.server_.name_);
-        if (Parameters._wZ_) {
+        if (Parameters.useRC4) {
             this.connection_.setOutgoingCipher("rc4", _L_2._Z_S_(RC4_OUTGOING_KEY));
             this.connection_.setIncomingCipher("rc4", _L_2._Z_S_(RC4_INCOMING_KEY));
         }

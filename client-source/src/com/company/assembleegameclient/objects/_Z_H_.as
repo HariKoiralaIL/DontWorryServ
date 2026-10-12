@@ -97,7 +97,7 @@ public class _Z_H_ {
                 return;
             case "RemoteTexture":
                 this.texture_ = AssetLibrary._xK_("lofiObj3", 0xFF);
-                if (Parameters._I_O_()) {
+                if (Parameters.isTestingDomain()) {
                     _local3 = new RemoteTexture(_arg1.Id, _arg1.Instance, this._Z_v);
                     _local3.run();
                 }

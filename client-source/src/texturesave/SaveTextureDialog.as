@@ -128,7 +128,7 @@ package texturesave
             var png:ByteArray = PNGEncoder.encode(this.bitmapData_);
             loader.addFile(png, "Foo.png", "data");
             loader.addEventListener(Event.COMPLETE, this.onUploadComplete);
-            loader.load("http://" + Parameters._fK_() + "/picture/save");
+            loader.load("http://" + Parameters.serverAddress() + "/picture/save");
             this.cancelButton_._A_w(false);
             this.saveButton_._A_w(false);
         }

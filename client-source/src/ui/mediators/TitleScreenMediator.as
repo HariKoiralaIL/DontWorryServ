@@ -108,7 +108,7 @@ public class TitleScreenMediator extends Mediator {
 
     private function showOfflineDialog():void {
         var dialog:Dialog;
-        if (Parameters._I_O_()) {
+        if (Parameters.isTestingDomain()) {
             dialog = new Dialog(NO_TESTING_SERVERS_MESSAGE, "No Testing Servers", null, null, "/noTestingServers");
         } else {
             dialog = new Dialog(OFFLINE_MESSAGE, "The Angelics are Sleeping", null, null, "/offLine");

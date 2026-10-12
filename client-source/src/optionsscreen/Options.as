@@ -335,7 +335,7 @@ public class Options extends Sprite {
             }
             i++;
         }
-        Parameters._fX_();
+        Parameters.initDefaults();
         Parameters.save();
         this.refresh();
     }

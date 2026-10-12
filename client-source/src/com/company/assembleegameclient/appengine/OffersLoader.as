@@ -24,7 +24,7 @@ public class OffersLoader {
             lastGuid = guid;
             sessionStart = now;
         }
-        var client:AppEngineClient = new AppEngineClient(Parameters._fK_(), path, true, MAX_RETRIES);
+        var client:AppEngineClient = new AppEngineClient(Parameters.serverAddress(), path, true, MAX_RETRIES);
         if (callback != null) {
             client.addEventListener(GenericDataEvent.GENERIC_DATA, callback);
         }

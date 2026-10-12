@@ -50,7 +50,7 @@ public class NewAccountNameFrame extends Frame {
             this.name_.setError("Name too short");
             return;
         }
-        var _local2:AppEngineClient = new AppEngineClient(Parameters._fK_(), "/account", true);
+        var _local2:AppEngineClient = new AppEngineClient(Parameters.serverAddress(), "/account", true);
         _local2.addEventListener(GenericDataEvent.GENERIC_DATA, this.onNameSet);
         _local2.addEventListener(TextErrorEvent.TEXT_ERROR, this.onNameError);
         var _local3:Object = {"name": this.name_.text()};

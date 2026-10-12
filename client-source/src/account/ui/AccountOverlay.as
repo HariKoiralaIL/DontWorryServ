@@ -45,7 +45,7 @@ public class AccountOverlay extends Sprite {
 
     private function verifyCredentials():void {
         removeCurrentFrame();
-        verifyRequest = new AppEngineClient(Parameters._fK_(), "/account", true);
+        verifyRequest = new AppEngineClient(Parameters.serverAddress(), "/account", true);
         verifyRequest.addEventListener(GenericDataEvent.GENERIC_DATA, onVerified);
         verifyRequest.addEventListener(TextErrorEvent.TEXT_ERROR, onVerifyError);
         verifyRequest.sendRequest("verify", Account.getInstance().credentials());

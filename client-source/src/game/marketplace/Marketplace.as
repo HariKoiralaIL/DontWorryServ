@@ -100,7 +100,7 @@ package game.marketplace {
 
         private function loadOffers(params:Object):void {
             this.showLoading();
-            this.request_ = new AppEngineClient(Parameters._fK_(), "/market", true, 2);
+            this.request_ = new AppEngineClient(Parameters.serverAddress(), "/market", true, 2);
             _H_U_._t2(params, Account.getInstance().credentials());
             this.request_.addEventListener(GenericDataEvent.GENERIC_DATA, this.onOffersLoaded);
             this.request_.addEventListener(TextErrorEvent.TEXT_ERROR, this.onLoadError);

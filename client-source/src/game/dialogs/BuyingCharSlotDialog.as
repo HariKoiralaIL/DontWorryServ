@@ -17,7 +17,7 @@ package game.dialogs {
         public function BuyingCharSlotDialog(price:int) {
             super("Buying Character Slot...", null, null, null, "/buyingCharSlot");
             this.price_ = price;
-            var request:AppEngineClient = new AppEngineClient(Parameters._fK_(), "/account", true, 2);
+            var request:AppEngineClient = new AppEngineClient(Parameters.serverAddress(), "/account", true, 2);
             request.addEventListener(GenericDataEvent.GENERIC_DATA, this.onPurchaseSuccess);
             request.addEventListener(TextErrorEvent.TEXT_ERROR, this.onPurchaseError);
             request.sendRequest("purchaseCharSlot", Account.getInstance().credentials());

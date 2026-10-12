@@ -136,7 +136,7 @@ public class PictureTile extends Sprite {
     }
 
     private function sendRequest():void {
-        var request:AppEngineClient = new AppEngineClient(Parameters._fK_(), PICTURE_PATH, false);
+        var request:AppEngineClient = new AppEngineClient(Parameters.serverAddress(), PICTURE_PATH, false);
         request.setDataFormat(URLLoaderDataFormat.BINARY);
         request.addEventListener(GenericDataEvent.GENERIC_DATA, this.onURLLoadComplete);
         request.sendRequest("get", {"id": this.id.toString()});

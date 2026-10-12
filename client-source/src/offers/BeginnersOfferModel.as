@@ -46,7 +46,7 @@ public class BeginnersOfferModel implements IBeginnersOfferModel {
     }
 
     public function requestTimeLeft():void {
-        var client:AppEngineClient = new AppEngineClient(Parameters._fK_(), "/account", true);
+        var client:AppEngineClient = new AppEngineClient(Parameters.serverAddress(), "/account", true);
         client.addEventListener(GenericDataEvent.GENERIC_DATA, this.handleTimeLeftLoaded);
         var params:Object = {};
         _H_U_._t2(params, Account.getInstance().credentials());

@@ -77,7 +77,7 @@ internal class RegisterFrame extends Frame {
             termsCheckbox.setError("Must agree to register");
             return;
         }
-        var request:AppEngineClient = new AppEngineClient(Parameters._fK_(), "/account", true);
+        var request:AppEngineClient = new AppEngineClient(Parameters.serverAddress(), "/account", true);
         request.addEventListener(GenericDataEvent.GENERIC_DATA, onRegisterSuccess);
         request.addEventListener(TextErrorEvent.TEXT_ERROR, onRegisterError);
         request.sendRequest("register", {
