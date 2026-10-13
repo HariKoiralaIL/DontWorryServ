@@ -23,7 +23,7 @@ public class SetGiveContainerUI extends Frame {
     public function SetGiveContainerUI(gs:GameSprite, obj:GameObject) {
         SetGiveContainerUI.isClosed = false;
         super("Give Sets", "Craft", "Close", "/craft", FRAME_WIDTH);
-        this.inventory_ = new Inventory(gs, obj, "Crafting Inventory", obj._9A_, 8, false);
+        this.inventory_ = new Inventory(gs, obj, "Crafting Inventory", obj.slotTypes_, 8, false);
         var inventoryX:Number = FRAME_WIDTH / 2 - this.inventory_.width / 2 - 5;
         this.gs_ = gs;
         this.obj_ = obj;

@@ -8,7 +8,7 @@ import audio.MusicManager;
 import com.company.assembleegameclient.game.GameSprite;
 import com.company.assembleegameclient.objects.BasicObject;
 import com.company.assembleegameclient.objects.GameObject;
-import com.company.assembleegameclient.objects._ez;
+import com.company.assembleegameclient.objects.NearbyPlayerTracker;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.util.ConditionEffect;
 
@@ -56,7 +56,7 @@ public class GameMap extends MapHandler {
         gradientOverlay_ = new GradientOverlay();
         mapOverlay_ = new MapOverlay();
         partyOverlay_ = new ArrowOverlay(this);
-        party_ = new _ez(this);
+        party_ = new NearbyPlayerTracker(this);
         quest_ = new Quest(this);
     }
 
@@ -301,14 +301,14 @@ public class GameMap extends MapHandler {
     private function collectObjects(camera:GameCamera, time:int):void {
         var square:Square;
         for each (var gameObject:GameObject in this.goDict_) {
-            gameObject._1D_ = false;
-            if (!gameObject._aE_) {
-                square = gameObject._0H_B_;
+            gameObject.unusedFlag_ = false;
+            if (!gameObject.dead_) {
+                square = gameObject.square_;
                 if (square != null && square.lastVisible_ == time) {
-                    gameObject._1D_ = true;
-                    gameObject._0E_T_(camera);
-                    if (gameObject.props_._06D_) {
-                        if (gameObject.props_._Z_L_) {
+                    gameObject.unusedFlag_ = true;
+                    gameObject.computeSortVal(camera);
+                    if (gameObject.props_.drawUnder_) {
+                        if (gameObject.props_.drawOnGround_) {
                             gameObject.draw(this.graphicsData_, camera, time);
                         } else {
                             this.visibleUnder_.push(gameObject);
@@ -320,11 +320,11 @@ public class GameMap extends MapHandler {
             }
         }
         for each (var basicObject:BasicObject in this.boDict_) {
-            basicObject._1D_ = false;
-            square = basicObject._0H_B_;
+            basicObject.unusedFlag_ = false;
+            square = basicObject.square_;
             if (square != null && square.lastVisible_ == time) {
-                basicObject._1D_ = true;
-                basicObject._0E_T_(camera);
+                basicObject.unusedFlag_ = true;
+                basicObject.computeSortVal(camera);
                 this.visible_.push(basicObject);
             }
         }
@@ -341,7 +341,7 @@ public class GameMap extends MapHandler {
         this.visible_.sortOn(SORT_FIELDS, SORT_OPTIONS);
         if (Parameters.data_.drawShadows) {
             for each (obj in this.visible_) {
-                if (obj._P_m) {
+                if (obj.hasShadow_) {
                     obj.drawShadow(this.graphicsData_, camera, time);
                 }
             }
@@ -355,8 +355,8 @@ public class GameMap extends MapHandler {
     }
 
     private function updateOverlays(clipRect:Rectangle, time:int):void {
-        if (this.player_ != null && this.player_._R_4 >= 0 && this.player_._R_4 < Parameters._E_S_) {
-            var intensity:Number = (Parameters._E_S_ - this.player_._R_4) / Parameters._E_S_;
+        if (this.player_ != null && this.player_.breath_ >= 0 && this.player_.breath_ < Parameters._E_S_) {
+            var intensity:Number = (Parameters._E_S_ - this.player_.breath_) / Parameters._E_S_;
             var pulse:Number = Math.abs(Math.sin(time / 300)) * 0.75;
             hurtColorTransform_.alphaMultiplier = intensity * pulse;
             this.hurtOverlay_.transform.colorTransform = hurtColorTransform_;
@@ -376,18 +376,18 @@ public class GameMap extends MapHandler {
     }
 
     private function updateFilters(time:int):void {
-        if (this.player_ != null && (this.player_._9B_ & ConditionEffect._T_D_) != 0) {
+        if (this.player_ != null && (this.player_.condition_ & ConditionEffect._T_D_) != 0) {
             var filterList:Array = [];
             var blur:Number;
-            if (this.player_._N_b()) {
+            if (this.player_.isDrunk()) {
                 blur = 20 + 10 * Math.sin(time / 1000);
                 filterList.push(new BlurFilter(blur, blur));
             }
-            if (this.player_._N_c()) {
+            if (this.player_.hasConditionN_c()) {
                 blur = 20 + 10 * Math.sin(time / 1000);
                 filterList.push(new BlurFilter(blur, blur));
             }
-            if (this.player_._rL_()) {
+            if (this.player_.isBlind()) {
                 filterList.push(GREYSCALE_FILTER);
             }
             this.map_.filters = filterList;

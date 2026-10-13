@@ -1,6 +1,6 @@
 package client.ui.panels {
 import com.company.assembleegameclient.game.GameSprite;
-import com.company.assembleegameclient.objects.Container;
+import com.company.assembleegameclient.objects.LootContainer;
 import com.company.assembleegameclient.ui.Inventory;
 import com.company.assembleegameclient.ui.Slot;
 
@@ -12,9 +12,9 @@ public class ContainerPanel extends Panel {
 
     public var inventory:Inventory;
 
-    public function ContainerPanel(gs:GameSprite, container:Container) {
+    public function ContainerPanel(gs:GameSprite, container:LootContainer) {
         super(gs);
-        this.inventory = new Inventory(gs_, container, container._include(), SLOT_TYPES, 8, false);
+        this.inventory = new Inventory(gs_, container, container.getName(), SLOT_TYPES, 8, false);
         this.inventory.x = 8;
         addChild(this.inventory);
     }

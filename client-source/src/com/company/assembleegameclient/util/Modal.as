@@ -27,7 +27,7 @@ public class Modal extends Sprite {
     public static const HEIGH:int = 185;
     public static var isClosed:Boolean = true;
 
-    private const closeButton:_str152 = ObjectLibrary._str2799(Modal.WIDTH);
+    private const closeButton:_str152 = ObjectLibrary.makeCornerWidget(Modal.WIDTH);
     private const buyButton:_u5 = new _u5("Buy for ", 16, 0, Currency.INVALID);
 
     private var _str8496:NativeSignal;

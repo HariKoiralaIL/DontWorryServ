@@ -151,7 +151,7 @@ package particleeffects {
                         particle.lY_ += particle.speedY_ * dtSeconds;
                         particle.x_ = x_ + particle.lX_;
                         particle.y_ = y_ + particle.lY_;
-                        particle._0H_B_ = map_.getSquare(particle.x_, particle.y_);
+                        particle.square_ = map_.getSquare(particle.x_, particle.y_);
                         particle.z_ = (particle.z_ + (particle.rise_ * dtSeconds));
                     }
                 }

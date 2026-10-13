@@ -54,7 +54,7 @@ package particleeffects {
             this.particle_.lY_ = -this.effectProps_.radius * Math.sin(this.angle_ * Math.PI / 180);
             this.particle_.x_ = this.x_ + this.particle_.lX_;
             this.particle_.y_ = this.y_ + this.particle_.lY_;
-            this.particle_._0H_B_ = map_.getSquare(this.particle_.x_, this.particle_.y_);
+            this.particle_.square_ = map_.getSquare(this.particle_.x_, this.particle_.y_);
             return true;
         }
 

@@ -48,8 +48,8 @@ public class NewCharacterScreen extends BaseScreen {
 
     private function buildCharacterBoxes(model:CharListEvent):void {
         var index:int = 0;
-        while (index < ObjectLibrary._tj.length) {
-            var playerXML:XML = ObjectLibrary._tj[index];
+        while (index < ObjectLibrary.playerChars_.length) {
+            var playerXML:XML = ObjectLibrary.playerChars_[index];
             var objectType:int = int(playerXML.@type);
             var box:CharacterBox = new CharacterBox(playerXML, model.charStats_[objectType], model);
             box.x = (((GRID_LEFT + (CELL_SIZE * int((index % COLUMNS)))) + (CELL_SIZE / 2)) - (box.width / 2));

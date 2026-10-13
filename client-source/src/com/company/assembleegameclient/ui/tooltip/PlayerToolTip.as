@@ -45,7 +45,7 @@ public class PlayerToolTip extends ToolTip {
         this.mpBar_.y = _local2;
         addChild(this.mpBar_);
         _local2 = (_local2 + 24);
-        this.inventory_ = new Inventory(null, this.player_, "Other Player Inventory", this.player_._9A_, 4, false);
+        this.inventory_ = new Inventory(null, this.player_, "Other Player Inventory", this.player_.slotTypes_, 4, false);
         this.inventory_.x = 8;
         this.inventory_.y = _local2;
         addChild(this.inventory_);
@@ -68,8 +68,8 @@ public class PlayerToolTip extends ToolTip {
     private var clickHint_:SimpleText;
 
     override public function draw():void {
-        this.hpBar_.draw(this.player_.HP_, this.player_.maxHP_, this.player_._P_7, this.player_._uR_);
-        this.mpBar_.draw(this.player_.MP_, this.player_.maxMP_, this.player_._0D_G_, this.player_._dt);
+        this.hpBar_.draw(this.player_.HP_, this.player_.maxHP_, this.player_._P_7, this.player_.maxHPMax_);
+        this.mpBar_.draw(this.player_.MP_, this.player_.maxMP_, this.player_._0D_G_, this.player_.maxMPMax_);
         this.inventory_.draw(this.player_.equipment_);
         this.starDisplay_.draw(this.player_.numStars_);
         super.draw();

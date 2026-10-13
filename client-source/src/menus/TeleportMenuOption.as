@@ -54,14 +54,14 @@ package menus
 
         private function onEnterFrame(event:Event):void
         {
-            var cooldown:int = this.player_._Z_C_();
+            var cooldown:int = this.player_.msUntilTeleport();
             if (cooldown > 0)
             {
                 if (!contains(this.cooldownText_))
                 {
                     addChild(this.cooldownText_);
                 }
-                this.cooldownText_.width = this.cooldownTextWidth_ * (1 - (cooldown / Player._0G_S_));
+                this.cooldownText_.width = this.cooldownTextWidth_ * (1 - (cooldown / Player.TELEPORT_COOLDOWN_MS));
                 setColorTransform(COOLDOWN_TRANSFORM);
             }
             else

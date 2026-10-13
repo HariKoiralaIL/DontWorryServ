@@ -56,7 +56,7 @@ public class _2j extends Slot {
             if(this.data_ != null && this.data_.hasOwnProperty("TextureFile") && this.data_.TextureFile != "") {
                 _local8 = ObjectLibrary.getRedrawnTextureFromTypeCustom(this.item_, 80, true, this.data_);
             }
-            _local9 = ObjectLibrary._Q_F_[this.item_];
+            _local9 = ObjectLibrary.typeToXML_[this.item_];
             if (_local9.hasOwnProperty("Doses")) {
                 _local8 = _local8.clone();
                 _local11 = new SimpleText(12, 0xFFFFFF, false, 0, 0, "Myriad Pro");

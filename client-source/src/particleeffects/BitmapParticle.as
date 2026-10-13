@@ -42,17 +42,17 @@ package particleeffects {
             super();
             this.bitmapFill_.bitmapData = bitmapData;
             this.bitmapData_ = bitmapData;
-            objectId_ = _7y();
+            objectId_ = getNextFakeObjectId();
         }
 
         override public function draw(graphicsData:Vector.<IGraphicsData>, camera:GameCamera, time:int):void {
             this.bitmapFill_.bitmapData = _G_._0C_m(this.bitmapData_, this.alpha_);
             var halfW:Number = (this.bitmapFill_.bitmapData.width / 2);
             var halfH:Number = (this.bitmapFill_.bitmapData.height / 2);
-            this.vertices_[6] = (this.vertices_[0] = (_bY_[3] - halfW));
-            this.vertices_[3] = (this.vertices_[1] = (_bY_[4] - halfH));
-            this.vertices_[4] = (this.vertices_[2] = (_bY_[3] + halfW));
-            this.vertices_[7] = (this.vertices_[5] = (_bY_[4] + halfH));
+            this.vertices_[6] = (this.vertices_[0] = (screenVec_[3] - halfW));
+            this.vertices_[3] = (this.vertices_[1] = (screenVec_[4] - halfH));
+            this.vertices_[4] = (this.vertices_[2] = (screenVec_[3] + halfW));
+            this.vertices_[7] = (this.vertices_[5] = (screenVec_[4] + halfH));
             this.path_.data = this.vertices_;
             this.matrix_.identity();
             this.matrix_.translate(this.vertices_[0], this.vertices_[1]);
@@ -64,7 +64,7 @@ package particleeffects {
 
         override public function removeFromMap():void {
             map_ = null;
-            _0H_B_ = null;
+            square_ = null;
         }
 
         public function initialize(lifetime:Number, speedX:Number, speedY:Number, rise:Number, z:Number):void {

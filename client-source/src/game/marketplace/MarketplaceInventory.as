@@ -75,7 +75,7 @@ package game.marketplace {
                 return;
             }
             if (this.mode_ == MODE_SELECT) {
-                var xml:XML = ObjectLibrary._Q_F_[slot.item_];
+                var xml:XML = ObjectLibrary.typeToXML_[slot.item_];
                 if (xml.hasOwnProperty("Soulbound") || (slot.data_ != null && slot.data_.Soulbound)) {
                     return;
                 }

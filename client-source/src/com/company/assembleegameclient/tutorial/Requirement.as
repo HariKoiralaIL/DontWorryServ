@@ -1,4 +1,4 @@
-package com.company.assembleegameclient.tutorial {
+﻿package com.company.assembleegameclient.tutorial {
 import com.company.assembleegameclient.objects.ObjectLibrary;
 
 public class Requirement {
@@ -13,7 +13,7 @@ public class Requirement {
         this.type_ = String(xml);
         var objectId:String = String(xml.@objectId);
         if (objectId != null && objectId != "") {
-            this.objectType_ = ObjectLibrary._pb[objectId];
+            this.objectType_ = ObjectLibrary.idToType_[objectId];
         }
         this.objectName_ = String(xml.@objectName);
         if (this.objectName_ == null) {

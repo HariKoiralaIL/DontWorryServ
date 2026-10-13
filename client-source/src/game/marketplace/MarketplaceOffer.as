@@ -152,7 +152,7 @@ package game.marketplace {
         }
 
         private function isSoulbound(itemType:int, data:Object):Boolean {
-            var xml:XML = ObjectLibrary._Q_F_[itemType];
+            var xml:XML = ObjectLibrary.typeToXML_[itemType];
             return xml.hasOwnProperty("Soulbound") || (this.hasField(data, "Soulbound") && data.Soulbound);
         }
 

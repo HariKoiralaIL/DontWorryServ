@@ -1,6 +1,6 @@
 package particleeffects {
 
-    import com.company.assembleegameclient.objects._Z_H_;
+    import com.company.assembleegameclient.objects.TextureData;
 
     import spriteanimation.AnimationsData;
 
@@ -8,7 +8,7 @@ package particleeffects {
     public class ParticleProperties {
 
         public var id_:String;
-        public var textureData_:_Z_H_;
+        public var textureData_:TextureData;
         public var size_:int = 100;
         public var z_:Number = 0;
         public var duration_:Number = 0;
@@ -16,7 +16,7 @@ package particleeffects {
 
         public function ParticleProperties(xml:XML) {
             this.id_ = xml.@id;
-            this.textureData_ = new _Z_H_(xml);
+            this.textureData_ = new TextureData(xml);
             if (xml.hasOwnProperty("Size")) {
                 this.size_ = Number(xml.Size);
             }

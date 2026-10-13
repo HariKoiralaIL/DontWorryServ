@@ -2,7 +2,7 @@ package client.ui.panels {
 import com.company.assembleegameclient.game.GameSprite;
 import com.company.assembleegameclient.objects.GameObject;
 import com.company.assembleegameclient.objects.Player;
-import com.company.assembleegameclient.objects._G_4;
+import com.company.assembleegameclient.objects.IInteractable;
 import com.company.util.PointUtil;
 
 import flash.display.Sprite;
@@ -23,7 +23,7 @@ public class InteractPanel extends Sprite {
     public var w_:int;
     public var h_:int;
     public var currentPanel:Panel = null;
-    public var currentInteractive:_G_4 = null;
+    public var currentInteractive:IInteractable = null;
     public var partyPanel:PartyPanel;
     private var overridePanel:Panel;
 
@@ -55,12 +55,12 @@ public class InteractPanel extends Sprite {
             return;
         }
         var closestDist:Number = Number.MAX_VALUE;
-        var closest:_G_4 = null;
+        var closest:IInteractable = null;
         for each (var go:GameObject in this.gs_.map_.goDict_) {
-            if (!go._064) {
+            if (!go.isInteractive_) {
                 continue;
             }
-            var interactive:_G_4 = go as _G_4;
+            var interactive:IInteractable = go as IInteractable;
             if (interactive == null) {
                 return;
             }

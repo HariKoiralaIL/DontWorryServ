@@ -99,12 +99,12 @@ public class Stats extends Sprite {
     public var toolTip_:TitleDescriptionToolTip;
 
     public function draw(_arg1:Player):void {
-        this._086[_att_stat].draw(_arg1.attack_, _arg1._05s, _arg1._X_2);
-        this._086[_def_stat].draw(_arg1.defense_, _arg1._07f, _arg1._0B_S_);
-        this._086[_spd_stat].draw(_arg1.speed_, _arg1._065, _arg1._b8);
-        this._086[_dex_stat].draw(_arg1.dexterity_, _arg1._cu, _arg1._07C_);
-        this._086[_vit_stat].draw(_arg1.vitality_, _arg1._pP_, _arg1._N_s);
-        this._086[_wis_stat].draw(_arg1.wisdom_, _arg1._B_e, _arg1._05Q_);
+        this._086[_att_stat].draw(_arg1.attack_, _arg1._05s, _arg1.attackMax_);
+        this._086[_def_stat].draw(_arg1.defense_, _arg1._07f, _arg1.defenseMax_);
+        this._086[_spd_stat].draw(_arg1.speed_, _arg1._065, _arg1.speedMax_);
+        this._086[_dex_stat].draw(_arg1.dexterity_, _arg1._cu, _arg1.dexterityMax_);
+        this._086[_vit_stat].draw(_arg1.vitality_, _arg1._pP_, _arg1.vitalityMax_);
+        this._086[_wis_stat].draw(_arg1.wisdom_, _arg1._B_e, _arg1.wisdomMax_);
         this._086[_luck_stat].draw(_arg1.luck_, _arg1.stat_luck, _arg1.stat_luckI);
         this._086[_crit_stat].draw(_arg1.crit_, _arg1.stat_crit, _arg1.stat_critI);
     }

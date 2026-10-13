@@ -10,13 +10,13 @@ internal class ObjectChooser extends Chooser {
         var objectXml:XML;
         super(MapLayer.OBJECT);
         var sortedIds:Vector.<String> = new Vector.<String>();
-        for (id in ObjectLibrary._pb) {
+        for (id in ObjectLibrary.idToType_) {
             sortedIds.push(id);
         }
         sortedIds.sort(_L_2._L_O_);
         for each (id in sortedIds) {
-            type = ObjectLibrary._pb[id];
-            objectXml = ObjectLibrary._Q_F_[type];
+            type = ObjectLibrary.idToType_[id];
+            objectXml = ObjectLibrary.typeToXML_[type];
             if (isPlaceable(objectXml)) {
                 addElement(new ObjectElement(objectXml));
             }

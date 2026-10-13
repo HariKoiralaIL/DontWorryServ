@@ -44,9 +44,9 @@ public class MapJsonParser {
 
     // Formerly _A_s
     public static function createObject(objData:Object):GameObject {
-        var objectType:int = ObjectLibrary._pb[objData["id"]];
-        var obj:GameObject = ObjectLibrary._075(objectType);
-        obj.size_ = objData.hasOwnProperty("size") ? objData["size"] : obj.props_._0M_t();
+        var objectType:int = ObjectLibrary.idToType_[objData["id"]];
+        var obj:GameObject = ObjectLibrary.getObjectFromType(objectType);
+        obj.size_ = objData.hasOwnProperty("size") ? objData["size"] : obj.props_.getSize();
         return obj;
     }
 
@@ -76,7 +76,7 @@ public class MapJsonParser {
                     if (objs != null) {
                         for each (objData in objs) {
                             obj = createObject(objData);
-                            obj.objectId_ = BasicObject._7y();
+                            obj.objectId_ = BasicObject.getNextFakeObjectId();
                             map.addObj(obj, x + 0.5, y + 0.5);
                         }
                     }

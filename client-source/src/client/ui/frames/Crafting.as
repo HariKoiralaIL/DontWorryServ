@@ -14,7 +14,7 @@ public class Crafting extends Frame {
     public function Crafting(param1:GameSprite, param2:GameObject) {
         Crafting.isClosed = false;
         super("Craft items", "Craft", "Close", "/craft", 250);
-        this.inventory_ = new Inventory(param1, param2, "Crafting Inventory", param2._9A_, 8, false);
+        this.inventory_ = new Inventory(param1, param2, "Crafting Inventory", param2.slotTypes_, 8, false);
         var _loc3_:* = 250 / 2 - this.inventory_.width / 2 - 5;
         this.gs_ = param1;
         this.obj_ = param2;

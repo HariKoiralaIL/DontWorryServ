@@ -31,7 +31,7 @@ public class _Z_B_ {
     public static const _n0:Vector.<ColorTransform> = new <ColorTransform>[_09M_, _03U_, _A_k, _tX_, _O_G_, _eD_];
 
     public static function _5e():int {
-        return ((ObjectLibrary._tj.length * _yJ_.length));
+        return ((ObjectLibrary.playerChars_.length * _yJ_.length));
     }
 
     public static function _lr(_arg1:int):int {
@@ -64,22 +64,22 @@ public class _Z_B_ {
 
     public static function _03A_(_arg1:int):Sprite {
         var _local2:Sprite = new StarGraphic();
-        if (_arg1 < ObjectLibrary._tj.length) {
+        if (_arg1 < ObjectLibrary.playerChars_.length) {
             _local2.transform.colorTransform = _09M_;
         } else {
-            if (_arg1 < (ObjectLibrary._tj.length * 2)) {
+            if (_arg1 < (ObjectLibrary.playerChars_.length * 2)) {
                 _local2.transform.colorTransform = _03U_;
             } else {
-                if (_arg1 < (ObjectLibrary._tj.length * 3)) {
+                if (_arg1 < (ObjectLibrary.playerChars_.length * 3)) {
                     _local2.transform.colorTransform = _A_k;
                 } else {
-                    if (_arg1 < (ObjectLibrary._tj.length * 4)) {
+                    if (_arg1 < (ObjectLibrary.playerChars_.length * 4)) {
                         _local2.transform.colorTransform = _tX_;
                     } else {
-                        if (_arg1 < (ObjectLibrary._tj.length * 5)) {
+                        if (_arg1 < (ObjectLibrary.playerChars_.length * 5)) {
                             _local2.transform.colorTransform = _O_G_;
                         } else {
-                            if (_arg1 < (ObjectLibrary._tj.length * 6)) {
+                            if (_arg1 < (ObjectLibrary.playerChars_.length * 6)) {
                                 _local2.transform.colorTransform = _eD_;
                             } else {
                                     _local2.transform.colorTransform = new ColorTransform((0xFF / 0xFF), (0 / 0xFF), (0xFF / 0xFF));

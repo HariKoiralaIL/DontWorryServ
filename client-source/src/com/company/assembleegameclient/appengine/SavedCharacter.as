@@ -27,7 +27,7 @@ public class SavedCharacter {
         var tex2:int = (savedChar != null) ? savedChar.tex2() : 0;
         var animChar:_lJ_ = getAnimatedChar(playerXML);
         if (savedChar != null && savedChar.skin() != NO_SKIN) {
-            var skinXML:XML = ObjectLibrary._Q_F_[savedChar.skin()];
+            var skinXML:XML = ObjectLibrary.typeToXML_[savedChar.skin()];
             if (skinXML != null) {
                 animChar = getAnimatedChar(skinXML);
             }
@@ -95,7 +95,7 @@ public class SavedCharacter {
     }
 
     public function displayId():String {
-        return ObjectLibrary._0D_N_[this.objectType()];
+        return ObjectLibrary.typeToDisplayId_[this.objectType()];
     }
 
     public function toString():String {

@@ -26,7 +26,7 @@ import com.company.assembleegameclient.net.messages.incoming.File;
 import com.company.assembleegameclient.net.messages.incoming.Text;
 import com.company.assembleegameclient.net.messages.outgoing.*;
 import com.company.assembleegameclient.objects.*;
-import com.company.assembleegameclient.objects.Container;
+import com.company.assembleegameclient.objects.LootContainer;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.ui.FrameHolder;
 import com.company.assembleegameclient.ui._B_N_;
@@ -489,7 +489,7 @@ public class GameServerClient {
         }
         this.gs_.moveRecords_.clear(msg.time_);
         this.connection_.sendMessage(msg);
-        player._01w();
+        player.updateMoveMultiplier();
     }
 
     public function teleport(objectId:int):void {
@@ -849,7 +849,7 @@ public class GameServerClient {
     private function loadXmlData(xmlString:String):void {
         var xml:XML = XML(xmlString);
         GroundLibrary.parseFromXML(xml);
-        ObjectLibrary._nY_(xml);
+        ObjectLibrary.parseFromXML(xml);
     }
 
     private function onCreateSuccess(msg:CreateSuccess):void {
@@ -882,7 +882,7 @@ public class GameServerClient {
 
     private function addObject(objData:ObjectData):void {
         var map:GameMap = this.gs_.map_;
-        var obj:GameObject = ObjectLibrary._075(objData.objectType_);
+        var obj:GameObject = ObjectLibrary.getObjectFromType(objData.objectType_);
         if (obj == null) {
             return;
         }
@@ -893,7 +893,7 @@ public class GameServerClient {
             map.player_ = obj as Player;
         }
         this.processObjectStatus(status, 0, -1);
-        if (obj.props_.static_ && obj.props_.occupySquare_ && !obj.props_._ia) {
+        if (obj.props_.static_ && obj.props_.occupySquare_ && !obj.props_.noMiniMap_) {
             this.gs_.hudView_._F_._0A_R_(obj.x_, obj.y_, obj);
         }
     }
@@ -917,7 +917,7 @@ public class GameServerClient {
         }
         var isSelf:Boolean = status.objectId_ == this.playerObjectId_;
         if (tickTime != 0 && !isSelf) {
-            obj._0I_u(status.pos_.x_, status.pos_.y_, tickTime, tickId);
+            obj.onTickPos(status.pos_.x_, status.pos_.y_, tickTime, tickId);
         }
         var player:Player = obj as Player;
         var prevLevel:int;
@@ -931,12 +931,12 @@ public class GameServerClient {
             if (player.level_ > prevLevel) {
                 if (isSelf) {
                     var unlocked:Array = this.gs_.charList_.classesUnlockedBy(player.objectType_, player.level_);
-                    player._ut(unlocked.length != 0);
+                    player.handleLevelUp(unlocked.length != 0);
                 } else {
-                    player._x1("Level Up!");
+                    player.levelUpEffect("Level Up!");
                 }
             } else if (player.exp_ > prevExp) {
-                player._0I_I_(player.exp_ - prevExp);
+                player.handleExpUp(player.exp_ - prevExp);
             }
         }
     }
@@ -997,7 +997,7 @@ public class GameServerClient {
                     player.crit_ = value;
                     break;
                 case StatData.CONDITION_STAT:
-                    obj._9B_ = value;
+                    obj.condition_ = value;
                     break;
                 case StatData.INVDATA_0_STAT:
                 case StatData.INVDATA_1_STAT:
@@ -1033,7 +1033,7 @@ public class GameServerClient {
                 case StatData.NAME_STAT:
                     if (obj.name_ != stat.strStatValue_) {
                         obj.name_ = stat.strStatValue_;
-                        obj._U_g = null;
+                        obj.nameBitmap_ = null;
                     }
                     break;
                 case StatData.TEX1_STAT:
@@ -1046,13 +1046,13 @@ public class GameServerClient {
                     merchant.setMerchandiseType(value);
                     break;
                 case StatData.CREDITS_STAT:
-                    player._F_S_(value);
+                    player.setCredits(value);
                     break;
                 case StatData.MERCHANDISE_PRICE_STAT:
                     sellable.setPrice(value);
                     break;
                 case StatData.ACTIVE_STAT:
-                    (obj as Portal)._09S_ = value != 0;
+                    (obj as Portal).active_ = value != 0;
                     break;
                 case StatData.ACCOUNT_ID_STAT:
                     player.accountId_ = value;
@@ -1061,22 +1061,22 @@ public class GameServerClient {
                     player.fame_ = value;
                     break;
                 case StatData.MERCHANDISE_CURRENCY_STAT:
-                    sellable._gF_(value);
+                    sellable.setCurrency(value);
                     break;
                 case StatData.CONNECT_STAT:
-                    obj._O_l = value;
+                    obj.connectedMask_ = value;
                     break;
                 case StatData.MERCHANDISE_COUNT_STAT:
-                    merchant._1I_ = value;
-                    merchant._z5 = 0;
+                    merchant.count_ = value;
+                    merchant.msUntilBubble_ = 0;
                     break;
                 case StatData.MERCHANDISE_MINS_LEFT_STAT:
-                    merchant._gt = value;
-                    merchant._z5 = 0;
+                    merchant.minsLeft_ = value;
+                    merchant.msUntilBubble_ = 0;
                     break;
                 case StatData.MERCHANDISE_DISCOUNT_STAT:
-                    merchant._S_I_ = value;
-                    merchant._z5 = 0;
+                    merchant.discount_ = value;
+                    merchant.msUntilBubble_ = 0;
                     break;
                 case StatData.MERCHANDISE_RANK_REQ_STAT:
                     sellable.setRankReq(value);
@@ -1112,14 +1112,14 @@ public class GameServerClient {
                     player._cu = value;
                     break;
                 case StatData.OWNER_ACCOUNT_ID_STAT:
-                    (obj as Container)._75(value);
+                    (obj as LootContainer).setOwnerId(value);
                     break;
                 case StatData.RANK_REQUIRED_STAT:
-                    (obj as NameChanger)._Y__(value);
+                    (obj as NameChanger).setRank(value);
                     break;
                 case StatData.NAME_CHOSEN_STAT:
-                    player._hv = value != 0;
-                    obj._U_g = null;
+                    player.nameChosen_ = value != 0;
+                    obj.nameBitmap_ = null;
                     break;
                 case StatData.CURR_FAME_STAT:
                     player._0L_o = value;
@@ -1128,24 +1128,24 @@ public class GameServerClient {
                     player._n8 = value;
                     break;
                 case StatData.LEGENDARY_RANK_STAT:
-                    player._2v = value;
+                    player.glowColor_ = value;
                     break;
                 case StatData.SINK_LEVEL_STAT:
                     if (!isSelf) {
-                        player._0F_ = value;
+                        player.sinkLevel_ = value;
                     }
                     break;
                 case StatData.ALT_TEXTURE_STAT:
-                    obj._5w(value);
+                    obj.setAltTexture(value);
                     break;
                 case StatData.GUILD_NAME_STAT:
-                    player._Y_C_(stat.strStatValue_);
+                    player.setGuildName(stat.strStatValue_);
                     break;
                 case StatData.GUILD_RANK_STAT:
                     player.guildRank_ = value;
                     break;
                 case StatData.BREATH_STAT:
-                    player._R_4 = value;
+                    player.breath_ = value;
                     break;
                 case StatData.XP_BOOSTED_STAT:
                     player._gz = value;
@@ -1183,7 +1183,7 @@ public class GameServerClient {
         if (obj == null) {
             return;
         }
-        obj._gk(msg.pos_.x_, msg.pos_.y_, this.gs_.lastUpdate_);
+        obj.onGoto(msg.pos_.x_, msg.pos_.y_, this.gs_.lastUpdate_);
     }
 
     private function onQuestObjId(msg:QuestObjId):void {
@@ -1199,7 +1199,7 @@ public class GameServerClient {
         if (obj == null) {
             return;
         }
-        obj._05M_(msg.soundId_);
+        obj.playSound(msg.soundId_);
     }
 
     private function onSwitchMusic(msg:SwitchMusic):void {
@@ -1220,9 +1220,9 @@ public class GameServerClient {
         var map:GameMap = this.gs_.map_;
         var projectile:Projectile;
         if (msg.objectId_ >= 0 && msg.bulletId_ > 0) {
-            var projectileKey:int = Projectile._61(msg.objectId_, msg.bulletId_);
+            var projectileKey:int = Projectile.findObjectId(msg.objectId_, msg.bulletId_);
             projectile = map.boDict_[projectileKey] as Projectile;
-            if (projectile != null && !projectile._ko._0C_c) {
+            if (projectile != null && !projectile.projProps_.multiHit_) {
                 map.removeObj(projectileKey);
             }
         }
@@ -1235,7 +1235,7 @@ public class GameServerClient {
     private function onServerPlayerShoot(msg:ServerPlayerShoot):void {
         var isOwn:Boolean = msg.ownerId_ == this.playerObjectId_;
         var owner:GameObject = this.gs_.map_.goDict_[msg.ownerId_];
-        if (owner == null || owner._aE_) {
+        if (owner == null || owner.dead_) {
             if (isOwn) {
                 this.shootAck(-1);
             }
@@ -1243,7 +1243,7 @@ public class GameServerClient {
         }
         var projectile:Projectile = _wW_._B_1(Projectile) as Projectile;
         projectile.reset(msg.containerType_, 0, msg.ownerId_, msg.bulletId_, msg.angle_, this.gs_.lastUpdate_);
-        projectile._T_j(msg.damage_);
+        projectile.setDamage(msg.damage_);
         this.gs_.map_.addObj(projectile, msg.startingPos_.x_, msg.startingPos_.y_);
         if (isOwn) {
             this.shootAck(this.gs_.lastUpdate_);
@@ -1252,19 +1252,19 @@ public class GameServerClient {
 
     private function onAllyShoot(msg:AllyShoot):void {
         var owner:GameObject = this.gs_.map_.goDict_[msg.ownerId_];
-        if (owner == null || owner._aE_ || Parameters.data_.disableAllyProjectiles) {
+        if (owner == null || owner.dead_ || Parameters.data_.disableAllyProjectiles) {
             return;
         }
         var projectile:Projectile = _wW_._B_1(Projectile) as Projectile;
         projectile.reset(msg.containerType_, 0, msg.ownerId_, msg.bulletId_, msg.angle_, this.gs_.lastUpdate_);
-        projectile._T_j(msg.dmg_);
+        projectile.setDamage(msg.dmg_);
         this.gs_.map_.addObj(projectile, owner.x_, owner.y_);
         owner.setAttack(msg.containerType_, msg.angle_);
     }
 
     private function onEnemyShoot(msg:EnemyShoot):void {
         var owner:GameObject = this.gs_.map_.goDict_[msg.ownerId_];
-        if (owner == null || owner._aE_) {
+        if (owner == null || owner.dead_) {
             this.shootAck(-1);
             return;
         }
@@ -1273,7 +1273,7 @@ public class GameServerClient {
             var projectile:Projectile = _wW_._B_1(Projectile) as Projectile;
             var angle:Number = msg.angle_ + msg.angleInc_ * i;
             projectile.reset(owner.objectType_, msg.bulletType_, msg.ownerId_, (msg.bulletId_ + i) % 0x0100, angle, this.gs_.lastUpdate_);
-            projectile._T_j(msg.damage_);
+            projectile.setDamage(msg.damage_);
             this.gs_.map_.addObj(projectile, msg.startingPos_.x_, msg.startingPos_.y_);
             i++;
         }
@@ -1289,12 +1289,12 @@ public class GameServerClient {
         }
         var effect:AoeEffect = new AoeEffect(msg.pos_.toPoint(), msg.radius_, 0xFF0000);
         this.gs_.map_.addObj(effect, msg.pos_.x_, msg.pos_.y_);
-        if (player._0C_4() || player.isPaused()) {
+        if (player.isInvincible() || player.isPaused()) {
             this.aoeAck(this.gs_.lastUpdate_, player.x_, player.y_);
             return;
         }
-        if (player._F_Y_(msg.pos_) < msg.radius_) {
-            var damage:int = GameObject._C_f(msg.damage_, player.defense_, false, player._9B_);
+        if (player.distTo(msg.pos_) < msg.radius_) {
+            var damage:int = GameObject.getDamageAfterDefense(msg.damage_, player.defense_, false, player.condition_);
             var effects:Vector.<uint> = null;
             if (msg.effect_ != 0) {
                 effects = new Vector.<uint>();
@@ -1400,7 +1400,7 @@ public class GameServerClient {
             case ShowEffect.FLASH_EFFECT:
                 target = map.goDict_[msg.targetObjectId_];
                 if (target == null) return;
-                target._B_t = new _T_f(getTimer(), msg.color_, msg.pos1_.x_, msg.pos1_.y_);
+                target.colorFlash_ = new ColorFlash(getTimer(), msg.color_, msg.pos1_.x_, msg.pos1_.y_);
                 return;
             case ShowEffect.THROW_PROJECTILE_EFFECT:
                 start = msg.pos1_.toPoint();

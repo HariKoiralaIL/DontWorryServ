@@ -61,14 +61,14 @@ public class CharacterStatusText extends Sprite implements IMapOverlayElement {
         if (elapsed > this.lifetime_ || (this.go_ != null && this.go_.map_ == null)) {
             return false;
         }
-        if (this.go_ == null || !this.go_._1D_) {
+        if (this.go_ == null || !this.go_.unusedFlag_) {
             visible = false;
             return true;
         }
         visible = true;
-        x = (this.go_._bY_[0] + this.offset.x);
+        x = (this.go_.screenVec_[0] + this.offset.x);
         var rise:Number = ((elapsed / this.lifetime_) * RISE_HEIGHT);
-        y = ((this.go_._bY_[1] + this.offset.y) - rise);
+        y = ((this.go_.screenVec_[1] + this.offset.y) - rise);
         return true;
     }
 }

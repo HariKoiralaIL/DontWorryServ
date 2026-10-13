@@ -24,7 +24,7 @@ package particleeffects {
 
         public function Particle(color:uint, z:Number, size:int) {
             super();
-            objectId_ = _7y();
+            objectId_ = getNextFakeObjectId();
             this.setZ(z);
             this.setColor(color);
             this.setSize(size);
@@ -36,10 +36,10 @@ package particleeffects {
             var halfH:Number = texture.height / 2;
             this.vertices_.length = 0;
             this.vertices_.push(
-                (_bY_[3] - halfW), (_bY_[4] - halfH),
-                (_bY_[3] + halfW), (_bY_[4] - halfH),
-                (_bY_[3] + halfW), (_bY_[4] + halfH),
-                (_bY_[3] - halfW), (_bY_[4] + halfH));
+                (screenVec_[3] - halfW), (screenVec_[4] - halfH),
+                (screenVec_[3] + halfW), (screenVec_[4] - halfH),
+                (screenVec_[3] + halfW), (screenVec_[4] + halfH),
+                (screenVec_[3] - halfW), (screenVec_[4] + halfH));
             this.path_.data = this.vertices_;
             this.bitmapFill_.bitmapData = texture;
             this.matrix_.identity();
@@ -57,7 +57,7 @@ package particleeffects {
             }
             x_ = newX;
             y_ = newY;
-            _0H_B_ = square;
+            square_ = square;
             return true;
         }
 

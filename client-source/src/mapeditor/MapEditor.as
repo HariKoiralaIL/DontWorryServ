@@ -189,7 +189,7 @@ public class MapEditor extends BaseScreen {
                 json["ground"] = id;
             }
             if (types[MapLayer.OBJECT] != -1) {
-                id = ObjectLibrary._6H_(types[MapLayer.OBJECT]);
+                id = ObjectLibrary.getIdFromType(types[MapLayer.OBJECT]);
                 objectJson = {"id": id};
                 if (tile.objectName_ != null) {
                     objectJson["name"] = tile.objectName_;
@@ -358,8 +358,8 @@ public class MapEditor extends BaseScreen {
                 objectsJson = tileJson["objs"];
                 if (objectsJson != null) {
                     for each (objectJson in objectsJson) {
-                        if (ObjectLibrary._pb.hasOwnProperty(objectJson["id"])) {
-                            type = ObjectLibrary._pb[objectJson["id"]];
+                        if (ObjectLibrary.idToType_.hasOwnProperty(objectJson["id"])) {
+                            type = ObjectLibrary.idToType_[objectJson["id"]];
                             this.map_.setType(tileX, tileY, MapLayer.OBJECT, type);
                             if (objectJson.hasOwnProperty("name")) {
                                 this.map_.setObjectName(tileX, tileY, objectJson["name"]);

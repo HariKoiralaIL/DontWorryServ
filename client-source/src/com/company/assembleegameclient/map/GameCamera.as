@@ -69,7 +69,7 @@ public class GameCamera {
             rect = Parameters._ih ? WIDE_SHORT_RECT : WIDE_RECT;
         }
         this.configure(player.x_, player.y_, 12, Parameters.data_.cameraAngle, rect, false);
-        this.isHallucinating_ = player._G_D_();
+        this.isHallucinating_ = player.isNinjaSpeedy();
     }
 
     public function startShake():void {

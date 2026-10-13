@@ -30,7 +30,7 @@ package particleeffects {
 
         public function XMLParticle(props:ParticleProperties) {
             super();
-            objectId_ = _7y();
+            objectId_ = getNextFakeObjectId();
             this.size_ = props.size_;
             z_ = props.z_;
             this.timeLeft_ = props.duration_;
@@ -68,10 +68,10 @@ package particleeffects {
             var h:int = texture.height;
             this.vertices_.length = 0;
             this.vertices_.push(
-                (_bY_[3] - (w / 2)), (_bY_[4] - h),
-                (_bY_[3] + (w / 2)), (_bY_[4] - h),
-                (_bY_[3] + (w / 2)), _bY_[4],
-                (_bY_[3] - (w / 2)), _bY_[4]);
+                (screenVec_[3] - (w / 2)), (screenVec_[4] - h),
+                (screenVec_[3] + (w / 2)), (screenVec_[4] - h),
+                (screenVec_[3] + (w / 2)), screenVec_[4],
+                (screenVec_[3] - (w / 2)), screenVec_[4]);
             this.path_.data = this.vertices_;
             this.bitmapFill_.bitmapData = texture;
             this.matrix_.identity();
@@ -89,7 +89,7 @@ package particleeffects {
             }
             x_ = newX;
             y_ = newY;
-            _0H_B_ = square;
+            square_ = square;
             return true;
         }
 

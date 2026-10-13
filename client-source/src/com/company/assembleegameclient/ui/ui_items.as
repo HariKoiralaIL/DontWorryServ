@@ -9,7 +9,7 @@ import client.ui.panels.ContainerPanel;
 import audio.SoundEffects;
 
 import com.company.assembleegameclient.map.GameMap;
-import com.company.assembleegameclient.objects.Container;
+import com.company.assembleegameclient.objects.LootContainer;
 import com.company.assembleegameclient.objects.GameObject;
 import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.assembleegameclient.objects.Player;
@@ -40,7 +40,7 @@ public class ui_items extends Sprite {
         super();
         this._0M_X_ = _arg1;
         this.data_ = _arg3;
-        var _local3:XML = ObjectLibrary._Q_F_[_arg1];
+        var _local3:XML = ObjectLibrary.typeToXML_[_arg1];
         var _local4:Number = 5;
         if (_local3.hasOwnProperty("ScaleValue")) {
             _local4 = _local3.ScaleValue;
@@ -99,7 +99,7 @@ public class ui_items extends Sprite {
             this._0K_9();
             return;
         }
-        if ((((((_arg1._e9._iA_ is Player)) && ((_arg1.id_ < 4)))) && (!(ObjectLibrary._S_d(this._0M_X_, (_arg1._e9._iA_ as Player)))))) {
+        if ((((((_arg1._e9._iA_ is Player)) && ((_arg1.id_ < 4)))) && (!(ObjectLibrary.meetsEquipRequirements(this._0M_X_, (_arg1._e9._iA_ as Player)))))) {
             this._0K_9();
             SoundEffects.play("error");
             return;
@@ -125,15 +125,15 @@ public class ui_items extends Sprite {
         var _local7:_E_6;
         var _local1:Player = this._03f._e9.gs_.map_.player_;
         var _local2:GameObject = this._03f._e9._iA_;
-        var _local3:Container = (_local2 as Container);
-        var _local4:Boolean = ObjectLibrary._0H_Z_(this._0M_X_);
+        var _local3:LootContainer = (_local2 as LootContainer);
+        var _local4:Boolean = ObjectLibrary.isSoulbound(this._0M_X_);
         if (((!((_local2 == _local1))) && ((((((_local3 == null)) || (!((_local3.ownerId_ == _local1.accountId_))))) || (_local4))))) {
             this._0K_9();
             SoundEffects.play("error");
             return;
         }
-        var _local5:Container = (this._03f._e9.gs_.hudView_._U_T_.currentInteractive as Container);
-        if (((!((_local5 == null))) && (((((_local5._X_w()) && (_local4))) || ((((_local5.ownerId_ == -1)) && (!(_local4)))))))) {
+        var _local5:LootContainer = (this._03f._e9.gs_.hudView_._U_T_.currentInteractive as LootContainer);
+        if (((!((_local5 == null))) && (((((_local5.isOwnedByPlayer()) && (_local4))) || ((((_local5.ownerId_ == -1)) && (!(_local4)))))))) {
             _local6 = (this._03f._e9.gs_.hudView_._U_T_.currentPanel as ContainerPanel);
             if (((!((_local6 == null))) && (!((_local6.inventory == null))))) {
                 for each (_local7 in _local6.inventory.slots_) {

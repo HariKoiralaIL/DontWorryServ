@@ -64,7 +64,7 @@ public class ui_playerslist extends Sprite {
         if (_local6 != null) {
             if (_local6.inParty) {
                 _local3 = Parameters.partyColor;
-            } else if (_local6._N_n) {
+            } else if (_local6.isFellowGuild_) {
                 _local3 = Parameters._mg;
             } else if (_local6.name_ == "$Bledixon$") {
                 _local3 = Parameters._colorBled;
@@ -74,25 +74,25 @@ public class ui_playerslist extends Sprite {
                 _local3 = Parameters._colorSec;
             } else if (_local6.name_ == "Crisp") {
                 _local3 = Parameters._colorSec;
-            } else if (_local6._hv) {
+            } else if (_local6.nameChosen_) {
                 _local3 = Parameters._8T_;
             }
         }
         if (this._H_a) {
             _local5 = true;
             if (((!((this.go_.name_ == null))) && (!((this.go_.name_ == ""))))) {
-                _local4 = ((("<b>" + this.go_.name_) + "</b> (") + ObjectLibrary._0D_N_[this.go_.objectType_]);
+                _local4 = ((("<b>" + this.go_.name_) + "</b> (") + ObjectLibrary.typeToDisplayId_[this.go_.objectType_]);
                 if (this.go_.level_ < 1) {
                     _local4 = (_local4 + ")");
                 } else {
                     _local4 = (_local4 + ((" " + this.go_.level_) + ")"));
                 }
             } else {
-                _local4 = (("<b>" + ObjectLibrary._0D_N_[this.go_.objectType_]) + "</b>");
+                _local4 = (("<b>" + ObjectLibrary.typeToDisplayId_[this.go_.objectType_]) + "</b>");
             }
         } else {
             if ((((this.go_.name_ == null)) || ((this.go_.name_ == "")))) {
-                _local4 = ObjectLibrary._0D_N_[this.go_.objectType_];
+                _local4 = ObjectLibrary.typeToDisplayId_[this.go_.objectType_];
             } else {
                 _local4 = this.go_.name_;
             }

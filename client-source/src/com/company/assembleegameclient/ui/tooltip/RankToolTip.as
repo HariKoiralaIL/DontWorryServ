@@ -48,7 +48,7 @@ public class RankToolTip extends ToolTip {
         var _local3:int = (this.divider_.y + 3);
         var _local4:int;
         while (_local4 < _Z_B_._n0.length) {
-            legendLine = new LegendLine((_local4 * ObjectLibrary._tj.length), (((_local4 + 1) * ObjectLibrary._tj.length) - 1), _Z_B_._n0[_local4]);
+            legendLine = new LegendLine((_local4 * ObjectLibrary.playerChars_.length), (((_local4 + 1) * ObjectLibrary.playerChars_.length) - 1), _Z_B_._n0[_local4]);
             legendLine.x = 6;
             legendLine.y = _local3;
             addChild(legendLine);

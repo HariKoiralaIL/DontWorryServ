@@ -34,7 +34,7 @@ public class CreateNewCharacterRect extends CharacterRect {
     public function CreateNewCharacterRect(_arg1:CharListEvent) {
         super(0x4C4C4C, 0x606060);
         this.charList_ = _arg1;
-        var _local2:XML = ObjectLibrary._tj[int((ObjectLibrary._tj.length * Math.random()))];
+        var _local2:XML = ObjectLibrary.playerChars_[int((ObjectLibrary.playerChars_.length * Math.random()))];
         var _local3:BitmapData = SavedCharacter.getImage(null, _local2, _lJ_.RIGHT, _lJ_._sS_, 0, false, false);
         _local3 = BitmapUtil._Y_d(_local3, 6, 6, (_local3.width - 12), (_local3.height - 6));
         this.bitmap_ = new Bitmap();

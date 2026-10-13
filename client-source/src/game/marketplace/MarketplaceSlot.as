@@ -96,7 +96,7 @@ package game.marketplace {
             if (this.item_ == -1) {
                 return;
             }
-            var xml:XML = ObjectLibrary._Q_F_[this.item_];
+            var xml:XML = ObjectLibrary.typeToXML_[this.item_];
             var scale:Number = DEFAULT_ITEM_SCALE;
             if (xml.hasOwnProperty("ScaleValue")) {
                 scale = xml.ScaleValue;
@@ -106,7 +106,7 @@ package game.marketplace {
                 texture = ObjectLibrary.getRedrawnTextureFromTypeCustom(this.item_, TEXTURE_SIZE, true, this.item_, true, scale, 0, 0);
             }
             this.itemBitmap_ = new Bitmap(texture);
-            var offset:Point = this.getItemOffset(this.item_, ObjectLibrary._gf(this.item_));
+            var offset:Point = this.getItemOffset(this.item_, ObjectLibrary.getSlotTypeFromType(this.item_));
             this.itemBitmap_.x = (-(this.itemBitmap_.width) / 2) + (WIDTH / 2) + offset.x;
             this.itemBitmap_.y = (-(this.itemBitmap_.height) / 2) + (HEIGHT / 2) + offset.y;
             addChild(this.itemBitmap_);
@@ -147,7 +147,7 @@ package game.marketplace {
 
         private function onMouseOver(e:MouseEvent):void {
             this.removeToolTip();
-            if (this.item_ != -1 && ObjectLibrary._6H_(this.item_) != null) {
+            if (this.item_ != -1 && ObjectLibrary.getIdFromType(this.item_) != null) {
                 this.toolTip_ = new EquipmentToolTip(this.item_, this.gs_.map_.player_, -1, ActorType.NPC, 1, false, this.data_);
                 stage.addChild(this.toolTip_);
             }

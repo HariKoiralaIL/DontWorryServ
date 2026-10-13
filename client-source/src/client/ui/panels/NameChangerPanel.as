@@ -28,7 +28,7 @@ public class NameChangerPanel extends Panel {
             return;
         }
         var player:Player = gs_.map_.player_;
-        this.hasChosenName = player._hv;
+        this.hasChosenName = player.nameChosen_;
         var title:SimpleText;
         if (this.hasChosenName) {
             title = PanelUtil.createLabel("Your name is: \n" + gs_.charList_.name_);

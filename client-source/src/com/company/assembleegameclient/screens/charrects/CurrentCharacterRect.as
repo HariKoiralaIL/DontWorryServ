@@ -57,7 +57,7 @@ import com.company.util.BitmapUtil;
         this._name = _arg1;
         this.character = _arg2;
         this.characterStats = _arg3;
-        this.playerXML = ObjectLibrary._Q_F_[this.character.objectType()];
+        this.playerXML = ObjectLibrary.typeToXML_[this.character.objectType()];
         this.makeSelectContainer();
         this.makeBitmap();
         this.makeClassNameText();

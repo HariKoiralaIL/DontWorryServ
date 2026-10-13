@@ -1,19 +1,9 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.util.offer.Offer
-
 package com.company.assembleegameclient.util.offer {
+
 public class Offer {
 
-    public function Offer(_arg1:String, _arg2:Number, _arg3:int, _arg4:String, _arg5:String, _arg6:String = null):void {
-        this.id_ = _arg1;
-        this.price_ = _arg2;
-        this.realmGold_ = _arg3;
-        this.jwt_ = _arg4;
-        this.data_ = _arg5;
-        this.currency_ = (((_arg6) != null) ? _arg6 : "USD");
-    }
+    private static const DEFAULT_CURRENCY:String = "USD";
+
     public var id_:String;
     public var price_:Number;
     public var realmGold_:int;
@@ -22,6 +12,15 @@ public class Offer {
     public var currency_:String;
     public var tagline:String;
     public var bonus:int;
-}
-}//package com.company.assembleegameclient.util.offer
 
+    public function Offer(id:String, price:Number, realmGold:int, jwt:String, data:String, currency:String = null):void {
+        this.id_ = id;
+        this.price_ = price;
+        this.realmGold_ = realmGold;
+        this.jwt_ = jwt;
+        this.data_ = data;
+        this.currency_ = currency != null ? currency : DEFAULT_CURRENCY;
+    }
+
+}
+}

@@ -22,8 +22,8 @@ public class CharacterToolTip extends ToolTip {
     public function CharacterToolTip(_arg1:String, xml:XML, _0a_h_:ClassStats) {
         super(0x2A2A2A, 1, 0xFFFFFF, 1);
         var _local4:int = int(xml.ObjectType);
-        var xml2:XML = ObjectLibrary._Q_F_[_local4];
-        this.player_ = Player._D_U_(_arg1, xml);
+        var xml2:XML = ObjectLibrary.typeToXML_[_local4];
+        this.player_ = Player.fromCharXML(_arg1, xml);
         this.playerEntry_ = new ui_playerslist(0xB3B3B3, true, this.player_);
         addChild(this.playerEntry_);
         this.hpBar_ = new _0M_Y_(176, 16, 14693428, 0x2D2D2D, "HP");
@@ -34,7 +34,7 @@ public class CharacterToolTip extends ToolTip {
         this.mpBar_.x = 6;
         this.mpBar_.y = 64;
         addChild(this.mpBar_);
-        this.inventory_ = new Inventory(null, this.player_, "Player Inventory", this.player_._9A_, 12, false);
+        this.inventory_ = new Inventory(null, this.player_, "Player Inventory", this.player_.slotTypes_, 12, false);
         this.inventory_.x = 8;
         this.inventory_.y = 88;
         addChild(this.inventory_);
@@ -71,8 +71,8 @@ public class CharacterToolTip extends ToolTip {
     private var nextGoalText_:SimpleText;
 
     override public function draw():void {
-        this.hpBar_.draw(this.player_.HP_, this.player_.maxHP_, this.player_._P_7, this.player_._uR_);
-        this.mpBar_.draw(this.player_.MP_, this.player_.maxMP_, this.player_._0D_G_, this.player_._dt);
+        this.hpBar_.draw(this.player_.HP_, this.player_.maxHP_, this.player_._P_7, this.player_.maxHPMax_);
+        this.mpBar_.draw(this.player_.MP_, this.player_.maxMP_, this.player_._0D_G_, this.player_.maxMPMax_);
         this.inventory_.draw(this.player_.equipment_);
         this.divider_._rs((width - 10), 0x2D2D2D);
         super.draw();

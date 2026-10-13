@@ -86,10 +86,10 @@ package arrows
                 visible = false;
                 return;
             }
-            this.go_._0E_T_(camera);
+            this.go_.computeSortVal(camera);
             var bounds:Rectangle = camera.clipRect_;
-            var dx:Number = this.go_._bY_[0];
-            var dy:Number = this.go_._bY_[1];
+            var dx:Number = this.go_.screenVec_[0];
+            var dy:Number = this.go_.screenVec_[1];
             if (!_E_I_._S_1(camera.clipRect_, 0, 0, dx, dy, this.screenPoint_))
             {
                 this.go_ = null;

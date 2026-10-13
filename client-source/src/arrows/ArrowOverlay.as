@@ -3,7 +3,7 @@ package arrows
     import com.company.assembleegameclient.map.GameCamera;
     import com.company.assembleegameclient.map.GameMap;
     import com.company.assembleegameclient.objects.Player;
-    import com.company.assembleegameclient.objects._ez;
+    import com.company.assembleegameclient.objects.NearbyPlayerTracker;
 
     import flash.display.Sprite;
     import flash.events.Event;
@@ -19,8 +19,8 @@ package arrows
             var arrow:PartyMemberArrow;
             super();
             this.map_ = map;
-            this.partyArrows_ = new Vector.<PartyMemberArrow>(_ez._tn, true);
-            for (var i:int = 0; i < _ez._tn; i++)
+            this.partyArrows_ = new Vector.<PartyMemberArrow>(NearbyPlayerTracker.MAX_LISTED, true);
+            for (var i:int = 0; i < NearbyPlayerTracker.MAX_LISTED; i++)
             {
                 arrow = new PartyMemberArrow();
                 this.partyArrows_[i] = arrow;
@@ -43,21 +43,21 @@ package arrows
             {
                 return;
             }
-            var party:_ez = this.map_.party_;
-            for (var i:int = 0; i < _ez._tn; i++)
+            var party:NearbyPlayerTracker = this.map_.party_;
+            for (var i:int = 0; i < NearbyPlayerTracker.MAX_LISTED; i++)
             {
                 arrow = this.partyArrows_[i];
                 if (arrow.isMouseOver_)
                 {
                     continue;
                 }
-                if (i >= party._X_e.length)
+                if (i >= party.members_.length)
                 {
                     arrow.setGameObject(null);
                     continue;
                 }
-                member = party._X_e[i];
-                if (member._1D_ || member.map_ == null || member._aE_)
+                member = party.members_[i];
+                if (member.unusedFlag_ || member.map_ == null || member.dead_)
                 {
                     arrow.setGameObject(null);
                     continue;

@@ -75,7 +75,7 @@ package com.company.assembleegameclient.ui {
         this.itemBitmap_ = null;
       }
       if(this.item_ != -1) {
-        var _local2:XML = ObjectLibrary._Q_F_[this.item_];
+        var _local2:XML = ObjectLibrary.typeToXML_[this.item_];
         var _local3:Number = 5;
         if (_local2.hasOwnProperty("ScaleValue")) {
           _local3 = _local2.ScaleValue;
@@ -85,7 +85,7 @@ package com.company.assembleegameclient.ui {
           _local4 = ObjectLibrary.getRedrawnTextureFromTypeCustom(this.item_, 80, true, this.item_, true, _local3);
         }
         this.itemBitmap_ = new Bitmap(_local4);
-        var _local5:Point = _H_K_(this.item_, ObjectLibrary._gf(this.item_), false);
+        var _local5:Point = _H_K_(this.item_, ObjectLibrary.getSlotTypeFromType(this.item_), false);
         this.itemBitmap_.x = (-(this.itemBitmap_.width) / 2) + (WIDTH / 2) + _local5.x;
         this.itemBitmap_.y = (-(this.itemBitmap_.height) / 2) + (HEIGHT / 2) + _local5.y;
         addChild(this.itemBitmap_);
@@ -136,7 +136,7 @@ package com.company.assembleegameclient.ui {
 
     private function onMouseOver(e:MouseEvent):void {
       this._9();
-      if(this.item_ != -1 && ObjectLibrary._6H_(this.item_) != null) {
+      if(this.item_ != -1 && ObjectLibrary.getIdFromType(this.item_) != null) {
         this.toolTip_ = new EquipmentToolTip(this.item_, this.gs_.map_.player_, -1, ActorType.NPC, 1, false, this.data_);
         stage.addChild(this.toolTip_);
       }

@@ -6,7 +6,7 @@ import arrows.ArrowOverlay;
 import com.company.assembleegameclient.game.GameSprite;
 import com.company.assembleegameclient.objects.BasicObject;
 import com.company.assembleegameclient.objects.Player;
-import com.company.assembleegameclient.objects._ez;
+import com.company.assembleegameclient.objects.NearbyPlayerTracker;
 
 import flash.display.Sprite;
 import flash.geom.Point;
@@ -38,7 +38,7 @@ public class MapHandler extends Sprite {
     public var squares_:Vector.<Square>;
     public var boDict_:Dictionary;
     public var merchLookup_:Object;
-    public var party_:_ez = null;
+    public var party_:NearbyPlayerTracker = null;
     public var quest_:Quest = null;
     public var weather_:int;
 

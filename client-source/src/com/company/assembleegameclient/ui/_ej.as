@@ -217,10 +217,10 @@ public class _ej extends Sprite {
         var _local9:Number = (mouseY - (this.h_ / 2));
         this._nC_.length = 0;
         for each (_local10 in this.map_.goDict_) {
-            if (!((_local10.props_._ia) || ((_local10 == this.map_.player_)))) {
+            if (!((_local10.props_.noMiniMap_) || ((_local10 == this.map_.player_)))) {
                 _local16 = (_local10 as Player);
                 if (_local16 != null) {
-                    if (this.map_.player_.canBeHitBy(_local16) && _local16._di()) {
+                    if (this.map_.player_.canBeHitBy(_local16) && _local16.isInvisible()) {
                         continue;
                     }
                     if (_local16.isPaused()) {
@@ -228,7 +228,7 @@ public class _ej extends Sprite {
                     } else {
                         if (_local16.inParty) {
                             _local15 = 0xFFFF;
-                        } else if (_local16._N_n) {
+                        } else if (_local16.isFellowGuild_) {
                             _local15 = 0xFF00;
                         } else {
                             _local15 = 0xFFFF00;

@@ -1,26 +1,20 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.objects.GuildChronicle
-
 package com.company.assembleegameclient.objects {
-import client.ui.panels.GuildChroniclePanel;
+    import client.ui.panels.GuildChroniclePanel;
 
-import com.company.assembleegameclient.game.GameSprite;
+    import com.company.assembleegameclient.game.GameSprite;
 
-import client.ui.panels.Panel;
+    import client.ui.panels.Panel;
 
-public class GuildChronicle extends GameObject implements _G_4 {
+    public class GuildChronicle extends GameObject implements IInteractable {
 
-    public function GuildChronicle(_arg1:XML) {
-        super(_arg1);
-        _064 = true;
+        public function GuildChronicle(xml:XML) {
+            super(xml);
+            isInteractive_ = true;
+        }
+
+        public function getPanel(gs:GameSprite):Panel {
+            return (new GuildChroniclePanel(gs));
+        }
+
     }
-
-    public function getPanel(_arg1:GameSprite):Panel {
-        return (new GuildChroniclePanel(_arg1));
-    }
-
-}
 }//package com.company.assembleegameclient.objects
-

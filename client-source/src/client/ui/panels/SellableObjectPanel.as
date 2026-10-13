@@ -68,7 +68,7 @@ public class SellableObjectPanel extends Panel {
     override public function draw():void {
         var player:Player = gs_.map_.player_;
         this.nameText.y = (this.nameText.height > 30) ? 0 : 12;
-        var starsRequired:int = this.sellable._U_R_;
+        var starsRequired:int = this.sellable.rankReq_;
         if (player.numStars_ < starsRequired) {
             this.removeIfPresent(this.buyButton);
             if (this.rankRequiredLabel == null || !contains(this.rankRequiredLabel)) {
@@ -77,10 +77,10 @@ public class SellableObjectPanel extends Panel {
                 this.rankRequiredLabel.y = (HEIGHT - (this.rankRequiredLabel.height / 2)) - 20;
                 addChild(this.rankRequiredLabel);
             }
-        } else if (player.guildRank_ < this.sellable._0F_S_) {
+        } else if (player.guildRank_ < this.sellable.guildRankReq_) {
             this.removeIfPresent(this.buyButton);
             if (this.guildRankLabel == null || !contains(this.guildRankLabel)) {
-                this.guildRankLabel = createGuildRankRequiredText(this.sellable._0F_S_);
+                this.guildRankLabel = createGuildRankRequiredText(this.sellable.guildRankReq_);
                 this.guildRankLabel.x = (WIDTH / 2) - (this.guildRankLabel.width / 2);
                 this.guildRankLabel.y = (HEIGHT - (this.guildRankLabel.height / 2)) - 20;
                 addChild(this.guildRankLabel);

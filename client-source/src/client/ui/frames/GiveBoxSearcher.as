@@ -56,10 +56,10 @@ package client.ui.frames {
         var _local1:Vector.<int> = ObjectLibrary.searchItems(_arg1);
         var l:int = 0;
         for(var p:int = 0; p < _local1.length; p++) {
-          if(ObjectLibrary._6H_(_local1[p]) == null) {
+          if(ObjectLibrary.getIdFromType(_local1[p]) == null) {
             continue;
           }
-          var _local3:XML = ObjectLibrary._Q_F_[_local1[p]];
+          var _local3:XML = ObjectLibrary.typeToXML_[_local1[p]];
           if(_local3.hasOwnProperty("AdminOnly") || _local3.hasOwnProperty("Soulbound")) {
             continue;
           }
@@ -80,7 +80,7 @@ package client.ui.frames {
 
     private function onClickItem(event:MouseEvent):void {
       var _local1:MarketplaceSlot = (event.currentTarget as MarketplaceSlot);
-      var _local3:XML = ObjectLibrary._Q_F_[_local1.item_];
+      var _local3:XML = ObjectLibrary.typeToXML_[_local1.item_];
       if(_local3 == null) {
         return;
       }

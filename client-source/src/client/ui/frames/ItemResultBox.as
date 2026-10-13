@@ -34,7 +34,7 @@ package client.ui.frames {
         private var toolTip_:EquipmentToolTip;
 
         private function addIcon() {
-            var _local1:XML = ObjectLibrary._Q_F_[this.itemType_];
+            var _local1:XML = ObjectLibrary.typeToXML_[this.itemType_];
             var _local2:Number = 5;
             if (_local1.hasOwnProperty("ScaleValue")) {
                 _local2 = _local1.ScaleValue;
@@ -54,7 +54,7 @@ package client.ui.frames {
             _local4.setBold(true);
             _local4.setAlign(TextFormatAlign.CENTER);
             _local4.width = this.width - 10;
-            _local4.text = ObjectLibrary._0D_N_[this.itemType_];
+            _local4.text = ObjectLibrary.typeToDisplayId_[this.itemType_];
             _local4.wordWrap = true;
             if (this.itemData_ != null && this.itemData_.hasOwnProperty("Name") && this.itemData_.Name != "") {
                 _local4.text = this.itemData_.Name;

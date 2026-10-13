@@ -71,7 +71,7 @@ public class DeathScreen extends Sprite {
         this.title = new SimpleText(38, 0xCCCCCC, false, 0, 0, "Myriad Pro");
         this.title.setBold(true);
         this.title.filters = [new DropShadowFilter(0, 0, 0, 0.5, 12, 12)];
-        this.title.text = TITLE_TEMPLATE.replace("${NAME}", characterName).replace("${LEVEL}", level).replace("${TYPE}", ObjectLibrary._0D_N_[classType]);
+        this.title.text = TITLE_TEMPLATE.replace("${NAME}", characterName).replace("${LEVEL}", level).replace("${TYPE}", ObjectLibrary.typeToDisplayId_[classType]);
         this.title.updateMetrics();
         this.title.x = ((800 / 2) - (this.title.width / 2));
         this.title.y = 225;
@@ -95,11 +95,11 @@ public class DeathScreen extends Sprite {
         badgeBackground.filters = [new DropShadowFilter(0, 0, 0, 0.5, 12, 12)];
         badge.addChild(badgeBackground);
         var character:XML = new XML(characterXML);
-        var baseXML:XML = ObjectLibrary._Q_F_[int(character.ObjectType)];
+        var baseXML:XML = ObjectLibrary.typeToXML_[int(character.ObjectType)];
         var skinId:int = int(character.hasOwnProperty("Skin") ? character.Skin : -1);
         var textureXML:XML = baseXML;
         if (skinId != -1) {
-            var skinXML:XML = ObjectLibrary._Q_F_[skinId];
+            var skinXML:XML = ObjectLibrary.typeToXML_[skinId];
             if (skinXML != null) {
                 textureXML = skinXML;
             }

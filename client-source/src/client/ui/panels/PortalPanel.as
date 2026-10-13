@@ -28,15 +28,15 @@ public class PortalPanel extends Panel {
         this.enterButton = new _7f(16, "Enter");
         addChild(this.enterButton);
         // Portal._xq: portal is locked. Otherwise a blocked portal is full.
-        this.statusText = PanelUtil.createLabel(this.portal_._xq ? "Locked" : "Full", 18, 0xFF0000, WIDTH, false);
+        this.statusText = PanelUtil.createLabel(this.portal_.isLocked_ ? "Locked" : "Full", 18, 0xFF0000, WIDTH, false);
         addEventListener(Event.ADDED_TO_STAGE, this.onAddedToStage);
         addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
     }
 
     override public function draw():void {
-        var locked:Boolean = this.portal_._xq;
-        var canEnter:Boolean = this.portal_._09S_;  // Portal._09S_: portal accepts players
-        var portalName:String = this.portal_._include();
+        var locked:Boolean = this.portal_.isLocked_;
+        var canEnter:Boolean = this.portal_.active_;  // Portal._09S_: portal accepts players
+        var portalName:String = this.portal_.getName();
         if (locked && portalName.indexOf(LOCKED_PREFIX) == 0) {
             portalName = portalName.substr(LOCKED_PREFIX.length);
         }

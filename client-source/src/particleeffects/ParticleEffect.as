@@ -40,8 +40,8 @@ package particleeffects {
 
         public function ParticleEffect() {
             super(null);
-            objectId_ = _7y();
-            _P_m = false;
+            objectId_ = getNextFakeObjectId();
+            hasShadow_ = false;
         }
 
         override public function update(time:int, dt:int):Boolean {

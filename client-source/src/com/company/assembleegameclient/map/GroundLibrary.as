@@ -1,5 +1,5 @@
 package com.company.assembleegameclient.map {
-import com.company.assembleegameclient.objects._Z_H_;
+import com.company.assembleegameclient.objects.TextureData;
 import com.company.util.BitmapUtil;
 
 import flash.display.BitmapData;
@@ -19,7 +19,7 @@ public class GroundLibrary {
             var type:int = int(groundXML.@type);
             propsLibrary_[type] = new GroundProperties(groundXML);
             xmlLibrary_[type] = groundXML;
-            typeToTextureData_[type] = new _Z_H_(groundXML);
+            typeToTextureData_[type] = new TextureData(groundXML);
             idToType_[String(groundXML.@id)] = type;
         }
         defaultProps_ = propsLibrary_[0xFF];

@@ -1,62 +1,56 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.objects.SellableObject
-
 package com.company.assembleegameclient.objects {
-import com.company.assembleegameclient.ui.tooltip.ToolTip;
+    import com.company.assembleegameclient.ui.tooltip.ToolTip;
 
-import flash.display.BitmapData;
+    import flash.display.BitmapData;
 
-import client.ui.panels.SellableObjectPanel;
+    import client.ui.panels.SellableObjectPanel;
 
-import com.company.assembleegameclient.game.GameSprite;
+    import com.company.assembleegameclient.game.GameSprite;
 
-import client.ui.panels.Panel;
+    import client.ui.panels.Panel;
 
-public class SellableObject extends GameObject implements _G_4 {
+    public class SellableObject extends GameObject implements IInteractable {
 
-    public function SellableObject(_arg1:XML) {
-        super(_arg1);
-        _064 = true;
+        public function SellableObject(xml:XML) {
+            super(xml);
+            isInteractive_ = true;
+        }
+        public var price_:int = 0;
+        public var currency_:int = -1;
+        public var rankReq_:int = 0;
+        public var guildRankReq_:int = -1;
+
+        public function setPrice(price:int):void {
+            this.price_ = price;
+        }
+
+        public function setCurrency(currency:int):void {
+            this.currency_ = currency;
+        }
+
+        public function setRankReq(rank:int):void {
+            this.rankReq_ = rank;
+        }
+
+        public function soldObjectName():String {
+            return (null);
+        }
+
+        public function soldObjectInternalName():String {
+            return (null);
+        }
+
+        public function getTooltip():ToolTip {
+            return (null);
+        }
+
+        public function getIcon():BitmapData {
+            return (null);
+        }
+
+        public function getPanel(gs:GameSprite):Panel {
+            return (new SellableObjectPanel(gs, this));
+        }
+
     }
-    public var price_:int = 0;
-    public var currency_:int = -1;
-    public var _U_R_:int = 0;
-    public var _0F_S_:int = -1;
-
-    public function setPrice(_arg1:int):void {
-        this.price_ = _arg1;
-    }
-
-    public function _gF_(_arg1:int):void {
-        this.currency_ = _arg1;
-    }
-
-    public function setRankReq(_arg1:int):void {
-        this._U_R_ = _arg1;
-    }
-
-    public function soldObjectName():String {
-        return (null);
-    }
-
-    public function soldObjectInternalName():String {
-        return (null);
-    }
-
-    public function getTooltip():ToolTip {
-        return (null);
-    }
-
-    public function getIcon():BitmapData {
-        return (null);
-    }
-
-    public function getPanel(_arg1:GameSprite):Panel {
-        return (new SellableObjectPanel(_arg1, this));
-    }
-
-}
 }//package com.company.assembleegameclient.objects
-

@@ -108,9 +108,9 @@ public class CharListEvent extends Event {
     }
 
     public function isAvailable(classType:int):Boolean {
-        var classXML:XML = ObjectLibrary._Q_F_[classType];
+        var classXML:XML = ObjectLibrary.typeToXML_[classType];
         for each (var requirement:XML in classXML.UnlockLevel) {
-            var requiredType:int = ObjectLibrary._pb[requirement.toString()];
+            var requiredType:int = ObjectLibrary.idToType_[requirement.toString()];
             if (this.bestLevel(requiredType) < int(requirement.@level)) {
                 return false;
             }
@@ -132,8 +132,8 @@ public class CharListEvent extends Event {
      */
     public function classesUnlockedBy(classType:int, level:int):Array {
         var result:Array = [];
-        for (var i:int = 0; i < ObjectLibrary._tj.length; i++) {
-            var classXML:XML = ObjectLibrary._tj[i];
+        for (var i:int = 0; i < ObjectLibrary.playerChars_.length; i++) {
+            var classXML:XML = ObjectLibrary.playerChars_[i];
             var type:int = int(classXML.@type);
             if (this.isAvailable(type)) {
                 continue;
@@ -141,7 +141,7 @@ public class CharListEvent extends Event {
             var onlyThisMissing:Boolean = true;
             var thisMissing:Boolean = false;
             for each (var requirement:XML in classXML.UnlockLevel) {
-                var requiredType:int = ObjectLibrary._pb[requirement.toString()];
+                var requiredType:int = ObjectLibrary.idToType_[requirement.toString()];
                 var requiredLevel:int = int(requirement.@level);
                 if (this.bestLevel(requiredType) < requiredLevel) {
                     if (requiredType != classType || requiredLevel != level) {
@@ -282,8 +282,8 @@ public class CharListEvent extends Event {
     private function reportClassesUnlocked():void {
         var acct:Account = Account.getInstance();
         var unlocked:int = 0;
-        for (var i:int = 0; i < ObjectLibrary._tj.length; i++) {
-            var classXML:XML = ObjectLibrary._tj[i];
+        for (var i:int = 0; i < ObjectLibrary.playerChars_.length; i++) {
+            var classXML:XML = ObjectLibrary.playerChars_[i];
             if (this.isAvailable(int(classXML.@type))) {
                 acct.reportIntStat(classXML.@id + "Unlocked", 1);
                 unlocked++;

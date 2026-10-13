@@ -73,7 +73,7 @@ package com.company.assembleegameclient.ui {
       this.Magic_bar.x = 12;
       this.Magic_bar.y = 78;
       addChild(this.Magic_bar);
-      this.equips_ = new Inventory(_arg1, _arg2, "Inventory", _arg2._9A_.slice(0, 4), 4, true, 0, true);
+      this.equips_ = new Inventory(_arg1, _arg2, "Inventory", _arg2.slotTypes_.slice(0, 4), 4, true, 0, true);
       this.equips_.x = 14;
       this.equips_.y = 104;
       addChild(this.equips_);
@@ -94,7 +94,7 @@ package com.company.assembleegameclient.ui {
       this._086.x = 6;
       this._086.y = 7;
       this.statTab_.holder_.addChild(this._086);
-      this._e9 = new Inventory(_arg1, _arg2, "Inventory", _arg2._9A_.slice(4), 8, true, 4);
+      this._e9 = new Inventory(_arg1, _arg2, "Inventory", _arg2.slotTypes_.slice(4), 8, true, 4);
       this._e9.x = 7;
       this._e9.y = 7;
       this.invTab_.holder_.addChild(this._e9);
@@ -305,8 +305,8 @@ package com.company.assembleegameclient.ui {
         this.Fame_bar.draw(this.go_._0L_o, this.go_._n8, 0);
       }
       //this.tabBG_.draw(this.invTab_.selected_);
-      this.Health_bar.draw(this.go_.HP_, this.go_.maxHP_, this.go_._P_7, this.go_._uR_);
-      this.Magic_bar.draw(this.go_.MP_, this.go_.maxMP_, this.go_._0D_G_, this.go_._dt);
+      this.Health_bar.draw(this.go_.HP_, this.go_.maxHP_, this.go_._P_7, this.go_.maxHPMax_);
+      this.Magic_bar.draw(this.go_.MP_, this.go_.maxMP_, this.go_._0D_G_, this.go_.maxMPMax_);
       this._086.draw(this.go_);
       this.equips_.draw(this.go_.equipment_.slice(0, 4));
       this._e9.draw(this.go_.equipment_.slice(4));

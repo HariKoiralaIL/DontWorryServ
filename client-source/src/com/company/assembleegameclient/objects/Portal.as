@@ -1,43 +1,37 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.objects.Portal
-
 package com.company.assembleegameclient.objects {
 
-import flash.display.IGraphicsData;
+    import flash.display.IGraphicsData;
 
-import com.company.assembleegameclient.map.GameCamera;
+    import com.company.assembleegameclient.map.GameCamera;
 
-import client.ui.panels.PortalPanel;
+    import client.ui.panels.PortalPanel;
 
-import com.company.assembleegameclient.game.GameSprite;
+    import com.company.assembleegameclient.game.GameSprite;
 
-import client.ui.panels.Panel;
+    import client.ui.panels.Panel;
 
-public class Portal extends GameObject implements _G_4 {
+    public class Portal extends GameObject implements IInteractable {
 
-    public function Portal(_arg1:XML) {
-        super(_arg1);
-        _064 = true;
-        this._0J_A_ = _arg1.hasOwnProperty("NexusPortal");
-        this._xq = _arg1.hasOwnProperty("LockedPortal");
-    }
-    public var _0J_A_:Boolean;
-    public var _xq:Boolean;
-    public var _09S_:Boolean = true;
-
-    override public function draw(_arg1:Vector.<IGraphicsData>, _arg2:GameCamera, _arg3:int):void {
-        super.draw(_arg1, _arg2, _arg3);
-        if (this._0J_A_) {
-            _oL_(_arg1, _arg2);
+        public function Portal(xml:XML) {
+            super(xml);
+            isInteractive_ = true;
+            this.isNexusPortal_ = xml.hasOwnProperty("NexusPortal");
+            this.isLocked_ = xml.hasOwnProperty("LockedPortal");
         }
-    }
+        public var isNexusPortal_:Boolean;
+        public var isLocked_:Boolean;
+        public var active_:Boolean = true;
 
-    public function getPanel(_arg1:GameSprite):Panel {
-        return (new PortalPanel(_arg1, this));
-    }
+        override public function draw(graphicsData:Vector.<IGraphicsData>, camera:GameCamera, time:int):void {
+            super.draw(graphicsData, camera, time);
+            if (this.isNexusPortal_) {
+                drawName(graphicsData, camera);
+            }
+        }
 
-}
+        public function getPanel(gs:GameSprite):Panel {
+            return (new PortalPanel(gs, this));
+        }
+
+    }
 }//package com.company.assembleegameclient.objects
-

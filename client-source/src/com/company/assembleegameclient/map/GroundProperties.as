@@ -1,5 +1,5 @@
 package com.company.assembleegameclient.map {
-import com.company.assembleegameclient.objects._Z_H_;
+import com.company.assembleegameclient.objects.TextureData;
 import com.company.util.BitmapUtil;
 
 import flash.display.BitmapData;
@@ -24,11 +24,11 @@ public class GroundProperties {
     public var randomOffset_:Boolean = false;
     public var hasEdge_:Boolean = false;
     public var sameTypeEdgeMode_:Boolean = false;
-    public var topData_:_Z_H_ = null;
+    public var topData_:TextureData = null;
     public var topAnimate_:AnimateProperties = null;
-    private var edgeData_:_Z_H_ = null;
-    private var cornerData_:_Z_H_ = null;
-    private var innerCornerData_:_Z_H_ = null;
+    private var edgeData_:TextureData = null;
+    private var cornerData_:TextureData = null;
+    private var innerCornerData_:TextureData = null;
     private var edgeTextures_:Vector.<BitmapData> = null;
     private var innerCornerTextures_:Vector.<BitmapData> = null;
 
@@ -63,17 +63,17 @@ public class GroundProperties {
         this.randomOffset_ = xml.hasOwnProperty("RandomOffset");
         if (xml.hasOwnProperty("Edge")) {
             this.hasEdge_ = true;
-            this.edgeData_ = new _Z_H_(XML(xml.Edge));
+            this.edgeData_ = new TextureData(XML(xml.Edge));
             if (xml.hasOwnProperty("Corner")) {
-                this.cornerData_ = new _Z_H_(XML(xml.Corner));
+                this.cornerData_ = new TextureData(XML(xml.Corner));
             }
             if (xml.hasOwnProperty("InnerCorner")) {
-                this.innerCornerData_ = new _Z_H_(XML(xml.InnerCorner));
+                this.innerCornerData_ = new TextureData(XML(xml.InnerCorner));
             }
         }
         this.sameTypeEdgeMode_ = xml.hasOwnProperty("SameTypeEdgeMode");
         if (xml.hasOwnProperty("Top")) {
-            this.topData_ = new _Z_H_(XML(xml.Top));
+            this.topData_ = new TextureData(XML(xml.Top));
             this.topAnimate_ = new AnimateProperties();
             if (xml.hasOwnProperty("TopAnimate")) {
                 this.topAnimate_.parse(XML(xml.TopAnimate));

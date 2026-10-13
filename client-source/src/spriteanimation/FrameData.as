@@ -1,6 +1,6 @@
 package spriteanimation {
 
-import com.company.assembleegameclient.objects._Z_H_;
+import com.company.assembleegameclient.objects.TextureData;
 
 /** One frame of an animation, parsed from a <Frame> XML node. */
 public class FrameData {
@@ -9,11 +9,11 @@ public class FrameData {
     public var duration:int;
 
     /** Source of the texture(s) shown during this frame. */
-    public var textureData:_Z_H_;
+    public var textureData:TextureData;
 
     public function FrameData(xml:XML) {
         this.duration = int(Number(xml.@time) * 1000);
-        this.textureData = new _Z_H_(xml);
+        this.textureData = new TextureData(xml);
     }
 
 }

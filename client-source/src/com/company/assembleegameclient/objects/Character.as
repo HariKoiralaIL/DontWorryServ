@@ -1,35 +1,28 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.objects.Character
-
 package com.company.assembleegameclient.objects {
-import audio.SoundEffects;
+    import audio.SoundEffects;
 
+    public class Character extends GameObject {
 
-public class Character extends GameObject {
-
-    public function Character(_arg1:XML) {
-        super(_arg1);
-        this._06w = ((_arg1.hasOwnProperty("HitSound")) ? String(_arg1.HitSound) : "monster/default_hit");
-        SoundEffects.load(this._06w);
-        this._0L_g = ((_arg1.hasOwnProperty("DeathSound")) ? String(_arg1.DeathSound) : "monster/default_death");
-        SoundEffects.load(this._0L_g);
-    }
-    public var _07K_:int = 0;
-    public var damageType_:uint = 0;
-    public var _06w:String;
-    public var _0L_g:String;
-
-    override public function damage(_arg1:int, _arg2:int, _arg3:Vector.<uint>, _arg4:Boolean, _arg5:Projectile):void {
-        super.damage(_arg1, _arg2, _arg3, _arg4, _arg5);
-        if (_aE_) {
-            SoundEffects.play(this._0L_g);
-        } else {
-            SoundEffects.play(this._06w);
+        public function Character(xml:XML) {
+            super(xml);
+            this.hitSound_ = ((xml.hasOwnProperty("HitSound")) ? String(xml.HitSound) : "monster/default_hit");
+            SoundEffects.load(this.hitSound_);
+            this.deathSound_ = ((xml.hasOwnProperty("DeathSound")) ? String(xml.DeathSound) : "monster/default_death");
+            SoundEffects.load(this.deathSound_);
         }
+        public var unusedInt_:int = 0;
+        public var damageType_:uint = 0;
+        public var hitSound_:String;
+        public var deathSound_:String;
+
+        override public function damage(itemType:int, damage:int, effects:Vector.<uint>, kill:Boolean, proj:Projectile):void {
+            super.damage(itemType, damage, effects, kill, proj);
+            if (dead_) {
+                SoundEffects.play(this.deathSound_);
+            } else {
+                SoundEffects.play(this.hitSound_);
+            }
+        }
+
     }
-
-}
 }//package com.company.assembleegameclient.objects
-

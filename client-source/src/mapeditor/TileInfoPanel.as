@@ -84,7 +84,7 @@ public class TileInfoPanel extends Sprite {
         var tile:MapTile = this.map_.getTile(selection.x, selection.y);
         var types:Vector.<int> = ((tile == null) ? MapLayer.EMPTY_TYPES : tile.types_);
         var groundName:String = ((types[MapLayer.GROUND] == -1) ? "None" : GroundLibrary.getIdFromType(types[MapLayer.GROUND]));
-        var objectName:String = ((types[MapLayer.OBJECT] == -1) ? "None" : ObjectLibrary._6H_(types[MapLayer.OBJECT]));
+        var objectName:String = ((types[MapLayer.OBJECT] == -1) ? "None" : ObjectLibrary.getIdFromType(types[MapLayer.OBJECT]));
         var regionName:String = ((types[MapLayer.REGION] == -1) ? "None" : RegionLibrary.getIdFromType(types[MapLayer.REGION]));
         var customName:String = (((tile == null) || (tile.objectName_ == null)) ? "" : ((" (" + tile.objectName_) + ")"));
         this.tileText_.text = ((((((((("<span class='in'>" + "Ground: ") + groundName) + "\nObject: ") + objectName) + customName) + "\nRegion: ") + regionName) + "</span>"));

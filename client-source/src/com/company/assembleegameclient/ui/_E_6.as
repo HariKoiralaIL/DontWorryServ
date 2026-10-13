@@ -81,7 +81,7 @@ public class _E_6 extends Slot {
         if (type_ == any_) {
             return (true);
         }
-        var _local2:int = ObjectLibrary._gf(_arg1);
+        var _local2:int = ObjectLibrary.getSlotTypeFromType(_arg1);
         return ((type_ == _local2));
     }
 
@@ -111,7 +111,7 @@ public class _E_6 extends Slot {
 
     public function _0E_J_():void {
         this._X_6();
-        var _local1:XML = ObjectLibrary._Q_F_[this.objectType_];
+        var _local1:XML = ObjectLibrary.typeToXML_[this.objectType_];
         if ((((this.objectType_ == -1)) || ((type_ == any_)))) {
             this._cX_ = false;
         } else {
@@ -132,7 +132,7 @@ public class _E_6 extends Slot {
         if ((((this.objectType_ < 0)) || ((_local1 == null)))) {
             return;
         }
-        var _local2:int = ObjectLibrary._gf(this.objectType_);
+        var _local2:int = ObjectLibrary.getSlotTypeFromType(this.objectType_);
         var _local3:Point = _H_K_(this.objectType_, _local2, false);
         this._X_B_ = new ui_items(this.objectType_, this, this.itemData_);
         this._X_B_.x = ((WIDTH / 2) + _local3.x);
@@ -152,7 +152,7 @@ public class _E_6 extends Slot {
 
     public function attemptUse():void {
         var tmp:InvTabs
-        var _local1:XML = ObjectLibrary._Q_F_[this.objectType_];
+        var _local1:XML = ObjectLibrary.typeToXML_[this.objectType_];
         if (_local1 == null) {
             return;
         }
@@ -182,7 +182,7 @@ public class _E_6 extends Slot {
             return;
         }
         var _local1:Player = this._e9.gs_.map_.player_;
-        var _local2:Boolean = ObjectLibrary._d1(this.objectType_, _local1) && ObjectLibrary.checkLevelRequirement(this.objectType_, _local1);
+        var _local2:Boolean = ObjectLibrary.canUseItem(this.objectType_, _local1) && ObjectLibrary.checkLevelRequirement(this.objectType_, _local1);
         if (((((((!((this.objectType_ == -1))) && ((_local2 == false)))) && (!((this._X_B_ == null))))) && ((this._X_B_._e == false)))) {
             this._D_s.alpha = 1;
         } else {
@@ -227,7 +227,7 @@ public class _E_6 extends Slot {
 
     private function _H_T_():void {
         var _local1:Boolean = this._e9._mK_();
-        if (ObjectLibrary._6H_(this.objectType_) != null)
+        if (ObjectLibrary.getIdFromType(this.objectType_) != null)
             toolTip_ = new EquipmentToolTip(this.objectType_, (((this._e9.gs_) != null) ? this._e9.gs_.map_.player_ : null), (((this._e9._iA_) != null) ? this._e9._iA_.objectType_ : -1), this._Y_K_, this._X_B_._03f.id_, _local1, this.itemData_);
         else
             this._i9();
@@ -267,13 +267,13 @@ public class _E_6 extends Slot {
         var _local7:_E_6;
         if (this._I_N_()) {
             _local1 = this._v5();
-            _local2 = ObjectLibrary._01j(this.objectType_, _local1);
-            _local3 = ObjectLibrary._Q_F_[this.objectType_];
+            _local2 = ObjectLibrary.fitsPlayerSlots(this.objectType_, _local1);
+            _local3 = ObjectLibrary.typeToXML_[this.objectType_];
             _local4 = _local3.SlotType;
             if (_local2) {
                 _local5 = 0;
                 while (_local5 < 4) {
-                    if (_local1._9A_[_local5] == _local4) {
+                    if (_local1.slotTypes_[_local5] == _local4) {
                         _local6 = this._A_P_();
                         _local7 = _local6.slots_[_local5];
                         this._0A_v(_local7);
@@ -296,14 +296,14 @@ public class _E_6 extends Slot {
         var _local6:Inventory;
         var _local7:_E_6;
         var _local1:Player = this._v5();
-        var _local2:Boolean = ObjectLibrary._01j(this.objectType_, _local1);
+        var _local2:Boolean = ObjectLibrary.fitsPlayerSlots(this.objectType_, _local1);
         var _local8:Boolean = ObjectLibrary.checkLevelRequirement(this.objectType_, _local1);
-        var _local3:XML = ObjectLibrary._Q_F_[this.objectType_];
+        var _local3:XML = ObjectLibrary.typeToXML_[this.objectType_];
         var _local4:int = _local3.SlotType;
         if (_local2 && _local8) {
             _local5 = 0;
             while (_local5 < 4) {
-                if (_local1._9A_[_local5] == _local4) {
+                if (_local1.slotTypes_[_local5] == _local4) {
                     _local6 = this._A_P_();
                     _local7 = _local6.slots_[_local5];
                     this._0A_v(_local7);

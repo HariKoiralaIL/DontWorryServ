@@ -100,13 +100,13 @@ public class ClassToolTip extends ToolTip {
             this.unlockText_.wordWrap = false;
             this.unlockText_.multiline = true;
             for each (xml in xml2.UnlockLevel) {
-                _local12 = ObjectLibrary._pb[xml.toString()];
+                _local12 = ObjectLibrary.idToType_[xml.toString()];
                 _local13 = int(xml.@level);
                 if (server_list.bestLevel(_local12) < int(xml.@level)) {
                     if (this.unlockText_.text != "") {
                         this.unlockText_.text = (this.unlockText_.text + "\n");
                     }
-                    this.unlockText_.text = (this.unlockText_.text + ((("Reach Level " + _local13) + " with ") + ObjectLibrary._0D_N_[_local12]));
+                    this.unlockText_.text = (this.unlockText_.text + ((("Reach Level " + _local13) + " with ") + ObjectLibrary.typeToDisplayId_[_local12]));
                 }
             }
             this.unlockText_.border = false;

@@ -120,12 +120,12 @@ public class GameInputHandler {
             return;
         }
         if (this.inputEnabled) {
-            player._vr(
+            player.setRelativeMovement(
                 (this.rotateRightHeld ? 1 : 0) - (this.rotateLeftHeld ? 1 : 0),
                 (this.moveRightHeld ? 1 : 0) - (this.moveLeftHeld ? 1 : 0),
                 (this.moveDownHeld ? 1 : 0) - (this.moveUpHeld ? 1 : 0));
         } else {
-            player._vr(0, 0, 0);
+            player.setRelativeMovement(0, 0, 0);
         }
     }
 
@@ -211,7 +211,7 @@ public class GameInputHandler {
             return;
         }
         doneAction(this.gs_, Tutorial.ATTACK);
-        player._O_7(Math.atan2(event.localY, event.localX)); // also handles the (Unstable) debuff
+        player.attemptAttackAngle(Math.atan2(event.localY, event.localX)); // also handles the (Unstable) debuff
         this.mouseDown = true;
     }
 
@@ -249,7 +249,7 @@ public class GameInputHandler {
         if (this.inputEnabled && (this.mouseDown || this.autofire)) {
             var player:Player = this.gs_.map_.player_;
             if (player != null) {
-                player._O_7(Math.atan2(this.gs_.map_.mouseY, this.gs_.map_.mouseX));
+                player.attemptAttackAngle(Math.atan2(this.gs_.map_.mouseY, this.gs_.map_.mouseX));
             }
         }
     }

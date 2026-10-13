@@ -70,10 +70,10 @@ package game.marketplace {
             var count:int = 0;
             for (var i:int = 0; i < matches.length; i++) {
                 var type:int = matches[i];
-                if (ObjectLibrary._6H_(type) == null) {
+                if (ObjectLibrary.getIdFromType(type) == null) {
                     continue;
                 }
-                var xml:XML = ObjectLibrary._Q_F_[type];
+                var xml:XML = ObjectLibrary.typeToXML_[type];
                 if (xml.hasOwnProperty("AdminOnly") || xml.hasOwnProperty("Soulbound")) {
                     continue;
                 }
@@ -113,7 +113,7 @@ package game.marketplace {
             if (this.inventory_.equipment_.length >= MAX_ITEMS) {
                 return;
             }
-            var xml:XML = ObjectLibrary._Q_F_[slot.item_];
+            var xml:XML = ObjectLibrary.typeToXML_[slot.item_];
             if (xml == null) {
                 return;
             }

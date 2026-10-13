@@ -56,7 +56,7 @@ package menus
             var target:Player;
             for each (candidate in this.players_)
             {
-                if (localPlayer._0D_X_(candidate))
+                if (localPlayer.canTeleportTo(candidate))
                 {
                     target = candidate;
                     break;

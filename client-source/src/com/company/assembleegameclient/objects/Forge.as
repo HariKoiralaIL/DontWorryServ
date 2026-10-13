@@ -4,15 +4,15 @@ package com.company.assembleegameclient.objects {
 
     import com.company.assembleegameclient.game.GameSprite;
 
-    public class Forge extends GameObject implements _G_4 {
+    public class Forge extends GameObject implements IInteractable {
 
-        public function Forge(param1:XML) {
-            super(param1);
-            _064 = true;
+        public function Forge(xml:XML) {
+            super(xml);
+            isInteractive_ = true;
         }
 
-        public function getPanel(param1:GameSprite):Panel {
-            return new ForgePanel(param1, this);
+        public function getPanel(gs:GameSprite):Panel {
+            return new ForgePanel(gs, this);
         }
     }
 }

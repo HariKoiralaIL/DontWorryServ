@@ -41,9 +41,9 @@ package maploading
 
         public static function createObject(objectData:Object):GameObject
         {
-            var objectType:int = ObjectLibrary._pb[objectData["id"]];
-            var obj:GameObject = ObjectLibrary._075(objectType);
-            obj.size_ = objectData.hasOwnProperty("size") ? objectData["size"] : obj.props_._0M_t();
+            var objectType:int = ObjectLibrary.idToType_[objectData["id"]];
+            var obj:GameObject = ObjectLibrary.getObjectFromType(objectType);
+            obj.size_ = objectData.hasOwnProperty("size") ? objectData["size"] : obj.props_.getSize();
             return obj;
         }
 
@@ -79,7 +79,7 @@ package maploading
                         for each (objectData in objectsData)
                         {
                             obj = createObject(objectData);
-                            obj.objectId_ = BasicObject._7y();
+                            obj.objectId_ = BasicObject.getNextFakeObjectId();
                             map.addObj(obj, x + 0.5, y + 0.5);
                         }
                     }

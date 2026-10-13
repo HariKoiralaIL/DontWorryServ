@@ -15,7 +15,7 @@ package particleeffects {
             if (timeLeft_ <= 0) {
                 return false;
             }
-            if (((_0H_B_.obj_) && (_0H_B_.obj_.props_.static_))) {
+            if (((square_.obj_) && (square_.obj_.props_.static_))) {
                 return false;
             }
             var jitterX:Number = (Math.random() * this.spread_);

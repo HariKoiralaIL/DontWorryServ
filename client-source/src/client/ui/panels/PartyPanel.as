@@ -1,7 +1,7 @@
 package client.ui.panels {
 import com.company.assembleegameclient.game.GameSprite;
 import com.company.assembleegameclient.objects.Player;
-import com.company.assembleegameclient.objects._ez;
+import com.company.assembleegameclient.objects.NearbyPlayerTracker;
 import com.company.assembleegameclient.ui.tooltip.PlayerToolTip;
 import com.company.assembleegameclient.ui.ui_playerslist;
 import com.company.util.MoreColorUtil;
@@ -28,7 +28,7 @@ public class PartyPanel extends Panel {
 
     public function PartyPanel(gs:GameSprite) {
         super(gs);
-        this.memberSlots = new Vector.<ui_playerslist>(_ez._tn, true);
+        this.memberSlots = new Vector.<ui_playerslist>(NearbyPlayerTracker.MAX_LISTED, true);
         for (var i:int = 0; i < SLOT_POSITIONS.length; i++) {
             this.memberSlots[i] = this.createMemberSlot(SLOT_POSITIONS[i][0], SLOT_POSITIONS[i][1]);
         }
@@ -38,7 +38,7 @@ public class PartyPanel extends Panel {
 
     override public function draw():void {
         var slot:ui_playerslist;
-        var party:_ez = gs_.map_.party_;
+        var party:NearbyPlayerTracker = gs_.map_.party_;
         if (party == null) {
             for each (slot in this.memberSlots) {
                 slot.draw(null);
@@ -49,12 +49,12 @@ public class PartyPanel extends Panel {
         // so the tooltip/menu target doesn't change under the cursor.
         var keepSlotPlayers:Boolean = this.isHovering || (this.playerMenu != null && this.playerMenu.parent != null);
         var blinkTime:int = 0;
-        for (var i:int = 0; i < _ez._tn; i++) {
+        for (var i:int = 0; i < NearbyPlayerTracker.MAX_LISTED; i++) {
             var member:Player;
             if (keepSlotPlayers) {
                 member = this.memberSlots[i].go_ as Player;
             } else {
-                member = party._X_e[i];
+                member = party.members_[i];
             }
             if (member != null && member.map_ == null) {
                 member = null;

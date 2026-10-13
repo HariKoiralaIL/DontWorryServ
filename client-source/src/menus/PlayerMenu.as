@@ -32,13 +32,13 @@ package menus
                 this.addTextOption(4, "Mute", this.onMute);
                 this.addTextOption(3, "UnMute", this.onUnmute);
             }
-            if (this.gs_.map_.allowPlayerTeleport_ && this.player_._0D_X_(this.player_))
+            if (this.gs_.map_.allowPlayerTeleport_ && this.player_.canTeleportTo(this.player_))
             {
                 teleportOption = new TeleportMenuOption(this.gs_.map_.player_);
                 teleportOption.addEventListener(MouseEvent.CLICK, this.onTeleport);
                 addOption(teleportOption);
             }
-            if (this.player_._0D_X_(this.player_))
+            if (this.player_.canTeleportTo(this.player_))
             {
                 this.addTextOption(4, "Tell", this.onTell);
             }
@@ -59,7 +59,7 @@ package menus
                 this.addTextOption(1, "Unlock", this.onUnlock);
             }
             this.addTextOption(7, "Trade", this.onTrade);
-            if (!this.player_._0M_w)
+            if (!this.player_.isIgnored_)
             {
                 this.addTextOption(8, "Ignore", this.onIgnore);
             }

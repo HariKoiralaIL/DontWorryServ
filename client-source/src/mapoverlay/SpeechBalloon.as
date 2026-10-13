@@ -98,7 +98,7 @@ public class SpeechBalloon extends Sprite implements IMapOverlayElement {
         if (elapsed > this.lifetime_ || (this.go_ != null && this.go_.map_ == null)) {
             return false;
         }
-        if (this.go_ == null || !this.go_._1D_) {
+        if (this.go_ == null || !this.go_.unusedFlag_) {
             visible = false;
             return true;
         }
@@ -107,8 +107,8 @@ public class SpeechBalloon extends Sprite implements IMapOverlayElement {
             return true;
         }
         visible = true;
-        x = int((this.go_._bY_[0] + this.offset.x));
-        y = int((this.go_._bY_[1] + this.offset.y));
+        x = int((this.go_.screenVec_[0] + this.offset.x));
+        y = int((this.go_.screenVec_[1] + this.offset.y));
         return true;
     }
 

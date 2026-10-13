@@ -42,7 +42,7 @@ package client.ui.frames {
     private var effect_:TextInput;
 
     private function addIcon() {
-      var _local1:XML = ObjectLibrary._Q_F_[this.itemType_];
+      var _local1:XML = ObjectLibrary.typeToXML_[this.itemType_];
       var _local2:Number = 5;
       if (_local1.hasOwnProperty("ScaleValue")) {
         _local2 = _local1.ScaleValue;
@@ -96,7 +96,7 @@ package client.ui.frames {
 
     private function onMouseOver(e:MouseEvent):void {
       this.removeTooltip();
-      if(this.itemType_ != -1 && ObjectLibrary._6H_(this.itemType_) != null) {
+      if(this.itemType_ != -1 && ObjectLibrary.getIdFromType(this.itemType_) != null) {
         this.toolTip_ = new EquipmentToolTip(this.itemType_, this.gs_.map_.player_, -1, ActorType.NPC, 1, false, this.itemData_);
         stage.addChild(this.toolTip_);
       }

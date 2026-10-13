@@ -62,15 +62,15 @@ package com.company.assembleegameclient.ui.tooltip {
       this.stackCount_ = stackCount;
       this.ownedByPlayer_ = ownedByPlayer;
       this.itemData_ = itemData;
-      this.playerCanUse_ = (player != null ? ObjectLibrary._d1(objectType, player) : false);
+      this.playerCanUse_ = (player != null ? ObjectLibrary.canUseItem(objectType, player) : false);
       this.meetsLevel = ObjectLibrary.checkLevelRequirement(objectType, player);
       var _local7:uint = ((((this.playerCanUse_ && this.meetsLevel) || ((this.player_ == null)))) ? 0x2A2A2A : 5578255);
       var _local8:uint = ((((this.playerCanUse_ && this.meetsLevel) || ((player == null)))) ? 0x9B9B9B : 10965039);
       super(_local7, 1, _local8, 1, true);
       this.slotHandlers_ = new SlotHandlers();
       this.objectType_ = objectType;
-      this.itemXml_ = ObjectLibrary._Q_F_[objectType];
-      this.playerHasSlot_ = this.player_ != null ? ObjectLibrary._01j(this.objectType_, this.player_) : false;
+      this.itemXml_ = ObjectLibrary.typeToXML_[objectType];
+      this.playerHasSlot_ = this.player_ != null ? ObjectLibrary.fitsPlayerSlots(this.objectType_, this.player_) : false;
       this.effects_ = new Vector.<Effect>();
       this.containerType_ = containerType;
       this.slotType_ = int(this.itemXml_.SlotType);
@@ -81,8 +81,8 @@ package com.company.assembleegameclient.ui.tooltip {
         if (this.playerHasSlot_) {
           _local9 = 0;
           while (_local9 < 4) {
-            if ((((this.slotType_ == this.player_._9A_[_local9])) && (!((this.player_.equipment_[_local9] == -1))))) {
-              this.curItemXML = ObjectLibrary._Q_F_[this.player_.equipment_[_local9]];
+            if ((((this.slotType_ == this.player_.slotTypes_[_local9])) && (!((this.player_.equipment_[_local9] == -1))))) {
+              this.curItemXML = ObjectLibrary.typeToXML_[this.player_.equipment_[_local9]];
               this.curItemData = this.player_.equipData_[_local9];
               break;
             }
@@ -187,7 +187,7 @@ package com.company.assembleegameclient.ui.tooltip {
     }
 
     private function initIcon():void {
-      var xml:XML = ObjectLibrary._Q_F_[this.objectType_];
+      var xml:XML = ObjectLibrary.typeToXML_[this.objectType_];
       var _local2:Number = 5;
       if (xml.hasOwnProperty("ScaleValue")) {
         _local2 = xml.ScaleValue;
@@ -262,7 +262,7 @@ package com.company.assembleegameclient.ui.tooltip {
       this.nameText_ = new SimpleText(fontSize + 2, _local1, false, (((TOOLTIP_WIDTH - this.icon_.width) - 4) - 30), 0, fontName);
       this.nameText_.setBold(true);
       this.nameText_.wordWrap = true;
-      this.nameText_.text = ObjectLibrary._0D_N_[this.objectType_];
+      this.nameText_.text = ObjectLibrary.typeToDisplayId_[this.objectType_];
       if(this.itemData_ != null && this.itemData_.hasOwnProperty("Name") && this.itemData_.Name != "") {
         this.nameText_.text = this.itemData_.Name;
       }
@@ -574,7 +574,7 @@ package com.company.assembleegameclient.ui.tooltip {
       if (this.itemData_ != null && this.itemData_.hasOwnProperty("Effect") && this.itemData_.Effect != "") {
         this.specialInfo_.push(new Restriction("Effect: " + this.itemData_.Effect, 0xB3B3B3, false));
       }
-      if (this.itemXml_.hasOwnProperty("Material") && !(this.containerType_ == ObjectLibrary._pb["Crafting Station"])) {
+      if (this.itemXml_.hasOwnProperty("Material") && !(this.containerType_ == ObjectLibrary.idToType_["Crafting Station"])) {
         this.specialInfo_.push(new Restriction("Crafting Material", 16549442, true));
       }
       if (this.itemXml_.hasOwnProperty("Soulbound") || (this.itemData_ != null && this.itemData_.hasOwnProperty("Soulbound") && this.itemData_.Soulbound == true)) {
@@ -589,7 +589,7 @@ package com.company.assembleegameclient.ui.tooltip {
       var _local5:int;
       this.restrictions_ = new Vector.<Restriction>();
       var _local6:Boolean = (this.itemData_ != null && this.itemData_.hasOwnProperty("MultiUse") && Boolean(this.itemData_.MultiUse));
-      if ((this.itemXml_.hasOwnProperty("VaultItem") || _local6) && !(this.containerType_ == -1) && !(this.containerType_ == ObjectLibrary._pb["Vault Chest"])) {
+      if ((this.itemXml_.hasOwnProperty("VaultItem") || _local6) && !(this.containerType_ == -1) && !(this.containerType_ == ObjectLibrary.idToType_["Vault Chest"])) {
         this.restrictions_.push(new Restriction("Store this item in your Vault to avoid losing it!", 16549442, true));
       }
       if (this.itemXml_.hasOwnProperty("HalloweenItem"))
@@ -612,16 +612,16 @@ package com.company.assembleegameclient.ui.tooltip {
       } else {
         if (this.player_ != null) {
           if(!this.playerCanUse_) {
-            this.restrictions_.push(new Restriction(("Not usable by " + ObjectLibrary._0D_N_[this.player_.objectType_]), 16549442, true));
+            this.restrictions_.push(new Restriction(("Not usable by " + ObjectLibrary.typeToDisplayId_[this.player_.objectType_]), 16549442, true));
           }
         }
       }
-      var _local1:Vector.<String> = ObjectLibrary._7S_(this.objectType_);
+      var _local1:Vector.<String> = ObjectLibrary.usableByClasses(this.objectType_);
       if (_local1 != null) {
         this.restrictions_.push(new Restriction(("Usable by: " + _local1.join(", ")), 0xB3B3B3, false));
       }
       for each (xml in this.itemXml_.EquipRequirement) {
-        _local3 = ObjectLibrary._get(xml, this.player_);
+        _local3 = ObjectLibrary.checkEquipRequirement(xml, this.player_);
         if (xml.toString() == "Stat") {
           _local4 = int(xml.@stat);
           _local5 = int(xml.@value);
@@ -684,7 +684,7 @@ package com.company.assembleegameclient.ui.tooltip {
       this.actualName_.setBold(true);
       this.actualName_.wordWrap = true;
       if (this.itemData_ != null && this.itemData_.hasOwnProperty("Name") && this.itemData_.Name != "") {
-        this.actualName_.text = ObjectLibrary._0D_N_[this.objectType_];
+        this.actualName_.text = ObjectLibrary.typeToDisplayId_[this.objectType_];
       } else {
         this.actualName_.text = "";
       }

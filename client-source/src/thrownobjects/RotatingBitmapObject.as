@@ -28,8 +28,8 @@ public class RotatingBitmapObject extends BasicObject {
 
     public function RotatingBitmapObject(z:Number, bitmap:BitmapData) {
         super();
-        _P_m = false;
-        objectId_ = _7y();
+        hasShadow_ = false;
+        objectId_ = getNextFakeObjectId();
         this.bitmap_ = bitmap;
         z_ = z;
     }
@@ -40,10 +40,10 @@ public class RotatingBitmapObject extends BasicObject {
     override public function draw(graphicsData:Vector.<IGraphicsData>, camera:GameCamera, time:int):void {
         var w:int = this.bitmap_.width;
         var h:int = this.bitmap_.height;
-        var left:Number = _bY_[3] - w / 2;
-        var right:Number = _bY_[3] + w / 2;
-        var top:Number = _bY_[4] - h / 2;
-        var bottom:Number = _bY_[4] + h / 2;
+        var left:Number = screenVec_[3] - w / 2;
+        var right:Number = screenVec_[3] + w / 2;
+        var top:Number = screenVec_[4] - h / 2;
+        var bottom:Number = screenVec_[4] + h / 2;
 
         this.vertices_.length = 0;
         this.vertices_.push(left, top, right, top, right, bottom, left, bottom);
@@ -75,7 +75,7 @@ public class RotatingBitmapObject extends BasicObject {
         }
         x_ = newX;
         y_ = newY;
-        _0H_B_ = square;
+        square_ = square;
         return true;
     }
 

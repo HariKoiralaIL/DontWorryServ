@@ -158,7 +158,7 @@ package com.company.assembleegameclient.util {
     private function initObjects():void{
       var _local1:*;
       for each (_local1 in DataEmbeds._use) {
-        ObjectLibrary._nY_(XML(_local1));
+        ObjectLibrary.parseFromXML(XML(_local1));
       }
     }
     private function initRegions():void{

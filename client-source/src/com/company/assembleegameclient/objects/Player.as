@@ -1,1071 +1,1057 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.objects.Player
-
 package com.company.assembleegameclient.objects {
-import mapoverlay.CharacterStatusText;
+    import mapoverlay.CharacterStatusText;
 
-import particleeffects.LevelUpEffect;
-import particleeffects.AuraEffect;
-import particleeffects.HealingEffect;
+    import particleeffects.LevelUpEffect;
+    import particleeffects.AuraEffect;
+    import particleeffects.HealingEffect;
     import particleeffects.EffectProperties;
     import particleeffects.ParticleEffect;
 
-    import account.Account;
+    import audio.SoundEffects;
 
+    import com.company.assembleegameclient.map.Square;
+    import com.company.assembleegameclient.map.GameCamera;
+    import com.company.assembleegameclient.parameters.Parameters;
+    import com.company.assembleegameclient.tutorial.Tutorial;
+    import com.company.assembleegameclient.tutorial.doneAction;
+    import com.company.assembleegameclient.ui.Inventory;
+    import com.company.assembleegameclient.util.ConditionEffect;
+    import com.company.assembleegameclient.util.TextureRedrawer;
+    import com.company.assembleegameclient.util._J_H_;
+    import com.company.assembleegameclient.util._Z_B_;
+    import com.company.assembleegameclient.util._lJ_;
+    import com.company.assembleegameclient.util._wW_;
+    import com.company.ui.SimpleText;
+    import com.company.util.AssetLibrary;
+    import com.company.util.ConversionUtil;
+    import com.company.util.GraphicHelper;
+    import com.company.util.IntPoint;
+    import com.company.util.MoreColorUtil;
+    import com.company.util.PointUtil;
+    import com.company.util.Trig;
+    import com.company.util._G_;
 
-import audio.SoundEffects;
-
-import com.company.assembleegameclient.appengine.CharListEvent;
-
-import com.company.assembleegameclient.map.Square;
-import com.company.assembleegameclient.map.GameCamera;
-import com.company.assembleegameclient.parameters.Parameters;
-import com.company.assembleegameclient.tutorial.Tutorial;
-import com.company.assembleegameclient.tutorial.doneAction;
-import com.company.assembleegameclient.ui.Inventory;
-import com.company.assembleegameclient.util.ConditionEffect;
-import com.company.assembleegameclient.util.TextureRedrawer;
-import com.company.assembleegameclient.util._J_H_;
-import com.company.assembleegameclient.util._Z_B_;
-import com.company.assembleegameclient.util._lJ_;
-import com.company.assembleegameclient.util._wW_;
-import com.company.ui.SimpleText;
-import com.company.util.AssetLibrary;
-import com.company.util.ConversionUtil;
-import com.company.util.GraphicHelper;
-import com.company.util.IntPoint;
-import com.company.util.MoreColorUtil;
-import com.company.util.PointUtil;
-import com.company.util.Trig;
-import com.company.util._G_;
-
-import flash.display.BitmapData;
-import flash.display.GraphicsPath;
-import flash.display.GraphicsSolidFill;
-import flash.display.IGraphicsData;
-import flash.display.Sprite;
-import flash.events.KeyboardEvent;
-import flash.filters.GlowFilter;
-import flash.geom.ColorTransform;
-import flash.geom.Matrix;
-import flash.geom.Point;
-import flash.utils.Dictionary;
-import flash.utils.getTimer;
-
-    import zerorealms.rotmg.assets._items;
+    import flash.display.BitmapData;
+    import flash.display.GraphicsPath;
+    import flash.display.GraphicsSolidFill;
+    import flash.display.IGraphicsData;
+    import flash.display.Sprite;
+    import flash.filters.GlowFilter;
+    import flash.geom.ColorTransform;
+    import flash.geom.Matrix;
+    import flash.geom.Point;
+    import flash.utils.Dictionary;
+    import flash.utils.getTimer;
 
     public class Player extends Character {
 
-    public static const _0G_S_:int = 10000;
+        public static const TELEPORT_COOLDOWN_MS:int = 10000;
 
-    public static var _atk;
-    public static var _def;
-    public static var _spd;
-    public static var _dex;
-    public static var _vit;
-    public static var _wis;
+        public static var _atk;
+        public static var _def;
+        public static var _spd;
+        public static var _dex;
+        public static var _vit;
+        public static var _wis;
 
-    public static var _mindmg;
-    public static var _maxdmg;
+        public static var _mindmg;
+        public static var _maxdmg;
 
-    public var _x_:int = 75;
+        public var statScale_:int = 75;
 
-    public static var _e_D:Boolean = false;
-    private static const _A_u:Vector.<Point> = new <Point>[new Point(0, 0), new Point(1, 0), new Point(0, 1), new Point(1, 1)];
-    private static const _Q_a:Number = 0.4;
-    private static const _I_5:Matrix = new Matrix(1, 0, 0, 1, 2, 4);
-    private static const _0G_b:Matrix = new Matrix(1, 0, 0, 1, 20, 0);
-    private static const _dK_:Number = 0.004;
-    private static const _T_v:Number = 0.0096;
-    private static const _lU_:Number = 0.0015;
-    private static const _Z_:Number = 0.008;
-    private static const _01b:Number = 0.5;
-    private static const _0J_Q_:Number = 2;
+        public static var _e_D:Boolean = false;
+        private static const NEIGHBOR_OFFSETS:Vector.<Point> = new <Point>[new Point(0, 0), new Point(1, 0), new Point(0, 1), new Point(1, 1)];
+        private static const MOVE_STEP_SIZE:Number = 0.4;
+        private static const STAR_MATRIX:Matrix = new Matrix(1, 0, 0, 1, 2, 4);
+        private static const NAME_MATRIX:Matrix = new Matrix(1, 0, 0, 1, 20, 0);
+        private static const MIN_MOVE_SPEED:Number = 0.004;
+        private static const MAX_MOVE_SPEED:Number = 0.0096;
+        private static const MIN_ATTACK_FREQ:Number = 0.0015;
+        private static const MAX_ATTACK_FREQ:Number = 0.008;
+        private static const MIN_ATTACK_MULT:Number = 0.5;
+        private static const MAX_ATTACK_MULT:Number = 2;
 
-    private static var _06g:Point = new Point();
+        private static var tempPoint2_:Point = new Point();
 
-    public static function _D_U_(_arg1:String, _arg2:XML):Player {
-        var _local3:int = int(_arg2.ObjectType);
-        var _local4:XML = ObjectLibrary._Q_F_[_local3];
-        var _local5:Player = new Player(_local4);
-        _local5.name_ = _arg1;
-        _local5.level_ = int(_arg2.Level);
-        _local5.exp_ = int(_arg2.Exp);
-        _local5.equipment_ = ConversionUtil._04n(_arg2._Equipment);
-        _local5.maxHP_ = int(_arg2.MaxHitPoints);
-        _local5.HP_ = int(_arg2.HitPoints);
-        _local5.maxMP_ = int(_arg2.MaxMagicPoints);
-        _local5.MP_ = int(_arg2.MagicPoints);
-        _local5.attack_ = int(_arg2.Attack);
-        _local5.defense_ = int(_arg2.Defense);
-        _local5.speed_ = int(_arg2.Speed);
-        _local5.dexterity_ = int(_arg2.Dexterity);
-        _local5.vitality_ = int(_arg2.HpRegen);
-        _local5.wisdom_ = int(_arg2.MpRegen);
-        _local5.luck_ = int(_arg2.Luck);
-        _local5.crit_ = int(_arg2.Crit);
-        _local5.tex1Id_ = int(_arg2.Tex1);
-        _local5.tex2Id_ = int(_arg2.Tex2);
-        _local5.setSkin(int(_arg2.Skin));
-        return (_local5);
-    }
+        public static function fromCharXML(name:String, xml:XML):Player {
+            var _local3:int = int(xml.ObjectType);
+            var _local4:XML = ObjectLibrary.typeToXML_[_local3];
+            var _local5:Player = new Player(_local4);
+            _local5.name_ = name;
+            _local5.level_ = int(xml.Level);
+            _local5.exp_ = int(xml.Exp);
+            _local5.equipment_ = ConversionUtil._04n(xml._Equipment);
+            _local5.maxHP_ = int(xml.MaxHitPoints);
+            _local5.HP_ = int(xml.HitPoints);
+            _local5.maxMP_ = int(xml.MaxMagicPoints);
+            _local5.MP_ = int(xml.MagicPoints);
+            _local5.attack_ = int(xml.Attack);
+            _local5.defense_ = int(xml.Defense);
+            _local5.speed_ = int(xml.Speed);
+            _local5.dexterity_ = int(xml.Dexterity);
+            _local5.vitality_ = int(xml.HpRegen);
+            _local5.wisdom_ = int(xml.MpRegen);
+            _local5.luck_ = int(xml.Luck);
+            _local5.crit_ = int(xml.Crit);
+            _local5.tex1Id_ = int(xml.Tex1);
+            _local5.tex2Id_ = int(xml.Tex2);
+            _local5.setSkin(int(xml.Skin));
+            return (_local5);
+        }
 
-    private static function _091(_arg1:Number, _arg2:GameCamera):int {
-        var _local4:int;
-        var _local3:Number = Trig._V_r((_arg1 - _arg2.angleRad_));
-        if ((((_local3 > (Math.PI / 4))) && ((_local3 < ((3 * Math.PI) / 4))))) {
-            _local4 = _lJ_.DOWN;
-        } else {
-            if ((((_local3 <= (Math.PI / 4))) && ((_local3 >= (-(Math.PI) / 4))))) {
-                _local4 = _lJ_.RIGHT;
+        private static function getFacing(angle:Number, camera:GameCamera):int {
+            var _local4:int;
+            var _local3:Number = Trig._V_r((angle - camera.angleRad_));
+            if ((((_local3 > (Math.PI / 4))) && ((_local3 < ((3 * Math.PI) / 4))))) {
+                _local4 = _lJ_.DOWN;
             } else {
-                if ((((_local3 < (-(Math.PI) / 4))) && ((_local3 > ((-3 * Math.PI) / 4))))) {
-                    _local4 = _lJ_.UP;
+                if ((((_local3 <= (Math.PI / 4))) && ((_local3 >= (-(Math.PI) / 4))))) {
+                    _local4 = _lJ_.RIGHT;
                 } else {
-                    _local4 = _lJ_.LEFT;
+                    if ((((_local3 < (-(Math.PI) / 4))) && ((_local3 > ((-3 * Math.PI) / 4))))) {
+                        _local4 = _lJ_.UP;
+                    } else {
+                        _local4 = _lJ_.LEFT;
+                    }
                 }
             }
+            return (_local4);
         }
-        return (_local4);
-    }
 
-    public function Player(_arg1:XML) {
-        this._06x = new IntPoint();
-        super(_arg1);
-        this._X_2 = int(_arg1.Attack.@max);
-        this._0B_S_ = int(_arg1.Defense.@max);
-        this._b8 = int(_arg1.Speed.@max);
-        this._07C_ = int(_arg1.Dexterity.@max);
-        this._N_s = int(_arg1.HpRegen.@max);
-        this._05Q_ = int(_arg1.MpRegen.@max);
-        this.stat_luckI = int(_arg1.Luck.@max);
-        this.stat_critI = int(_arg1.Crit.@max);
-        this._uR_ = int(_arg1.MaxHitPoints.@max);
-        this._dt = int(_arg1.MaxMagicPoints.@max);
-        _qm = new Dictionary();
-        unusualEffects_ = new Vector.<ParticleEffect>();
-    }
-    public var accountId_:int = -1;
-    public var credits_:int = 0;
-    public var numStars_:int = 0;
-    public var fame_:int = 0;
-    public var keys_:int = 0;
-    public var _hv:Boolean = false;
-    public var _Hh:Boolean = false;
-    public var _0L_o:int = 0;
-    public var _n8:int = -1;
-    public var _2v:int = -1;
-    public var guildName_:String = null;
-    public var guildRank_:int = -1;
-    public var partyID_:int = -1;
-    public var partyLeader:Boolean = false;
-    public var _N_n:Boolean = false;
-    public var inParty:Boolean = false;
-    public var _R_4:int = -1;
-    public var maxMP_:int = 200;
-    public var MP_:Number = 0;
-    public var _7V_:int = 1000;
-    public var exp_:int = 0;
-    public var attack_:int = 0;
-    public var speed_:int = 0;
-    public var dexterity_:int = 0;
-    public var vitality_:int = 0;
-    public var wisdom_:int = 0;
-    public var _P_7:int = 0;
-    public var _0D_G_:int = 0;
-    public var _05s:int = 0;
-    public var _07f:int = 0;
-    public var _065:int = 0;
-    public var _pP_:int = 0;
-    public var _B_e:int = 0;
-      public var luck_:int = 0;
-      public var crit_:int = 0;
-      public var stat_luck:int = 0;
-      public var stat_crit:int = 0;
-      public var stat_luckI:int = 0;
-      public var stat_critI:int = 0;
-    public var _cu:int = 0;
-    public var _gz:int = 0;
-    public var _X_2:int = 0;
-    public var _0B_S_:int = 0;
-    public var _b8:int = 0;
-    public var _07C_:int = 0;
-    public var _N_s:int = 0;
-    public var _05Q_:int = 0;
-    public var _uR_:int = 0;
-    public var _dt:int = 0;
-    public var starred_:Boolean = false;
-    public var _0M_w:Boolean = false;
-    public var distSqFromThisPlayer_:Number = 0;
-    public var _y4:int = 0;
-    public var _0m:int = 0;
-    public var nextTeleportAt_:int = 0;
-    public var inventory:Inventory;
-    public var _K_X_:BitmapData = null;
-    public var usiShukAbil:Boolean = false;
-    public var canNexus:Boolean = true;
-    protected var _ky:Number = 0;
-    protected var _D_k:Point = null;
-    protected var _W_V_:Number = 1;
-    protected var _nE_:HealingEffect = null;
-    protected var _0D_8:Merchant = null;
-    private var _sd:BitmapData = null;
-    private var _7U_:Boolean = true;
-    private var _06x:IntPoint;
-    private var _F_k:GraphicsSolidFill = null;
-    private var _03i:GraphicsPath = null;
-    private var _Y_e:GraphicsSolidFill = null;
-    private var _K_Y_:GraphicsPath = null;
-    private var prevEffect_:String = "";
-    private var effString_:String = "";
-    private var unusualEffects_:Vector.<ParticleEffect> = null;
+        public function Player(xml:XML) {
+            this.merchLookupKey_ = new IntPoint();
+            super(xml);
+            this.attackMax_ = int(xml.Attack.@max);
+            this.defenseMax_ = int(xml.Defense.@max);
+            this.speedMax_ = int(xml.Speed.@max);
+            this.dexterityMax_ = int(xml.Dexterity.@max);
+            this.vitalityMax_ = int(xml.HpRegen.@max);
+            this.wisdomMax_ = int(xml.MpRegen.@max);
+            this.stat_luckI = int(xml.Luck.@max);
+            this.stat_critI = int(xml.Crit.@max);
+            this.maxHPMax_ = int(xml.MaxHitPoints.@max);
+            this.maxMPMax_ = int(xml.MaxMagicPoints.@max);
+            textureCache_ = new Dictionary();
+            unusualEffects_ = new Vector.<ParticleEffect>();
+        }
+        public var accountId_:int = -1;
+        public var credits_:int = 0;
+        public var numStars_:int = 0;
+        public var fame_:int = 0;
+        public var keys_:int = 0;
+        public var nameChosen_:Boolean = false;
+        public var _Hh:Boolean = false;
+        public var _0L_o:int = 0;
+        public var _n8:int = -1;
+        public var glowColor_:int = -1;
+        public var guildName_:String = null;
+        public var guildRank_:int = -1;
+        public var partyID_:int = -1;
+        public var partyLeader:Boolean = false;
+        public var isFellowGuild_:Boolean = false;
+        public var inParty:Boolean = false;
+        public var breath_:int = -1;
+        public var maxMP_:int = 200;
+        public var MP_:Number = 0;
+        public var _7V_:int = 1000;
+        public var exp_:int = 0;
+        public var attack_:int = 0;
+        public var speed_:int = 0;
+        public var dexterity_:int = 0;
+        public var vitality_:int = 0;
+        public var wisdom_:int = 0;
+        public var _P_7:int = 0;
+        public var _0D_G_:int = 0;
+        public var _05s:int = 0;
+        public var _07f:int = 0;
+        public var _065:int = 0;
+        public var _pP_:int = 0;
+        public var _B_e:int = 0;
+        public var luck_:int = 0;
+        public var crit_:int = 0;
+        public var stat_luck:int = 0;
+        public var stat_crit:int = 0;
+        public var stat_luckI:int = 0;
+        public var stat_critI:int = 0;
+        public var _cu:int = 0;
+        public var _gz:int = 0;
+        public var attackMax_:int = 0;
+        public var defenseMax_:int = 0;
+        public var speedMax_:int = 0;
+        public var dexterityMax_:int = 0;
+        public var vitalityMax_:int = 0;
+        public var wisdomMax_:int = 0;
+        public var maxHPMax_:int = 0;
+        public var maxMPMax_:int = 0;
+        public var starred_:Boolean = false;
+        public var isIgnored_:Boolean = false;
+        public var distSqFromThisPlayer_:Number = 0;
+        public var attackPeriod_:int = 0;
+        public var altCooldownEnd_:int = 0;
+        public var nextTeleportAt_:int = 0;
+        public var inventory:Inventory;
+        public var _K_X_:BitmapData = null;
+        public var usiShukAbil:Boolean = false;
+        public var canNexus:Boolean = true;
+        protected var rotate_:Number = 0;
+        protected var inputDir_:Point = null;
+        protected var moveMultiplier_:Number = 1;
+        protected var healingEffect_:HealingEffect = null;
+        protected var nearestMerchant_:Merchant = null;
+        private var playerHallucinationTex_:BitmapData = null;
+        private var isDefaultTexture_:Boolean = true;
+        private var merchLookupKey_:IntPoint;
+        private var breathBgFill_:GraphicsSolidFill = null;
+        private var breathBgPath_:GraphicsPath = null;
+        private var breathFill_:GraphicsSolidFill = null;
+        private var breathPath_:GraphicsPath = null;
+        private var prevEffect_:String = "";
+        private var effString_:String = "";
+        private var unusualEffects_:Vector.<ParticleEffect> = null;
 
-    override public function moveTo(_arg1:Number, _arg2:Number):Boolean {
-        var _local3:Boolean = super.moveTo(_arg1, _arg2);
-        this._0D_8 = this._0I_U_();
-        return (_local3);
-    }
+        override public function moveTo(x:Number, y:Number):Boolean {
+            var _local3:Boolean = super.moveTo(x, y);
+            this.nearestMerchant_ = this.findNearestMerchant();
+            return (_local3);
+        }
 
-    override public function update(_arg1:int, _arg2:int):Boolean {
-        var _local3:Number;
-        var _local4:Number;
-        var _local5:Number;
-        var _local6:int;
-        if(prevEffect_ != effString_) {
-            prevEffect_ = effString_;
-            for each(var _effect:ParticleEffect in unusualEffects_) {
-                map_.removeObj(_effect.objectId_);
-            }
-            this.unusualEffects_ = new Vector.<ParticleEffect>();
-            var _effXML:XML = XML(this.effString_);
-            if(_effXML.name() == "Effects") {
-                for each(var _childEff:XML in _effXML.children()) {
-                    var _newEff:ParticleEffect = ParticleEffect.fromProps(new EffectProperties(_childEff), this);
+        override public function update(time:int, dt:int):Boolean {
+            var _local3:Number;
+            var _local4:Number;
+            var _local5:Number;
+            var _local6:int;
+            if(prevEffect_ != effString_) {
+                prevEffect_ = effString_;
+                for each(var _effect:ParticleEffect in unusualEffects_) {
+                    map_.removeObj(_effect.objectId_);
+                }
+                this.unusualEffects_ = new Vector.<ParticleEffect>();
+                var _effXML:XML = XML(this.effString_);
+                if(_effXML.name() == "Effects") {
+                    for each(var _childEff:XML in _effXML.children()) {
+                        var _newEff:ParticleEffect = ParticleEffect.fromProps(new EffectProperties(_childEff), this);
+                        if(_newEff != null) {
+                            this.unusualEffects_.push(_newEff);
+                        }
+                    }
+                } else {
+                    var _newEff:ParticleEffect = ParticleEffect.fromProps(new EffectProperties(XML(this.effString_)), this);
                     if(_newEff != null) {
                         this.unusualEffects_.push(_newEff);
                     }
                 }
-            } else {
-                var _newEff:ParticleEffect = ParticleEffect.fromProps(new EffectProperties(XML(this.effString_)), this);
-                if(_newEff != null) {
-                    this.unusualEffects_.push(_newEff);
+                for each(var _effect:ParticleEffect in unusualEffects_) {
+                    map_.addObj(_effect, x_, y_);
                 }
             }
-            for each(var _effect:ParticleEffect in unusualEffects_) {
-                map_.addObj(_effect, x_, y_);
+            if (((isHealing()) && (!(isPaused())))) {
+                if (this.healingEffect_ == null) {
+                    this.healingEffect_ = new HealingEffect(this);
+                    map_.addObj(this.healingEffect_, x_, y_);
+                }
+            } else {
+                if (this.healingEffect_ != null) {
+                    map_.removeObj(this.healingEffect_.objectId_);
+                    this.healingEffect_ = null;
+                }
             }
-        }
-        if (((_00c()) && (!(isPaused())))) {
-            if (this._nE_ == null) {
-                this._nE_ = new HealingEffect(this);
-                map_.addObj(this._nE_, x_, y_);
+            if ((((map_.player_ == this)) && (isPaused()))) {
+                return (true);
             }
-        } else {
-            if (this._nE_ != null) {
-                map_.removeObj(this._nE_.objectId_);
-                this._nE_ = null;
+            if (this.inputDir_ != null) {
+                _local3 = Parameters.data_.cameraAngle;
+                if (this.rotate_ != 0) {
+                    _local3 = (_local3 + ((dt * Parameters.data_.rotationSpeed) * this.rotate_));
+                    Parameters.data_.cameraAngle = _local3;
+                }
+                if (((!((this.inputDir_.x == 0))) || (!((this.inputDir_.y == 0))))) {
+                    _local4 = this.getMoveSpeed();
+                    _local5 = Math.atan2(this.inputDir_.y, this.inputDir_.x);
+                    moveVec_.x = (_local4 * Math.cos((_local3 + _local5)));
+                    moveVec_.y = (_local4 * Math.sin((_local3 + _local5)));
+                } else {
+                    moveVec_.x = 0;
+                    moveVec_.y = 0;
+                }
+                if (((!((square_ == null))) && (square_.props_.push_))) {
+                    moveVec_.x = (moveVec_.x - (square_.props_.animate_.dx_ / 1000));
+                    moveVec_.y = (moveVec_.y - (square_.props_.animate_.dy_ / 1000));
+                }
+                this.walkTo((x_ + (dt * moveVec_.x)), (y_ + (dt * moveVec_.y)));
+            } else {
+                if (!super.update(time, dt)) {
+                    return (false);
+                }
             }
-        }
-        if ((((map_.player_ == this)) && (isPaused()))) {
+            if ((((((((((map_.player_ == this)) && ((square_.props_.maxDamage_ > 0)))) && (((square_.lastDamage_ + 500) < time)))) && (!(isInvincible())))) && ((((square_.obj_ == null)) || (!(square_.obj_.props_.protectFromGroundDamage_)))))) {
+                _local6 = map_.gs_.gsc_.getNextDamage(square_.props_.minDamage_, square_.props_.maxDamage_);
+                damage(-1, _local6, null, (HP_ <= _local6), null);
+                map_.gs_.gsc_.groundDamage(time, x_, y_);
+                square_.lastDamage_ = time;
+            }
             return (true);
         }
-        if (this._D_k != null) {
-            _local3 = Parameters.data_.cameraAngle;
-            if (this._ky != 0) {
-                _local3 = (_local3 + ((_arg2 * Parameters.data_.rotationSpeed) * this._ky));
-                Parameters.data_.cameraAngle = _local3;
+
+        public function setEffect(effect:String) {
+            this.effString_ = effect;
+        }
+
+        override protected function generateNameBitmapData(nameText:SimpleText):BitmapData {
+            if (this.inParty) {
+                nameText.setColor(Parameters.partyColor);
+            } else if (this.isFellowGuild_) {
+                nameText.setColor(Parameters._mg);
+            } else if (this.name_ == "$Bledixon$") {
+                nameText.setColor(Parameters._colorBled);
+            } else if (this.name_ == "Quest") {
+                nameText.setColor(Parameters._colorArc);
+            } else if (this.name_ == "Antidote") {
+                nameText.setColor(Parameters._colorSec);
+            } else if (this.name_ == "Crisp") {
+                nameText.setColor(Parameters._colorSec);
+            } else if (this.nameChosen_) {
+                nameText.setColor(Parameters._8T_);
             }
-            if (((!((this._D_k.x == 0))) || (!((this._D_k.y == 0))))) {
-                _local4 = this._J_N_();
-                _local5 = Math.atan2(this._D_k.y, this._D_k.x);
-                moveVec_.x = (_local4 * Math.cos((_local3 + _local5)));
-                moveVec_.y = (_local4 * Math.sin((_local3 + _local5)));
-            } else {
-                moveVec_.x = 0;
-                moveVec_.y = 0;
-            }
-            if (((!((_0H_B_ == null))) && (_0H_B_.props_.push_))) {
-                moveVec_.x = (moveVec_.x - (_0H_B_.props_.animate_.dx_ / 1000));
-                moveVec_.y = (moveVec_.y - (_0H_B_.props_.animate_.dy_ / 1000));
-            }
-            this._2((x_ + (_arg2 * moveVec_.x)), (y_ + (_arg2 * moveVec_.y)));
-        } else {
-            if (!super.update(_arg1, _arg2)) {
-                return (false);
-            }
-        }
-        if ((((((((((map_.player_ == this)) && ((_0H_B_.props_.maxDamage_ > 0)))) && (((_0H_B_.lastDamage_ + 500) < _arg1)))) && (!(_0C_4())))) && ((((_0H_B_.obj_ == null)) || (!(_0H_B_.obj_.props_.protectFromGroundDamage_)))))) {
-            _local6 = map_.gs_.gsc_.getNextDamage(_0H_B_.props_.minDamage_, _0H_B_.props_.maxDamage_);
-            damage(-1, _local6, null, (HP_ <= _local6), null);
-            map_.gs_.gsc_.groundDamage(_arg1, x_, y_);
-            _0H_B_.lastDamage_ = _arg1;
-        }
-        return (true);
-    }
-
-    public function setEffect(_arg1:String) {
-        this.effString_ = _arg1;
-    }
-
-    override protected function generateNameBitmapData(_arg1:SimpleText):BitmapData {
-        if (this.inParty) {
-            _arg1.setColor(Parameters.partyColor);
-        } else if (this._N_n) {
-            _arg1.setColor(Parameters._mg);
-        } else if (this.name_ == "$Bledixon$") {
-            _arg1.setColor(Parameters._colorBled);
-        } else if (this.name_ == "Quest") {
-            _arg1.setColor(Parameters._colorArc);
-        } else if (this.name_ == "Antidote") {
-            _arg1.setColor(Parameters._colorSec);
-        } else if (this.name_ == "Crisp") {
-            _arg1.setColor(Parameters._colorSec);
-        } else if (this._hv) {
-            _arg1.setColor(Parameters._8T_);
-        }
-        var _local2:BitmapData = new BitmapData((_arg1.width + 20), 64, true, 0);
-        _local2.draw(_arg1, _0G_b);
-        _local2.applyFilter(_local2, _local2.rect, PointUtil._P_5, new GlowFilter(0, 1, 3, 3, 2, 1));
-        var _local3:Sprite = _Z_B_._0M_r(this.numStars_);
-        _local2.draw(_local3, _I_5);
-        return (_local2);
-    }
-
-    override public function draw(_arg1:Vector.<IGraphicsData>, _arg2:GameCamera, _arg3:int):void {
-        if(Parameters.data_.HideOtherPlayers) {
-          if(this != map_.player_) {
-            return;
-          }
-        }
-        super.draw(_arg1, _arg2, _arg3);
-        if (this != map_.player_) {
-            if (!Parameters._0F_o) {
-                if (this != this.map_.player_ && this.map_.player_.canBeHitBy(this)) {
-                    if (!this._di()) {
-                        _oL_(_arg1, _arg2);
-                    }
-                } else {
-                    _oL_(_arg1, _arg2);
-                }
-            }
-        } else {
-            if (this._R_4 >= 0) {
-                this._071(_arg1, _arg2, _arg3);
-            }
-        }
-    }
-
-    override protected function getTexture(_arg1:GameCamera, _arg2:int):BitmapData {
-        var _local10:int;
-        var _local11:Dictionary;
-        var _local12:Number;
-        var _local13:int;
-        var _local14:ColorTransform;
-        var _local3:Number = 0;
-        var _local4:int = _lJ_._sS_;
-        if (_arg2 < (_W_J_ + this._y4)) {
-            _N_V_ = _M_r;
-            _local3 = (((_arg2 - _W_J_) % this._y4) / this._y4);
-            _local4 = _lJ_._E_w;
-        } else {
-            if (((!((moveVec_.x == 0))) || (!((moveVec_.y == 0))))) {
-                _local10 = (3.5 / this._J_N_());
-                if (((!((moveVec_.y == 0))) || (!((moveVec_.x == 0))))) {
-                    _N_V_ = Math.atan2(moveVec_.y, moveVec_.x);
-                }
-                _local3 = ((_arg2 % _local10) / _local10);
-                _local4 = _lJ_._m1;
-            }
-        }
-        if (((this._o4()) && (this._7U_))) {
-            this._Q_K_();
-        }
-        if (((!(this._o4())) && (!(this._7U_)))) {
-            this._ur();
-        }
-        var _local5:_J_H_ = _yN_.imageFromFacing(_N_V_, _arg1, _local4, _local3);
-        if (_arg1.isHallucinating_) {
-            _local5 = new _J_H_(_1g(), null);
-        }
-        var _local6:int = tex1Id_;
-        var _local7:int = tex2Id_;
-        var _local8:BitmapData;
-        if (this._0D_8 != null) {
-            _local11 = _qm[this._0D_8];
-            if (_local11 == null) {
-                _qm[this._0D_8] = new Dictionary();
-            } else {
-                _local8 = _local11[_local5];
-            }
-            _local6 = this._0D_8.getTex1Id(tex1Id_);
-            _local7 = this._0D_8.getTex2Id(tex2Id_);
-            this.previewSkin(this._0D_8.getSkinId(skinId_, this));
-        } else {
-            _local8 = _qm[_local5];
-            this.previewSkin(-1);
-        }
-        if (_local8 == null) {
-            _local8 = TextureRedrawer.resize(_local5.image_, _local5.mask_, size_, false, _local6, _local7);
-            if (this._0D_8 != null) {
-                _qm[this._0D_8][_local5] = _local8;
-            } else {
-                _qm[_local5] = _local8;
-            }
-        }
-        if (HP_ < (maxHP_ * 0.2)) {
-            _local12 = (int((Math.abs(Math.sin((_arg2 / 200))) * 10)) / 10);
-            _local13 = 128;
-            _local14 = new ColorTransform(1, 1, 1, 1, (_local12 * _local13), (-(_local12) * _local13), (-(_local12) * _local13));
-            _local8 = _G_._B_2(_local8, _local14);
-        }
-        var _local9:BitmapData = _qm[_local8];
-        if (_local9 == null) {
-            _local9 = TextureRedrawer.outlineGlow(_local8, 0, this._2v == -1 ? 0 : this._2v);
-            _qm[_local8] = _local9;
-        }
-        if (((isPaused()) || (_C_H_()))) {
-            _local9 = _G_._R_9(_local9, _oj);
-        } else {
-            if (_di()) {
-                if (this != this.map_.player_ && this.map_.player_.canBeHitBy(this)) {
-                    _local9 = _G_._0C_m(_local9, 0);
-                } else {
-                    _local9 = _G_._0C_m(_local9, 0.4);
-                }
-            }
-        }
-        return (_local9);
-    }
-
-    override public function getPortrait():BitmapData {
-        var _local1:_J_H_;
-        var _local2:int;
-        if (_tm == null) {
-            _local1 = _yN_.imageFromDir(_lJ_.RIGHT, _lJ_._sS_, 0);
-            _local2 = ((4 / _local1.image_.width) * 100);
-            _tm = TextureRedrawer.resize(_local1.image_, _local1.mask_, _local2, true, tex1Id_, tex2Id_);
-            _tm = TextureRedrawer.outlineGlow(_tm, 0, 0);
-        }
-        return (_tm);
-    }
-
-    override public function setAttack(_arg1:int, _arg2:Number):void {
-        var _local3:XML = ObjectLibrary._Q_F_[_arg1];
-        if (_local3 == null || !_local3.hasOwnProperty("RateOfFire")) {
-            return;
-        }
-        var _local4:Number = Number(_local3.RateOfFire);
-        this._y4 = ((1 / this._F_W_()) * (1 / _local4));
-        super.setAttack(_arg1, _arg2);
-    }
-
-    override public function toString():String {
-        return ("<Char>" + "<Name>" + name_ + "</Name>" + "<ObjectType>" + objectType_ + "</ObjectType>" + "<Level>" + level_ + "</Level>" + "<Exp>" + this.exp_ + "</Exp>" + "<Equipment>" + equipment_ + "</Equipment>" + "<MaxHitPoints>" + maxHP_ + "</MaxHitPoints>" + "<HitPoints>" + HP_ + "</HitPoints>" + "<MaxMagicPoints>" + this.maxMP_ + "</MaxMagicPoints>" + "<MagicPoints>" + this.MP_ + "</MagicPoints>" + "<Attack>" + this.attack_ + "</Attack>" + "<Defense>" + defense_ + "</Defense>" + "<Speed>" + this.speed_ + "</Speed>" + "<HpRegen>" + this.vitality_ + "</HpRegen>" + "<MpRegen>" + this.wisdom_ + "</MpRegen>" + "<Dexterity>" + this.dexterity_ + "</Dexterity>" + "</Char>");
-    }
-
-    public function _vr(_arg1:Number, _arg2:Number, _arg3:Number):void {
-        var _local4:Number;
-        if (this._D_k == null) {
-            this._D_k = new Point();
-        }
-        this._ky = _arg1;
-        this._D_k.x = _arg2;
-        this._D_k.y = _arg3;
-        if (_8a()) {
-            _local4 = this._D_k.x;
-            this._D_k.x = -(this._D_k.y);
-            this._D_k.y = -(_local4);
-            this._ky = -(this._ky);
-        }
-    }
-
-    public function _F_S_(_arg1:int):void {
-        this.credits_ = _arg1;
-    }
-
-    public function setKeys(_arg1:int):void {
-        this.keys_ = _arg1;
-    }
-
-    public function _Y_C_(_arg1:String):void {
-        var _local3:GameObject;
-        var _local4:Player;
-        var _local5:Boolean;
-        this.guildName_ = _arg1;
-        var _local2:Player = map_.player_;
-        if (_local2 == this) {
-            for each (_local3 in map_.goDict_) {
-                _local4 = (_local3 as Player);
-                if (((!((_local4 == null))) && (!((_local4 == this))))) {
-                    _local4._Y_C_(_local4.guildName_);
-                }
-            }
-        } else {
-            _local5 = ((((((!((_local2 == null))) && (!((_local2.guildName_ == null))))) && (!((_local2.guildName_ == ""))))) && ((_local2.guildName_ == this.guildName_)));
-            if (_local5 != this._N_n) {
-                this._N_n = _local5;
-                _U_g = null;
-            }
-        }
-    }
-
-    public function UpdateParty(_arg1:int):void {
-        var _local3:GameObject;
-        var _local4:Player;
-        var _local5:Boolean;
-        this.partyID_ = _arg1;
-        var _local2:Player = map_.player_;
-        if (_local2 == this) {
-            for each (_local3 in map_.goDict_) {
-                _local4 = (_local3 as Player);
-                if (((!((_local4 == null))) && (!((_local4 == this))))) {
-                    _local4.UpdateParty(_local4.partyID_);
-                }
-            }
-        } else {
-            _local5 = _local2 != null && _local2.partyID_ != -1 && _local2.partyID_ == this.partyID_;
-            if (_local5 != this.inParty) {
-                this.inParty = _local5;
-                _U_g = null;
-            }
-        }
-    }
-
-    public function _0D_X_(_arg1:Player):Boolean {
-        if (((_arg1.isPaused()) || (_arg1._di()))) {
-            return (false);
-        }
-        return (true);
-    }
-
-    public function _Z_C_():int {
-        var _local1:int = getTimer();
-        return (Math.max(0, (this.nextTeleportAt_ - _local1)));
-    }
-
-    public function teleportTo(_arg1:Player):Boolean {
-        if (isPaused()) {
-            map_.gs_.textBox_.addText(Parameters.SendError, "Can not teleport while paused.");
-            return (false);
-        }
-        var _local2:int = this._Z_C_();
-        if (_local2 > 0) {
-            map_.gs_.textBox_.addText(Parameters.SendError, (("You can not teleport for another " + int(((_local2 / 1000) + 1))) + " seconds."));
-            return (false);
-        }
-        if (!this._0D_X_(_arg1)) {
-            if (_arg1._di()) {
-                map_.gs_.textBox_.addText(Parameters.SendError, (("Can not teleport to " + _arg1.name_) + " while they are invisible."));
-            }
-            map_.gs_.textBox_.addText(Parameters.SendError, ("Can not teleport to " + _arg1.name_));
-            return (false);
-        }
-        map_.gs_.gsc_.teleport(_arg1.objectId_);
-        this.nextTeleportAt_ = (getTimer() + _0G_S_);
-        return (true);
-    }
-
-    public function _x1(_arg1:String):void {
-        this._p7();
-        map_.mapOverlay_.addChild(new CharacterStatusText(this, _arg1, 0xFF00, 2000));
-    }
-
-    public function _ut(_arg1:Boolean):void {
-        SoundEffects.play("level_up");
-        if (_arg1) {
-            this._x1("New Class Unlocked!");
-        } else {
-            this._x1("Level Up!");
-        }
-    }
-
-    public function _p7():void {
-        map_.addObj(new LevelUpEffect(this, 0xFF00FF00, 20), x_, y_);
-    }
-
-    public function _oK_():void {
-        map_.addObj(new AuraEffect(this, 0xFFFFFF), x_, y_);
-    }
-
-    public function _0I_I_(_arg1:int):void {
-        if (level_ == 120) {
-            return;
-        }
-        map_.mapOverlay_.addChild(new CharacterStatusText(this, (("+" + _arg1) + "XP"), 0xFF00, 1000));
-    }
-
-    public function _2(_arg1:Number, _arg2:Number):Boolean {
-        this._u0(_arg1, _arg2, _06g);
-        return (this.moveTo(_06g.x, _06g.y));
-    }
-
-    public function _u0(_arg1:Number, _arg2:Number, _arg3:Point):void {
-        if (_R_7()) {
-            _arg3.x = x_;
-            _arg3.y = y_;
-            return;
-        }
-        var _local4:Number = (_arg1 - x_);
-        var _local5:Number = (_arg2 - y_);
-        if ((((((((_local4 < _Q_a)) && ((_local4 > -(_Q_a))))) && ((_local5 < _Q_a)))) && ((_local5 > -(_Q_a))))) {
-            this._A_y(_arg1, _arg2, _arg3);
-            return;
-        }
-        var _local6:Number = Math.atan2(_local4, _local5);
-        var _local7:Number = (_Q_a / Math.max(Math.abs(_local4), Math.abs(_local5)));
-        var _local8:Number = 0;
-        _arg3.x = x_;
-        _arg3.y = y_;
-        var _local9:Boolean;
-        while (!(_local9)) {
-            if ((_local8 + _local7) >= 1) {
-                _local7 = (1 - _local8);
-                _local9 = true;
-            }
-            this._A_y((_arg3.x + (_local4 * _local7)), (_arg3.y + (_local5 * _local7)), _arg3);
-            _local8 = (_local8 + _local7);
-        }
-    }
-
-    public function _A_y(_arg1:Number, _arg2:Number, _arg3:Point):void {
-        var _local6:Number;
-        var _local7:Number;
-        var _local4:Boolean = ((((((x_ % 0.5) == 0)) && (!((_arg1 == x_))))) || (!((int((x_ / 0.5)) == int((_arg1 / 0.5))))));
-        var _local5:Boolean = ((((((y_ % 0.5) == 0)) && (!((_arg2 == y_))))) || (!((int((y_ / 0.5)) == int((_arg2 / 0.5))))));
-        if (((((!(_local4)) && (!(_local5)))) || (this._M_S_(_arg1, _arg2)))) {
-            _arg3.x = _arg1;
-            _arg3.y = _arg2;
-            return;
-        }
-        if (_local4) {
-            _local6 = (((_arg1) > x_) ? (int((_arg1 * 2)) / 2) : (int((x_ * 2)) / 2));
-            if (int(_local6) > int(x_)) {
-                _local6 = (_local6 - 0.01);
-            }
-        }
-        if (_local5) {
-            _local7 = (((_arg2) > y_) ? (int((_arg2 * 2)) / 2) : (int((y_ * 2)) / 2));
-            if (int(_local7) > int(y_)) {
-                _local7 = (_local7 - 0.01);
-            }
-        }
-        if (!_local4) {
-            _arg3.x = _arg1;
-            _arg3.y = _local7;
-            return;
-        }
-        if (!_local5) {
-            _arg3.x = _local6;
-            _arg3.y = _arg2;
-            return;
-        }
-        var _local8:Number = (((_arg1) > x_) ? (_arg1 - _local6) : (_local6 - _arg1));
-        var _local9:Number = (((_arg2) > y_) ? (_arg2 - _local7) : (_local7 - _arg2));
-        if (_local8 > _local9) {
-            if (this._M_S_(_arg1, _local7)) {
-                _arg3.x = _arg1;
-                _arg3.y = _local7;
-                return;
-            }
-            if (this._M_S_(_local6, _arg2)) {
-                _arg3.x = _local6;
-                _arg3.y = _arg2;
-                return;
-            }
-        } else {
-            if (this._M_S_(_local6, _arg2)) {
-                _arg3.x = _local6;
-                _arg3.y = _arg2;
-                return;
-            }
-            if (this._M_S_(_arg1, _local7)) {
-                _arg3.x = _arg1;
-                _arg3.y = _local7;
-                return;
-            }
-        }
-        _arg3.x = _local6;
-        _arg3.y = _local7;
-    }
-
-    public function _M_S_(_arg1:Number, _arg2:Number):Boolean {
-        var _local3:Square = map_.getSquare(_arg1, _arg2);
-        if (((!((_0H_B_ == _local3))) && ((((_local3 == null)) || (!(_local3.isWalkable())))))) {
-            return (false);
-        }
-        var _local4:Number = (_arg1 - int(_arg1));
-        var _local5:Number = (_arg2 - int(_arg2));
-        if (_local4 < 0.5) {
-            if (this._g7((_arg1 - 1), _arg2)) {
-                return (false);
-            }
-            if (_local5 < 0.5) {
-                if (((this._g7(_arg1, (_arg2 - 1))) || (this._g7((_arg1 - 1), (_arg2 - 1))))) {
-                    return (false);
-                }
-            } else {
-                if (_local5 > 0.5) {
-                    if (((this._g7(_arg1, (_arg2 + 1))) || (this._g7((_arg1 - 1), (_arg2 + 1))))) {
-                        return (false);
-                    }
-                }
-            }
-        } else {
-            if (_local4 > 0.5) {
-                if (this._g7((_arg1 + 1), _arg2)) {
-                    return (false);
-                }
-                if (_local5 < 0.5) {
-                    if (((this._g7(_arg1, (_arg2 - 1))) || (this._g7((_arg1 + 1), (_arg2 - 1))))) {
-                        return (false);
-                    }
-                } else {
-                    if (_local5 > 0.5) {
-                        if (((this._g7(_arg1, (_arg2 + 1))) || (this._g7((_arg1 + 1), (_arg2 + 1))))) {
-                            return (false);
-                        }
-                    }
-                }
-            } else {
-                if (_local5 < 0.5) {
-                    if (this._g7(_arg1, (_arg2 - 1))) {
-                        return (false);
-                    }
-                } else {
-                    if (_local5 > 0.5) {
-                        if (this._g7(_arg1, (_arg2 + 1))) {
-                            return (false);
-                        }
-                    }
-                }
-            }
-        }
-        return (true);
-    }
-
-    public function _g7(_arg1:Number, _arg2:Number):Boolean {
-        var _local3:Square = map_.lookupSquare(_arg1, _arg2);
-        return ((((((_local3 == null)) || ((_local3.tileType_ == 0xFF)))) || (((!((_local3.obj_ == null))) && (_local3.obj_.props_._4V_)))));
-    }
-
-    public function _01w():void {
-        var _local1:Square = map_.getSquare(x_, y_);
-        if (_local1.props_.sinking_) {
-            _0F_ = Math.min((_0F_ + 1), Parameters._K_5);
-            this._W_V_ = (0.1 + ((1 - (_0F_ / Parameters._K_5)) * (_local1.props_.speed_ - 0.1)));
-        } else {
-            _0F_ = 0;
-            this._W_V_ = _local1.props_.speed_;
-        }
-    }
-
-    public function _F_W_():Number {
-        if (_0I_0()) {
-            return (_lU_);
+            var _local2:BitmapData = new BitmapData((nameText.width + 20), 64, true, 0);
+            _local2.draw(nameText, NAME_MATRIX);
+            _local2.applyFilter(_local2, _local2.rect, PointUtil._P_5, new GlowFilter(0, 1, 3, 3, 2, 1));
+            var _local3:Sprite = _Z_B_._0M_r(this.numStars_);
+            _local2.draw(_local3, STAR_MATRIX);
+            return (_local2);
         }
 
-        _atk = this.attack_;
-        _def = this.defense_;
-        _spd = this.speed_;
-        _vit = this.vitality_;
-        _wis = this.wisdom_;
-        _dex = this.dexterity_;
-
-        var _local1:Number = (_lU_ + ((this.dexterity_ / _x_) * (_Z_ - _lU_)));
-        if (_L_8()) {
-            _local1 = (_local1 * 1.5);
-        }
-        if (_x_ != 75) {
-            _x_ = 75
-        }
-        return (_local1);
-    }
-
-    public function useAltWeapon(_arg1:Number, _arg2:Number):void {
-        var _local7:XML;
-        var _local8:int;
-        var _local10:Number;
-        if (map_ == null || isPaused()) {
-            return;
-        }
-        var _local3:int = equipment_[1];
-        if (_local3 == -1) {
-            return;
-        }
-        var _local4:XML = ObjectLibrary._Q_F_[_local3];
-        if (_local4 == null || !_local4.hasOwnProperty("Usable")) {
-            return;
-        }
-        var _local5:int = int(_local4.MpCost);
-        if (_local5 > this.MP_) {
-            SoundEffects.play("no_mana");
-            return;
-        }
-        var _local6:Point = map_.pSTopW(_arg1, _arg2);
-        if (_local6 == null) {
-            SoundEffects.play("error");
-            return;
-        }
-        for each (_local7 in _local4.Activate) {
-            if (_local7.toString() == "Teleport") {
-                if (!this._M_S_(_local6.x, _local6.y)) {
-                    SoundEffects.play("error");
+        override public function draw(graphicsData:Vector.<IGraphicsData>, camera:GameCamera, time:int):void {
+            if(Parameters.data_.HideOtherPlayers) {
+                if(this != map_.player_) {
                     return;
                 }
             }
+            super.draw(graphicsData, camera, time);
+            if (this != map_.player_) {
+                if (!Parameters._0F_o) {
+                    if (this != this.map_.player_ && this.map_.player_.canBeHitBy(this)) {
+                        if (!this.isInvisible()) {
+                            drawName(graphicsData, camera);
+                        }
+                    } else {
+                        drawName(graphicsData, camera);
+                    }
+                }
+            } else {
+                if (this.breath_ >= 0) {
+                    this.drawBreathBar(graphicsData, camera, time);
+                }
+            }
         }
-        if (usiShukAbil) {
-            return;
-        }
-        _local8 = getTimer();
-        var _local19:XML = ObjectLibrary._Q_F_[equipment_[3]];
-        if (_local8 < this._0m) {
-            SoundEffects.play("error");
-            return;
-        }
-        var _local9 = 500;
-        if (_local4.hasOwnProperty("Cooldown")) {
-            _local9 = (Number(_local4.Cooldown) * 1000);
-        }
-        if (_local19 != null && _local19.hasOwnProperty("BypassCool")) {
-            _local9 = 0;
-        }
-        this._0m = (_local8 + _local9);
-        map_.gs_.gsc_.useItem(_local8, objectId_, 1, _local3, _local6.x, _local6.y);
-        if (_local4.Activate == "Shoot") {
-            _local10 = Math.atan2(_arg2, _arg1);
-            this._G_Y_(_local8, _local3, _local4, (Parameters.data_.cameraAngle + _local10), false, 1);
-        }
-        if (_local4.Activate == "ShurikenAbility") {
-            this.usiShukAbil = true;
-        }
-    }
 
-    public function shukAbil(_arg1:Number, _arg2:Number):void {
-
-        if (!usiShukAbil)
-            return;
-
-        var _local3:int = equipment_[1];
-        var _local4:XML = ObjectLibrary._Q_F_[_local3];
-        var _local6:Point = map_.pSTopW(_arg1, _arg2);
-        var _local8:int;
-
-        if (_local3 == -1) {
-            return;
+        override protected function getTexture(camera:GameCamera, time:int):BitmapData {
+            var _local10:int;
+            var _local11:Dictionary;
+            var _local12:Number;
+            var _local13:int;
+            var _local14:ColorTransform;
+            var _local3:Number = 0;
+            var _local4:int = _lJ_._sS_;
+            if (time < (attackStart_ + this.attackPeriod_)) {
+                facing_ = attackAngle_;
+                _local3 = (((time - attackStart_) % this.attackPeriod_) / this.attackPeriod_);
+                _local4 = _lJ_._E_w;
+            } else {
+                if (((!((moveVec_.x == 0))) || (!((moveVec_.y == 0))))) {
+                    _local10 = (3.5 / this.getMoveSpeed());
+                    if (((!((moveVec_.y == 0))) || (!((moveVec_.x == 0))))) {
+                        facing_ = Math.atan2(moveVec_.y, moveVec_.x);
+                    }
+                    _local3 = ((time % _local10) / _local10);
+                    _local4 = _lJ_._m1;
+                }
+            }
+            if (((this.isHexed()) && (this.isDefaultTexture_))) {
+                this.applyHexTexture();
+            }
+            if (((!(this.isHexed())) && (!(this.isDefaultTexture_)))) {
+                this.restoreTexture();
+            }
+            var _local5:_J_H_ = animatedChar_.imageFromFacing(facing_, camera, _local4, _local3);
+            if (camera.isHallucinating_) {
+                _local5 = new _J_H_(getHallucinationTexture(), null);
+            }
+            var _local6:int = tex1Id_;
+            var _local7:int = tex2Id_;
+            var _local8:BitmapData;
+            if (this.nearestMerchant_ != null) {
+                _local11 = textureCache_[this.nearestMerchant_];
+                if (_local11 == null) {
+                    textureCache_[this.nearestMerchant_] = new Dictionary();
+                } else {
+                    _local8 = _local11[_local5];
+                }
+                _local6 = this.nearestMerchant_.getTex1Id(tex1Id_);
+                _local7 = this.nearestMerchant_.getTex2Id(tex2Id_);
+                this.previewSkin(this.nearestMerchant_.getSkinId(skinId_, this));
+            } else {
+                _local8 = textureCache_[_local5];
+                this.previewSkin(-1);
+            }
+            if (_local8 == null) {
+                _local8 = TextureRedrawer.resize(_local5.image_, _local5.mask_, size_, false, _local6, _local7);
+                if (this.nearestMerchant_ != null) {
+                    textureCache_[this.nearestMerchant_][_local5] = _local8;
+                } else {
+                    textureCache_[_local5] = _local8;
+                }
+            }
+            if (HP_ < (maxHP_ * 0.2)) {
+                _local12 = (int((Math.abs(Math.sin((time / 200))) * 10)) / 10);
+                _local13 = 128;
+                _local14 = new ColorTransform(1, 1, 1, 1, (_local12 * _local13), (-(_local12) * _local13), (-(_local12) * _local13));
+                _local8 = _G_._B_2(_local8, _local14);
+            }
+            var _local9:BitmapData = textureCache_[_local8];
+            if (_local9 == null) {
+                _local9 = TextureRedrawer.outlineGlow(_local8, 0, this.glowColor_ == -1 ? 0 : this.glowColor_);
+                textureCache_[_local8] = _local9;
+            }
+            if (((isPaused()) || (isStasis()))) {
+                _local9 = _G_._R_9(_local9, GRAYSCALE_FILTER);
+            } else {
+                if (isInvisible()) {
+                    if (this != this.map_.player_ && this.map_.player_.canBeHitBy(this)) {
+                        _local9 = _G_._0C_m(_local9, 0);
+                    } else {
+                        _local9 = _G_._0C_m(_local9, 0.4);
+                    }
+                }
+            }
+            return (_local9);
         }
-        if (_local6 == null) {
-            return;
+
+        override public function getPortrait():BitmapData {
+            var _local1:_J_H_;
+            var _local2:int;
+            if (portrait_ == null) {
+                _local1 = animatedChar_.imageFromDir(_lJ_.RIGHT, _lJ_._sS_, 0);
+                _local2 = ((4 / _local1.image_.width) * 100);
+                portrait_ = TextureRedrawer.resize(_local1.image_, _local1.mask_, _local2, true, tex1Id_, tex2Id_);
+                portrait_ = TextureRedrawer.outlineGlow(portrait_, 0, 0);
+            }
+            return (portrait_);
         }
-        _local8 = getTimer();
 
-        this.usiShukAbil = false;
-
-        map_.gs_.gsc_.useItem(_local8, objectId_, 1, _local3, _local6.x, _local6.y);
-
-        var _local5:int = int(_local4.MpEndCost);
-        var _local10:Number = Math.atan2(_arg2, _arg1);
-        if (_local5 > this.MP_) {
-            SoundEffects.play("error");
-        } else {
-            this._G_Y_(_local8, _local3, _local4, (Parameters.data_.cameraAngle + _local10), false, 1);
+        override public function setAttack(itemType:int, angle:Number):void {
+            var _local3:XML = ObjectLibrary.typeToXML_[itemType];
+            if (_local3 == null || !_local3.hasOwnProperty("RateOfFire")) {
+                return;
+            }
+            var _local4:Number = Number(_local3.RateOfFire);
+            this.attackPeriod_ = ((1 / this.getAttackFrequency()) * (1 / _local4));
+            super.setAttack(itemType, angle);
         }
-    }
 
-    public function _O_7(_arg1:Number):void {
-        this.shoot(Parameters.data_.cameraAngle + _arg1);
-    }
-
-    public function _7b():String {
-        return (ObjectLibrary._0D_N_[objectType_]);
-    }
-
-    public function _o4():Boolean {
-        return (!(((_9B_ & ConditionEffect._gY_) == 0)));
-    }
-
-    override public function drawShadow(_arg1:Vector.<IGraphicsData>, _arg2:GameCamera, _arg3:int):void {
-        if(this != this.map_.player_ && this.map_.player_.canBeHitBy(this) && this._di()) {
-            return;
+        override public function toString():String {
+            return ("<Char>" + "<Name>" + name_ + "</Name>" + "<ObjectType>" + objectType_ + "</ObjectType>" + "<Level>" + level_ + "</Level>" + "<Exp>" + this.exp_ + "</Exp>" + "<Equipment>" + equipment_ + "</Equipment>" + "<MaxHitPoints>" + maxHP_ + "</MaxHitPoints>" + "<HitPoints>" + HP_ + "</HitPoints>" + "<MaxMagicPoints>" + this.maxMP_ + "</MaxMagicPoints>" + "<MagicPoints>" + this.MP_ + "</MagicPoints>" + "<Attack>" + this.attack_ + "</Attack>" + "<Defense>" + defense_ + "</Defense>" + "<Speed>" + this.speed_ + "</Speed>" + "<HpRegen>" + this.vitality_ + "</HpRegen>" + "<MpRegen>" + this.wisdom_ + "</MpRegen>" + "<Dexterity>" + this.dexterity_ + "</Dexterity>" + "</Char>");
         }
-        super.drawShadow(_arg1, _arg2, _arg3);
-    }
 
-    protected function _071(_arg1:Vector.<IGraphicsData>, _arg2:GameCamera, _arg3:int):void {
-        var _local8:Number;
-        var _local9:Number;
-        if (this._K_Y_ == null) {
-            this._F_k = new GraphicsSolidFill();
-            this._03i = new GraphicsPath(GraphicHelper._H_2, new Vector.<Number>());
-            this._Y_e = new GraphicsSolidFill(2542335);
-            this._K_Y_ = new GraphicsPath(GraphicHelper._H_2, new Vector.<Number>());
+        public function setRelativeMovement(rotate:Number, x:Number, y:Number):void {
+            var _local4:Number;
+            if (this.inputDir_ == null) {
+                this.inputDir_ = new Point();
+            }
+            this.rotate_ = rotate;
+            this.inputDir_.x = x;
+            this.inputDir_.y = y;
+            if (isConfused()) {
+                _local4 = this.inputDir_.x;
+                this.inputDir_.x = -(this.inputDir_.y);
+                this.inputDir_.y = -(_local4);
+                this.rotate_ = -(this.rotate_);
+            }
         }
-        if (this._R_4 <= Parameters._E_S_) {
-            _local8 = ((Parameters._E_S_ - this._R_4) / Parameters._E_S_);
-            this._F_k.color = MoreColorUtil._oH_(0x545454, 0xFF0000, (Math.abs(Math.sin((_arg3 / 300))) * _local8));
-        } else {
-            this._F_k.color = 0x545454;
+
+        public function setCredits(credits:int):void {
+            this.credits_ = credits;
         }
-        var _local4:int = 20;
-        var _local5:int = 4;
-        var _local6:int = 6;
-        var _local7:Vector.<Number> = this._03i.data;
-        _local7.length = 0;
-        _local7.push((_bY_[0] - _local4), (_bY_[1] + _local5), (_bY_[0] + _local4), (_bY_[1] + _local5), (_bY_[0] + _local4), ((_bY_[1] + _local5) + _local6), (_bY_[0] - _local4), ((_bY_[1] + _local5) + _local6));
-        _arg1.push(this._F_k);
-        _arg1.push(this._03i);
-        _arg1.push(GraphicHelper.END_FILL);
-        if (this._R_4 > 0) {
-            _local7 = this._K_Y_.data;
-            _local9 = (((this._R_4 / 100) * 2) * _local4);
+
+        public function setKeys(keys:int):void {
+            this.keys_ = keys;
+        }
+
+        public function setGuildName(name:String):void {
+            var _local3:GameObject;
+            var _local4:Player;
+            var _local5:Boolean;
+            this.guildName_ = name;
+            var _local2:Player = map_.player_;
+            if (_local2 == this) {
+                for each (_local3 in map_.goDict_) {
+                    _local4 = (_local3 as Player);
+                    if (((!((_local4 == null))) && (!((_local4 == this))))) {
+                        _local4.setGuildName(_local4.guildName_);
+                    }
+                }
+            } else {
+                _local5 = ((((((!((_local2 == null))) && (!((_local2.guildName_ == null))))) && (!((_local2.guildName_ == ""))))) && ((_local2.guildName_ == this.guildName_)));
+                if (_local5 != this.isFellowGuild_) {
+                    this.isFellowGuild_ = _local5;
+                    nameBitmap_ = null;
+                }
+            }
+        }
+
+        public function UpdateParty(partyId:int):void {
+            var _local3:GameObject;
+            var _local4:Player;
+            var _local5:Boolean;
+            this.partyID_ = partyId;
+            var _local2:Player = map_.player_;
+            if (_local2 == this) {
+                for each (_local3 in map_.goDict_) {
+                    _local4 = (_local3 as Player);
+                    if (((!((_local4 == null))) && (!((_local4 == this))))) {
+                        _local4.UpdateParty(_local4.partyID_);
+                    }
+                }
+            } else {
+                _local5 = _local2 != null && _local2.partyID_ != -1 && _local2.partyID_ == this.partyID_;
+                if (_local5 != this.inParty) {
+                    this.inParty = _local5;
+                    nameBitmap_ = null;
+                }
+            }
+        }
+
+        public function canTeleportTo(player:Player):Boolean {
+            if (((player.isPaused()) || (player.isInvisible()))) {
+                return (false);
+            }
+            return (true);
+        }
+
+        public function msUntilTeleport():int {
+            var _local1:int = getTimer();
+            return (Math.max(0, (this.nextTeleportAt_ - _local1)));
+        }
+
+        public function teleportTo(player:Player):Boolean {
+            if (isPaused()) {
+                map_.gs_.textBox_.addText(Parameters.SendError, "Can not teleport while paused.");
+                return (false);
+            }
+            var _local2:int = this.msUntilTeleport();
+            if (_local2 > 0) {
+                map_.gs_.textBox_.addText(Parameters.SendError, (("You can not teleport for another " + int(((_local2 / 1000) + 1))) + " seconds."));
+                return (false);
+            }
+            if (!this.canTeleportTo(player)) {
+                if (player.isInvisible()) {
+                    map_.gs_.textBox_.addText(Parameters.SendError, (("Can not teleport to " + player.name_) + " while they are invisible."));
+                }
+                map_.gs_.textBox_.addText(Parameters.SendError, ("Can not teleport to " + player.name_));
+                return (false);
+            }
+            map_.gs_.gsc_.teleport(player.objectId_);
+            this.nextTeleportAt_ = (getTimer() + TELEPORT_COOLDOWN_MS);
+            return (true);
+        }
+
+        public function levelUpEffect(text:String):void {
+            this.levelUpParticles();
+            map_.mapOverlay_.addChild(new CharacterStatusText(this, text, 0xFF00, 2000));
+        }
+
+        public function handleLevelUp(isNewClass:Boolean):void {
+            SoundEffects.play("level_up");
+            if (isNewClass) {
+                this.levelUpEffect("New Class Unlocked!");
+            } else {
+                this.levelUpEffect("Level Up!");
+            }
+        }
+
+        public function levelUpParticles():void {
+            map_.addObj(new LevelUpEffect(this, 0xFF00FF00, 20), x_, y_);
+        }
+
+        public function auraEffect():void {
+            map_.addObj(new AuraEffect(this, 0xFFFFFF), x_, y_);
+        }
+
+        public function handleExpUp(exp:int):void {
+            if (level_ == 120) {
+                return;
+            }
+            map_.mapOverlay_.addChild(new CharacterStatusText(this, (("+" + exp) + "XP"), 0xFF00, 1000));
+        }
+
+        public function walkTo(x:Number, y:Number):Boolean {
+            this.modifyMove(x, y, tempPoint2_);
+            return (this.moveTo(tempPoint2_.x, tempPoint2_.y));
+        }
+
+        public function modifyMove(x:Number, y:Number, point:Point):void {
+            if (isParalyzed()) {
+                point.x = x_;
+                point.y = y_;
+                return;
+            }
+            var _local4:Number = (x - x_);
+            var _local5:Number = (y - y_);
+            if ((((((((_local4 < MOVE_STEP_SIZE)) && ((_local4 > -(MOVE_STEP_SIZE))))) && ((_local5 < MOVE_STEP_SIZE)))) && ((_local5 > -(MOVE_STEP_SIZE))))) {
+                this.modifyStep(x, y, point);
+                return;
+            }
+            var _local6:Number = Math.atan2(_local4, _local5);
+            var _local7:Number = (MOVE_STEP_SIZE / Math.max(Math.abs(_local4), Math.abs(_local5)));
+            var _local8:Number = 0;
+            point.x = x_;
+            point.y = y_;
+            var _local9:Boolean;
+            while (!(_local9)) {
+                if ((_local8 + _local7) >= 1) {
+                    _local7 = (1 - _local8);
+                    _local9 = true;
+                }
+                this.modifyStep((point.x + (_local4 * _local7)), (point.y + (_local5 * _local7)), point);
+                _local8 = (_local8 + _local7);
+            }
+        }
+
+        public function modifyStep(x:Number, y:Number, point:Point):void {
+            var _local6:Number;
+            var _local7:Number;
+            var _local4:Boolean = ((((((x_ % 0.5) == 0)) && (!((x == x_))))) || (!((int((x_ / 0.5)) == int((x / 0.5))))));
+            var _local5:Boolean = ((((((y_ % 0.5) == 0)) && (!((y == y_))))) || (!((int((y_ / 0.5)) == int((y / 0.5))))));
+            if (((((!(_local4)) && (!(_local5)))) || (this.isValidPosition(x, y)))) {
+                point.x = x;
+                point.y = y;
+                return;
+            }
+            if (_local4) {
+                _local6 = (((x) > x_) ? (int((x * 2)) / 2) : (int((x_ * 2)) / 2));
+                if (int(_local6) > int(x_)) {
+                    _local6 = (_local6 - 0.01);
+                }
+            }
+            if (_local5) {
+                _local7 = (((y) > y_) ? (int((y * 2)) / 2) : (int((y_ * 2)) / 2));
+                if (int(_local7) > int(y_)) {
+                    _local7 = (_local7 - 0.01);
+                }
+            }
+            if (!_local4) {
+                point.x = x;
+                point.y = _local7;
+                return;
+            }
+            if (!_local5) {
+                point.x = _local6;
+                point.y = y;
+                return;
+            }
+            var _local8:Number = (((x) > x_) ? (x - _local6) : (_local6 - x));
+            var _local9:Number = (((y) > y_) ? (y - _local7) : (_local7 - y));
+            if (_local8 > _local9) {
+                if (this.isValidPosition(x, _local7)) {
+                    point.x = x;
+                    point.y = _local7;
+                    return;
+                }
+                if (this.isValidPosition(_local6, y)) {
+                    point.x = _local6;
+                    point.y = y;
+                    return;
+                }
+            } else {
+                if (this.isValidPosition(_local6, y)) {
+                    point.x = _local6;
+                    point.y = y;
+                    return;
+                }
+                if (this.isValidPosition(x, _local7)) {
+                    point.x = x;
+                    point.y = _local7;
+                    return;
+                }
+            }
+            point.x = _local6;
+            point.y = _local7;
+        }
+
+        public function isValidPosition(x:Number, y:Number):Boolean {
+            var _local3:Square = map_.getSquare(x, y);
+            if (((!((square_ == _local3))) && ((((_local3 == null)) || (!(_local3.isWalkable())))))) {
+                return (false);
+            }
+            var _local4:Number = (x - int(x));
+            var _local5:Number = (y - int(y));
+            if (_local4 < 0.5) {
+                if (this.isFullOccupy((x - 1), y)) {
+                    return (false);
+                }
+                if (_local5 < 0.5) {
+                    if (((this.isFullOccupy(x, (y - 1))) || (this.isFullOccupy((x - 1), (y - 1))))) {
+                        return (false);
+                    }
+                } else {
+                    if (_local5 > 0.5) {
+                        if (((this.isFullOccupy(x, (y + 1))) || (this.isFullOccupy((x - 1), (y + 1))))) {
+                            return (false);
+                        }
+                    }
+                }
+            } else {
+                if (_local4 > 0.5) {
+                    if (this.isFullOccupy((x + 1), y)) {
+                        return (false);
+                    }
+                    if (_local5 < 0.5) {
+                        if (((this.isFullOccupy(x, (y - 1))) || (this.isFullOccupy((x + 1), (y - 1))))) {
+                            return (false);
+                        }
+                    } else {
+                        if (_local5 > 0.5) {
+                            if (((this.isFullOccupy(x, (y + 1))) || (this.isFullOccupy((x + 1), (y + 1))))) {
+                                return (false);
+                            }
+                        }
+                    }
+                } else {
+                    if (_local5 < 0.5) {
+                        if (this.isFullOccupy(x, (y - 1))) {
+                            return (false);
+                        }
+                    } else {
+                        if (_local5 > 0.5) {
+                            if (this.isFullOccupy(x, (y + 1))) {
+                                return (false);
+                            }
+                        }
+                    }
+                }
+            }
+            return (true);
+        }
+
+        public function isFullOccupy(x:Number, y:Number):Boolean {
+            var _local3:Square = map_.lookupSquare(x, y);
+            return ((((((_local3 == null)) || ((_local3.tileType_ == 0xFF)))) || (((!((_local3.obj_ == null))) && (_local3.obj_.props_.fullOccupy_)))));
+        }
+
+        public function updateMoveMultiplier():void {
+            var _local1:Square = map_.getSquare(x_, y_);
+            if (_local1.props_.sinking_) {
+                sinkLevel_ = Math.min((sinkLevel_ + 1), Parameters._K_5);
+                this.moveMultiplier_ = (0.1 + ((1 - (sinkLevel_ / Parameters._K_5)) * (_local1.props_.speed_ - 0.1)));
+            } else {
+                sinkLevel_ = 0;
+                this.moveMultiplier_ = _local1.props_.speed_;
+            }
+        }
+
+        public function getAttackFrequency():Number {
+            if (isDazed()) {
+                return (MIN_ATTACK_FREQ);
+            }
+
+            _atk = this.attack_;
+            _def = this.defense_;
+            _spd = this.speed_;
+            _vit = this.vitality_;
+            _wis = this.wisdom_;
+            _dex = this.dexterity_;
+
+            var _local1:Number = (MIN_ATTACK_FREQ + ((this.dexterity_ / statScale_) * (MAX_ATTACK_FREQ - MIN_ATTACK_FREQ)));
+            if (isBerserk()) {
+                _local1 = (_local1 * 1.5);
+            }
+            if (statScale_ != 75) {
+                statScale_ = 75
+            }
+            return (_local1);
+        }
+
+        public function useAltWeapon(x:Number, y:Number):void {
+            var _local7:XML;
+            var _local8:int;
+            var _local10:Number;
+            if (map_ == null || isPaused()) {
+                return;
+            }
+            var _local3:int = equipment_[1];
+            if (_local3 == -1) {
+                return;
+            }
+            var _local4:XML = ObjectLibrary.typeToXML_[_local3];
+            if (_local4 == null || !_local4.hasOwnProperty("Usable")) {
+                return;
+            }
+            var _local5:int = int(_local4.MpCost);
+            if (_local5 > this.MP_) {
+                SoundEffects.play("no_mana");
+                return;
+            }
+            var _local6:Point = map_.pSTopW(x, y);
+            if (_local6 == null) {
+                SoundEffects.play("error");
+                return;
+            }
+            for each (_local7 in _local4.Activate) {
+                if (_local7.toString() == "Teleport") {
+                    if (!this.isValidPosition(_local6.x, _local6.y)) {
+                        SoundEffects.play("error");
+                        return;
+                    }
+                }
+            }
+            if (usiShukAbil) {
+                return;
+            }
+            _local8 = getTimer();
+            var _local19:XML = ObjectLibrary.typeToXML_[equipment_[3]];
+            if (_local8 < this.altCooldownEnd_) {
+                SoundEffects.play("error");
+                return;
+            }
+            var _local9 = 500;
+            if (_local4.hasOwnProperty("Cooldown")) {
+                _local9 = (Number(_local4.Cooldown) * 1000);
+            }
+            if (_local19 != null && _local19.hasOwnProperty("BypassCool")) {
+                _local9 = 0;
+            }
+            this.altCooldownEnd_ = (_local8 + _local9);
+            map_.gs_.gsc_.useItem(_local8, objectId_, 1, _local3, _local6.x, _local6.y);
+            if (_local4.Activate == "Shoot") {
+                _local10 = Math.atan2(y, x);
+                this.doShoot(_local8, _local3, _local4, (Parameters.data_.cameraAngle + _local10), false, 1);
+            }
+            if (_local4.Activate == "ShurikenAbility") {
+                this.usiShukAbil = true;
+            }
+        }
+
+        public function shukAbil(x:Number, y:Number):void {
+
+            if (!usiShukAbil)
+                return;
+
+            var _local3:int = equipment_[1];
+            var _local4:XML = ObjectLibrary.typeToXML_[_local3];
+            var _local6:Point = map_.pSTopW(x, y);
+            var _local8:int;
+
+            if (_local3 == -1) {
+                return;
+            }
+            if (_local6 == null) {
+                return;
+            }
+            _local8 = getTimer();
+
+            this.usiShukAbil = false;
+
+            map_.gs_.gsc_.useItem(_local8, objectId_, 1, _local3, _local6.x, _local6.y);
+
+            var _local5:int = int(_local4.MpEndCost);
+            var _local10:Number = Math.atan2(y, x);
+            if (_local5 > this.MP_) {
+                SoundEffects.play("error");
+            } else {
+                this.doShoot(_local8, _local3, _local4, (Parameters.data_.cameraAngle + _local10), false, 1);
+            }
+        }
+
+        public function attemptAttackAngle(angle:Number):void {
+            this.shoot(Parameters.data_.cameraAngle + angle);
+        }
+
+        public function getClassName():String {
+            return (ObjectLibrary.typeToDisplayId_[objectType_]);
+        }
+
+        public function isHexed():Boolean {
+            return (!(((condition_ & ConditionEffect._gY_) == 0)));
+        }
+
+        override public function drawShadow(graphicsData:Vector.<IGraphicsData>, camera:GameCamera, time:int):void {
+            if(this != this.map_.player_ && this.map_.player_.canBeHitBy(this) && this.isInvisible()) {
+                return;
+            }
+            super.drawShadow(graphicsData, camera, time);
+        }
+
+        protected function drawBreathBar(graphicsData:Vector.<IGraphicsData>, camera:GameCamera, time:int):void {
+            var _local8:Number;
+            var _local9:Number;
+            if (this.breathPath_ == null) {
+                this.breathBgFill_ = new GraphicsSolidFill();
+                this.breathBgPath_ = new GraphicsPath(GraphicHelper._H_2, new Vector.<Number>());
+                this.breathFill_ = new GraphicsSolidFill(2542335);
+                this.breathPath_ = new GraphicsPath(GraphicHelper._H_2, new Vector.<Number>());
+            }
+            if (this.breath_ <= Parameters._E_S_) {
+                _local8 = ((Parameters._E_S_ - this.breath_) / Parameters._E_S_);
+                this.breathBgFill_.color = MoreColorUtil._oH_(0x545454, 0xFF0000, (Math.abs(Math.sin((time / 300))) * _local8));
+            } else {
+                this.breathBgFill_.color = 0x545454;
+            }
+            var _local4:int = 20;
+            var _local5:int = 4;
+            var _local6:int = 6;
+            var _local7:Vector.<Number> = this.breathBgPath_.data;
             _local7.length = 0;
-            _local7.push((_bY_[0] - _local4), (_bY_[1] + _local5), ((_bY_[0] - _local4) + _local9), (_bY_[1] + _local5), ((_bY_[0] - _local4) + _local9), ((_bY_[1] + _local5) + _local6), (_bY_[0] - _local4), ((_bY_[1] + _local5) + _local6));
-            _arg1.push(this._Y_e);
-            _arg1.push(this._K_Y_);
-            _arg1.push(GraphicHelper.END_FILL);
-        }
-    }
-
-    protected function _ei():BitmapData {
-        if (this._sd == null) {
-            this._sd = AssetLibrary._xK_("lofiChar8x8", int((Math.random() * 239)));
-        }
-        return (this._sd);
-    }
-
-    private function _0I_U_():Merchant {
-        var _local3:Point;
-        var _local4:Merchant;
-        var _local1:int = ((((x_ - int(x_))) > 0.5) ? 1 : -1);
-        var _local2:int = ((((y_ - int(y_))) > 0.5) ? 1 : -1);
-        for each (_local3 in _A_u) {
-            this._06x.x_ = (x_ + (_local1 * _local3.x));
-            this._06x.y_ = (y_ + (_local2 * _local3.y));
-            _local4 = map_.merchLookup_[this._06x];
-            if (_local4 != null) {
-                return ((((PointUtil._bm(_local4.x_, _local4.y_, x_, y_) < 1)) ? _local4 : null));
+            _local7.push((screenVec_[0] - _local4), (screenVec_[1] + _local5), (screenVec_[0] + _local4), (screenVec_[1] + _local5), (screenVec_[0] + _local4), ((screenVec_[1] + _local5) + _local6), (screenVec_[0] - _local4), ((screenVec_[1] + _local5) + _local6));
+            graphicsData.push(this.breathBgFill_);
+            graphicsData.push(this.breathBgPath_);
+            graphicsData.push(GraphicHelper.END_FILL);
+            if (this.breath_ > 0) {
+                _local7 = this.breathPath_.data;
+                _local9 = (((this.breath_ / 100) * 2) * _local4);
+                _local7.length = 0;
+                _local7.push((screenVec_[0] - _local4), (screenVec_[1] + _local5), ((screenVec_[0] - _local4) + _local9), (screenVec_[1] + _local5), ((screenVec_[0] - _local4) + _local9), ((screenVec_[1] + _local5) + _local6), (screenVec_[0] - _local4), ((screenVec_[1] + _local5) + _local6));
+                graphicsData.push(this.breathFill_);
+                graphicsData.push(this.breathPath_);
+                graphicsData.push(GraphicHelper.END_FILL);
             }
         }
-        return (null);
-    }
 
-    private function _J_N_():Number {
-        if (_051()) {
-            return ((_dK_ * this._W_V_));
-        }
-        var _local1:Number = (_dK_ + ((this.speed_ / _x_) * (_T_v - _dK_)));
-        if (_N_4()) {
-            _local1 = (_local1 * 1.5);
-        }
-        if (_x_ != 75) {
-            _x_ = 75
-        }
-        return ((_local1 * this._W_V_));
-    }
-
-    private function _6D_():Number {
-        if (_hQ_()) {
-            return (_01b);
-        }
-
-        var _local1:Number = (_01b + ((this.attack_ / _x_) * (_0J_Q_ - _01b)));
-        if (_07I_()) {
-            _local1 = (_local1 * 1.5);
-        }
-        if (_x_ != 75) {
-            _x_ = 75
-        }
-        return (_local1);
-    }
-
-    private function _ur():void {
-        var _local1:_Z_H_ = ObjectLibrary._V_a[objectType_];
-        texture_ = _local1.texture_;
-        mask_ = _local1.mask_;
-        _yN_ = _local1._yN_;
-        this._7U_ = true;
-    }
-
-    private function _Q_K_():void {
-        var _local1:Vector.<XML> = ObjectLibrary._J_G_;
-        var _local2:uint = Math.floor((Math.random() * _local1.length));
-        var _local3:int = _local1[_local2].@type;
-        var _local4:_Z_H_ = ObjectLibrary._V_a[_local3];
-        texture_ = _local4.texture_;
-        mask_ = _local4.mask_;
-        _yN_ = _local4._yN_;
-        this._7U_ = false;
-    }
-
-    private function shoot(_arg1:Number):void {
-        if (map_ == null || _0I_e() || isPaused()) {
-            return;
-        }
-        var _local2:int = equipment_[0];
-        if (_local2 == -1) {
-            map_.gs_.textBox_.addText(Parameters.SendError, "You do not have a weapon equipped!");
-            return;
-        }
-        var _local3:XML = ObjectLibrary._Q_F_[_local2];
-        var _local4:int = getTimer();
-        var _local5:Number = Number(_local3.RateOfFire);
-        this._y4 = ((1 / this._F_W_()) * (1 / _local5));
-        if (_local4 < (_W_J_ + this._y4)) {
-            return;
-        }
-        doneAction(map_.gs_, Tutorial.ATTACK);
-        map_.gs_.gsc_.playerCheatCheck();
-        _M_r = _arg1;
-        _W_J_ = _local4;
-        this._G_Y_(_W_J_, _local2, _local3, _M_r, true, 0);
-    }
-
-    private function _G_Y_(_arg1:int, _arg2:int, _arg3:XML, _arg4:Number, _arg5:Boolean, _arg6:int):void {
-        var _local12:uint;
-        var _local13:Projectile;
-        var _local14:int;
-        var _local15:int;
-        var _local16:Number;
-        var _local17:int;
-        var _local6:int = ((_arg3.hasOwnProperty("NumProjectiles")) ? int(_arg3.NumProjectiles) : 1);
-        var _local7:Number = (((_arg3.hasOwnProperty("ArcGap")) ? Number(_arg3.ArcGap) : 11.25) * Trig._km);
-        var _local8:Vector.<Projectile> = new Vector.<Projectile>();
-        var _local9:Number = (_local7 * (_local6 - 1));
-        var _local10:Number = (_arg4 - (_local9 / 2));
-        var _local11:int;
-        var itemData_:Object = this.equipData_[_arg6];
-        while (_local11 < _local6) {
-            _local12 = _true();
-            _local13 = (_wW_._B_1(Projectile) as Projectile);
-            _local13.reset(_arg2, 0, objectId_, _local12, _local10, _arg1);
-            _local14 = int(_local13._ko.minDamage_);
-            _local15 = int(_local13._ko.maxDamage_);
-            if(itemData_ != null && itemData_.hasOwnProperty("DmgPercentage") && itemData_.DmgPercentage != 0) {
-                var _local18:int = int(itemData_.DmgPercentage);
-                _local14 += (_local14 * (_local18 / 100));
-                _local15 += (_local15 * (_local18 / 100));
+        protected function getPlayerHallucinationTexture():BitmapData {
+            if (this.playerHallucinationTex_ == null) {
+                this.playerHallucinationTex_ = AssetLibrary._xK_("lofiChar8x8", int((Math.random() * 239)));
             }
-            _local16 = ((_arg5) ? this._6D_() : 1);
-            _local17 = (map_.gs_.gsc_.getNextDamage(_local14, _local15) * _local16);
-            if (_arg1 > (map_.gs_.moveRecords_.lastClearTime_ + 600)) {
-                _local17 = 0;
-            }
-            _local13._T_j(_local17);
-            if ((((_local11 == 0)) && (!((_local13._P_B_ == null))))) {
-                SoundEffects.play(_local13._P_B_, 0.75, false);
-            }
-            map_.addObj(_local13, (x_ + (Math.cos(_arg4) * 0.3)), (y_ + (Math.sin(_arg4) * 0.3)));
-            map_.gs_.gsc_.playerShoot(_arg1, _local13);
-            _local10 = (_local10 + _local7);
-            _local11++;
-
-          _mindmg = _local14;
-          _maxdmg = _local15;
+            return (this.playerHallucinationTex_);
         }
-    }
 
-}
+        private function findNearestMerchant():Merchant {
+            var _local3:Point;
+            var _local4:Merchant;
+            var _local1:int = ((((x_ - int(x_))) > 0.5) ? 1 : -1);
+            var _local2:int = ((((y_ - int(y_))) > 0.5) ? 1 : -1);
+            for each (_local3 in NEIGHBOR_OFFSETS) {
+                this.merchLookupKey_.x_ = (x_ + (_local1 * _local3.x));
+                this.merchLookupKey_.y_ = (y_ + (_local2 * _local3.y));
+                _local4 = map_.merchLookup_[this.merchLookupKey_];
+                if (_local4 != null) {
+                    return ((((PointUtil._bm(_local4.x_, _local4.y_, x_, y_) < 1)) ? _local4 : null));
+                }
+            }
+            return (null);
+        }
+
+        private function getMoveSpeed():Number {
+            if (isSlowed()) {
+                return ((MIN_MOVE_SPEED * this.moveMultiplier_));
+            }
+            var _local1:Number = (MIN_MOVE_SPEED + ((this.speed_ / statScale_) * (MAX_MOVE_SPEED - MIN_MOVE_SPEED)));
+            if (isSpeedy()) {
+                _local1 = (_local1 * 1.5);
+            }
+            if (statScale_ != 75) {
+                statScale_ = 75
+            }
+            return ((_local1 * this.moveMultiplier_));
+        }
+
+        private function getAttackMultiplier():Number {
+            if (isWeak()) {
+                return (MIN_ATTACK_MULT);
+            }
+
+            var _local1:Number = (MIN_ATTACK_MULT + ((this.attack_ / statScale_) * (MAX_ATTACK_MULT - MIN_ATTACK_MULT)));
+            if (isDamaging()) {
+                _local1 = (_local1 * 1.5);
+            }
+            if (statScale_ != 75) {
+                statScale_ = 75
+            }
+            return (_local1);
+        }
+
+        private function restoreTexture():void {
+            var _local1:TextureData = ObjectLibrary.typeToTextureData_[objectType_];
+            texture_ = _local1.texture_;
+            mask_ = _local1.mask_;
+            animatedChar_ = _local1.animatedChar_;
+            this.isDefaultTexture_ = true;
+        }
+
+        private function applyHexTexture():void {
+            var _local1:Vector.<XML> = ObjectLibrary.hexableXmls_;
+            var _local2:uint = Math.floor((Math.random() * _local1.length));
+            var _local3:int = _local1[_local2].@type;
+            var _local4:TextureData = ObjectLibrary.typeToTextureData_[_local3];
+            texture_ = _local4.texture_;
+            mask_ = _local4.mask_;
+            animatedChar_ = _local4.animatedChar_;
+            this.isDefaultTexture_ = false;
+        }
+
+        private function shoot(angle:Number):void {
+            if (map_ == null || isStunned() || isPaused()) {
+                return;
+            }
+            var _local2:int = equipment_[0];
+            if (_local2 == -1) {
+                map_.gs_.textBox_.addText(Parameters.SendError, "You do not have a weapon equipped!");
+                return;
+            }
+            var _local3:XML = ObjectLibrary.typeToXML_[_local2];
+            var _local4:int = getTimer();
+            var _local5:Number = Number(_local3.RateOfFire);
+            this.attackPeriod_ = ((1 / this.getAttackFrequency()) * (1 / _local5));
+            if (_local4 < (attackStart_ + this.attackPeriod_)) {
+                return;
+            }
+            doneAction(map_.gs_, Tutorial.ATTACK);
+            map_.gs_.gsc_.playerCheatCheck();
+            attackAngle_ = angle;
+            attackStart_ = _local4;
+            this.doShoot(attackStart_, _local2, _local3, attackAngle_, true, 0);
+        }
+
+        private function doShoot(time:int, itemType:int, itemXml:XML, angle:Number, isAttack:Boolean, slotIndex:int):void {
+            var _local12:uint;
+            var _local13:Projectile;
+            var _local14:int;
+            var _local15:int;
+            var _local16:Number;
+            var _local17:int;
+            var _local6:int = ((itemXml.hasOwnProperty("NumProjectiles")) ? int(itemXml.NumProjectiles) : 1);
+            var _local7:Number = (((itemXml.hasOwnProperty("ArcGap")) ? Number(itemXml.ArcGap) : 11.25) * Trig._km);
+            var _local8:Vector.<Projectile> = new Vector.<Projectile>();
+            var _local9:Number = (_local7 * (_local6 - 1));
+            var _local10:Number = (angle - (_local9 / 2));
+            var _local11:int;
+            var itemData_:Object = this.equipData_[slotIndex];
+            while (_local11 < _local6) {
+                _local12 = getNextBulletId();
+                _local13 = (_wW_._B_1(Projectile) as Projectile);
+                _local13.reset(itemType, 0, objectId_, _local12, _local10, time);
+                _local14 = int(_local13.projProps_.minDamage_);
+                _local15 = int(_local13.projProps_.maxDamage_);
+                if(itemData_ != null && itemData_.hasOwnProperty("DmgPercentage") && itemData_.DmgPercentage != 0) {
+                    var _local18:int = int(itemData_.DmgPercentage);
+                    _local14 += (_local14 * (_local18 / 100));
+                    _local15 += (_local15 * (_local18 / 100));
+                }
+                _local16 = ((isAttack) ? this.getAttackMultiplier() : 1);
+                _local17 = (map_.gs_.gsc_.getNextDamage(_local14, _local15) * _local16);
+                if (time > (map_.gs_.moveRecords_.lastClearTime_ + 600)) {
+                    _local17 = 0;
+                }
+                _local13.setDamage(_local17);
+                if ((((_local11 == 0)) && (!((_local13.sound_ == null))))) {
+                    SoundEffects.play(_local13.sound_, 0.75, false);
+                }
+                map_.addObj(_local13, (x_ + (Math.cos(angle) * 0.3)), (y_ + (Math.sin(angle) * 0.3)));
+                map_.gs_.gsc_.playerShoot(time, _local13);
+                _local10 = (_local10 + _local7);
+                _local11++;
+
+                _mindmg = _local14;
+                _maxdmg = _local15;
+            }
+        }
+
+    }
 }//package com.company.assembleegameclient.objects
-
