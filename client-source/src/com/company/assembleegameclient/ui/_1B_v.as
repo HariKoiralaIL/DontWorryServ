@@ -17,7 +17,7 @@ public class _1B_v extends Sprite {
         this._Zx_ = new SimpleText(_Y_J_, 0xFFFFFF, false, 0, 0, "Myriad Pro");
         this._Zx_.filters = [new DropShadowFilter(0, 0, 0, 1, 4, 4, 2)];
        addChild(_Zx_);
-        var _local2:BitmapData = AssetLibrary._xK_("lofiObj3", 182);
+        var _local2:BitmapData = AssetLibrary.getImageFromSet("lofiObj3", 182);
         _local2 = TextureRedrawer.redraw(_local2, 40, true, 0, 0);
         this._3q = new Bitmap(_local2);
         addChild(_3q);

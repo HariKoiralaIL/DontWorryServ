@@ -69,7 +69,7 @@ public class SpeechBalloon extends Sprite implements IMapOverlayElement {
                 JointStyle.ROUND, 3, this.outlineFill_);
         this.path_ = new GraphicsPath(new Vector.<int>(), new Vector.<Number>());
         this.graphicsData_ = new <IGraphicsData>[this.outlineStroke, this.backgroundFill, this.path_,
-            GraphicHelper.END_FILL, GraphicHelper._H_B_];
+            GraphicHelper.END_FILL, GraphicHelper.NO_STROKE];
         mouseEnabled = false;
         mouseChildren = false;
         this.go_ = go;
@@ -133,7 +133,7 @@ public class SpeechBalloon extends Sprite implements IMapOverlayElement {
 
     private function drawBubble(bubbleWidth:int):void {
         graphics.clear();
-        GraphicHelper._0L_6(this.path_);
+        GraphicHelper.clearPath(this.path_);
         GraphicHelper.drawUI(-BOX_PADDING, -BOX_PADDING, (bubbleWidth + (BOX_PADDING * 2)),
                 (height + (BOX_PADDING * 2)), BOX_CORNER_RADIUS, [1, 1, 1, 1], this.path_);
         // insert the speech tail (three extra points) into the rounded rectangle path

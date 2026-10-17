@@ -50,7 +50,7 @@ package com.company.assembleegameclient.ui {
 
     public function draw():void {
       this.updateFill(this.selected_);
-      GraphicHelper._0L_6(this.path_);
+      GraphicHelper.clearPath(this.path_);
       GraphicHelper.drawUI(0, 0, WIDTH, HEIGHT + 4, 2, [1, 1, 0, 0], this.path_);
       this.graphics.clear();
       this.graphics.drawGraphicsData(this.graphicsData_);

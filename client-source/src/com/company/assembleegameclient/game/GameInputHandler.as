@@ -10,7 +10,7 @@ import com.company.assembleegameclient.tutorial.Tutorial;
 import com.company.assembleegameclient.tutorial.doneAction;
 import com.company.assembleegameclient.ui.FrameHolder;
 import com.company.assembleegameclient.util.TextureRedrawer;
-import com.company.util._H_V_;
+import com.company.util.KeyCodes;
 
 import flash.display.Stage;
 import flash.display.StageDisplayState;
@@ -170,20 +170,20 @@ public class GameInputHandler {
     /** Keys that must work even while a text field has focus; everything else is ignored then. */
     private function isIgnoredWhileTyping(keyCode:uint, stage:Stage):Boolean {
         switch (keyCode) {
-            case _H_V_.F1:
-            case _H_V_.F2:
-            case _H_V_.F3:
-            case _H_V_.F4:
-            case _H_V_.F5:
-            case _H_V_.F6:
-            case _H_V_.F7:
-            case _H_V_.F8:
-            case _H_V_.F9:
-            case _H_V_.F10:
-            case _H_V_.F11:
-            case _H_V_.F12:
-            case _H_V_.INSERT:
-            case _H_V_.ALT:
+            case KeyCodes.F1:
+            case KeyCodes.F2:
+            case KeyCodes.F3:
+            case KeyCodes.F4:
+            case KeyCodes.F5:
+            case KeyCodes.F6:
+            case KeyCodes.F7:
+            case KeyCodes.F8:
+            case KeyCodes.F9:
+            case KeyCodes.F10:
+            case KeyCodes.F11:
+            case KeyCodes.F12:
+            case KeyCodes.INSERT:
+            case KeyCodes.ALT:
                 return false;
             default:
                 return stage.focus != null;
@@ -356,13 +356,13 @@ public class GameInputHandler {
     /** F2-F4 debug toggles (only when Parameters._1h is set). */
     private function handleDebugKeys(keyCode:uint):void {
         switch (keyCode) {
-            case _H_V_.F2:
+            case KeyCodes.F2:
                 this.toggleHud();
                 break;
-            case _H_V_.F3:
+            case KeyCodes.F3:
                 Parameters._ih = !Parameters._ih;
                 break;
-            case _H_V_.F4:
+            case KeyCodes.F4:
                 this.gs_.map_.mapOverlay_.visible = !this.gs_.map_.mapOverlay_.visible;
                 this.gs_.map_.partyOverlay_.visible = !this.gs_.map_.partyOverlay_.visible;
                 break;
@@ -372,12 +372,12 @@ public class GameInputHandler {
     /** F6-F9 rendering / survey test keys (only when not Parameters.isTesting). */
     private function handleTestKeys(keyCode:uint):void {
         switch (keyCode) {
-            case _H_V_.F6:
+            case KeyCodes.F6:
                 TextureRedrawer.clearCache();
                 Parameters._Q_b = (Parameters._Q_b + 1) % 7;
                 this.gs_.textBox_.addText(Parameters.SendError, "Projectile Color Type: " + Parameters._Q_b);
                 break;
-            case _H_V_.F7:
+            case KeyCodes.F7:
                 for each (var square:Square in this.gs_.map_.squares_) {
                     if (square != null) {
                         square.faces_.length = 0;
@@ -386,13 +386,13 @@ public class GameInputHandler {
                 Parameters._R_P_ = (Parameters._R_P_ + 1) % 2;
                 this.gs_.textBox_.addText(Parameters.SendClient, "Blend type: " + Parameters._R_P_);
                 break;
-            case _H_V_.F8:
+            case KeyCodes.F8:
                 Parameters.data_.surveyDate = 0;
                 Parameters.data_.needsSurvey = true;
                 Parameters.data_.playTimeLeftTillSurvey = 5;
                 Parameters.data_.surveyGroup = "testing";
                 break;
-            case _H_V_.F9:
+            case KeyCodes.F9:
                 Parameters._Q_w = !Parameters._Q_w;
                 break;
         }

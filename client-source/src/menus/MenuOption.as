@@ -3,7 +3,7 @@ package menus
     import com.company.assembleegameclient.util.TextureRedrawer;
     import com.company.ui.SimpleText;
     import com.company.util.MoreColorUtil;
-    import com.company.util._G_;
+    import com.company.util.BitmapEffectCache;
 
     import flash.display.Bitmap;
     import flash.display.BitmapData;
@@ -58,7 +58,7 @@ package menus
             }
             else
             {
-                tinted = _G_._B_2(this.icon_, this.currentTransform_);
+                tinted = BitmapEffectCache.getColorTransformed(this.icon_, this.currentTransform_);
                 tinted = TextureRedrawer.redraw(tinted, this.getIconScale(), true, 0, 0);
                 this.iconBitmap_.bitmapData = tinted;
                 this.text_.transform.colorTransform = this.currentTransform_;

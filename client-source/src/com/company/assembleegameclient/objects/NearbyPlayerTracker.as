@@ -46,7 +46,7 @@ package com.company.assembleegameclient.objects {
                         _local5.starred_ = true;
                     }
                     _local5.isIgnored_ = !((this.ignored_[_local5.accountId_] == undefined));
-                    _local5.distSqFromThisPlayer_ = PointUtil._bm(_local3.x_, _local3.y_, _local5.x_, _local5.y_);
+                    _local5.distSqFromThisPlayer_ = PointUtil.distanceSquaredXY(_local3.x_, _local3.y_, _local5.x_, _local5.y_);
                     if (!(((_local5.distSqFromThisPlayer_ > MAX_DIST_SQ)) && (!(_local5.starred_)))) {
                         if (_local3.canBeHitBy(_local5)) {
                             if (!_local5.isInvisible()) {

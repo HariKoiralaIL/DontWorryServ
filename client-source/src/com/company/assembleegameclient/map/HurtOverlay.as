@@ -11,8 +11,8 @@ import flash.display.Shape;
 public class HurtOverlay extends Shape {
 
     private const diagonal:Number = 600 / Math.sin(Math.PI / 4);
-    private const fill:GraphicsGradientFill = new GraphicsGradientFill(GradientType.RADIAL, [0xFFFFFF, 0xFFFFFF, 0xFFFFFF], [0, 0, 0.92], [0, 155, 0xFF], GraphicHelper._0L_0(diagonal, diagonal, 0, (600 - diagonal) / 2, (600 - diagonal) / 2));
-    private const path:GraphicsPath = GraphicHelper._wj(0, 0, 600, 600);
+    private const fill:GraphicsGradientFill = new GraphicsGradientFill(GradientType.RADIAL, [0xFFFFFF, 0xFFFFFF, 0xFFFFFF], [0, 0, 0.92], [0, 155, 0xFF], GraphicHelper.createGradientMatrix(diagonal, diagonal, 0, (600 - diagonal) / 2, (600 - diagonal) / 2));
+    private const path:GraphicsPath = GraphicHelper.createRectPath(0, 0, 600, 600);
     private var graphicsData:Vector.<IGraphicsData>;
 
     public function HurtOverlay() {

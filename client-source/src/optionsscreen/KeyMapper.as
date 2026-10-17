@@ -9,7 +9,7 @@ import flash.filters.DropShadowFilter;
 import flash.utils.getTimer;
 
 import com.company.ui.SimpleText;
-import com.company.util._H_V_;
+import com.company.util.KeyCodes;
 
 /**
  * Button showing the name of a key. Clicking it waits for the next key press and
@@ -53,7 +53,7 @@ public class KeyMapper extends Sprite {
             return;
         }
         this.key = newKey;
-        this.setText(_H_V_._in[this.key]);
+        this.setText(KeyCodes.KEY_NAMES[this.key]);
         dispatchEvent(new Event(Event.CHANGE, true));
     }
 
@@ -83,7 +83,7 @@ public class KeyMapper extends Sprite {
             removeEventListener(KeyboardEvent.KEY_DOWN, this.onKeyDown);
             stage.removeEventListener(MouseEvent.MOUSE_DOWN, this.onStageMouseDown, true);
         }
-        this.setText(_H_V_._in[this.key]);
+        this.setText(KeyCodes.KEY_NAMES[this.key]);
         addEventListener(MouseEvent.CLICK, this.onClick);
     }
 

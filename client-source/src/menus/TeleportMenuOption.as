@@ -19,7 +19,7 @@ package menus
 
         public function TeleportMenuOption(player:Player)
         {
-            super(AssetLibrary._xK_("lofiInterfaceBig", 11), 0xFFFFFF, "Teleport");
+            super(AssetLibrary.getImageFromSet("lofiInterfaceBig", 11), 0xFFFFFF, "Teleport");
             this.player_ = player;
             this.cooldownText_ = new SimpleText(18, 0xFFFFFF, false, 0, 0, "Myriad Pro");
             this.cooldownText_.setBold(true);

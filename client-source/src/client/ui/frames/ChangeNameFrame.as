@@ -5,7 +5,7 @@
 
 package client.ui.frames {
 import com.company.assembleegameclient.game.GameSprite;
-import com.company.util._H_V_;
+import com.company.util.KeyCodes;
 
 import flash.events.KeyboardEvent;
 
@@ -75,7 +75,7 @@ public class ChangeNameFrame extends Frame {
 
     private function onKeyPressed(e:KeyboardEvent):void {
 
-        if (e.keyCode == _H_V_.ENTER) {
+        if (e.keyCode == KeyCodes.ENTER) {
             this.onChoose(null);
         }
     }

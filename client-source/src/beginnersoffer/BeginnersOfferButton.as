@@ -68,7 +68,7 @@ public class BeginnersOfferButton extends Sprite {
     }
 
     private function createIcon():void {
-        var bitmapData:BitmapData = AssetLibrary._xK_(ICON_SPRITE_SHEET, ICON_SPRITE_INDEX);
+        var bitmapData:BitmapData = AssetLibrary.getImageFromSet(ICON_SPRITE_SHEET, ICON_SPRITE_INDEX);
         bitmapData = TextureRedrawer.redraw(bitmapData, ICON_SCALE, true, 0, 0);
         this.icon = new Bitmap(bitmapData);
         this.icon.x = -this.icon.width;

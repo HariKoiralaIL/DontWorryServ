@@ -1,6 +1,6 @@
 package mapeditor {
 import com.company.assembleegameclient.objects.ObjectLibrary;
-import com.company.util._L_2;
+import com.company.util.StringUtil;
 
 internal class ObjectChooser extends Chooser {
 
@@ -13,7 +13,7 @@ internal class ObjectChooser extends Chooser {
         for (id in ObjectLibrary.idToType_) {
             sortedIds.push(id);
         }
-        sortedIds.sort(_L_2._L_O_);
+        sortedIds.sort(StringUtil.compare);
         for each (id in sortedIds) {
             type = ObjectLibrary.idToType_[id];
             objectXml = ObjectLibrary.typeToXML_[type];

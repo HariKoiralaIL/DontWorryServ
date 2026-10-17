@@ -1,6 +1,6 @@
 package spriteeditor {
 import editorcommands.SelectableButtonGroup;
-import com.company.util._H_V_;
+import com.company.util.KeyCodes;
 import editorcommands.SelectableButton;
 import editorcommands.CommandEvent;
 
@@ -14,15 +14,15 @@ public class EditorToolbar extends SelectableButtonGroup {
     public static const MODE_SAMPLE:int = 3;
 
     public function EditorToolbar() {
-        addButton("(D)raw", _H_V_.D, this.onDraw, MODE_DRAW);
-        addButton("(E)rase", _H_V_.E, this.onErase, MODE_ERASE);
-        addButton("S(A)mple", _H_V_.A, this.onSample, MODE_SAMPLE);
-        addButton("(U)ndo", _H_V_.U, this.onUndo, MODE_NONE);
-        addButton("(R)edo", _H_V_.R, this.onRedo, MODE_NONE);
-        addButton("(C)lear", _H_V_.C, this.onClear, MODE_NONE);
+        addButton("(D)raw", KeyCodes.D, this.onDraw, MODE_DRAW);
+        addButton("(E)rase", KeyCodes.E, this.onErase, MODE_ERASE);
+        addButton("S(A)mple", KeyCodes.A, this.onSample, MODE_SAMPLE);
+        addButton("(U)ndo", KeyCodes.U, this.onUndo, MODE_NONE);
+        addButton("(R)edo", KeyCodes.R, this.onRedo, MODE_NONE);
+        addButton("(C)lear", KeyCodes.C, this.onClear, MODE_NONE);
         addSpacer();
-        addButton("(L)oad", _H_V_.L, this.onLoad, MODE_NONE);
-        addButton("(S)ave", _H_V_.S, this.onSave, MODE_NONE);
+        addButton("(L)oad", KeyCodes.L, this.onLoad, MODE_NONE);
+        addButton("(S)ave", KeyCodes.S, this.onSave, MODE_NONE);
     }
 
     private function onDraw(button:SelectableButton):void {

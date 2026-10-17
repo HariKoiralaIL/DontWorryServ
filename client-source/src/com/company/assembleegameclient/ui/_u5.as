@@ -31,7 +31,7 @@ public class _u5 extends Sprite {
 
     public static function _I_H_():BitmapData {
         if (coin_ == null) {
-            coin_ = TextureRedrawer.resize(AssetLibrary._xK_("lofiObj3", 225), null, 40, true, 0, 0);
+            coin_ = TextureRedrawer.resize(AssetLibrary.getImageFromSet("lofiObj3", 225), null, 40, true, 0, 0);
             coin_ = TextureRedrawer.outlineGlow(coin_, 0, 0xFFFFFFFF);
         }
         return (coin_);
@@ -39,7 +39,7 @@ public class _u5 extends Sprite {
 
     public static function fame():BitmapData {
         if (_Q_7 == null) {
-            _Q_7 = TextureRedrawer.resize(AssetLibrary._xK_("lofiObj3", 224), null, 40, true, 0, 0);
+            _Q_7 = TextureRedrawer.resize(AssetLibrary.getImageFromSet("lofiObj3", 224), null, 40, true, 0, 0);
             _Q_7 = TextureRedrawer.outlineGlow(_Q_7, 0, 0xFFFFFFFF);
         }
         return (_Q_7);
@@ -47,7 +47,7 @@ public class _u5 extends Sprite {
 
     public static function key():BitmapData {
         if (key_ == null) {
-            key_ = TextureRedrawer.resize(AssetLibrary._xK_("lofiObj3", 182), null, 40, true, 0, 0);
+            key_ = TextureRedrawer.resize(AssetLibrary.getImageFromSet("lofiObj3", 182), null, 40, true, 0, 0);
             key_ = TextureRedrawer.outlineGlow(key_, 0, 0xFFFFFFFF);
         }
         return (key_);
@@ -55,7 +55,7 @@ public class _u5 extends Sprite {
 
     public static function _0M_s():BitmapData {
         if (_K_F_ == null) {
-            _K_F_ = TextureRedrawer.resize(AssetLibrary._xK_("lofiObj3", 226), null, 40, true, 0, 0);
+            _K_F_ = TextureRedrawer.resize(AssetLibrary.getImageFromSet("lofiObj3", 226), null, 40, true, 0, 0);
             _K_F_ = TextureRedrawer.outlineGlow(_K_F_, 0, 0xFFFFFFFF);
         }
         return (_K_F_);
@@ -126,7 +126,7 @@ public class _u5 extends Sprite {
         } else {
             this.w_ = (this.text_.textWidth + 16);
         }
-        GraphicHelper._0L_6(this.path_);
+        GraphicHelper.clearPath(this.path_);
         GraphicHelper.drawUI(0, 0, this.w_, (this.text_.textHeight + 8), 4, [1, 1, 1, 1], this.path_);
         this.draw();
     }

@@ -84,7 +84,7 @@ public class ObjectFace3D {
         }
 
         if (!this.textured_ || texture == null) {
-            this.solidFill_.color = MoreColorUtil._kz(
+            this.solidFill_.color = MoreColorUtil.applyColorTransform(
                 new ColorTransform(this.brightness_, this.brightness_, this.brightness_), color);
             graphicsData.push(this.solidFill_);
         } else {

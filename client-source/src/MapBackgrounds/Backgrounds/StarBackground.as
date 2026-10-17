@@ -11,7 +11,7 @@ import flash.display.IGraphicsData;
 
 import com.company.assembleegameclient.map.GameCamera;
 import com.company.util.AssetLibrary;
-import com.company.util._kp;
+import com.company.util.ImageSet;
 import com.company.util.PointUtil;
 
 
@@ -42,10 +42,10 @@ public class StarBackground extends Background {
 
     private function _lh():void {
         var _local3:Star;
-        var _local1:_kp = AssetLibrary._18("stars");
-        var _local2:Star = new Star(((Math.random() * 1000) - 500), ((Math.random() * 1000) - 500), (4 * (0.5 + (0.5 * Math.random()))), _local1._W_u[int((_local1._W_u.length * Math.random()))]);
+        var _local1:ImageSet = AssetLibrary.getImageSet("stars");
+        var _local2:Star = new Star(((Math.random() * 1000) - 500), ((Math.random() * 1000) - 500), (4 * (0.5 + (0.5 * Math.random()))), _local1.images[int((_local1.images.length * Math.random()))]);
         for each (_local3 in this._P_j) {
-            if (PointUtil._R_O_(_local2.x_, _local2.y_, _local3.x_, _local3.y_) < 3) {
+            if (PointUtil.distanceXY(_local2.x_, _local2.y_, _local3.x_, _local3.y_) < 3) {
                 return;
             }
         }

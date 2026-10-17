@@ -1,192 +1,183 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.util.Trig
-
 package com.company.util {
 public class Trig {
 
-    public static const _G_Q_:Number = (180 / Math.PI);//57.2957795130823
-    public static const _km:Number = (Math.PI / 180);//0.0174532925199433
+    public static const RAD_TO_DEG:Number = 180 / Math.PI;
+    public static const DEG_TO_RAD:Number = Math.PI / 180;
 
-    public static function _08f(_arg1:Number, _arg2:Number, _arg3:Number):Number {
-        var _local4:Number = Number.MAX_VALUE;
-        if (_arg1 > _arg2) {
-            if ((_arg1 - _arg2) > Math.PI) {
-                _local4 = ((_arg1 * (1 - _arg3)) + ((_arg2 + (2 * Math.PI)) * _arg3));
+    /** Interpolates between two radian angles along the shortest arc. */
+    public static function lerpAngle(from:Number, to:Number, t:Number):Number {
+        var result:Number = Number.MAX_VALUE;
+        if (from > to) {
+            if ((from - to) > Math.PI) {
+                result = (from * (1 - t)) + ((to + (2 * Math.PI)) * t);
             } else {
-                _local4 = ((_arg1 * (1 - _arg3)) + (_arg2 * _arg3));
+                result = (from * (1 - t)) + (to * t);
             }
         } else {
-            if ((_arg2 - _arg1) > Math.PI) {
-                _local4 = (((_arg1 + (2 * Math.PI)) * (1 - _arg3)) + (_arg2 * _arg3));
+            if ((to - from) > Math.PI) {
+                result = ((from + (2 * Math.PI)) * (1 - t)) + (to * t);
             } else {
-                _local4 = ((_arg1 * (1 - _arg3)) + (_arg2 * _arg3));
+                result = (from * (1 - t)) + (to * t);
             }
         }
-        if ((((_local4 < -(Math.PI))) || ((_local4 > Math.PI)))) {
-            _local4 = _V_r(_local4);
+        if (result < -Math.PI || result > Math.PI) {
+            result = normalizeRadians(result);
         }
-        return (_local4);
+        return result;
     }
 
-    public static function _6y(_arg1:Number, _arg2:Number):Number {
-        if (_arg1 > _arg2) {
-            if ((_arg1 - _arg2) > Math.PI) {
-                return (((_arg2 + (2 * Math.PI)) - _arg1));
+    /** Smallest absolute difference between two radian angles. */
+    public static function angleDifference(a:Number, b:Number):Number {
+        if (a > b) {
+            if ((a - b) > Math.PI) {
+                return (b + (2 * Math.PI)) - a;
             }
-            return ((_arg1 - _arg2));
+            return a - b;
         }
-        if ((_arg2 - _arg1) > Math.PI) {
-            return (((_arg1 + (2 * Math.PI)) - _arg2));
+        if ((b - a) > Math.PI) {
+            return (a + (2 * Math.PI)) - b;
         }
-        return ((_arg2 - _arg1));
+        return b - a;
     }
 
-    public static function sin(_arg1:Number):Number {
-        var _local2:Number;
-        if ((((_arg1 < -(Math.PI))) || ((_arg1 > Math.PI)))) {
-            _arg1 = _V_r(_arg1);
+    /** Fast parabolic sine approximation. */
+    public static function sin(x:Number):Number {
+        var y:Number;
+        if (x < -Math.PI || x > Math.PI) {
+            x = normalizeRadians(x);
         }
-        if (_arg1 < 0) {
-            _local2 = ((1.27323954 * _arg1) + ((0.405284735 * _arg1) * _arg1));
-            if (_local2 < 0) {
-                _local2 = ((0.225 * ((_local2 * -(_local2)) - _local2)) + _local2);
-            } else {
-                _local2 = ((0.225 * ((_local2 * _local2) - _local2)) + _local2);
-            }
+        if (x < 0) {
+            y = (1.27323954 * x) + ((0.405284735 * x) * x);
         } else {
-            _local2 = ((1.27323954 * _arg1) - ((0.405284735 * _arg1) * _arg1));
-            if (_local2 < 0) {
-                _local2 = ((0.225 * ((_local2 * -(_local2)) - _local2)) + _local2);
-            } else {
-                _local2 = ((0.225 * ((_local2 * _local2) - _local2)) + _local2);
-            }
+            y = (1.27323954 * x) - ((0.405284735 * x) * x);
         }
-        return (_local2);
-    }
-
-    public static function cos(_arg1:Number):Number {
-        return (sin((_arg1 + (Math.PI / 2))));
-    }
-
-    public static function atan2(_arg1:Number, _arg2:Number):Number {
-        var _local3:Number;
-        if (_arg2 == 0) {
-            if (_arg1 < 0) {
-                return ((-(Math.PI) / 2));
-            }
-            if (_arg1 > 0) {
-                return ((Math.PI / 2));
-            }
-            return (undefined);
-        }
-        if (_arg1 == 0) {
-            if (_arg2 < 0) {
-                return (Math.PI);
-            }
-            return (0);
-        }
-        if ((((_arg2 > 0)) ? _arg2 : -(_arg2)) > (((_arg1 > 0)) ? _arg1 : -(_arg1))) {
-            _local3 = ((((_arg2 < 0)) ? -(Math.PI) : 0) + atan2Helper(_arg1, _arg2));
+        if (y < 0) {
+            y = (0.225 * ((y * -y) - y)) + y;
         } else {
-            _local3 = ((((_arg1 > 0)) ? (Math.PI / 2) : (-(Math.PI) / 2)) - atan2Helper(_arg2, _arg1));
+            y = (0.225 * ((y * y) - y)) + y;
         }
-        if ((((_local3 < -(Math.PI))) || ((_local3 > Math.PI)))) {
-            _local3 = _V_r(_local3);
-        }
-        return (_local3);
+        return y;
     }
 
-    public static function atan2Helper(_arg1:Number, _arg2:Number):Number {
-        var _local3:Number = (_arg1 / _arg2);
-        var _local4:Number = _local3;
-        var _local5:Number = _local3;
-        var _local6:Number = 1;
-        var _local7:int = 1;
-        do
-        {
-            _local6 = (_local6 + 2);
-            _local7 = (((_local7 > 0)) ? -1 : 1);
-            _local5 = ((_local5 * _local3) * _local3);
-            _local4 = (_local4 + ((_local7 * _local5) / _local6));
-        } while ((((((_local5 > 0.01)) || ((_local5 < -0.01)))) && ((_local6 <= 11))));
-        return (_local4);
+    public static function cos(x:Number):Number {
+        return sin(x + (Math.PI / 2));
     }
 
-    public static function _V_r(_arg1:Number):Number {
-        var _local2:int;
-        if (_arg1 < -(Math.PI)) {
-            _local2 = ((int((_arg1 / -(Math.PI))) + 1) / 2);
-            _arg1 = (_arg1 + ((_local2 * 2) * Math.PI));
+    /** Series-based atan2 approximation (note: argument order is y, x). */
+    public static function atan2(y:Number, x:Number):Number {
+        var result:Number;
+        if (x == 0) {
+            if (y < 0) {
+                return -Math.PI / 2;
+            }
+            if (y > 0) {
+                return Math.PI / 2;
+            }
+            return NaN; // original returned undefined
+        }
+        if (y == 0) {
+            if (x < 0) {
+                return Math.PI;
+            }
+            return 0;
+        }
+        if (((x > 0) ? x : -x) > ((y > 0) ? y : -y)) {
+            result = ((x < 0) ? -Math.PI : 0) + atan2Helper(y, x);
         } else {
-            if (_arg1 > Math.PI) {
-                _local2 = ((int((_arg1 / Math.PI)) + 1) / 2);
-                _arg1 = (_arg1 - ((_local2 * 2) * Math.PI));
+            result = ((y > 0) ? (Math.PI / 2) : (-Math.PI / 2)) - atan2Helper(x, y);
+        }
+        if (result < -Math.PI || result > Math.PI) {
+            result = normalizeRadians(result);
+        }
+        return result;
+    }
+
+    /** Truncated arctan Taylor series for numerator / denominator. */
+    public static function atan2Helper(numerator:Number, denominator:Number):Number {
+        var ratio:Number = numerator / denominator;
+        var sum:Number = ratio;
+        var power:Number = ratio;
+        var divisor:Number = 1;
+        var sign:int = 1;
+        do {
+            divisor = divisor + 2;
+            sign = (sign > 0) ? -1 : 1;
+            power = (power * ratio) * ratio;
+            sum = sum + ((sign * power) / divisor);
+        } while ((power > 0.01 || power < -0.01) && divisor <= 11);
+        return sum;
+    }
+
+    /** Wraps radians into [-PI, PI]. */
+    public static function normalizeRadians(angle:Number):Number {
+        var turns:int;
+        if (angle < -Math.PI) {
+            turns = (int(angle / -Math.PI) + 1) / 2;
+            angle = angle + ((turns * 2) * Math.PI);
+        } else {
+            if (angle > Math.PI) {
+                turns = (int(angle / Math.PI) + 1) / 2;
+                angle = angle - ((turns * 2) * Math.PI);
             }
         }
-        return (_arg1);
+        return angle;
     }
 
-    public static function _S_C_(_arg1:Number):Number {
-        var _local2:int;
-        if (_arg1 < -180) {
-            _local2 = ((int((_arg1 / -180)) + 1) / 2);
-            _arg1 = (_arg1 + (_local2 * 360));
+    /** Wraps degrees into [-180, 180]. */
+    public static function normalizeDegrees(angle:Number):Number {
+        var turns:int;
+        if (angle < -180) {
+            turns = (int(angle / -180) + 1) / 2;
+            angle = angle + (turns * 360);
         } else {
-            if (_arg1 > 180) {
-                _local2 = ((int((_arg1 / 180)) + 1) / 2);
-                _arg1 = (_arg1 - (_local2 * 360));
+            if (angle > 180) {
+                turns = (int(angle / 180) + 1) / 2;
+                angle = angle - (turns * 360);
             }
         }
-        return (_arg1);
+        return angle;
     }
 
-    public static function _4H_():Boolean {
+    public static function runUnitTest():Boolean {
         trace("STARTING UNITTEST: Trig");
-        var _local1:Boolean = ((((testFunc1(Math.sin, sin)) && (testFunc1(Math.cos, cos)))) && (testFunc2(Math.atan2, atan2)));
-        if (!_local1) {
+        var passed:Boolean = testFunc1(Math.sin, sin) && testFunc1(Math.cos, cos) && testFunc2(Math.atan2, atan2);
+        if (!passed) {
             trace("Trig Unit Test FAILED!");
         }
         trace("FINISHED UNITTEST: Trig");
-        return (_local1);
+        return passed;
     }
 
-    public static function testFunc1(_arg1:Function, _arg2:Function):Boolean {
-        var _local5:Number;
-        var _local6:Number;
-        var _local3:Random = new Random();
-        var _local4:int;
-        while (_local4 < 1000) {
-            _local5 = (((_local3._ds() % 2000) - 1000) + _local3._J_t());
-            _local6 = Math.abs((_arg1(_local5) - _arg2(_local5)));
-            if (_local6 > 0.1) {
-                return (false);
+    public static function testFunc1(reference:Function, approximation:Function):Boolean {
+        var random:Random = new Random();
+        var i:int = 0;
+        while (i < 1000) {
+            var x:Number = ((random.nextInt() % 2000) - 1000) + random.nextDouble();
+            var error:Number = Math.abs(reference(x) - approximation(x));
+            if (error > 0.1) {
+                return false;
             }
-            _local4++;
+            i++;
         }
-        return (true);
+        return true;
     }
 
-    public static function testFunc2(_arg1:Function, _arg2:Function):Boolean {
-        var _local5:Number;
-        var _local6:Number;
-        var _local7:Number;
-        var _local3:Random = new Random();
-        var _local4:int;
-        while (_local4 < 1000) {
-            _local5 = (((_local3._ds() % 2000) - 1000) + _local3._J_t());
-            _local6 = (((_local3._ds() % 2000) - 1000) + _local3._J_t());
-            _local7 = Math.abs((_arg1(_local5, _local6) - _arg2(_local5, _local6)));
-            if (_local7 > 0.1) {
-                return (false);
+    public static function testFunc2(reference:Function, approximation:Function):Boolean {
+        var random:Random = new Random();
+        var i:int = 0;
+        while (i < 1000) {
+            var y:Number = ((random.nextInt() % 2000) - 1000) + random.nextDouble();
+            var x:Number = ((random.nextInt() % 2000) - 1000) + random.nextDouble();
+            var error:Number = Math.abs(reference(y, x) - approximation(y, x));
+            if (error > 0.1) {
+                return false;
             }
-            _local4++;
+            i++;
         }
-        return (true);
+        return true;
     }
 
-    public function Trig(_arg1:StaticEnforcer) {
+    public function Trig(enforcer:StaticEnforcer) {
     }
 
 }
@@ -195,4 +186,3 @@ public class Trig {
 class StaticEnforcer {
 
 }
-

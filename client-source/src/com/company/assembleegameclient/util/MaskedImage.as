@@ -30,7 +30,7 @@ public class MaskedImage {
 
     /** Fraction of the image that is transparent (1 = fully transparent). */
     public function amountTransparent():Number {
-        return BitmapUtil._F_9(this.image_);
+        return BitmapUtil.getTransparentFraction(this.image_);
     }
 
 }

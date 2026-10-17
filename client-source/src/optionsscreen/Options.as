@@ -24,7 +24,7 @@ import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.ui._0M_Y_;
 import com.company.ui.SimpleText;
 import com.company.util.AssetLibrary;
-import com.company.util._H_V_;
+import com.company.util.KeyCodes;
 
 /**
  * The options screen: a row of tabs, and a two-column grid of options for the selected tab.
@@ -379,7 +379,7 @@ public class Options extends Sprite {
             cursorData = new MouseCursorData();
             cursorData.hotSpot = new Point(15, 15);
             bitmaps = new Vector.<BitmapData>(1, true);
-            bitmaps[0] = AssetLibrary._xK_("cursorsEmbed", int(Parameters.data_.cursorSelect));
+            bitmaps[0] = AssetLibrary.getImageFromSet("cursorsEmbed", int(Parameters.data_.cursorSelect));
             cursorData.data = bitmaps;
             Mouse.registerCursor(Parameters.data_.cursorSelect, cursorData);
             registeredCursors.push(Parameters.data_.cursorSelect);
@@ -388,7 +388,7 @@ public class Options extends Sprite {
     }
 
     private function onKeyDown(event:KeyboardEvent):void {
-        if (Capabilities.playerType == "Desktop" && event.keyCode == _H_V_.ESCAPE) {
+        if (Capabilities.playerType == "Desktop" && event.keyCode == KeyCodes.ESCAPE) {
             Parameters.data_.fullscreenMode = false;
             Parameters.save();
             this.refresh();

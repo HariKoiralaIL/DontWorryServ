@@ -18,7 +18,7 @@ package particleeffects {
         public var size_:int;
         public var color_:uint;
         protected var bitmapFill_:GraphicsBitmapFill = new GraphicsBitmapFill(null, null, false, false);
-        protected var path_:GraphicsPath = new GraphicsPath(GraphicHelper._H_2, null);
+        protected var path_:GraphicsPath = new GraphicsPath(GraphicHelper.RECT_COMMANDS, null);
         protected var vertices_:Vector.<Number> = new Vector.<Number>();
         protected var matrix_:Matrix = new Matrix();
 

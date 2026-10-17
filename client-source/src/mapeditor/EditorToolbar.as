@@ -1,5 +1,5 @@
 package mapeditor {
-import com.company.util._H_V_;
+import com.company.util.KeyCodes;
 
 import editorcommands.CommandEvent;
 import editorcommands.SelectableButton;
@@ -16,17 +16,17 @@ public class EditorToolbar extends SelectableButtonGroup {
     public static const TOOL_EDIT:int = 4;
 
     public function EditorToolbar() {
-        addButton("(D)raw", _H_V_.D, this.select, TOOL_DRAW);
-        addButton("(E)rase", _H_V_.E, this.select, TOOL_ERASE);
-        addButton("S(A)mple", _H_V_.A, this.select, TOOL_SAMPLE);
-        addButton("Ed(I)t", _H_V_.I, this.select, TOOL_EDIT);
-        addButton("(U)ndo", _H_V_.U, this.onUndo, TOOL_NONE);
-        addButton("(R)edo", _H_V_.R, this.onRedo, TOOL_NONE);
-        addButton("(C)lear", _H_V_.C, this.onClear, TOOL_NONE);
+        addButton("(D)raw", KeyCodes.D, this.select, TOOL_DRAW);
+        addButton("(E)rase", KeyCodes.E, this.select, TOOL_ERASE);
+        addButton("S(A)mple", KeyCodes.A, this.select, TOOL_SAMPLE);
+        addButton("Ed(I)t", KeyCodes.I, this.select, TOOL_EDIT);
+        addButton("(U)ndo", KeyCodes.U, this.onUndo, TOOL_NONE);
+        addButton("(R)edo", KeyCodes.R, this.onRedo, TOOL_NONE);
+        addButton("(C)lear", KeyCodes.C, this.onClear, TOOL_NONE);
         addSpacer();
-        addButton("(L)oad", _H_V_.L, this.onLoad, TOOL_NONE);
-        addButton("(S)ave", _H_V_.S, this.onSave, TOOL_NONE);
-        addButton("(T)est", _H_V_.T, this.onTest, TOOL_NONE);
+        addButton("(L)oad", KeyCodes.L, this.onLoad, TOOL_NONE);
+        addButton("(S)ave", KeyCodes.S, this.onSave, TOOL_NONE);
+        addButton("(T)est", KeyCodes.T, this.onTest, TOOL_NONE);
     }
 
     private function select(button:SelectableButton):void {

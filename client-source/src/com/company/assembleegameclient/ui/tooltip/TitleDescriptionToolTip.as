@@ -1,8 +1,3 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.ui.tooltip.TitleDescriptionToolTip
-
 package com.company.assembleegameclient.ui.tooltip {
 import com.company.ui.SimpleText;
 
@@ -10,42 +5,43 @@ import flash.filters.DropShadowFilter;
 
 public class TitleDescriptionToolTip extends ToolTip {
 
-    public function TitleDescriptionToolTip(_arg1:uint, _arg2:uint, _arg3:String, _arg4:String, _arg5:int) {
-        super(_arg1, 1, _arg2, 1);
-        if (_arg3 != null) {
-            this._P_V_ = new SimpleText(20, 0xFFFFFF, false, _arg5, 0, "Myriad Pro");
-            this._P_V_.setBold(true);
-            this._P_V_.wordWrap = true;
-            this._P_V_.text = _arg3;
-            this._P_V_.updateMetrics();
-            this._P_V_.filters = [new DropShadowFilter(0, 0, 0)];
-            addChild(this._P_V_);
-        }
-        if (_arg4 != null) {
-            this.descriptionText_ = new SimpleText(14, 0xB3B3B3, false, _arg5, 0, "Myriad Pro");
-            this.descriptionText_.wordWrap = true;
-            this.descriptionText_.y = (((this._P_V_) != null) ? (this._P_V_.height + 8) : 0);
-            this.descriptionText_.text = _arg4;
-            this.descriptionText_._08S_();
-            this.descriptionText_.filters = [new DropShadowFilter(0, 0, 0)];
-            addChild(this.descriptionText_);
-        }
-    }
-    public var _P_V_:SimpleText;
+    public var titleText_:SimpleText;      // formerly _P_V_
     public var descriptionText_:SimpleText;
 
-    public function setTitle(_arg1:String):void {
-        this._P_V_.text = _arg1;
-        this._P_V_.updateMetrics();
+    public function TitleDescriptionToolTip(backgroundColor:uint, outlineColor:uint, title:String, description:String, wrapWidth:int) {
+        super(backgroundColor, 1, outlineColor, 1);
+        if (title != null) {
+            titleText_ = new SimpleText(20, 0xFFFFFF, false, wrapWidth, 0, "Myriad Pro");
+            titleText_.setBold(true);
+            titleText_.wordWrap = true;
+            titleText_.text = title;
+            titleText_.updateMetrics();
+            titleText_.filters = [new DropShadowFilter(0, 0, 0)];
+            addChild(titleText_);
+        }
+        if (description != null) {
+            descriptionText_ = new SimpleText(14, 0xB3B3B3, false, wrapWidth, 0, "Myriad Pro");
+            descriptionText_.wordWrap = true;
+            descriptionText_.y = titleText_ != null ? titleText_.height + 8 : 0;
+            descriptionText_.text = description;
+            descriptionText_._08S_();
+            descriptionText_.filters = [new DropShadowFilter(0, 0, 0)];
+            addChild(descriptionText_);
+        }
+    }
+
+    public function setTitle(title:String):void {
+        titleText_.text = title;
+        titleText_.updateMetrics();
         draw();
     }
 
-    public function _02C_(_arg1:String):void {
-        this.descriptionText_.text = _arg1;
-        this.descriptionText_._08S_();
+    /** Formerly _02C_ */
+    public function setDescription(description:String):void {
+        descriptionText_.text = description;
+        descriptionText_._08S_();
         draw();
     }
 
 }
-}//package com.company.assembleegameclient.ui.tooltip
-
+}

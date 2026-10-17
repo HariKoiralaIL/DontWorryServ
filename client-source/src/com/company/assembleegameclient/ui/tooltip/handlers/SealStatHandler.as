@@ -1,74 +1,42 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.ui.tooltip.handlers.SealStatHandler
-
 package com.company.assembleegameclient.ui.tooltip.handlers {
 public class SealStatHandler extends SlotStatHandler {
 
-    private var healingAura:XML;
-    private var damagingAura:XML;
-    private var curHealingAura:XML;
-    private var curDamagingAura:XML;
+    private static const BLASPHEMOUS_PRAYER:String = "Seal of Blasphemous Prayer";
 
     override protected function compareSlots(itemXML:XML, curItemXML:XML):void {
-        var tag:XML;
+        var healing:XML = findAura(itemXML, "Healing");
+        var damaging:XML = findAura(itemXML, "Damaging");
+        var curHealing:XML = findAura(curItemXML, "Healing");
+        var curDamaging:XML = findAura(curItemXML, "Damaging");
+
         tooltipText = "";
-        this.healingAura = this.findAura(itemXML, "Healing");
-        this.damagingAura = this.findAura(itemXML, "Damaging");
-        this.curHealingAura = this.findAura(curItemXML, "Healing");
-        this.curDamagingAura = this.findAura(curItemXML, "Damaging");
-        if (this.hasAllAuras()) {
-            this.healingLine();
-            this.damagingLine();
-            if (itemXML.@id == "Seal of Blasphemous Prayer") {
-                tag = itemXML.Activate.(text() == "ConditionEffectSelf")[0];
-                tooltipText = (tooltipText + ("Effect on Self:\n" + colorize((("Invulnerable for " + tag.@duration) + " secs\n"), PURPLE)));
-                handledXml[tag.toXMLString()] = true;
-            }
+        if (healing == null || damaging == null || curHealing == null || curDamaging == null) {
+            return;
+        }
+        addAuraLine("Healing", healing, curHealing);
+        addAuraLine("Damaging", damaging, curDamaging);
+        if (itemXML.@id == BLASPHEMOUS_PRAYER) {
+            var tag:XML = activateTags(itemXML, "ConditionEffectSelf")[0];
+            tooltipText += selfEffectLine("Invulnerable", tag.@duration, PURPLE);
+            handledXml[tag.toXMLString()] = true;
         }
     }
 
-    private function hasAllAuras():Boolean {
-        return (((((((!((this.healingAura == null))) && (!((this.damagingAura == null))))) && (!((this.curHealingAura == null))))) && (!((this.curDamagingAura == null)))));
+    private function findAura(itemXML:XML, effect:String):XML {
+        return findActivateByEffect(itemXML, "ConditionEffectAura", effect);
     }
 
-    private function findAura(xml:XML, effectName:String):XML {
-        var matches:XMLList;
-        var tag:XML;
-        matches = xml.Activate.(text() == "ConditionEffectAura");
-        for each (tag in matches) {
-            if (tag.@effect == effectName) {
-                return (tag);
-            }
-        }
-        return (null);
-    }
-
-    private function healingLine():void {
-        var _local1:int = int(this.healingAura.@duration);
-        var _local2:int = int(this.curHealingAura.@duration);
-        var _local3:Number = Number(this.healingAura.@range);
-        var _local4:Number = Number(this.curHealingAura.@range);
-        var _local5:Number = (((0.5 * _local1) * 0.5) * _local3);
-        var _local6:Number = (((0.5 * _local2) * 0.5) * _local4);
-        var _local7 = (((("Within " + this.healingAura.@range) + " sqrs\nHealing for ") + _local1) + " seconds\n");
-        tooltipText = (tooltipText + ("Party Effect: " + colorize(_local7, compareColor((_local5 - _local6)))));
-        handledXml[this.healingAura.toXMLString()] = true;
-    }
-
-    private function damagingLine():void {
-        var _local1:int = int(this.damagingAura.@duration);
-        var _local2:int = int(this.curDamagingAura.@duration);
-        var _local3:Number = Number(this.damagingAura.@range);
-        var _local4:Number = Number(this.curDamagingAura.@range);
-        var _local5:Number = (((0.5 * _local1) * 0.5) * _local3);
-        var _local6:Number = (((0.5 * _local2) * 0.5) * _local4);
-        var _local7 = (((("Within " + this.damagingAura.@range) + " sqrs\nDamaging for ") + _local1) + " seconds\n");
-        tooltipText = (tooltipText + ("Party Effect: " + colorize(_local7, compareColor((_local5 - _local6)))));
-        handledXml[this.damagingAura.toXMLString()] = true;
+    private function addAuraLine(effect:String, aura:XML, curAura:XML):void {
+        var duration:int = int(aura.@duration);
+        var curDuration:int = int(curAura.@duration);
+        var range:Number = Number(aura.@range);
+        var curRange:Number = Number(curAura.@range);
+        var score:Number = 0.5 * duration * 0.5 * range;
+        var curScore:Number = 0.5 * curDuration * 0.5 * curRange;
+        var text:String = "Within " + aura.@range + " sqrs\n" + effect + " for " + duration + " seconds\n";
+        tooltipText += "Party Effect: " + colorize(text, compareColor(score - curScore));
+        handledXml[aura.toXMLString()] = true;
     }
 
 }
-}//package com.company.assembleegameclient.ui.tooltip.handlers
-
+}

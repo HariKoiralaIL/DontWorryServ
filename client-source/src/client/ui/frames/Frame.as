@@ -36,7 +36,7 @@ public class Frame extends Sprite {
         this.outlineStroke = new GraphicsStroke(1, false, LineScaleMode.NORMAL, CapsStyle.NONE, JointStyle.ROUND, 3, this.outlineFill_);
         this.path1_ = new GraphicsPath(new Vector.<int>(), new Vector.<Number>());
         this.path2_ = new GraphicsPath(new Vector.<int>(), new Vector.<Number>());
-        this.graphicsData_ = new <IGraphicsData>[bodyFill, path2_, GraphicHelper.END_FILL, headerFill, path1_, GraphicHelper.END_FILL, outlineStroke, path2_, GraphicHelper._H_B_];
+        this.graphicsData_ = new <IGraphicsData>[bodyFill, path2_, GraphicHelper.END_FILL, headerFill, path1_, GraphicHelper.END_FILL, outlineStroke, path2_, GraphicHelper.NO_STROKE];
         super();
         this.w_ = _arg5;
         this.titleText = new SimpleText(12, 0xB3B3B3, false, 0, 0, "Myriad Pro");
@@ -171,9 +171,9 @@ public class Frame extends Sprite {
 
     public function draw():void {
         this.graphics.clear();
-        GraphicHelper._0L_6(this.path1_);
+        GraphicHelper.clearPath(this.path1_);
         GraphicHelper.drawUI(-6, -6, this.w_, (20 + 12), 4, [1, 1, 0, 0], this.path1_);
-        GraphicHelper._0L_6(this.path2_);
+        GraphicHelper.clearPath(this.path2_);
         GraphicHelper.drawUI(-6, -6, this.w_, this.h_, 4, [1, 1, 1, 1], this.path2_);
         (this.Button1.y = (this.h_ - 48));
         (this.Button2.y = (this.h_ - 48));

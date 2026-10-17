@@ -38,7 +38,7 @@ public class TutorialDialog extends Sprite {
         this.fill_ = new GraphicsSolidFill(0x2A2A2A, 1);
         this.stroke_ = new GraphicsStroke(1, false, LineScaleMode.NORMAL, CapsStyle.NONE, JointStyle.ROUND, 3, new GraphicsSolidFill(0xFFFFFF));
         this.path_ = new GraphicsPath(new Vector.<int>(), new Vector.<Number>());
-        this.graphicsData_ = new <IGraphicsData>[stroke_, fill_, path_, GraphicHelper.END_FILL, GraphicHelper._H_B_];
+        this.graphicsData_ = new <IGraphicsData>[stroke_, fill_, path_, GraphicHelper.END_FILL, GraphicHelper.NO_STROKE];
         super();
         this.tutorial_ = tutorial;
         this.rect_ = bounds.clone();
@@ -73,7 +73,7 @@ public class TutorialDialog extends Sprite {
         }
         var r:Rectangle = this.rect_.clone();
         r.inflate(-(1 - scale) * this.rect_.width / 2, -(1 - scale) * this.rect_.height / 2);
-        GraphicHelper._0L_6(this.path_);
+        GraphicHelper.clearPath(this.path_);
         GraphicHelper.drawUI(r.x, r.y, r.width, r.height, 4, [1, 1, 1, 1], this.path_);
         graphics.clear();
         graphics.drawGraphicsData(this.graphicsData_);

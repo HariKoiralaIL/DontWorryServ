@@ -1,5 +1,5 @@
 package com.company.assembleegameclient.net {
-import com.company.util._0K_N_;
+import com.company.util.GeoCoordinate;
 
 public class Server {
 
@@ -13,11 +13,11 @@ public class Server {
     public var name_:String;
     public var address_:String;
     public var port_:int;
-    public var latLong_:_0K_N_;
+    public var latLong_:GeoCoordinate;
     public var usage_:Number;
     public var isAdminOnly_:Boolean;
 
-    public function Server(name:String, address:String, port:int, latLong:_0K_N_ = null, usage:Number = 0, isAdminOnly:Boolean = false):void {
+    public function Server(name:String, address:String, port:int, latLong:GeoCoordinate = null, usage:Number = 0, isAdminOnly:Boolean = false):void {
         this.name_ = name;
         this.address_ = address;
         this.port_ = port;
@@ -42,7 +42,7 @@ public class Server {
     }
 
     public function setLatLong(latitude:Number, longitude:Number):Server {
-        this.latLong_ = new _0K_N_(latitude, longitude);
+        this.latLong_ = new GeoCoordinate(latitude, longitude);
         return this;
     }
 

@@ -1,36 +1,34 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.ui.tooltip.QuestToolTip
-
 package com.company.assembleegameclient.ui.tooltip {
-import com.company.ui.SimpleText;
+import com.company.assembleegameclient.objects.GameObject;
 import com.company.assembleegameclient.ui.ui_playerslist;
+import com.company.ui.SimpleText;
 
 import flash.filters.DropShadowFilter;
 
-import com.company.assembleegameclient.objects.GameObject;
-
 public class QuestToolTip extends ToolTip {
 
-    public function QuestToolTip(gameObject:GameObject) {
-        super(6036765, 1, 16549442, 1, false);
-        this.text_ = new SimpleText(22, 16549442, false, 0, 0, "Myriad Pro");
-        this.text_.setBold(true);
-        this.text_.text = "Quest!";
-        this.text_.updateMetrics();
-        this.text_.filters = [new DropShadowFilter(0, 0, 0)];
-        this.text_.x = 0;
-        this.text_.y = 0;
-        addChild(this.text_);
-        this.playerEntry_ = new ui_playerslist(0xB3B3B3, true, gameObject);
-        this.playerEntry_.x = 0;
-        this.playerEntry_.y = 32;
-        addChild(this.playerEntry_);
-        filters = [];
-    }
+    private static const BACKGROUND_COLOR:uint = 0x5C1D1D;
+    private static const QUEST_COLOR:uint = 0xFC8642;
+
     public var playerEntry_:ui_playerslist;
     private var text_:SimpleText;
-}
-}//package com.company.assembleegameclient.ui.tooltip
 
+    public function QuestToolTip(gameObject:GameObject) {
+        super(BACKGROUND_COLOR, 1, QUEST_COLOR, 1, false);
+        text_ = new SimpleText(22, QUEST_COLOR, false, 0, 0, "Myriad Pro");
+        text_.setBold(true);
+        text_.text = "Quest!";
+        text_.updateMetrics();
+        text_.filters = [new DropShadowFilter(0, 0, 0)];
+        text_.x = 0;
+        text_.y = 0;
+        addChild(text_);
+        playerEntry_ = new ui_playerslist(0xB3B3B3, true, gameObject);
+        playerEntry_.x = 0;
+        playerEntry_.y = 32;
+        addChild(playerEntry_);
+        filters = [];
+    }
+
+}
+}

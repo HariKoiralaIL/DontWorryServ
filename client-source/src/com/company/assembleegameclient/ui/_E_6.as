@@ -51,7 +51,7 @@ public class _E_6 extends Slot {
         type_ = _arg3;
         this._D_s = new Shape();
         var _local6:GraphicsSolidFill = new GraphicsSolidFill(9385987, 1);
-        GraphicHelper._0L_6(path_);
+        GraphicHelper.clearPath(path_);
         var _local7:Vector.<IGraphicsData> = new <IGraphicsData>[_local6, path_, GraphicHelper.END_FILL];
         GraphicHelper.drawUI(0, 0, WIDTH, HEIGHT, 4, _07i, path_);
         this._D_s.graphics.drawGraphicsData(_local7);

@@ -30,7 +30,7 @@ public class _zX_ extends Sprite {
     private var bitmap_:Bitmap;
 
     private function _P_P_():void {
-        this.bitmap_.bitmapData = ((((Parameters.data_.playMusic) || (Parameters.data_.playSFX))) ? AssetLibrary._xK_("lofiInterfaceBig", 3) : AssetLibrary._xK_("lofiInterfaceBig", 4));
+        this.bitmap_.bitmapData = ((((Parameters.data_.playMusic) || (Parameters.data_.playSFX))) ? AssetLibrary.getImageFromSet("lofiInterfaceBig", 3) : AssetLibrary.getImageFromSet("lofiInterfaceBig", 4));
     }
 
     private function _iK_(_arg1:MouseEvent):void {

@@ -11,7 +11,7 @@ import com.company.ui.SimpleText;
 
 import flash.filters.DropShadowFilter;
 
-import com.company.util._O_m;
+import com.company.util.DisplayUtil;
 import com.company.assembleegameclient.util.GuildUtil;
 
 public class _L_N_ extends Sprite {
@@ -38,14 +38,14 @@ public class _L_N_ extends Sprite {
         this.name_ = _arg1;
         this._S_e = _arg2;
         if ((((this.name_ == null)) || ((this.name_ == "")))) {
-            _O_m._03d(this, this._5U_);
-            _O_m._03d(this, this.guildName_);
+            DisplayUtil.safeRemoveChild(this, this._5U_);
+            DisplayUtil.safeRemoveChild(this, this.guildName_);
         } else {
             this._5U_.bitmapData = GuildUtil.getRankIcon(this._S_e, 10);
-            _O_m._041(this, this._5U_);
+            DisplayUtil.safeAddChild(this, this._5U_);
             this.guildName_.text = this.name_;
             this.guildName_._08S_();
-            _O_m._041(this, this.guildName_);
+            DisplayUtil.safeAddChild(this, this.guildName_);
         }
     }
 

@@ -1,5 +1,5 @@
 package com.company.assembleegameclient.util {
-import com.company.util._kp;
+import com.company.util.ImageSet;
 
 import flash.display.BitmapData;
 
@@ -12,16 +12,16 @@ public class MaskedImageSet {
      * Note: _kp is an external class; its members keep their original names.
      */
     public function addFromBitmapData(image:BitmapData, mask:BitmapData, cellWidth:int, cellHeight:int):void {
-        var imageCells:_kp = new _kp();
+        var imageCells:ImageSet = new ImageSet();
         imageCells.addFromBitmapData(image, cellWidth, cellHeight);
-        var maskCells:_kp;
+        var maskCells:ImageSet;
         if (mask != null) {
-            maskCells = new _kp();
+            maskCells = new ImageSet();
             maskCells.addFromBitmapData(mask, cellWidth, cellHeight);
         }
         var i:int = 0;
-        while (i < imageCells._W_u.length) {
-            this.images_.push(new MaskedImage(imageCells._W_u[i], (maskCells == null) ? null : maskCells._W_u[i]));
+        while (i < imageCells.images.length) {
+            this.images_.push(new MaskedImage(imageCells.images[i], (maskCells == null) ? null : maskCells.images[i]));
             i++;
         }
     }

@@ -18,7 +18,7 @@ import flash.events.MouseEvent;
 
 import com.company.util.MoreColorUtil;
 import com.company.assembleegameclient.parameters.Parameters;
-import com.company.util._H_V_;
+import com.company.util.KeyCodes;
 
 public class _rN_ extends Sprite {
 
@@ -61,7 +61,7 @@ public class _rN_ extends Sprite {
     protected function onMouseOver(_arg1:MouseEvent):void {
         this._037(_0A_8);
         if (((!((this.toolTip_ == null))) && (!(stage.contains(this.toolTip_))))) {
-            this.toolTip_._02C_(("Hotkey: " + _H_V_._in[Parameters.data_[this._0C_p]]));
+            this.toolTip_.setDescription(("Hotkey: " + KeyCodes.KEY_NAMES[Parameters.data_[this._0C_p]]));
             stage.addChild(this.toolTip_);
         }
     }

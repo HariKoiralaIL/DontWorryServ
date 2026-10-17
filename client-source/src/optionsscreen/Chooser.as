@@ -44,7 +44,7 @@ public class Chooser extends Sprite {
     private var stroke:GraphicsStroke = new GraphicsStroke(2, false, LineScaleMode.NORMAL,
             CapsStyle.NONE, JointStyle.ROUND, 3, normalFill);
     private var graphicsData_:Vector.<IGraphicsData> = new <IGraphicsData>[
-            internalFill_, stroke, path_, GraphicHelper._H_B_, GraphicHelper.END_FILL];
+            internalFill_, stroke, path_, GraphicHelper.NO_STROKE, GraphicHelper.END_FILL];
 
     public function Chooser(labels:Vector.<String>, values:Array, initialValue:Object) {
         this.labels = labels;
@@ -81,7 +81,7 @@ public class Chooser extends Sprite {
     }
 
     private function redraw():void {
-        GraphicHelper._0L_6(this.path_);
+        GraphicHelper.clearPath(this.path_);
         GraphicHelper.drawUI(0, 0, WIDTH, HEIGHT, 4, [1, 1, 1, 1], this.path_);
         this.stroke.fill = this.over_ ? this.hoverFill : this.normalFill;
         var g:Graphics = graphics;

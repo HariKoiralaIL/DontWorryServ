@@ -2,7 +2,7 @@ package com.company.assembleegameclient.appengine {
 import account.Account;
 
 import com.company.assembleegameclient.parameters.Parameters;
-import com.company.util._H_U_;
+import com.company.util.PropertyUtil;
 
 import events.GenericDataEvent;
 
@@ -25,7 +25,7 @@ public class CharacterClient extends AppEngineClient {
             "play_platform": acct.playPlatform(),
             "do_login": Parameters._hk
         };
-        _H_U_._t2(params, acct.credentials());
+        PropertyUtil.copyProperties(params, acct.credentials());
         sendRequest("list", params);
         Parameters._hk = false;
     }
@@ -36,7 +36,7 @@ public class CharacterClient extends AppEngineClient {
             "charId": charId,
             "reason": DELETE_REASON
         };
-        _H_U_._t2(params, Account.getInstance().credentials());
+        PropertyUtil.copyProperties(params, Account.getInstance().credentials());
         sendRequest("delete", params);
     }
 

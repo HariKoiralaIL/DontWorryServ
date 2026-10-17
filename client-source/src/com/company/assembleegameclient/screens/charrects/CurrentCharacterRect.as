@@ -156,7 +156,7 @@ import com.company.util.BitmapUtil;
 
     private function setImage(_arg1:int, _arg2:int, _arg3:Number):void {
         var _local4:BitmapData = SavedCharacter.getImage(this.character, this.playerXML, _arg1, _arg2, _arg3, true, true);
-        _local4 = BitmapUtil._Y_d(_local4, 6, 6, (_local4.width - 12), (_local4.height - 6));
+        _local4 = BitmapUtil.crop(_local4, 6, 6, (_local4.width - 12), (_local4.height - 6));
         this.bitmap.bitmapData = _local4;
         this.bitmap.y = 25;
         this.bitmap.x = 30;

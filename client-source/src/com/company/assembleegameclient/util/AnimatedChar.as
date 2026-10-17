@@ -121,7 +121,7 @@ public class AnimatedChar {
 
     /** Like imageFromAngle, but relative to the camera rotation. */
     public function imageFromFacing(facing:Number, camera:GameCamera, action:int, progress:Number):MaskedImage {
-        var relativeAngle:Number = Trig._V_r((facing - camera.angleRad_));
+        var relativeAngle:Number = Trig.normalizeRadians((facing - camera.angleRad_));
         var octant:int = (int(((relativeAngle / OCTANT_ANGLE) + 4)) % 8);
         return this.imageForOctant(octant, action, progress);
     }

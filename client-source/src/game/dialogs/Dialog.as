@@ -57,7 +57,7 @@ package game.dialogs {
             this.outlineStroke_ = new GraphicsStroke(1, false, LineScaleMode.NORMAL, CapsStyle.NONE, JointStyle.ROUND, 3, this.outlineFill_);
             this.backgroundFill_ = new GraphicsSolidFill(0x2A2A2A, 1);
             this.path_ = new GraphicsPath(new Vector.<int>(), new Vector.<Number>());
-            this.graphicsData_ = new <IGraphicsData>[this.outlineStroke_, this.backgroundFill_, this.path_, GraphicHelper.END_FILL, GraphicHelper._H_B_];
+            this.graphicsData_ = new <IGraphicsData>[this.outlineStroke_, this.backgroundFill_, this.path_, GraphicHelper.END_FILL, GraphicHelper.NO_STROKE];
             this.analyticsPage_ = analyticsPage;
 
             this.messageText_ = new SimpleText(14, MESSAGE_COLOR, false, (WIDTH - 40), 0, FONT);
@@ -123,7 +123,7 @@ package game.dialogs {
                     this.button2_.y = buttonY;
                 }
             }
-            GraphicHelper._0L_6(this.path_);
+            GraphicHelper.clearPath(this.path_);
             GraphicHelper.drawUI(0, 0, WIDTH, (this.box_.height + 10), 4, [1, 1, 1, 1], this.path_);
             this.rect_ = new Shape();
             this.rect_.graphics.drawGraphicsData(this.graphicsData_);

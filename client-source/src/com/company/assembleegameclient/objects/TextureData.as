@@ -76,10 +76,10 @@ package com.company.assembleegameclient.objects {
             var _local4:XML;
             switch (xml.name().toString()) {
                 case "Texture":
-                    this.texture_ = AssetLibrary._xK_(String(xml.File), int(xml.Index));
+                    this.texture_ = AssetLibrary.getImageFromSet(String(xml.File), int(xml.Index));
                     return;
                 case "Mask":
-                    this.mask_ = AssetLibrary._xK_(String(xml.File), int(xml.Index));
+                    this.mask_ = AssetLibrary.getImageFromSet(String(xml.File), int(xml.Index));
                     return;
                 case "Effect":
                     this.effectProps_ = new EffectProperties(xml);
@@ -91,7 +91,7 @@ package com.company.assembleegameclient.objects {
                     this.mask_ = _local2.mask_;
                     return;
                 case "RemoteTexture":
-                    this.texture_ = AssetLibrary._xK_("lofiObj3", 0xFF);
+                    this.texture_ = AssetLibrary.getImageFromSet("lofiObj3", 0xFF);
                     if (Parameters.isTestingDomain()) {
                         _local3 = new RemoteTexture(xml.Id, xml.Instance, this.onRemoteTexture);
                         _local3.run();

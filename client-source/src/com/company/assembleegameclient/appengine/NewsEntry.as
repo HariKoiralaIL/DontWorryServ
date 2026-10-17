@@ -25,11 +25,11 @@ public class NewsEntry {
     }
 
     private static function getDefaultIcon():BitmapData {
-        return TextureRedrawer.redraw(AssetLibrary._xK_("lofiInterface2", 4), ICON_SIZE, true, 0, 0);
+        return TextureRedrawer.redraw(AssetLibrary.getImageFromSet("lofiInterface2", 4), ICON_SIZE, true, 0, 0);
     }
 
     private static function getFameIcon():BitmapData {
-        return TextureRedrawer.redraw(AssetLibrary._xK_("lofiObj3", 224), ICON_SIZE, true, 0, 0);
+        return TextureRedrawer.redraw(AssetLibrary.getImageFromSet("lofiObj3", 224), ICON_SIZE, true, 0, 0);
     }
 
     public function getIcon():BitmapData {

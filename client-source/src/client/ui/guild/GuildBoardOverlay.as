@@ -22,7 +22,7 @@ package client.ui.guild {
 
     import flash.events.Event;
 
-    import com.company.util._H_U_;
+    import com.company.util.PropertyUtil;
 
     public class GuildBoardOverlay extends Sprite {
 
@@ -101,7 +101,7 @@ package client.ui.guild {
             this.request.addEventListener(GenericDataEvent.GENERIC_DATA, this.onBoardSaved);
             this.request.addEventListener(TextErrorEvent.TEXT_ERROR, this.onSaveError);
             var _local2:Object = {"board": this.editor.getText()};
-            _H_U_._t2(_local2, Account.getInstance().credentials());
+            PropertyUtil.copyProperties(_local2, Account.getInstance().credentials());
             this.request.sendRequest("setBoard", _local2);
             removeChild(this.editor);
             this.editor = null;

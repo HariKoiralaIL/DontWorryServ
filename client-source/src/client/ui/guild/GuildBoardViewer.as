@@ -22,7 +22,7 @@ import flash.display.JointStyle;
 import flash.display.Shape;
 import flash.display.Graphics;
 
-import com.company.util._sH_;
+import com.company.util.XmlUtil;
 
 import flash.events.Event;
 import flash.events.MouseEvent;
@@ -39,7 +39,7 @@ internal class GuildBoardViewer extends Sprite {
         this.outlineFill_ = new GraphicsSolidFill(0xFFFFFF, 1);
         this.outlineStroke = new GraphicsStroke(2, false, LineScaleMode.NORMAL, CapsStyle.NONE, JointStyle.ROUND, 3, this.outlineFill_);
         this.path_ = new GraphicsPath(new Vector.<int>(), new Vector.<Number>());
-        this.graphicsData_ = new <IGraphicsData>[outlineStroke, backgroundFill, path_, GraphicHelper.END_FILL, GraphicHelper._H_B_];
+        this.graphicsData_ = new <IGraphicsData>[outlineStroke, backgroundFill, path_, GraphicHelper.END_FILL, GraphicHelper.NO_STROKE];
         super();
         this.text_ = _arg1;
         this.textContainer = new Sprite();
@@ -51,7 +51,7 @@ internal class GuildBoardViewer extends Sprite {
         this.textContainer.addChild(_local3);
         this.textContainer.mask = _local3;
         addChild(this.textContainer);
-        var _local5:String = _sH_._M_6(_arg1);
+        var _local5:String = XmlUtil.escapeXml(_arg1);
         _local5.replace(URL_PATTERN, ('<font color="#7777EE"><a href="$1" target="_blank">' + "$1</a></font>"));
         _local5 = _arg1;
         this.textField = new SimpleText(16, 0xB3B3B3, false, WIDTH, 0, "Myriad Pro");
@@ -85,7 +85,7 @@ internal class GuildBoardViewer extends Sprite {
         addChild(this.closeButton);
         this.h_ = ((HEIGHT + this.closeButton.height) + 8);
         graphics.clear();
-        GraphicHelper._0L_6(this.path_);
+        GraphicHelper.clearPath(this.path_);
         GraphicHelper.drawUI(-6, -6, (this.w_ + 12), (this.h_ + 12), 4, [1, 1, 1, 1], this.path_);
         graphics.drawGraphicsData(this.graphicsData_);
     }

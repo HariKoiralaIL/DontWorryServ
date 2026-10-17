@@ -22,7 +22,7 @@ import flash.display.CapsStyle;
 import flash.display.JointStyle;
 
 import com.company.util.GraphicHelper;
-import com.company.util._O_m;
+import com.company.util.DisplayUtil;
 import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.util.MoreColorUtil;
 
@@ -43,7 +43,7 @@ public class _2j extends Slot {
         this._W_p = new GraphicsSolidFill(16711310, 1);
         this._0y = new GraphicsStroke(2, false, LineScaleMode.NORMAL, CapsStyle.NONE, JointStyle.ROUND, 3, this._W_p);
         this._01a = new GraphicsPath(new Vector.<int>(), new Vector.<Number>());
-        this.graphicsData_ = new <IGraphicsData>[this._0y, this._01a, GraphicHelper._H_B_];
+        this.graphicsData_ = new <IGraphicsData>[this._0y, this._01a, GraphicHelper.NO_STROKE];
         super(_arg4, _arg5, _arg6);
         this.id = _arg7;
         this.item_ = _arg1;
@@ -51,7 +51,7 @@ public class _2j extends Slot {
         this.included_ = _arg3;
         this.data_ = _arg8;
         if (this.item_ != -1) {
-            _O_m._03d(this, _0H_K_);
+            DisplayUtil.safeRemoveChild(this, _0H_K_);
             _local8 = ObjectLibrary.getRedrawnTextureFromType(this.item_, 80, true);
             if(this.data_ != null && this.data_.hasOwnProperty("TextureFile") && this.data_.TextureFile != "") {
                 _local8 = ObjectLibrary.getRedrawnTextureFromTypeCustom(this.item_, 80, true, this.data_);
@@ -68,10 +68,10 @@ public class _2j extends Slot {
             this._0L_K_ = new Bitmap(_local8);
             this._0L_K_.x = (((WIDTH / 2) - (this._0L_K_.width / 2)) + _local10.x);
             this._0L_K_.y = (((HEIGHT / 2) - (this._0L_K_.height / 2)) + _local10.y);
-            _O_m._041(this, this._0L_K_);
+            DisplayUtil.safeAddChild(this, this._0L_K_);
         }
         if (!this._var) {
-            transform.colorTransform = MoreColorUtil._0t;
+            transform.colorTransform = MoreColorUtil.GRAY_40;
         }
         this._k5 = this._U_e();
         addChild(this._k5);
@@ -102,7 +102,7 @@ public class _2j extends Slot {
 
     private function _U_e():Shape {
         var _local1:Shape = new Shape();
-        GraphicHelper._0L_6(this._01a);
+        GraphicHelper.clearPath(this._01a);
         GraphicHelper.drawUI(0, 0, WIDTH, HEIGHT, 4, _07i, this._01a);
         _local1.graphics.drawGraphicsData(this.graphicsData_);
         return (_local1);

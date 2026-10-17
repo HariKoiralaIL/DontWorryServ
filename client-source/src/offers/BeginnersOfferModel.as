@@ -5,7 +5,7 @@ import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.util.MathUtil;
 import com.company.assembleegameclient.util.offer.Offer;
 import com.company.assembleegameclient.util.offer.Offers;
-import com.company.util._H_U_;
+import com.company.util.PropertyUtil;
 
 import account.Account;
 import signals.Signal;
@@ -49,7 +49,7 @@ public class BeginnersOfferModel implements IBeginnersOfferModel {
         var client:AppEngineClient = new AppEngineClient(Parameters.serverAddress(), "/account", true);
         client.addEventListener(GenericDataEvent.GENERIC_DATA, this.handleTimeLeftLoaded);
         var params:Object = {};
-        _H_U_._t2(params, Account.getInstance().credentials());
+        PropertyUtil.copyProperties(params, Account.getInstance().credentials());
         client.sendRequest("getBeginnerPackageTimeLeft", params);
     }
 

@@ -32,7 +32,7 @@ public class _return extends Shape {
     public function _rs(_arg1:int, _arg2:uint):void {
         graphics.clear();
         this._7H_.color = _arg2;
-        GraphicHelper._0L_6(this._nM_);
+        GraphicHelper.clearPath(this._nM_);
         GraphicHelper.drawSpacer(0, 0, 4, this._nM_);
         GraphicHelper.drawSpacer(_arg1, 0, 4, this._nM_);
         GraphicHelper.drawRect(0, -1, _arg1, 2, this._nM_);
@@ -42,7 +42,7 @@ public class _return extends Shape {
     public function drawVert(_arg1:int, _arg2:uint):void {
         graphics.clear();
         this._7H_.color = _arg2;
-        GraphicHelper._0L_6(this._nM_);
+        GraphicHelper.clearPath(this._nM_);
         GraphicHelper.drawSpacer(0, 0, 4, this._nM_);
         GraphicHelper.drawSpacer(0, _arg1, 4, this._nM_);
         GraphicHelper.drawRect(-1, 0, 2, _arg1, this._nM_);

@@ -19,7 +19,7 @@ public class RotatingBitmapObject extends BasicObject {
 
     public var size_:int;
     protected var bitmapFill_:GraphicsBitmapFill = new GraphicsBitmapFill(null, null, false, false);
-    protected var path_:GraphicsPath = new GraphicsPath(GraphicHelper._H_2, null);
+    protected var path_:GraphicsPath = new GraphicsPath(GraphicHelper.RECT_COMMANDS, null);
     protected var vertices_:Vector.<Number> = new Vector.<Number>();  // formerly vS_
     protected var matrix_:Matrix = new Matrix();                      // formerly _01i
     protected var rotationSpeed_:Number = 0;                          // formerly _A_o (radians per update)

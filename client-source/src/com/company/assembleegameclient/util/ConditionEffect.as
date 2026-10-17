@@ -170,9 +170,9 @@ public class ConditionEffect {
                     j = 0;
                     while (j < effects_[i].iconOffsets_.length) {
                         icon = new BitmapData(16, 16, true, 0);
-                        icon.draw(AssetLibrary._xK_("lofiInterface2", effects_[i].iconOffsets_[j]), translation);
+                        icon.draw(AssetLibrary.getImageFromSet("lofiInterface2", effects_[i].iconOffsets_[j]), translation);
                         icon = TextureRedrawer.outlineGlow(icon, 0, 0xFFFFFFFF);
-                        icon.applyFilter(icon, icon.rect, PointUtil._P_5, GLOW_FILTER);
+                        icon.applyFilter(icon, icon.rect, PointUtil.ORIGIN, GLOW_FILTER);
                         icons.push(icon);
                         j++;
                     }

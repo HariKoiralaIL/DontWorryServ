@@ -69,7 +69,7 @@ public class _Q_y extends Sprite {
         var _local7:MaskedImage = _local6.imageFromDir(AnimatedChar.RIGHT, AnimatedChar.STAND, 0);
         var _local10:BitmapData = TextureRedrawer.resize(_local7.image_, _local7.mask_, 100, false, _local8, _local9);
         _local10 = TextureRedrawer.outlineGlow(_local10, 0, 0);
-        _local10 = BitmapUtil._Y_d(_local10, 6, 6, (_local10.width - 12), (_local10.height - 6));
+        _local10 = BitmapUtil.crop(_local10, 6, 6, (_local10.width - 12), (_local10.height - 6));
         this.bitmap_ = new Bitmap(_local10);
         this.bitmap_.x = 104;
         this.bitmap_.y = (((HEIGHT / 2) - (this.bitmap_.height / 2)) - 2);
@@ -82,9 +82,9 @@ public class _Q_y extends Sprite {
         this.nameText_.x = 170;
         this.nameText_.y = ((HEIGHT / 2) - (this.nameText_.height / 2));
         addChild(this.nameText_);
-        this._4N_ = ConversionUtil._04n(_arg3.Equipment);
+        this._4N_ = ConversionUtil.toIntVector(_arg3.Equipment);
         this._4N_.length = 4;
-        var _local11:Vector.<int> = ConversionUtil._04n(_local5.SlotTypes);
+        var _local11:Vector.<int> = ConversionUtil.toIntVector(_local5.SlotTypes);
         _local11.length = 4;
         this._e9 = new Inventory(null, null, "Inventory", _local11, 4, false);
         this._e9.x = 400;
@@ -98,7 +98,7 @@ public class _Q_y extends Sprite {
         this._D_a.x = (660 - this._D_a.width);
         this._D_a.y = ((HEIGHT / 2) - (this._D_a.height / 2));
         addChild(this._D_a);
-        var _local12:BitmapData = AssetLibrary._xK_("lofiObj3", 224);
+        var _local12:BitmapData = AssetLibrary.getImageFromSet("lofiObj3", 224);
         this._0H_ = new Bitmap(TextureRedrawer.redraw(_local12, 40, true, 0, 0));
         this._0H_.x = 652;
         this._0H_.y = ((HEIGHT / 2) - (this._0H_.height / 2));

@@ -6,7 +6,7 @@ package MapBackgrounds._Weather {
 
   import com.company.assembleegameclient.map.GameCamera;
   import com.company.util.AssetLibrary;
-  import com.company.util._kp;
+  import com.company.util.ImageSet;
 
   import flash.display.IGraphicsData;
 
@@ -39,8 +39,8 @@ package MapBackgrounds._Weather {
       graphics.drawGraphicsData(this.graphicsData_);
     }
     private function addGhostDrop():void{
-      var _local1:_kp = AssetLibrary._18("ghosts");
-      var _local2:GhostDrop = new GhostDrop(((Math.random() * 1000) - 500), ((Math.random() * 1000) - 500), (3 * (0.5 + (0.5 * Math.random()))), _local1._W_u[int((_local1._W_u.length * Math.random()))]);
+      var _local1:ImageSet = AssetLibrary.getImageSet("ghosts");
+      var _local2:GhostDrop = new GhostDrop(((Math.random() * 1000) - 500), ((Math.random() * 1000) - 500), (3 * (0.5 + (0.5 * Math.random()))), _local1.images[int((_local1.images.length * Math.random()))]);
       _local2.x_spd = 3.5;
       _local2.y_spd = 3.5;
       this._P_j.push(_local2);

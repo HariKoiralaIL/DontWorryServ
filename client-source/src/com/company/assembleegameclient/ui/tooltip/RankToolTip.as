@@ -1,114 +1,112 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.ui.tooltip.RankToolTip
-
 package com.company.assembleegameclient.ui.tooltip {
-import com.company.ui.SimpleText;
-import com.company.rotmg.graphics.StarGraphic;
+import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.assembleegameclient.ui._return;
+import com.company.assembleegameclient.util.FameUtil;
+import com.company.rotmg.graphics.StarGraphic;
+import com.company.ui.SimpleText;
 
 import flash.filters.DropShadowFilter;
 import flash.geom.ColorTransform;
 
-import com.company.assembleegameclient.util.FameUtil;
-import com.company.assembleegameclient.objects.ObjectLibrary;
-
 public class RankToolTip extends ToolTip {
 
-    public function RankToolTip(_arg1:int) {
-        var legendLine:LegendLine;
-        super(0x2A2A2A, 1, 0xFFFFFF, 1);
-        this.titleText_ = new SimpleText(13, 0xB3B3B3, false, 0, 0, "Myriad Pro");
-        this.titleText_.setBold(true);
-        this.titleText_.text = ("You have earned " + _arg1);
-        this.titleText_.updateMetrics();
-        this.titleText_.filters = [new DropShadowFilter(0, 0, 0)];
-        this.titleText_.x = 6;
-        this.titleText_.y = 2;
-        addChild(this.titleText_);
-        this.star_ = new StarGraphic();
-        this.star_.transform.colorTransform = new ColorTransform((179 / 0xFF), (179 / 0xFF), (179 / 0xFF));
-        this.star_.x = (this.titleText_.width + 7);
-        this.star_.y = (this.titleText_.y + 3);
-        addChild(this.star_);
-        this.descriptionText_ = new SimpleText(13, 0xB3B3B3, false, 174, 0, "Myriad Pro");
-        this.descriptionText_.wordWrap = true;
-        this.descriptionText_.multiline = true;
-        this.descriptionText_.text = "You can earn more by completing Class Quests.";
-        this.descriptionText_.updateMetrics();
-        this.descriptionText_.filters = [new DropShadowFilter(0, 0, 0)];
-        this.descriptionText_.x = 6;
-        this.descriptionText_.y = 30;
-        addChild(this.descriptionText_);
-        this.divider_ = new _return(100, 0x2D2D2D);
-        this.divider_.x = 6;
-        this.divider_.y = (height + 10);
-        addChild(this.divider_);
-        var _local3:int = (this.divider_.y + 3);
-        var _local4:int;
-        while (_local4 < FameUtil.STAR_COLORS.length) {
-            legendLine = new LegendLine((_local4 * ObjectLibrary.playerChars_.length), (((_local4 + 1) * ObjectLibrary.playerChars_.length) - 1), FameUtil.STAR_COLORS[_local4]);
-            legendLine.x = 6;
-            legendLine.y = _local3;
-            addChild(legendLine);
-            _local3 = (_local3 + legendLine.height);
-            _local4++;
-        }
-        legendLine = new LegendLine(FameUtil.maxStars(), FameUtil.maxStars(), new ColorTransform((0xFF / 0xFF), (0 / 0xFF), (0xFF / 0xFF)));
-        legendLine.x = 6;
-        legendLine.y = _local3;
-        addChild(legendLine);
-        height = (height + 6);
-    }
+    private static const DIVIDER_COLOR:uint = 0x2D2D2D;
+
     private var titleText_:SimpleText;
     private var star_:StarGraphic;
     private var descriptionText_:SimpleText;
     private var divider_:_return;
-    private var legendLines_:Vector.<LegendLine>;
+
+    public function RankToolTip(rank:int) {
+        super(0x2A2A2A, 1, 0xFFFFFF, 1);
+        titleText_ = new SimpleText(13, 0xB3B3B3, false, 0, 0, "Myriad Pro");
+        titleText_.setBold(true);
+        titleText_.text = "You have earned " + rank;
+        titleText_.updateMetrics();
+        titleText_.filters = [new DropShadowFilter(0, 0, 0)];
+        titleText_.x = 6;
+        titleText_.y = 2;
+        addChild(titleText_);
+
+        star_ = new StarGraphic();
+        star_.transform.colorTransform = new ColorTransform(179 / 0xFF, 179 / 0xFF, 179 / 0xFF);
+        star_.x = titleText_.width + 7;
+        star_.y = titleText_.y + 3;
+        addChild(star_);
+
+        descriptionText_ = new SimpleText(13, 0xB3B3B3, false, 174, 0, "Myriad Pro");
+        descriptionText_.wordWrap = true;
+        descriptionText_.multiline = true;
+        descriptionText_.text = "You can earn more by completing Class Quests.";
+        descriptionText_.updateMetrics();
+        descriptionText_.filters = [new DropShadowFilter(0, 0, 0)];
+        descriptionText_.x = 6;
+        descriptionText_.y = 30;
+        addChild(descriptionText_);
+
+        divider_ = new _return(100, DIVIDER_COLOR);
+        divider_.x = 6;
+        divider_.y = height + 10;
+        addChild(divider_);
+
+        var lineY:int = divider_.y + 3;
+        var charCount:int = ObjectLibrary.playerChars_.length;
+        for (var i:int = 0; i < FameUtil.STAR_COLORS.length; i++) {
+            lineY += addLegendLine(i * charCount, (i + 1) * charCount - 1, FameUtil.STAR_COLORS[i], lineY);
+        }
+        addLegendLine(FameUtil.maxStars(), FameUtil.maxStars(), new ColorTransform(1, 0, 1), lineY);
+        height = height + 6;
+    }
 
     override public function draw():void {
-        this.divider_._rs((width - 10), 0x2D2D2D);
+        divider_._rs(width - 10, DIVIDER_COLOR);
         super.draw();
     }
 
-}
-}//package com.company.assembleegameclient.ui.tooltip
+    /** Adds a legend line at lineY and returns its height. */
+    private function addLegendLine(minStars:int, maxStars:int, color:ColorTransform, lineY:int):int {
+        var line:LegendLine = new LegendLine(minStars, maxStars, color);
+        line.x = 6;
+        line.y = lineY;
+        addChild(line);
+        return line.height;
+    }
 
-import flash.display.Sprite;
+}
+}
 
 import com.company.rotmg.graphics.StarGraphic;
 import com.company.ui.SimpleText;
 
+import flash.display.Sprite;
 import flash.filters.DropShadowFilter;
 import flash.geom.ColorTransform;
 
 class LegendLine extends Sprite {
 
-    /*private*/
     internal var coloredStar_:StarGraphic;
-    /*private*/
     internal var rangeText_:SimpleText;
-    /*private*/
     internal var star_:StarGraphic;
 
-    public function LegendLine(_arg1:int, _arg2:int, colorTransform2:ColorTransform) {
-        this.coloredStar_ = new StarGraphic();
-        this.coloredStar_.transform.colorTransform = colorTransform2;
-        this.coloredStar_.y = 4;
-        addChild(this.coloredStar_);
-        this.rangeText_ = new SimpleText(13, 0xB3B3B3, false, 0, 0, "Myriad Pro");
-        this.rangeText_.setBold(true);
-        this.rangeText_.text = (": " + (((_arg1 == _arg2)) ? _arg1.toString() : ((_arg1 + " - ") + _arg2)));
-        this.rangeText_.updateMetrics();
-        this.rangeText_.filters = [new DropShadowFilter(0, 0, 0)];
-        this.rangeText_.x = this.coloredStar_.width;
-        addChild(this.rangeText_);
-        this.star_ = new StarGraphic();
-        this.star_.transform.colorTransform = new ColorTransform((179 / 0xFF), (179 / 0xFF), (179 / 0xFF));
-        this.star_.x = ((this.rangeText_.x + this.rangeText_.width) + 2);
-        this.star_.y = 4;
-        addChild(this.star_);
-    }
-}
+    public function LegendLine(minStars:int, maxStars:int, color:ColorTransform) {
+        coloredStar_ = new StarGraphic();
+        coloredStar_.transform.colorTransform = color;
+        coloredStar_.y = 4;
+        addChild(coloredStar_);
 
+        rangeText_ = new SimpleText(13, 0xB3B3B3, false, 0, 0, "Myriad Pro");
+        rangeText_.setBold(true);
+        rangeText_.text = ": " + (minStars == maxStars ? minStars.toString() : minStars + " - " + maxStars);
+        rangeText_.updateMetrics();
+        rangeText_.filters = [new DropShadowFilter(0, 0, 0)];
+        rangeText_.x = coloredStar_.width;
+        addChild(rangeText_);
+
+        star_ = new StarGraphic();
+        star_.transform.colorTransform = new ColorTransform(179 / 0xFF, 179 / 0xFF, 179 / 0xFF);
+        star_.x = rangeText_.x + rangeText_.width + 2;
+        star_.y = 4;
+        addChild(star_);
+    }
+
+}

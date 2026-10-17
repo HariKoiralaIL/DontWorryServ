@@ -2,7 +2,7 @@ package com.company.assembleegameclient.appengine {
 import account.Account;
 
 import com.company.assembleegameclient.parameters.Parameters;
-import com.company.util._H_U_;
+import com.company.util.PropertyUtil;
 
 import events.GenericDataEvent;
 
@@ -34,7 +34,7 @@ public class OffersLoader {
             "game_net": acct.gameNetwork(),
             "play_platform": acct.playPlatform()
         };
-        _H_U_._t2(params, acct.credentials());
+        PropertyUtil.copyProperties(params, acct.credentials());
         client.sendRequest("getoffers", params);
     }
 

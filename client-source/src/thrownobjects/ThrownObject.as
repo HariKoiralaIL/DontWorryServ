@@ -25,7 +25,7 @@ public class ThrownObject extends RotatingBitmapObject {
     public var pathY_:Number;
 
     public function ThrownObject(lifetime:int, start:Point, end:Point) {
-        var bitmap:BitmapData = AssetLibrary._xK_(SPRITE_SHEET, SPRITE_INDEX);
+        var bitmap:BitmapData = AssetLibrary.getImageFromSet(SPRITE_SHEET, SPRITE_INDEX);
         bitmap = TextureRedrawer.redraw(bitmap, SPRITE_SIZE, true, 0, 0, false);
         rotationSpeed_ = SPIN_SPEED;
         super(0, bitmap);

@@ -131,7 +131,7 @@ public class _0K_B_ extends Sprite {
     }
 
     private function _5s(_arg1:int, _arg2:int, _arg3:Graphics):void {
-        GraphicHelper._0L_6(this.path_);
+        GraphicHelper.clearPath(this.path_);
         GraphicHelper.drawUI(0, 0, _arg1, _arg2, 4, [1, 1, 1, 1], this.path_);
         _arg3.clear();
         _arg3.drawGraphicsData(this.graphicsData_);

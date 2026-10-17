@@ -71,7 +71,7 @@ public class Inventory extends Sprite {
         var _local3:_E_6;
         var _local2:int = 0;
         if (this.equipment_) {
-            GraphicHelper._0L_6(this.path_);
+            GraphicHelper.clearPath(this.path_);
             GraphicHelper.drawUI(-3, -3, 178, 46, 6, [1, 1, 1, 1], this.path_);
             graphics.clear();
             graphics.drawGraphicsData(this.graphicsData_);

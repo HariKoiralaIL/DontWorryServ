@@ -1,51 +1,38 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.ui.tooltip.handlers.OrbStatHandler
-
 package com.company.assembleegameclient.ui.tooltip.handlers {
 public class OrbStatHandler extends SlotStatHandler {
 
-    override protected function compareSlots(xml4:XML, xml:XML):void {
-        var xml2:XML;
-        var xml3:XML;
-        var _local5:int;
-        var _local6:int;
-        var _local7:String;
-        xml2 = this.findStasisBlast(xml4);
-        xml3 = this.findStasisBlast(xml);
+    private static const ORB_OF_CONFLICT:String = "Orb of Conflict";
+
+    override protected function compareSlots(itemXML:XML, curItemXML:XML):void {
+        var stasis:XML = findStasisBlast(itemXML);
+        var curStasis:XML = findStasisBlast(curItemXML);
         tooltipText = "";
-        if (((!((xml2 == null))) && (!((xml3 == null))))) {
-            _local5 = int(xml2.@duration);
-            _local6 = int(xml3.@duration);
-            _local7 = compareColor((_local5 - _local6));
-            tooltipText = (tooltipText + ("Stasis on group: " + colorize((_local5 + " secs\n"), _local7)));
-            handledXml[xml2.toXMLString()] = true;
-            this.addUniqueEffect(xml4);
+        if (stasis != null && curStasis != null) {
+            var duration:int = int(stasis.@duration);
+            var curDuration:int = int(curStasis.@duration);
+            tooltipText += "Stasis on group: " + colorize(duration + " secs\n", compareColor(duration - curDuration));
+            handledXml[stasis.toXMLString()] = true;
+            addUniqueEffect(itemXML);
         }
     }
 
-    private function findStasisBlast(orbXML:XML):XML {
-        var matches:XMLList;
-        matches = orbXML.Activate.(text() == "StasisBlast");
-        return ((((matches.length()) == 1) ? matches[0] : null));
+    private function findStasisBlast(itemXML:XML):XML {
+        var matches:XMLList = activateTags(itemXML, "StasisBlast");
+        return matches.length() == 1 ? matches[0] : null;
     }
 
     private function addUniqueEffect(itemXML:XML):void {
-        var selfTags:XMLList;
-        var speedy:XML;
-        var damaging:XML;
-        if (itemXML.@id == "Orb of Conflict") {
-            selfTags = itemXML.Activate.(text() == "ConditionEffectSelf");
-            speedy = selfTags.(@effect == "Speedy")[0];
-            damaging = selfTags.(@effect == "Damaging")[0];
-            tooltipText = (tooltipText + ("Effect on Self:\n" + colorize((("Speedy for " + speedy.@duration) + " secs\n"), PURPLE)));
-            tooltipText = (tooltipText + ("Effect on Self:\n" + colorize((("Damaging for " + damaging.@duration) + "secs\n"), PURPLE)));
-            handledXml[speedy.toXMLString()] = true;
-            handledXml[damaging.toXMLString()] = true;
+        if (itemXML.@id != ORB_OF_CONFLICT) {
+            return;
         }
+        var selfTags:XMLList = activateTags(itemXML, "ConditionEffectSelf");
+        var speedy:XML = selfTags.(@effect == "Speedy")[0];
+        var damaging:XML = selfTags.(@effect == "Damaging")[0];
+        tooltipText += selfEffectLine("Speedy", speedy.@duration, PURPLE);
+        tooltipText += selfEffectLine("Damaging", damaging.@duration, PURPLE);
+        handledXml[speedy.toXMLString()] = true;
+        handledXml[damaging.toXMLString()] = true;
     }
 
 }
-}//package com.company.assembleegameclient.ui.tooltip.handlers
-
+}

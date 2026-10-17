@@ -103,9 +103,9 @@ public class GoldOfferItem extends Sprite implements ISelectableItem {
 
     private function createIcon():void {
         var _local1:Bitmap;
-        this.iconData = AssetLibrary._xK_("lofiObj3", 225);
+        this.iconData = AssetLibrary.getImageFromSet("lofiObj3", 225);
         this.iconData = TextureRedrawer.redraw(this.iconData, 50, true, 0, 0, false);
-        this.iconData = BitmapUtil._Y_d(this.iconData, 8, 8, (this.iconData.width - 16), (this.iconData.height - 16));
+        this.iconData = BitmapUtil.crop(this.iconData, 8, 8, (this.iconData.width - 16), (this.iconData.height - 16));
         _local1 = new Bitmap(this.iconData);
         _local1.x = (this.checkBox.x + 35);
         this.container.addChild(_local1);

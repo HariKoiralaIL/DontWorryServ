@@ -18,7 +18,7 @@ package com.company.assembleegameclient.objects {
     import com.company.util.GraphicHelper;
     import com.company.util.MoreColorUtil;
     import com.company.util.PointUtil;
-    import com.company.util._G_;
+    import com.company.util.BitmapEffectCache;
 
     import flash.display.BitmapData;
     import flash.display.GradientType;
@@ -50,7 +50,7 @@ package com.company.assembleegameclient.objects {
 
         private static const MOVE_EPSILON:Number = 1E-5;
         private static const MOVE_EPSILON_NEG:Number = -(MOVE_EPSILON);
-        protected static const GRAYSCALE_FILTER:ColorMatrixFilter = new ColorMatrixFilter(MoreColorUtil._0M_l);
+        protected static const GRAYSCALE_FILTER:ColorMatrixFilter = new ColorMatrixFilter(MoreColorUtil.GRAYSCALE_MATRIX);
         public static const ATTACK_PERIOD_MS:int = 300;
 
         public static function getDamageAfterDefense(damage:int, defense:int, armorPierced:Boolean, condition:int):int {
@@ -77,7 +77,7 @@ package com.company.assembleegameclient.objects {
             this.tickPos_ = new Point();
             this.moveVec_ = new Vector3D();
             this.bitmapFill_ = new GraphicsBitmapFill(null, null, false, false);
-            this.path_ = new GraphicsPath(GraphicHelper._H_2, null);
+            this.path_ = new GraphicsPath(GraphicHelper.RECT_COMMANDS, null);
             this.quadVerts_ = new Vector.<Number>();
             this.unusedVec_ = new Vector.<Number>();
             this.drawMatrix_ = new Matrix();
@@ -115,7 +115,7 @@ package com.company.assembleegameclient.objects {
                 this.defense_ = int(xml.Defense);
             }
             if (xml.hasOwnProperty("SlotTypes")) {
-                this.slotTypes_ = ConversionUtil._04n(xml.SlotTypes);
+                this.slotTypes_ = ConversionUtil.toIntVector(xml.SlotTypes);
                 this.equipment_ = new Vector.<int>(this.slotTypes_.length);
                 this.equipData_ = new Vector.<Object>(this.slotTypes_.length);
                 _local4 = 0;
@@ -362,7 +362,7 @@ package com.company.assembleegameclient.objects {
         override public function drawShadow(graphicsData:Vector.<IGraphicsData>, camera:GameCamera, time:int):void {
             if (this.shadowFill_ == null) {
                 this.shadowFill_ = new GraphicsGradientFill(GradientType.RADIAL, [this.props_.shadowColor_, this.props_.shadowColor_], [0.5, 0], null, new Matrix());
-                this.shadowPath_ = new GraphicsPath(GraphicHelper._H_2, new Vector.<Number>());
+                this.shadowPath_ = new GraphicsPath(GraphicHelper.RECT_COMMANDS, new Vector.<Number>());
             }
             var _local4:Number = (((this.size_ / 100) * (this.props_.shadowSize_ / 100)) * this.textureScale_);
             var _local5:Number = (30 * _local4);
@@ -583,7 +583,7 @@ package com.company.assembleegameclient.objects {
         }
 
         public function getColor():uint {
-            return (BitmapUtil._B_n(this.texture_));
+            return (BitmapUtil.getDominantColor(this.texture_));
         }
 
         public function getNextBulletId():uint {
@@ -726,7 +726,7 @@ package com.company.assembleegameclient.objects {
                 this.nameText_ = this.makeNameText(this.name_);
                 this.nameBitmap_ = this.generateNameBitmapData(this.nameText_);
                 this.nameFill_ = new GraphicsBitmapFill(null, new Matrix(), false, false);
-                this.namePath_ = new GraphicsPath(GraphicHelper._H_2, new Vector.<Number>());
+                this.namePath_ = new GraphicsPath(GraphicHelper.RECT_COMMANDS, new Vector.<Number>());
             }
             var _local3:int = ((this.nameBitmap_.width / 2) + 1);
             var _local4:int = 30;
@@ -743,7 +743,7 @@ package com.company.assembleegameclient.objects {
         }
 
         public function setTexture(file:String, index:int):void {
-            this.texture_ = AssetLibrary._xK_(file, index);
+            this.texture_ = AssetLibrary.getImageFromSet(file, index);
             this.textureScale_ = (this.texture_.height / 8);
         }
 
@@ -787,7 +787,7 @@ package com.company.assembleegameclient.objects {
                 _local9 = this.condIcons_[_local8];
                 if (_local8 >= this.condIconFills_.length) {
                     this.condIconFills_.push(new GraphicsBitmapFill(null, new Matrix(), false, false));
-                    this.condIconPaths_.push(new GraphicsPath(GraphicHelper._H_2, new Vector.<Number>()));
+                    this.condIconPaths_.push(new GraphicsPath(GraphicHelper.RECT_COMMANDS, new Vector.<Number>()));
                 }
                 _local10 = this.condIconFills_[_local8];
                 _local11 = this.condIconPaths_[_local8];
@@ -821,13 +821,13 @@ package com.company.assembleegameclient.objects {
         protected function generateNameBitmapData(nameText:SimpleText):BitmapData {
             var _local2:BitmapData = new BitmapData(nameText.width, 64, true, 0);
             _local2.draw(nameText, null);
-            _local2.applyFilter(_local2, _local2.rect, PointUtil._P_5, new GlowFilter(0, 1, 3, 3, 2, 1));
+            _local2.applyFilter(_local2, _local2.rect, PointUtil.ORIGIN, new GlowFilter(0, 1, 3, 3, 2, 1));
             return (_local2);
         }
 
         protected function getHallucinationTexture():BitmapData {
             if (this.hallucinationTex_ == null) {
-                this.hallucinationTex_ = AssetLibrary._xK_("lofiChar8x8", int((Math.random() * 239)));
+                this.hallucinationTex_ = AssetLibrary.getImageFromSet("lofiChar8x8", int((Math.random() * 239)));
             }
             return (this.hallucinationTex_);
         }
@@ -886,7 +886,7 @@ package com.company.assembleegameclient.objects {
                 _local4 = (this.size_ * Math.min(1.5, (_local11 / _local3.width)));
             }
             if (this.isStasis()) {
-                _local3 = _G_._R_9(_local3, GRAYSCALE_FILTER);
+                _local3 = BitmapEffectCache.getFiltered(_local3, GRAYSCALE_FILTER);
             }
             if (this.colorFlash_ != null) {
                 if (!this.colorFlash_.isFinished(time)) {

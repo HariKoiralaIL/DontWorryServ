@@ -2,7 +2,7 @@ package com.company.assembleegameclient.appengine {
 import account.Account;
 
 import com.company.assembleegameclient.parameters.Parameters;
-import com.company.util._gv;
+import com.company.util.SystemInfo;
 
 import flash.events.ErrorEvent;
 
@@ -29,7 +29,7 @@ public class ClientErrorReporter {
             var text:String = "Build: " + Parameters.buildLabel() + "\n"
                     + "message: " + message + "\n"
                     + "stackTrace: " + stackTrace + "\n"
-                    + _gv._00f();
+                    + SystemInfo.getCapabilitiesReport();
             var client:AppEngineClient = new AppEngineClient(Parameters.serverAddress(), "/clientError", false);
             client.sendRequest("add", {
                 "text": text,

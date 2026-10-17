@@ -23,7 +23,7 @@ public class PixelCell extends Sprite {
     }
 
     public function getColor():uint {
-        return (((this.color_ == null) ? 0 : MoreColorUtil._nL_(this.color_.h, this.color_.s, this.color_.v)));
+        return (((this.color_ == null) ? 0 : MoreColorUtil.hsvToRgb(this.color_.h, this.color_.s, this.color_.v)));
     }
 
     public function redraw():void {
@@ -31,7 +31,7 @@ public class PixelCell extends Sprite {
         if (this.color_ == null) {
             graphics.beginFill(0, ((this.transparentWhenEmpty_) ? 0 : 1));
         } else {
-            graphics.beginFill(MoreColorUtil._nL_(this.color_.h, this.color_.s, this.color_.v));
+            graphics.beginFill(MoreColorUtil.hsvToRgb(this.color_.h, this.color_.s, this.color_.v));
         }
         graphics.drawRect(0, 0, this.size_, this.size_);
         graphics.endFill();

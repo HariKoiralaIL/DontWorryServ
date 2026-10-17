@@ -18,7 +18,7 @@ public class HSV {
     }
 
     public static function random():HSV {
-        var rgb:RGB = RGB.fromHex(MoreColorUtil._0L_E_());
+        var rgb:RGB = RGB.fromHex(MoreColorUtil.randomColor());
         return rgb.toHSV();
     }
 

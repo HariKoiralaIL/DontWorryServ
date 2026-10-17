@@ -39,7 +39,7 @@ import com.company.util.PointUtil;
 import com.company.assembleegameclient.objects.Character;
 import com.company.assembleegameclient.objects.GuildHallPortal;
 import com.company.assembleegameclient.objects.Portal;
-import com.company.util._E_I_;
+import com.company.util.RectUtil;
 import com.company.assembleegameclient.parameters.Parameters;
 
 
@@ -78,7 +78,7 @@ public class _ej extends Sprite {
             _local5 = (_local5 / 2);
         }
         this._M_R_.push(_local4);
-        this._0H_x = AssetLibrary._xK_("lofiInterface", 54);
+        this._0H_x = AssetLibrary.getImageFromSet("lofiInterface", 54);
         this._0H_x = this._0H_x.clone();
         this._0H_x.colorTransform(this._0H_x.rect, new ColorTransform(0, 0, 1));
         graphics.clear();
@@ -94,7 +94,7 @@ public class _ej extends Sprite {
         this._16.y = (this.h_ / 2);
         addChild(this._16);
         this._tk = new Sprite();
-        _local6 = new Bitmap(AssetLibrary._xK_("lofiInterface", 54));
+        _local6 = new Bitmap(AssetLibrary.getImageFromSet("lofiInterface", 54));
         _local6.scaleX = 2;
         _local6.scaleY = 2;
         this._tk.x = (this.w_ - 20);
@@ -103,7 +103,7 @@ public class _ej extends Sprite {
         this._tk.addEventListener(MouseEvent.CLICK, this._0_7);
         addChild(this._tk);
         this._1_ = new Sprite();
-        _local6 = new Bitmap(AssetLibrary._xK_("lofiInterface", 55));
+        _local6 = new Bitmap(AssetLibrary.getImageFromSet("lofiInterface", 55));
         _local6.scaleX = 2;
         _local6.scaleY = 2;
         this._1_.x = (this.w_ - 20);
@@ -181,7 +181,7 @@ public class _ej extends Sprite {
         this._6q.identity();
         this._6q.translate(-(this.map_.player_.x_), -(this.map_.player_.y_));
         this._6q.scale(_local1, _local1);
-        var _local2:Point = this._6q.transformPoint(PointUtil._P_5);
+        var _local2:Point = this._6q.transformPoint(PointUtil.ORIGIN);
         var _local3:Point = this._6q.transformPoint(this._0M_j);
         var _local4:Number = 0;
         if (_local2.x > this._eh.left) {
@@ -200,7 +200,7 @@ public class _ej extends Sprite {
             }
         }
         this._6q.translate(_local4, _local5);
-        _local2 = this._6q.transformPoint(PointUtil._P_5);
+        _local2 = this._6q.transformPoint(PointUtil.ORIGIN);
         var _local6:Rectangle = new Rectangle();
         _local6.x = Math.max(this._eh.x, _local2.x);
         _local6.y = Math.max(this._eh.y, _local2.y);
@@ -252,7 +252,7 @@ public class _ej extends Sprite {
                 _local17 = (((this._6q.a * _local10.x_) + (this._6q.c * _local10.y_)) + this._6q.tx);
                 _local18 = (((this._6q.b * _local10.x_) + (this._6q.d * _local10.y_)) + this._6q.ty);
                 if ((((((((_local17 <= (-(this.w_) / 2))) || ((_local17 >= (this.w_ / 2))))) || ((_local18 <= (-(this.h_) / 2))))) || ((_local18 >= (this.h_ / 2))))) {
-                    _E_I_._S_1(this._eh, 0, 0, _local17, _local18, this._0B_);
+                    RectUtil.findEdgeCrossing(this._eh, 0, 0, _local17, _local18, this._0B_);
                     _local17 = this._0B_.x;
                     _local18 = this._0B_.y;
                 }
@@ -274,7 +274,7 @@ public class _ej extends Sprite {
                 this.toolTip_ = new PlayerListToolTip(this._nC_);
                 stage.addChild(this.toolTip_);
             } else {
-                if (!this._while(this.toolTip_._nC_, this._nC_)) {
+                if (!this._while(this.toolTip_.players_, this._nC_)) {
                     this.toolTip_.setPlayers(this._nC_);
                 }
             }
@@ -361,10 +361,10 @@ public class _ej extends Sprite {
     }
 
     private function _R_B_(_arg1:MouseEvent):void {
-        if ((((((((this.toolTip_ == null)) || ((this.toolTip_.parent == null)))) || ((this.toolTip_._nC_ == null)))) || ((this.toolTip_._nC_.length == 0)))) {
+        if ((((((((this.toolTip_ == null)) || ((this.toolTip_.parent == null)))) || ((this.toolTip_.players_ == null)))) || ((this.toolTip_.players_.length == 0)))) {
             return;
         }
-        var _local2:Vector.<Player> = this.toolTip_._nC_;
+        var _local2:Vector.<Player> = this.toolTip_.players_;
         var _local3:int = (this.toolTip_.x + 12);
         var _local4:int = this.toolTip_.y;
         this._false();

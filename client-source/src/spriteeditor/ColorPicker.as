@@ -171,7 +171,7 @@ public class ColorPicker extends Sprite {
         while (x < this.hueSaturationData_.width) {
             y = 0;
             while (y < this.hueSaturationData_.height) {
-                rgb = MoreColorUtil._nL_(x, ((this.hueSaturationData_.height - y) / this.hueSaturationData_.height), this.selected_.color_.v);
+                rgb = MoreColorUtil.hsvToRgb(x, ((this.hueSaturationData_.height - y) / this.hueSaturationData_.height), this.selected_.color_.v);
                 this.hueSaturationData_.setPixel(x, y, rgb);
                 y++;
             }
@@ -184,7 +184,7 @@ public class ColorPicker extends Sprite {
         var rgb:uint;
         var y:int;
         while (y < this.valueStripData_.height) {
-            rgb = MoreColorUtil._nL_(this.selected_.color_.h, this.selected_.color_.s, ((this.valueStripData_.height - y) / this.valueStripData_.height));
+            rgb = MoreColorUtil.hsvToRgb(this.selected_.color_.h, this.selected_.color_.s, ((this.valueStripData_.height - y) / this.valueStripData_.height));
             this.valueStripData_.setPixel(0, y, rgb);
             y++;
         }

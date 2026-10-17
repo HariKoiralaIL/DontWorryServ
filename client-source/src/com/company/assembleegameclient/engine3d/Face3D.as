@@ -2,7 +2,7 @@ package com.company.assembleegameclient.engine3d {
 import com.company.assembleegameclient.map.GameCamera;
 import com.company.assembleegameclient.util.TextureRedrawer;
 import com.company.util.GraphicHelper;
-import com.company.util._09Q_;
+import com.company.util.Triangle;
 
 import flash.display.BitmapData;
 import flash.display.GraphicsBitmapFill;
@@ -122,10 +122,10 @@ public class Face3D {
     /** Tests whether a screen point lies inside the projected triangle or quad. */
     public function contains(x:Number, y:Number):Boolean {
         var s:Vector.<Number> = this.screenVertices_;
-        if (_09Q_._094(s[0], s[1], s[2], s[3], s[4], s[5], x, y)) {
+        if (Triangle.containsPoint(s[0], s[1], s[2], s[3], s[4], s[5], x, y)) {
             return true;
         }
-        if (s.length == 8 && _09Q_._094(s[0], s[1], s[4], s[5], s[6], s[7], x, y)) {
+        if (s.length == 8 && Triangle.containsPoint(s[0], s[1], s[4], s[5], s[6], s[7], x, y)) {
             return true;
         }
         return false;

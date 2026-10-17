@@ -43,13 +43,13 @@ package com.company.assembleegameclient.ui {
       this.nameText_.filters = [new DropShadowFilter(0, 0, 0)];
       addChild(this.nameText_);
       if (this.gs_.gsc_.gameId_ != Parameters.NEXUS_ID) {
-        this._nw = new _rN_(AssetLibrary._xK_("lofiInterfaceBig", 6), "Nexus", "escapeToNexus");
+        this._nw = new _rN_(AssetLibrary.getImageFromSet("lofiInterfaceBig", 6), "Nexus", "escapeToNexus");
         this._nw.addEventListener(MouseEvent.CLICK, this._Q_C_);
         this._nw.x = 172;
         this._nw.y = 2;
         addChild(this._nw);
       } else {
-        this._nw = new _rN_(AssetLibrary._xK_("lofiInterfaceBig", 5), "Options", "options");
+        this._nw = new _rN_(AssetLibrary.getImageFromSet("lofiInterfaceBig", 5), "Options", "options");
         this._nw.addEventListener(MouseEvent.CLICK, this._nD_);
         this._nw.x = 172;
         this._nw.y = 2;
@@ -78,13 +78,13 @@ package com.company.assembleegameclient.ui {
       this.equips_.y = 104;
       addChild(this.equips_);
       this.tabList_ = [];
-      this.invTab_ = new TabButton(AssetLibrary._xK_("lofiInterfaceBig", 0x20), true, 0);
+      this.invTab_ = new TabButton(AssetLibrary.getImageFromSet("lofiInterfaceBig", 0x20), true, 0);
       this.invTab_.addEventListener(MouseEvent.CLICK, this.onTabClick);
       this.invTab_.x = 7;
       this.invTab_.y = 152;
       addChild(this.invTab_);
       this.tabList_[0] = this.invTab_;
-      this.statTab_ = new TabButton(AssetLibrary._xK_("lofiInterfaceBig", 0x21), false, 1);
+      this.statTab_ = new TabButton(AssetLibrary.getImageFromSet("lofiInterfaceBig", 0x21), false, 1);
       this.statTab_.addEventListener(MouseEvent.CLICK, this.onTabClick);
       this.statTab_.x = 35;
       this.statTab_.y = 152;
@@ -98,7 +98,7 @@ package com.company.assembleegameclient.ui {
       this._e9.x = 7;
       this._e9.y = 7;
       this.invTab_.holder_.addChild(this._e9);
-      this.teleportTab_ = new TabButton(AssetLibrary._xK_("lofiInterfaceBig", 0x27), false, 2);
+      this.teleportTab_ = new TabButton(AssetLibrary.getImageFromSet("lofiInterfaceBig", 0x27), false, 2);
       this.teleportTab_.addEventListener(MouseEvent.CLICK, this.onTabClick);
       this.teleportTab_.x = 35 + 28;
       this.teleportTab_.y = 152;
@@ -176,7 +176,7 @@ package com.company.assembleegameclient.ui {
       this.teleportTab_.holder_.addChild(this.clothmarket_);
       if (Player._e_D)
       {
-        this.adminTab_ = new TabButton(AssetLibrary._xK_("lofiInterfaceBig", 0x26), false, 3);
+        this.adminTab_ = new TabButton(AssetLibrary.getImageFromSet("lofiInterfaceBig", 0x26), false, 3);
         this.adminTab_.addEventListener(MouseEvent.CLICK, this.onTabClick);
         this.adminTab_.x = 35 + 56;
         this.adminTab_.y = 152;

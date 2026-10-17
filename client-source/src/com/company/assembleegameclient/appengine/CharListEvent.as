@@ -6,7 +6,7 @@ import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.assembleegameclient.objects.Player;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.util.MathUtil;
-import com.company.util._0K_N_;
+import com.company.util.GeoCoordinate;
 
 import config.InjectorLocator;
 
@@ -20,7 +20,7 @@ public class CharListEvent extends Event {
     public static const SAVED_CHARS_LIST:String = "SAVED_CHARS_LIST";
 
     private static const ONE_DAY_MS:int = 86400000;
-    private static const DEFAULT_LAT_LONG:_0K_N_ = new _0K_N_(37.4436, -122.412);
+    private static const DEFAULT_LAT_LONG:GeoCoordinate = new GeoCoordinate(37.4436, -122.412);
 
     public var rawXML_:String;
     public var xml_:XML;
@@ -44,7 +44,7 @@ public class CharListEvent extends Event {
     public var converted_:Boolean;
     public var isAdmin_:Boolean;
     public var newsItems_:Vector.<NewsEntry>;
-    public var clientLatLong_:_0K_N_;
+    public var clientLatLong_:GeoCoordinate;
     public var classAvailability_:Object;
 
     public function CharListEvent(rawXML:String) {
@@ -173,7 +173,7 @@ public class CharListEvent extends Event {
                 return server;
             }
             var priority:int = server.priority();
-            var distance:Number = _0K_N_.distance(this.clientLatLong_, server.latLong_);
+            var distance:Number = GeoCoordinate.distance(this.clientLatLong_, server.latLong_);
             if (priority < bestPriority || (priority == bestPriority && distance < bestDistance)) {
                 best = server;
                 bestDistance = distance;
@@ -246,7 +246,7 @@ public class CharListEvent extends Event {
                     String(serverXML.Name),
                     String(serverXML.DNS),
                     Parameters.gamePort,
-                    new _0K_N_(Number(serverXML.Lat), Number(serverXML.Long)),
+                    new GeoCoordinate(Number(serverXML.Lat), Number(serverXML.Long)),
                     Number(serverXML.Usage),
                     serverXML.hasOwnProperty("AdminOnly")));
         }
@@ -266,7 +266,7 @@ public class CharListEvent extends Event {
 
     private function parseLatLong():void {
         if (this.xml_.hasOwnProperty("Lat") && this.xml_.hasOwnProperty("Long")) {
-            this.clientLatLong_ = new _0K_N_(Number(this.xml_.Lat), Number(this.xml_.Long));
+            this.clientLatLong_ = new GeoCoordinate(Number(this.xml_.Lat), Number(this.xml_.Long));
         } else {
             this.clientLatLong_ = DEFAULT_LAT_LONG;
         }

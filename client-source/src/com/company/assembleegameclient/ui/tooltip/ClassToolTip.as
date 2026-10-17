@@ -1,136 +1,151 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.ui.tooltip.ClassToolTip
-
 package com.company.assembleegameclient.ui.tooltip {
-import flash.display.Bitmap;
-
-import com.company.ui.SimpleText;
-import com.company.assembleegameclient.ui._return;
-import com.company.assembleegameclient.util.AnimatedCharLibrary;
-import com.company.assembleegameclient.util.AnimatedChar;
-import com.company.assembleegameclient.util.MaskedImage;
-import com.company.assembleegameclient.util.TextureRedrawer;
-
-import flash.display.BitmapData;
-
-import com.company.util._G_;
-
-import flash.geom.ColorTransform;
-import flash.filters.DropShadowFilter;
-
-import com.company.assembleegameclient.util.FameUtil;
-import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.assembleegameclient.appengine.CharListEvent;
 import com.company.assembleegameclient.appengine.ClassStats;
+import com.company.assembleegameclient.objects.ObjectLibrary;
+import com.company.assembleegameclient.ui._return;
+import com.company.assembleegameclient.util.AnimatedChar;
+import com.company.assembleegameclient.util.AnimatedCharLibrary;
+import com.company.assembleegameclient.util.MaskedImage;
+import com.company.assembleegameclient.util.TextureRedrawer;
+import com.company.ui.SimpleText;
+import com.company.util.BitmapEffectCache;
+
+import flash.display.Bitmap;
+import flash.display.BitmapData;
+import flash.filters.DropShadowFilter;
+import flash.geom.ColorTransform;
 
 public class ClassToolTip extends ToolTip {
 
-    public function ClassToolTip(xml2:XML, server_list:CharListEvent, _0a_h_:ClassStats) {
-        var _local9:int;
-        var _local10:int;
-        var xml:XML;
-        var _local12:int;
-        var _local13:int;
-        super(0x2A2A2A, 1, 0xFFFFFF, 1);
-        var _local4:AnimatedChar = AnimatedCharLibrary.getAnimatedChar(String(xml2.AnimatedTexture.File), int(xml2.AnimatedTexture.Index));
-        var _j_h_:MaskedImage = _local4.imageFromDir(AnimatedChar.RIGHT, AnimatedChar.STAND, 0);
-        var _local6:int = ((4 / _j_h_.width()) * 100);
-        var bitmapData2:BitmapData = TextureRedrawer.redraw(_j_h_.image_, _local6, true, 0, 0);
-        var _local8:Boolean = server_list.isAvailable(int(xml2.@type));
-        if (!_local8) {
-            bitmapData2 = _G_._B_2(bitmapData2, new ColorTransform(0, 0, 0, 0.5, 0, 0, 0, 0));
-        }
-        this.portrait_ = new Bitmap();
-        this.portrait_.bitmapData = bitmapData2;
-        this.portrait_.x = -4;
-        this.portrait_.y = -4;
-        addChild(this.portrait_);
-        this.nameText_ = new SimpleText(13, 0xB3B3B3, false, 0, 0, "Myriad Pro");
-        this.nameText_.setBold(true);
-        this.nameText_.text = xml2.@id;
-        this.nameText_.updateMetrics();
-        this.nameText_.filters = [new DropShadowFilter(0, 0, 0)];
-        this.nameText_.x = 32;
-        this.nameText_.y = 6;
-        addChild(this.nameText_);
-        this.desc_ = new SimpleText(13, 0xB3B3B3, false, 174, 0, "Myriad Pro");
-        this.desc_.wordWrap = true;
-        this.desc_.multiline = true;
-        this.desc_.text = xml2.Description;
-        this.desc_.updateMetrics();
-        this.desc_.filters = [new DropShadowFilter(0, 0, 0)];
-        this.desc_.x = 8;
-        this.desc_.y = 40;
-        addChild(this.desc_);
-        this.divider_ = new _return(100, 0x2D2D2D);
-        this.divider_.x = 6;
-        this.divider_.y = height;
-        addChild(this.divider_);
-        if (_local8) {
-            _local9 = (((_0a_h_ == null)) ? 0 : _0a_h_.numStars());
-            this.statsText_ = new SimpleText(12, 6206769, false, 0, 0, "Myriad Pro");
-            this.statsText_.text = ((((((_local9 + " of " + FameUtil.STAR_THRESHOLDS.length + " C-Quests Completed\n") + "Best Level Achieved: ") + (((_0a_h_) != null) ? _0a_h_.bestLevel() : 0)) + "\n") + "Best Fame Achieved: ") + (((_0a_h_) != null) ? _0a_h_.bestFame() : 0));
-            this.statsText_.updateMetrics();
-            this.statsText_.filters = [new DropShadowFilter(0, 0, 0)];
-            this.statsText_.x = 8;
-            this.statsText_.y = (height - 2);
-            addChild(this.statsText_);
-            _local10 = FameUtil.nextStarFame((((_0a_h_ == null)) ? 0 : _0a_h_.bestFame()), 0);
-            if (_local10 > 0) {
-                this.nextGoalText_ = new SimpleText(10, 16549442, false, 174, 0, "Myriad Pro");
-                this.nextGoalText_.text = (((("Next Goal: Earn " + _local10) + " Fame\n") + "  with a ") + xml2.@id);
-                this.nextGoalText_.updateMetrics();
-                this.nextGoalText_.filters = [new DropShadowFilter(0, 0, 0)];
-                this.nextGoalText_.x = 8;
-                this.nextGoalText_.y = (height - 2);
-                addChild(this.nextGoalText_);
-            }
-        } else {
-            this.unlockText_ = new SimpleText(13, 0xB3B3B3, false, 174, 0, "Myriad Pro");
-            this.unlockText_.setBold(true);
-            this.unlockText_.text = "To Unlock:";
-            this.unlockText_.updateMetrics();
-            this.unlockText_.filters = [new DropShadowFilter(0, 0, 0)];
-            this.unlockText_.x = 8;
-            this.unlockText_.y = (height - 2);
-            addChild(this.unlockText_);
-            this.unlockText_ = new SimpleText(13, 16549442, false, 174, 0, "Myriad Pro");
-            this.unlockText_.wordWrap = false;
-            this.unlockText_.multiline = true;
-            for each (xml in xml2.UnlockLevel) {
-                _local12 = ObjectLibrary.idToType_[xml.toString()];
-                _local13 = int(xml.@level);
-                if (server_list.bestLevel(_local12) < int(xml.@level)) {
-                    if (this.unlockText_.text != "") {
-                        this.unlockText_.text = (this.unlockText_.text + "\n");
-                    }
-                    this.unlockText_.text = (this.unlockText_.text + ((("Reach Level " + _local13) + " with ") + ObjectLibrary.typeToDisplayId_[_local12]));
-                }
-            }
-            this.unlockText_.border = false;
-            this.unlockText_.updateMetrics();
-            this.unlockText_.filters = [new DropShadowFilter(0, 0, 0)];
-            this.unlockText_.x = 12;
-            this.unlockText_.y = (height - 4);
-            addChild(this.unlockText_);
-        }
-    }
+    private static const DIVIDER_COLOR:uint = 0x2D2D2D;
+    private static const STATS_COLOR:uint = 0x5EB531;
+    private static const GOAL_COLOR:uint = 0xFC8642;
+
     private var portrait_:Bitmap;
     private var nameText_:SimpleText;
     private var desc_:SimpleText;
     private var divider_:_return;
     private var statsText_:SimpleText;
-    private var unusedText_:SimpleText;
     private var unlockText_:SimpleText;
     private var nextGoalText_:SimpleText;
 
+    public function ClassToolTip(classXML:XML, charList:CharListEvent, classStats:ClassStats) {
+        super(0x2A2A2A, 1, 0xFFFFFF, 1);
+        var available:Boolean = charList.isAvailable(int(classXML.@type));
+
+        addPortrait(classXML, available);
+        addName(classXML);
+        addDescription(classXML);
+
+        divider_ = new _return(100, DIVIDER_COLOR);
+        divider_.x = 6;
+        divider_.y = height;
+        addChild(divider_);
+
+        if (available) {
+            addStats(classXML, classStats);
+        } else {
+            addUnlockRequirements(classXML, charList);
+        }
+    }
+
     override public function draw():void {
-        this.divider_._rs((width - 10), 0x2D2D2D);
+        divider_._rs(width - 10, DIVIDER_COLOR);
         super.draw();
     }
 
-}
-}//package com.company.assembleegameclient.ui.tooltip
+    private function addPortrait(classXML:XML, available:Boolean):void {
+        var animatedChar:AnimatedChar = AnimatedCharLibrary.getAnimatedChar(
+                String(classXML.AnimatedTexture.File), int(classXML.AnimatedTexture.Index));
+        var maskedImage:MaskedImage = animatedChar.imageFromDir(AnimatedChar.RIGHT, AnimatedChar.STAND, 0);
+        var scale:int = (4 / maskedImage.width()) * 100;
+        var bitmapData:BitmapData = TextureRedrawer.redraw(maskedImage.image_, scale, true, 0, 0);
+        if (!available) {
+            bitmapData = BitmapEffectCache.getColorTransformed(bitmapData, new ColorTransform(0, 0, 0, 0.5, 0, 0, 0, 0));
+        }
+        portrait_ = new Bitmap();
+        portrait_.bitmapData = bitmapData;
+        portrait_.x = -4;
+        portrait_.y = -4;
+        addChild(portrait_);
+    }
 
+    private function addName(classXML:XML):void {
+        nameText_ = new SimpleText(13, 0xB3B3B3, false, 0, 0, "Myriad Pro");
+        nameText_.setBold(true);
+        nameText_.text = classXML.@id;
+        nameText_.updateMetrics();
+        nameText_.filters = [new DropShadowFilter(0, 0, 0)];
+        nameText_.x = 32;
+        nameText_.y = 6;
+        addChild(nameText_);
+    }
+
+    private function addDescription(classXML:XML):void {
+        desc_ = new SimpleText(13, 0xB3B3B3, false, 174, 0, "Myriad Pro");
+        desc_.wordWrap = true;
+        desc_.multiline = true;
+        desc_.text = classXML.Description;
+        desc_.updateMetrics();
+        desc_.filters = [new DropShadowFilter(0, 0, 0)];
+        desc_.x = 8;
+        desc_.y = 40;
+        addChild(desc_);
+    }
+
+    private function addStats(classXML:XML, classStats:ClassStats):void {
+        statsText_ = new SimpleText(12, STATS_COLOR, false, 0, 0, "Myriad Pro");
+        statsText_.text = ClassStatsText.summary(classStats);
+        statsText_.updateMetrics();
+        statsText_.filters = [new DropShadowFilter(0, 0, 0)];
+        statsText_.x = 8;
+        statsText_.y = height - 2;
+        addChild(statsText_);
+
+        var goal:String = ClassStatsText.nextGoal(classStats, String(classXML.@id));
+        if (goal != null) {
+            nextGoalText_ = new SimpleText(10, GOAL_COLOR, false, 174, 0, "Myriad Pro");
+            nextGoalText_.text = goal;
+            nextGoalText_.updateMetrics();
+            nextGoalText_.filters = [new DropShadowFilter(0, 0, 0)];
+            nextGoalText_.x = 8;
+            nextGoalText_.y = height - 2;
+            addChild(nextGoalText_);
+        }
+    }
+
+    private function addUnlockRequirements(classXML:XML, charList:CharListEvent):void {
+        var label:SimpleText = new SimpleText(13, 0xB3B3B3, false, 174, 0, "Myriad Pro");
+        label.setBold(true);
+        label.text = "To Unlock:";
+        label.updateMetrics();
+        label.filters = [new DropShadowFilter(0, 0, 0)];
+        label.x = 8;
+        label.y = height - 2;
+        addChild(label);
+
+        var requirements:String = "";
+        for each (var unlock:XML in classXML.UnlockLevel) {
+            var requiredType:int = ObjectLibrary.idToType_[unlock.toString()];
+            var requiredLevel:int = int(unlock.@level);
+            if (charList.bestLevel(requiredType) < requiredLevel) {
+                if (requirements != "") {
+                    requirements += "\n";
+                }
+                requirements += "Reach Level " + requiredLevel + " with " + ObjectLibrary.typeToDisplayId_[requiredType];
+            }
+        }
+        unlockText_ = new SimpleText(13, GOAL_COLOR, false, 174, 0, "Myriad Pro");
+        unlockText_.wordWrap = false;
+        unlockText_.multiline = true;
+        unlockText_.text = requirements;
+        unlockText_.border = false;
+        unlockText_.updateMetrics();
+        unlockText_.filters = [new DropShadowFilter(0, 0, 0)];
+        unlockText_.x = 12;
+        unlockText_.y = height - 4;
+        addChild(unlockText_);
+    }
+
+}
+}

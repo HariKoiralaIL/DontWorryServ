@@ -67,7 +67,7 @@ public class InteractPanel extends Sprite {
             if (Math.abs(go.x_ - this.player_.x_) > MAX_DIST || Math.abs(go.y_ - this.player_.y_) > MAX_DIST) {
                 continue;
             }
-            var dist:Number = PointUtil._R_O_(go.x_, go.y_, this.player_.x_, this.player_.y_);
+            var dist:Number = PointUtil.distanceXY(go.x_, go.y_, this.player_.x_, this.player_.y_);
             if (dist < MAX_DIST && dist < closestDist) {
                 closestDist = dist;
                 closest = interactive;

@@ -25,7 +25,7 @@ package particleeffects {
             this.effectProps_ = props;
             this.angle_ = this.effectProps_.angleOffset;
             if (this.effectProps_.bitmapFile) {
-                this.bitmapData = AssetLibrary._xK_(this.effectProps_.bitmapFile, this.effectProps_.bitmapIndex);
+                this.bitmapData = AssetLibrary.getImageFromSet(this.effectProps_.bitmapFile, this.effectProps_.bitmapIndex);
                 this.bitmapData = TextureRedrawer.redraw(this.bitmapData, this.effectProps_.size, true, 0, 0);
             } else {
                 this.bitmapData = TextureRedrawer.redrawSolidSquare(this.effectProps_.color, this.effectProps_.size);

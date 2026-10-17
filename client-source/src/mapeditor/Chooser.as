@@ -27,7 +27,7 @@ internal class Chooser extends Sprite {
         this.outlineStroke_ = new GraphicsStroke(1, false, LineScaleMode.NORMAL, CapsStyle.NONE, JointStyle.ROUND, 3, this.outlineFill_);
         this.backgroundFill_ = new GraphicsSolidFill(0x363636, 1);
         this.path_ = new GraphicsPath(new Vector.<int>(), new Vector.<Number>());
-        this.graphicsData_ = new <IGraphicsData>[outlineStroke_, backgroundFill_, path_, GraphicHelper.END_FILL, GraphicHelper._H_B_];
+        this.graphicsData_ = new <IGraphicsData>[outlineStroke_, backgroundFill_, path_, GraphicHelper.END_FILL, GraphicHelper.NO_STROKE];
         super();
         this.layer_ = layer;
         this.drawBackground();
@@ -94,7 +94,7 @@ internal class Chooser extends Sprite {
     }
 
     private function drawBackground():void {
-        GraphicHelper._0L_6(this.path_);
+        GraphicHelper.clearPath(this.path_);
         GraphicHelper.drawUI(0, 0, WIDTH, HEIGHT, 4, [1, 1, 1, 1], this.path_);
         graphics.drawGraphicsData(this.graphicsData_);
     }

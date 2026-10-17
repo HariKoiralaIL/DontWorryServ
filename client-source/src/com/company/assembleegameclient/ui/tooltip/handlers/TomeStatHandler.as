@@ -1,52 +1,42 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.ui.tooltip.handlers.TomeStatHandler
-
 package com.company.assembleegameclient.ui.tooltip.handlers {
 public class TomeStatHandler extends SlotStatHandler {
 
+    private static const PURIFICATION:String = "Tome of Purification";
+    private static const HOLY_PROTECTION:String = "Tome of Holy Protection";
+
     override protected function compareSlots(itemXML:XML, curItemXML:XML):void {
-        var nova:XMLList;
-        var otherNova:XMLList;
-        var tag:XML;
-        var range:int;
-        var otherRange:int;
-        var amount:int;
-        var otherAmount:int;
-        var wavg:Number;
-        var otherWavg:Number;
-        var effectText:String;
-        nova = itemXML.Activate.(text() == "HealNova");
-        otherNova = curItemXML.Activate.(text() == "HealNova");
+        var nova:XMLList = activateTags(itemXML, "HealNova");
+        var curNova:XMLList = activateTags(curItemXML, "HealNova");
         tooltipText = "";
-        if ((((nova.length() == 1)) && ((otherNova.length() == 1)))) {
-            range = int(itemXML.Activate.@range);
-            otherRange = int(curItemXML.Activate.@range);
-            amount = int(itemXML.Activate.@amount);
-            otherAmount = int(curItemXML.Activate.@amount);
-            wavg = ((0.5 * range) + (0.5 * amount));
-            otherWavg = ((0.5 * otherRange) + (0.5 * otherAmount));
-            if (itemXML.@id == "Tome of Purification") {
+        if (nova.length() == 1 && curNova.length() == 1) {
+            var range:int = int(itemXML.Activate.@range);
+            var curRange:int = int(curItemXML.Activate.@range);
+            var amount:int = int(itemXML.Activate.@amount);
+            var curAmount:int = int(curItemXML.Activate.@amount);
+            var score:Number = 0.5 * range + 0.5 * amount;
+            var curScore:Number = 0.5 * curRange + 0.5 * curAmount;
+            if (itemXML.@id == PURIFICATION) {
                 range = 6;
             }
-            effectText = (((amount + " HP within ") + range) + " sqrs\n");
-            tooltipText = (tooltipText + ("Party Heal: " + colorize(effectText, compareColor((wavg - otherWavg)))));
+            var text:String = amount + " HP within " + range + " sqrs\n";
+            tooltipText += "Party Heal: " + colorize(text, compareColor(score - curScore));
             handledXml[nova.toXMLString()] = true;
         }
-        if (itemXML.@id == "Tome of Purification") {
-            tag = itemXML.Activate.(text() == "RemoveNegativeConditions")[0];
-            tooltipText = (tooltipText + colorize("Removes negative conditions\n", PURPLE));
+        addUniqueEffect(itemXML);
+    }
+
+    private function addUniqueEffect(itemXML:XML):void {
+        var tag:XML;
+        if (itemXML.@id == PURIFICATION) {
+            tag = activateTags(itemXML, "RemoveNegativeConditions")[0];
+            tooltipText += colorize("Removes negative conditions\n", PURPLE);
             handledXml[tag.toXMLString()] = true;
-        } else {
-            if (itemXML.@id == "Tome of Holy Protection") {
-                tag = itemXML.Activate.(text() == "ConditionEffectSelf")[0];
-                tooltipText = (tooltipText + ("Effect on Self:\n" + colorize((("Armored for " + tag.@duration) + " secs\n"), PURPLE)));
-                handledXml[tag.toXMLString()] = true;
-            }
+        } else if (itemXML.@id == HOLY_PROTECTION) {
+            tag = activateTags(itemXML, "ConditionEffectSelf")[0];
+            tooltipText += selfEffectLine("Armored", tag.@duration, PURPLE);
+            handledXml[tag.toXMLString()] = true;
         }
     }
 
 }
-}//package com.company.assembleegameclient.ui.tooltip.handlers
-
+}

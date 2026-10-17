@@ -5,7 +5,7 @@ import com.company.assembleegameclient.util.TextureRedrawer;
 import com.company.assembleegameclient.util.AnimatedCharLibrary;
 import com.company.assembleegameclient.util.MaskedImage;
 import com.company.assembleegameclient.util.AnimatedChar;
-import com.company.util._G_;
+import com.company.util.BitmapEffectCache;
 
 import flash.display.BitmapData;
 import flash.geom.ColorTransform;
@@ -36,9 +36,9 @@ public class SavedCharacter {
         var image:BitmapData = TextureRedrawer.resize(frame.image_, frame.mask_, 100, false, tex1, tex2);
         image = TextureRedrawer.outlineGlow(image, 0, 0);
         if (!available) {
-            image = _G_._B_2(image, new ColorTransform(0, 0, 0, 0.5, 0, 0, 0, 0));
+            image = BitmapEffectCache.getColorTransformed(image, new ColorTransform(0, 0, 0, 0.5, 0, 0, 0, 0));
         } else if (!selected) {
-            image = _G_._B_2(image, new ColorTransform(0.75, 0.75, 0.75, 1, 0, 0, 0, 0));
+            image = BitmapEffectCache.getColorTransformed(image, new ColorTransform(0.75, 0.75, 0.75, 1, 0, 0, 0, 0));
         }
         return image;
     }

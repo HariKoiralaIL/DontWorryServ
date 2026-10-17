@@ -7,7 +7,7 @@ import client.ui.frames.TextInput;
 import com.company.assembleegameclient.appengine.AppEngineClient;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.ui.TextButton;
-import com.company.util._H_V_;
+import com.company.util.KeyCodes;
 
 import flash.events.Event;
 import flash.events.KeyboardEvent;
@@ -91,7 +91,7 @@ internal class SignInFrame extends Frame {
     }
 
     private function onKeyPressed(event:KeyboardEvent):void {
-        if (event.keyCode == _H_V_.ENTER) {
+        if (event.keyCode == KeyCodes.ENTER) {
             onSignIn(null);
         }
     }

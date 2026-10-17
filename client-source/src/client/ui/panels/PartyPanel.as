@@ -71,9 +71,9 @@ public class PartyPanel extends Panel {
                 }
                 if (!member.starred_) {
                     if (tint != null) {
-                        tint.concat(MoreColorUtil._3f);
+                        tint.concat(MoreColorUtil.GRAY_60);
                     } else {
-                        tint = MoreColorUtil._3f;
+                        tint = MoreColorUtil.GRAY_60;
                     }
                 }
             }

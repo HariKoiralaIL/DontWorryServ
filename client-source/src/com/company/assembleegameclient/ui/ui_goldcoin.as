@@ -36,7 +36,7 @@ public class ui_goldcoin extends Sprite {
         this._ho = new SimpleText(_Y_J_, 0xFFFFFF, false, 0, 0, "Myriad Pro");
         this._ho.filters = [new DropShadowFilter(0, 0, 0, 1, 4, 4, 2)];
         addChild(this._ho);
-        var _local2:BitmapData = AssetLibrary._xK_("lofiObj3", 225);
+        var _local2:BitmapData = AssetLibrary.getImageFromSet("lofiObj3", 225);
         _local2 = TextureRedrawer.redraw(_local2, 40, true, 0, 0);
         this._0_V_ = new Bitmap(_local2);
         addChild(this._0_V_);

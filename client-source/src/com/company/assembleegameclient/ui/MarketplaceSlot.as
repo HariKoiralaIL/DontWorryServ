@@ -62,7 +62,7 @@ package com.company.assembleegameclient.ui {
       }
       this.fill_.color = GraphicHelper.darkenColor(_local1, 25);
       this.graphicsData_ = new <IGraphicsData>[this.fill_, this.path_, GraphicHelper.END_FILL];
-      GraphicHelper._0L_6(this.path_);
+      GraphicHelper.clearPath(this.path_);
       GraphicHelper.drawUI(0, 0, WIDTH, HEIGHT, 6, [1, 1, 1, 1], this.path_);
       graphics.clear();
       graphics.drawGraphicsData(this.graphicsData_);

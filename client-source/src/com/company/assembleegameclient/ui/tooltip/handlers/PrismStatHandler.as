@@ -1,28 +1,17 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.ui.tooltip.handlers.PrismStatHandler
-
 package com.company.assembleegameclient.ui.tooltip.handlers {
 public class PrismStatHandler extends SlotStatHandler {
 
-    private var _S_y:XMLList;
-    private var curDecoy:XMLList;
-
     override protected function compareSlots(itemXML:XML, curItemXML:XML):void {
-        var duration:Number;
-        var otherDuration:Number;
-        this._S_y = itemXML.Activate.(text() == "Decoy");
-        this.curDecoy = curItemXML.Activate.(text() == "Decoy");
+        var decoy:XMLList = activateTags(itemXML, "Decoy");
+        var curDecoy:XMLList = activateTags(curItemXML, "Decoy");
         tooltipText = "";
-        if ((((this._S_y.length() == 1)) && ((this.curDecoy.length() == 1)))) {
-            duration = Number(this._S_y[0].@duration);
-            otherDuration = Number(this.curDecoy[0].@duration);
-            tooltipText = (tooltipText + ("Decoy: " + colorize((duration.toString() + " secs\n"), compareColor((duration - otherDuration)))));
-            handledXml[this._S_y[0].toXMLString()] = true;
+        if (decoy.length() == 1 && curDecoy.length() == 1) {
+            var duration:Number = Number(decoy[0].@duration);
+            var curDuration:Number = Number(curDecoy[0].@duration);
+            tooltipText += "Decoy: " + colorize(duration + " secs\n", compareColor(duration - curDuration));
+            handledXml[decoy[0].toXMLString()] = true;
         }
     }
 
 }
-}//package com.company.assembleegameclient.ui.tooltip.handlers
-
+}

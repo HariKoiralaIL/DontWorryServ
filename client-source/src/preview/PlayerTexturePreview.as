@@ -3,7 +3,7 @@ import com.company.assembleegameclient.util.TextureRedrawer;
 import com.company.assembleegameclient.util.AnimatedCharLibrary;
 import com.company.assembleegameclient.util.MaskedImage;
 import com.company.assembleegameclient.util.AnimatedChar;
-import com.company.util._kp;
+import com.company.util.ImageSet;
 
 import flash.display.Bitmap;
 import flash.display.BitmapData;
@@ -15,8 +15,8 @@ public class PlayerTexturePreview extends PreviewBase {
     private static const PLAYER_IDS:Vector.<int> = new <int>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
     private static var iconsEmbed_:Class = TexturePreviewIcons;
-    private static var icons:_kp = function ():_kp {
-        var set:* = new _kp();
+    private static var icons:ImageSet = function ():ImageSet {
+        var set:* = new ImageSet();
         set.addFromBitmapData(new iconsEmbed_().bitmapData, 16, 16);
         return set;
     }();
@@ -35,38 +35,38 @@ public class PlayerTexturePreview extends PreviewBase {
 
     public function PlayerTexturePreview(w:int, h:int) {
         super(w, h);
-        nextButton = addIcon(new Bitmap(icons._W_u[1]), nextPlayer);
+        nextButton = addIcon(new Bitmap(icons.images[1]), nextPlayer);
         nextButton.x = w_ - nextButton.width - 5;
         nextButton.y = h_ - nextButton.height - 5;
-        prevButton = addIcon(new Bitmap(icons._W_u[0]), prevPlayer);
+        prevButton = addIcon(new Bitmap(icons.images[0]), prevPlayer);
         prevButton.x = nextButton.x - prevButton.width - 5;
         prevButton.y = h_ - prevButton.height - 5;
-        rightButton = addIcon(new Bitmap(icons._W_u[3]), function ():void {
+        rightButton = addIcon(new Bitmap(icons.images[3]), function ():void {
             dir_ = AnimatedChar.RIGHT;
         });
         rightButton.x = w_ - rightButton.width - 100;
         rightButton.y = h_ - rightButton.height - 5;
-        downButton = addIcon(new Bitmap(icons._W_u[4]), function ():void {
+        downButton = addIcon(new Bitmap(icons.images[4]), function ():void {
             dir_ = AnimatedChar.DOWN;
         });
         downButton.x = rightButton.x - downButton.width - 5;
         downButton.y = h_ - downButton.height - 5;
-        upButton = addIcon(new Bitmap(icons._W_u[2]), function ():void {
+        upButton = addIcon(new Bitmap(icons.images[2]), function ():void {
             dir_ = AnimatedChar.UP;
         });
         upButton.x = downButton.x;
         upButton.y = downButton.y - upButton.height - 5;
-        leftButton = addIcon(new Bitmap(icons._W_u[5]), function ():void {
+        leftButton = addIcon(new Bitmap(icons.images[5]), function ():void {
             dir_ = AnimatedChar.LEFT;
         });
         leftButton.x = downButton.x - leftButton.width - 5;
         leftButton.y = h_ - leftButton.height - 5;
-        tex1Button = addIcon(new Bitmap(icons._W_u[6]), function ():void {
+        tex1Button = addIcon(new Bitmap(icons.images[6]), function ():void {
             useTex1_ = true;
         });
         tex1Button.x = 5;
         tex1Button.y = h_ - tex1Button.height - 5;
-        tex2Button = addIcon(new Bitmap(icons._W_u[7]), function ():void {
+        tex2Button = addIcon(new Bitmap(icons.images[7]), function ():void {
             useTex1_ = false;
         });
         tex2Button.x = tex1Button.x + tex1Button.width + 5;

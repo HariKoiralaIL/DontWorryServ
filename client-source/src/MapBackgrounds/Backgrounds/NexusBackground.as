@@ -31,7 +31,7 @@ public class NexusBackground extends Background {
         this._co = new Vector.<Island>();
         this.graphicsData_ = new Vector.<IGraphicsData>();
         this.bitmapFill_ = new GraphicsBitmapFill(null, new Matrix(), true, false);
-        this.path_ = new GraphicsPath(GraphicHelper._H_2, new Vector.<Number>());
+        this.path_ = new GraphicsPath(GraphicHelper.RECT_COMMANDS, new Vector.<Number>());
         super();
         this._T_k = new BitmapData(0x0400, 0x0400, false, 0);
         this._T_k.perlinNoise(0x0400, 0x0400, 8, Math.random(), true, true, BitmapDataChannel.BLUE, false, null);
@@ -101,7 +101,7 @@ class Island {
 
     public function Island(_arg1:Number, _arg2:Number, _arg3:int):void {
         this.bitmapFill_ = new GraphicsBitmapFill(null, new Matrix(), true, false);
-        this.path_ = new GraphicsPath(GraphicHelper._H_2, new Vector.<Number>());
+        this.path_ = new GraphicsPath(GraphicHelper.RECT_COMMANDS, new Vector.<Number>());
         super();
         this.center_ = new Point(_arg1, _arg2);
         this.startTime_ = _arg3;

@@ -9,7 +9,7 @@ import com.company.assembleegameclient.map.GroundLibrary;
 import com.company.assembleegameclient.map.RegionLibrary;
 import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.util.IntPoint;
-import com.company.util._O_m;
+import com.company.util.DisplayUtil;
 import com.hurlant.util.Base64;
 
 import editorcommands.CommandEvent;
@@ -266,9 +266,9 @@ public class MapEditor extends BaseScreen {
 
     private function setChooserShown(chooser:Chooser, shown:Boolean):void {
         if (shown) {
-            _O_m._041(this, chooser);
+            DisplayUtil.safeAddChild(this, chooser);
         } else {
-            _O_m._03d(this, chooser);
+            DisplayUtil.safeRemoveChild(this, chooser);
         }
     }
 

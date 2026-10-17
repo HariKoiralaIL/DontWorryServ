@@ -1,44 +1,24 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.ui.tooltip.handlers.ScepterStatHandler
-
 package com.company.assembleegameclient.ui.tooltip.handlers {
 public class ScepterStatHandler extends SlotStatHandler {
 
     override protected function compareSlots(itemXML:XML, curItemXML:XML):void {
-        var result:XMLList;
-        var otherResult:XMLList;
-        var damage:int;
-        var otherDamage:int;
-        var textColor:String;
-        var targets:int;
-        var otherTargets:int;
-        var condition:String;
-        var duration:Number;
-        var compositeStr:String;
-        var htmlStr:String;
-        result = itemXML.Activate.(text() == "Lightning");
-        otherResult = curItemXML.Activate.(text() == "Lightning");
+        var lightning:XMLList = activateTags(itemXML, "Lightning");
+        var curLightning:XMLList = activateTags(curItemXML, "Lightning");
         tooltipText = "";
-        if ((((result.length() == 1)) && ((otherResult.length() == 1)))) {
-            damage = int(result[0].@totalDamage);
-            otherDamage = int(otherResult[0].@totalDamage);
-            textColor = compareColor((damage - otherDamage));
-            targets = int(result[0].@maxTargets);
-            otherTargets = int(otherResult[0].@maxTargets);
-            tooltipText = (tooltipText + ("Lightning: " + colorize((((damage + " to ") + targets) + " targets\n"), compareColor((damage - otherDamage)))));
-            handledXml[result[0].toXMLString()] = true;
+        if (lightning.length() == 1 && curLightning.length() == 1) {
+            var damage:int = int(lightning[0].@totalDamage);
+            var curDamage:int = int(curLightning[0].@totalDamage);
+            var targets:int = int(lightning[0].@maxTargets);
+            tooltipText += "Lightning: " + colorize(damage + " to " + targets + " targets\n", compareColor(damage - curDamage));
+            handledXml[lightning[0].toXMLString()] = true;
         }
         if (itemXML.Activate.@condEffect) {
-            condition = itemXML.Activate.@condEffect;
-            duration = itemXML.Activate.@condDuration;
-            compositeStr = ((((" " + condition) + " for ") + duration) + " secs\n");
-            htmlStr = ("Shot Effect:\n" + colorize(compositeStr, YELLOW));
-            tooltipText = (tooltipText + htmlStr);
+            var condition:String = itemXML.Activate.@condEffect;
+            var duration:Number = itemXML.Activate.@condDuration;
+            var text:String = " " + condition + " for " + duration + " secs\n";
+            tooltipText += "Shot Effect:\n" + colorize(text, YELLOW);
         }
     }
 
 }
-}//package com.company.assembleegameclient.ui.tooltip.handlers
-
+}

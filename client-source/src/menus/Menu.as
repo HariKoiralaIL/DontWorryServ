@@ -1,7 +1,7 @@
 package menus
 {
     import com.company.util.GraphicHelper;
-    import com.company.util._E_I_;
+    import com.company.util.RectUtil;
 
     import flash.display.CapsStyle;
     import flash.display.GraphicsPath;
@@ -36,7 +36,7 @@ package menus
             this.outlineFill_ = new GraphicsSolidFill(0, 1);
             this.outlineStroke_ = new GraphicsStroke(1, false, LineScaleMode.NORMAL, CapsStyle.NONE, JointStyle.ROUND, 3, this.outlineFill_);
             this.path_ = new GraphicsPath(new Vector.<int>(), new Vector.<Number>());
-            this.graphicsData_ = new <IGraphicsData>[this.outlineStroke_, this.backgroundFill_, this.path_, GraphicHelper.END_FILL, GraphicHelper._H_B_];
+            this.graphicsData_ = new <IGraphicsData>[this.outlineStroke_, this.backgroundFill_, this.path_, GraphicHelper.END_FILL, GraphicHelper.NO_STROKE];
             super();
             this.backgroundColor_ = backgroundColor;
             this.outlineColor_ = outlineColor;
@@ -67,7 +67,7 @@ package menus
             this.backgroundFill_.color = this.backgroundColor_;
             this.outlineFill_.color = this.outlineColor_;
             graphics.clear();
-            GraphicHelper._0L_6(this.path_);
+            GraphicHelper.clearPath(this.path_);
             GraphicHelper.drawUI(-6, -6, Math.max(154, width + 12), height + 12, 4, [1, 1, 1, 1], this.path_);
             graphics.drawGraphicsData(this.graphicsData_);
         }
@@ -93,7 +93,7 @@ package menus
                 return;
             }
             var bounds:Rectangle = getRect(stage);
-            var distance:Number = _E_I_._1K_(bounds, stage.mouseX, stage.mouseY);
+            var distance:Number = RectUtil.distanceToPoint(bounds, stage.mouseX, stage.mouseY);
             if (distance > 40)
             {
                 this.remove();

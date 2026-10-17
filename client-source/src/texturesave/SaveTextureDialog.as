@@ -58,7 +58,7 @@ package texturesave
             this.outlineStroke_ = new GraphicsStroke(1, false, LineScaleMode.NORMAL, CapsStyle.NONE, JointStyle.ROUND, 3, this.outlineFill_);
             this.backgroundFill_ = new GraphicsSolidFill(0x2A2A2A, 1);
             this.path_ = new GraphicsPath(new Vector.<int>(), new Vector.<Number>());
-            this.graphicsData_ = new <IGraphicsData>[this.outlineStroke_, this.backgroundFill_, this.path_, GraphicHelper.END_FILL, GraphicHelper._H_B_];
+            this.graphicsData_ = new <IGraphicsData>[this.outlineStroke_, this.backgroundFill_, this.path_, GraphicHelper.END_FILL, GraphicHelper.NO_STROKE];
             super();
             this.bitmapData_ = bitmapData;
 
@@ -160,7 +160,7 @@ package texturesave
 
         private function onAddedToStage(event:Event):void
         {
-            GraphicHelper._0L_6(this.path_);
+            GraphicHelper.clearPath(this.path_);
             GraphicHelper.drawUI(0, 0, WIDTH, this.box_.height + 20, 4, [1, 1, 1, 1], this.path_);
             this.background_ = new Shape();
             var g:Graphics = this.background_.graphics;

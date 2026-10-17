@@ -96,7 +96,7 @@ public class StatRow extends Sprite {
         if (this.tooltipText == null) {
             return;
         }
-        sharedTooltip._02C_(this.tooltipText);
+        sharedTooltip.setDescription(this.tooltipText);
         stage.addChild(sharedTooltip);
     }
 

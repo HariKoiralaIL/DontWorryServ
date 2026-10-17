@@ -1,6 +1,6 @@
 package com.company.assembleegameclient.parameters {
-import com.company.util._0A_s;
-import com.company.util._H_V_;
+import com.company.util.DateUtil;
+import com.company.util.KeyCodes;
 
 import flash.display.DisplayObject;
 import flash.net.LocalConnection;
@@ -98,7 +98,7 @@ public class Parameters {
     public static function setKey(action:String, keyCode:uint):void {
         for (var other:String in keyActions_) {
             if (data_[other] == keyCode) {
-                data_[other] = _H_V_._0F_r; // unbound
+                data_[other] = KeyCodes.UNSET; // unbound
             }
         }
         data_[action] = keyCode;
@@ -111,41 +111,41 @@ public class Parameters {
     }
 
     private static function initKeyBindings():void {
-        defaultKey("moveLeft", _H_V_.A);
-        defaultKey("moveRight", _H_V_.D);
-        defaultKey("moveUp", _H_V_.W);
-        defaultKey("moveDown", _H_V_.S);
-        defaultKey("rotateLeft", _H_V_.Q);
-        defaultKey("rotateRight", _H_V_.E);
-        defaultKey("useSpecial", _H_V_.SPACE);
-        defaultKey("interact", _H_V_.NUMBER_0);
-        defaultKey("useInvSlot1", _H_V_.NUMBER_1);
-        defaultKey("useInvSlot2", _H_V_.NUMBER_2);
-        defaultKey("useInvSlot3", _H_V_.NUMBER_3);
-        defaultKey("useInvSlot4", _H_V_.NUMBER_4);
-        defaultKey("useInvSlot5", _H_V_.NUMBER_5);
-        defaultKey("useInvSlot6", _H_V_.NUMBER_6);
-        defaultKey("useInvSlot7", _H_V_.NUMBER_7);
-        defaultKey("useInvSlot8", _H_V_.NUMBER_8);
-        defaultKey("escapeToNexus", _H_V_.INSERT);
-        defaultKey("escapeToNexus2", _H_V_.F5);
-        defaultKey("autofireToggle", _H_V_.I);
-        defaultKey("scrollChatUp", _H_V_._R_0);
-        defaultKey("scrollChatDown", _H_V_._xs);
-        defaultKey("miniMapZoomOut", _H_V_._0F_K_);
-        defaultKey("miniMapZoomIn", _H_V_._0E_f);
-        defaultKey("resetToDefaultCameraAngle", _H_V_.R);
-        defaultKey("togglePerformanceStats", _H_V_._0F_r);
-        defaultKey("options", _H_V_.O);
-        defaultKey("toggleCentering", _H_V_._0F_r);
-        defaultKey("chat", _H_V_.ENTER);
-        defaultKey("chatCommand", _H_V_._jE_);
-        defaultKey("tell", _H_V_.TAB);
-        defaultKey("guildChat", _H_V_.G);
-        defaultKey("partyChat", _H_V_.P);
-        defaultKey("toggleFullscreen", _H_V_._0F_r);
-        defaultKey("switchTabs", _H_V_.B);
-        defaultKey("giveItem", _H_V_._0F_r);
+        defaultKey("moveLeft", KeyCodes.A);
+        defaultKey("moveRight", KeyCodes.D);
+        defaultKey("moveUp", KeyCodes.W);
+        defaultKey("moveDown", KeyCodes.S);
+        defaultKey("rotateLeft", KeyCodes.Q);
+        defaultKey("rotateRight", KeyCodes.E);
+        defaultKey("useSpecial", KeyCodes.SPACE);
+        defaultKey("interact", KeyCodes.NUMBER_0);
+        defaultKey("useInvSlot1", KeyCodes.NUMBER_1);
+        defaultKey("useInvSlot2", KeyCodes.NUMBER_2);
+        defaultKey("useInvSlot3", KeyCodes.NUMBER_3);
+        defaultKey("useInvSlot4", KeyCodes.NUMBER_4);
+        defaultKey("useInvSlot5", KeyCodes.NUMBER_5);
+        defaultKey("useInvSlot6", KeyCodes.NUMBER_6);
+        defaultKey("useInvSlot7", KeyCodes.NUMBER_7);
+        defaultKey("useInvSlot8", KeyCodes.NUMBER_8);
+        defaultKey("escapeToNexus", KeyCodes.INSERT);
+        defaultKey("escapeToNexus2", KeyCodes.F5);
+        defaultKey("autofireToggle", KeyCodes.I);
+        defaultKey("scrollChatUp", KeyCodes.PAGE_UP);
+        defaultKey("scrollChatDown", KeyCodes.PAGE_DOWN);
+        defaultKey("miniMapZoomOut", KeyCodes.MINUS);
+        defaultKey("miniMapZoomIn", KeyCodes.EQUAL);
+        defaultKey("resetToDefaultCameraAngle", KeyCodes.R);
+        defaultKey("togglePerformanceStats", KeyCodes.UNSET);
+        defaultKey("options", KeyCodes.O);
+        defaultKey("toggleCentering", KeyCodes.UNSET);
+        defaultKey("chat", KeyCodes.ENTER);
+        defaultKey("chatCommand", KeyCodes.SLASH);
+        defaultKey("tell", KeyCodes.TAB);
+        defaultKey("guildChat", KeyCodes.G);
+        defaultKey("partyChat", KeyCodes.P);
+        defaultKey("toggleFullscreen", KeyCodes.UNSET);
+        defaultKey("switchTabs", KeyCodes.B);
+        defaultKey("giveItem", KeyCodes.UNSET);
     }
 
     private static function initSettings():void {
@@ -164,7 +164,7 @@ public class Parameters {
         defaultSetting("fullscreenMode", true);
         defaultSetting("showProtips", true);
         defaultSetting("protipIndex", 0);
-        defaultSetting("joinDate", _0A_s._mP_());
+        defaultSetting("joinDate", DateUtil.formatPacificTime());
         defaultSetting("lastDailyAnalytics", null);
         defaultSetting("allowRotation", false);
         defaultSetting("charIdUseMap", {});

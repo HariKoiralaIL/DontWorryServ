@@ -42,7 +42,7 @@ public class ui_trading extends Sprite {
         this._0y = new GraphicsStroke(2, false, LineScaleMode.NORMAL, CapsStyle.NONE, JointStyle.ROUND, 3, this.outlineFill_);
         this.graphicsData_ = new <IGraphicsData>[_pL_, path_, GraphicHelper.END_FILL];
         this._jN_ = new <IGraphicsData>[_0J_i, path_, GraphicHelper.END_FILL];
-        this.outlineGraphicsData_ = new <IGraphicsData>[_0y, path_, GraphicHelper._H_B_];
+        this.outlineGraphicsData_ = new <IGraphicsData>[_0y, path_, GraphicHelper.NO_STROKE];
         super();
         this._L_v = getTimer();
         this.text_ = new SimpleText(_arg1, 0x363636, false, 0, 0, "Myriad Pro");
@@ -51,7 +51,7 @@ public class ui_trading extends Sprite {
         this.text_.updateMetrics();
         this.w_ = (((_arg2) != 0) ? _arg2 : (this.text_.width + 12));
         this.h_ = (this.text_.textHeight + 8);
-        GraphicHelper._0L_6(this.path_);
+        GraphicHelper.clearPath(this.path_);
         GraphicHelper.drawUI(0, 0, this.w_, (this.text_.textHeight + 8), 4, [1, 1, 1, 1], this.path_);
         this.text_.x = (((this.w_ / 2) - (this.text_.textWidth / 2)) - 2);
         this.text_.y = 1;

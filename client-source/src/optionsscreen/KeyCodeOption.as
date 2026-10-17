@@ -26,7 +26,7 @@ public class KeyCodeOption extends BaseOption {
     /** Greys the option out and stops it reacting to the mouse. */
     public function setDisabled(disabled:Boolean):void {
         this.disabled = disabled;
-        transform.colorTransform = this.disabled ? MoreColorUtil._3f : MoreColorUtil.identity;
+        transform.colorTransform = this.disabled ? MoreColorUtil.GRAY_60 : MoreColorUtil.identity;
         mouseEnabled = !this.disabled;
         mouseChildren = !this.disabled;
     }

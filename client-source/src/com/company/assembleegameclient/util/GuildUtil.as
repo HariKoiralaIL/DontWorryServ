@@ -32,26 +32,26 @@ public class GuildUtil {
         var icon:BitmapData;
         switch (rank) {
             case INITIATE:
-                icon = AssetLibrary._xK_("lofiInterfaceBig", 20);
+                icon = AssetLibrary.getImageFromSet("lofiInterfaceBig", 20);
                 break;
             case MEMBER:
-                icon = AssetLibrary._xK_("lofiInterfaceBig", 19);
+                icon = AssetLibrary.getImageFromSet("lofiInterfaceBig", 19);
                 break;
             case OFFICER:
-                icon = AssetLibrary._xK_("lofiInterfaceBig", 18);
+                icon = AssetLibrary.getImageFromSet("lofiInterfaceBig", 18);
                 break;
             case LEADER:
-                icon = AssetLibrary._xK_("lofiInterfaceBig", 17);
+                icon = AssetLibrary.getImageFromSet("lofiInterfaceBig", 17);
                 break;
             case FOUNDER:
-                icon = AssetLibrary._xK_("lofiInterfaceBig", 16);
+                icon = AssetLibrary.getImageFromSet("lofiInterfaceBig", 16);
                 break;
         }
         return TextureRedrawer.redraw(icon, size, true, 0, 0, true);
     }
 
     public static function getGuildFameIcon(size:int):BitmapData {
-        var icon:BitmapData = AssetLibrary._xK_("lofiObj3", 226);
+        var icon:BitmapData = AssetLibrary.getImageFromSet("lofiObj3", 226);
         return TextureRedrawer.redraw(icon, size, true, 0, 0, true);
     }
 

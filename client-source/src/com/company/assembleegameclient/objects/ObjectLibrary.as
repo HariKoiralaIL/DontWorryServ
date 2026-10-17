@@ -182,7 +182,7 @@ package com.company.assembleegameclient.objects {
             var _local6:TextureData = typeToTextureData_[type];
             var _local7:BitmapData = _local6.getTexture();
             if (_local7 == null) {
-                _local7 = AssetLibrary._xK_("lofiObj3", 0xFF);
+                _local7 = AssetLibrary.getImageFromSet("lofiObj3", 0xFF);
             }
             var _local8:BitmapData = _local6.mask_;
             if (_local8 == null) {
@@ -199,9 +199,9 @@ package com.company.assembleegameclient.objects {
         public static function getRedrawnTextureFromTypeCustom(type:int, size:int, includeBottom:Boolean, textureObj:Object, useCaching:Boolean = true, scaleValue:Number = 5, glowColor:uint = 0, glowAlpha:uint = 0):BitmapData {
             if (scaleValue == 0) { scaleValue = getTagGlow(type); if (scaleValue != 0 && glowColor == 0) glowColor = 1; }
             var _local6:TextureData = typeToTextureData_[type];
-            var _local7:BitmapData = AssetLibrary._xK_(textureObj.TextureFile, int(textureObj.TextureIndex));
+            var _local7:BitmapData = AssetLibrary.getImageFromSet(textureObj.TextureFile, int(textureObj.TextureIndex));
             if (_local7 == null) {
-                _local7 = AssetLibrary._xK_("lofiObj3", 0xFF);
+                _local7 = AssetLibrary.getImageFromSet("lofiObj3", 0xFF);
             }
             var _local8:BitmapData = _local6.mask_;
             if (_local8 == null) {
@@ -309,7 +309,7 @@ package com.company.assembleegameclient.objects {
             }
             var _local4:Vector.<String> = new Vector.<String>();
             for each (_local5 in playerChars_) {
-                _local6 = ConversionUtil._04n(_local5.SlotTypes);
+                _local6 = ConversionUtil.toIntVector(_local5.SlotTypes);
                 _local7 = 0;
                 while (_local7 < _local6.length) {
                     if (_local6[_local7] == _local3) {

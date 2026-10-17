@@ -29,7 +29,7 @@ package com.company.assembleegameclient.objects {
     import com.company.util.MoreColorUtil;
     import com.company.util.PointUtil;
     import com.company.util.Trig;
-    import com.company.util._G_;
+    import com.company.util.BitmapEffectCache;
 
     import flash.display.BitmapData;
     import flash.display.GraphicsPath;
@@ -80,7 +80,7 @@ package com.company.assembleegameclient.objects {
             _local5.name_ = name;
             _local5.level_ = int(xml.Level);
             _local5.exp_ = int(xml.Exp);
-            _local5.equipment_ = ConversionUtil._04n(xml._Equipment);
+            _local5.equipment_ = ConversionUtil.toIntVector(xml._Equipment);
             _local5.maxHP_ = int(xml.MaxHitPoints);
             _local5.HP_ = int(xml.HitPoints);
             _local5.maxMP_ = int(xml.MaxMagicPoints);
@@ -101,7 +101,7 @@ package com.company.assembleegameclient.objects {
 
         private static function getFacing(angle:Number, camera:GameCamera):int {
             var _local4:int;
-            var _local3:Number = Trig._V_r((angle - camera.angleRad_));
+            var _local3:Number = Trig.normalizeRadians((angle - camera.angleRad_));
             if ((((_local3 > (Math.PI / 4))) && ((_local3 < ((3 * Math.PI) / 4))))) {
                 _local4 = AnimatedChar.DOWN;
             } else {
@@ -314,7 +314,7 @@ package com.company.assembleegameclient.objects {
             }
             var _local2:BitmapData = new BitmapData((nameText.width + 20), 64, true, 0);
             _local2.draw(nameText, NAME_MATRIX);
-            _local2.applyFilter(_local2, _local2.rect, PointUtil._P_5, new GlowFilter(0, 1, 3, 3, 2, 1));
+            _local2.applyFilter(_local2, _local2.rect, PointUtil.ORIGIN, new GlowFilter(0, 1, 3, 3, 2, 1));
             var _local3:Sprite = FameUtil.numStarsToIcon(this.numStars_);
             _local2.draw(_local3, STAR_MATRIX);
             return (_local2);
@@ -405,7 +405,7 @@ package com.company.assembleegameclient.objects {
                 _local12 = (int((Math.abs(Math.sin((time / 200))) * 10)) / 10);
                 _local13 = 128;
                 _local14 = new ColorTransform(1, 1, 1, 1, (_local12 * _local13), (-(_local12) * _local13), (-(_local12) * _local13));
-                _local8 = _G_._B_2(_local8, _local14);
+                _local8 = BitmapEffectCache.getColorTransformed(_local8, _local14);
             }
             var _local9:BitmapData = textureCache_[_local8];
             if (_local9 == null) {
@@ -413,13 +413,13 @@ package com.company.assembleegameclient.objects {
                 textureCache_[_local8] = _local9;
             }
             if (((isPaused()) || (isStasis()))) {
-                _local9 = _G_._R_9(_local9, GRAYSCALE_FILTER);
+                _local9 = BitmapEffectCache.getFiltered(_local9, GRAYSCALE_FILTER);
             } else {
                 if (isInvisible()) {
                     if (this != this.map_.player_ && this.map_.player_.canBeHitBy(this)) {
-                        _local9 = _G_._0C_m(_local9, 0);
+                        _local9 = BitmapEffectCache.getWithAlpha(_local9, 0);
                     } else {
-                        _local9 = _G_._0C_m(_local9, 0.4);
+                        _local9 = BitmapEffectCache.getWithAlpha(_local9, 0.4);
                     }
                 }
             }
@@ -885,13 +885,13 @@ package com.company.assembleegameclient.objects {
             var _local9:Number;
             if (this.breathPath_ == null) {
                 this.breathBgFill_ = new GraphicsSolidFill();
-                this.breathBgPath_ = new GraphicsPath(GraphicHelper._H_2, new Vector.<Number>());
+                this.breathBgPath_ = new GraphicsPath(GraphicHelper.RECT_COMMANDS, new Vector.<Number>());
                 this.breathFill_ = new GraphicsSolidFill(2542335);
-                this.breathPath_ = new GraphicsPath(GraphicHelper._H_2, new Vector.<Number>());
+                this.breathPath_ = new GraphicsPath(GraphicHelper.RECT_COMMANDS, new Vector.<Number>());
             }
             if (this.breath_ <= Parameters._E_S_) {
                 _local8 = ((Parameters._E_S_ - this.breath_) / Parameters._E_S_);
-                this.breathBgFill_.color = MoreColorUtil._oH_(0x545454, 0xFF0000, (Math.abs(Math.sin((time / 300))) * _local8));
+                this.breathBgFill_.color = MoreColorUtil.lerpColor(0x545454, 0xFF0000, (Math.abs(Math.sin((time / 300))) * _local8));
             } else {
                 this.breathBgFill_.color = 0x545454;
             }
@@ -917,7 +917,7 @@ package com.company.assembleegameclient.objects {
 
         protected function getPlayerHallucinationTexture():BitmapData {
             if (this.playerHallucinationTex_ == null) {
-                this.playerHallucinationTex_ = AssetLibrary._xK_("lofiChar8x8", int((Math.random() * 239)));
+                this.playerHallucinationTex_ = AssetLibrary.getImageFromSet("lofiChar8x8", int((Math.random() * 239)));
             }
             return (this.playerHallucinationTex_);
         }
@@ -932,7 +932,7 @@ package com.company.assembleegameclient.objects {
                 this.merchLookupKey_.y_ = (y_ + (_local2 * _local3.y));
                 _local4 = map_.merchLookup_[this.merchLookupKey_];
                 if (_local4 != null) {
-                    return ((((PointUtil._bm(_local4.x_, _local4.y_, x_, y_) < 1)) ? _local4 : null));
+                    return ((((PointUtil.distanceSquaredXY(_local4.x_, _local4.y_, x_, y_) < 1)) ? _local4 : null));
                 }
             }
             return (null);
@@ -1017,7 +1017,7 @@ package com.company.assembleegameclient.objects {
             var _local16:Number;
             var _local17:int;
             var _local6:int = ((itemXml.hasOwnProperty("NumProjectiles")) ? int(itemXml.NumProjectiles) : 1);
-            var _local7:Number = (((itemXml.hasOwnProperty("ArcGap")) ? Number(itemXml.ArcGap) : 11.25) * Trig._km);
+            var _local7:Number = (((itemXml.hasOwnProperty("ArcGap")) ? Number(itemXml.ArcGap) : 11.25) * Trig.DEG_TO_RAD);
             var _local8:Vector.<Projectile> = new Vector.<Projectile>();
             var _local9:Number = (_local7 * (_local6 - 1));
             var _local10:Number = (angle - (_local9 / 2));

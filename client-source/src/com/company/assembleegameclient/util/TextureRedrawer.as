@@ -85,10 +85,10 @@ public class TextureRedrawer {
         var sourceBitmap:Bitmap = new Bitmap(source);
         result.draw(sourceBitmap, null, null, BlendMode.ALPHA);
         OUTLINE_FILTER.color = outlineColor;
-        result.applyFilter(result, result.rect, PointUtil._P_5, OUTLINE_FILTER);
+        result.applyFilter(result, result.rect, PointUtil.ORIGIN, OUTLINE_FILTER);
         if (glowColor != 0xFFFFFFFF) {
             GLOW_FILTER.color = glowColor;
-            result.applyFilter(result, result.rect, PointUtil._P_5, GLOW_FILTER);
+            result.applyFilter(result, result.rect, PointUtil.ORIGIN, GLOW_FILTER);
         }
         return result;
     }
@@ -105,7 +105,7 @@ public class TextureRedrawer {
         }
         result = new BitmapData(((size + BORDER) + BORDER), ((size + BORDER) + BORDER), true, 0);
         result.fillRect(new Rectangle(BORDER, BORDER, size, size), (0xFF000000 | color));
-        result.applyFilter(result, result.rect, PointUtil._P_5, OUTLINE_FILTER);
+        result.applyFilter(result, result.rect, PointUtil.ORIGIN, OUTLINE_FILTER);
         sizeCache[color] = result;
         return result;
     }
@@ -162,13 +162,13 @@ public class TextureRedrawer {
                 solidColorTexture.setPixel(0, 0, value);
                 return solidColorTexture;
             case 4:
-                return AssetLibrary._xK_("textile4x4", value);
+                return AssetLibrary.getImageFromSet("textile4x4", value);
             case 5:
-                return AssetLibrary._xK_("textile5x5", value);
+                return AssetLibrary.getImageFromSet("textile5x5", value);
             case 9:
-                return AssetLibrary._xK_("textile9x9", value);
+                return AssetLibrary.getImageFromSet("textile9x9", value);
             case 10:
-                return AssetLibrary._xK_("textile10x10", value);
+                return AssetLibrary.getImageFromSet("textile10x10", value);
             case 0xFF:
                 return sharedTexture_;
         }
@@ -189,7 +189,7 @@ public class TextureRedrawer {
         shader.data.texture2.input = texture2;
         shader.data.texture1Size.value = [((textureId1 == 0) ? 0 : texture1.width)];
         shader.data.texture2Size.value = [((textureId2 == 0) ? 0 : texture2.width)];
-        scaled.applyFilter(scaled, scaled.rect, PointUtil._P_5, new ShaderFilter(shader));
+        scaled.applyFilter(scaled, scaled.rect, PointUtil.ORIGIN, new ShaderFilter(shader));
         return scaled;
     }
 

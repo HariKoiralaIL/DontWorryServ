@@ -5,7 +5,7 @@ import flash.utils.Timer;
 
 import com.company.assembleegameclient.appengine.AppEngineClient;
 import com.company.assembleegameclient.parameters.Parameters;
-import com.company.util._str954;
+import com.company.util.DateTemplateFormatter;
 
 import client.tasks.Task;
 import events.GenericDataEvent;
@@ -78,8 +78,8 @@ public class LoadFameTask extends Task {
     private function formatCreatedOn():String {
         var milliseconds:Number = Number(this.xml.CreatedOn) * 1000;
         var date:Date = new Date(milliseconds);
-        var formatter:_str954 = new _str954();
-        formatter._str4106 = "MMMM D, YYYY";
+        var formatter:DateTemplateFormatter = new DateTemplateFormatter();
+        formatter.formatString = "MMMM D, YYYY";
         return formatter.format(date);
     }
 

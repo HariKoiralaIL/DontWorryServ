@@ -8,7 +8,7 @@ package com.company.assembleegameclient.util {
   import com.company.assembleegameclient.objects.ObjectLibrary;
   import com.company.assembleegameclient.parameters.Parameters;
   import com.company.util.AssetLibrary;
-  import com.company.util._str437;
+  import com.company.util.MusicLoader;
 
   import flash.display.BitmapData;
   import flash.utils.ByteArray;
@@ -22,7 +22,7 @@ package com.company.assembleegameclient.util {
     public var extraLoader_:ILoadable;
 
     public function EmbeddedAssetLoader() {
-      this.extraLoader_ = new _str437();
+      this.extraLoader_ = new MusicLoader();
     }
 
     public function load():void {
@@ -41,54 +41,54 @@ package com.company.assembleegameclient.util {
     }
 
     private function initImageSets():void{
-      AssetLibrary._05q("lofiChar8x8", new AssetEmbeds.lofiCharEmbed_().bitmapData, 8, 8);
-      AssetLibrary._05q("lofiChar16x8", new AssetEmbeds.lofiCharEmbed_().bitmapData, 16, 8);
-      AssetLibrary._05q("lofiChar16x16", new AssetEmbeds.lofiCharEmbed_().bitmapData, 16, 16);
-      AssetLibrary._05q("lofiChar28x8", new AssetEmbeds.lofiChar2Embed_().bitmapData, 8, 8);
-      AssetLibrary._05q("lofiChar216x8", new AssetEmbeds.lofiChar2Embed_().bitmapData, 16, 8);
-      AssetLibrary._05q("lofiChar216x16", new AssetEmbeds.lofiChar2Embed_().bitmapData, 16, 16);
-      AssetLibrary._05q("lofiCharBig", new AssetEmbeds.lofiCharBigEmbed_().bitmapData, 16, 16);
-      AssetLibrary._05q("lofiEnvironment", new AssetEmbeds.lofiEnvironmentEmbed_().bitmapData, 8, 8);
-      AssetLibrary._05q("lofiEnvironment2", new AssetEmbeds.lofiEnvironment2Embed_().bitmapData, 8, 8);
-      AssetLibrary._05q("lofiEnvironment3", new AssetEmbeds.lofiEnvironment3Embed_().bitmapData, 8, 8);
-      AssetLibrary._05q("lofiInterface", new AssetEmbeds.lofiInterfaceEmbed_().bitmapData, 8, 8);
-      AssetLibrary._05q("redLootBag", new AssetEmbeds.redLootBagEmbed_().bitmapData, 8, 8);
-      AssetLibrary._05q("lofiInterfaceBig", new AssetEmbeds.lofiInterfaceBigEmbed_().bitmapData, 32, 32);
-      AssetLibrary._05q("lofiInterface2", new AssetEmbeds.lofiInterface2Embed_().bitmapData, 8, 8);
-      AssetLibrary._05q("lofiObj", new AssetEmbeds.lofiObjEmbed_().bitmapData, 8, 8);
-      AssetLibrary._05q("lofiObj2", new AssetEmbeds.lofiObj2Embed_().bitmapData, 8, 8);
-      AssetLibrary._05q("lofiObj3", new AssetEmbeds.lofiObj3Embed_().bitmapData, 8, 8);
-      AssetLibrary._05q("lofiObj4", new AssetEmbeds.lofiObj4Embed_().bitmapData, 8, 8);
-      AssetLibrary._05q("lofiObj5", new AssetEmbeds.lofiObj5Embed_().bitmapData, 8, 8);
-      AssetLibrary._05q("lofiObj6", new AssetEmbeds.lofiObj6Embed_().bitmapData, 8, 8);
-      AssetLibrary._05q("lofiObjBig", new AssetEmbeds.lofiObjBigEmbed_().bitmapData, 16, 16);
-      AssetLibrary._05q("lofiObj40x40", new AssetEmbeds.lofiObj40x40Embed_().bitmapData, 40, 40);
-      AssetLibrary._05q("lofiProjs", new AssetEmbeds.lofiProjsEmbed_().bitmapData, 8, 8);
-      AssetLibrary._05q("lofiProjsBig", new AssetEmbeds.lofiProjsBigEmbed_().bitmapData, 16, 16);
-      AssetLibrary._05q("lofiParts", new AssetEmbeds.lofiPartsEmbed_().bitmapData, 8, 8);
-      AssetLibrary._05q("stars", new AssetEmbeds.starsEmbed_().bitmapData, 5, 5);
-      AssetLibrary._05q("rain", new AssetEmbeds.rainEmbed_().bitmapData, 5, 5);
-      AssetLibrary._05q("lava", new AssetEmbeds.lavaEmbed_().bitmapData, 5, 5);
-      AssetLibrary._05q("ghosts", new AssetEmbeds.ghostsEmbed_().bitmapData, 16, 16);
-      AssetLibrary._05q("textile4x4", new AssetEmbeds.textile4x4Embed_().bitmapData, 4, 4);
-      AssetLibrary._05q("textile5x5", new AssetEmbeds.textile5x5Embed_().bitmapData, 5, 5);
-      AssetLibrary._05q("textile9x9", new AssetEmbeds.textile9x9Embed_().bitmapData, 9, 9);
-      AssetLibrary._05q("textile10x10", new AssetEmbeds.textile10x10Embed_().bitmapData, 10, 10);
-      AssetLibrary._05q("inner_mask", new AssetEmbeds.innerMaskEmbed_().bitmapData, 4, 4);
-      AssetLibrary._05q("sides_mask", new AssetEmbeds.sidesMaskEmbed_().bitmapData, 4, 4);
-      AssetLibrary._05q("outer_mask", new AssetEmbeds.outerMaskEmbed_().bitmapData, 4, 4);
-      AssetLibrary._05q("innerP1_mask", new AssetEmbeds.innerP1MaskEmbed_().bitmapData, 4, 4);
-      AssetLibrary._05q("innerP2_mask", new AssetEmbeds.innerP2MaskEmbed_().bitmapData, 4, 4);
-      AssetLibrary._05q("extraEnvironment", new AssetEmbeds.extraEnvironmentEmbed_().bitmapData, 8, 8);
-      AssetLibrary._05q("portals8x8", new AssetEmbeds.portals8x8Embed_().bitmapData, 8, 8);
-      AssetLibrary._05q("essences", new AssetEmbeds.essencesEmbed_().bitmapData, 8, 8);
-      AssetLibrary._05q("HalloweenEffects16x16", new AssetEmbeds.HalloweenEffects16x16Embed_().bitmapData, 16, 16);
-      AssetLibrary._05q("customEffects16x16", new AssetEmbeds.customEffects16x16Embed_().bitmapData, 16, 16);
-      AssetLibrary._05q("customEffects8x8", new AssetEmbeds.customEffects8x8Embed_().bitmapData, 8, 8);
-      AssetLibrary._05q("invisible", new BitmapData(8, 8, true, 0), 8, 8);
-      AssetLibrary._05q("animatedWeapoTest", new AssetEmbeds.animatedWeapoTestEmbed_().bitmapData, 8, 8);
-      AssetLibrary._05q("customitems", new AssetEmbeds.customitems_().bitmapData, 8, 8);
-      AssetLibrary._05q("cursorsEmbed", new AssetEmbeds.cursorsEmbed_().bitmapData, 32, 32);
+      AssetLibrary.addImageSet("lofiChar8x8", new AssetEmbeds.lofiCharEmbed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("lofiChar16x8", new AssetEmbeds.lofiCharEmbed_().bitmapData, 16, 8);
+      AssetLibrary.addImageSet("lofiChar16x16", new AssetEmbeds.lofiCharEmbed_().bitmapData, 16, 16);
+      AssetLibrary.addImageSet("lofiChar28x8", new AssetEmbeds.lofiChar2Embed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("lofiChar216x8", new AssetEmbeds.lofiChar2Embed_().bitmapData, 16, 8);
+      AssetLibrary.addImageSet("lofiChar216x16", new AssetEmbeds.lofiChar2Embed_().bitmapData, 16, 16);
+      AssetLibrary.addImageSet("lofiCharBig", new AssetEmbeds.lofiCharBigEmbed_().bitmapData, 16, 16);
+      AssetLibrary.addImageSet("lofiEnvironment", new AssetEmbeds.lofiEnvironmentEmbed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("lofiEnvironment2", new AssetEmbeds.lofiEnvironment2Embed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("lofiEnvironment3", new AssetEmbeds.lofiEnvironment3Embed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("lofiInterface", new AssetEmbeds.lofiInterfaceEmbed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("redLootBag", new AssetEmbeds.redLootBagEmbed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("lofiInterfaceBig", new AssetEmbeds.lofiInterfaceBigEmbed_().bitmapData, 32, 32);
+      AssetLibrary.addImageSet("lofiInterface2", new AssetEmbeds.lofiInterface2Embed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("lofiObj", new AssetEmbeds.lofiObjEmbed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("lofiObj2", new AssetEmbeds.lofiObj2Embed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("lofiObj3", new AssetEmbeds.lofiObj3Embed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("lofiObj4", new AssetEmbeds.lofiObj4Embed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("lofiObj5", new AssetEmbeds.lofiObj5Embed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("lofiObj6", new AssetEmbeds.lofiObj6Embed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("lofiObjBig", new AssetEmbeds.lofiObjBigEmbed_().bitmapData, 16, 16);
+      AssetLibrary.addImageSet("lofiObj40x40", new AssetEmbeds.lofiObj40x40Embed_().bitmapData, 40, 40);
+      AssetLibrary.addImageSet("lofiProjs", new AssetEmbeds.lofiProjsEmbed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("lofiProjsBig", new AssetEmbeds.lofiProjsBigEmbed_().bitmapData, 16, 16);
+      AssetLibrary.addImageSet("lofiParts", new AssetEmbeds.lofiPartsEmbed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("stars", new AssetEmbeds.starsEmbed_().bitmapData, 5, 5);
+      AssetLibrary.addImageSet("rain", new AssetEmbeds.rainEmbed_().bitmapData, 5, 5);
+      AssetLibrary.addImageSet("lava", new AssetEmbeds.lavaEmbed_().bitmapData, 5, 5);
+      AssetLibrary.addImageSet("ghosts", new AssetEmbeds.ghostsEmbed_().bitmapData, 16, 16);
+      AssetLibrary.addImageSet("textile4x4", new AssetEmbeds.textile4x4Embed_().bitmapData, 4, 4);
+      AssetLibrary.addImageSet("textile5x5", new AssetEmbeds.textile5x5Embed_().bitmapData, 5, 5);
+      AssetLibrary.addImageSet("textile9x9", new AssetEmbeds.textile9x9Embed_().bitmapData, 9, 9);
+      AssetLibrary.addImageSet("textile10x10", new AssetEmbeds.textile10x10Embed_().bitmapData, 10, 10);
+      AssetLibrary.addImageSet("inner_mask", new AssetEmbeds.innerMaskEmbed_().bitmapData, 4, 4);
+      AssetLibrary.addImageSet("sides_mask", new AssetEmbeds.sidesMaskEmbed_().bitmapData, 4, 4);
+      AssetLibrary.addImageSet("outer_mask", new AssetEmbeds.outerMaskEmbed_().bitmapData, 4, 4);
+      AssetLibrary.addImageSet("innerP1_mask", new AssetEmbeds.innerP1MaskEmbed_().bitmapData, 4, 4);
+      AssetLibrary.addImageSet("innerP2_mask", new AssetEmbeds.innerP2MaskEmbed_().bitmapData, 4, 4);
+      AssetLibrary.addImageSet("extraEnvironment", new AssetEmbeds.extraEnvironmentEmbed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("portals8x8", new AssetEmbeds.portals8x8Embed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("essences", new AssetEmbeds.essencesEmbed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("HalloweenEffects16x16", new AssetEmbeds.HalloweenEffects16x16Embed_().bitmapData, 16, 16);
+      AssetLibrary.addImageSet("customEffects16x16", new AssetEmbeds.customEffects16x16Embed_().bitmapData, 16, 16);
+      AssetLibrary.addImageSet("customEffects8x8", new AssetEmbeds.customEffects8x8Embed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("invisible", new BitmapData(8, 8, true, 0), 8, 8);
+      AssetLibrary.addImageSet("animatedWeapoTest", new AssetEmbeds.animatedWeapoTestEmbed_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("customitems", new AssetEmbeds.customitems_().bitmapData, 8, 8);
+      AssetLibrary.addImageSet("cursorsEmbed", new AssetEmbeds.cursorsEmbed_().bitmapData, 32, 32);
     }
     private function initAnimatedChars():void{
       AnimatedCharLibrary.add("chars8x8rBeach", new AssetEmbeds.chars8x8rBeachEmbed_().bitmapData, null, 8, 8, 56, 8, AnimatedChar.RIGHT);
@@ -163,4 +163,4 @@ package com.company.assembleegameclient.util {
       }
     }
   }
-}
+}

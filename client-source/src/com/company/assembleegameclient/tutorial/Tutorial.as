@@ -101,7 +101,7 @@ public class Tutorial extends Sprite {
             if (matchName && req.objectName_ != "" && obj.name_ != req.objectName_) {
                 continue;
             }
-            if (PointUtil._R_O_(obj.x_, obj.y_, player.x_, player.y_) <= req.radius_) {
+            if (PointUtil.distanceXY(obj.x_, obj.y_, player.x_, player.y_) <= req.radius_) {
                 return true;
             }
         }

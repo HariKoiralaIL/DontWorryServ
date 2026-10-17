@@ -29,7 +29,7 @@ package com.company.assembleegameclient.objects {
             if (map_.player_ == null) {
                 return (true);
             }
-            var _local4:Number = PointUtil._R_O_(map_.player_.x_, map_.player_.y_, x, y);
+            var _local4:Number = PointUtil.distanceXY(map_.player_.x_, map_.player_.y_, x, y);
             if (((this.isLoot_) && ((_local4 < 10)))) {
                 SoundEffects.play("loot_appears");
             }

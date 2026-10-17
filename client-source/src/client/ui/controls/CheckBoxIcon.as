@@ -58,8 +58,8 @@ public class CheckBoxIcon extends Sprite {
         var strokeFill:GraphicsSolidFill = new GraphicsSolidFill(0xFFFFFF, 1);
         var stroke:GraphicsStroke = new GraphicsStroke(2, false, LineScaleMode.NORMAL, CapsStyle.NONE, JointStyle.ROUND, 3, strokeFill);
         var path:GraphicsPath = new GraphicsPath();
-        GraphicHelper.drawUI(0, 0, SIZE, SIZE, BOX_RADIUS, GraphicHelper._0D_3, path);
-        var graphicsData:Vector.<IGraphicsData> = new <IGraphicsData>[stroke, fill, path, GraphicHelper.END_FILL, GraphicHelper._H_B_];
+        GraphicHelper.drawUI(0, 0, SIZE, SIZE, BOX_RADIUS, GraphicHelper.ALL_CORNERS, path);
+        var graphicsData:Vector.<IGraphicsData> = new <IGraphicsData>[stroke, fill, path, GraphicHelper.END_FILL, GraphicHelper.NO_STROKE];
         graphics.drawGraphicsData(graphicsData);
     }
 
@@ -67,7 +67,7 @@ public class CheckBoxIcon extends Sprite {
     private function drawInnerSquare(graphics:Graphics):void {
         var fill:GraphicsSolidFill = new GraphicsSolidFill(0xFFFFFF, 1);
         var path:GraphicsPath = new GraphicsPath();
-        GraphicHelper.drawUI(INNER_INSET, INNER_INSET, SIZE - 2 * INNER_INSET, SIZE - 2 * INNER_INSET, INNER_RADIUS, GraphicHelper._0D_3, path);
+        GraphicHelper.drawUI(INNER_INSET, INNER_INSET, SIZE - 2 * INNER_INSET, SIZE - 2 * INNER_INSET, INNER_RADIUS, GraphicHelper.ALL_CORNERS, path);
         var graphicsData:Vector.<IGraphicsData> = new <IGraphicsData>[fill, path, GraphicHelper.END_FILL];
         graphics.drawGraphicsData(graphicsData);
     }

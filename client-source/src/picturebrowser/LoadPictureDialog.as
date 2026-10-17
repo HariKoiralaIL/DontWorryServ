@@ -20,7 +20,7 @@ import com.company.assembleegameclient.util.StageEventDispatcher;
 import com.company.rotmg.graphics.DeleteXGraphic;
 import com.company.ui.SimpleText;
 import com.company.util.GraphicHelper;
-import com.company.util._H_U_;
+import com.company.util.PropertyUtil;
 
 import flash.display.CapsStyle;
 import flash.display.Graphics;
@@ -132,7 +132,7 @@ public class LoadPictureDialog extends Sprite {
         this.boxFill = new GraphicsSolidFill(BOX_FILL_COLOR, 1);
         this.boxPath = new GraphicsPath(new Vector.<int>(), new Vector.<Number>());
         this.graphicsData = new <IGraphicsData>[this.outlineStroke, this.boxFill, this.boxPath,
-            GraphicHelper.END_FILL, GraphicHelper._H_B_];
+            GraphicHelper.END_FILL, GraphicHelper.NO_STROKE];
         createTitle();
         createCloseButton();
         createSearchButton();
@@ -256,7 +256,7 @@ public class LoadPictureDialog extends Sprite {
     private function draw():void {
         var boxGraphics:Graphics;
         var dimGraphics:Graphics;
-        GraphicHelper._0L_6(this.boxPath);
+        GraphicHelper.clearPath(this.boxPath);
         GraphicHelper.drawUI(0, 0, WIDTH, HEIGHT, BOX_CORNER_RADIUS, [1, 1, 1, 1], this.boxPath);
         this.boxBackground = new Shape();
         boxGraphics = this.boxBackground.graphics;
@@ -361,7 +361,7 @@ public class LoadPictureDialog extends Sprite {
         var request:AppEngineClient = new AppEngineClient(Parameters.serverAddress(), PICTURE_PATH, false);
         request.addEventListener(GenericDataEvent.GENERIC_DATA, this.onDeleteComplete);
         var params:Object = {"id": dialog.pictureId.toString()};
-        _H_U_._t2(params, Account.getInstance().credentials());
+        PropertyUtil.copyProperties(params, Account.getInstance().credentials());
         request.sendRequest("delete", params);
     }
 

@@ -123,7 +123,7 @@ public class DeathScreen extends Sprite {
         this.statsPanel.y = 316;
         this.contentContainer.addChild(this.statsPanel);
         var fameIcon:BitmapData = FameUtil.getFameIcon();
-        fameIcon = BitmapUtil._Y_d(fameIcon, 6, 6, (fameIcon.width - 12), (fameIcon.height - 12));
+        fameIcon = BitmapUtil.crop(fameIcon, 6, 6, (fameIcon.width - 12), (fameIcon.height - 12));
         this.totalFameRow = new StatRow(24, 0xCCCCCC, 0xFFC800, "Total Fame Earned", null, totalFame, "", "", new Bitmap(fameIcon));
         this.totalFameRow.x = 10;
         this.totalFameRow.y = 470;

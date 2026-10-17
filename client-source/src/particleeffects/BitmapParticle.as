@@ -3,7 +3,7 @@ package particleeffects {
     import com.company.assembleegameclient.map.GameCamera;
     import com.company.assembleegameclient.objects.BasicObject;
     import com.company.util.GraphicHelper;
-    import com.company.util._G_;
+    import com.company.util.BitmapEffectCache;
 
     import flash.display.BitmapData;
     import flash.display.GraphicsBitmapFill;
@@ -35,7 +35,7 @@ package particleeffects {
         public var alpha_:Number = 1;
         protected var vertices_:Vector.<Number> = new Vector.<Number>(8);
         protected var matrix_:Matrix = new Matrix();
-        protected var path_:GraphicsPath = new GraphicsPath(GraphicHelper._H_2, null);
+        protected var path_:GraphicsPath = new GraphicsPath(GraphicHelper.RECT_COMMANDS, null);
         protected var bitmapFill_:GraphicsBitmapFill = new GraphicsBitmapFill(null, null, false, false);
 
         public function BitmapParticle(bitmapData:BitmapData) {
@@ -46,7 +46,7 @@ package particleeffects {
         }
 
         override public function draw(graphicsData:Vector.<IGraphicsData>, camera:GameCamera, time:int):void {
-            this.bitmapFill_.bitmapData = _G_._0C_m(this.bitmapData_, this.alpha_);
+            this.bitmapFill_.bitmapData = BitmapEffectCache.getWithAlpha(this.bitmapData_, this.alpha_);
             var halfW:Number = (this.bitmapFill_.bitmapData.width / 2);
             var halfH:Number = (this.bitmapFill_.bitmapData.height / 2);
             this.vertices_[6] = (this.vertices_[0] = (screenVec_[3] - halfW));

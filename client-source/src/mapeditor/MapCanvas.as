@@ -5,7 +5,7 @@ import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.util.AssetLibrary;
 import com.company.util.IntPoint;
 import com.company.util.PointUtil;
-import com.company.util._H_V_;
+import com.company.util.KeyCodes;
 
 import flash.display.Bitmap;
 import flash.display.BitmapData;
@@ -51,8 +51,8 @@ internal class MapCanvas extends Sprite {
         addChild(new Bitmap(this.view_));
         addChild(this.selectionOverlay_);
         this.viewOrigin_ = new IntPoint(((MAP_SIZE / 2) - (this.getVisibleTileCount() / 2)), ((MAP_SIZE / 2) - (this.getVisibleTileCount() / 2)));
-        this.invisibleTexture_ = AssetLibrary._xK_("invisible", 0);
-        this.placeholderTexture_ = AssetLibrary._xK_("lofiObj3", 0xFF);
+        this.invisibleTexture_ = AssetLibrary.getImageFromSet("invisible", 0);
+        this.placeholderTexture_ = AssetLibrary.getImageFromSet("lofiObj3", 0xFF);
         this.draw();
         addEventListener(Event.ADDED_TO_STAGE, this.onAddedToStage);
         addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage);
@@ -201,7 +201,7 @@ internal class MapCanvas extends Sprite {
         tilePixels = (TILE_SIZE * this.zoom_);
         if (this.zoom_ > 2) {
             regionView = new BitmapData((VIEW_SIZE / tilePixels), (VIEW_SIZE / tilePixels));
-            regionView.copyPixels(this.regionMap_, new Rectangle(this.viewOrigin_.x_, this.viewOrigin_.y_, sourceSize, sourceSize), PointUtil._P_5);
+            regionView.copyPixels(this.regionMap_, new Rectangle(this.viewOrigin_.x_, this.viewOrigin_.y_, sourceSize, sourceSize), PointUtil.ORIGIN);
             matrix.scale(tilePixels, tilePixels);
             this.view_.draw(regionView, matrix);
         } else {
@@ -411,10 +411,10 @@ internal class MapCanvas extends Sprite {
             case Keyboard.DOWN:
                 this.moveDown();
                 break;
-            case _H_V_._0F_K_:
+            case KeyCodes.MINUS:
                 this.zoomOut();
                 break;
-            case _H_V_._0E_f:
+            case KeyCodes.EQUAL:
                 this.zoomIn();
                 break;
         }

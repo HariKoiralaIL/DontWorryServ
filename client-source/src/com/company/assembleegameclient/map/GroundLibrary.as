@@ -44,7 +44,7 @@ public class GroundLibrary {
             if (groundXML.hasOwnProperty("Color")) {
                 color = uint(groundXML.Color);
             } else {
-                color = BitmapUtil._B_n(getBitmapData(type));
+                color = BitmapUtil.getDominantColor(getBitmapData(type));
             }
             typeToColor_[type] = color;
         }

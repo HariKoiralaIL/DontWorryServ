@@ -8,8 +8,8 @@ import client.ui.frames.TextInput;
 import com.company.assembleegameclient.appengine.AppEngineClient;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.ui.TextButton;
-import com.company.util._9S_;
-import com.company.util._H_V_;
+import com.company.util.InputValidator;
+import com.company.util.KeyCodes;
 
 import flash.events.Event;
 import flash.events.KeyboardEvent;
@@ -57,11 +57,11 @@ internal class RegisterFrame extends Frame {
     }
 
     private function onRegister(event:MouseEvent):void {
-        if (!_9S_._02A_(usernameInput.text())) {
+        if (!InputValidator.isValidName(usernameInput.text())) {
             usernameInput.setError("Not a valid username");
             return;
         }
-        if (!_9S_.isEmail(emailInput.text())) {
+        if (!InputValidator.isEmail(emailInput.text())) {
             emailInput.setError("Not a valid email address");
             return;
         }
@@ -113,7 +113,7 @@ internal class RegisterFrame extends Frame {
     }
 
     private function onKeyPressed(event:KeyboardEvent):void {
-        if (event.keyCode == _H_V_.ENTER) {
+        if (event.keyCode == KeyCodes.ENTER) {
             onRegister(null);
         }
     }

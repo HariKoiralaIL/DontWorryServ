@@ -81,7 +81,7 @@ public class StatsPanel extends Sprite {
         this.addRow("Dungeons Completed", null, dungeonsCompleted, false, STAT_COLOR);
         this.addRow("Party Member Level Ups", null, stats.LevelUpAssists, false, STAT_COLOR);
         var fameIcon:BitmapData = FameUtil.getFameIcon();
-        fameIcon = BitmapUtil._Y_d(fameIcon, 6, 6, (fameIcon.width - 12), (fameIcon.height - 12));
+        fameIcon = BitmapUtil.crop(fameIcon, 6, 6, (fameIcon.width - 12), (fameIcon.height - 12));
         this.addRow("Base Fame Earned", null, stats.BaseFame, true, FAME_COLOR, "", "", new Bitmap(fameIcon));
         for each (var bonus:XML in stats.Bonus) {
             this.addRow(("Bonus: " + bonus.@id), bonus.@desc, int(bonus), true, FAME_COLOR, "+", "", new Bitmap(fameIcon));

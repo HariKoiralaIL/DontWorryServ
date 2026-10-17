@@ -43,7 +43,7 @@ package com.company.assembleegameclient.objects {
         }
 
         override public function getColor():uint {
-            return (BitmapUtil._B_n(this.topTexture_));
+            return (BitmapUtil.getDominantColor(this.topTexture_));
         }
 
         override public function draw(graphicsData:Vector.<IGraphicsData>, camera:GameCamera, time:int):void {

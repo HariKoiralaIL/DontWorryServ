@@ -5,7 +5,7 @@
 
 package client.ui.frames {
 import com.company.assembleegameclient.appengine.AppEngineClient;
-import com.company.util._H_V_;
+import com.company.util.KeyCodes;
 
 import flash.events.KeyboardEvent;
 
@@ -17,7 +17,7 @@ import com.company.assembleegameclient.parameters.Parameters;
 import events.GenericDataEvent;
 import events.TextErrorEvent;
 
-import com.company.util._H_U_;
+import com.company.util.PropertyUtil;
 
 import account.Account;
 
@@ -54,7 +54,7 @@ public class NewAccountNameFrame extends Frame {
         _local2.addEventListener(GenericDataEvent.GENERIC_DATA, this.onNameSet);
         _local2.addEventListener(TextErrorEvent.TEXT_ERROR, this.onNameError);
         var _local3:Object = {"name": this.name_.text()};
-        _H_U_._t2(_local3, Account.getInstance().credentials());
+        PropertyUtil.copyProperties(_local3, Account.getInstance().credentials());
         _local2.sendRequest("setName", _local3);
         disableInput();
     }
@@ -78,7 +78,7 @@ public class NewAccountNameFrame extends Frame {
 
     private function onKeyPressed(e:KeyboardEvent):void {
 
-        if (e.keyCode == _H_V_.ENTER) {
+        if (e.keyCode == KeyCodes.ENTER) {
             this.onChoose(null);
         }
     }

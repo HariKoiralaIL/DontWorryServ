@@ -131,7 +131,7 @@ public class Stats extends Sprite {
     private function onMouseOver(_arg1:MouseEvent):void {
         var _local2:Stat = (_arg1.target as Stat);
         this.toolTip_.setTitle(_local2.fullName_);
-        this.toolTip_._02C_(_local2.description_);
+        this.toolTip_.setDescription(_local2.description_);
         if (!stage.contains(this.toolTip_)) {
             stage.addChild(this.toolTip_);
         }

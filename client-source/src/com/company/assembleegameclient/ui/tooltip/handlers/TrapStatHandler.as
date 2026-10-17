@@ -1,61 +1,48 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.ui.tooltip.handlers.TrapStatHandler
-
 package com.company.assembleegameclient.ui.tooltip.handlers {
 public class TrapStatHandler extends SlotStatHandler {
 
+    private static const CORAL_VENOM_TRAP:String = "Coral Venom Trap";
+
     override protected function compareSlots(itemXML:XML, curItemXML:XML):void {
-        var trap:XML;
-        var otherTrap:XML;
-        var tag:XML;
-        var text:String;
-        var radius:Number;
-        var otherRadius:Number;
-        var damage:int;
-        var otherDamage:int;
-        var duration:int;
-        var otherDuration:int;
-        var avg:Number;
-        var otherAvg:Number;
-        var textColor:String;
-        var compositeHtml:String;
-        trap = this.findTrap(itemXML);
-        otherTrap = this.findTrap(curItemXML);
+        var trap:XML = findTrap(itemXML);
+        var curTrap:XML = findTrap(curItemXML);
         tooltipText = "";
-        if (((!((trap == null))) && (!((otherTrap == null))))) {
-            if (itemXML.@id == "Coral Venom Trap") {
-                tag = itemXML.Activate.(text() == "Trap")[0];
-                text = ((((((tag.@totalDamage + " HP within ") + tag.@radius) + " sqrs\n") + "Paralyzed for ") + tag.@condDuration) + " seconds\n");
-                tooltipText = (tooltipText + ("Trap: " + colorize(text, PURPLE)));
-                handledXml[tag.toXMLString()] = true;
-            } else {
-                radius = Number(trap.@radius);
-                otherRadius = Number(otherTrap.@radius);
-                damage = int(trap.@totalDamage);
-                otherDamage = int(otherTrap.@totalDamage);
-                duration = int(trap.@condDuration);
-                otherDuration = int(otherTrap.@condDuration);
-                avg = (((0.33 * radius) + (0.33 * damage)) + (0.33 * duration));
-                otherAvg = (((0.33 * otherRadius) + (0.33 * otherDamage)) + (0.33 * otherDuration));
-                textColor = compareColor((avg - otherAvg));
-                compositeHtml = ((((((damage + " HP within ") + radius) + " sqrs\n") + " Slowed for ") + duration) + " seconds\n");
-                tooltipText = (tooltipText + ("Trap: " + colorize(compositeHtml, textColor)));
-                handledXml[trap.toXMLString()] = true;
-            }
+        if (trap == null || curTrap == null) {
+            return;
+        }
+        if (itemXML.@id == CORAL_VENOM_TRAP) {
+            addCoralVenomLine(itemXML);
+        } else {
+            addSlowTrapLine(trap, curTrap);
         }
     }
 
-    private function findTrap(xml:XML):XML {
-        var matches:XMLList;
-        matches = xml.Activate.(text() == "Trap");
-        if (matches.length() >= 1) {
-            return (matches[0]);
-        }
-        return (null);
+    private function addCoralVenomLine(itemXML:XML):void {
+        var tag:XML = activateTags(itemXML, "Trap")[0];
+        var text:String = tag.@totalDamage + " HP within " + tag.@radius + " sqrs\n"
+                + "Paralyzed for " + tag.@condDuration + " seconds\n";
+        tooltipText += "Trap: " + colorize(text, PURPLE);
+        handledXml[tag.toXMLString()] = true;
+    }
+
+    private function addSlowTrapLine(trap:XML, curTrap:XML):void {
+        var radius:Number = Number(trap.@radius);
+        var curRadius:Number = Number(curTrap.@radius);
+        var damage:int = int(trap.@totalDamage);
+        var curDamage:int = int(curTrap.@totalDamage);
+        var duration:int = int(trap.@condDuration);
+        var curDuration:int = int(curTrap.@condDuration);
+        var score:Number = 0.33 * radius + 0.33 * damage + 0.33 * duration;
+        var curScore:Number = 0.33 * curRadius + 0.33 * curDamage + 0.33 * curDuration;
+        var text:String = damage + " HP within " + radius + " sqrs\n Slowed for " + duration + " seconds\n";
+        tooltipText += "Trap: " + colorize(text, compareColor(score - curScore));
+        handledXml[trap.toXMLString()] = true;
+    }
+
+    private function findTrap(itemXML:XML):XML {
+        var matches:XMLList = activateTags(itemXML, "Trap");
+        return matches.length() >= 1 ? matches[0] : null;
     }
 
 }
-}//package com.company.assembleegameclient.ui.tooltip.handlers
-
+}

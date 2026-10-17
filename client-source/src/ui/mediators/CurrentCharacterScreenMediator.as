@@ -8,7 +8,7 @@ import client.signals.typed.GameInitSignal;
 
 import com.company.assembleegameclient.appengine.SavedCharacter;
 import com.company.assembleegameclient.parameters.Parameters;
-import com.company.util._0A_s;
+import com.company.util.DateUtil;
 
 import env.ServerListState;
 
@@ -75,7 +75,7 @@ public class CurrentCharacterScreenMediator extends Mediator {
 
     /** Sends the "joinDate" analytics event at most once per day. */
     private function trackDailyJoinDate():void {
-        var today:String = _0A_s._mP_();
+        var today:String = DateUtil.formatPacificTime();
         if (Parameters.data_.lastDailyAnalytics != today) {
             var analyticsEvent:AnalyticsEvent = new AnalyticsEvent();
             analyticsEvent.category = "joinDate";

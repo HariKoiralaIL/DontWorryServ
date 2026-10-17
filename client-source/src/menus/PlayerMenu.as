@@ -71,7 +71,7 @@ package menus
 
         private function addTextOption(iconIndex:int, label:String, handler:Function):void
         {
-            var option:MenuOption = new MenuOption(AssetLibrary._xK_("lofiInterfaceBig", iconIndex), 0xFFFFFF, label);
+            var option:MenuOption = new MenuOption(AssetLibrary.getImageFromSet("lofiInterfaceBig", iconIndex), 0xFFFFFF, label);
             option.addEventListener(MouseEvent.CLICK, handler);
             addOption(option);
         }

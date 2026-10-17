@@ -24,7 +24,7 @@ package com.company.assembleegameclient.ui {
     import com.company.assembleegameclient.net.messages.incoming.TradeChanged;
     import com.company.assembleegameclient.net.messages.incoming.TradeAccepted;
 
-    import com.company.util._O_m;
+    import com.company.util.DisplayUtil;
     import com.company.assembleegameclient.objects.Player;
 
     import flash.display.Graphics;
@@ -128,20 +128,20 @@ package com.company.assembleegameclient.ui {
             }
             if (!this._L_C_) {
                 this._loadGUIBG();
-                _O_m._041(this, this._F_);
+              DisplayUtil.safeAddChild(this, this._F_);
                 this._0J_s();
                 this._L_C_ = true;
             }
             this._F_.draw();
             if (this._6K_ != null) {
                 this._3S_.visible = false;
-                _O_m._03d(this, this._02y);
-                _O_m._03d(this, this._U_T_);
-                _O_m._041(this, this._6K_);
+              DisplayUtil.safeRemoveChild(this, this._02y);
+              DisplayUtil.safeRemoveChild(this, this._U_T_);
+              DisplayUtil.safeAddChild(this, this._6K_);
             } else {
                 this._3S_.visible = false;
-                _O_m._041(this, this._02y);
-                _O_m._041(this, this._U_T_);
+              DisplayUtil.safeAddChild(this, this._02y);
+              DisplayUtil.safeAddChild(this, this._U_T_);
                 this._02y.draw();
                 this._U_T_.draw();
             }
@@ -150,7 +150,7 @@ package com.company.assembleegameclient.ui {
         private function _0L_A_():void {
             if (this._6K_ != null) {
                 this._6K_.removeEventListener(Event.CANCEL, this._05I_);
-                _O_m._03d(this, this._6K_);
+              DisplayUtil.safeRemoveChild(this, this._6K_);
                 this._6K_ = null;
             } else if (this._02y != null && this._02y.itemSelect_ != null) {
                 this._02y.cancelSelect();

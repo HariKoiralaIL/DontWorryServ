@@ -43,7 +43,7 @@ package client.ui.frames {
             if(this.itemData_ != null && this.itemData_.hasOwnProperty("TextureFile") && this.itemData_.TextureFile != "") {
                 _local3 = ObjectLibrary.getRedrawnTextureFromTypeCustom(this.itemType_, 60, true, this.itemData_, true, _local2);
             }
-            _local3 = BitmapUtil._Y_d(_local3, 4, 4, (_local3.width - 8), (_local3.height - 8));
+            _local3 = BitmapUtil.crop(_local3, 4, 4, (_local3.width - 8), (_local3.height - 8));
             this.itemBitmap_ = new Bitmap(_local3);
             this.itemBitmap_.scaleX = this.itemBitmap_.scaleY = 3;
             //this.itemBitmap_.addEventListener(MouseEvent.MOUSE_OVER, this.onMouseOver);

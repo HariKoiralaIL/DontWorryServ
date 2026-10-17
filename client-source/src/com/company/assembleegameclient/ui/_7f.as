@@ -30,7 +30,7 @@ public class _7f extends Sprite {
         this.text_.updateMetrics();
         addChild(this.text_);
         this.w_ = (((_arg3) != 0) ? _arg3 : (this.text_.width + 12));
-        GraphicHelper._0L_6(this.path_);
+        GraphicHelper.clearPath(this.path_);
         GraphicHelper.drawUI(0, 0, this.w_, (this.text_.textHeight + 8), 4, [1, 1, 1, 1], this.path_);
         this.draw();
         this.text_.x = (((this.w_ / 2) - (this.text_.textWidth / 2)) - 2);

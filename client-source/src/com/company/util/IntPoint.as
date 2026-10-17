@@ -1,96 +1,94 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.util.IntPoint
-
 package com.company.util {
-import flash.geom.Point;
 import flash.geom.Matrix;
+import flash.geom.Point;
 
 public class IntPoint {
 
-    public static function _4H_():void {
-        var _local1:UnitTest = new UnitTest();
+    public static function runUnitTest():void {
+        var test:UnitTest = new UnitTest();
     }
 
-    public static function _0M_C_(_arg1:Point):IntPoint {
-        return (new IntPoint(Math.round(_arg1.x), Math.round(_arg1.y)));
+    public static function fromPoint(point:Point):IntPoint {
+        return new IntPoint(Math.round(point.x), Math.round(point.y));
     }
 
-    public function IntPoint(_arg1:int = 0, _arg2:int = 0) {
-        this.x_ = _arg1;
-        this.y_ = _arg2;
+    public function IntPoint(x:int = 0, y:int = 0) {
+        this.x_ = x;
+        this.y_ = y;
     }
+
     public var x_:int;
     public var y_:int;
 
     public function x():int {
-        return (this.x_);
+        return this.x_;
     }
 
     public function y():int {
-        return (this.y_);
+        return this.y_;
     }
 
-    public function _Y_I_(_arg1:int):void {
-        this.x_ = _arg1;
+    public function setX(value:int):void {
+        this.x_ = value;
     }
 
-    public function _0I_X_(_arg1:int):void {
-        this.y_ = _arg1;
+    public function setY(value:int):void {
+        this.y_ = value;
     }
 
     public function clone():IntPoint {
-        return (new IntPoint(this.x_, this.y_));
+        return new IntPoint(this.x_, this.y_);
     }
 
-    public function _I_c(_arg1:IntPoint):Boolean {
-        return ((((this.x_ == _arg1.x_)) && ((this.y_ == _arg1.y_))));
+    public function equals(other:IntPoint):Boolean {
+        return this.x_ == other.x_ && this.y_ == other.y_;
     }
 
-    public function _G_K_(_arg1:IntPoint):int {
-        var _local2:int = (_arg1.x_ - this.x_);
-        var _local3:int = (_arg1.y_ - this.y_);
-        return (Math.round(Math.sqrt(((_local2 * _local2) + (_local3 * _local3)))));
+    /** Euclidean distance, rounded to the nearest int. */
+    public function distanceToRounded(other:IntPoint):int {
+        var dx:int = other.x_ - this.x_;
+        var dy:int = other.y_ - this.y_;
+        return Math.round(Math.sqrt((dx * dx) + (dy * dy)));
     }
 
-    public function _lw(_arg1:IntPoint):Number {
-        var _local2:int = (_arg1.x_ - this.x_);
-        var _local3:int = (_arg1.y_ - this.y_);
-        return (Math.sqrt(((_local2 * _local2) + (_local3 * _local3))));
+    public function distanceTo(other:IntPoint):Number {
+        var dx:int = other.x_ - this.x_;
+        var dy:int = other.y_ - this.y_;
+        return Math.sqrt((dx * dx) + (dy * dy));
     }
 
-    public function _W_q(_arg1:Point):Number {
-        var _local2:int = (_arg1.x - this.x_);
-        var _local3:int = (_arg1.y - this.y_);
-        return (Math.sqrt(((_local2 * _local2) + (_local3 * _local3))));
+    /** Distance to a Point; deltas are truncated to int (original behavior). */
+    public function distanceToPoint(point:Point):Number {
+        var dx:int = point.x - this.x_;
+        var dy:int = point.y - this.y_;
+        return Math.sqrt((dx * dx) + (dy * dy));
     }
 
     public function trunc1000():IntPoint {
-        return (new IntPoint((int((this.x_ / 1000)) * 1000), (int((this.y_ / 1000)) * 1000)));
+        return new IntPoint(int(this.x_ / 1000) * 1000, int(this.y_ / 1000) * 1000);
     }
 
     public function round1000():IntPoint {
-        return (new IntPoint((Math.round((this.x_ / 1000)) * 1000), (Math.round((this.y_ / 1000)) * 1000)));
+        return new IntPoint(Math.round(this.x_ / 1000) * 1000, Math.round(this.y_ / 1000) * 1000);
     }
 
-    public function _P_1(_arg1:IntPoint):int {
-        var _local2:int = (_arg1.x() - this.x_);
-        var _local3:int = (_arg1.y() - this.y_);
-        return (((_local2 * _local2) + (_local3 * _local3)));
+    public function distanceSquaredTo(other:IntPoint):int {
+        var dx:int = other.x() - this.x_;
+        var dy:int = other.y() - this.y_;
+        return (dx * dx) + (dy * dy);
     }
 
-    public function _6g():Point {
-        return (new Point(this.x_, this.y_));
+    public function toPoint():Point {
+        return new Point(this.x_, this.y_);
     }
 
-    public function transform(_arg1:Matrix):IntPoint {
-        var _local2:Point = _arg1.transformPoint(this._6g());
-        return (new IntPoint(Math.round(_local2.x), Math.round(_local2.y)));
+    public function transform(matrix:Matrix):IntPoint {
+        var transformed:Point = matrix.transformPoint(this.toPoint());
+        return new IntPoint(Math.round(transformed.x), Math.round(transformed.y));
     }
 
     public function toString():String {
-        return ((((("(" + this.x_) + ", ") + this.y_) + ")"));
+        return "(" + this.x_ + ", " + this.y_ + ")";
     }
 
 }
@@ -101,86 +99,43 @@ import com.company.util.IntPoint;
 class UnitTest {
 
     public function UnitTest() {
-        var _local1:IntPoint;
-        var _local2:IntPoint;
-        var _local3:Number;
-        super();
         trace("STARTING UNITTEST: IntPoint");
-        _local1 = new IntPoint(999, 1001);
-        _local2 = _local1.round1000();
-        if (((!((_local2.x() == 1000))) || (!((_local2.y() == 1000))))) {
-            trace("ERROR IN UNITTEST: IntPoint1");
-        }
-        _local1 = new IntPoint(500, 400);
-        _local2 = _local1.round1000();
-        if (((!((_local2.x() == 1000))) || (!((_local2.y() == 0))))) {
-            trace("ERROR IN UNITTEST: IntPoint2");
-        }
-        _local1 = new IntPoint(-400, -500);
-        _local2 = _local1.round1000();
-        if (((!((_local2.x() == 0))) || (!((_local2.y() == 0))))) {
-            trace("ERROR IN UNITTEST: IntPoint3");
-        }
-        _local1 = new IntPoint(-501, -999);
-        _local2 = _local1.round1000();
-        if (((!((_local2.x() == -1000))) || (!((_local2.y() == -1000))))) {
-            trace("ERROR IN UNITTEST: IntPoint4");
-        }
-        _local1 = new IntPoint(-1000, -1001);
-        _local2 = _local1.round1000();
-        if (((!((_local2.x() == -1000))) || (!((_local2.y() == -1000))))) {
-            trace("ERROR IN UNITTEST: IntPoint5");
-        }
-        _local1 = new IntPoint(999, 1001);
-        _local2 = _local1.trunc1000();
-        if (((!((_local2.x() == 0))) || (!((_local2.y() == 1000))))) {
-            trace("ERROR IN UNITTEST: IntPoint6");
-        }
-        _local1 = new IntPoint(500, 400);
-        _local2 = _local1.trunc1000();
-        if (((!((_local2.x() == 0))) || (!((_local2.y() == 0))))) {
-            trace("ERROR IN UNITTEST: IntPoint7");
-        }
-        _local1 = new IntPoint(-400, -500);
-        _local2 = _local1.trunc1000();
-        if (((!((_local2.x() == 0))) || (!((_local2.y() == 0))))) {
-            trace("ERROR IN UNITTEST: IntPoint8");
-        }
-        _local1 = new IntPoint(-501, -999);
-        _local2 = _local1.trunc1000();
-        if (((!((_local2.x() == 0))) || (!((_local2.y() == 0))))) {
-            trace("ERROR IN UNITTEST: IntPoint9");
-        }
-        _local1 = new IntPoint(-1000, -1001);
-        _local2 = _local1.trunc1000();
-        if (((!((_local2.x() == -1000))) || (!((_local2.y() == -1000))))) {
-            trace("ERROR IN UNITTEST: IntPoint10");
-        }
-        _local3 = 0.9999998;
-        if (int(_local3) != 0) {
-            trace("ERROR IN UNITTEST: IntPoint40");
-        }
-        _local3 = 0.5;
-        if (int(_local3) != 0) {
-            trace("ERROR IN UNITTEST: IntPoint41");
-        }
-        _local3 = 0.499999;
-        if (int(_local3) != 0) {
-            trace("ERROR IN UNITTEST: IntPoint42");
-        }
-        _local3 = -0.499999;
-        if (int(_local3) != 0) {
-            trace("ERROR IN UNITTEST: IntPoint43");
-        }
-        _local3 = -0.5;
-        if (int(_local3) != 0) {
-            trace("ERROR IN UNITTEST: IntPoint44");
-        }
-        _local3 = -0.99999;
-        if (int(_local3) != 0) {
-            trace("ERROR IN UNITTEST: IntPoint45");
-        }
+        checkRound(1, 999, 1001, 1000, 1000);
+        checkRound(2, 500, 400, 1000, 0);
+        checkRound(3, -400, -500, 0, 0);
+        checkRound(4, -501, -999, -1000, -1000);
+        checkRound(5, -1000, -1001, -1000, -1000);
+        checkTrunc(6, 999, 1001, 0, 1000);
+        checkTrunc(7, 500, 400, 0, 0);
+        checkTrunc(8, -400, -500, 0, 0);
+        checkTrunc(9, -501, -999, 0, 0);
+        checkTrunc(10, -1000, -1001, -1000, -1000);
+        checkIntCast(40, 0.9999998);
+        checkIntCast(41, 0.5);
+        checkIntCast(42, 0.499999);
+        checkIntCast(43, -0.499999);
+        checkIntCast(44, -0.5);
+        checkIntCast(45, -0.99999);
         trace("FINISHED UNITTEST: IntPoint");
     }
-}
 
+    private function checkRound(id:int, x:int, y:int, expectedX:int, expectedY:int):void {
+        var result:IntPoint = new IntPoint(x, y).round1000();
+        if (result.x() != expectedX || result.y() != expectedY) {
+            trace("ERROR IN UNITTEST: IntPoint" + id);
+        }
+    }
+
+    private function checkTrunc(id:int, x:int, y:int, expectedX:int, expectedY:int):void {
+        var result:IntPoint = new IntPoint(x, y).trunc1000();
+        if (result.x() != expectedX || result.y() != expectedY) {
+            trace("ERROR IN UNITTEST: IntPoint" + id);
+        }
+    }
+
+    private function checkIntCast(id:int, value:Number):void {
+        if (int(value) != 0) {
+            trace("ERROR IN UNITTEST: IntPoint" + id);
+        }
+    }
+}

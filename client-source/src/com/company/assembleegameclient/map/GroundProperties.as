@@ -88,14 +88,14 @@ public class GroundProperties {
         }
         this.edgeTextures_ = new Vector.<BitmapData>(9);
         this.edgeTextures_[3] = this.edgeData_.getTexture(0);
-        this.edgeTextures_[1] = BitmapUtil._c(this.edgeTextures_[3], 1);
-        this.edgeTextures_[5] = BitmapUtil._c(this.edgeTextures_[3], 2);
-        this.edgeTextures_[7] = BitmapUtil._c(this.edgeTextures_[3], 3);
+        this.edgeTextures_[1] = BitmapUtil.rotate90(this.edgeTextures_[3], 1);
+        this.edgeTextures_[5] = BitmapUtil.rotate90(this.edgeTextures_[3], 2);
+        this.edgeTextures_[7] = BitmapUtil.rotate90(this.edgeTextures_[3], 3);
         if (this.cornerData_ != null) {
             this.edgeTextures_[0] = this.cornerData_.getTexture(0);
-            this.edgeTextures_[2] = BitmapUtil._c(this.edgeTextures_[0], 1);
-            this.edgeTextures_[8] = BitmapUtil._c(this.edgeTextures_[0], 2);
-            this.edgeTextures_[6] = BitmapUtil._c(this.edgeTextures_[0], 3);
+            this.edgeTextures_[2] = BitmapUtil.rotate90(this.edgeTextures_[0], 1);
+            this.edgeTextures_[8] = BitmapUtil.rotate90(this.edgeTextures_[0], 2);
+            this.edgeTextures_[6] = BitmapUtil.rotate90(this.edgeTextures_[0], 3);
         }
         return this.edgeTextures_;
     }
@@ -107,9 +107,9 @@ public class GroundProperties {
         }
         this.innerCornerTextures_ = this.edgeTextures_.concat();
         this.innerCornerTextures_[0] = this.innerCornerData_.getTexture(0);
-        this.innerCornerTextures_[2] = BitmapUtil._c(this.innerCornerTextures_[0], 1);
-        this.innerCornerTextures_[8] = BitmapUtil._c(this.innerCornerTextures_[0], 2);
-        this.innerCornerTextures_[6] = BitmapUtil._c(this.innerCornerTextures_[0], 3);
+        this.innerCornerTextures_[2] = BitmapUtil.rotate90(this.innerCornerTextures_[0], 1);
+        this.innerCornerTextures_[8] = BitmapUtil.rotate90(this.innerCornerTextures_[0], 2);
+        this.innerCornerTextures_[6] = BitmapUtil.rotate90(this.innerCornerTextures_[0], 3);
         return this.innerCornerTextures_;
     }
 

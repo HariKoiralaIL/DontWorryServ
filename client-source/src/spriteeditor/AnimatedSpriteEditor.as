@@ -67,11 +67,11 @@ public class AnimatedSpriteEditor extends BitmapEditor {
         } else {
             frameWidth = (bitmapData.width / SHEET_FRAMES);
             frameHeight = bitmapData.height;
-            this.grids_[FrameSelector.STAND].loadBitmapData(BitmapUtil._Y_d(bitmapData, 0, 0, frameWidth, frameHeight));
-            this.grids_[FrameSelector.WALK1].loadBitmapData(BitmapUtil._Y_d(bitmapData, frameWidth, 0, frameWidth, frameHeight));
-            this.grids_[FrameSelector.WALK2].loadBitmapData(BitmapUtil._Y_d(bitmapData, (frameWidth * 2), 0, frameWidth, frameHeight));
-            this.grids_[FrameSelector.ATTACK1].loadBitmapData(BitmapUtil._Y_d(bitmapData, (frameWidth * 4), 0, frameWidth, frameHeight));
-            this.grids_[FrameSelector.ATTACK2].loadBitmapData(BitmapUtil._Y_d(bitmapData, (frameWidth * 5), 0, (frameWidth * 2), frameHeight));
+            this.grids_[FrameSelector.STAND].loadBitmapData(BitmapUtil.crop(bitmapData, 0, 0, frameWidth, frameHeight));
+            this.grids_[FrameSelector.WALK1].loadBitmapData(BitmapUtil.crop(bitmapData, frameWidth, 0, frameWidth, frameHeight));
+            this.grids_[FrameSelector.WALK2].loadBitmapData(BitmapUtil.crop(bitmapData, (frameWidth * 2), 0, frameWidth, frameHeight));
+            this.grids_[FrameSelector.ATTACK1].loadBitmapData(BitmapUtil.crop(bitmapData, (frameWidth * 4), 0, frameWidth, frameHeight));
+            this.grids_[FrameSelector.ATTACK2].loadBitmapData(BitmapUtil.crop(bitmapData, (frameWidth * 5), 0, (frameWidth * 2), frameHeight));
         }
         dispatchEvent(new Event(Event.CHANGE));
     }

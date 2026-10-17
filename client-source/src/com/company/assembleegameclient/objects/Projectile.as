@@ -53,7 +53,7 @@ package com.company.assembleegameclient.objects {
             this.tempPoint_ = new Point();
             this.tempVec3D_ = new Vector3D();
             this.shadowFill_ = new GraphicsGradientFill(GradientType.RADIAL, [0, 0], [0.5, 0], null, new Matrix());
-            this.shadowPath_ = new GraphicsPath(GraphicHelper._H_2, new Vector.<Number>());
+            this.shadowPath_ = new GraphicsPath(GraphicHelper.RECT_COMMANDS, new Vector.<Number>());
             super();
         }
         public var props_:ObjectProperties;
@@ -249,7 +249,7 @@ package com.company.assembleegameclient.objects {
             this.bulletType_ = bulletType;
             this.ownerId_ = ownerId;
             this.bulletId_ = bulletId;
-            this.angle_ = Trig._V_r(angle);
+            this.angle_ = Trig.normalizeRadians(angle);
             this.startTime_ = startTime;
             objectId_ = allocateObjectId(this.ownerId_, this.bulletId_);
             z_ = 0.5;

@@ -6,7 +6,7 @@ package game.guild {
     import com.company.assembleegameclient.ui._0K_B_;
     import com.company.assembleegameclient.util.GuildUtil;
     import com.company.ui.SimpleText;
-    import com.company.util._H_U_;
+    import com.company.util.PropertyUtil;
 
     import events.GenericDataEvent;
     import events.TextErrorEvent;
@@ -65,7 +65,7 @@ package game.guild {
                 "num": count,
                 "offset": offset
             };
-            _H_U_._t2(params, Account.getInstance().credentials());
+            PropertyUtil.copyProperties(params, Account.getInstance().credentials());
             this.request_.addEventListener(GenericDataEvent.GENERIC_DATA, this.onMembersLoaded);
             this.request_.addEventListener(TextErrorEvent.TEXT_ERROR, this.onLoadError);
             this.request_.sendRequest("listMembers", params);

@@ -53,7 +53,7 @@ public class BuyCharacterRect extends CharacterRect {
         this.priceText_.y = 38;
         addChild(this.priceText_);
         var _local4:BitmapData = _u5.fame();
-        _local4 = BitmapUtil._Y_d(_local4, 6, 6, (_local4.width - 12), (_local4.height - 12));
+        _local4 = BitmapUtil.crop(_local4, 6, 6, (_local4.width - 12), (_local4.height - 12));
         this.coin_ = new Bitmap();
         this.coin_.bitmapData = _local4;
         this.coin_.x = 200;

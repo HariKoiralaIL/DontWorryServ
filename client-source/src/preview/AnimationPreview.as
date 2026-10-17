@@ -2,7 +2,7 @@ package preview {
 import com.company.assembleegameclient.util.TextureRedrawer;
 import com.company.assembleegameclient.util.MaskedImage;
 import com.company.assembleegameclient.util.AnimatedChar;
-import com.company.util._kp;
+import com.company.util.ImageSet;
 
 import flash.display.Bitmap;
 import flash.display.Sprite;
@@ -13,8 +13,8 @@ import flash.utils.getTimer;
 public class AnimationPreview extends PreviewBase {
 
     private static var iconsEmbed_:Class = AnimationPreviewIcons;
-    private static var icons:_kp = function ():_kp {
-        var set:* = new _kp();
+    private static var icons:ImageSet = function ():ImageSet {
+        var set:* = new ImageSet();
         set.addFromBitmapData(new iconsEmbed_().bitmapData, 16, 16);
         return set;
     }();
@@ -27,21 +27,21 @@ public class AnimationPreview extends PreviewBase {
 
     public function AnimationPreview(w:int, h:int) {
         super(w, h);
-        var walkBitmap:Bitmap = new Bitmap(icons._W_u[1]);
+        var walkBitmap:Bitmap = new Bitmap(icons.images[1]);
         walkBitmap.scaleX = walkBitmap.scaleY = 2;
         walkButton = addIcon(walkBitmap, function ():void {
             action_ = AnimatedChar.WALK;
         });
         walkButton.x = (w_ / 2) - (walkButton.width / 2);
         walkButton.y = h_ - walkButton.height - 5;
-        var standBitmap:Bitmap = new Bitmap(icons._W_u[0]);
+        var standBitmap:Bitmap = new Bitmap(icons.images[0]);
         standBitmap.scaleX = standBitmap.scaleY = 2;
         standButton = addIcon(standBitmap, function ():void {
             action_ = AnimatedChar.STAND;
         });
         standButton.x = walkButton.x - standButton.width - 5;
         standButton.y = h_ - standButton.height - 5;
-        var attackBitmap:Bitmap = new Bitmap(icons._W_u[2]);
+        var attackBitmap:Bitmap = new Bitmap(icons.images[2]);
         attackBitmap.scaleX = attackBitmap.scaleY = 2;
         attackButton = addIcon(attackBitmap, function ():void {
             action_ = AnimatedChar.ATTACK;

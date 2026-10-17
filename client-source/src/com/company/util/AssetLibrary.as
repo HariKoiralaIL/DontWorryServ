@@ -1,92 +1,86 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.util.AssetLibrary
-
 package com.company.util {
-import flash.utils.Dictionary;
 import flash.display.BitmapData;
 import flash.media.Sound;
 import flash.media.SoundTransform;
+import flash.utils.Dictionary;
 
 public class AssetLibrary {
 
-    private static var _W_u:Dictionary = new Dictionary();
-    private static var _08l:Dictionary = new Dictionary();
-    private static var _6x:Dictionary = new Dictionary();
-    private static var _4d:Dictionary = new Dictionary();
+    private static var images_:Dictionary = new Dictionary();
+    private static var imageSets_:Dictionary = new Dictionary();
+    private static var sounds_:Dictionary = new Dictionary();
+    private static var imageKeys_:Dictionary = new Dictionary();
 
-    public static function _9_(_arg1:String, _arg2:BitmapData):void {
-        _W_u[_arg1] = _arg2;
-        _4d[_arg2] = _arg1;
+    public static function addImage(id:String, bitmapData:BitmapData):void {
+        images_[id] = bitmapData;
+        imageKeys_[bitmapData] = id;
     }
 
-    public static function _05q(_arg1:String, _arg2:BitmapData, _arg3:int, _arg4:int):void {
-        _W_u[_arg1] = _arg2;
-        var _local5:_kp = new _kp();
-        _local5.addFromBitmapData(_arg2, _arg3, _arg4);
-        _08l[_arg1] = _local5;
-        var _local6:int;
-        while (_local6 < _local5._W_u.length) {
-            _4d[_local5._W_u[_local6]] = [_arg1, _local6];
-            _local6++;
+    public static function addImageSet(id:String, bitmapData:BitmapData, tileWidth:int, tileHeight:int):void {
+        images_[id] = bitmapData;
+        var imageSet:ImageSet = new ImageSet();
+        imageSet.addFromBitmapData(bitmapData, tileWidth, tileHeight);
+        imageSets_[id] = imageSet;
+        var i:int = 0;
+        while (i < imageSet.images.length) {
+            imageKeys_[imageSet.images[i]] = [id, i];
+            i++;
         }
     }
 
-    public static function _0F_R_(_arg1:String, _arg2:BitmapData):void {
-        var _local3:_kp = _08l[_arg1];
-        if (_local3 == null) {
-            _local3 = new _kp();
-            _08l[_arg1] = _local3;
+    public static function addToImageSet(id:String, bitmapData:BitmapData):void {
+        var imageSet:ImageSet = imageSets_[id];
+        if (imageSet == null) {
+            imageSet = new ImageSet();
+            imageSets_[id] = imageSet;
         }
-        _local3.add(_arg2);
-        var _local4:int = (_local3._W_u.length - 1);
-        _4d[_local3._W_u[_local4]] = [_arg1, _local4];
+        imageSet.add(bitmapData);
+        var index:int = imageSet.images.length - 1;
+        imageKeys_[imageSet.images[index]] = [id, index];
     }
 
-    public static function _tl(_arg1:String, _arg2:Class):void {
-        var _local3:Array = _6x[_arg1];
-        if (_local3 == null) {
-            _6x[_arg1] = [];
+    public static function addSound(id:String, soundClass:Class):void {
+        if (sounds_[id] == null) {
+            sounds_[id] = [];
         }
-        _6x[_arg1].push(_arg2);
+        sounds_[id].push(soundClass);
     }
 
-    public static function _eT_(_arg1:BitmapData):Object {
-        return (_4d[_arg1]);
+    /** Returns the id (String) or [id, index] (Array) the bitmap was registered under. */
+    public static function getImageKey(bitmapData:BitmapData):Object {
+        return imageKeys_[bitmapData];
     }
 
-    public static function getImage(_arg1:String):BitmapData {
-        return (_W_u[_arg1]);
+    public static function getImage(id:String):BitmapData {
+        return images_[id];
     }
 
-    public static function _18(_arg1:String):_kp {
-        return (_08l[_arg1]);
+    public static function getImageSet(id:String):ImageSet {
+        return imageSets_[id];
     }
 
-    public static function _xK_(_arg1:String, _arg2:int):BitmapData {
-        var _local3:_kp = _08l[_arg1];
-        return (_local3._W_u[_arg2]);
+    public static function getImageFromSet(id:String, index:int):BitmapData {
+        var imageSet:ImageSet = imageSets_[id];
+        return imageSet.images[index];
     }
 
-    public static function _I_w(_arg1:String):Sound {
-        var _local2:Array = _6x[_arg1];
-        var _local3:int = (Math.random() * _local2.length);
-        return (new (_6x[_arg1][_local3])());
+    public static function getSound(id:String):Sound {
+        var soundClasses:Array = sounds_[id];
+        var index:int = Math.random() * soundClasses.length;
+        var soundClass:Class = soundClasses[index];
+        return new soundClass();
     }
 
-    public static function _05M_(_arg1:String, _arg2:Number = 1):void {
-        var _local3:Array = _6x[_arg1];
-        var _local4:int = (Math.random() * _local3.length);
-        var _local5:Sound = new (_6x[_arg1][_local4])();
-        var _local6:SoundTransform;
-        if (_arg2 != 1) {
-            _local6 = new SoundTransform(_arg2);
+    public static function playSound(id:String, volume:Number = 1):void {
+        var sound:Sound = getSound(id);
+        var transform:SoundTransform;
+        if (volume != 1) {
+            transform = new SoundTransform(volume);
         }
-        _local5.play(0, 0, _local6);
+        sound.play(0, 0, transform);
     }
 
-    public function AssetLibrary(_arg1:StaticEnforcer) {
+    public function AssetLibrary(enforcer:StaticEnforcer) {
     }
 
 }
@@ -95,4 +89,3 @@ public class AssetLibrary {
 class StaticEnforcer {
 
 }
-

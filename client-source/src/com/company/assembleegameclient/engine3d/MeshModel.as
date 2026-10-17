@@ -64,9 +64,9 @@ public class MeshModel {
         var model:MeshModel = new MeshModel();
         for each (var vertexKey:String in vertexKeys) {
             var parts:Array = vertexKey.split("/");
-            ConversionUtil._gM_(positions[int(parts[0]) - 1], model.vertices_);
+            ConversionUtil.appendToNumberVector(positions[int(parts[0]) - 1], model.vertices_);
             if (parts.length > 1 && parts[1].length > 0) {
-                ConversionUtil._gM_(uvs[int(parts[1]) - 1], model.uvts_);
+                ConversionUtil.appendToNumberVector(uvs[int(parts[1]) - 1], model.uvts_);
                 model.uvts_.push(0);
             } else {
                 model.uvts_.push(0, 0, 0);

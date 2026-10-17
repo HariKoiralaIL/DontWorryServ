@@ -13,7 +13,7 @@ public class PreviewBase extends Sprite {
     private static const MAX_SIZE:int = 300;
     private static const MIN_SIZE:int = 40;
     private static const ZOOM_STEP:int = 20;
-    protected static const DISABLED_FILTER:Array = MoreColorUtil._fL_(0x4F4F4F);
+    protected static const DISABLED_FILTER:Array = MoreColorUtil.solidColorMatrix(0x4F4F4F);
 
     private static var zoomInIcon:Class = ZoomInIcon;
     private static var zoomOutIcon:Class = ZoomOutIcon;

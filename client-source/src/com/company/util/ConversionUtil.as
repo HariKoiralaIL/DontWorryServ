@@ -1,140 +1,134 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.util.ConversionUtil
-
 package com.company.util {
-
-import flash.geom.Rectangle;
 import flash.geom.Point;
+import flash.geom.Rectangle;
 import flash.geom.Vector3D;
-
 
 public class ConversionUtil {
 
-    public static function _0D_K_(_arg1:Object, _arg2:String = ","):Array {
-        if (_arg1 == null) {
-            return ([]);
+    public static function toIntArray(value:Object, separator:String = ","):Array {
+        if (value == null) {
+            return [];
         }
-        return (_arg1.toString().split(_arg2).map(_M_q));
+        return value.toString().split(separator).map(mapParseInt);
     }
 
-    public static function _pA_(_arg1:Object, _arg2:String = ","):Array {
-        if (_arg1 == null) {
-            return ([]);
+    public static function toFloatArray(value:Object, separator:String = ","):Array {
+        if (value == null) {
+            return [];
         }
-        return (_arg1.toString().split(_arg2).map(mapParseFloat));
+        return value.toString().split(separator).map(mapParseFloat);
     }
 
-    public static function _04n(_arg1:Object, _arg2:String = ","):Vector.<int> {
-        if (_arg1 == null) {
-            return (new Vector.<int>());
+    public static function toIntVector(value:Object, separator:String = ","):Vector.<int> {
+        if (value == null) {
+            return new Vector.<int>();
         }
-        return (Vector.<int>(_arg1.toString().split(_arg2).map(_M_q)));
+        return Vector.<int>(value.toString().split(separator).map(mapParseInt));
     }
 
-    public static function _j4(_arg1:Object, _arg2:String = ","):Vector.<Number> {
-        if (_arg1 == null) {
-            return (new Vector.<Number>());
+    public static function toNumberVector(value:Object, separator:String = ","):Vector.<Number> {
+        if (value == null) {
+            return new Vector.<Number>();
         }
-        return (Vector.<Number>(_arg1.toString().split(_arg2).map(mapParseFloat)));
+        return Vector.<Number>(value.toString().split(separator).map(mapParseFloat));
     }
 
-    public static function _vh(_arg1:Object, _arg2:String = ","):Array {
-        if (_arg1 == null) {
-            return ([]);
+    public static function toStringArray(value:Object, separator:String = ","):Array {
+        if (value == null) {
+            return [];
         }
-        return (_arg1.toString().split(_arg2));
+        return value.toString().split(separator);
     }
 
-    public static function _0M_q(_arg1:Object, _arg2:String = ","):Rectangle {
-        if (_arg1 == null) {
-            return (new Rectangle());
+    public static function toRectangle(value:Object, separator:String = ","):Rectangle {
+        if (value == null) {
+            return new Rectangle();
         }
-        var _local3:Array = _arg1.toString().split(_arg2).map(mapParseFloat);
-        return ((((((_local3 == null)) || ((_local3.length < 4)))) ? new Rectangle() : new Rectangle(_local3[0], _local3[1], _local3[2], _local3[3])));
+        var parts:Array = value.toString().split(separator).map(mapParseFloat);
+        return (parts == null || parts.length < 4) ? new Rectangle() : new Rectangle(parts[0], parts[1], parts[2], parts[3]);
     }
 
-    public static function _6g(_arg1:Object, _arg2:String = ","):Point {
-        if (_arg1 == null) {
-            return (new Point());
+    public static function toPoint(value:Object, separator:String = ","):Point {
+        if (value == null) {
+            return new Point();
         }
-        var _local3:Array = _arg1.toString().split(_arg2).map(ConversionUtil.mapParseFloat);
-        return ((((((_local3 == null)) || ((_local3.length < 2)))) ? new Point() : new Point(_local3[0], _local3[1])));
+        var parts:Array = value.toString().split(separator).map(ConversionUtil.mapParseFloat);
+        return (parts == null || parts.length < 2) ? new Point() : new Point(parts[0], parts[1]);
     }
 
-    public static function _b3(_arg1:Object, _arg2:String = ","):Array {
-        var _local3:Array = [];
-        if (_arg1 == null) {
-            _local3.push(new Point());
-            _local3.push(new Point());
-            return (_local3);
+    /** "x1,y1,x2,y2" -> [Point, Point] (zeroed points on bad input). */
+    public static function toPointPair(value:Object, separator:String = ","):Array {
+        var result:Array = [];
+        if (value == null) {
+            result.push(new Point());
+            result.push(new Point());
+            return result;
         }
-        var _local4:Array = _arg1.toString().split(_arg2).map(ConversionUtil.mapParseFloat);
-        if ((((_local4 == null)) || ((_local4.length < 4)))) {
-            _local3.push(new Point());
-            _local3.push(new Point());
-            return (_local3);
+        var parts:Array = value.toString().split(separator).map(ConversionUtil.mapParseFloat);
+        if (parts == null || parts.length < 4) {
+            result.push(new Point());
+            result.push(new Point());
+            return result;
         }
-        _local3.push(new Point(_local4[0], _local4[1]));
-        _local3.push(new Point(_local4[2], _local4[3]));
-        return (_local3);
+        result.push(new Point(parts[0], parts[1]));
+        result.push(new Point(parts[2], parts[3]));
+        return result;
     }
 
-    public static function _h7(_arg1:Object, _arg2:String = ","):Vector3D {
-        if (_arg1 == null) {
-            return (new Vector3D());
+    public static function toVector3D(value:Object, separator:String = ","):Vector3D {
+        if (value == null) {
+            return new Vector3D();
         }
-        var _local3:Array = _arg1.toString().split(_arg2).map(ConversionUtil.mapParseFloat);
-        return ((((((_local3 == null)) || ((_local3.length < 3)))) ? new Vector3D() : new Vector3D(_local3[0], _local3[1], _local3[2])));
+        var parts:Array = value.toString().split(separator).map(ConversionUtil.mapParseFloat);
+        return (parts == null || parts.length < 3) ? new Vector3D() : new Vector3D(parts[0], parts[1], parts[2]);
     }
 
-    public static function _sV_(_arg1:Object, _arg2:String = ","):Vector.<int> {
-        if (_arg1 == null) {
-            return (new Vector.<int>());
+    /** Maps each token to its first character code. */
+    public static function toCharCodeVector(value:Object, separator:String = ","):Vector.<int> {
+        if (value == null) {
+            return new Vector.<int>();
         }
-        return (Vector.<int>(_arg1.toString().split(_arg2).map(_try_)));
+        return Vector.<int>(value.toString().split(separator).map(mapCharCode));
     }
 
-    public static function _gM_(_arg1:Object, _arg2:Vector.<Number>, _arg3:String = ","):void {
-        var _local5:Number;
-        if (_arg1 == null) {
+    public static function appendToNumberVector(value:Object, target:Vector.<Number>, separator:String = ","):void {
+        if (value == null) {
             return;
         }
-        var _local4:Array = _arg1.toString().split(_arg3).map(mapParseFloat);
-        for each (_local5 in _local4) {
-            _arg2.push(_local5);
+        var parts:Array = value.toString().split(separator).map(mapParseFloat);
+        for each (var number:Number in parts) {
+            target.push(number);
         }
     }
 
-    public static function _S_q(_arg1:Object, _arg2:Vector.<int>, _arg3:String = ","):void {
-        var _local5:int;
-        if (_arg1 == null) {
+    /** Note: parses tokens as floats, then truncates on push (original behavior). */
+    public static function appendToIntVector(value:Object, target:Vector.<int>, separator:String = ","):void {
+        if (value == null) {
             return;
         }
-        var _local4:Array = _arg1.toString().split(_arg3).map(mapParseFloat);
-        for each (_local5 in _local4) {
-            _arg2.push(_local5);
+        var parts:Array = value.toString().split(separator).map(mapParseFloat);
+        for each (var number:int in parts) {
+            target.push(number);
         }
     }
 
-    public static function mapParseFloat(_arg1:*, ..._args):Number {
-        return (parseFloat(_arg1));
+    public static function mapParseFloat(item:*, ...rest):Number {
+        return parseFloat(item);
     }
 
-    public static function _M_q(_arg1:*, ..._args):Number {
-        return (parseInt(_arg1));
+    public static function mapParseInt(item:*, ...rest):Number {
+        return parseInt(item);
     }
 
-    public static function _try_(_arg1:*, ..._args):Number {
-        return (String(_arg1).charCodeAt());
+    public static function mapCharCode(item:*, ...rest):Number {
+        return String(item).charCodeAt();
     }
 
-    public static function _0G_f(_arg1:Vector3D):Array {
-        return ([_arg1.x, _arg1.y, _arg1.z]);
+    public static function vector3DToArray(vector:Vector3D):Array {
+        return [vector.x, vector.y, vector.z];
     }
 
-    public function ConversionUtil(_arg1:StaticEnforcer) {
+    public function ConversionUtil(enforcer:StaticEnforcer) {
     }
 
 }
@@ -143,4 +137,3 @@ public class ConversionUtil {
 class StaticEnforcer {
 
 }
-

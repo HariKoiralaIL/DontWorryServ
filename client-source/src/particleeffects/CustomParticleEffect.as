@@ -63,7 +63,7 @@ package particleeffects {
 
         private function buildTexture(index:uint, size:Number):BitmapData {
             if (this.effectProps_.bitmapFile) {
-                var source:BitmapData = AssetLibrary._xK_(this.effectProps_.bitmapFile, index);
+                var source:BitmapData = AssetLibrary.getImageFromSet(this.effectProps_.bitmapFile, index);
                 return TextureRedrawer.redraw(source, size, true, 0, 0);
             }
             return TextureRedrawer.redrawSolidSquare(this.effectProps_.color, size);

@@ -1,184 +1,169 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.util.BitmapUtil
-
 package com.company.util {
 import flash.display.BitmapData;
 import flash.geom.Matrix;
-import flash.geom.Rectangle;
 import flash.geom.Point;
+import flash.geom.Rectangle;
 import flash.utils.Dictionary;
 
 public class BitmapUtil {
 
-    public static function mirror(_arg1:BitmapData, _arg2:int = 0):BitmapData {
-        var _local5:int;
-        if (_arg2 == 0) {
-            _arg2 = _arg1.width;
+    /** Horizontally flips the first mirrorWidth columns (0 = whole width). */
+    public static function mirror(source:BitmapData, mirrorWidth:int = 0):BitmapData {
+        if (mirrorWidth == 0) {
+            mirrorWidth = source.width;
         }
-        var _local3:BitmapData = new BitmapData(_arg1.width, _arg1.height, true, 0);
-        var _local4:int;
-        while (_local4 < _arg2) {
-            _local5 = 0;
-            while (_local5 < _arg1.height) {
-                _local3.setPixel32(((_arg2 - _local4) - 1), _local5, _arg1.getPixel32(_local4, _local5));
-                _local5++;
+        var result:BitmapData = new BitmapData(source.width, source.height, true, 0);
+        var x:int = 0;
+        while (x < mirrorWidth) {
+            var y:int = 0;
+            while (y < source.height) {
+                result.setPixel32((mirrorWidth - x) - 1, y, source.getPixel32(x, y));
+                y++;
             }
-            _local4++;
+            x++;
         }
-        return (_local3);
+        return result;
     }
 
-    public static function _c(_arg1:BitmapData, _arg2:int):BitmapData {
-        var _local3:Matrix = new Matrix();
-        _local3.translate((-(_arg1.width) / 2), (-(_arg1.height) / 2));
-        _local3.rotate(((_arg2 * Math.PI) / 2));
-        _local3.translate((_arg1.height / 2), (_arg1.width / 2));
-        var _local4:BitmapData = new BitmapData(_arg1.height, _arg1.width, true, 0);
-        _local4.draw(_arg1, _local3);
-        return (_local4);
+    /** Rotates by quarterTurns * 90 degrees; output dimensions are swapped. */
+    public static function rotate90(source:BitmapData, quarterTurns:int):BitmapData {
+        var matrix:Matrix = new Matrix();
+        matrix.translate(-source.width / 2, -source.height / 2);
+        matrix.rotate((quarterTurns * Math.PI) / 2);
+        matrix.translate(source.height / 2, source.width / 2);
+        var result:BitmapData = new BitmapData(source.height, source.width, true, 0);
+        result.draw(source, matrix);
+        return result;
     }
 
-    public static function _Y_d(_arg1:BitmapData, _arg2:int, _arg3:int, _arg4:int, _arg5:int):BitmapData {
-        var _local6:BitmapData = new BitmapData(_arg4, _arg5);
-        _local6.copyPixels(_arg1, new Rectangle(_arg2, _arg3, _arg4, _arg5), new Point(0, 0));
-        return (_local6);
+    public static function crop(source:BitmapData, x:int, y:int, width:int, height:int):BitmapData {
+        var result:BitmapData = new BitmapData(width, height);
+        result.copyPixels(source, new Rectangle(x, y, width, height), new Point(0, 0));
+        return result;
     }
 
-    public static function _F_9(_arg1:BitmapData):Number {
-        var _local4:int;
-        var _local5:int;
-        var _local2:int;
-        var _local3:int;
-        while (_local3 < _arg1.width) {
-            _local4 = 0;
-            while (_local4 < _arg1.height) {
-                _local5 = (_arg1.getPixel32(_local3, _local4) & 0xFF000000);
-                if (_local5 == 0) {
-                    _local2++;
+    /** Fraction (0..1) of pixels with alpha == 0. */
+    public static function getTransparentFraction(source:BitmapData):Number {
+        var transparentCount:int = 0;
+        var x:int = 0;
+        while (x < source.width) {
+            var y:int = 0;
+            while (y < source.height) {
+                var alpha:int = source.getPixel32(x, y) & 0xFF000000;
+                if (alpha == 0) {
+                    transparentCount++;
                 }
-                _local4++;
+                y++;
             }
-            _local3++;
+            x++;
         }
-        return ((_local2 / (_arg1.width * _arg1.height)));
+        return transparentCount / (source.width * source.height);
     }
 
-    public static function _B_n(_arg1:BitmapData):uint {
-        var _local3:uint;
-        var _local7:String;
-        var _local8:int;
-        var _local9:int;
-        var _local2:Dictionary = new Dictionary();
-        var _local4:int;
-        while (_local4 < _arg1.width) {
-            _local8 = 0;
-            while (_local8 < _arg1.width) {
-                _local3 = _arg1.getPixel32(_local4, _local8);
-                if ((_local3 & 0xFF000000) != 0) {
-                    if (!_local2.hasOwnProperty(String(_local3))) {
-                        _local2[_local3] = 1;
+    /** Most frequent non-transparent color; ties go to the larger color value. */
+    public static function getDominantColor(source:BitmapData):uint {
+        var color:uint;
+        var counts:Dictionary = new Dictionary();
+        var x:int = 0;
+        while (x < source.width) {
+            var y:int = 0;
+            while (y < source.width) { // NOTE: bound is width (not height) in the original
+                color = source.getPixel32(x, y);
+                if ((color & 0xFF000000) != 0) {
+                    if (!counts.hasOwnProperty(String(color))) {
+                        counts[color] = 1;
                     } else {
-                        var _local10 = _local2;
-                        var _local11 = _local3;
-                        _local10[_local11] = (_local10[_local11] + 1);
+                        counts[color] = counts[color] + 1;
                     }
                 }
-                _local8++;
+                y++;
             }
-            _local4++;
+            x++;
         }
-        var _local5:uint;
-        var _local6:uint;
-        for (_local7 in _local2) {
-            _local3 = uint(_local7);
-            _local9 = _local2[_local7];
-            if ((((_local9 > _local6)) || ((((_local9 == _local6)) && ((_local3 > _local5)))))) {
-                _local5 = _local3;
-                _local6 = _local9;
+        var bestColor:uint = 0;
+        var bestCount:uint = 0;
+        for (var key:String in counts) {
+            color = uint(key);
+            var count:int = counts[key];
+            if (count > bestCount || (count == bestCount && color > bestColor)) {
+                bestColor = color;
+                bestCount = count;
             }
         }
-        return (_local5);
+        return bestColor;
     }
 
-    public static function _import(_arg1:BitmapData, _arg2:IntPoint, _arg3:IntPoint):Boolean {
-        var _local11:int;
-        var _local19:int;
-        var _local20:int;
-        var _local21:int;
-        var _local4:int = _arg1.width;
-        var _local5:int = _arg1.height;
-        var _local6:int = _arg2.x();
-        var _local7:int = _arg2.y();
-        var _local8:int = _arg3.x();
-        var _local9:int = _arg3.y();
-        var _local10 = ((((_local7 > _local9)) ? (_local7 - _local9) : (_local9 - _local7)) > (((_local6 > _local8)) ? (_local6 - _local8) : (_local8 - _local6)));
-        if (_local10) {
-            _local11 = _local6;
-            _local6 = _local7;
-            _local7 = _local11;
-            _local11 = _local8;
-            _local8 = _local9;
-            _local9 = _local11;
-            _local11 = _local4;
-            _local4 = _local5;
-            _local5 = _local11;
+    /**
+     * Walks a Bresenham line between two points; returns false as soon as it
+     * hits a pixel whose RGB is 0, true if the whole (clipped) line is filled.
+     */
+    public static function isLineFilled(bitmapData:BitmapData, from:IntPoint, to:IntPoint):Boolean {
+        var tmp:int;
+        var width:int = bitmapData.width;
+        var height:int = bitmapData.height;
+        var x0:int = from.x();
+        var y0:int = from.y();
+        var x1:int = to.x();
+        var y1:int = to.y();
+        var steep:Boolean = ((y0 > y1) ? (y0 - y1) : (y1 - y0)) > ((x0 > x1) ? (x0 - x1) : (x1 - x0));
+        if (steep) {
+            tmp = x0; x0 = y0; y0 = tmp;
+            tmp = x1; x1 = y1; y1 = tmp;
+            tmp = width; width = height; height = tmp;
         }
-        if (_local6 > _local8) {
-            _local11 = _local6;
-            _local6 = _local8;
-            _local8 = _local11;
-            _local11 = _local7;
-            _local7 = _local9;
-            _local9 = _local11;
+        if (x0 > x1) {
+            tmp = x0; x0 = x1; x1 = tmp;
+            tmp = y0; y0 = y1; y1 = tmp;
         }
-        var _local12:int = (_local8 - _local6);
-        var _local13:int = (((_local7 > _local9)) ? (_local7 - _local9) : (_local9 - _local7));
-        var _local14:int = (-((_local12 + 1)) / 2);
-        var _local15:int = (((_local7) > _local9) ? -1 : 1);
-        var _local16:int = (((_local8 > (_local4 - 1))) ? (_local4 - 1) : _local8);
-        var _local17:int = _local7;
-        var _local18:int = _local6;
-        if (_local18 < 0) {
-            _local14 = (_local14 + (_local13 * -(_local18)));
-            if (_local14 >= 0) {
-                _local19 = ((_local14 / _local12) + 1);
-                _local17 = (_local17 + (_local15 * _local19));
-                _local14 = (_local14 - (_local19 * _local12));
+        var dx:int = x1 - x0;
+        var dy:int = (y0 > y1) ? (y0 - y1) : (y1 - y0);
+        var error:int = -(dx + 1) / 2;
+        var yStep:int = (y0 > y1) ? -1 : 1;
+        var xEnd:int = (x1 > (width - 1)) ? (width - 1) : x1;
+        var y:int = y0;
+        var x:int = x0;
+        var steps:int;
+        if (x < 0) {
+            error = error + (dy * -x);
+            if (error >= 0) {
+                steps = (error / dx) + 1;
+                y = y + (yStep * steps);
+                error = error - (steps * dx);
             }
-            _local18 = 0;
+            x = 0;
         }
-        if ((((((_local15 > 0)) && ((_local17 < 0)))) || ((((_local15 < 0)) && ((_local17 >= _local5)))))) {
-            _local20 = (((_local15 > 0)) ? (-(_local17) - 1) : (_local17 - _local5));
-            _local14 = (_local14 - (_local12 * _local20));
-            _local21 = (-(_local14) / _local13);
-            _local18 = (_local18 + _local21);
-            _local14 = (_local14 + (_local21 * _local13));
-            _local17 = (_local17 + (_local20 * _local15));
+        if ((yStep > 0 && y < 0) || (yStep < 0 && y >= height)) {
+            var yClip:int = (yStep > 0) ? (-y - 1) : (y - height);
+            error = error - (dx * yClip);
+            var xSkip:int = -error / dy;
+            x = x + xSkip;
+            error = error + (xSkip * dy);
+            y = y + (yClip * yStep);
         }
-        while (_local18 <= _local16) {
-            if ((((((_local15 > 0)) && ((_local17 >= _local5)))) || ((((_local15 < 0)) && ((_local17 < 0)))))) break;
-            if (_local10) {
-                if ((((((_local17 >= 0)) && ((_local17 < _local5)))) && ((_arg1.getPixel(_local17, _local18) == 0)))) {
-                    return (false);
+        while (x <= xEnd) {
+            if ((yStep > 0 && y >= height) || (yStep < 0 && y < 0)) {
+                break;
+            }
+            if (steep) {
+                if (y >= 0 && y < height && bitmapData.getPixel(y, x) == 0) {
+                    return false;
                 }
             } else {
-                if ((((((_local17 >= 0)) && ((_local17 < _local5)))) && ((_arg1.getPixel(_local18, _local17) == 0)))) {
-                    return (false);
+                if (y >= 0 && y < height && bitmapData.getPixel(x, y) == 0) {
+                    return false;
                 }
             }
-            _local14 = (_local14 + _local13);
-            if (_local14 >= 0) {
-                _local17 = (_local17 + _local15);
-                _local14 = (_local14 - _local12);
+            error = error + dy;
+            if (error >= 0) {
+                y = y + yStep;
+                error = error - dx;
             }
-            _local18++;
+            x++;
         }
-        return (true);
+        return true;
     }
 
-    public function BitmapUtil(_arg1:StaticEnforcer) {
+    public function BitmapUtil(enforcer:StaticEnforcer) {
     }
 
 }
@@ -187,4 +172,3 @@ public class BitmapUtil {
 class StaticEnforcer {
 
 }
-

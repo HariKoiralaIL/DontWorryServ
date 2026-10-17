@@ -1,6 +1,6 @@
 package mapeditor {
 import com.company.assembleegameclient.map.GroundLibrary;
-import com.company.util._L_2;
+import com.company.util.StringUtil;
 
 internal class GroundChooser extends Chooser {
 
@@ -12,7 +12,7 @@ internal class GroundChooser extends Chooser {
         for (id in GroundLibrary.idToType_) {
             sortedIds.push(id);
         }
-        sortedIds.sort(_L_2._L_O_);
+        sortedIds.sort(StringUtil.compare);
         for each (id in sortedIds) {
             type = GroundLibrary.idToType_[id];
             addElement(new GroundElement(GroundLibrary.xmlLibrary_[type]));

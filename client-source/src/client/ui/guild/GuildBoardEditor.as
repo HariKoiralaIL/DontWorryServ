@@ -35,7 +35,7 @@ internal class GuildBoardEditor extends Sprite {
         this.outlineFill_ = new GraphicsSolidFill(0xFFFFFF, 1);
         this.outlineStroke = new GraphicsStroke(2, false, LineScaleMode.NORMAL, CapsStyle.NONE, JointStyle.ROUND, 3, this.outlineFill_);
         this.path_ = new GraphicsPath(new Vector.<int>(), new Vector.<Number>());
-        this.graphicsData_ = new <IGraphicsData>[outlineStroke, backgroundFill, path_, GraphicHelper.END_FILL, GraphicHelper._H_B_];
+        this.graphicsData_ = new <IGraphicsData>[outlineStroke, backgroundFill, path_, GraphicHelper.END_FILL, GraphicHelper.NO_STROKE];
         super();
         this.text_ = _arg1;
         this.textContainer = new Sprite();
@@ -76,7 +76,7 @@ internal class GuildBoardEditor extends Sprite {
         addChild(this.saveButton);
         this.h_ = ((HEIGHT + this.saveButton.height) + 8);
         graphics.clear();
-        GraphicHelper._0L_6(this.path_);
+        GraphicHelper.clearPath(this.path_);
         GraphicHelper.drawUI(-6, -6, (this.w_ + 12), (this.h_ + 12), 4, [1, 1, 1, 1], this.path_);
         graphics.drawGraphicsData(this.graphicsData_);
         this.scrollBar._fA_(HEIGHT, this.textField.textHeight, false);

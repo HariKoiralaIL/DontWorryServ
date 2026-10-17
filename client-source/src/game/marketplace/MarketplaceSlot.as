@@ -64,7 +64,7 @@ package game.marketplace {
             }
             // Outer shape in a darkened colour, then the border ring (even-odd) in the item colour.
             this.fill_.color = GraphicHelper.darkenColor(color, 25);
-            GraphicHelper._0L_6(this.path_);
+            GraphicHelper.clearPath(this.path_);
             GraphicHelper.drawUI(0, 0, WIDTH, HEIGHT, CORNER_RADIUS, [1, 1, 1, 1], this.path_);
             graphics.clear();
             graphics.drawGraphicsData(this.graphicsData_);

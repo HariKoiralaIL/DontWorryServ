@@ -23,7 +23,7 @@ public class TabBackground extends Sprite {
     private var graphicsData_:Vector.<IGraphicsData>;
 
     public function draw(_firstTab:Boolean) {
-        GraphicHelper._0L_6(this.path_);
+        GraphicHelper.clearPath(this.path_);
         GraphicHelper.drawUI(0, 0, this.width_, this.height_, 6, [_firstTab ? 0 : 1, 1, 1, 1], this.path_);
         this.graphics.clear();
         this.graphics.drawGraphicsData(this.graphicsData_);

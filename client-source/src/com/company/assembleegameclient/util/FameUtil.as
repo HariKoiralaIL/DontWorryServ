@@ -85,7 +85,7 @@ public class FameUtil {
     }
 
     public static function getFameIcon():BitmapData {
-        var icon:BitmapData = AssetLibrary._xK_("lofiObj3", 224);
+        var icon:BitmapData = AssetLibrary.getImageFromSet("lofiObj3", 224);
         return TextureRedrawer.redraw(icon, 40, true, 0, 0);
     }
 

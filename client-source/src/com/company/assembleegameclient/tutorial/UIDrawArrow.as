@@ -18,7 +18,7 @@ public class UIDrawArrow {
     public var color_:uint;
 
     public function UIDrawArrow(xml:XML) {
-        var points:Array = ConversionUtil._b3(xml);
+        var points:Array = ConversionUtil.toPointPair(xml);
         this.p0_ = points[0];
         this.p1_ = points[1];
         this.color_ = uint(xml.@color);
@@ -36,10 +36,10 @@ public class UIDrawArrow {
         g.lineStyle(lineWidth, this.color_);
         g.moveTo(this.p0_.x, this.p0_.y);
         g.lineTo(tip.x, tip.y);
-        var angle:Number = PointUtil._C_q(tip, this.p0_);
-        var head:Point = PointUtil._b9(tip, angle + HEAD_ANGLE, HEAD_LENGTH);
+        var angle:Number = PointUtil.angleBetween(tip, this.p0_);
+        var head:Point = PointUtil.pointAtAngle(tip, angle + HEAD_ANGLE, HEAD_LENGTH);
         g.lineTo(head.x, head.y);
-        head = PointUtil._b9(tip, angle - HEAD_ANGLE, HEAD_LENGTH);
+        head = PointUtil.pointAtAngle(tip, angle - HEAD_ANGLE, HEAD_LENGTH);
         g.moveTo(tip.x, tip.y);
         g.lineTo(head.x, head.y);
     }

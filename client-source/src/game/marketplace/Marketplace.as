@@ -7,7 +7,7 @@ package game.marketplace {
     import com.company.assembleegameclient.ui.TextButton;
     import com.company.assembleegameclient.ui._0K_B_;
     import com.company.ui.SimpleText;
-    import com.company.util._H_U_;
+    import com.company.util.PropertyUtil;
 
     import events.GenericDataEvent;
     import events.TextErrorEvent;
@@ -101,7 +101,7 @@ package game.marketplace {
         private function loadOffers(params:Object):void {
             this.showLoading();
             this.request_ = new AppEngineClient(Parameters.serverAddress(), "/market", true, 2);
-            _H_U_._t2(params, Account.getInstance().credentials());
+            PropertyUtil.copyProperties(params, Account.getInstance().credentials());
             this.request_.addEventListener(GenericDataEvent.GENERIC_DATA, this.onOffersLoaded);
             this.request_.addEventListener(TextErrorEvent.TEXT_ERROR, this.onLoadError);
             this.request_.sendRequest("list", params);

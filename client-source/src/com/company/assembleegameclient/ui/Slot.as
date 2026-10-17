@@ -54,7 +54,7 @@ public class Slot extends Sprite {
     public static const WIDTH:int = 40;
     public static const HEIGHT:int = 40;
     public static const BORDER:int = 4;
-    private static const _0I_E_:ColorMatrixFilter = new ColorMatrixFilter(MoreColorUtil._fL_(0x404040));
+    private static const _0I_E_:ColorMatrixFilter = new ColorMatrixFilter(MoreColorUtil.solidColorMatrix(0x404040));
 
     public static function _mb(_arg1:int):String {
         switch (_arg1) {
@@ -159,7 +159,7 @@ public class Slot extends Sprite {
         var _local4:Point;
         var _local5:SimpleText;
         var _local6:Matrix;
-        GraphicHelper._0L_6(this.path_);
+        GraphicHelper.clearPath(this.path_);
         GraphicHelper.drawUI(0, 0, WIDTH, HEIGHT, 4, this._07i, this.path_);
         graphics.clear();
         graphics.drawGraphicsData(this.graphicsData_);
@@ -170,85 +170,85 @@ public class Slot extends Sprite {
             case any_:
                 break;
             case sword_:
-                _local1 = AssetLibrary._xK_("lofiObj5", 48);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj5", 48);
                 break;
             case dagger_:
-                _local1 = AssetLibrary._xK_("lofiObj5", 96);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj5", 96);
                 break;
             case bow_:
-                _local1 = AssetLibrary._xK_("lofiObj5", 80);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj5", 80);
                 break;
             case tome_:
-                _local1 = AssetLibrary._xK_("lofiObj6", 80);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj6", 80);
                 break;
             case shield_:
-                _local1 = AssetLibrary._xK_("lofiObj6", 112);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj6", 112);
                 break;
             case leatherArmor_:
-                _local1 = AssetLibrary._xK_("lofiObj5", 0);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj5", 0);
                 break;
             case heavyArmor_:
-                _local1 = AssetLibrary._xK_("lofiObj5", 32);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj5", 32);
                 break;
             case wand_:
-                _local1 = AssetLibrary._xK_("lofiObj5", 64);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj5", 64);
                 break;
             case accessory_:
-                _local1 = AssetLibrary._xK_("lofiObj", 44);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj", 44);
                 break;
             case spell_:
-                _local1 = AssetLibrary._xK_("lofiObj6", 64);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj6", 64);
                 break;
             case holySeal_:
-                _local1 = AssetLibrary._xK_("lofiObj6", 160);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj6", 160);
                 break;
             case cloak_:
-                _local1 = AssetLibrary._xK_("lofiObj6", 32);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj6", 32);
                 break;
             case robe_:
-                _local1 = AssetLibrary._xK_("lofiObj5", 16);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj5", 16);
                 break;
             case quiver_:
-                _local1 = AssetLibrary._xK_("lofiObj6", 48);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj6", 48);
                 break;
             case helm_:
-                _local1 = AssetLibrary._xK_("lofiObj6", 96);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj6", 96);
                 break;
             case staff_:
-                _local1 = AssetLibrary._xK_("lofiObj5", 112);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj5", 112);
                 break;
             case poison_:
-                _local1 = AssetLibrary._xK_("lofiObj6", 128);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj6", 128);
                 break;
             case skull_:
-                _local1 = AssetLibrary._xK_("lofiObj6", 0);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj6", 0);
                 break;
             case trap_:
-                _local1 = AssetLibrary._xK_("lofiObj6", 16);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj6", 16);
                 break;
             case orb_:
-                _local1 = AssetLibrary._xK_("lofiObj6", 144);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj6", 144);
                 break;
             case prism_:
-                _local1 = AssetLibrary._xK_("lofiObj6", 176);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj6", 176);
                 break;
             case scepter_:
-                _local1 = AssetLibrary._xK_("lofiObj6", 192);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj6", 192);
                 break;
             case katana_:
-                _local1 = AssetLibrary._xK_("lofiObj3", 512);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj3", 512);
                 break;
             case shuriken_:
-                _local1 = AssetLibrary._xK_("lofiObj3", 547);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj3", 547);
                 break;
             case scythe_:
-                _local1 = AssetLibrary._xK_("lofiObj5", 208);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj5", 208);
                 break;
             case heart_:
-                _local1 = AssetLibrary._xK_("lofiObj5", 224);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj5", 224);
                 break;
             case bone_:
-                _local1 = AssetLibrary._xK_("lofiObj6", 208);
+                _local1 = AssetLibrary.getImageFromSet("lofiObj6", 208);
                 break;
         }
         if (this._0H_K_ == null) {

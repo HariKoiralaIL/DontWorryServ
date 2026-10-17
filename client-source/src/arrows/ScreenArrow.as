@@ -6,7 +6,7 @@ package arrows
     import com.company.assembleegameclient.objects.GameObject;
     import com.company.assembleegameclient.ui.tooltip.ToolTip;
     import com.company.util.Trig;
-    import com.company.util._E_I_;
+    import com.company.util.RectUtil;
 
     import flash.display.Graphics;
     import flash.display.Shape;
@@ -90,7 +90,7 @@ package arrows
             var bounds:Rectangle = camera.clipRect_;
             var dx:Number = this.go_.screenVec_[0];
             var dy:Number = this.go_.screenVec_[1];
-            if (!_E_I_._S_1(camera.clipRect_, 0, 0, dx, dy, this.screenPoint_))
+            if (!RectUtil.findEdgeCrossing(camera.clipRect_, 0, 0, dx, dy, this.screenPoint_))
             {
                 this.go_ = null;
                 visible = false;
@@ -98,7 +98,7 @@ package arrows
             }
             x = this.screenPoint_.x;
             y = this.screenPoint_.y;
-            var angle:Number = Trig._S_C_(270 - (Trig._G_Q_ * Math.atan2(dx, dy)));
+            var angle:Number = Trig.normalizeDegrees(270 - (Trig.RAD_TO_DEG * Math.atan2(dx, dy)));
             if (this.screenPoint_.x < bounds.left + 5)
             {
                 if (angle > 45)
@@ -206,32 +206,32 @@ package arrows
             var tmp:Number;
             var angle:Number = this.arrowShape_.rotation;
             var distance:int = CENTER_OFFSET + BIG_SIZE + 12;
-            var offsetX:Number = distance * Math.cos(angle * Trig._km);
-            var offsetY:Number = distance * Math.sin(angle * Trig._km);
+            var offsetX:Number = distance * Math.cos(angle * Trig.DEG_TO_RAD);
+            var offsetY:Number = distance * Math.sin(angle * Trig.DEG_TO_RAD);
             var width:Number = toolTip.contentWidth_;
             var height:Number = toolTip.contentHeight_;
             if (angle >= 45 && angle <= 135)
             {
-                tmp = offsetX + (width / Math.tan(angle * Trig._km));
+                tmp = offsetX + (width / Math.tan(angle * Trig.DEG_TO_RAD));
                 toolTip.x = ((offsetX + tmp) / 2) - (width / 2);
                 toolTip.y = offsetY;
             }
             else if (angle <= -45 && angle >= -135)
             {
-                tmp = offsetX - (width / Math.tan(angle * Trig._km));
+                tmp = offsetX - (width / Math.tan(angle * Trig.DEG_TO_RAD));
                 toolTip.x = ((offsetX + tmp) / 2) - (width / 2);
                 toolTip.y = offsetY - height;
             }
             else if (angle < 45 && angle > -45)
             {
                 toolTip.x = offsetX;
-                tmp = offsetY + (height * Math.tan(angle * Trig._km));
+                tmp = offsetY + (height * Math.tan(angle * Trig.DEG_TO_RAD));
                 toolTip.y = ((offsetY + tmp) / 2) - (height / 2);
             }
             else
             {
                 toolTip.x = offsetX - width;
-                tmp = offsetY - (height * Math.tan(angle * Trig._km));
+                tmp = offsetY - (height * Math.tan(angle * Trig.DEG_TO_RAD));
                 toolTip.y = ((offsetY + tmp) / 2) - (height / 2);
             }
         }

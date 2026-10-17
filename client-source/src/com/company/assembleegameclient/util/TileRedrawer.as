@@ -7,7 +7,7 @@ import com.company.assembleegameclient.parameters.Parameters;
 import com.company.util.AssetLibrary;
 import com.company.util.BitmapUtil;
 import com.company.util.PointUtil;
-import com.company.util._kp;
+import com.company.util.ImageSet;
 
 import flash.display.BitmapData;
 import flash.geom.Point;
@@ -49,7 +49,7 @@ public class TileRedrawer {
     private static const MASK_INNER_P2:int = 5;
 
     /** One mask set per quadrant (top-left, top-right, bottom-left, bottom-right). */
-    private static const rotatedMasks_:Vector.<Vector.<_kp>> = buildRotatedMasks();
+    private static const rotatedMasks_:Vector.<Vector.<ImageSet>> = buildRotatedMasks();
 
     private static var cacheByQuality_:Vector.<Object> = new <Object>[null, {}];
 
@@ -152,7 +152,7 @@ public class TileRedrawer {
      * @param corner tile type of the diagonal neighbour
      * @param sideB  tile type of the second adjacent side neighbour
      */
-    private static function blendQuadrant(target:BitmapData, rect:Rectangle, destPoint:Point, masks:Vector.<_kp>, center:uint, sideA:uint, corner:uint, sideB:uint):void {
+    private static function blendQuadrant(target:BitmapData, rect:Rectangle, destPoint:Point, masks:Vector.<ImageSet>, center:uint, sideA:uint, corner:uint, sideB:uint):void {
         var texture:BitmapData;
         var mask:BitmapData;
         if (center == sideA && center == sideB) {
@@ -208,25 +208,25 @@ public class TileRedrawer {
         return neighbors;
     }
 
-    private static function buildRotatedMasks():Vector.<Vector.<_kp>> {
-        var masks:Vector.<Vector.<_kp>> = new Vector.<Vector.<_kp>>();
-        addRotatedMasks(masks, AssetLibrary._18("inner_mask"), AssetLibrary._18("sides_mask"), AssetLibrary._18("outer_mask"), AssetLibrary._18("innerP1_mask"), AssetLibrary._18("innerP2_mask"));
+    private static function buildRotatedMasks():Vector.<Vector.<ImageSet>> {
+        var masks:Vector.<Vector.<ImageSet>> = new Vector.<Vector.<ImageSet>>();
+        addRotatedMasks(masks, AssetLibrary.getImageSet("inner_mask"), AssetLibrary.getImageSet("sides_mask"), AssetLibrary.getImageSet("outer_mask"), AssetLibrary.getImageSet("innerP1_mask"), AssetLibrary.getImageSet("innerP2_mask"));
         return masks;
     }
 
     /** Pushes one mask set per quadrant, each rotated to match that quadrant. */
-    private static function addRotatedMasks(target:Vector.<Vector.<_kp>>, inner:_kp, sides:_kp, outer:_kp, innerP1:_kp, innerP2:_kp):void {
+    private static function addRotatedMasks(target:Vector.<Vector.<ImageSet>>, inner:ImageSet, sides:ImageSet, outer:ImageSet, innerP1:ImageSet, innerP2:ImageSet):void {
         var rotation:int;
         for each (rotation in [-1, 0, 2, 1]) {
-            target.push(new <_kp>[rotateMasks(inner, rotation), rotateMasks(sides, (rotation - 1)), rotateMasks(sides, rotation), rotateMasks(outer, rotation), rotateMasks(innerP1, rotation), rotateMasks(innerP2, rotation)]);
+            target.push(new <ImageSet>[rotateMasks(inner, rotation), rotateMasks(sides, (rotation - 1)), rotateMasks(sides, rotation), rotateMasks(outer, rotation), rotateMasks(innerP1, rotation), rotateMasks(innerP2, rotation)]);
         }
     }
 
-    private static function rotateMasks(masks:_kp, rotation:int):_kp {
+    private static function rotateMasks(masks:ImageSet, rotation:int):ImageSet {
         var mask:BitmapData;
-        var rotated:_kp = new _kp();
-        for each (mask in masks._W_u) {
-            rotated.add(BitmapUtil._c(mask, rotation));
+        var rotated:ImageSet = new ImageSet();
+        for each (mask in masks.images) {
+            rotated.add(BitmapUtil.rotate90(mask, rotation));
         }
         return rotated;
     }
@@ -361,7 +361,7 @@ public class TileRedrawer {
 
     /** Alpha-composites a full-size overlay texture onto the target. */
     private static function stamp(target:BitmapData, overlay:BitmapData):void {
-        target.copyPixels(overlay, overlay.rect, PointUtil._P_5, null, null, true);
+        target.copyPixels(overlay, overlay.rect, PointUtil.ORIGIN, null, null, true);
     }
 
 }

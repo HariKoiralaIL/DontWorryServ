@@ -130,7 +130,7 @@ public class GameCamera {
         //I can already feel it will take me a long time to get this part right...
         var viewingDistance:int = (projectblogo.sHeight / 600) + (projectblogo.sWidth / 600) + (projectblogo.sHeight / 600) + (projectblogo.sWidth / 600) / (Parameters.data_["mscale"]);
         if (usePerspective) {
-            var halfFovTan:Number = this.z_ * Math.tan((this.perspective_.fieldOfView / 2) * Trig._km);
+            var halfFovTan:Number = this.z_ * Math.tan((this.perspective_.fieldOfView / 2) * Trig.DEG_TO_RAD);
             this.maxDist_ = Math.SQRT2 * halfFovTan * 1.4;
         } else {
             var halfWidth:Number = this.clipRect_.width / (2 * 50);

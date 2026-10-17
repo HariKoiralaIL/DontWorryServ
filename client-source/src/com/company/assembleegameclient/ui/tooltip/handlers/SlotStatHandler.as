@@ -1,8 +1,3 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.ui.tooltip.handlers.SlotStatHandler
-
 package com.company.assembleegameclient.ui.tooltip.handlers {
 import flash.utils.Dictionary;
 
@@ -18,44 +13,63 @@ public class SlotStatHandler {
     public var onEquipText:Dictionary;
     public var tooltipText:String;
 
-    public function _N_Q_(xml2:XML, xml:XML):void {
-        this.reset();
-        this.compareSlots(xml2, xml);
+    /** Formerly _N_Q_ */
+    public function compare(itemXML:XML, curItemXML:XML):void {
+        reset();
+        compareSlots(itemXML, curItemXML);
     }
 
-    public function compareWithData(xml2:XML, xml:XML, _arg3:Object, _arg4:Object):void {
-        this.compareSlotsData(xml2, xml, _arg3, _arg4);
+    public function compareWithData(itemXML:XML, curItemXML:XML, itemData:Object, curItemData:Object):void {
+        compareSlotsData(itemXML, curItemXML, itemData, curItemData);
     }
 
-    protected function compareSlots(xml2:XML, xml:XML):void {
+    protected function compareSlots(itemXML:XML, curItemXML:XML):void {
     }
 
-    protected function compareSlotsData(xml2:XML, xml:XML, _arg3:Object, _arg4:Object):void {
+    protected function compareSlotsData(itemXML:XML, curItemXML:XML, itemData:Object, curItemData:Object):void {
     }
 
-    protected function compareColor(_arg1:Number):String {
-        if (_arg1 < 0) {
-            return (RED);
+    protected function compareColor(diff:Number):String {
+        if (diff < 0) {
+            return RED;
         }
-        if (_arg1 > 0) {
-            return (GREEN);
+        if (diff > 0) {
+            return GREEN;
         }
-        return (YELLOW);
+        return YELLOW;
     }
 
-    protected function colorize(_arg1:String, _arg2:String = "#FFFF8F"):String {
-        return ('<font color="' + _arg2 + '">' + _arg1 + "</font>");
+    protected function colorize(text:String, color:String = "#FFFF8F"):String {
+        return '<font color="' + color + '">' + text + "</font>";
     }
 
-    protected function mpCostLine(_arg1:String):String {
-        return (this.colorize("MP Cost: ", GRAY) + this.colorize(_arg1, YELLOW) + "\n");
+    protected function mpCostLine(cost:String):String {
+        return colorize("MP Cost: ", GRAY) + colorize(cost, YELLOW) + "\n";
+    }
+
+    protected function selfEffectLine(effectName:String, duration:Object, color:String):String {
+        return "Effect on Self:\n" + colorize(effectName + " for " + duration + " secs\n", color);
+    }
+
+    /** All <Activate> tags whose text matches activateName. */
+    protected function activateTags(itemXML:XML, activateName:String):XMLList {
+        return itemXML.Activate.(text() == activateName);
+    }
+
+    /** First <Activate> tag with the given name and @effect, or null. */
+    protected function findActivateByEffect(itemXML:XML, activateName:String, effect:String):XML {
+        for each (var tag:XML in activateTags(itemXML, activateName)) {
+            if (tag.@effect == effect) {
+                return tag;
+            }
+        }
+        return null;
     }
 
     private function reset():void {
-        this.handledXml = new Dictionary();
-        this.onEquipText = new Dictionary();
+        handledXml = new Dictionary();
+        onEquipText = new Dictionary();
     }
 
 }
-}//package com.company.assembleegameclient.ui.tooltip.handlers
-
+}

@@ -26,8 +26,8 @@ import com.company.assembleegameclient.ui.ui_chat;
 import com.company.assembleegameclient.ui.ui_goldcoin;
 import com.company.assembleegameclient.util.TextureRedrawer;
 import com.company.util.MoreColorUtil;
-import com.company.util._G_;
-import com.company.util._H_U_;
+import com.company.util.BitmapEffectCache;
+import com.company.util.PropertyUtil;
 
 import flash.display.DisplayObject;
 import flash.display.StageScaleMode;
@@ -43,7 +43,7 @@ import game.signals.SingletonSignal;
 public class GameSprite extends BaseGameSprite {
 
     public static const CLIENT_START_TIME:Number = new Date().time;
-    protected static const PAUSED_FILTER:ColorMatrixFilter = new ColorMatrixFilter(MoreColorUtil._0M_l);
+    protected static const PAUSED_FILTER:ColorMatrixFilter = new ColorMatrixFilter(MoreColorUtil.GRAYSCALE_MATRIX);
 
     private static const STAGE_WIDTH:int = 800;
     private static const STAGE_HEIGHT:int = 600;
@@ -141,7 +141,7 @@ public class GameSprite extends BaseGameSprite {
             "game_net": acct.gameNetwork(),
             "play_platform": acct.playPlatform()
         };
-        _H_U_._t2(logParams, acct.credentials());
+        PropertyUtil.copyProperties(logParams, acct.credentials());
         // NOTE: `!name == "Kitchen"` compares a Boolean with a String and is always false,
         // so the tutorial-exit logging and protip branches below never run. Behavior kept as-is.
         if (!this.map_.name_ == "Kitchen" && !this.map_.name_ == "Tutorial" && Parameters.data_.watchForTutorialExit == true) {
@@ -189,7 +189,7 @@ public class GameSprite extends BaseGameSprite {
         this.map_.dispose();
         removeChild(this.hudView_);
         this.hudView_.dispose();
-        _G_.clear();
+        BitmapEffectCache.clear();
         TextureRedrawer.clearCache();
         Projectile.dispose();
     }

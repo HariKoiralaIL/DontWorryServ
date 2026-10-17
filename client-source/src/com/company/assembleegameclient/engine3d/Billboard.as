@@ -49,7 +49,7 @@ public class Billboard {
         }
         var px:Number = this.projected_.x;
         var py:Number = this.projected_.y;
-        var depthScale:Number = this.projected_.w * Math.sin((camera.perspective_.fieldOfView / 2) * Trig._km);
+        var depthScale:Number = this.projected_.w * Math.sin((camera.perspective_.fieldOfView / 2) * Trig.DEG_TO_RAD);
         var half:Number = this.size_ / depthScale;
 
         this.data_.length = 0;

@@ -16,7 +16,7 @@ public class UIDrawBox {
     public var color_:uint;
 
     public function UIDrawBox(xml:XML) {
-        this.rect_ = ConversionUtil._0M_q(xml);
+        this.rect_ = ConversionUtil.toRectangle(xml);
         this.color_ = uint(xml.@color);
     }
 

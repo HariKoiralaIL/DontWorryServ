@@ -57,7 +57,7 @@ public class MenuLinkButton extends Sprite {
         this.hasIcon = hasIcon;
         if (this.hasIcon) {
             var iconData:BitmapData = TextureRedrawer.redraw(
-                    AssetLibrary._xK_(ICON_SPRITE_SHEET, iconIndex), ICON_SCALE, true, 0, 0);
+                    AssetLibrary.getImageFromSet(ICON_SPRITE_SHEET, iconIndex), ICON_SCALE, true, 0, 0);
             this.icon = new Bitmap(iconData);
             this.icon.x = ICON_X;
             this.icon.y = ICON_Y;

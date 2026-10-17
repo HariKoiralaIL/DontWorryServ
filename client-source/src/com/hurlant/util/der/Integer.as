@@ -4,11 +4,11 @@
 //com.hurlant.util.der.Integer
 
 package com.hurlant.util.der {
-import com.hurlant.math._03Q_;
+import com.hurlant.math.BigInteger;
 
 import flash.utils.ByteArray;
 
-public class Integer extends _03Q_ implements IAsn1Type {
+public class Integer extends BigInteger implements IAsn1Type {
 
     public function Integer(_arg1:uint, _arg2:uint, _arg3:ByteArray) {
         this._type = _arg1;

@@ -10,8 +10,8 @@ import flash.display.Shape;
 /** Thin shaded strip drawn along the right edge of the viewport. */
 public class GradientOverlay extends Shape {
 
-    private const fill:GraphicsGradientFill = new GraphicsGradientFill(GradientType.LINEAR, [0, 0], [0, 1], [0, 0xFF], GraphicHelper._0L_0(10, 600));
-    private const path:GraphicsPath = GraphicHelper._wj(0, 0, 10, 600);
+    private const fill:GraphicsGradientFill = new GraphicsGradientFill(GradientType.LINEAR, [0, 0], [0, 1], [0, 0xFF], GraphicHelper.createGradientMatrix(10, 600));
+    private const path:GraphicsPath = GraphicHelper.createRectPath(0, 0, 10, 600);
     private var graphicsData:Vector.<IGraphicsData>;
 
     public function GradientOverlay() {

@@ -1,38 +1,31 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.ui.tooltip.handlers.ShieldStatHandler
-
 package com.company.assembleegameclient.ui.tooltip.handlers {
 public class ShieldStatHandler extends SlotStatHandler {
 
-    public function ShieldStatHandler() {
-        this.weaponHandler = new WeaponStatHandler();
-    }
+    private static const SHIELD_OF_OGMUR:String = "Shield of Ogmur";
+
     private var weaponHandler:WeaponStatHandler;
 
-    override protected function compareSlots(xml2:XML, xml:XML):void {
-        var _local3:String;
-        this.weaponHandler._N_Q_(xml2, xml);
-        tooltipText = this.weaponHandler.tooltipText;
-        for (_local3 in this.weaponHandler.handledXml) {
-            handledXml[_local3] = this.weaponHandler.handledXml[_local3];
+    public function ShieldStatHandler() {
+        weaponHandler = new WeaponStatHandler();
+    }
+
+    override protected function compareSlots(itemXML:XML, curItemXML:XML):void {
+        weaponHandler.compare(itemXML, curItemXML);
+        tooltipText = weaponHandler.tooltipText;
+        for (var key:String in weaponHandler.handledXml) {
+            handledXml[key] = weaponHandler.handledXml[key];
         }
-        this.addOgmurEffect(xml2);
+        addOgmurEffect(itemXML);
     }
 
     private function addOgmurEffect(itemXML:XML):void {
-        var tag:XML;
-        var str:String;
-        if (itemXML.@id == "Shield of Ogmur") {
-            tag = itemXML.ConditionEffect.(text() == "Armor Broken")[0];
-            str = (("Armor Broken for " + tag.@duration) + " secs\n");
-            str = ("Party Effect: " + colorize(str, PURPLE));
-            tooltipText = (tooltipText + str);
-            handledXml[tag.toXMLString()] = str;
+        if (itemXML.@id == SHIELD_OF_OGMUR) {
+            var tag:XML = itemXML.ConditionEffect.(text() == "Armor Broken")[0];
+            var line:String = "Party Effect: " + colorize("Armor Broken for " + tag.@duration + " secs\n", PURPLE);
+            tooltipText += line;
+            handledXml[tag.toXMLString()] = line;
         }
     }
 
 }
-}//package com.company.assembleegameclient.ui.tooltip.handlers
-
+}

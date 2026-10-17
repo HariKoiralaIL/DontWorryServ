@@ -44,7 +44,7 @@ package com.company.assembleegameclient.objects {
             this.addWallFace(_local8, _local7, _local3, _local4, texture_, true, true);
             var _local9:BitmapData = texture_;
             if (this.objectXml_.hasOwnProperty("DotTexture")) {
-                _local9 = AssetLibrary._xK_(String(this.objectXml_.DotTexture.File), int(this.objectXml_.DotTexture.Index));
+                _local9 = AssetLibrary.getImageFromSet(String(this.objectXml_.DotTexture.File), int(this.objectXml_.DotTexture.Index));
             }
             this.addTopFace([_local5, _local6, _local7, _local8], new <Number>[0.25, 0.25, 0.75, 0.25, 0.25, 0.75], _local9);
         }
@@ -63,7 +63,7 @@ package com.company.assembleegameclient.objects {
             this.addWallFace(_local8, _local7, _local3, _local4, texture_, true, true);
             var _local9:BitmapData = texture_;
             if (this.objectXml_.hasOwnProperty("ShortLineTexture")) {
-                _local9 = AssetLibrary._xK_(String(this.objectXml_.ShortLineTexture.File), int(this.objectXml_.ShortLineTexture.Index));
+                _local9 = AssetLibrary.getImageFromSet(String(this.objectXml_.ShortLineTexture.File), int(this.objectXml_.ShortLineTexture.Index));
             }
             this.addTopFace([_local5, _local6, _local7, _local8], new <Number>[0.25, 0, 0.75, 0, 0.25, 0.75], _local9);
         }
@@ -87,7 +87,7 @@ package com.company.assembleegameclient.objects {
             this.addWallFace(_local7, _local12, _local6, _local1, texture_, false, true);
             var _local13:BitmapData = texture_;
             if (this.objectXml_.hasOwnProperty("LTexture")) {
-                _local13 = AssetLibrary._xK_(String(this.objectXml_.LTexture.File), int(this.objectXml_.LTexture.Index));
+                _local13 = AssetLibrary.getImageFromSet(String(this.objectXml_.LTexture.File), int(this.objectXml_.LTexture.Index));
             }
             this.addTopFace([_local7, _local8, _local9, _local10, _local11, _local12], new <Number>[0.25, 0, 0.75, 0, 0.25, 0.75], _local13);
         }
@@ -105,7 +105,7 @@ package com.company.assembleegameclient.objects {
             this.addWallFace(_local5, _local8, _local4, _local1, texture_, false, false);
             var _local9:BitmapData = texture_;
             if (this.objectXml_.hasOwnProperty("LineTexture")) {
-                _local9 = AssetLibrary._xK_(String(this.objectXml_.LineTexture.File), int(this.objectXml_.LineTexture.Index));
+                _local9 = AssetLibrary.getImageFromSet(String(this.objectXml_.LineTexture.File), int(this.objectXml_.LineTexture.Index));
             }
             this.addTopFace([_local5, _local6, _local7, _local8], new <Number>[0.25, 0, 0.75, 0, 0.25, 1], _local9);
         }
@@ -134,7 +134,7 @@ package com.company.assembleegameclient.objects {
             this.addNormalWallFace(_local9, _local16, _local8, _local1, texture_, N0, false);
             var _local17:BitmapData = texture_;
             if (this.objectXml_.hasOwnProperty("TTexture")) {
-                _local17 = AssetLibrary._xK_(String(this.objectXml_.TTexture.File), int(this.objectXml_.TTexture.Index));
+                _local17 = AssetLibrary.getImageFromSet(String(this.objectXml_.TTexture.File), int(this.objectXml_.TTexture.Index));
             }
             this.addTopFace([_local9, _local10, _local11, _local12, _local13, _local14, _local15, _local16], new <Number>[0.25, 0, 0.75, 0, 0.25, 0.25], _local17);
         }
@@ -174,7 +174,7 @@ package com.company.assembleegameclient.objects {
             this.addNormalWallFace(_local13, _local24, _local12, _local1, texture_, N0, false);
             var _local25:BitmapData = texture_;
             if (this.objectXml_.hasOwnProperty("CrossTexture")) {
-                _local25 = AssetLibrary._xK_(String(this.objectXml_.CrossTexture.File), int(this.objectXml_.CrossTexture.Index));
+                _local25 = AssetLibrary.getImageFromSet(String(this.objectXml_.CrossTexture.File), int(this.objectXml_.CrossTexture.Index));
             }
             this.addTopFace([_local13, _local14, _local15, _local16, _local17, _local18, _local19, _local20, _local21, _local22, _local23, _local24], new <Number>[0.25, 0, 0.75, 0, 0.25, 0.25], _local25);
         }
