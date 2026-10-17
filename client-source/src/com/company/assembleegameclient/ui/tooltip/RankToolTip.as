@@ -11,7 +11,7 @@ import com.company.assembleegameclient.ui._return;
 import flash.filters.DropShadowFilter;
 import flash.geom.ColorTransform;
 
-import com.company.assembleegameclient.util._Z_B_;
+import com.company.assembleegameclient.util.FameUtil;
 import com.company.assembleegameclient.objects.ObjectLibrary;
 
 public class RankToolTip extends ToolTip {
@@ -47,15 +47,15 @@ public class RankToolTip extends ToolTip {
         addChild(this.divider_);
         var _local3:int = (this.divider_.y + 3);
         var _local4:int;
-        while (_local4 < _Z_B_._n0.length) {
-            legendLine = new LegendLine((_local4 * ObjectLibrary.playerChars_.length), (((_local4 + 1) * ObjectLibrary.playerChars_.length) - 1), _Z_B_._n0[_local4]);
+        while (_local4 < FameUtil.STAR_COLORS.length) {
+            legendLine = new LegendLine((_local4 * ObjectLibrary.playerChars_.length), (((_local4 + 1) * ObjectLibrary.playerChars_.length) - 1), FameUtil.STAR_COLORS[_local4]);
             legendLine.x = 6;
             legendLine.y = _local3;
             addChild(legendLine);
             _local3 = (_local3 + legendLine.height);
             _local4++;
         }
-        legendLine = new LegendLine(_Z_B_._5e(), _Z_B_._5e(), new ColorTransform((0xFF / 0xFF), (0 / 0xFF), (0xFF / 0xFF)));
+        legendLine = new LegendLine(FameUtil.maxStars(), FameUtil.maxStars(), new ColorTransform((0xFF / 0xFF), (0 / 0xFF), (0xFF / 0xFF)));
         legendLine.x = 6;
         legendLine.y = _local3;
         addChild(legendLine);

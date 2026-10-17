@@ -1,6 +1,6 @@
-package com.company.assembleegameclient.objects {
+﻿package com.company.assembleegameclient.objects {
     import com.company.assembleegameclient.util.Currency;
-    import com.company.assembleegameclient.util._07E_;
+    import com.company.assembleegameclient.util.GuildUtil;
 
     import com.company.assembleegameclient.ui.tooltip.TitleDescriptionToolTip;
     import com.company.assembleegameclient.ui.tooltip.ToolTip;
@@ -12,9 +12,9 @@ package com.company.assembleegameclient.objects {
         public function GuildMerchant(xml:XML) {
             super(xml);
             price_ = int(xml.Price);
-            currency_ = Currency._A_h;
+            currency_ = Currency.GUILD_FAME;
             this.description_ = xml.Description;
-            guildRankReq_ = _07E_._tS_;
+            guildRankReq_ = GuildUtil.LEADER;
         }
         public var description_:String;
 

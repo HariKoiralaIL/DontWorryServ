@@ -36,7 +36,7 @@ package particleeffects {
 import particleeffects.Particle;
 import particleeffects.SparkParticle;
 
-import com.company.assembleegameclient.util._04d;
+import com.company.assembleegameclient.util.MathUtil;
 
 import flash.geom.Point;
 
@@ -74,7 +74,7 @@ class ThrowParticle extends Particle {
         this.pathX_ = (this.pathX_ + (this.dx_ * dt));
         this.pathY_ = (this.pathY_ + (this.dy_ * dt));
         moveTo(this.pathX_, this.pathY_);
-        map_.addObj(new SparkParticle((100 * (z_ + 1)), color_, 400, z_, _04d._F_e(1), _04d._F_e(1)), this.pathX_, this.pathY_);
+        map_.addObj(new SparkParticle((100 * (z_ + 1)), color_, 400, z_, MathUtil.randomSpread(1), MathUtil.randomSpread(1)), this.pathX_, this.pathY_);
         return true;
     }
 

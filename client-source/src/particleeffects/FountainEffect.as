@@ -2,7 +2,7 @@ package particleeffects {
 
     import com.company.assembleegameclient.objects.GameObject;
     import com.company.assembleegameclient.parameters.Parameters;
-    import com.company.assembleegameclient.util._wW_;
+    import com.company.assembleegameclient.util.ObjectPool;
 
     public class FountainEffect extends ParticleEffect {
 
@@ -30,7 +30,7 @@ package particleeffects {
             var tick:int = (this.lastUpdate_ / SPAWN_INTERVAL);
             while (tick < (time / SPAWN_INTERVAL)) {
                 spawnTime = (tick * SPAWN_INTERVAL);
-                particle = (_wW_._B_1(FountainParticle) as FountainParticle);
+                particle = (ObjectPool.getOrCreate(FountainParticle) as FountainParticle);
                 particle.restart(spawnTime, time);
                 if (!Parameters.data_["disableParticles"]) {
                     map_.addObj(particle, x_, y_);
@@ -46,7 +46,7 @@ package particleeffects {
 
 import particleeffects.Particle;
 
-import com.company.assembleegameclient.util._wW_;
+import com.company.assembleegameclient.util.ObjectPool;
 
 class FountainParticle extends Particle {
 
@@ -78,7 +78,7 @@ class FountainParticle extends Particle {
 
     override public function removeFromMap():void {
         super.removeFromMap();
-        _wW_._ay(this);
+        ObjectPool.releaseInstance(this);
     }
 
     override public function update(time:int, dt:int):Boolean {

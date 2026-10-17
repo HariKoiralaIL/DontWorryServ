@@ -4,7 +4,7 @@ package game.guild {
     import com.company.assembleegameclient.appengine.AppEngineClient;
     import com.company.assembleegameclient.parameters.Parameters;
     import com.company.assembleegameclient.ui._0K_B_;
-    import com.company.assembleegameclient.util._07E_;
+    import com.company.assembleegameclient.util.GuildUtil;
     import com.company.ui.SimpleText;
     import com.company.util._H_U_;
 
@@ -91,7 +91,7 @@ package game.guild {
             this.fameText_.y = ((HEADER_HEIGHT / 2) - (this.fameText_.height / 2));
             addChild(this.fameText_);
 
-            this.fameIcon_ = new Bitmap(_07E_._oO_(40));
+            this.fameIcon_ = new Bitmap(GuildUtil.getGuildFameIcon(40));
             this.fameIcon_.x = 760;
             this.fameIcon_.y = ((HEADER_HEIGHT / 2) - (this.fameIcon_.height / 2));
             addChild(this.fameIcon_);
@@ -129,7 +129,7 @@ package game.guild {
                 rowCount++;
             }
 
-            var openSlots:int = (_07E_._27 - (this.offset_ + rowCount));
+            var openSlots:int = (GuildUtil.MAX_RANK - (this.offset_ + rowCount));
             this.openSlotsText_ = new SimpleText(22, TEXT_COLOR, false, 0, 0, FONT);
             this.openSlotsText_.text = (openSlots + " open slots");
             this.openSlotsText_._08S_();

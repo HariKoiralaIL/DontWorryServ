@@ -1,6 +1,6 @@
 package com.company.assembleegameclient.net.messages.incoming {
 import com.company.assembleegameclient.net.messages.data.ObjectStatusData;
-import com.company.assembleegameclient.util._wW_;
+import com.company.assembleegameclient.util.ObjectPool;
 import flash.utils.IDataInput;
 
 /**
@@ -24,11 +24,11 @@ public class NewTick extends ServerMessage {
         this.tickTime_ = data.readInt();
         count = data.readShort();
         for (i = count; i < this.statuses_.length; i++) {
-            _wW_._ay(this.statuses_[i]);
+            ObjectPool.releaseInstance(this.statuses_[i]);
         }
         this.statuses_.length = Math.min(count, this.statuses_.length);
         while (this.statuses_.length < count) {
-            this.statuses_.push((_wW_._B_1(ObjectStatusData) as ObjectStatusData));
+            this.statuses_.push((ObjectPool.getOrCreate(ObjectStatusData) as ObjectStatusData));
         }
         for (i = 0; i < count; i++) {
             this.statuses_[i].parseFromInput(data);

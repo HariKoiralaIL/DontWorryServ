@@ -1,6 +1,6 @@
 package com.company.assembleegameclient.net.messages.incoming {
 import com.company.assembleegameclient.net.messages.data.TradeItem;
-import com.company.assembleegameclient.util._wW_;
+import com.company.assembleegameclient.util.ObjectPool;
 import flash.utils.IDataInput;
 
 /**
@@ -23,11 +23,11 @@ public class TradeStart extends ServerMessage {
         var i:int;
         count = data.readShort();
         for (i = count; i < this.myItems_.length; i++) {
-            _wW_._ay(this.myItems_[i]);
+            ObjectPool.releaseInstance(this.myItems_[i]);
         }
         this.myItems_.length = Math.min(count, this.myItems_.length);
         while (this.myItems_.length < count) {
-            this.myItems_.push((_wW_._B_1(TradeItem) as TradeItem));
+            this.myItems_.push((ObjectPool.getOrCreate(TradeItem) as TradeItem));
         }
         for (i = 0; i < count; i++) {
             this.myItems_[i].parseFromInput(data);
@@ -35,11 +35,11 @@ public class TradeStart extends ServerMessage {
         this.yourName_ = data.readUTF();
         count = data.readShort();
         for (i = count; i < this.yourItems_.length; i++) {
-            _wW_._ay(this.yourItems_[i]);
+            ObjectPool.releaseInstance(this.yourItems_[i]);
         }
         this.yourItems_.length = Math.min(count, this.yourItems_.length);
         while (this.yourItems_.length < count) {
-            this.yourItems_.push((_wW_._B_1(TradeItem) as TradeItem));
+            this.yourItems_.push((ObjectPool.getOrCreate(TradeItem) as TradeItem));
         }
         for (i = 0; i < count; i++) {
             this.yourItems_[i].parseFromInput(data);

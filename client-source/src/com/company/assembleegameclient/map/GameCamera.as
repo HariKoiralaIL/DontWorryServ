@@ -1,7 +1,7 @@
 package com.company.assembleegameclient.map {
 import com.company.assembleegameclient.objects.Player;
 import com.company.assembleegameclient.parameters.Parameters;
-import com.company.assembleegameclient.util._04d;
+import com.company.assembleegameclient.util.MathUtil;
 import com.company.util.Trig;
 
 import flash.geom.Matrix3D;
@@ -88,8 +88,8 @@ public class GameCamera {
 
     public function configure(x:Number, y:Number, z:Number, angleRad:Number, clipRect:Rectangle, usePerspective:Boolean):void {
         if (this.isShaking_) {
-            x += _04d._F_e(this.shakeAmount_);
-            y += _04d._F_e(this.shakeAmount_);
+            x += MathUtil.randomSpread(this.shakeAmount_);
+            y += MathUtil.randomSpread(this.shakeAmount_);
         }
         this.x_ = x;
         this.y_ = y;

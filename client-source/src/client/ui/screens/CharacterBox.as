@@ -4,8 +4,8 @@ import com.company.assembleegameclient.appengine.CharListEvent;
 import com.company.assembleegameclient.appengine.ClassStats;
 import com.company.assembleegameclient.ui.tooltip.ClassToolTip;
 import com.company.assembleegameclient.ui.tooltip.ToolTip;
-import com.company.assembleegameclient.util._Z_B_;
-import com.company.assembleegameclient.util._lJ_;
+import com.company.assembleegameclient.util.FameUtil;
+import com.company.assembleegameclient.util.AnimatedChar;
 import com.company.rotmg.graphics.FullCharBoxGraphic;
 import com.company.rotmg.graphics.LockedCharBoxGraphic;
 import com.company.rotmg.graphics.StarGraphic;
@@ -30,7 +30,7 @@ public class CharacterBox extends Sprite {
     private static const STAR_UNEARNED_TRANSFORM:ColorTransform = new ColorTransform(0.2, 0.2, 0.2);
     private static const SPIN_FRAMES_PER_STEP:int = 20;
     /** Facing order while the mouse is over the box. */
-    private static const SPIN_DIRECTIONS:Array = [_lJ_.DOWN, _lJ_.RIGHT, _lJ_.UP, _lJ_.LEFT];
+    private static const SPIN_DIRECTIONS:Array = [AnimatedChar.DOWN, AnimatedChar.RIGHT, AnimatedChar.UP, AnimatedChar.LEFT];
 
     public var playerXML_:XML = null;
     public var charStats_:ClassStats;
@@ -59,7 +59,7 @@ public class CharacterBox extends Sprite {
         }
         addChild(this.boxGraphic);
         this.bitmap_ = new Bitmap(null);
-        this.setImage(_lJ_.DOWN, _lJ_._sS_, 0);
+        this.setImage(AnimatedChar.DOWN, AnimatedChar.STAND, 0);
         addChild(this.bitmap_);
         this.classNameText_ = new SimpleText(14, 0xFFFFFF, false, 0, 0, "Myriad Pro");
         this.classNameText_.setBold(true);
@@ -79,7 +79,7 @@ public class CharacterBox extends Sprite {
             addChild(this.lockedText);
             this.classNameText_.y = 78;
         } else {
-            var stars:Sprite = this.buildStars(_Z_B_._lr(this.charList_.bestFame(this.objectType())), _Z_B_._yJ_.length);
+            var stars:Sprite = this.buildStars(FameUtil.numStars(this.charList_.bestFame(this.objectType())), FameUtil.STAR_THRESHOLDS.length);
             stars.y = 60;
             stars.x = ((this.boxGraphic.width / 2) - (stars.width / 2));
             stars.filters = [new DropShadowFilter(0, 0, 0, 1, 4, 4)];
@@ -110,7 +110,7 @@ public class CharacterBox extends Sprite {
     /** Called every frame: spins the preview while hovered, otherwise resets to facing down. */
     public function tryUpdateSpin():void {
         if (!this.selectedOver) {
-            this.setImage(_lJ_.DOWN, _lJ_._sS_, 0);
+            this.setImage(AnimatedChar.DOWN, AnimatedChar.STAND, 0);
             this.spinFramesElapsed = 0;
             this.curSpinPos = 0;
             return;
@@ -119,7 +119,7 @@ public class CharacterBox extends Sprite {
         if (this.spinFramesElapsed % SPIN_FRAMES_PER_STEP == 0) {
             this.spinFramesElapsed = 0;
             this.curSpinPos = ((this.curSpinPos + 1) % SPIN_DIRECTIONS.length);
-            this.setImage(SPIN_DIRECTIONS[this.curSpinPos], _lJ_._sS_, 0);
+            this.setImage(SPIN_DIRECTIONS[this.curSpinPos], AnimatedChar.STAND, 0);
         }
     }
 

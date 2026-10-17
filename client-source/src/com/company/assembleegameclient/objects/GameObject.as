@@ -8,9 +8,9 @@ package com.company.assembleegameclient.objects {
     import com.company.assembleegameclient.parameters.Parameters;
     import com.company.assembleegameclient.util.ConditionEffect;
     import com.company.assembleegameclient.util.TextureRedrawer;
-    import com.company.assembleegameclient.util._7t;
-    import com.company.assembleegameclient.util._J_H_;
-    import com.company.assembleegameclient.util._lJ_;
+    import com.company.assembleegameclient.util.BloodComposition;
+    import com.company.assembleegameclient.util.MaskedImage;
+    import com.company.assembleegameclient.util.AnimatedChar;
     import com.company.ui.SimpleText;
     import com.company.util.AssetLibrary;
     import com.company.util.BitmapUtil;
@@ -55,16 +55,16 @@ package com.company.assembleegameclient.objects {
 
         public static function getDamageAfterDefense(damage:int, defense:int, armorPierced:Boolean, condition:int):int {
             var _local5:int = defense;
-            if (((armorPierced) || (!(((condition & ConditionEffect._if_) == 0))))) {
+            if (((armorPierced) || (!(((condition & ConditionEffect.ARMOR_BROKEN_BIT) == 0))))) {
                 _local5 = 0;
             } else {
-                if ((condition & ConditionEffect._3M_) != 0) {
+                if ((condition & ConditionEffect.ARMORED_BIT) != 0) {
                     _local5 = (_local5 * 2);
                 }
             }
             var _local6:int = ((damage * 3) / 20);
             var _local7:int = Math.max(_local6, (damage - _local5));
-            if ((condition & ConditionEffect._cV_) != 0) {
+            if ((condition & ConditionEffect.INVULNERABLE_BIT) != 0) {
                 _local7 = 0;
             }
             return (_local7);
@@ -143,7 +143,7 @@ package com.company.assembleegameclient.objects {
         public var flying_:Boolean = false;
         public var attackAngle_:Number = 0;
         public var attackStart_:int = 0;
-        public var animatedChar_:_lJ_ = null;
+        public var animatedChar_:AnimatedChar = null;
         public var texture_:BitmapData = null;
         public var mask_:BitmapData = null;
         public var randomTextureData_:Vector.<TextureData> = null;
@@ -351,7 +351,7 @@ package com.company.assembleegameclient.objects {
             graphicsData.push(this.bitmapFill_);
             graphicsData.push(this.path_);
             graphicsData.push(GraphicHelper.END_FILL);
-            if (((((!(this.isPaused())) && (!(((this.condition_ & ConditionEffect._06j) == 0))))) && (!(Parameters._0F_o)))) {
+            if (((((!(this.isPaused())) && (!(((this.condition_ & ConditionEffect.ICON_BITMASK) == 0))))) && (!(Parameters._0F_o)))) {
                 this.drawConditionIcons(graphicsData, camera, time);
             }
             if (((((this.props_.showName_) && (!((this.name_ == null))))) && (!((this.name_.length == 0))))) {
@@ -463,99 +463,99 @@ package com.company.assembleegameclient.objects {
         }
 
         public function isQuiet():Boolean {
-            return (!(((this.condition_ & ConditionEffect._I_T_) == 0)));
+            return (!(((this.condition_ & ConditionEffect.QUIET_BIT) == 0)));
         }
 
         public function isWeak():Boolean {
-            return (!(((this.condition_ & ConditionEffect._0F_g) == 0)));
+            return (!(((this.condition_ & ConditionEffect.WEAK_BIT) == 0)));
         }
 
         public function isSlowed():Boolean {
-            return (!(((this.condition_ & ConditionEffect._sm) == 0)));
+            return (!(((this.condition_ & ConditionEffect.SLOWED_BIT) == 0)));
         }
 
         public function isSick():Boolean {
-            return (!(((this.condition_ & ConditionEffect._q_) == 0)));
+            return (!(((this.condition_ & ConditionEffect.SICK_BIT) == 0)));
         }
 
         public function isDazed():Boolean {
-            return (!(((this.condition_ & ConditionEffect._02V_) == 0)));
+            return (!(((this.condition_ & ConditionEffect.DAZED_BIT) == 0)));
         }
 
         public function isStunned():Boolean {
-            return (!(((this.condition_ & ConditionEffect._0G_k) == 0)));
+            return (!(((this.condition_ & ConditionEffect.STUNNED_BIT) == 0)));
         }
 
         public function isBlind():Boolean {
-            return (!(((this.condition_ & ConditionEffect._E_t) == 0)));
+            return (!(((this.condition_ & ConditionEffect.BLIND_BIT) == 0)));
         }
 
         public function isDrunk():Boolean {
-            return (!(((this.condition_ & ConditionEffect._0E_l) == 0)));
+            return (!(((this.condition_ & ConditionEffect.DRUNK_BIT) == 0)));
         }
 
         public function hasConditionN_c():Boolean {
-            return (!(((this.condition_ & ConditionEffect._0E_2) == 0)));
+            return (!(((this.condition_ & ConditionEffect.BLUR_BIT) == 0)));
         }
 
         public function isConfused():Boolean {
-            return (!(((this.condition_ & ConditionEffect._pE_) == 0)));
+            return (!(((this.condition_ & ConditionEffect.CONFUSED_BIT) == 0)));
         }
 
         public function isStunImmune():Boolean {
-            return (!(((this.condition_ & ConditionEffect._tY_) == 0)));
+            return (!(((this.condition_ & ConditionEffect.STUN_IMMUNE_BIT) == 0)));
         }
 
         public function isInvisible():Boolean {
-            return (!(((this.condition_ & ConditionEffect._X_9) == 0)));
+            return (!(((this.condition_ & ConditionEffect.INVISIBLE_BIT) == 0)));
         }
 
         public function isParalyzed():Boolean {
-            return (!(((this.condition_ & ConditionEffect._O_3) == 0)));
+            return (!(((this.condition_ & ConditionEffect.PARALYZED_BIT) == 0)));
         }
 
         public function isSpeedy():Boolean {
-            return (!(((this.condition_ & ConditionEffect._c_) == 0)));
+            return (!(((this.condition_ & ConditionEffect.SPEEDY_BIT) == 0)));
         }
 
         public function isNinjaSpeedy():Boolean {
-            return (!(((this.condition_ & ConditionEffect._N_6) == 0)));
+            return (!(((this.condition_ & ConditionEffect.HALLUCINATING_BIT) == 0)));
         }
 
         public function isHealing():Boolean {
-            return (!(((this.condition_ & ConditionEffect._4_) == 0)));
+            return (!(((this.condition_ & ConditionEffect.HEALING_BIT) == 0)));
         }
 
         public function isDamaging():Boolean {
-            return (!(((this.condition_ & ConditionEffect._00L_) == 0)));
+            return (!(((this.condition_ & ConditionEffect.DAMAGING_BIT) == 0)));
         }
 
         public function isBerserk():Boolean {
-            return (!(((this.condition_ & ConditionEffect._X_D_) == 0)));
+            return (!(((this.condition_ & ConditionEffect.BERSERK_BIT) == 0)));
         }
 
         public function isPaused():Boolean {
-            return (!(((this.condition_ & ConditionEffect._Z_i) == 0)));
+            return (!(((this.condition_ & ConditionEffect.PAUSED_BIT) == 0)));
         }
 
         public function isStasis():Boolean {
-            return (!(((this.condition_ & ConditionEffect._O_Y_) == 0)));
+            return (!(((this.condition_ & ConditionEffect.STASIS_BIT) == 0)));
         }
 
         public function isInvincible():Boolean {
-            return (!(((this.condition_ & ConditionEffect._0K__) == 0)));
+            return (!(((this.condition_ & ConditionEffect.INVINCIBLE_BIT) == 0)));
         }
 
         public function isInvulnerable():Boolean {
-            return (!(((this.condition_ & ConditionEffect._cV_) == 0)));
+            return (!(((this.condition_ & ConditionEffect.INVULNERABLE_BIT) == 0)));
         }
 
         public function isArmored():Boolean {
-            return (!(((this.condition_ & ConditionEffect._3M_) == 0)));
+            return (!(((this.condition_ & ConditionEffect.ARMORED_BIT) == 0)));
         }
 
         public function isArmorBroken():Boolean {
-            return (!(((this.condition_ & ConditionEffect._if_) == 0)));
+            return (!(((this.condition_ & ConditionEffect.ARMOR_BROKEN_BIT) == 0)));
         }
 
         public function noCharactersNearby():Boolean {
@@ -656,29 +656,29 @@ package com.company.assembleegameclient.objects {
                     for each (_local8 in effects) {
                         _local9 = null;
                         switch (_local8) {
-                            case ConditionEffect._0I_2:
+                            case ConditionEffect.NOTHING:
                                 break;
-                            case ConditionEffect._xc:
-                            case ConditionEffect._V_H_:
-                            case ConditionEffect._0D_Z_:
-                            case ConditionEffect._vJ_:
-                            case ConditionEffect._030:
-                            case ConditionEffect._2p:
-                            case ConditionEffect._01n:
-                            case ConditionEffect._02w:
-                            case ConditionEffect._o9:
-                            case ConditionEffect._xn:
-                            case ConditionEffect._vH_:
-                            case ConditionEffect._T_q:
-                            case ConditionEffect._K_J_:
-                            case ConditionEffect._iM_:
-                            case ConditionEffect._l0:
-                            case ConditionEffect._Z_A_:
-                            case ConditionEffect._qn:
-                            case ConditionEffect._03w:
+                            case ConditionEffect.QUIET:
+                            case ConditionEffect.WEAK:
+                            case ConditionEffect.SLOWED:
+                            case ConditionEffect.SICK:
+                            case ConditionEffect.DAZED:
+                            case ConditionEffect.BLIND:
+                            case ConditionEffect.HALLUCINATING:
+                            case ConditionEffect.DRUNK:
+                            case ConditionEffect.CONFUSED:
+                            case ConditionEffect.STUN_IMMUNE:
+                            case ConditionEffect.INVISIBLE:
+                            case ConditionEffect.PARALYZED:
+                            case ConditionEffect.SPEEDY:
+                            case ConditionEffect.BLEEDING:
+                            case ConditionEffect.STASIS:
+                            case ConditionEffect.STASIS_IMMUNE:
+                            case ConditionEffect.ARMOR_BROKEN:
+                            case ConditionEffect.BLUR:
                                 _local9 = ConditionEffect.effects_[_local8];
                                 break;
-                            case ConditionEffect._V_Z_:
+                            case ConditionEffect.STUNNED:
                                 if (this.isStunImmune()) {
                                     map_.mapOverlay_.addChild(new CharacterStatusText(this, "Immune", 0xFF0000, 3000));
                                 } else {
@@ -696,7 +696,7 @@ package com.company.assembleegameclient.objects {
                     }
                 }
             }
-            var _local6:Vector.<uint> = _7t._8W_(this.objectType_, this.texture_, this.props_.bloodProb_, this.props_.bloodColor_);
+            var _local6:Vector.<uint> = BloodComposition.getBloodComposition(this.objectType_, this.texture_, this.props_.bloodProb_, this.props_.bloodColor_);
             if (this.dead_) {
                 map_.addObj(new ExplosionEffect(_local6, this.size_, 30), x_, y_);
             } else {
@@ -778,7 +778,7 @@ package com.company.assembleegameclient.objects {
             }
             this.condIcons_.length = 0;
             var _local4:int = (time / 500);
-            ConditionEffect._a4(this.condition_, this.condIcons_, _local4);
+            ConditionEffect.addConditionIcons(this.condition_, this.condIcons_, _local4);
             var _local5:Number = screenVec_[3];
             var _local6:Number = this.quadVerts_[1];
             var _local7:int = this.condIcons_.length;
@@ -835,7 +835,7 @@ package com.company.assembleegameclient.objects {
         protected function getTexture(camera:GameCamera, time:int):BitmapData {
             var _local6:Number;
             var _local7:int;
-            var _local8:_J_H_;
+            var _local8:MaskedImage;
             var _local9:int;
             var _local10:BitmapData;
             var _local11:int;
@@ -845,22 +845,22 @@ package com.company.assembleegameclient.objects {
             var _local5:BitmapData;
             if (this.animatedChar_ != null) {
                 _local6 = 0;
-                _local7 = _lJ_._sS_;
+                _local7 = AnimatedChar.STAND;
                 if (time < (this.attackStart_ + ATTACK_PERIOD_MS)) {
                     if (!this.props_.dontFaceAttacks_) {
                         this.facing_ = this.attackAngle_;
                     }
                     _local6 = (((time - this.attackStart_) % ATTACK_PERIOD_MS) / ATTACK_PERIOD_MS);
-                    _local7 = _lJ_._E_w;
+                    _local7 = AnimatedChar.ATTACK;
                 } else {
                     if (((!((this.moveVec_.x == 0))) || (!((this.moveVec_.y == 0))))) {
                         _local9 = (0.5 / this.moveVec_.length);
                         _local9 = (_local9 + (400 - (_local9 % 400)));
                         if ((((((((this.moveVec_.x > MOVE_EPSILON)) || ((this.moveVec_.x < MOVE_EPSILON_NEG)))) || ((this.moveVec_.y > MOVE_EPSILON)))) || ((this.moveVec_.y < MOVE_EPSILON_NEG)))) {
                             this.facing_ = Math.atan2(this.moveVec_.y, this.moveVec_.x);
-                            _local7 = _lJ_._m1;
+                            _local7 = AnimatedChar.WALK;
                         } else {
-                            _local7 = _lJ_._sS_;
+                            _local7 = AnimatedChar.STAND;
                         }
                         _local6 = ((time % _local9) / _local9);
                     }

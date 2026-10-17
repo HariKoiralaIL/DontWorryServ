@@ -1,7 +1,7 @@
 package particleeffects {
 
     import com.company.assembleegameclient.objects.GameObject;
-    import com.company.assembleegameclient.util._04d;
+    import com.company.assembleegameclient.util.MathUtil;
 
     /** Emits gas particles while the owner is moving. */
     public class GasEffect extends ParticleEffect {
@@ -34,8 +34,8 @@ package particleeffects {
                 var i:int = 0;
                 while (i < this.rate) {
                     roll = Math.random();
-                    velocityX = _04d._F_e((this.effectProps_.speed - (this.effectProps_.speed * (roll * (1 - this.effectProps_.speedVariance)))));
-                    velocityY = _04d._F_e((this.effectProps_.speed - (this.effectProps_.speed * (roll * (1 - this.effectProps_.speedVariance)))));
+                    velocityX = MathUtil.randomSpread((this.effectProps_.speed - (this.effectProps_.speed * (roll * (1 - this.effectProps_.speedVariance)))));
+                    velocityY = MathUtil.randomSpread((this.effectProps_.speed - (this.effectProps_.speed * (roll * (1 - this.effectProps_.speedVariance)))));
                     lifetime = ((this.effectProps_.life * 1000) - ((this.effectProps_.life * 1000) * (roll * this.effectProps_.lifeVariance)));
                     particle = new GasParticle(150, this.color_, lifetime, this.effectProps_.spread, 0, velocityX, velocityY);
                     map_.addObj(particle, x_, y_);

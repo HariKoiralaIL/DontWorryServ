@@ -6,7 +6,7 @@
 package com.company.assembleegameclient.ui {
 import flash.display.Sprite;
 
-import com.company.assembleegameclient.util._Z_B_;
+import com.company.assembleegameclient.util.FameUtil;
 
 import flash.text.engine.ContentElement;
 
@@ -28,7 +28,7 @@ public class ui_chat_colors {
         this.time_ = _arg1;
         this.name_ = _arg2;
         if (_arg4 >= 0) {
-            this._L_P_ = _Z_B_._0M_r(_arg4);
+            this._L_P_ = FameUtil.numStarsToIcon(_arg4);
         }
         this.recipient_ = _arg5;
         this._E_B_ = _arg6;

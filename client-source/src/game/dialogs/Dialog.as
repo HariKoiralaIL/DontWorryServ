@@ -1,6 +1,6 @@
 package game.dialogs {
     import com.company.assembleegameclient.ui._7f;
-    import com.company.assembleegameclient.util.Dispatcher;
+    import com.company.assembleegameclient.util.StageEventDispatcher;
     import com.company.ui.SimpleText;
     import com.company.util.GraphicHelper;
 
@@ -32,7 +32,7 @@ package game.dialogs {
         private static const MESSAGE_COLOR:uint = 0xB3B3B3;
         private static const TITLE_COLOR:uint = 0x57AD62;
 
-        public var eventDispatch:Dispatcher;
+        public var eventDispatch:StageEventDispatcher;
 
         protected var overlay_:Shape;
         protected var box_:Sprite;

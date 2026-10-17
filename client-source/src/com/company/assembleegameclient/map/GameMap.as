@@ -376,7 +376,7 @@ public class GameMap extends MapHandler {
     }
 
     private function updateFilters(time:int):void {
-        if (this.player_ != null && (this.player_.condition_ & ConditionEffect._T_D_) != 0) {
+        if (this.player_ != null && (this.player_.condition_ & ConditionEffect.MAP_FILTER_BITMASK) != 0) {
             var filterList:Array = [];
             var blur:Number;
             if (this.player_.isDrunk()) {

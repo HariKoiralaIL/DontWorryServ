@@ -10,7 +10,7 @@ import com.company.ui.SimpleText;
 
 import flash.filters.DropShadowFilter;
 
-import com.company.assembleegameclient.util._Z_B_;
+import com.company.assembleegameclient.util.FameUtil;
 
 public class _0G_h extends Sprite {
 
@@ -52,7 +52,7 @@ public class _0G_h extends Sprite {
         _local2.updateMetrics();
         _local2.filters = [new DropShadowFilter(0, 0, 0, 1, 4, 4, 2)];
         this._Q_j.addChild(_local2);
-        _local3 = ((this._0H_O_) ? _Z_B_._bl(this.numStars_) : _Z_B_._03A_(this.numStars_));
+        _local3 = ((this._0H_O_) ? FameUtil.numStarsToBigImage(this.numStars_) : FameUtil.numStarsToImage(this.numStars_));
         _local3.x = (_local2.width + 2);
         this._Q_j.addChild(_local3);
         _local3.y = (int(((_local2.height / 2) - (_local3.height / 2))) + 1);

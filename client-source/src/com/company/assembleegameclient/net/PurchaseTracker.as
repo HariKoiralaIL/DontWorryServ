@@ -18,13 +18,13 @@ internal class PurchaseTracker {
 
     public function track():void {
         switch (this.currency_) {
-            case Currency._class: // gold
+            case Currency.GOLD: // gold
                 //GA.global().trackEvent("credits", ((this.converted_) ? "buyConverted" : "buy"), this.itemId_, this.price_);
                 return;
             case Currency.FAME:
                 //GA.global().trackEvent("credits", "buyFame", this.itemId_, this.price_);
                 return;
-            case Currency._A_h: // guild fame
+            case Currency.GUILD_FAME: // guild fame
                 //GA.global().trackEvent("credits", "buyGuildFame", this.itemId_, this.price_);
                 return;
             case Currency.KEYS:

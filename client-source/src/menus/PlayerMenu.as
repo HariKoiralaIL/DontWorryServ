@@ -3,7 +3,7 @@ package menus
     import com.company.assembleegameclient.game.GameSprite;
     import com.company.assembleegameclient.objects.Player;
     import com.company.assembleegameclient.ui.ui_playerslist;
-    import com.company.assembleegameclient.util._07E_;
+    import com.company.assembleegameclient.util.GuildUtil;
     import com.company.util.AssetLibrary;
 
     import flash.events.Event;
@@ -42,7 +42,7 @@ package menus
             {
                 this.addTextOption(4, "Tell", this.onTell);
             }
-            if (this.gs_.map_.player_.guildRank_ >= _07E_._f3 && (player.guildName_ == null || player.guildName_.length == 0))
+            if (this.gs_.map_.player_.guildRank_ >= GuildUtil.OFFICER && (player.guildName_ == null || player.guildName_.length == 0))
             {
                 this.addTextOption(10, "Invite", this.onInvite);
             }

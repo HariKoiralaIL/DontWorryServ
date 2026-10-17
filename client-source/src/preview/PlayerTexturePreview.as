@@ -1,8 +1,8 @@
 package preview {
 import com.company.assembleegameclient.util.TextureRedrawer;
-import com.company.assembleegameclient.util._0B_c;
-import com.company.assembleegameclient.util._J_H_;
-import com.company.assembleegameclient.util._lJ_;
+import com.company.assembleegameclient.util.AnimatedCharLibrary;
+import com.company.assembleegameclient.util.MaskedImage;
+import com.company.assembleegameclient.util.AnimatedChar;
 import com.company.util._kp;
 
 import flash.display.Bitmap;
@@ -42,22 +42,22 @@ public class PlayerTexturePreview extends PreviewBase {
         prevButton.x = nextButton.x - prevButton.width - 5;
         prevButton.y = h_ - prevButton.height - 5;
         rightButton = addIcon(new Bitmap(icons._W_u[3]), function ():void {
-            dir_ = _lJ_.RIGHT;
+            dir_ = AnimatedChar.RIGHT;
         });
         rightButton.x = w_ - rightButton.width - 100;
         rightButton.y = h_ - rightButton.height - 5;
         downButton = addIcon(new Bitmap(icons._W_u[4]), function ():void {
-            dir_ = _lJ_.DOWN;
+            dir_ = AnimatedChar.DOWN;
         });
         downButton.x = rightButton.x - downButton.width - 5;
         downButton.y = h_ - downButton.height - 5;
         upButton = addIcon(new Bitmap(icons._W_u[2]), function ():void {
-            dir_ = _lJ_.UP;
+            dir_ = AnimatedChar.UP;
         });
         upButton.x = downButton.x;
         upButton.y = downButton.y - upButton.height - 5;
         leftButton = addIcon(new Bitmap(icons._W_u[5]), function ():void {
-            dir_ = _lJ_.LEFT;
+            dir_ = AnimatedChar.LEFT;
         });
         leftButton.x = downButton.x - leftButton.width - 5;
         leftButton.y = h_ - leftButton.height - 5;
@@ -77,15 +77,15 @@ public class PlayerTexturePreview extends PreviewBase {
         super.redraw();
         nextButton.filters = (playerIndex == PLAYER_IDS.length - 1) ? [new ColorMatrixFilter(DISABLED_FILTER)] : [];
         prevButton.filters = (playerIndex == 0) ? [new ColorMatrixFilter(DISABLED_FILTER)] : [];
-        rightButton.filters = (dir_ == _lJ_.RIGHT) ? [new ColorMatrixFilter(DISABLED_FILTER)] : [];
-        downButton.filters = (dir_ == _lJ_.DOWN) ? [new ColorMatrixFilter(DISABLED_FILTER)] : [];
-        upButton.filters = (dir_ == _lJ_.UP) ? [new ColorMatrixFilter(DISABLED_FILTER)] : [];
-        leftButton.filters = (dir_ == _lJ_.LEFT) ? [new ColorMatrixFilter(DISABLED_FILTER)] : [];
+        rightButton.filters = (dir_ == AnimatedChar.RIGHT) ? [new ColorMatrixFilter(DISABLED_FILTER)] : [];
+        downButton.filters = (dir_ == AnimatedChar.DOWN) ? [new ColorMatrixFilter(DISABLED_FILTER)] : [];
+        upButton.filters = (dir_ == AnimatedChar.UP) ? [new ColorMatrixFilter(DISABLED_FILTER)] : [];
+        leftButton.filters = (dir_ == AnimatedChar.LEFT) ? [new ColorMatrixFilter(DISABLED_FILTER)] : [];
         tex1Button.filters = useTex1_ ? [new ColorMatrixFilter(DISABLED_FILTER)] : [];
         tex2Button.filters = useTex1_ ? [] : [new ColorMatrixFilter(DISABLED_FILTER)];
-        var animChar:_lJ_ = _0B_c._J_v("players", PLAYER_IDS[playerIndex]);
-        var frame:_J_H_ = animChar.imageFromDir(dir_, _lJ_._sS_, 0);
-        TextureRedrawer._rn = source_;
+        var animChar:AnimatedChar = AnimatedCharLibrary.getAnimatedChar("players", PLAYER_IDS[playerIndex]);
+        var frame:MaskedImage = animChar.imageFromDir(dir_, AnimatedChar.STAND, 0);
+        TextureRedrawer.sharedTexture_ = source_;
         var color:int = (source_ != null) ? 0xFFFFFFFF : 0;
         var bmd:BitmapData = TextureRedrawer.resize(frame.image_, frame.mask_, size_, true, useTex1_ ? color : 0, useTex1_ ? 0 : color);
         bmd = TextureRedrawer.outlineGlow(bmd, 0, 0);

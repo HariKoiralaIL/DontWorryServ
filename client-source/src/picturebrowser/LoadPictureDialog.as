@@ -16,7 +16,7 @@ import com.company.assembleegameclient.appengine.AppEngineClient;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.ui.TextButton;
 import com.company.assembleegameclient.ui._7f;
-import com.company.assembleegameclient.util.Dispatcher;
+import com.company.assembleegameclient.util.StageEventDispatcher;
 import com.company.rotmg.graphics.DeleteXGraphic;
 import com.company.ui.SimpleText;
 import com.company.util.GraphicHelper;
@@ -98,7 +98,7 @@ public class LoadPictureDialog extends Sprite {
         TextureCategory.MISCELLANEOUS
     ];
 
-    public var eventDispatch:Dispatcher;
+    public var eventDispatch:StageEventDispatcher;
 
     protected var dimmer:Shape;
     protected var box:Sprite;

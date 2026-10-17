@@ -98,13 +98,13 @@ public class _u5 extends Sprite {
             this.text_.text = (this._A_2 + _arg1);
             this.text_.updateMetrics();
             switch (_arg2) {
-                case Currency._class:
+                case Currency.GOLD:
                     this._5U_.bitmapData = _I_H_();
                     break;
                 case Currency.FAME:
                     this._5U_.bitmapData = fame();
                     break;
-                case Currency._A_h:
+                case Currency.GUILD_FAME:
                     this._5U_.bitmapData = _0M_s();
                     break;
                 case Currency.KEYS:

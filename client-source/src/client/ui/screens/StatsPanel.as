@@ -1,6 +1,6 @@
 package client.ui.screens {
 import com.company.assembleegameclient.ui._0K_B_;
-import com.company.assembleegameclient.util._Z_B_;
+import com.company.assembleegameclient.util.FameUtil;
 import com.company.util.BitmapUtil;
 
 import flash.display.Bitmap;
@@ -80,7 +80,7 @@ public class StatsPanel extends Sprite {
                 + int(stats.TombsCompleted));
         this.addRow("Dungeons Completed", null, dungeonsCompleted, false, STAT_COLOR);
         this.addRow("Party Member Level Ups", null, stats.LevelUpAssists, false, STAT_COLOR);
-        var fameIcon:BitmapData = _Z_B_._qf();
+        var fameIcon:BitmapData = FameUtil.getFameIcon();
         fameIcon = BitmapUtil._Y_d(fameIcon, 6, 6, (fameIcon.width - 12), (fameIcon.height - 12));
         this.addRow("Base Fame Earned", null, stats.BaseFame, true, FAME_COLOR, "", "", new Bitmap(fameIcon));
         for each (var bonus:XML in stats.Bonus) {

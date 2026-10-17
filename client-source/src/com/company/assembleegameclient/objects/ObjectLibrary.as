@@ -1,5 +1,5 @@
 package com.company.assembleegameclient.objects {
-    import com.company.assembleegameclient.util._str152;
+    import com.company.assembleegameclient.util.CloseButton;
 
     import flash.utils.Dictionary;
 
@@ -149,8 +149,8 @@ package com.company.assembleegameclient.objects {
             return (typeToXML_[_local2]);
         }
 
-        public static function makeCornerWidget(width:int):_str152{
-            var _local2:_str152 = new _str152();
+        public static function makeCornerWidget(width:int):CloseButton{
+            var _local2:CloseButton = new CloseButton();
             _local2.y = 4;
             _local2.x = ((width - _local2.width) - 5);
             return (_local2);

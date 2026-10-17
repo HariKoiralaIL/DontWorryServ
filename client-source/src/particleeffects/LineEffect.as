@@ -3,7 +3,7 @@ package particleeffects {
     import com.company.assembleegameclient.net.messages.data.LocationData;
     import com.company.assembleegameclient.objects.GameObject;
     import com.company.assembleegameclient.parameters.Parameters;
-    import com.company.assembleegameclient.util._04d;
+    import com.company.assembleegameclient.util.MathUtil;
 
     import flash.geom.Point;
 
@@ -30,7 +30,7 @@ package particleeffects {
             var i:int = 0;
             while (i < PARTICLE_COUNT) {
                 position = Point.interpolate(this.start_, this.end_, (i / PARTICLE_COUNT));
-                particle = new SparkParticle(100, this.color_, 700, 0.5, _04d._F_e(1), _04d._F_e(1));
+                particle = new SparkParticle(100, this.color_, 700, 0.5, MathUtil.randomSpread(1), MathUtil.randomSpread(1));
                 if (!Parameters.data_["disableParticles"]) {
                     map_.addObj(particle, position.x, position.y);
                 }

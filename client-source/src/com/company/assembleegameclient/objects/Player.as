@@ -17,10 +17,10 @@ package com.company.assembleegameclient.objects {
     import com.company.assembleegameclient.ui.Inventory;
     import com.company.assembleegameclient.util.ConditionEffect;
     import com.company.assembleegameclient.util.TextureRedrawer;
-    import com.company.assembleegameclient.util._J_H_;
-    import com.company.assembleegameclient.util._Z_B_;
-    import com.company.assembleegameclient.util._lJ_;
-    import com.company.assembleegameclient.util._wW_;
+    import com.company.assembleegameclient.util.MaskedImage;
+    import com.company.assembleegameclient.util.FameUtil;
+    import com.company.assembleegameclient.util.AnimatedChar;
+    import com.company.assembleegameclient.util.ObjectPool;
     import com.company.ui.SimpleText;
     import com.company.util.AssetLibrary;
     import com.company.util.ConversionUtil;
@@ -103,15 +103,15 @@ package com.company.assembleegameclient.objects {
             var _local4:int;
             var _local3:Number = Trig._V_r((angle - camera.angleRad_));
             if ((((_local3 > (Math.PI / 4))) && ((_local3 < ((3 * Math.PI) / 4))))) {
-                _local4 = _lJ_.DOWN;
+                _local4 = AnimatedChar.DOWN;
             } else {
                 if ((((_local3 <= (Math.PI / 4))) && ((_local3 >= (-(Math.PI) / 4))))) {
-                    _local4 = _lJ_.RIGHT;
+                    _local4 = AnimatedChar.RIGHT;
                 } else {
                     if ((((_local3 < (-(Math.PI) / 4))) && ((_local3 > ((-3 * Math.PI) / 4))))) {
-                        _local4 = _lJ_.UP;
+                        _local4 = AnimatedChar.UP;
                     } else {
-                        _local4 = _lJ_.LEFT;
+                        _local4 = AnimatedChar.LEFT;
                     }
                 }
             }
@@ -315,7 +315,7 @@ package com.company.assembleegameclient.objects {
             var _local2:BitmapData = new BitmapData((nameText.width + 20), 64, true, 0);
             _local2.draw(nameText, NAME_MATRIX);
             _local2.applyFilter(_local2, _local2.rect, PointUtil._P_5, new GlowFilter(0, 1, 3, 3, 2, 1));
-            var _local3:Sprite = _Z_B_._0M_r(this.numStars_);
+            var _local3:Sprite = FameUtil.numStarsToIcon(this.numStars_);
             _local2.draw(_local3, STAR_MATRIX);
             return (_local2);
         }
@@ -351,11 +351,11 @@ package com.company.assembleegameclient.objects {
             var _local13:int;
             var _local14:ColorTransform;
             var _local3:Number = 0;
-            var _local4:int = _lJ_._sS_;
+            var _local4:int = AnimatedChar.STAND;
             if (time < (attackStart_ + this.attackPeriod_)) {
                 facing_ = attackAngle_;
                 _local3 = (((time - attackStart_) % this.attackPeriod_) / this.attackPeriod_);
-                _local4 = _lJ_._E_w;
+                _local4 = AnimatedChar.ATTACK;
             } else {
                 if (((!((moveVec_.x == 0))) || (!((moveVec_.y == 0))))) {
                     _local10 = (3.5 / this.getMoveSpeed());
@@ -363,7 +363,7 @@ package com.company.assembleegameclient.objects {
                         facing_ = Math.atan2(moveVec_.y, moveVec_.x);
                     }
                     _local3 = ((time % _local10) / _local10);
-                    _local4 = _lJ_._m1;
+                    _local4 = AnimatedChar.WALK;
                 }
             }
             if (((this.isHexed()) && (this.isDefaultTexture_))) {
@@ -372,9 +372,9 @@ package com.company.assembleegameclient.objects {
             if (((!(this.isHexed())) && (!(this.isDefaultTexture_)))) {
                 this.restoreTexture();
             }
-            var _local5:_J_H_ = animatedChar_.imageFromFacing(facing_, camera, _local4, _local3);
+            var _local5:MaskedImage = animatedChar_.imageFromFacing(facing_, camera, _local4, _local3);
             if (camera.isHallucinating_) {
-                _local5 = new _J_H_(getHallucinationTexture(), null);
+                _local5 = new MaskedImage(getHallucinationTexture(), null);
             }
             var _local6:int = tex1Id_;
             var _local7:int = tex2Id_;
@@ -427,10 +427,10 @@ package com.company.assembleegameclient.objects {
         }
 
         override public function getPortrait():BitmapData {
-            var _local1:_J_H_;
+            var _local1:MaskedImage;
             var _local2:int;
             if (portrait_ == null) {
-                _local1 = animatedChar_.imageFromDir(_lJ_.RIGHT, _lJ_._sS_, 0);
+                _local1 = animatedChar_.imageFromDir(AnimatedChar.RIGHT, AnimatedChar.STAND, 0);
                 _local2 = ((4 / _local1.image_.width) * 100);
                 portrait_ = TextureRedrawer.resize(_local1.image_, _local1.mask_, _local2, true, tex1Id_, tex2Id_);
                 portrait_ = TextureRedrawer.outlineGlow(portrait_, 0, 0);
@@ -870,7 +870,7 @@ package com.company.assembleegameclient.objects {
         }
 
         public function isHexed():Boolean {
-            return (!(((condition_ & ConditionEffect._gY_) == 0)));
+            return (!(((condition_ & ConditionEffect.HEXED_BIT) == 0)));
         }
 
         override public function drawShadow(graphicsData:Vector.<IGraphicsData>, camera:GameCamera, time:int):void {
@@ -1025,7 +1025,7 @@ package com.company.assembleegameclient.objects {
             var itemData_:Object = this.equipData_[slotIndex];
             while (_local11 < _local6) {
                 _local12 = getNextBulletId();
-                _local13 = (_wW_._B_1(Projectile) as Projectile);
+                _local13 = (ObjectPool.getOrCreate(Projectile) as Projectile);
                 _local13.reset(itemType, 0, objectId_, _local12, _local10, time);
                 _local14 = int(_local13.projProps_.minDamage_);
                 _local15 = int(_local13.projProps_.maxDamage_);

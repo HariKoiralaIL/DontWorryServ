@@ -8,9 +8,9 @@ package com.company.assembleegameclient.ui {
 
 import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.assembleegameclient.util.TextureRedrawer;
-import com.company.assembleegameclient.util._0B_c;
-import com.company.assembleegameclient.util._J_H_;
-import com.company.assembleegameclient.util._lJ_;
+import com.company.assembleegameclient.util.AnimatedCharLibrary;
+import com.company.assembleegameclient.util.MaskedImage;
+import com.company.assembleegameclient.util.AnimatedChar;
 import com.company.ui.SimpleText;
 import com.company.util.AssetLibrary;
 import com.company.util.BitmapUtil;
@@ -55,18 +55,18 @@ public class _Q_y extends Sprite {
         var _local8:int = ((_arg3.hasOwnProperty("Tex1")) ? _arg3.Tex1 : 0);
         var _local9:int = ((_arg3.hasOwnProperty("Tex2")) ? _arg3.Tex2 : 0);
         var _skin:int = (_arg3.hasOwnProperty("Skin") ? _arg3.Skin : -1);
-        var _local6:_lJ_;
+        var _local6:AnimatedChar;
         if (_skin == -1) {
-            _local6 = _0B_c._J_v(String(_local5.AnimatedTexture.File), int(_local5.AnimatedTexture.Index));
+            _local6 = AnimatedCharLibrary.getAnimatedChar(String(_local5.AnimatedTexture.File), int(_local5.AnimatedTexture.Index));
         } else {
             var _skinx:XML = ObjectLibrary.typeToXML_[_skin];
             if (_skinx == null) {
-                _local6 = _0B_c._J_v(String(_local5.AnimatedTexture.File), int(_local5.AnimatedTexture.Index));
+                _local6 = AnimatedCharLibrary.getAnimatedChar(String(_local5.AnimatedTexture.File), int(_local5.AnimatedTexture.Index));
             } else {
-                _local6 = _0B_c._J_v(String(_skinx.AnimatedTexture.File), int(_skinx.AnimatedTexture.Index));
+                _local6 = AnimatedCharLibrary.getAnimatedChar(String(_skinx.AnimatedTexture.File), int(_skinx.AnimatedTexture.Index));
             }
         }
-        var _local7:_J_H_ = _local6.imageFromDir(_lJ_.RIGHT, _lJ_._sS_, 0);
+        var _local7:MaskedImage = _local6.imageFromDir(AnimatedChar.RIGHT, AnimatedChar.STAND, 0);
         var _local10:BitmapData = TextureRedrawer.resize(_local7.image_, _local7.mask_, 100, false, _local8, _local9);
         _local10 = TextureRedrawer.outlineGlow(_local10, 0, 0);
         _local10 = BitmapUtil._Y_d(_local10, 6, 6, (_local10.width - 12), (_local10.height - 6));

@@ -1,16 +1,16 @@
 package com.company.assembleegameclient.objects {
     import flash.display.BitmapData;
 
-    import com.company.assembleegameclient.util._lJ_;
+    import com.company.assembleegameclient.util.AnimatedChar;
 
     import flash.utils.Dictionary;
 
     import particleeffects.EffectProperties;
 
-    import com.company.assembleegameclient.util._J_H_;
+    import com.company.assembleegameclient.util.MaskedImage;
     import com.company.assembleegameclient.appengine.RemoteTexture;
     import com.company.util.AssetLibrary;
-    import com.company.assembleegameclient.util._0B_c;
+    import com.company.assembleegameclient.util.AnimatedCharLibrary;
     import com.company.assembleegameclient.parameters.Parameters;
 
     import com.company.assembleegameclient.appengine.*;
@@ -49,7 +49,7 @@ package com.company.assembleegameclient.objects {
         }
         public var texture_:BitmapData = null;
         public var mask_:BitmapData = null;
-        public var animatedChar_:_lJ_ = null;
+        public var animatedChar_:AnimatedChar = null;
         public var randomTextureData_:Vector.<TextureData> = null;
         public var altTextures_:Dictionary = null;
         public var remoteTextureDir_:int;
@@ -71,7 +71,7 @@ package com.company.assembleegameclient.objects {
         }
 
         private function parse(xml:XML):void {
-            var _local2:_J_H_;
+            var _local2:MaskedImage;
             var _local3:RemoteTexture;
             var _local4:XML;
             switch (xml.name().toString()) {
@@ -85,8 +85,8 @@ package com.company.assembleegameclient.objects {
                     this.effectProps_ = new EffectProperties(xml);
                     return;
                 case "AnimatedTexture":
-                    this.animatedChar_ = _0B_c._J_v(String(xml.File), int(xml.Index));
-                    _local2 = this.animatedChar_._l8(0, _lJ_._sS_, 0);
+                    this.animatedChar_ = AnimatedCharLibrary.getAnimatedChar(String(xml.File), int(xml.Index));
+                    _local2 = this.animatedChar_.imageFromAngle(0, AnimatedChar.STAND, 0);
                     this.texture_ = _local2.image_;
                     this.mask_ = _local2.mask_;
                     return;
@@ -96,7 +96,7 @@ package com.company.assembleegameclient.objects {
                         _local3 = new RemoteTexture(xml.Id, xml.Instance, this.onRemoteTexture);
                         _local3.run();
                     }
-                    this.remoteTextureDir_ = ((xml.hasOwnProperty("Right")) ? _lJ_.RIGHT : _lJ_.DOWN);
+                    this.remoteTextureDir_ = ((xml.hasOwnProperty("Right")) ? AnimatedChar.RIGHT : AnimatedChar.DOWN);
                     return;
                 case "RandomTexture":
                     this.randomTextureData_ = new Vector.<TextureData>();
@@ -115,9 +115,9 @@ package com.company.assembleegameclient.objects {
 
         private function onRemoteTexture(bitmap:BitmapData):void {
             if (bitmap.width > 16) {
-                _0B_c.add("remoteTexture", bitmap, null, (bitmap.width / 7), bitmap.height, bitmap.width, bitmap.height, this.remoteTextureDir_);
-                this.animatedChar_ = _0B_c._J_v("remoteTexture", 0);
-                this.texture_ = this.animatedChar_._l8(0, _lJ_._sS_, 0).image_;
+                AnimatedCharLibrary.add("remoteTexture", bitmap, null, (bitmap.width / 7), bitmap.height, bitmap.width, bitmap.height, this.remoteTextureDir_);
+                this.animatedChar_ = AnimatedCharLibrary.getAnimatedChar("remoteTexture", 0);
+                this.texture_ = this.animatedChar_.imageFromAngle(0, AnimatedChar.STAND, 0).image_;
             } else {
                 this.texture_ = bitmap;
             }

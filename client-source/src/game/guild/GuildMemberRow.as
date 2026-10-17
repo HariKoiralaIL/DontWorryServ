@@ -1,5 +1,5 @@
 package game.guild {
-    import com.company.assembleegameclient.util._07E_;
+    import com.company.assembleegameclient.util.GuildUtil;
     import com.company.rotmg.graphics.DeleteXGraphic;
     import com.company.ui.SimpleText;
     import com.company.util.MoreColorUtil;
@@ -58,36 +58,36 @@ package game.guild {
             this.fameText_.y = this.centeredY(this.fameText_);
             addChild(this.fameText_);
 
-            this.fameIcon_ = new Bitmap(_07E_._oO_(40));
+            this.fameIcon_ = new Bitmap(GuildUtil.getGuildFameIcon(40));
             this.fameIcon_.x = 400;
             this.fameIcon_.y = ((HEIGHT / 2) - (this.fameIcon_.height / 2));
             addChild(this.fameIcon_);
 
-            this.rankIcon_ = new Bitmap(_07E_._wS_(rank, 10));
+            this.rankIcon_ = new Bitmap(GuildUtil.getRankIcon(rank, 10));
             this.rankIcon_.x = 548;
             this.rankIcon_.y = ((HEIGHT / 2) - (this.rankIcon_.height / 2));
             addChild(this.rankIcon_);
 
-            this.rankText_ = this.createText(_07E_._0C_n(rank), color, false);
+            this.rankText_ = this.createText(GuildUtil.getRankName(rank), color, false);
             this.rankText_.x = 580;
             this.rankText_.y = this.centeredY(this.rankText_);
             addChild(this.rankText_);
 
-            if (_07E_._0D_e(viewerRank, rank)) {
+            if (GuildUtil.canPromote(viewerRank, rank)) {
                 this.promoteButton_ = this.createArrowButton(true);
                 this.promoteButton_.addEventListener(MouseEvent.CLICK, this.onPromoteClick);
                 this.promoteButton_.x = (670 + 6);
                 this.promoteButton_.y = (HEIGHT / 2);
                 addChild(this.promoteButton_);
             }
-            if (_07E_._z0(viewerRank, rank)) {
+            if (GuildUtil.canDemote(viewerRank, rank)) {
                 this.demoteButton_ = this.createArrowButton(false);
                 this.demoteButton_.addEventListener(MouseEvent.CLICK, this.onDemoteClick);
                 this.demoteButton_.x = (700 + 6);
                 this.demoteButton_.y = (HEIGHT / 2);
                 addChild(this.demoteButton_);
             }
-            if (_07E_._dn(viewerRank, rank)) {
+            if (GuildUtil.canRemove(viewerRank, rank)) {
                 this.removeButton_ = new DeleteXGraphic();
                 this.addHover(this.removeButton_);
                 this.removeButton_.addEventListener(MouseEvent.CLICK, this.onRemoveClick);
@@ -154,24 +154,24 @@ package game.guild {
 
         private function onPromoteClick(e:MouseEvent):void {
             this.showConfirm(
-                "Are you sure you want to promote " + this.name_ + " to " + _07E_._0C_n(_07E_._0H_q(this.rank_)) + "?",
+                "Are you sure you want to promote " + this.name_ + " to " + GuildUtil.getRankName(GuildUtil.getPromotedRank(this.rank_)) + "?",
                 "Promote " + this.name_, "Promote", "/promote", this.onPromoteConfirmed);
         }
 
         private function onPromoteConfirmed(e:Event):void {
             this.closeDialog(e);
-            dispatchEvent(new GuildMemberEvent(GuildMemberEvent.SET_RANK, this.name_, _07E_._0H_q(this.rank_)));
+            dispatchEvent(new GuildMemberEvent(GuildMemberEvent.SET_RANK, this.name_, GuildUtil.getPromotedRank(this.rank_)));
         }
 
         private function onDemoteClick(e:MouseEvent):void {
             this.showConfirm(
-                "Are you sure you want to demote " + this.name_ + " to " + _07E_._0C_n(_07E_._4J_(this.rank_)) + "?",
+                "Are you sure you want to demote " + this.name_ + " to " + GuildUtil.getRankName(GuildUtil.getDemotedRank(this.rank_)) + "?",
                 "Demote " + this.name_, "Demote", "/demote", this.onDemoteConfirmed);
         }
 
         private function onDemoteConfirmed(e:Event):void {
             this.closeDialog(e);
-            dispatchEvent(new GuildMemberEvent(GuildMemberEvent.SET_RANK, this.name_, _07E_._4J_(this.rank_)));
+            dispatchEvent(new GuildMemberEvent(GuildMemberEvent.SET_RANK, this.name_, GuildUtil.getDemotedRank(this.rank_)));
         }
 
         private function onRemoveClick(e:MouseEvent):void {

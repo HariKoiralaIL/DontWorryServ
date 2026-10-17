@@ -2,9 +2,9 @@ package com.company.assembleegameclient.appengine {
 import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.util.TextureRedrawer;
-import com.company.assembleegameclient.util._0B_c;
-import com.company.assembleegameclient.util._J_H_;
-import com.company.assembleegameclient.util._lJ_;
+import com.company.assembleegameclient.util.AnimatedCharLibrary;
+import com.company.assembleegameclient.util.MaskedImage;
+import com.company.assembleegameclient.util.AnimatedChar;
 import com.company.util._G_;
 
 import flash.display.BitmapData;
@@ -25,14 +25,14 @@ public class SavedCharacter {
     public static function getImage(savedChar:SavedCharacter, playerXML:XML, dir:int, action:int, p:Number, available:Boolean, selected:Boolean):BitmapData {
         var tex1:int = (savedChar != null) ? savedChar.tex1() : 0;
         var tex2:int = (savedChar != null) ? savedChar.tex2() : 0;
-        var animChar:_lJ_ = getAnimatedChar(playerXML);
+        var animChar:AnimatedChar = getAnimatedChar(playerXML);
         if (savedChar != null && savedChar.skin() != NO_SKIN) {
             var skinXML:XML = ObjectLibrary.typeToXML_[savedChar.skin()];
             if (skinXML != null) {
                 animChar = getAnimatedChar(skinXML);
             }
         }
-        var frame:_J_H_ = animChar.imageFromDir(dir, action, p);
+        var frame:MaskedImage = animChar.imageFromDir(dir, action, p);
         var image:BitmapData = TextureRedrawer.resize(frame.image_, frame.mask_, 100, false, tex1, tex2);
         image = TextureRedrawer.outlineGlow(image, 0, 0);
         if (!available) {
@@ -43,8 +43,8 @@ public class SavedCharacter {
         return image;
     }
 
-    private static function getAnimatedChar(xml:XML):_lJ_ {
-        return _0B_c._J_v(String(xml.AnimatedTexture.File), int(xml.AnimatedTexture.Index));
+    private static function getAnimatedChar(xml:XML):AnimatedChar {
+        return AnimatedCharLibrary.getAnimatedChar(String(xml.AnimatedTexture.File), int(xml.AnimatedTexture.Index));
     }
 
     /** Sort comparator: most-used characters first, then highest exp. */

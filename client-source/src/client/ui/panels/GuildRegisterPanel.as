@@ -10,7 +10,7 @@ import com.company.assembleegameclient.ui.FrameHolder;
 import com.company.assembleegameclient.ui._7f;
 import com.company.assembleegameclient.ui._u5;
 import com.company.assembleegameclient.util.Currency;
-import com.company.assembleegameclient.util._07E_;
+import com.company.assembleegameclient.util.GuildUtil;
 import com.company.ui.SimpleText;
 
 import flash.display.Sprite;
@@ -29,7 +29,7 @@ public class GuildRegisterPanel extends Panel {
         var inGuild:Boolean = player.guildName_ != null && player.guildName_.length > 0;
         var title:SimpleText;
         if (inGuild) {
-            title = PanelUtil.createLabel(_07E_._0C_n(player.guildRank_) + " of \n" + player.guildName_);
+            title = PanelUtil.createLabel(GuildUtil.getRankName(player.guildRank_) + " of \n" + player.guildName_);
         } else {
             title = PanelUtil.createLabel("Create a Guild");
         }

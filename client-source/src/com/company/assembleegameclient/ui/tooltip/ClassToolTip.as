@@ -8,9 +8,9 @@ import flash.display.Bitmap;
 
 import com.company.ui.SimpleText;
 import com.company.assembleegameclient.ui._return;
-import com.company.assembleegameclient.util._0B_c;
-import com.company.assembleegameclient.util._lJ_;
-import com.company.assembleegameclient.util._J_H_;
+import com.company.assembleegameclient.util.AnimatedCharLibrary;
+import com.company.assembleegameclient.util.AnimatedChar;
+import com.company.assembleegameclient.util.MaskedImage;
 import com.company.assembleegameclient.util.TextureRedrawer;
 
 import flash.display.BitmapData;
@@ -20,7 +20,7 @@ import com.company.util._G_;
 import flash.geom.ColorTransform;
 import flash.filters.DropShadowFilter;
 
-import com.company.assembleegameclient.util._Z_B_;
+import com.company.assembleegameclient.util.FameUtil;
 import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.assembleegameclient.appengine.CharListEvent;
 import com.company.assembleegameclient.appengine.ClassStats;
@@ -34,8 +34,8 @@ public class ClassToolTip extends ToolTip {
         var _local12:int;
         var _local13:int;
         super(0x2A2A2A, 1, 0xFFFFFF, 1);
-        var _local4:_lJ_ = _0B_c._J_v(String(xml2.AnimatedTexture.File), int(xml2.AnimatedTexture.Index));
-        var _j_h_:_J_H_ = _local4.imageFromDir(_lJ_.RIGHT, _lJ_._sS_, 0);
+        var _local4:AnimatedChar = AnimatedCharLibrary.getAnimatedChar(String(xml2.AnimatedTexture.File), int(xml2.AnimatedTexture.Index));
+        var _j_h_:MaskedImage = _local4.imageFromDir(AnimatedChar.RIGHT, AnimatedChar.STAND, 0);
         var _local6:int = ((4 / _j_h_.width()) * 100);
         var bitmapData2:BitmapData = TextureRedrawer.redraw(_j_h_.image_, _local6, true, 0, 0);
         var _local8:Boolean = server_list.isAvailable(int(xml2.@type));
@@ -71,13 +71,13 @@ public class ClassToolTip extends ToolTip {
         if (_local8) {
             _local9 = (((_0a_h_ == null)) ? 0 : _0a_h_.numStars());
             this.statsText_ = new SimpleText(12, 6206769, false, 0, 0, "Myriad Pro");
-            this.statsText_.text = ((((((_local9 + " of " + _Z_B_._yJ_.length + " C-Quests Completed\n") + "Best Level Achieved: ") + (((_0a_h_) != null) ? _0a_h_.bestLevel() : 0)) + "\n") + "Best Fame Achieved: ") + (((_0a_h_) != null) ? _0a_h_.bestFame() : 0));
+            this.statsText_.text = ((((((_local9 + " of " + FameUtil.STAR_THRESHOLDS.length + " C-Quests Completed\n") + "Best Level Achieved: ") + (((_0a_h_) != null) ? _0a_h_.bestLevel() : 0)) + "\n") + "Best Fame Achieved: ") + (((_0a_h_) != null) ? _0a_h_.bestFame() : 0));
             this.statsText_.updateMetrics();
             this.statsText_.filters = [new DropShadowFilter(0, 0, 0)];
             this.statsText_.x = 8;
             this.statsText_.y = (height - 2);
             addChild(this.statsText_);
-            _local10 = _Z_B_._F_U_((((_0a_h_ == null)) ? 0 : _0a_h_.bestFame()), 0);
+            _local10 = FameUtil.nextStarFame((((_0a_h_ == null)) ? 0 : _0a_h_.bestFame()), 0);
             if (_local10 > 0) {
                 this.nextGoalText_ = new SimpleText(10, 16549442, false, 174, 0, "Myriad Pro");
                 this.nextGoalText_.text = (((("Next Goal: Earn " + _local10) + " Fame\n") + "  with a ") + xml2.@id);

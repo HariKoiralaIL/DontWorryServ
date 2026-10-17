@@ -27,11 +27,11 @@ import signals.nativesignals.NativeRelaySignal;
 import flash.events.MouseEvent;
 import flash.events.Event;
 
-import com.company.assembleegameclient.util._lJ_;
+import com.company.assembleegameclient.util.AnimatedChar;
 
 import flash.filters.DropShadowFilter;
 
-import com.company.assembleegameclient.util._Z_B_;
+import com.company.assembleegameclient.util.FameUtil;
 import com.company.rotmg.graphics.StarGraphic;
 
 import flash.geom.ColorTransform;
@@ -90,7 +90,7 @@ import com.company.util.BitmapUtil;
     private function makeBitmap():void {
         this.bitmap = new Bitmap();
         this.selectContainer.addChild(this.bitmap);
-        this.setImage(_lJ_.RIGHT, _lJ_._sS_, 0);
+        this.setImage(AnimatedChar.RIGHT, AnimatedChar.STAND, 0);
     }
 
     private function makeClassNameText():void {
@@ -113,7 +113,7 @@ import com.company.util.BitmapUtil;
     }
 
     private function getNextStarFame():int {
-        return (_Z_B_._F_U_((((this.characterStats == null)) ? 0 : this.characterStats.bestFame()), this.character.fame()));
+        return (FameUtil.nextStarFame((((this.characterStats == null)) ? 0 : this.characterStats.bestFame()), this.character.fame()));
     }
 
     private function makeTaglineIcon():void {

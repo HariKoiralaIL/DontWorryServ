@@ -14,7 +14,7 @@ import com.company.assembleegameclient.objects.ObjectLibrary;
 
 import flash.filters.DropShadowFilter;
 
-import com.company.assembleegameclient.util._Z_B_;
+import com.company.assembleegameclient.util.FameUtil;
 import com.company.assembleegameclient.appengine.ClassStats;
 
 public class CharacterToolTip extends ToolTip {
@@ -44,13 +44,13 @@ public class CharacterToolTip extends ToolTip {
         addChild(this.divider_);
         var _local6:int = (((_0a_h_ == null)) ? 0 : _0a_h_.numStars());
         this.statsText_ = new SimpleText(12, 6206769, false, 0, 0, "CHIP SB");
-        this.statsText_.text = ((((((_local6 + " of " + _Z_B_._yJ_.length + " C-Quests Completed\n") + "Best Level Achieved: ") + (((_0a_h_) != null) ? _0a_h_.bestLevel() : 0)) + "\n") + "Best Fame Achieved: ") + (((_0a_h_) != null) ? _0a_h_.bestFame() : 0));
+        this.statsText_.text = ((((((_local6 + " of " + FameUtil.STAR_THRESHOLDS.length + " C-Quests Completed\n") + "Best Level Achieved: ") + (((_0a_h_) != null) ? _0a_h_.bestLevel() : 0)) + "\n") + "Best Fame Achieved: ") + (((_0a_h_) != null) ? _0a_h_.bestFame() : 0));
         this.statsText_.updateMetrics();
         this.statsText_.filters = [new DropShadowFilter(0, 0, 0)];
         this.statsText_.x = 8;
         this.statsText_.y = (height - 2);
         addChild(this.statsText_);
-        var _local7:int = _Z_B_._F_U_((((_0a_h_ == null)) ? 0 : _0a_h_.bestFame()), 0);
+        var _local7:int = FameUtil.nextStarFame((((_0a_h_ == null)) ? 0 : _0a_h_.bestFame()), 0);
         if (_local7 > 0) {
             this.nextGoalText_ = new SimpleText(10, 16549442, false, 174, 0, "CHIP SB");
             this.nextGoalText_.text = (((("Next Goal: Earn " + _local7) + " Fame\n") + "  with a ") + xml2.@id);

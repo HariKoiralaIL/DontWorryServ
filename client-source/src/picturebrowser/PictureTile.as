@@ -11,9 +11,9 @@ import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.ui.tooltip.TitleDescriptionToolTip;
 import com.company.assembleegameclient.ui.tooltip.ToolTip;
 import com.company.assembleegameclient.util.TextureRedrawer;
-import com.company.assembleegameclient.util._0B_c;
-import com.company.assembleegameclient.util._J_H_;
-import com.company.assembleegameclient.util._lJ_;
+import com.company.assembleegameclient.util.AnimatedCharLibrary;
+import com.company.assembleegameclient.util.MaskedImage;
+import com.company.assembleegameclient.util.AnimatedChar;
 import com.company.rotmg.graphics.DeleteXGraphic;
 import com.company.ui.SimpleText;
 
@@ -78,7 +78,7 @@ public class PictureTile extends Sprite {
     public var isMine:Boolean;
     public var isAdmin:Boolean;
     public var bitmapData:BitmapData = null;
-    public var animatedChar:_lJ_ = null;
+    public var animatedChar:AnimatedChar = null;
     protected var bitmap:Bitmap;
     protected var nameText:SimpleText;
     protected var addToSheetButton:Sprite;
@@ -145,24 +145,24 @@ public class PictureTile extends Sprite {
     private function startCharacterAnimation():void {
         var frameWidth:int = (this.bitmapData.width / CHARACTER_SHEET_FRAMES);
         var frameHeight:int = this.bitmapData.height;
-        this.animatedChar = new _lJ_(new _J_H_(this.bitmapData, null), frameWidth, frameHeight, _lJ_.RIGHT);
+        this.animatedChar = new AnimatedChar(new MaskedImage(this.bitmapData, null), frameWidth, frameHeight, AnimatedChar.RIGHT);
         addEventListener(Event.ENTER_FRAME, this.onEnterFrame);
         this.updateAnimationFrame();
     }
 
     private function updateAnimationFrame():void {
         var time:int = getTimer();
-        var actionFrame:int = ((time / ANIMATION_PERIOD_MS) % _lJ_._0E_Z_);
+        var actionFrame:int = ((time / ANIMATION_PERIOD_MS) % AnimatedChar.NUM_ACTION);
         var frameFraction:Number = ((time % ANIMATION_PERIOD_MS) / ANIMATION_PERIOD_MS);
-        var frame:_J_H_ = this.animatedChar.imageFromDir(_lJ_.RIGHT, actionFrame, frameFraction);
+        var frame:MaskedImage = this.animatedChar.imageFromDir(AnimatedChar.RIGHT, actionFrame, frameFraction);
         this.bitmap.bitmapData = TextureRedrawer.redraw(frame.image_, IMAGE_SIZE, true, 0, 0, true);
         this.centerBitmap();
     }
 
     private function showTextileOnPlayer():void {
-        var player:_lJ_ = _0B_c._J_v("players", 0);
-        var frame:_J_H_ = player.imageFromDir(_lJ_.RIGHT, _lJ_._sS_, 0);
-        TextureRedrawer._rn = this.bitmapData;
+        var player:AnimatedChar = AnimatedCharLibrary.getAnimatedChar("players", 0);
+        var frame:MaskedImage = player.imageFromDir(AnimatedChar.RIGHT, AnimatedChar.STAND, 0);
+        TextureRedrawer.sharedTexture_ = this.bitmapData;
         var image:BitmapData = TextureRedrawer.resize(frame.image_, frame.mask_, IMAGE_SIZE, true, 0xFFFFFFFF, 0);
         image = TextureRedrawer.outlineGlow(image, 0, 0);
         this.bitmap.bitmapData = image;

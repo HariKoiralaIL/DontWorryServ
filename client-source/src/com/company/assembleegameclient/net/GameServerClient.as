@@ -31,7 +31,7 @@ import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.ui.FrameHolder;
 import com.company.assembleegameclient.ui._B_N_;
 import com.company.assembleegameclient.util.Currency;
-import com.company.assembleegameclient.util._wW_;
+import com.company.assembleegameclient.util.ObjectPool;
 import com.company.net.NetworkMessage;
 import com.company.net.ServerConnection;
 import com.company.util.Random;
@@ -513,7 +513,7 @@ public class GameServerClient {
             return;
         }
         var converted:Boolean = false;
-        if (item.currency_ == Currency._class) {
+        if (item.currency_ == Currency.GOLD) {
             var credits:int = this.gs_.map_.player_.credits_;
             converted = this.gs_.charList_.converted_ || credits > CONVERTED_CREDITS_LIMIT || item.price_ > credits;
         }
@@ -1241,7 +1241,7 @@ public class GameServerClient {
             }
             return;
         }
-        var projectile:Projectile = _wW_._B_1(Projectile) as Projectile;
+        var projectile:Projectile = ObjectPool.getOrCreate(Projectile) as Projectile;
         projectile.reset(msg.containerType_, 0, msg.ownerId_, msg.bulletId_, msg.angle_, this.gs_.lastUpdate_);
         projectile.setDamage(msg.damage_);
         this.gs_.map_.addObj(projectile, msg.startingPos_.x_, msg.startingPos_.y_);
@@ -1255,7 +1255,7 @@ public class GameServerClient {
         if (owner == null || owner.dead_ || Parameters.data_.disableAllyProjectiles) {
             return;
         }
-        var projectile:Projectile = _wW_._B_1(Projectile) as Projectile;
+        var projectile:Projectile = ObjectPool.getOrCreate(Projectile) as Projectile;
         projectile.reset(msg.containerType_, 0, msg.ownerId_, msg.bulletId_, msg.angle_, this.gs_.lastUpdate_);
         projectile.setDamage(msg.dmg_);
         this.gs_.map_.addObj(projectile, owner.x_, owner.y_);
@@ -1270,7 +1270,7 @@ public class GameServerClient {
         }
         var i:int = 0;
         while (i < msg.numShots_) {
-            var projectile:Projectile = _wW_._B_1(Projectile) as Projectile;
+            var projectile:Projectile = ObjectPool.getOrCreate(Projectile) as Projectile;
             var angle:Number = msg.angle_ + msg.angleInc_ * i;
             projectile.reset(owner.objectType_, msg.bulletType_, msg.ownerId_, (msg.bulletId_ + i) % 0x0100, angle, this.gs_.lastUpdate_);
             projectile.setDamage(msg.damage_);

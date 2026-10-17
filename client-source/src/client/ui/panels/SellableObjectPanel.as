@@ -9,8 +9,8 @@ import com.company.assembleegameclient.objects.SellableObject;
 import com.company.assembleegameclient.ui._u5;
 import com.company.assembleegameclient.ui.tooltip.ToolTip;
 import com.company.assembleegameclient.util.Currency;
-import com.company.assembleegameclient.util.Modal;
-import com.company.assembleegameclient.util._07E_;
+import com.company.assembleegameclient.util.ConfirmPurchaseModal;
+import com.company.assembleegameclient.util.GuildUtil;
 import com.company.ui.SimpleText;
 
 import flash.display.Bitmap;
@@ -31,7 +31,7 @@ public class SellableObjectPanel extends Panel {
     private static function createGuildRankRequiredText(rank:int):SimpleText {
         var text:SimpleText = new SimpleText(16, 0xFF0000, false, 0, 0, "Myriad Pro");
         text.setBold(true);
-        text.text = _07E_._0C_n(rank) + " Rank Required";
+        text.text = GuildUtil.getRankName(rank) + " Rank Required";
         text._08S_();
         text.filters = [new DropShadowFilter(0, 0, 0)];
         return text;
@@ -39,7 +39,7 @@ public class SellableObjectPanel extends Panel {
 
     public var event:Signal;
     private var sellable:SellableObject;
-    private var modal:Modal;
+    private var modal:ConfirmPurchaseModal;
     private var nameText:SimpleText;
     private var buyButton:_u5;
     private var rankRequiredLabel:Sprite = null;
@@ -126,10 +126,10 @@ public class SellableObjectPanel extends Panel {
 
     private function buy():void {
         if (!Account.getInstance().isRegistered()) {
-            stage.addChild(new NotRegisteredDialog("In order to use " + Currency._01r(this.sellable.currency_)
+            stage.addChild(new NotRegisteredDialog("In order to use " + Currency.getName(this.sellable.currency_)
                     + ", you must be a registered user."));
         } else {
-            this.modal = new Modal(this.event, this.sellable, this.buyButton.width, gs_);
+            this.modal = new ConfirmPurchaseModal(this.event, this.sellable, this.buyButton.width, gs_);
             parent.addChild(this.modal);
         }
     }
@@ -164,13 +164,13 @@ public class SellableObjectPanel extends Panel {
     }
 
     private function onBuyClick(e:MouseEvent):void {
-        if (Modal.isClosed) {
+        if (ConfirmPurchaseModal.isClosed) {
             this.buy();
         }
     }
 
     private function onKeyDown(e:KeyboardEvent):void {
-        if (PanelUtil.isInteractKey(e) && Modal.isClosed) {
+        if (PanelUtil.isInteractKey(e) && ConfirmPurchaseModal.isClosed) {
             this.buy();
         }
     }

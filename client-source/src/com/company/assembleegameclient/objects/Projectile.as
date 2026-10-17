@@ -7,9 +7,9 @@ package com.company.assembleegameclient.objects {
     import com.company.assembleegameclient.tutorial.Tutorial;
     import com.company.assembleegameclient.tutorial.doneAction;
     import com.company.assembleegameclient.util.TextureRedrawer;
-    import com.company.assembleegameclient.util._04d;
-    import com.company.assembleegameclient.util._7t;
-    import com.company.assembleegameclient.util._wW_;
+    import com.company.assembleegameclient.util.MathUtil;
+    import com.company.assembleegameclient.util.BloodComposition;
+    import com.company.assembleegameclient.util.ObjectPool;
     import com.company.util.GraphicHelper;
     import com.company.util.Trig;
 
@@ -101,7 +101,7 @@ package com.company.assembleegameclient.objects {
             super.removeFromMap();
             releaseObjectId(this.ownerId_, this.bulletId_);
             this.multiHitDict_ = null;
-            _wW_._ay(this);
+            ObjectPool.releaseInstance(this);
         }
 
         override public function update(time:int, dt:int):Boolean {
@@ -120,7 +120,7 @@ package com.company.assembleegameclient.objects {
                     map_.gs_.gsc_.squareHit(time, this.bulletId_, this.ownerId_);
                 } else {
                     if (square_.obj_ != null) {
-                        _local5 = _7t._tD_(this.texture_);
+                        _local5 = BloodComposition.getColors(this.texture_);
                         map_.addObj(new HitEffect(_local5, 100, 3, this.angle_, this.projProps_.speed_), _local4.x, _local4.y);
                     }
                 }
@@ -130,7 +130,7 @@ package com.company.assembleegameclient.objects {
                 if (this.damagesPlayers_) {
                     map_.gs_.gsc_.otherHit(time, this.bulletId_, this.ownerId_, square_.obj_.objectId_);
                 } else {
-                    _local5 = _7t._tD_(this.texture_);
+                    _local5 = BloodComposition.getColors(this.texture_);
                     map_.addObj(new HitEffect(_local5, 100, 3, this.angle_, this.projProps_.speed_), _local4.x, _local4.y);
                 }
                 return (false);
@@ -220,9 +220,9 @@ package com.company.assembleegameclient.objects {
             this.billboard_.draw(graphicsData, this.tempVec3D_, (((this.angle_ - camera.angleRad_) + this.props_.angleCorrection_) + _local5), camera.wToS_, camera, _local4);
             if (this.projProps_.particleTrail_) {
                 if (!Parameters.data_["disableParticles"]) {
-                    map_.addObj(new SparkParticle(100, this.projProps_.trailColor_, 600, 0.5, _04d._F_e(3), _04d._F_e(3)), x_, y_);
-                    map_.addObj(new SparkParticle(100, this.projProps_.trailColor_, 600, 0.5, _04d._F_e(3), _04d._F_e(3)), x_, y_);
-                    map_.addObj(new SparkParticle(100, this.projProps_.trailColor_, 600, 0.5, _04d._F_e(3), _04d._F_e(3)), x_, y_);
+                    map_.addObj(new SparkParticle(100, this.projProps_.trailColor_, 600, 0.5, MathUtil.randomSpread(3), MathUtil.randomSpread(3)), x_, y_);
+                    map_.addObj(new SparkParticle(100, this.projProps_.trailColor_, 600, 0.5, MathUtil.randomSpread(3), MathUtil.randomSpread(3)), x_, y_);
+                    map_.addObj(new SparkParticle(100, this.projProps_.trailColor_, 600, 0.5, MathUtil.randomSpread(3), MathUtil.randomSpread(3)), x_, y_);
                 }
             }
         }

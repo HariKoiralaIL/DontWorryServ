@@ -24,7 +24,7 @@ package com.company.assembleegameclient.objects {
                 if (this.effects_ == null) {
                     this.effects_ = new Vector.<uint>();
                 }
-                this.effects_.push(ConditionEffect._0I_W_(String(_local2)));
+                this.effects_.push(ConditionEffect.getIndexByName(String(_local2)));
             }
             this.multiHit_ = xml.hasOwnProperty("MultiHit");
             this.passesCover_ = xml.hasOwnProperty("PassesCover");

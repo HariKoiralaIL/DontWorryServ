@@ -1,7 +1,7 @@
 package particleeffects {
 
     import com.company.assembleegameclient.objects.GameObject;
-    import com.company.assembleegameclient.util._04d;
+    import com.company.assembleegameclient.util.MathUtil;
 
     /** A puff of spark particles at a game object's position. */
     public class SparkEffect extends ParticleEffect {
@@ -24,7 +24,7 @@ package particleeffects {
             y_ = this.go_.y_;
             var i:int = 0;
             while (i < PARTICLE_COUNT) {
-                map_.addObj(new SparkParticle(100, this.color_, 400, 0.75, _04d._F_e(4), _04d._F_e(4)), x_, y_);
+                map_.addObj(new SparkParticle(100, this.color_, 400, 0.75, MathUtil.randomSpread(4), MathUtil.randomSpread(4)), x_, y_);
                 i++;
             }
             return false;

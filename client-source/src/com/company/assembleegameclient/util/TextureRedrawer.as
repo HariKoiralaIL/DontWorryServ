@@ -1,218 +1,207 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.util.TextureRedrawer
-
 package com.company.assembleegameclient.util {
-import flash.filters.GlowFilter;
-import flash.filters.BitmapFilterQuality;
-import flash.utils.Dictionary;
-import flash.display.Shape;
-import flash.geom.Matrix;
-import flash.display.BitmapData;
-import flash.utils.ByteArray;
-import flash.display.BlendMode;
-import flash.display.Bitmap;
-
+import com.company.util.AssetLibrary;
 import com.company.util.PointUtil;
 
-import flash.geom.Rectangle;
-import flash.geom.ColorTransform;
-
-import com.company.util.AssetLibrary;
-
-import flash.display.Shader;
-import flash.filters.ShaderFilter;
+import flash.display.Bitmap;
+import flash.display.BitmapData;
+import flash.display.BlendMode;
 import flash.display.GradientType;
-
-import flash.events.MouseEvent;
+import flash.display.Shader;
+import flash.display.Shape;
+import flash.filters.BitmapFilterQuality;
+import flash.filters.GlowFilter;
+import flash.filters.ShaderFilter;
+import flash.geom.ColorTransform;
+import flash.geom.Matrix;
+import flash.geom.Rectangle;
+import flash.utils.ByteArray;
+import flash.utils.Dictionary;
 
 public class TextureRedrawer {
 
     private static const BORDER:int = 4;
+    private static const RESIZE_MARGIN:int = 12;
+    private static const GRADIENT_SIZE:int = 0x0100;
+    private static const GRADIENT_REFERENCE_SIZE:int = 0x0089;
+    // End color of the gradient subtracted in outlineGlow(). It is 0 (black), which makes that step a visual no-op.
+    private static const GRADIENT_END_COLOR:uint = 0;
     private static const OUTLINE_FILTER:GlowFilter = new GlowFilter(0, 0.8, 1.4, 1.4, 0xFF, BitmapFilterQuality.LOW, false, false);
     private static const GLOW_FILTER:GlowFilter = new GlowFilter(0, 0.4, 12, 12, 2, BitmapFilterQuality.LOW, false, false);
-    public static var _rn:BitmapData = null;
+
+    /** Texture used for texture-type 0xFF (set externally). */
+    public static var sharedTexture_:BitmapData = null;
+
     private static var cache_:Dictionary = new Dictionary();
-    private static var _1d:Dictionary = new Dictionary();
+    private static var brightnessCache_:Dictionary = new Dictionary();
     private static var gradient_:Shape = getGradient();
-    private static var drawMatrix_:Matrix = getDrawMatrix();
     private static var tempMatrix_:Matrix = new Matrix();
-    private static var textureShaderEmbed_:Class = TextureRedrawer_textureShaderEmbed_;
-    private static var textureShaderData_:ByteArray = (new textureShaderEmbed_() as ByteArray);
+    private static var textureShaderClass_:Class = TextureShaderEmbed;
+    private static var textureShaderData_:ByteArray = (new textureShaderClass_() as ByteArray);
     private static var colorTexture1:BitmapData = new BitmapData(1, 1, false);
     private static var colorTexture2:BitmapData = new BitmapData(1, 1, false);
-    private static var GRADIENT_MAX_SUB:uint;
 
-    public static function redraw(_arg1:BitmapData, _arg2:int, _arg3:Boolean, _arg4:uint, _arg5:uint, _arg6:Boolean = true, _arg7:Number = 5):BitmapData {
-        var _local8:Dictionary;
-        var _local9:BitmapData;
-        if (_arg6) {
-            _local8 = cache_[_arg2];
-            if (_local8 == null) {
-                _local8 = new Dictionary();
-                cache_[_arg2] = _local8;
+    public static function redraw(texture:BitmapData, size:int, padBottom:Boolean, outlineColor:uint, glowColor:uint, useCache:Boolean = true, sizeMultiplier:Number = 5):BitmapData {
+        var sizeCache:Dictionary;
+        var result:BitmapData;
+        if (useCache) {
+            sizeCache = cache_[size];
+            if (sizeCache == null) {
+                sizeCache = new Dictionary();
+                cache_[size] = sizeCache;
             }
-            _local9 = _local8[_arg1];
-            if (_local9 != null) {
-                return (_local9);
+            result = sizeCache[texture];
+            if (result != null) {
+                return result;
             }
         }
-        _local9 = resize(_arg1, null, _arg2, _arg3, 0, 0, _arg7);
-        _local9 = outlineGlow(_local9, _arg4, _arg5);
-        if (_arg6) {
-            _local8[_arg1] = _local9;
+        result = resize(texture, null, size, padBottom, 0, 0, sizeMultiplier);
+        result = outlineGlow(result, outlineColor, glowColor);
+        if (useCache) {
+            sizeCache[texture] = result;
         }
-        return (_local9);
+        return result;
     }
 
-    public static function resize(_arg1:BitmapData, _arg2:BitmapData, _arg3:int, _arg4:Boolean, _arg5:int, _arg6:int, _arg7:Number = 5):BitmapData {
-        if (((!((_arg2 == null))) && (((!((_arg5 == 0))) || (!((_arg6 == 0))))))) {
-            _arg1 = retexture(_arg1, _arg2, _arg5, _arg6);
-            _arg3 = (_arg3 / 5);
+    public static function resize(texture:BitmapData, mask:BitmapData, size:int, padBottom:Boolean, textureId1:int, textureId2:int, sizeMultiplier:Number = 5):BitmapData {
+        if (mask != null && (textureId1 != 0 || textureId2 != 0)) {
+            texture = retexture(texture, mask, textureId1, textureId2);
+            size = (size / 5);
         }
-        var _local8:int = ((_arg7 * (_arg3 / 100)) * _arg1.width);
-        var _local9:int = ((_arg7 * (_arg3 / 100)) * _arg1.height);
-        var _local10:Matrix = new Matrix();
-        _local10.scale((_local8 / _arg1.width), (_local9 / _arg1.height));
-        _local10.translate(12, 12);
-        var _local11:BitmapData = new BitmapData(((_local8 + 12) + 12), ((_local9 + ((_arg4) ? 12 : 1)) + 12), true, 0);
-        _local11.draw(_arg1, _local10);
-        return (_local11);
+        var scaledWidth:int = ((sizeMultiplier * (size / 100)) * texture.width);
+        var scaledHeight:int = ((sizeMultiplier * (size / 100)) * texture.height);
+        var matrix:Matrix = new Matrix();
+        matrix.scale((scaledWidth / texture.width), (scaledHeight / texture.height));
+        matrix.translate(RESIZE_MARGIN, RESIZE_MARGIN);
+        var result:BitmapData = new BitmapData(((scaledWidth + RESIZE_MARGIN) + RESIZE_MARGIN), ((scaledHeight + ((padBottom) ? RESIZE_MARGIN : 1)) + RESIZE_MARGIN), true, 0);
+        result.draw(texture, matrix);
+        return result;
     }
 
-    public static function outlineGlow(_arg1:BitmapData, _arg2:uint, _arg3:uint):BitmapData {
-        var _local4:BitmapData = _arg1.clone();
+    public static function outlineGlow(source:BitmapData, outlineColor:uint, glowColor:uint):BitmapData {
+        var result:BitmapData = source.clone();
         tempMatrix_.identity();
-        tempMatrix_.scale((_arg1.width / 0x0089), (_arg1.height / 0x0089));
-        if (MouseEvent.MOUSE_OVER) {
-            GRADIENT_MAX_SUB = 0xFFFFFF;
-        } else GRADIENT_MAX_SUB = 0x282828;
-        _local4.draw(gradient_, tempMatrix_, null, BlendMode.SUBTRACT);
-        var _local5:Bitmap = new Bitmap(_arg1);
-        _local4.draw(_local5, null, null, BlendMode.ALPHA);
-        OUTLINE_FILTER.color = _arg2;
-        _local4.applyFilter(_local4, _local4.rect, PointUtil._P_5, OUTLINE_FILTER);
-        if (_arg3 != 0xFFFFFFFF) {
-            GLOW_FILTER.color = _arg3;
-            _local4.applyFilter(_local4, _local4.rect, PointUtil._P_5, GLOW_FILTER);
+        tempMatrix_.scale((source.width / GRADIENT_REFERENCE_SIZE), (source.height / GRADIENT_REFERENCE_SIZE));
+        result.draw(gradient_, tempMatrix_, null, BlendMode.SUBTRACT);
+        var sourceBitmap:Bitmap = new Bitmap(source);
+        result.draw(sourceBitmap, null, null, BlendMode.ALPHA);
+        OUTLINE_FILTER.color = outlineColor;
+        result.applyFilter(result, result.rect, PointUtil._P_5, OUTLINE_FILTER);
+        if (glowColor != 0xFFFFFFFF) {
+            GLOW_FILTER.color = glowColor;
+            result.applyFilter(result, result.rect, PointUtil._P_5, GLOW_FILTER);
         }
-        return (_local4);
+        return result;
     }
 
-    public static function redrawSolidSquare(_arg1:uint, _arg2:int):BitmapData {
-        var _local3:Dictionary = cache_[_arg2];
-        if (_local3 == null) {
-            _local3 = new Dictionary();
-            cache_[_arg2] = _local3;
+    public static function redrawSolidSquare(color:uint, size:int):BitmapData {
+        var sizeCache:Dictionary = cache_[size];
+        if (sizeCache == null) {
+            sizeCache = new Dictionary();
+            cache_[size] = sizeCache;
         }
-        var _local4:BitmapData = _local3[_arg1];
-        if (_local4 != null) {
-            return (_local4);
+        var result:BitmapData = sizeCache[color];
+        if (result != null) {
+            return result;
         }
-        _local4 = new BitmapData(((_arg2 + 4) + 4), ((_arg2 + 4) + 4), true, 0);
-        _local4.fillRect(new Rectangle(4, 4, _arg2, _arg2), (0xFF000000 | _arg1));
-        _local4.applyFilter(_local4, _local4.rect, PointUtil._P_5, OUTLINE_FILTER);
-        _local3[_arg1] = _local4;
-        return (_local4);
+        result = new BitmapData(((size + BORDER) + BORDER), ((size + BORDER) + BORDER), true, 0);
+        result.fillRect(new Rectangle(BORDER, BORDER, size, size), (0xFF000000 | color));
+        result.applyFilter(result, result.rect, PointUtil._P_5, OUTLINE_FILTER);
+        sizeCache[color] = result;
+        return result;
     }
 
     public static function clearCache():void {
-        var _local1:BitmapData;
-        var _local2:Dictionary;
-        var _local3:Dictionary;
-        for each (_local2 in cache_) {
-            for each (_local1 in _local2) {
-                _local1.dispose();
+        var bitmap:BitmapData;
+        var sizeCache:Dictionary;
+        var multiplierCache:Dictionary;
+        for each (sizeCache in cache_) {
+            for each (bitmap in sizeCache) {
+                bitmap.dispose();
             }
         }
         cache_ = new Dictionary();
-        for each (_local3 in _1d) {
-            for each (_local1 in _local3) {
-                _local1.dispose();
+        for each (multiplierCache in brightnessCache_) {
+            for each (bitmap in multiplierCache) {
+                bitmap.dispose();
             }
         }
-        _1d = new Dictionary();
+        brightnessCache_ = new Dictionary();
     }
 
-    public static function _uB_(_arg1:BitmapData, _arg2:Number):BitmapData {
-        if (_arg2 == 1) {
-            return (_arg1);
+    /** Returns a copy of the bitmap with its RGB channels multiplied by `multiplier` (cached). */
+    public static function adjustBrightness(source:BitmapData, multiplier:Number):BitmapData {
+        if (multiplier == 1) {
+            return source;
         }
-        var _local3:Dictionary = _1d[_arg2];
-        if (_local3 == null) {
-            _local3 = new Dictionary();
-            _1d[_arg2] = _local3;
+        var multiplierCache:Dictionary = brightnessCache_[multiplier];
+        if (multiplierCache == null) {
+            multiplierCache = new Dictionary();
+            brightnessCache_[multiplier] = multiplierCache;
         }
-        var _local4:BitmapData = _local3[_arg1];
-        if (_local4 != null) {
-            return (_local4);
+        var result:BitmapData = multiplierCache[source];
+        if (result != null) {
+            return result;
         }
-        _local4 = _arg1.clone();
-        _local4.colorTransform(_local4.rect, new ColorTransform(_arg2, _arg2, _arg2));
-        _local3[_arg1] = _local4;
-        return (_local4);
+        result = source.clone();
+        result.colorTransform(result.rect, new ColorTransform(multiplier, multiplier, multiplier));
+        multiplierCache[source] = result;
+        return result;
     }
 
-    private static function getTexture(_arg1:int, _arg2:BitmapData):BitmapData {
-        var _local3:BitmapData;
-        var _local4 = ((_arg1 >> 24) & 0xFF);
-        var _local5 = (_arg1 & 0xFFFFFF);
-        switch (_local4) {
+    /**
+     * Resolves a packed texture descriptor: the top byte is the texture type, the low 24 bits are its value.
+     * Type 0 = unchanged, 1 = solid color, 4/5/9/10 = tile from the matching textile sheet, 0xFF = shared texture.
+     */
+    private static function getTexture(textureData:int, solidColorTexture:BitmapData):BitmapData {
+        var type:int = ((textureData >> 24) & 0xFF);
+        var value:int = (textureData & 0xFFFFFF);
+        switch (type) {
             case 0:
-                return (_arg2);
+                return solidColorTexture;
             case 1:
-                _arg2.setPixel(0, 0, _local5);
-                return (_arg2);
+                solidColorTexture.setPixel(0, 0, value);
+                return solidColorTexture;
             case 4:
-                return (AssetLibrary._xK_("textile4x4", _local5));
+                return AssetLibrary._xK_("textile4x4", value);
             case 5:
-                return (AssetLibrary._xK_("textile5x5", _local5));
+                return AssetLibrary._xK_("textile5x5", value);
             case 9:
-                return (AssetLibrary._xK_("textile9x9", _local5));
+                return AssetLibrary._xK_("textile9x9", value);
             case 10:
-                return (AssetLibrary._xK_("textile10x10", _local5));
+                return AssetLibrary._xK_("textile10x10", value);
             case 0xFF:
-                return (_rn);
+                return sharedTexture_;
         }
-        return (null);
+        return null;
     }
 
-    private static function retexture(_arg1:BitmapData, _arg2:BitmapData, _arg3:int, _arg4:int):BitmapData {
-        var _local5:Matrix = new Matrix();
-        _local5.scale(5, 5);
-        var _local6:BitmapData = new BitmapData((_arg1.width * 5), (_arg1.height * 5), true, 0);
-        _local6.draw(_arg1, _local5);
-        var _local7:BitmapData = getTexture(_arg3, colorTexture1);
-        var _local8:BitmapData = getTexture(_arg4, colorTexture2);
-        var _local9:Shader = new Shader(textureShaderData_);
-        _local9.data.src.input = _local6;
-        _local9.data.mask.input = _arg2;
-        _local9.data.texture1.input = _local7;
-        _local9.data.texture2.input = _local8;
-        _local9.data.texture1Size.value = [(((_arg3 == 0)) ? 0 : _local7.width)];
-        _local9.data.texture2Size.value = [(((_arg4 == 0)) ? 0 : _local8.width)];
-        _local6.applyFilter(_local6, _local6.rect, PointUtil._P_5, new ShaderFilter(_local9));
-        return (_local6);
+    private static function retexture(texture:BitmapData, mask:BitmapData, textureId1:int, textureId2:int):BitmapData {
+        var scaleMatrix:Matrix = new Matrix();
+        scaleMatrix.scale(5, 5);
+        var scaled:BitmapData = new BitmapData((texture.width * 5), (texture.height * 5), true, 0);
+        scaled.draw(texture, scaleMatrix);
+        var texture1:BitmapData = getTexture(textureId1, colorTexture1);
+        var texture2:BitmapData = getTexture(textureId2, colorTexture2);
+        var shader:Shader = new Shader(textureShaderData_);
+        shader.data.src.input = scaled;
+        shader.data.mask.input = mask;
+        shader.data.texture1.input = texture1;
+        shader.data.texture2.input = texture2;
+        shader.data.texture1Size.value = [((textureId1 == 0) ? 0 : texture1.width)];
+        shader.data.texture2Size.value = [((textureId2 == 0) ? 0 : texture2.width)];
+        scaled.applyFilter(scaled, scaled.rect, PointUtil._P_5, new ShaderFilter(shader));
+        return scaled;
     }
 
     private static function getGradient():Shape {
-        var _local1:Shape = new Shape();
-        var _local2:Matrix = new Matrix();
-        _local2.createGradientBox(0x0100, 0x0100, (Math.PI / 2), 0, 0);
-        _local1.graphics.beginGradientFill(GradientType.LINEAR, [0, GRADIENT_MAX_SUB], [1, 1], [127, 0xFF], _local2);
-        _local1.graphics.drawRect(0, 0, 0x0100, 0x0100);
-        _local1.graphics.endFill();
-        return (_local1);
-    }
-
-    private static function getDrawMatrix():Matrix {
-        var _local1:Matrix = new Matrix();
-        _local1.scale(8, 8);
-        _local1.translate(BORDER, BORDER);
-        return (_local1);
+        var shape:Shape = new Shape();
+        var matrix:Matrix = new Matrix();
+        matrix.createGradientBox(GRADIENT_SIZE, GRADIENT_SIZE, (Math.PI / 2), 0, 0);
+        shape.graphics.beginGradientFill(GradientType.LINEAR, [0, GRADIENT_END_COLOR], [1, 1], [127, 0xFF], matrix);
+        shape.graphics.drawRect(0, 0, GRADIENT_SIZE, GRADIENT_SIZE);
+        shape.graphics.endFill();
+        return shape;
     }
 
 }
-}//package com.company.assembleegameclient.util
-
+}

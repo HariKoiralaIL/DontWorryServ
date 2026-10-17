@@ -1,7 +1,7 @@
 package com.company.assembleegameclient.net.messages.incoming {
 import com.company.assembleegameclient.net.messages.data.ObjectData;
 import com.company.assembleegameclient.net.messages.data.GroundTileData;
-import com.company.assembleegameclient.util._wW_;
+import com.company.assembleegameclient.util.ObjectPool;
 import flash.utils.IDataInput;
 
 /**
@@ -25,11 +25,11 @@ public class Update extends ServerMessage {
         var i:int;
         count = data.readShort();
         for (i = count; i < this.tiles_.length; i++) {
-            _wW_._ay(this.tiles_[i]);
+            ObjectPool.releaseInstance(this.tiles_[i]);
         }
         this.tiles_.length = Math.min(count, this.tiles_.length);
         while (this.tiles_.length < count) {
-            this.tiles_.push((_wW_._B_1(GroundTileData) as GroundTileData));
+            this.tiles_.push((ObjectPool.getOrCreate(GroundTileData) as GroundTileData));
         }
         for (i = 0; i < count; i++) {
             this.tiles_[i].parseFromInput(data);
@@ -37,11 +37,11 @@ public class Update extends ServerMessage {
         this.newObjs_.length = 0;
         count = data.readShort();
         for (i = count; i < this.newObjs_.length; i++) {
-            _wW_._ay(this.newObjs_[i]);
+            ObjectPool.releaseInstance(this.newObjs_[i]);
         }
         this.newObjs_.length = Math.min(count, this.newObjs_.length);
         while (this.newObjs_.length < count) {
-            this.newObjs_.push((_wW_._B_1(ObjectData) as ObjectData));
+            this.newObjs_.push((ObjectPool.getOrCreate(ObjectData) as ObjectData));
         }
         for (i = 0; i < count; i++) {
             this.newObjs_[i].parseFromInput(data);

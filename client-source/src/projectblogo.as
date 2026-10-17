@@ -29,8 +29,8 @@ package {
   import game.signals.NoArgSignal3;
 
   import com.company.assembleegameclient.parameters.Parameters;
-  import com.company.assembleegameclient.util.Dispatcher;
-  import com.company.assembleegameclient.util.loadEmbeds;
+  import com.company.assembleegameclient.util.StageEventDispatcher;
+  import com.company.assembleegameclient.util.EmbeddedAssetLoader;
 
   import flash.display.Bitmap;
   import flash.display.BitmapData;
@@ -99,7 +99,7 @@ package {
         private function setup():void {
             this._4y();
             this._i1();
-            new loadEmbeds().load();
+            new EmbeddedAssetLoader().load();
             stage.scaleMode = StageScaleMode.NO_SCALE;
             this.context.injector.getInstance(NoArgSignal3).dispatch();
             primStage = stage;
@@ -115,8 +115,8 @@ package {
         private function _i1():void {
             this.context = new InjectorLocator();
             this.context.injector.map(LoaderInfo).toValue(root.stage.root.loaderInfo);
-            var _local1:Dispatcher = new Dispatcher(this);
-            this.context.injector.map(Dispatcher).toValue(_local1);
+            var _local1:StageEventDispatcher = new StageEventDispatcher(this);
+            this.context.injector.map(StageEventDispatcher).toValue(_local1);
             this.context.extend(AppBundle).extend(SingletonMappingExtension)
                     .configure(ApplicationConfig).configure(PaymentConfig)
                     .configure(GameConfig).configure(UIConfig)

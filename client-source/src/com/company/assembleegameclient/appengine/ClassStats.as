@@ -1,5 +1,5 @@
 package com.company.assembleegameclient.appengine {
-import com.company.assembleegameclient.util._Z_B_;
+import com.company.assembleegameclient.util.FameUtil;
 
 public class ClassStats {
 
@@ -18,7 +18,7 @@ public class ClassStats {
     }
 
     public function numStars():int {
-        return _Z_B_._lr(this.bestFame());
+        return FameUtil.numStars(this.bestFame());
     }
 
 }

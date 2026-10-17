@@ -34,7 +34,7 @@ public class NameChangerPanel extends Panel {
             title = PanelUtil.createLabel("Your name is: \n" + gs_.charList_.name_);
             title.y = 0;
             addChild(title);
-            var changeButton:_u5 = new _u5("Change ", 16, Parameters._0u, Currency._class);
+            var changeButton:_u5 = new _u5("Change ", 16, Parameters._0u, Currency.GOLD);
             changeButton.addEventListener(MouseEvent.CLICK, this.onButtonClick);
             changeButton.x = (WIDTH / 2) - (changeButton.w_ / 2);
             changeButton.y = (HEIGHT - (changeButton.height / 2)) - 10;

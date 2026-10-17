@@ -19,7 +19,7 @@ import com.company.util.AssetLibrary;
 import flash.display.BitmapData;
 
 import com.company.assembleegameclient.util.TextureRedrawer;
-import com.company.assembleegameclient.util._Z_B_;
+import com.company.assembleegameclient.util.FameUtil;
 
 import flash.events.MouseEvent;
 
@@ -43,7 +43,7 @@ public class ui_goldcoin extends Sprite {
         this._1x = new SimpleText(_Y_J_, 0xFFFFFF, false, 0, 0, "Myriad Pro");
         this._1x.filters = [new DropShadowFilter(0, 0, 0, 1, 4, 4, 2)];
         addChild(this._1x);
-        this._0H_ = new Bitmap(_Z_B_._qf());
+        this._0H_ = new Bitmap(FameUtil.getFameIcon());
         addChild(this._0H_);
         this.draw(0, 0);
         mouseEnabled = true;

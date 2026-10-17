@@ -3,7 +3,7 @@ import client.ui.guild.GuildBoardOverlay;
 
 import com.company.assembleegameclient.game.GameSprite;
 import com.company.assembleegameclient.objects.Player;
-import com.company.assembleegameclient.util._07E_;
+import com.company.assembleegameclient.util.GuildUtil;
 
 import flash.events.MouseEvent;
 
@@ -18,7 +18,7 @@ public class GuildBoardPanel extends ButtonPanel {
         if (player == null) {
             return;
         }
-        gs_.addChild(new GuildBoardOverlay(player.guildRank_ >= _07E_._f3));
+        gs_.addChild(new GuildBoardOverlay(player.guildRank_ >= GuildUtil.OFFICER));
     }
 }
 }

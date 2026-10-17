@@ -2,7 +2,7 @@ package particleeffects {
 
     import com.company.assembleegameclient.net.messages.data.LocationData;
     import com.company.assembleegameclient.objects.GameObject;
-    import com.company.assembleegameclient.util._04d;
+    import com.company.assembleegameclient.util.MathUtil;
 
     import flash.geom.Point;
 
@@ -34,7 +34,7 @@ package particleeffects {
                 position = Point.interpolate(this.start_, this.end_, (i / count));
                 particle = new SparkParticle(this.particleSize_, this.color_, (1000 - ((i / count) * 900)), 0.5, 0, 0);
                 jitterFactor = Math.min(i, (count - i));
-                map_.addObj(particle, (position.x + _04d._F_e(((distance / 200) * jitterFactor))), (position.y + _04d._F_e(((distance / 200) * jitterFactor))));
+                map_.addObj(particle, (position.x + MathUtil.randomSpread(((distance / 200) * jitterFactor))), (position.y + MathUtil.randomSpread(((distance / 200) * jitterFactor))));
                 i++;
             }
             return false;

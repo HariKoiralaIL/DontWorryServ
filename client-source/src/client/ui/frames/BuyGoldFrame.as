@@ -11,7 +11,7 @@ import com.company.assembleegameclient.ui._7f;
 import flash.events.MouseEvent;
 
 import com.company.assembleegameclient.parameters.Parameters;
-import com.company.assembleegameclient.util._zR_;
+import com.company.assembleegameclient.util.PaymentMethod;
 
 import flash.display.Shape;
 
@@ -63,9 +63,9 @@ public class BuyGoldFrame extends Frame {
     }
 
     private function getPaymentLabels():Vector.<String> {
-        var _local2:_zR_;
+        var _local2:PaymentMethod;
         var _local1:Vector.<String> = new Vector.<String>();
-        for each (_local2 in _zR_._X__) {
+        for each (_local2 in PaymentMethod.PAYMENT_METHODS) {
             _local1.push(_local2.label_);
         }
         return (_local1);

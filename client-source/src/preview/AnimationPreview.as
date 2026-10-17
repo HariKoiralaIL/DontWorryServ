@@ -1,7 +1,7 @@
 package preview {
 import com.company.assembleegameclient.util.TextureRedrawer;
-import com.company.assembleegameclient.util._J_H_;
-import com.company.assembleegameclient.util._lJ_;
+import com.company.assembleegameclient.util.MaskedImage;
+import com.company.assembleegameclient.util.AnimatedChar;
 import com.company.util._kp;
 
 import flash.display.Bitmap;
@@ -19,7 +19,7 @@ public class AnimationPreview extends PreviewBase {
         return set;
     }();
 
-    private var animChar:_lJ_ = null;
+    private var animChar:AnimatedChar = null;
     private var action_:int = 0;
     private var standButton:Sprite;
     private var walkButton:Sprite;
@@ -30,21 +30,21 @@ public class AnimationPreview extends PreviewBase {
         var walkBitmap:Bitmap = new Bitmap(icons._W_u[1]);
         walkBitmap.scaleX = walkBitmap.scaleY = 2;
         walkButton = addIcon(walkBitmap, function ():void {
-            action_ = _lJ_._m1;
+            action_ = AnimatedChar.WALK;
         });
         walkButton.x = (w_ / 2) - (walkButton.width / 2);
         walkButton.y = h_ - walkButton.height - 5;
         var standBitmap:Bitmap = new Bitmap(icons._W_u[0]);
         standBitmap.scaleX = standBitmap.scaleY = 2;
         standButton = addIcon(standBitmap, function ():void {
-            action_ = _lJ_._sS_;
+            action_ = AnimatedChar.STAND;
         });
         standButton.x = walkButton.x - standButton.width - 5;
         standButton.y = h_ - standButton.height - 5;
         var attackBitmap:Bitmap = new Bitmap(icons._W_u[2]);
         attackBitmap.scaleX = attackBitmap.scaleY = 2;
         attackButton = addIcon(attackBitmap, function ():void {
-            action_ = _lJ_._E_w;
+            action_ = AnimatedChar.ATTACK;
         });
         attackButton.x = walkButton.x + walkButton.width + 5;
         attackButton.y = h_ - attackButton.height - 5;
@@ -54,13 +54,13 @@ public class AnimationPreview extends PreviewBase {
 
     override public function redraw():void {
         super.redraw();
-        standButton.filters = (action_ == _lJ_._sS_) ? [new ColorMatrixFilter(DISABLED_FILTER)] : [];
-        walkButton.filters = (action_ == _lJ_._m1) ? [new ColorMatrixFilter(DISABLED_FILTER)] : [];
-        attackButton.filters = (action_ == _lJ_._E_w) ? [new ColorMatrixFilter(DISABLED_FILTER)] : [];
+        standButton.filters = (action_ == AnimatedChar.STAND) ? [new ColorMatrixFilter(DISABLED_FILTER)] : [];
+        walkButton.filters = (action_ == AnimatedChar.WALK) ? [new ColorMatrixFilter(DISABLED_FILTER)] : [];
+        attackButton.filters = (action_ == AnimatedChar.ATTACK) ? [new ColorMatrixFilter(DISABLED_FILTER)] : [];
         if (source_ == null || source_.width <= 16) {
             return;
         }
-        animChar = new _lJ_(new _J_H_(source_, null), source_.width / 7, source_.height, _lJ_.RIGHT);
+        animChar = new AnimatedChar(new MaskedImage(source_, null), source_.width / 7, source_.height, AnimatedChar.RIGHT);
         drawFrame();
     }
 
@@ -69,7 +69,7 @@ public class AnimationPreview extends PreviewBase {
             return;
         }
         var t:Number = (getTimer() % 400) / 400;
-        var frame:_J_H_ = animChar.imageFromDir(_lJ_.RIGHT, action_, t);
+        var frame:MaskedImage = animChar.imageFromDir(AnimatedChar.RIGHT, action_, t);
         bitmap_.bitmapData = TextureRedrawer.redraw(frame.image_, size_, true, 0, 0, false);
         position();
     }

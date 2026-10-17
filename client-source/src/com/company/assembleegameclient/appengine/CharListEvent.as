@@ -5,7 +5,7 @@ import com.company.assembleegameclient.net.Server;
 import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.assembleegameclient.objects.Player;
 import com.company.assembleegameclient.parameters.Parameters;
-import com.company.assembleegameclient.util._04d;
+import com.company.assembleegameclient.util.MathUtil;
 import com.company.util._0K_N_;
 
 import config.InjectorLocator;
@@ -201,7 +201,7 @@ public class CharListEvent extends Event {
         if (!accountXML.hasOwnProperty("BeginnerPackageTimeLeft")) {
             return;
         }
-        var timeLeft:int = _04d._3r(accountXML.BeginnerPackageTimeLeft);
+        var timeLeft:int = MathUtil.secondsToDaysCeil(accountXML.BeginnerPackageTimeLeft);
         Parameters.data_.beginnersOfferTimeLeft = timeLeft;
         var now:Number = new Date().time;
         var showNow:Boolean = timeLeft > 0 && Parameters.data_.beginnersOfferShowNowTime < now;

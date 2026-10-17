@@ -2,7 +2,7 @@ package particleeffects {
 
     import com.company.assembleegameclient.objects.GameObject;
     import com.company.assembleegameclient.parameters.Parameters;
-    import com.company.assembleegameclient.util._wW_;
+    import com.company.assembleegameclient.util.ObjectPool;
 
     public class VentEffect extends ParticleEffect {
 
@@ -34,7 +34,7 @@ package particleeffects {
             var tick:int = int((this.lastUpdate_ / SPAWN_INTERVAL));
             while (tick < int((time / SPAWN_INTERVAL))) {
                 spawnTime = (tick * SPAWN_INTERVAL);
-                particle = (_wW_._B_1(VentParticle) as VentParticle);
+                particle = (ObjectPool.getOrCreate(VentParticle) as VentParticle);
                 particle.restart(spawnTime, time);
                 angle = (Math.random() * Math.PI);
                 distance = (Math.random() * 0.4);
@@ -54,7 +54,7 @@ package particleeffects {
 
 import particleeffects.Particle;
 
-import com.company.assembleegameclient.util._wW_;
+import com.company.assembleegameclient.util.ObjectPool;
 
 class VentParticle extends Particle {
 
@@ -78,7 +78,7 @@ class VentParticle extends Particle {
 
     override public function removeFromMap():void {
         super.removeFromMap();
-        _wW_._ay(this);
+        ObjectPool.releaseInstance(this);
     }
 
     override public function update(time:int, dt:int):Boolean {

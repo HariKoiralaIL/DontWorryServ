@@ -1,7 +1,7 @@
 package com.company.assembleegameclient.map {
 import com.company.assembleegameclient.engine3d.TextureMatrix;
 import com.company.assembleegameclient.objects.GameObject;
-import com.company.assembleegameclient.util._V_m;
+import com.company.assembleegameclient.util.TileRedrawer;
 
 import flash.display.BitmapData;
 import flash.display.IGraphicsData;
@@ -107,12 +107,12 @@ public class Square {
         if (this.props_.animate_.type_ != AnimateProperties.NONE) {
             // NOTE: xOffset_ is intentionally passed for both axes (as in the original).
             this.faces_.push(new SquareFace(this.texture_, this.vertices_, this.props_.xOffset_, this.props_.xOffset_, this.props_.animate_.type_, this.props_.animate_.dx_, this.props_.animate_.dy_));
-            composite = _V_m.redraw(this, false);
+            composite = TileRedrawer.redraw(this, false);
             if (composite != null) {
                 this.faces_.push(new SquareFace(composite, this.vertices_, 0, 0, AnimateProperties.NONE, 0, 0));
             }
         } else {
-            composite = _V_m.redraw(this, true);
+            composite = TileRedrawer.redraw(this, true);
             uOffset = 0;
             vOffset = 0;
             if (composite == null) {

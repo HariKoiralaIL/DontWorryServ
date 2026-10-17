@@ -1,6 +1,6 @@
 package particleeffects {
 
-    import com.company.assembleegameclient.util._wW_;
+    import com.company.assembleegameclient.util.ObjectPool;
 
     /** Pooled particle used by BubbleEffect: rises, optionally drifting sideways. */
     public class BubbleParticle extends Particle {
@@ -8,7 +8,7 @@ package particleeffects {
         private static const DRIFT_SCALE:Number = 0.0025;
 
         public static function create(poolKey:*, color:uint, baseSpeed:Number, life:Number, lifeVariance:Number, speedVariance:Number, spread:Number):BubbleParticle {
-            var particle:BubbleParticle = (_wW_.getObject(poolKey) as BubbleParticle);
+            var particle:BubbleParticle = (ObjectPool.getObject(poolKey) as BubbleParticle);
             if (!particle) {
                 particle = new BubbleParticle(color, baseSpeed, life, lifeVariance, speedVariance, spread);
             }

@@ -2,7 +2,7 @@ package offers {
 
 import com.company.assembleegameclient.appengine.AppEngineClient;
 import com.company.assembleegameclient.parameters.Parameters;
-import com.company.assembleegameclient.util._04d;
+import com.company.assembleegameclient.util.MathUtil;
 import com.company.assembleegameclient.util.offer.Offer;
 import com.company.assembleegameclient.util.offer.Offers;
 import com.company.util._H_U_;
@@ -86,7 +86,7 @@ public class BeginnersOfferModel implements IBeginnersOfferModel {
     private function handleTimeLeftLoaded(event:GenericDataEvent):void {
         var xml:XML = new XML(event.data);
         this.hasServerTimeLeft = true;
-        this.timeLeft = _04d._3r(xml.text());
+        this.timeLeft = MathUtil.secondsToDaysCeil(xml.text());
         this.timeLeftUpdated.dispatch();
     }
 

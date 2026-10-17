@@ -132,7 +132,7 @@ public class Face3D {
     }
 
     private function refreshTexture():void {
-        var lit:BitmapData = TextureRedrawer._uB_(this.texture_, this.brightness_);
+        var lit:BitmapData = TextureRedrawer.adjustBrightness(this.texture_, this.brightness_);
         if (this.textureMatrix_ == null) {
             this.textureMatrix_ = new TextureMatrix(lit, this.uvts_);
         } else {

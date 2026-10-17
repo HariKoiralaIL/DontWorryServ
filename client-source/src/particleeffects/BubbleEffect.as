@@ -1,7 +1,7 @@
 package particleeffects {
 
     import com.company.assembleegameclient.objects.GameObject;
-    import com.company.assembleegameclient.util._wW_;
+    import com.company.assembleegameclient.util.ObjectPool;
 
     /** Continuously emits pooled BubbleParticles around a game object. */
     public class BubbleEffect extends ParticleEffect {
@@ -63,7 +63,7 @@ package particleeffects {
 
         override public function removeFromMap():void {
             super.removeFromMap();
-            _wW_.dump(this.poolKey_);
+            ObjectPool.dump(this.poolKey_);
         }
 
     }

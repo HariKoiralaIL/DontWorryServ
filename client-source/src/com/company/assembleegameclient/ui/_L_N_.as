@@ -12,7 +12,7 @@ import com.company.ui.SimpleText;
 import flash.filters.DropShadowFilter;
 
 import com.company.util._O_m;
-import com.company.assembleegameclient.util._07E_;
+import com.company.assembleegameclient.util.GuildUtil;
 
 public class _L_N_ extends Sprite {
 
@@ -41,7 +41,7 @@ public class _L_N_ extends Sprite {
             _O_m._03d(this, this._5U_);
             _O_m._03d(this, this.guildName_);
         } else {
-            this._5U_.bitmapData = _07E_._wS_(this._S_e, 10);
+            this._5U_.bitmapData = GuildUtil.getRankIcon(this._S_e, 10);
             _O_m._041(this, this._5U_);
             this.guildName_.text = this.name_;
             this.guildName_._08S_();

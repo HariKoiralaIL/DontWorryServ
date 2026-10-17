@@ -88,7 +88,7 @@ public class ObjectFace3D {
                 new ColorTransform(this.brightness_, this.brightness_, this.brightness_), color);
             graphicsData.push(this.solidFill_);
         } else {
-            texture = TextureRedrawer._uB_(texture, this.brightness_);
+            texture = TextureRedrawer.adjustBrightness(texture, this.brightness_);
             this.bitmapFill_.bitmapData = texture;
             this.bitmapFill_.matrix = this.computeTextureMatrix(texture);
             graphicsData.push(this.bitmapFill_);

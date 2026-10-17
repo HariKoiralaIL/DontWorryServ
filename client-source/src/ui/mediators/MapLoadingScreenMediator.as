@@ -8,9 +8,9 @@ import client.game.GameInitData;
 import com.company.assembleegameclient.appengine.SavedCharacter;
 import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.assembleegameclient.util.TextureRedrawer;
-import com.company.assembleegameclient.util._0B_c;
-import com.company.assembleegameclient.util._J_H_;
-import com.company.assembleegameclient.util._lJ_;
+import com.company.assembleegameclient.util.AnimatedCharLibrary;
+import com.company.assembleegameclient.util.MaskedImage;
+import com.company.assembleegameclient.util.AnimatedChar;
 
 import env.ServerListState;
 
@@ -47,7 +47,7 @@ public class MapLoadingScreenMediator extends Mediator {
         var portrait2:BitmapData = null;
         var character:SavedCharacter = this.findSelectedCharacter();
         if (character) {
-            var animatedChar:_lJ_ = this.getAnimatedChar(character);
+            var animatedChar:AnimatedChar = this.getAnimatedChar(character);
             portrait1 = this.renderPortrait(animatedChar, FRAME_FIRST, character);
             portrait2 = this.renderPortrait(animatedChar, FRAME_SECOND, character);
         }
@@ -70,21 +70,21 @@ public class MapLoadingScreenMediator extends Mediator {
     }
 
     /** Animated texture of the character's class, or of its skin when it has one. */
-    private function getAnimatedChar(character:SavedCharacter):_lJ_ {
+    private function getAnimatedChar(character:SavedCharacter):AnimatedChar {
         var classXml:XML = ObjectLibrary.typeToXML_[int(character.charXML_.ObjectType)];
-        var animatedChar:_lJ_ = _0B_c._J_v(String(classXml.AnimatedTexture.File), int(classXml.AnimatedTexture.Index));
+        var animatedChar:AnimatedChar = AnimatedCharLibrary.getAnimatedChar(String(classXml.AnimatedTexture.File), int(classXml.AnimatedTexture.Index));
         var skinType:int = character.skin();
         if (skinType != -1) {
             var skinXml:XML = ObjectLibrary.typeToXML_[skinType];
             if (skinXml != null) {
-                animatedChar = _0B_c._J_v(String(skinXml.AnimatedTexture.File), int(skinXml.AnimatedTexture.Index));
+                animatedChar = AnimatedCharLibrary.getAnimatedChar(String(skinXml.AnimatedTexture.File), int(skinXml.AnimatedTexture.Index));
             }
         }
         return animatedChar;
     }
 
-    private function renderPortrait(animatedChar:_lJ_, frame:Number, character:SavedCharacter):BitmapData {
-        var image:_J_H_ = animatedChar.imageFromDir(_lJ_.RIGHT, _lJ_._m1, frame);
+    private function renderPortrait(animatedChar:AnimatedChar, frame:Number, character:SavedCharacter):BitmapData {
+        var image:MaskedImage = animatedChar.imageFromDir(AnimatedChar.RIGHT, AnimatedChar.WALK, frame);
         var tex1:int = character.tex1();
         var tex2:int = character.tex2();
         return TextureRedrawer.resize(image.image_, image.mask_, PORTRAIT_SIZE, false, tex1, tex2);

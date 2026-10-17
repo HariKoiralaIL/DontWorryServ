@@ -16,7 +16,7 @@ import signals.Signal;
 
 import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.assembleegameclient.appengine.SavedCharacter;
-import com.company.assembleegameclient.util._lJ_;
+import com.company.assembleegameclient.util.AnimatedChar;
 
 import flash.display.BitmapData;
 
@@ -24,7 +24,7 @@ import com.company.util.BitmapUtil;
 
 import flash.filters.DropShadowFilter;
 
-import com.company.assembleegameclient.util._Z_B_;
+import com.company.assembleegameclient.util.FameUtil;
 import com.company.rotmg.graphics.StarGraphic;
 
 import flash.geom.ColorTransform;
@@ -35,7 +35,7 @@ public class CreateNewCharacterRect extends CharacterRect {
         super(0x4C4C4C, 0x606060);
         this.charList_ = _arg1;
         var _local2:XML = ObjectLibrary.playerChars_[int((ObjectLibrary.playerChars_.length * Math.random()))];
-        var _local3:BitmapData = SavedCharacter.getImage(null, _local2, _lJ_.RIGHT, _lJ_._sS_, 0, false, false);
+        var _local3:BitmapData = SavedCharacter.getImage(null, _local2, AnimatedChar.RIGHT, AnimatedChar.STAND, 0, false, false);
         _local3 = BitmapUtil._Y_d(_local3, 6, 6, (_local3.width - 12), (_local3.height - 6));
         this.bitmap_ = new Bitmap();
         this.bitmap_.bitmapData = _local3;
@@ -48,7 +48,7 @@ public class CreateNewCharacterRect extends CharacterRect {
         this.classNameText_.filters = [new DropShadowFilter(0, 0, 0, 1, 8, 8)];
         this.classNameText_.x = 58;
         addChild(this.classNameText_);
-        if (this.charList_.numStars_ != _Z_B_._5e()) {
+        if (this.charList_.numStars_ != FameUtil.maxStars()) {
             this.taglineIcon_ = new StarGraphic();
             this.taglineIcon_.transform.colorTransform = new ColorTransform((179 / 0xFF), (179 / 0xFF), (179 / 0xFF));
             this.taglineIcon_.scaleX = 1.2;
@@ -58,7 +58,7 @@ public class CreateNewCharacterRect extends CharacterRect {
             this.taglineIcon_.filters = [new DropShadowFilter(0, 0, 0)];
             addChild(this.taglineIcon_);
             this.taglineText_ = new SimpleText(14, 0xB3B3B3, false, 0, 0, "Myriad Pro");
-            this.taglineText_.text = ((_Z_B_._5e() - this.charList_.numStars_) + " Class quests not yet completed");
+            this.taglineText_.text = ((FameUtil.maxStars() - this.charList_.numStars_) + " Class quests not yet completed");
             this.taglineText_.updateMetrics();
             this.taglineText_.filters = [new DropShadowFilter(0, 0, 0, 1, 8, 8)];
             this.taglineText_.x = ((58 + this.taglineIcon_.width) + 2);
