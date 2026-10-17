@@ -1,122 +1,125 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.ui.Inventory
-
 package com.company.assembleegameclient.ui {
 import com.company.assembleegameclient.game.GameSprite;
 import com.company.assembleegameclient.objects.GameObject;
 import com.company.util.GraphicHelper;
 
-import flash.display.Bitmap;
 import flash.display.GraphicsPath;
 import flash.display.GraphicsSolidFill;
 import flash.display.IGraphicsData;
 import flash.display.Sprite;
 
-
+/**
+ * A grid of InventorySlots (4 per row) belonging to a game object: the
+ * player's equipment / inventory, a loot bag, a vault chest, ...
+ */
 public class Inventory extends Sprite {
 
-    private static const _pm:Array = [0, 0, 0, 0];
-    private static const _ls:Object = {
+    private static const SLOTS_PER_ROW:int = 4;
+    private static const SLOT_SPACING:int = 4;
+
+    private static const NO_CORNERS:Array = [0, 0, 0, 0];
+
+    /** Which corners of each slot are rounded, keyed by the number of slots in the grid. */
+    private static const SLOT_CORNERS:Object = {
         "1": [[1, 1, 1, 1]],
         "2": [[1, 0, 0, 1], [0, 1, 1, 0]],
-        "3": [[1, 0, 0, 1], _pm, [0, 1, 1, 0]],
-        "4": [[1, 0, 0, 1], _pm, _pm, [0, 1, 1, 0]],
-        "5": [[1, 0, 0, 1], _pm, _pm, [0, 1, 1, 0], [0, 0, 1, 1]],
-        "6": [[1, 0, 0, 1], _pm, _pm, [0, 1, 1, 0], [0, 0, 0, 1], [0, 0, 1, 0]],
-        "7": [[1, 0, 0, 1], _pm, _pm, [0, 1, 1, 0], [0, 0, 0, 1], _pm, [0, 0, 1, 0]],
-        "8": [[1, 0, 0, 0], _pm, _pm, [0, 1, 0, 0], [0, 0, 0, 1], _pm, _pm, [0, 0, 1, 0]],
-        "12": [[1, 0, 0, 1], _pm, _pm, [0, 1, 1, 0], [1, 0, 0, 0], _pm, _pm, [0, 1, 0, 0], [0, 0, 0, 1], _pm, _pm, [0, 0, 1, 0]]
+        "3": [[1, 0, 0, 1], NO_CORNERS, [0, 1, 1, 0]],
+        "4": [[1, 0, 0, 1], NO_CORNERS, NO_CORNERS, [0, 1, 1, 0]],
+        "5": [[1, 0, 0, 1], NO_CORNERS, NO_CORNERS, [0, 1, 1, 0], [0, 0, 1, 1]],
+        "6": [[1, 0, 0, 1], NO_CORNERS, NO_CORNERS, [0, 1, 1, 0], [0, 0, 0, 1], [0, 0, 1, 0]],
+        "7": [[1, 0, 0, 1], NO_CORNERS, NO_CORNERS, [0, 1, 1, 0], [0, 0, 0, 1], NO_CORNERS, [0, 0, 1, 0]],
+        "8": [[1, 0, 0, 0], NO_CORNERS, NO_CORNERS, [0, 1, 0, 0], [0, 0, 0, 1], NO_CORNERS, NO_CORNERS, [0, 0, 1, 0]],
+        "12": [[1, 0, 0, 1], NO_CORNERS, NO_CORNERS, [0, 1, 1, 0], [1, 0, 0, 0], NO_CORNERS, NO_CORNERS, [0, 1, 0, 0], [0, 0, 0, 1], NO_CORNERS, NO_CORNERS, [0, 0, 1, 0]]
     };
 
-    public function Inventory(_arg1:GameSprite, _arg2:GameObject, _arg3:String, _arg4:Vector.<int>, _arg5:int, _arg6:Boolean, _offset:int = 0, _equipment:Boolean = false):void {
-        var _local8:_E_6;
-        this.slots_ = new Vector.<_E_6>();
-        this.fill_ = new GraphicsSolidFill(0x4C4C4C);
-        this.path_ = new GraphicsPath(new Vector.<int>(), new Vector.<Number>());
-        this.graphicsData_ = new <IGraphicsData>[this.fill_, this.path_, GraphicHelper.END_FILL];
+    public var gs_:GameSprite;
+    /** The object whose items are shown (formerly _iA_). */
+    public var owner_:GameObject;
+    /** Inventory name such as "Inventory" or "Loot Bag" (formerly _A_H_). */
+    public var name_:String;
+    public var invsize_:int;
+    public var slots_:Vector.<InventorySlot> = new Vector.<InventorySlot>();
+    public var equipment_:Boolean;
+
+    protected var fill_:GraphicsSolidFill = new GraphicsSolidFill(0x4C4C4C);
+    protected var path_:GraphicsPath = new GraphicsPath(new Vector.<int>(), new Vector.<Number>());
+    private var graphicsData_:Vector.<IGraphicsData> = new <IGraphicsData>[fill_, path_, GraphicHelper.END_FILL];
+
+    /**
+     * @param gs          game sprite (null for display-only inventories)
+     * @param owner       object that owns the items (null for display-only inventories)
+     * @param name        inventory name
+     * @param slotTypes   slot type of every slot
+     * @param invSize     number of slots to create
+     * @param showHotkeys whether empty slots show their hotkey number
+     * @param offset      index of the first slot within the owner's equipment array
+     * @param equipment   true for the equipment row (draws a background plate)
+     */
+    public function Inventory(gs:GameSprite, owner:GameObject, name:String, slotTypes:Vector.<int>, invSize:int, showHotkeys:Boolean, offset:int = 0, equipment:Boolean = false) {
         super();
-        this.gs_ = _arg1;
-        this._iA_ = _arg2;
-        this._A_H_ = _arg3;
-        this.invsize_ = _arg5;
-        this.equipment_ = _equipment;
-        if (((_arg1) && ((_arg2 == this.gs_.map_.player_)))) {
+        this.gs_ = gs;
+        this.owner_ = owner;
+        this.name_ = name;
+        this.invsize_ = invSize;
+        this.equipment_ = equipment;
+        if (gs && owner == this.gs_.map_.player_) {
             this.gs_.map_.player_.inventory = this;
         }
-        var _local7:int = 0;
-        var _local10:int;
-        while (_local7 < _arg5) {
-            _local10 = _local7 + _offset;
-            _local8 = new _E_6(this, _local10, _arg4[_local7], ((_arg6) ? (_local10 - 3) : -1), _ls[_arg4.length][_local7], _equipment);
-            _local8.x = (int((_local7 % 4)) * (Slot.WIDTH + 4));
-            _local8.y = (int((_local7 / 4)) * (Slot.HEIGHT + 4));
-            this.slots_.push(_local8);
-            addChild(_local8);
-            _local7++;
+        for (var i:int = 0; i < invSize; i++) {
+            var slotId:int = i + offset;
+            var slot:InventorySlot = new InventorySlot(this, slotId, slotTypes[i], showHotkeys ? (slotId - 3) : -1, SLOT_CORNERS[slotTypes.length][i], equipment);
+            slot.x = int(i % SLOTS_PER_ROW) * (Slot.WIDTH + SLOT_SPACING);
+            slot.y = int(i / SLOTS_PER_ROW) * (Slot.HEIGHT + SLOT_SPACING);
+            this.slots_.push(slot);
+            addChild(slot);
         }
     }
-    public var gs_:GameSprite;
-    public var _iA_:GameObject;
-    public var _A_H_:String;
-    public var invsize_:int;
-    public var slots_:Vector.<_E_6>;
-    public var equipment_:Boolean;
-    protected var fill_:GraphicsSolidFill;
-    protected var path_:GraphicsPath;
-    private var graphicsData_:Vector.<IGraphicsData>;
 
-    public function draw(_arg1:Vector.<int>):void {
-        var _local3:_E_6;
-        var _local2:int = 0;
+    public function draw(items:Vector.<int>):void {
         if (this.equipment_) {
             GraphicHelper.clearPath(this.path_);
             GraphicHelper.drawUI(-3, -3, 178, 46, 6, [1, 1, 1, 1], this.path_);
             graphics.clear();
             graphics.drawGraphicsData(this.graphicsData_);
         }
-        while (_local2 < this.slots_.length) {
-            _local3 = this.slots_[_local2];
-            _local3.draw(((((!((_arg1 == null))) && ((_local2 < _arg1.length)))) ? _arg1[_local2] : -1));
-            _local2++;
+        for (var i:int = 0; i < this.slots_.length; i++) {
+            this.slots_[i].draw((items != null && i < items.length) ? items[i] : -1);
         }
     }
 
     public function refresh():void {
-        var _local1:_E_6;
-        for each (_local1 in this.slots_) {
-            _local1.refresh();
+        for each (var slot:InventorySlot in this.slots_) {
+            slot.refresh();
         }
     }
 
-    public function useItem(_arg1:int):void {
-        if ((((_arg1 < 0)) || ((_arg1 >= this.slots_.length)))) {
+    public function useItem(slotIndex:int):void {
+        if (slotIndex < 0 || slotIndex >= this.slots_.length) {
             return;
         }
-        this.slots_[_arg1].attemptUse();
+        this.slots_[slotIndex].attemptUse();
     }
 
-    public function _mK_():Boolean {
-        var _local3:_E_6;
+    /**
+     * True when every non-equipment slot (4..19) of the player's inventory
+     * holds an item. Always false for small inventories or without a game sprite.
+     * Formerly _mK_.
+     */
+    public function isFull():Boolean {
         if (!this.gs_) {
-            return (false);
+            return false;
         }
         if (this.invsize_ < 20) {
             return false;
         }
-        var _local1:Boolean = true;
-        var _local2:uint = 4;
-        while (_local2 < 20) {
-            _local3 = this.gs_.map_.player_.inventory.slots_[_local2];
-            if (_local3._X_B_ == null) {
-                _local1 = false;
+        var full:Boolean = true;
+        for (var i:uint = 4; i < 20; i++) {
+            var slot:InventorySlot = this.gs_.map_.player_.inventory.slots_[i];
+            if (slot.itemSprite_ == null) {
+                full = false;
             }
-            _local2++;
         }
-        return (_local1);
+        return full;
     }
-
 }
-}//package com.company.assembleegameclient.ui
-
+}

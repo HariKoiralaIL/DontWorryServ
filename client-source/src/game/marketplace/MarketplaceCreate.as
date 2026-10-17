@@ -1,7 +1,7 @@
 package game.marketplace {
     import com.company.assembleegameclient.game.GameSprite;
-    import com.company.assembleegameclient.ui._0K_B_;
-    import com.company.assembleegameclient.ui._7f;
+    import com.company.assembleegameclient.ui.Scrollbar;
+    import com.company.assembleegameclient.ui.RoundedButton;
     import com.company.ui.SimpleText;
 
     import flash.display.Bitmap;
@@ -22,11 +22,11 @@ package game.marketplace {
         private var divider_:Shape;
         private var viewport_:Sprite;
         private var list_:Sprite;
-        private var scrollBar_:_0K_B_;
+        private var scrollBar_:Scrollbar;
         private var myInv_:MarketplaceInventory;
         private var arrow_:Bitmap;
         private var request_:MarketplaceItemSelect;
-        private var createButton_:_7f;
+        private var createButton_:RoundedButton;
 
         public function MarketplaceCreate(gs:GameSprite) {
             super();
@@ -84,7 +84,7 @@ package game.marketplace {
             this.list_.addChild(this.request_);
             this.request_.addEventListener(Event.CHANGE, this.updateScrollBar);
 
-            this.createButton_ = new _7f(24, "Create");
+            this.createButton_ = new RoundedButton(24, "Create");
             this.createButton_.x = (MarketplaceLayout.ACTION_BUTTON_CENTER_X - (this.createButton_.width / 2));
             this.createButton_.y = this.myInv_.y + (this.myInv_.height / 2) - (this.arrow_.height / 2);
             this.list_.addChild(this.createButton_);
@@ -100,17 +100,17 @@ package game.marketplace {
                 this.scrollBar_ = null;
             }
             if (this.list_.height > MarketplaceLayout.VIEW_HEIGHT) {
-                this.scrollBar_ = new _0K_B_(MarketplaceLayout.SCROLL_BAR_WIDTH, MarketplaceLayout.VIEW_HEIGHT);
+                this.scrollBar_ = new Scrollbar(MarketplaceLayout.SCROLL_BAR_WIDTH, MarketplaceLayout.VIEW_HEIGHT);
                 this.scrollBar_.x = ((MarketplaceLayout.STAGE_WIDTH - this.scrollBar_.width) - 4);
                 this.scrollBar_.y = SCROLL_BAR_Y;
-                this.scrollBar_._fA_(MarketplaceLayout.VIEW_HEIGHT, this.list_.height);
+                this.scrollBar_.setIndicatorSize(MarketplaceLayout.VIEW_HEIGHT, this.list_.height);
                 this.scrollBar_.addEventListener(Event.CHANGE, this.onScroll);
                 addChild(this.scrollBar_);
             }
         }
 
         private function onScroll(e:Event):void {
-            this.list_.y = (-(this.scrollBar_._Q_D_()) * (this.list_.height - MarketplaceLayout.VIEW_HEIGHT));
+            this.list_.y = (-(this.scrollBar_.getPosition()) * (this.list_.height - MarketplaceLayout.VIEW_HEIGHT));
         }
 
         private function onCreateClick(e:MouseEvent):void {

@@ -1,31 +1,27 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.ui._y3
-
 package com.company.assembleegameclient.ui {
-import flash.display.Sprite;
-import flash.display.Shape;
-
 import client.ui.frames.Frame;
 
-import flash.display.Graphics;
+import flash.display.Sprite;
 import flash.events.Event;
 
+/**
+ * Shows a Frame without a backdrop and removes itself when the frame completes.
+ *
+ * Formerly: _y3 (variant)
+ */
 public class FrameHolderNoDim extends Sprite {
 
+    private var frame:Frame;
+
     public function FrameHolderNoDim(frame:Frame) {
+        super();
         this.frame = frame;
         this.frame.addEventListener(Event.COMPLETE, this.onComplete);
         addChild(this.frame);
     }
-    private var dimScreen:Shape;
-    private var frame:Frame;
 
-    private function onComplete(_arg1:Event):void {
+    private function onComplete(event:Event):void {
         parent.removeChild(this);
     }
-
 }
-}//package com.company.assembleegameclient.ui
-
+}

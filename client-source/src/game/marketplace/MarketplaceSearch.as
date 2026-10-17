@@ -1,6 +1,6 @@
 package game.marketplace {
     import com.company.assembleegameclient.game.GameSprite;
-    import com.company.assembleegameclient.ui._7f;
+    import com.company.assembleegameclient.ui.RoundedButton;
 
     import flash.display.Bitmap;
     import flash.display.Sprite;
@@ -13,7 +13,7 @@ package game.marketplace {
         private var offer_:MarketplaceItemSelect;
         private var arrow_:Bitmap;
         private var request_:MarketplaceItemSelect;
-        private var searchButton_:_7f;
+        private var searchButton_:RoundedButton;
 
         public function MarketplaceSearch(gs:GameSprite) {
             super();
@@ -34,7 +34,7 @@ package game.marketplace {
             this.request_.x = this.arrow_.x + this.arrow_.width + 18;
             this.request_.y = 58;
             addChild(this.request_);
-            this.searchButton_ = new _7f(24, "Search");
+            this.searchButton_ = new RoundedButton(24, "Search");
             this.searchButton_.x = (MarketplaceLayout.ACTION_BUTTON_CENTER_X - (this.searchButton_.width / 2));
             this.searchButton_.y = this.arrow_.y + (this.arrow_.height / 2) - (this.searchButton_.height / 2);
             addChild(this.searchButton_);

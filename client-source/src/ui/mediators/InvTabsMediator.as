@@ -1,5 +1,5 @@
 package ui.mediators {
-import com.company.assembleegameclient.ui.InvTabs;
+import com.company.assembleegameclient.ui.PlayerPanel;
 
 import robotlegs.bender.bundles.mvcs.Mediator;
 
@@ -10,7 +10,7 @@ import robotlegs.bender.bundles.mvcs.Mediator;
 public class InvTabsMediator extends Mediator {
 
     [Inject]
-    public var view:InvTabs;
+    public var view:PlayerPanel;
 
 }
 }

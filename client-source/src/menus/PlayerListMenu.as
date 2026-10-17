@@ -3,8 +3,8 @@ package menus
     import com.company.assembleegameclient.map.GameMap;
     import com.company.assembleegameclient.objects.Player;
     import com.company.assembleegameclient.parameters.Parameters;
-    import com.company.assembleegameclient.ui._return;
-    import com.company.assembleegameclient.ui.ui_playerslist;
+    import com.company.assembleegameclient.ui.LineSeparator;
+    import com.company.assembleegameclient.ui.GameObjectListItem;
 
     import flash.events.Event;
     import flash.events.MouseEvent;
@@ -14,13 +14,13 @@ package menus
         public var map_:GameMap;
         public var players_:Vector.<Player>;
         public var teleportOption_:MenuOption;
-        public var divider_:_return;
-        private var playerRows_:Vector.<ui_playerslist> = new Vector.<ui_playerslist>();
+        public var divider_:LineSeparator;
+        private var playerRows_:Vector.<GameObjectListItem> = new Vector.<GameObjectListItem>();
 
         public function PlayerListMenu(map:GameMap, players:Vector.<Player>)
         {
             var player:Player;
-            var row:ui_playerslist;
+            var row:GameObjectListItem;
             super(0x2A2A2A, 0xFFFFFF);
             this.map_ = map;
             this.players_ = players.concat();
@@ -32,7 +32,7 @@ package menus
                 this.teleportOption_.y = 8;
                 this.teleportOption_.addEventListener(MouseEvent.CLICK, this.onTeleport);
                 addChild(this.teleportOption_);
-                this.divider_ = new _return(width - 24, 0x2D2D2D);
+                this.divider_ = new LineSeparator(width - 24, 0x2D2D2D);
                 this.divider_.x = 6;
                 this.divider_.y = 40;
                 addChild(this.divider_);
@@ -40,7 +40,7 @@ package menus
             }
             for each (player in this.players_)
             {
-                row = new ui_playerslist(0xB3B3B3, true, player);
+                row = new GameObjectListItem(0xB3B3B3, true, player);
                 row.x = 0;
                 row.y = rowY;
                 addChild(row);

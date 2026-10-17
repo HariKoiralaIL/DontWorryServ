@@ -3,7 +3,7 @@ import com.company.assembleegameclient.net.messages.data.StatData;
 import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.assembleegameclient.objects.Player;
 import com.company.assembleegameclient.parameters.Parameters;
-import com.company.assembleegameclient.ui._return;
+import com.company.assembleegameclient.ui.LineSeparator;
 import com.company.ui.SimpleText;
 import com.company.util.BitmapUtil;
 import com.company.util.KeyCodes;
@@ -189,7 +189,7 @@ public class EquipmentToolTip extends ToolTip {
     // ---- layout helpers ----
 
     private function addSeparator(lineY:int, index:int):void {
-        var line:_return = new _return(TOOLTIP_WIDTH - 12, SEPARATOR_COLOR);
+        var line:LineSeparator = new LineSeparator(TOOLTIP_WIDTH - 12, SEPARATOR_COLOR);
         line.x = 8;
         line.y = lineY;
         addChild(line);

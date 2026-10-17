@@ -7,8 +7,8 @@ import client.events.AccountChangedEvent;
 import client.events.MoneyChangedEvent;
 
 import com.company.assembleegameclient.appengine.CharListEvent;
-import com.company.assembleegameclient.ui._0G_h;
-import com.company.assembleegameclient.ui._L_N_;
+import com.company.assembleegameclient.ui.RankDisplay;
+import com.company.assembleegameclient.ui.GuildText;
 import com.company.assembleegameclient.ui.tooltip.RankToolTip;
 
 import flash.display.Sprite;
@@ -39,8 +39,8 @@ public class BaseScreen extends Sprite {
     private var guildRank:int;
     private var stars:int;
     private var screenClass:Class;
-    private var starsView:_0G_h;
-    private var guildView:_L_N_;
+    private var starsView:RankDisplay;
+    private var guildView:GuildText;
     private var initialized:Boolean;
 
     public function BaseScreen(screenClass:Class) {
@@ -102,14 +102,14 @@ public class BaseScreen extends Sprite {
     }
 
     private function drawGuild():void {
-        this.guildView = new _L_N_(this.guildName, this.guildRank);
+        this.guildView = new GuildText(this.guildName, this.guildRank);
         this.guildView.x = 92;
         this.guildView.y = 6;
         this.guildLayer.addChild(this.guildView);
     }
 
     private function drawStars():void {
-        this.starsView = new _0G_h(this.stars, true, false);
+        this.starsView = new RankDisplay(this.stars, true, false);
         this.starsView.x = 36;
         this.starsView.y = 4;
         this.starsView.mouseEnabled = true;

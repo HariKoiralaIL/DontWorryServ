@@ -1,5 +1,5 @@
 package mapeditor {
-import com.company.assembleegameclient.ui._0K_B_;
+import com.company.assembleegameclient.ui.Scrollbar;
 import com.company.util.GraphicHelper;
 
 import flash.display.CapsStyle;
@@ -35,7 +35,7 @@ internal class Chooser extends Sprite {
         this.content_.x = 4;
         this.content_.y = 6;
         addChild(this.content_);
-        this.scrollBar_ = new _0K_B_(SCROLLBAR_WIDTH, (HEIGHT - 8));
+        this.scrollBar_ = new Scrollbar(SCROLLBAR_WIDTH, (HEIGHT - 8));
         this.scrollBar_.x = ((WIDTH - SCROLLBAR_WIDTH) - 6);
         this.scrollBar_.y = 4;
         this.scrollBar_.addEventListener(Event.CHANGE, this.onScroll);
@@ -52,7 +52,7 @@ internal class Chooser extends Sprite {
     public var selectedElement_:ChooserElement;
     private var graphicsData_:Vector.<IGraphicsData>;
     private var content_:Sprite;
-    private var scrollBar_:_0K_B_;
+    private var scrollBar_:Scrollbar;
     private var elements_:Vector.<ChooserElement>;
     private var outlineFill_:GraphicsSolidFill;
     private var outlineStroke_:GraphicsStroke;
@@ -105,12 +105,12 @@ internal class Chooser extends Sprite {
     }
 
     protected function onScroll(event:Event):void {
-        this.content_.y = (6 - (this.scrollBar_._Q_D_() * ((this.content_.height + 12) - HEIGHT)));
+        this.content_.y = (6 - (this.scrollBar_.getPosition() * ((this.content_.height + 12) - HEIGHT)));
     }
 
     protected function onAddedToStage(event:Event):void {
         addEventListener(MouseEvent.MOUSE_WHEEL, this.onMouseWheel);
-        this.scrollBar_._fA_(HEIGHT, this.content_.height);
+        this.scrollBar_.setIndicatorSize(HEIGHT, this.content_.height);
         addChild(this.scrollBar_);
     }
 
@@ -120,9 +120,9 @@ internal class Chooser extends Sprite {
 
     protected function onMouseWheel(mouseEvent:MouseEvent):void {
         if (mouseEvent.delta > 0) {
-            this.scrollBar_._d9();
+            this.scrollBar_.pageUp();
         } else if (mouseEvent.delta < 0) {
-            this.scrollBar_._tE_();
+            this.scrollBar_.pageDown();
         }
     }
 

@@ -7,7 +7,7 @@ package {
   import menubackgrounds.CharacterScreenBackground;
   import menubackgrounds.ScrollingMapBackground;
 
-  import com.company.assembleegameclient.ui._zX_;
+  import com.company.assembleegameclient.ui.SoundToggleButton;
 
   import flash.display.Sprite;
     

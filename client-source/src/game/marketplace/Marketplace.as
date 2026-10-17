@@ -5,7 +5,7 @@ package game.marketplace {
     import com.company.assembleegameclient.game.GameSprite;
     import com.company.assembleegameclient.parameters.Parameters;
     import com.company.assembleegameclient.ui.TextButton;
-    import com.company.assembleegameclient.ui._0K_B_;
+    import com.company.assembleegameclient.ui.Scrollbar;
     import com.company.ui.SimpleText;
     import com.company.util.PropertyUtil;
 
@@ -49,7 +49,7 @@ package game.marketplace {
         private var divider_:Shape;
         private var viewport_:Sprite;
         private var list_:Sprite;
-        private var scrollBar_:_0K_B_;
+        private var scrollBar_:Scrollbar;
         private var scrollPadding_:int;
         private var num_:int;
         private var offset_:int;
@@ -208,10 +208,10 @@ package game.marketplace {
 
         private function addScrollBar(barContentHeight:Number, scrollPadding:int):void {
             this.scrollPadding_ = scrollPadding;
-            this.scrollBar_ = new _0K_B_(MarketplaceLayout.SCROLL_BAR_WIDTH, MarketplaceLayout.VIEW_HEIGHT);
+            this.scrollBar_ = new Scrollbar(MarketplaceLayout.SCROLL_BAR_WIDTH, MarketplaceLayout.VIEW_HEIGHT);
             this.scrollBar_.x = ((MarketplaceLayout.STAGE_WIDTH - this.scrollBar_.width) - 4);
             this.scrollBar_.y = SCROLL_BAR_Y;
-            this.scrollBar_._fA_(MarketplaceLayout.VIEW_HEIGHT, barContentHeight);
+            this.scrollBar_.setIndicatorSize(MarketplaceLayout.VIEW_HEIGHT, barContentHeight);
             this.scrollBar_.addEventListener(Event.CHANGE, this.onScroll);
             addChild(this.scrollBar_);
         }
@@ -224,7 +224,7 @@ package game.marketplace {
         }
 
         private function onScroll(e:Event):void {
-            this.list_.y = (-(this.scrollBar_._Q_D_()) * ((this.list_.height + this.scrollPadding_) - MarketplaceLayout.VIEW_HEIGHT));
+            this.list_.y = (-(this.scrollBar_.getPosition()) * ((this.list_.height + this.scrollPadding_) - MarketplaceLayout.VIEW_HEIGHT));
         }
 
         private function checkScroll(e:Event):void {

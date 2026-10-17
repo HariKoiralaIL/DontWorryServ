@@ -3,7 +3,7 @@ import com.company.assembleegameclient.game.GameSprite;
 import com.company.assembleegameclient.objects.Player;
 import com.company.assembleegameclient.objects.NearbyPlayerTracker;
 import com.company.assembleegameclient.ui.tooltip.PlayerToolTip;
-import com.company.assembleegameclient.ui.ui_playerslist;
+import com.company.assembleegameclient.ui.GameObjectListItem;
 import com.company.util.MoreColorUtil;
 
 import flash.events.Event;
@@ -21,14 +21,14 @@ public class PartyPanel extends Panel {
             [[0, 0], [100, 0], [0, 32], [100, 32], [0, 64], [100, 64], [0, 92], [100, 92]];
     private static const LOW_HEALTH_RATIO:Number = 0.2;
 
-    public var memberSlots:Vector.<ui_playerslist>;
+    public var memberSlots:Vector.<GameObjectListItem>;
     private var toolTip:PlayerToolTip = null;
     private var playerMenu:PlayerMenu = null;
     private var isHovering:Boolean = false;
 
     public function PartyPanel(gs:GameSprite) {
         super(gs);
-        this.memberSlots = new Vector.<ui_playerslist>(NearbyPlayerTracker.MAX_LISTED, true);
+        this.memberSlots = new Vector.<GameObjectListItem>(NearbyPlayerTracker.MAX_LISTED, true);
         for (var i:int = 0; i < SLOT_POSITIONS.length; i++) {
             this.memberSlots[i] = this.createMemberSlot(SLOT_POSITIONS[i][0], SLOT_POSITIONS[i][1]);
         }
@@ -37,7 +37,7 @@ public class PartyPanel extends Panel {
     }
 
     override public function draw():void {
-        var slot:ui_playerslist;
+        var slot:GameObjectListItem;
         var party:NearbyPlayerTracker = gs_.map_.party_;
         if (party == null) {
             for each (slot in this.memberSlots) {
@@ -84,8 +84,8 @@ public class PartyPanel extends Panel {
         }
     }
 
-    private function createMemberSlot(x:int, y:int):ui_playerslist {
-        var slot:ui_playerslist = new ui_playerslist(0xFFFFFF, false, null);
+    private function createMemberSlot(x:int, y:int):GameObjectListItem {
+        var slot:GameObjectListItem = new GameObjectListItem(0xFFFFFF, false, null);
         addChild(slot);
         slot.x = x;
         slot.y = y;
@@ -111,7 +111,7 @@ public class PartyPanel extends Panel {
     }
 
     private function onAddedToStage(event:Event):void {
-        for each (var slot:ui_playerslist in this.memberSlots) {
+        for each (var slot:GameObjectListItem in this.memberSlots) {
             slot.addEventListener(MouseEvent.MOUSE_OVER, this.onMouseOver);
             slot.addEventListener(MouseEvent.MOUSE_OUT, this.onMouseOut);
             slot.addEventListener(MouseEvent.MOUSE_DOWN, this.onMouseDown);
@@ -121,7 +121,7 @@ public class PartyPanel extends Panel {
     private function onRemovedFromStage(event:Event):void {
         this.removeToolTip();
         this.removePlayerMenu();
-        for each (var slot:ui_playerslist in this.memberSlots) {
+        for each (var slot:GameObjectListItem in this.memberSlots) {
             slot.removeEventListener(MouseEvent.MOUSE_OVER, this.onMouseOver);
             slot.removeEventListener(MouseEvent.MOUSE_OUT, this.onMouseOut);
             slot.removeEventListener(MouseEvent.MOUSE_DOWN, this.onMouseDown);
@@ -133,7 +133,7 @@ public class PartyPanel extends Panel {
         if (this.playerMenu != null && this.playerMenu.parent != null) {
             return;
         }
-        var slot:ui_playerslist = event.target as ui_playerslist;
+        var slot:GameObjectListItem = event.target as GameObjectListItem;
         var player:Player = slot.go_ as Player;
         if (player == null || player.texture_ == null) {
             return;
@@ -151,7 +151,7 @@ public class PartyPanel extends Panel {
     private function onMouseDown(event:MouseEvent):void {
         this.removeToolTip();
         this.removePlayerMenu();
-        var slot:ui_playerslist = event.target as ui_playerslist;
+        var slot:GameObjectListItem = event.target as GameObjectListItem;
         this.playerMenu = new PlayerMenu(gs_, slot.go_ as Player);
         stage.addChild(this.playerMenu);
     }

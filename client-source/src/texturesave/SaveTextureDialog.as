@@ -7,7 +7,7 @@ package texturesave
     import account.Account;
 
     import com.company.assembleegameclient.parameters.Parameters;
-    import com.company.assembleegameclient.ui._7f;
+    import com.company.assembleegameclient.ui.RoundedButton;
     import com.company.ui.SimpleText;
     import com.company.util.GraphicHelper;
 
@@ -41,8 +41,8 @@ package texturesave
         protected var nameInput_:NameInput = null;
         protected var typeSelector_:TypeSelector = null;
         protected var tagsInput_:TagsInput = null;
-        protected var saveButton_:_7f = null;
-        protected var cancelButton_:_7f = null;
+        protected var saveButton_:RoundedButton = null;
+        protected var cancelButton_:RoundedButton = null;
         protected var errorText_:SimpleText;
 
         private var graphicsData_:Vector.<IGraphicsData>;
@@ -80,13 +80,13 @@ package texturesave
             this.tagsInput_.y = 180;
             this.box_.addChild(this.tagsInput_);
 
-            this.saveButton_ = new _7f(16, "Save", 120);
+            this.saveButton_ = new RoundedButton(16, "Save", 120);
             this.saveButton_.x = WIDTH - this.saveButton_.width - 20;
             this.saveButton_.y = 330;
             this.saveButton_.addEventListener(MouseEvent.CLICK, this.onSave);
             this.box_.addChild(this.saveButton_);
 
-            this.cancelButton_ = new _7f(16, "Cancel", 120);
+            this.cancelButton_ = new RoundedButton(16, "Cancel", 120);
             this.cancelButton_.x = WIDTH - this.saveButton_.width - this.cancelButton_.width - 40;
             this.cancelButton_.y = 330;
             this.cancelButton_.addEventListener(MouseEvent.CLICK, this.onCancel);
@@ -129,8 +129,8 @@ package texturesave
             loader.addFile(png, "Foo.png", "data");
             loader.addEventListener(Event.COMPLETE, this.onUploadComplete);
             loader.load("http://" + Parameters.serverAddress() + "/picture/save");
-            this.cancelButton_._A_w(false);
-            this.saveButton_._A_w(false);
+            this.cancelButton_.setEnabled(false);
+            this.saveButton_.setEnabled(false);
         }
 
         private function onCancel(event:MouseEvent):void

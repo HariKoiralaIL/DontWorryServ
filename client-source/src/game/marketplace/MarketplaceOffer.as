@@ -1,7 +1,7 @@
 package game.marketplace {
     import com.company.assembleegameclient.game.GameSprite;
     import com.company.assembleegameclient.objects.ObjectLibrary;
-    import com.company.assembleegameclient.ui._7f;
+    import com.company.assembleegameclient.ui.RoundedButton;
 
     import flash.display.Bitmap;
     import flash.display.Sprite;
@@ -24,7 +24,7 @@ package game.marketplace {
         private var offer_:Sprite;
         private var arrow_:Bitmap;
         private var request_:Sprite;
-        private var tradeButton_:_7f;
+        private var tradeButton_:RoundedButton;
         private var id_:int;
 
         public function MarketplaceOffer(xml:XML, gs:GameSprite) {
@@ -75,10 +75,10 @@ package game.marketplace {
             if (this.info_.mine_) {
                 label = (this.info_.status_ != 0) ? "Collect" : "Close";
             }
-            this.tradeButton_ = new _7f(24, label);
+            this.tradeButton_ = new RoundedButton(24, label);
             this.tradeButton_.x = (MarketplaceLayout.ACTION_BUTTON_CENTER_X - (this.tradeButton_.width / 2));
             this.tradeButton_.y = (HEIGHT / 2) - (this.tradeButton_.height / 2);
-            this.tradeButton_._A_w(this.canUseButton());
+            this.tradeButton_.setEnabled(this.canUseButton());
             addChild(this.tradeButton_);
             this.tradeButton_.addEventListener(MouseEvent.CLICK, this.onMouseClick);
         }

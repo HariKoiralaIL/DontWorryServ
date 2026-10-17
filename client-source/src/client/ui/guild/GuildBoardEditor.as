@@ -10,8 +10,8 @@ import flash.display.IGraphicsData;
 
 import com.company.util.GraphicHelper;
 import com.company.ui.SimpleText;
-import com.company.assembleegameclient.ui._0K_B_;
-import com.company.assembleegameclient.ui._7f;
+import com.company.assembleegameclient.ui.Scrollbar;
+import com.company.assembleegameclient.ui.RoundedButton;
 
 import flash.display.GraphicsSolidFill;
 import flash.display.GraphicsStroke;
@@ -57,19 +57,19 @@ internal class GuildBoardEditor extends Sprite {
         this.textField.addEventListener(Event.CHANGE, this.onTextChange);
         this.textField.addEventListener(Event.SCROLL, this.onTextChange);
         this.textContainer.addChild(this.textField);
-        this.scrollBar = new _0K_B_(16, (HEIGHT - 4));
+        this.scrollBar = new Scrollbar(16, (HEIGHT - 4));
         this.scrollBar.x = (WIDTH + 6);
         this.scrollBar.y = 0;
-        this.scrollBar._fA_(400, this.textField.height);
+        this.scrollBar.setIndicatorSize(400, this.textField.height);
         this.scrollBar.addEventListener(Event.CHANGE, this.onScroll);
         addChild(this.scrollBar);
         this.w_ = (WIDTH + 26);
-        this.cancelButton = new _7f(14, "Cancel", 120);
+        this.cancelButton = new RoundedButton(14, "Cancel", 120);
         this.cancelButton.x = 4;
         this.cancelButton.y = (HEIGHT + 4);
         this.cancelButton.addEventListener(MouseEvent.CLICK, this.onCancel);
         addChild(this.cancelButton);
-        this.saveButton = new _7f(14, "Save", 120);
+        this.saveButton = new RoundedButton(14, "Save", 120);
         this.saveButton.x = ((this.w_ - this.saveButton.width) - 4);
         this.saveButton.y = (HEIGHT + 4);
         this.saveButton.addEventListener(MouseEvent.CLICK, this.onSave);
@@ -79,7 +79,7 @@ internal class GuildBoardEditor extends Sprite {
         GraphicHelper.clearPath(this.path_);
         GraphicHelper.drawUI(-6, -6, (this.w_ + 12), (this.h_ + 12), 4, [1, 1, 1, 1], this.path_);
         graphics.drawGraphicsData(this.graphicsData_);
-        this.scrollBar._fA_(HEIGHT, this.textField.textHeight, false);
+        this.scrollBar.setIndicatorSize(HEIGHT, this.textField.textHeight, false);
     }
     public var w_:int;
     public var h_:int;
@@ -87,9 +87,9 @@ internal class GuildBoardEditor extends Sprite {
     private var text_:String;
     private var textField:SimpleText;
     private var textContainer:Sprite;
-    private var scrollBar:_0K_B_;
-    private var cancelButton:_7f;
-    private var saveButton:_7f;
+    private var scrollBar:Scrollbar;
+    private var cancelButton:RoundedButton;
+    private var saveButton:RoundedButton;
     private var backgroundFill:GraphicsSolidFill;
     private var outlineFill_:GraphicsSolidFill;
     private var outlineStroke:GraphicsStroke;
@@ -100,7 +100,7 @@ internal class GuildBoardEditor extends Sprite {
     }
 
     private function onScroll(_arg1:Event):void {
-        this.textField.scrollV = (1 + (this.scrollBar._Q_D_() * this.textField.maxScrollV));
+        this.textField.scrollV = (1 + (this.scrollBar.getPosition() * this.textField.maxScrollV));
     }
 
     private function onCancel(_arg1:Event):void {
@@ -115,11 +115,11 @@ internal class GuildBoardEditor extends Sprite {
         if (this.scrollBar == null) {
             return;
         }
-        this.scrollBar._fA_(HEIGHT, this.textField.textHeight, false);
+        this.scrollBar.setIndicatorSize(HEIGHT, this.textField.textHeight, false);
         if (this.textField.maxScrollV == 1) {
-            this.scrollBar._0D__(0);
+            this.scrollBar.setPosition(0);
         } else {
-            this.scrollBar._0D__(((this.textField.scrollV - 1) / (this.textField.maxScrollV - 1)));
+            this.scrollBar.setPosition(((this.textField.scrollV - 1) / (this.textField.maxScrollV - 1)));
         }
     }
 

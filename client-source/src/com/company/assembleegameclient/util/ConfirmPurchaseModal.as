@@ -2,7 +2,7 @@ package com.company.assembleegameclient.util {
 import com.company.assembleegameclient.game.GameSprite;
 import com.company.assembleegameclient.objects.ObjectLibrary;
 import com.company.assembleegameclient.objects.SellableObject;
-import com.company.assembleegameclient.ui._u5;
+import com.company.assembleegameclient.ui.BuyButton;
 import com.company.ui.SimpleText;
 
 import flash.display.Sprite;
@@ -31,7 +31,7 @@ public class ConfirmPurchaseModal extends Sprite {
     private static const CENTER_Y:int = -200;
 
     private const closeButton:CloseButton = ObjectLibrary.makeCornerWidget(ConfirmPurchaseModal.WIDTH);
-    private const buyButton:_u5 = new _u5("Buy for ", 16, 0, Currency.INVALID);
+    private const buyButton:BuyButton = new BuyButton("Buy for ", 16, 0, Currency.INVALID);
 
     private var buyClickSignal:NativeSignal;
     private var sellable_:SellableObject;

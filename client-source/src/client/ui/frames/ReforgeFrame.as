@@ -3,8 +3,8 @@ import com.company.assembleegameclient.game.GameSprite;
 import com.company.assembleegameclient.objects.GameObject;
 import com.company.assembleegameclient.objects.Reforge;
 import com.company.assembleegameclient.ui.Inventory;
-import com.company.assembleegameclient.ui._E_6;
-import com.company.assembleegameclient.ui._return;
+import com.company.assembleegameclient.ui.InventorySlot;
+import com.company.assembleegameclient.ui.LineSeparator;
 
 import flash.events.Event;
 import flash.events.MouseEvent;
@@ -32,10 +32,10 @@ public class ReforgeFrame extends Frame {
         this.output_.x = this.w_ / 2 - this.output_.width / 2 - 5;
         this.output_.y = this.h_ - 75 - this.output_.height;
 
-        var _spacer:_return = new _return((this.slot2_.x - 9) - (this.slot1_.x + 9 + this.slot1_.width), 0x2D2D2D);
+        var _spacer:LineSeparator = new LineSeparator((this.slot2_.x - 9) - (this.slot1_.x + 9 + this.slot1_.width), 0x2D2D2D);
         _spacer.x = this.slot1_.x + 9 + this.slot1_.width;
         _spacer.y = this.slot1_.y + this.slot1_.width / 2;
-        var _spacer2:_return = new _return((this.output_.y - 9) - (this.slot1_.y + this.slot1_.width / 2), 0x2D2D2D, true);
+        var _spacer2:LineSeparator = new LineSeparator((this.output_.y - 9) - (this.slot1_.y + this.slot1_.width / 2), 0x2D2D2D, true);
         _spacer2.x = this.slot2_.x - 9 - ((this.slot2_.x - 9) - (this.slot1_.x + 9 + this.slot1_.width)) / 2;
         _spacer2.y = this.slot1_.y + this.slot1_.width / 2;
 

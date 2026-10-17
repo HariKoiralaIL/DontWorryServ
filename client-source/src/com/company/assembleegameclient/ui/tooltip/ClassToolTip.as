@@ -2,7 +2,7 @@ package com.company.assembleegameclient.ui.tooltip {
 import com.company.assembleegameclient.appengine.CharListEvent;
 import com.company.assembleegameclient.appengine.ClassStats;
 import com.company.assembleegameclient.objects.ObjectLibrary;
-import com.company.assembleegameclient.ui._return;
+import com.company.assembleegameclient.ui.LineSeparator;
 import com.company.assembleegameclient.util.AnimatedChar;
 import com.company.assembleegameclient.util.AnimatedCharLibrary;
 import com.company.assembleegameclient.util.MaskedImage;
@@ -24,7 +24,7 @@ public class ClassToolTip extends ToolTip {
     private var portrait_:Bitmap;
     private var nameText_:SimpleText;
     private var desc_:SimpleText;
-    private var divider_:_return;
+    private var divider_:LineSeparator;
     private var statsText_:SimpleText;
     private var unlockText_:SimpleText;
     private var nextGoalText_:SimpleText;
@@ -37,7 +37,7 @@ public class ClassToolTip extends ToolTip {
         addName(classXML);
         addDescription(classXML);
 
-        divider_ = new _return(100, DIVIDER_COLOR);
+        divider_ = new LineSeparator(100, DIVIDER_COLOR);
         divider_.x = 6;
         divider_.y = height;
         addChild(divider_);
@@ -50,7 +50,7 @@ public class ClassToolTip extends ToolTip {
     }
 
     override public function draw():void {
-        divider_._rs(width - 10, DIVIDER_COLOR);
+        divider_.drawHorizontal(width - 10, DIVIDER_COLOR);
         super.draw();
     }
 

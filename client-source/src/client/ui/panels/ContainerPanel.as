@@ -21,7 +21,7 @@ public class ContainerPanel extends Panel {
 
     override public function draw():void {
         // Inventory._iA_ is the container the inventory belongs to.
-        this.inventory.draw(this.inventory._iA_.equipment_);
+        this.inventory.draw(this.inventory.owner_.equipment_);
     }
 }
 }

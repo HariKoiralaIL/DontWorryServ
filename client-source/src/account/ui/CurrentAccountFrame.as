@@ -68,7 +68,7 @@ internal class CurrentAccountFrame extends Frame {
         request.addEventListener(GenericDataEvent.GENERIC_DATA, onVerifySent);
         request.addEventListener(TextErrorEvent.TEXT_ERROR, onVerifyError);
         request.sendRequest("sendVerifyEmail", Account.getInstance().credentials());
-        resendVerifyButton._bu("Sent...");
+        resendVerifyButton.setTextDisabled("Sent...");
     }
 
     private function onVerifySent(event:GenericDataEvent):void {

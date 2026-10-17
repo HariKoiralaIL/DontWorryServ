@@ -2,7 +2,7 @@ package client.ui.panels {
 import com.company.assembleegameclient.game.GameSprite;
 import com.company.assembleegameclient.objects.GuildHallPortal;
 import com.company.assembleegameclient.objects.Player;
-import com.company.assembleegameclient.ui._7f;
+import com.company.assembleegameclient.ui.RoundedButton;
 import com.company.ui.SimpleText;
 
 import flash.events.Event;
@@ -25,7 +25,7 @@ public class GuildHallPanel extends Panel {
         nameText.y = 6;
         addChild(nameText);
         if (player.guildName_ != null && player.guildName_.length > 0) {
-            var enterButton:_7f = new _7f(16, "Enter");
+            var enterButton:RoundedButton = new RoundedButton(16, "Enter");
             enterButton.addEventListener(MouseEvent.CLICK, this.onEnterClick);
             enterButton.x = (WIDTH / 2) - (enterButton.width / 2);
             enterButton.y = (HEIGHT - enterButton.height) - 4;

@@ -1,5 +1,5 @@
 package com.company.assembleegameclient.tutorial {
-import com.company.assembleegameclient.ui._7f;
+import com.company.assembleegameclient.ui.RoundedButton;
 import com.company.ui.SimpleText;
 import com.company.util.GraphicHelper;
 
@@ -28,7 +28,7 @@ public class TutorialDialog extends Sprite {
     private var tutorial_:Tutorial;
     private var rect_:Rectangle;
     private var text_:SimpleText;
-    private var nextButton_:_7f = null;
+    private var nextButton_:RoundedButton = null;
     private var startTime_:int;
     private var fill_:GraphicsSolidFill;
     private var stroke_:GraphicsStroke;
@@ -53,7 +53,7 @@ public class TutorialDialog extends Sprite {
         this.text_.x = 2 * BORDER;
         this.text_.y = 2 * BORDER;
         if (showNextButton) {
-            this.nextButton_ = new _7f(18, "Next");
+            this.nextButton_ = new RoundedButton(18, "Next");
             this.nextButton_.addEventListener(MouseEvent.CLICK, this.onNextClick);
             this.nextButton_.x = this.rect_.width - this.nextButton_.width - 20;
             this.nextButton_.y = this.rect_.height - this.nextButton_.height - 10;

@@ -9,8 +9,8 @@ import com.company.assembleegameclient.game.GameSprite;
 import com.company.assembleegameclient.objects.Player;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.ui.FrameHolder;
-import com.company.assembleegameclient.ui._7f;
-import com.company.assembleegameclient.ui._u5;
+import com.company.assembleegameclient.ui.RoundedButton;
+import com.company.assembleegameclient.ui.BuyButton;
 import com.company.assembleegameclient.util.Currency;
 import com.company.ui.SimpleText;
 
@@ -34,7 +34,7 @@ public class NameChangerPanel extends Panel {
             title = PanelUtil.createLabel("Your name is: \n" + gs_.charList_.name_);
             title.y = 0;
             addChild(title);
-            var changeButton:_u5 = new _u5("Change ", 16, Parameters._0u, Currency.GOLD);
+            var changeButton:BuyButton = new BuyButton("Change ", 16, Parameters._0u, Currency.GOLD);
             changeButton.addEventListener(MouseEvent.CLICK, this.onButtonClick);
             changeButton.x = (WIDTH / 2) - (changeButton.w_ / 2);
             changeButton.y = (HEIGHT - (changeButton.height / 2)) - 10;
@@ -50,7 +50,7 @@ public class NameChangerPanel extends Panel {
             title = PanelUtil.createLabel("Choose Account Name");
             title.y = 6;
             addChild(title);
-            var chooseButton:_7f = new _7f(16, "Choose");
+            var chooseButton:RoundedButton = new RoundedButton(16, "Choose");
             chooseButton.addEventListener(MouseEvent.CLICK, this.onButtonClick);
             chooseButton.x = (WIDTH / 2) - (chooseButton.width / 2);
             chooseButton.y = (HEIGHT - chooseButton.height) - 4;

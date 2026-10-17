@@ -7,7 +7,7 @@ package UpdateFrame {
   import com.company.assembleegameclient.game.GameSprite;
   import com.company.assembleegameclient.parameters.Parameters;
   import com.company.assembleegameclient.ui.FrameHolder;
-  import com.company.assembleegameclient.ui.ui_chat;
+  import com.company.assembleegameclient.ui.Chat;
   import flash.events.Event;
   import flash.events.KeyboardEvent;
   import flash.events.MouseEvent;
@@ -33,7 +33,7 @@ package UpdateFrame {
     }
 
     private function Interact(_arg1:KeyboardEvent):void {   //Opens panel if interact key is pressed
-      if ((_arg1.keyCode == Parameters.data_.interact) && (!(ui_chat._0G_B_))) {
+      if ((_arg1.keyCode == Parameters.data_.interact) && (!(Chat.inputActive_))) {
         this.OpenPanel();
       }
     }

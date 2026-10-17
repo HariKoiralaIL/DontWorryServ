@@ -1,10 +1,10 @@
 package com.company.assembleegameclient.ui.tooltip {
 import com.company.assembleegameclient.objects.Player;
 import com.company.assembleegameclient.ui.Inventory;
-import com.company.assembleegameclient.ui._0G_h;
-import com.company.assembleegameclient.ui._0M_Y_;
-import com.company.assembleegameclient.ui._L_N_;
-import com.company.assembleegameclient.ui.ui_playerslist;
+import com.company.assembleegameclient.ui.RankDisplay;
+import com.company.assembleegameclient.ui.StatusBar;
+import com.company.assembleegameclient.ui.GuildText;
+import com.company.assembleegameclient.ui.GameObjectListItem;
 import com.company.ui.SimpleText;
 
 import flash.filters.DropShadowFilter;
@@ -16,11 +16,11 @@ public class PlayerToolTip extends ToolTip {
     private static const BAR_BACKGROUND:uint = 0x2D2D2D;
 
     public var player_:Player;
-    private var playerEntry_:ui_playerslist;
-    private var starDisplay_:_0G_h;
-    private var guildDisplay_:_L_N_;
-    private var hpBar_:_0M_Y_;
-    private var mpBar_:_0M_Y_;
+    private var playerEntry_:GameObjectListItem;
+    private var starDisplay_:RankDisplay;
+    private var guildDisplay_:GuildText;
+    private var hpBar_:StatusBar;
+    private var mpBar_:StatusBar;
     private var inventory_:Inventory;
     private var clickHint_:SimpleText;
 
@@ -28,18 +28,18 @@ public class PlayerToolTip extends ToolTip {
         super(0x2A2A2A, 0.5, 0xFFFFFF, 1);
         player_ = player;
 
-        playerEntry_ = new ui_playerslist(0xB3B3B3, true, player_);
+        playerEntry_ = new GameObjectListItem(0xB3B3B3, true, player_);
         addChild(playerEntry_);
 
         var nextY:int = 34;
-        starDisplay_ = new _0G_h(player_.numStars_, false, true);
+        starDisplay_ = new RankDisplay(player_.numStars_, false, true);
         starDisplay_.x = 6;
         starDisplay_.y = nextY;
         addChild(starDisplay_);
         nextY += 30;
 
         if (player.guildName_ != null && player.guildName_ != "") {
-            guildDisplay_ = new _L_N_(player_.guildName_, player_.guildRank_, 136);
+            guildDisplay_ = new GuildText(player_.guildName_, player_.guildRank_, 136);
             guildDisplay_.x = 6;
             guildDisplay_.y = nextY - 2;
             addChild(guildDisplay_);
@@ -74,8 +74,8 @@ public class PlayerToolTip extends ToolTip {
         super.draw();
     }
 
-    private function addBar(color:uint, label:String, barY:int):_0M_Y_ {
-        var bar:_0M_Y_ = new _0M_Y_(176, 16, color, BAR_BACKGROUND, label);
+    private function addBar(color:uint, label:String, barY:int):StatusBar {
+        var bar:StatusBar = new StatusBar(176, 16, color, BAR_BACKGROUND, label);
         bar.x = 6;
         bar.y = barY;
         addChild(bar);

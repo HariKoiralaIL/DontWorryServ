@@ -10,8 +10,8 @@ import flash.display.IGraphicsData;
 
 import com.company.util.GraphicHelper;
 import com.company.ui.SimpleText;
-import com.company.assembleegameclient.ui._0K_B_;
-import com.company.assembleegameclient.ui._7f;
+import com.company.assembleegameclient.ui.Scrollbar;
+import com.company.assembleegameclient.ui.RoundedButton;
 
 import flash.display.GraphicsSolidFill;
 import flash.display.GraphicsStroke;
@@ -64,21 +64,21 @@ internal class GuildBoardViewer extends Sprite {
         this.textContainer.addChild(this.textField);
         var _local6 = (this.textField.height > 400);
         if (_local6) {
-            this.scrollBar = new _0K_B_(16, (HEIGHT - 4));
+            this.scrollBar = new Scrollbar(16, (HEIGHT - 4));
             this.scrollBar.x = (WIDTH + 6);
             this.scrollBar.y = 0;
-            this.scrollBar._fA_(400, this.textField.height);
+            this.scrollBar.setIndicatorSize(400, this.textField.height);
             this.scrollBar.addEventListener(Event.CHANGE, this.onScroll);
             addChild(this.scrollBar);
         }
         this.w_ = (WIDTH + ((_local6) ? 26 : 0));
-        this.editButton = new _7f(14, "Edit", 120);
+        this.editButton = new RoundedButton(14, "Edit", 120);
         this.editButton.x = 4;
         this.editButton.y = (HEIGHT + 4);
         this.editButton.addEventListener(MouseEvent.CLICK, this.onEdit);
         addChild(this.editButton);
         this.editButton.visible = _arg2;
-        this.closeButton = new _7f(14, "Close", 120);
+        this.closeButton = new RoundedButton(14, "Close", 120);
         this.closeButton.x = ((this.w_ - this.closeButton.width) - 4);
         this.closeButton.y = (HEIGHT + 4);
         this.closeButton.addEventListener(MouseEvent.CLICK, this.onClose);
@@ -95,16 +95,16 @@ internal class GuildBoardViewer extends Sprite {
     private var text_:String;
     private var textField:SimpleText;
     private var textContainer:Sprite;
-    private var scrollBar:_0K_B_;
-    private var editButton:_7f;
-    private var closeButton:_7f;
+    private var scrollBar:Scrollbar;
+    private var editButton:RoundedButton;
+    private var closeButton:RoundedButton;
     private var backgroundFill:GraphicsSolidFill;
     private var outlineFill_:GraphicsSolidFill;
     private var outlineStroke:GraphicsStroke;
     private var path_:GraphicsPath;
 
     private function onScroll(_arg1:Event):void {
-        this.textField.y = (-(this.scrollBar._Q_D_()) * (this.textField.height - 400));
+        this.textField.y = (-(this.scrollBar.getPosition()) * (this.textField.height - 400));
     }
 
     private function onEdit(_arg1:Event):void {

@@ -1,5 +1,5 @@
 package game.dialogs {
-    import com.company.assembleegameclient.ui._7f;
+    import com.company.assembleegameclient.ui.RoundedButton;
     import com.company.assembleegameclient.util.StageEventDispatcher;
     import com.company.ui.SimpleText;
     import com.company.util.GraphicHelper;
@@ -39,8 +39,8 @@ package game.dialogs {
         protected var rect_:Shape;
         protected var messageText_:SimpleText;
         protected var titleText_:SimpleText = null;
-        protected var button1_:_7f = null;
-        protected var button2_:_7f = null;
+        protected var button1_:RoundedButton = null;
+        protected var button2_:RoundedButton = null;
         /** Reserved for pageview tracking (currently disabled). */
         protected var analyticsPage_:String = null;
 
@@ -78,11 +78,11 @@ package game.dialogs {
                 this.titleText_.filters = [new DropShadowFilter(0, 0, 0, 1, 8, 8, 1)];
             }
             if (button1Label != null) {
-                this.button1_ = new _7f(16, button1Label, 120);
+                this.button1_ = new RoundedButton(16, button1Label, 120);
                 this.button1_.addEventListener(MouseEvent.CLICK, this.onButton1Click);
             }
             if (button2Label != null) {
-                this.button2_ = new _7f(16, button2Label, 120);
+                this.button2_ = new RoundedButton(16, button2Label, 120);
                 this.button2_.addEventListener(MouseEvent.CLICK, this.onButton2Click);
             }
             this.draw();

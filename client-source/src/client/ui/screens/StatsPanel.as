@@ -1,5 +1,5 @@
 package client.ui.screens {
-import com.company.assembleegameclient.ui._0K_B_;
+import com.company.assembleegameclient.ui.Scrollbar;
 import com.company.assembleegameclient.util.FameUtil;
 import com.company.util.BitmapUtil;
 
@@ -30,7 +30,7 @@ public class StatsPanel extends Sprite {
     private var mask_:Shape = new Shape();
     private var rowContainer:Sprite = new Sprite();
     private var rows:Vector.<StatRow> = new Vector.<StatRow>();
-    private var scrollBar:_0K_B_;
+    private var scrollBar:Scrollbar;
     private var startTime_:int;
 
     public function StatsPanel(rect:Rectangle, stats:XML) {
@@ -39,7 +39,7 @@ public class StatsPanel extends Sprite {
         graphics.lineStyle(1, 0x494949, 2);
         graphics.drawRect((this.rect_.x + 1), (this.rect_.y + 1), (this.rect_.width - 2), (this.rect_.height - 2));
         graphics.lineStyle();
-        this.scrollBar = new _0K_B_(16, this.rect_.height);
+        this.scrollBar = new Scrollbar(16, this.rect_.height);
         this.scrollBar.addEventListener(Event.CHANGE, this.onScroll);
         this.mask_.graphics.beginFill(0xFFFFFF, 1);
         this.mask_.graphics.drawRect(this.rect_.x, this.rect_.y, this.rect_.width, this.rect_.height);
@@ -102,13 +102,13 @@ public class StatsPanel extends Sprite {
         graphics.drawRect((this.rect_.x + 1), (this.rect_.y + 1), (this.rect_.width - 26), (this.rect_.height - 2));
         graphics.lineStyle();
         this.scrollBar.x = (this.rect_.width - 16);
-        this.scrollBar._fA_(this.mask_.height, this.rowContainer.height);
-        this.scrollBar._0D__(1);
+        this.scrollBar.setIndicatorSize(this.mask_.height, this.rowContainer.height);
+        this.scrollBar.setPosition(1);
         addChild(this.scrollBar);
     }
 
     private function onScroll(event:Event):void {
-        var scrollPosition:Number = this.scrollBar._Q_D_();
+        var scrollPosition:Number = this.scrollBar.getPosition();
         this.rowContainer.y = ((scrollPosition * ((this.rect_.height - this.rowContainer.height) - 15)) + 5);
     }
 

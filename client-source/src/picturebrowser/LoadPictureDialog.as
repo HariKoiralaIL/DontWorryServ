@@ -15,7 +15,7 @@ import account.Account;
 import com.company.assembleegameclient.appengine.AppEngineClient;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.ui.TextButton;
-import com.company.assembleegameclient.ui._7f;
+import com.company.assembleegameclient.ui.RoundedButton;
 import com.company.assembleegameclient.util.StageEventDispatcher;
 import com.company.rotmg.graphics.DeleteXGraphic;
 import com.company.ui.SimpleText;
@@ -106,7 +106,7 @@ public class LoadPictureDialog extends Sprite {
     protected var titleText:SimpleText = null;
     protected var pictureGrid:PictureGrid = null;
     protected var closeButton:DeleteXGraphic = null;
-    protected var searchButton:_7f;
+    protected var searchButton:RoundedButton;
     protected var previousButton:TextButton;
     protected var nextButton:TextButton;
     protected var tagSearchBox:TagSearchBox;
@@ -160,7 +160,7 @@ public class LoadPictureDialog extends Sprite {
     }
 
     private function createSearchButton():void {
-        this.searchButton = new _7f(BUTTON_FONT_SIZE, "Search", FILTER_WIDTH);
+        this.searchButton = new RoundedButton(BUTTON_FONT_SIZE, "Search", FILTER_WIDTH);
         this.searchButton.x = (WIDTH - this.searchButton.width) - MARGIN;
         this.searchButton.y = FILTER_ROW_Y;
         this.searchButton.addEventListener(MouseEvent.CLICK, this.onSearchClick);
@@ -231,7 +231,7 @@ public class LoadPictureDialog extends Sprite {
         }
         params["num"] = PAGE_SIZE;
         request.sendRequest("list", params);
-        this.searchButton._A_w(false);
+        this.searchButton.setEnabled(false);
     }
 
     private function updateDownloadPanel():void {
@@ -310,7 +310,7 @@ public class LoadPictureDialog extends Sprite {
         this.pictureGrid.addEventListener(DeletePictureEvent.DELETE_PICTURE_EVENT, this.onDeletePictureRequested);
         this.pictureGrid.addEventListener(AddPictureEvent.ADD_PICTURE_EVENT, this.onAddPicture);
         this.box.addChildAt(this.pictureGrid, 1);
-        this.searchButton._A_w(true);
+        this.searchButton.setEnabled(true);
         this.nextButton.visible = (this.pictureGrid.pictureCount >= PAGE_SIZE);
         this.previousButton.visible = (this.pictureGrid.offset != 0);
     }

@@ -3,7 +3,7 @@ import com.company.assembleegameclient.game.GameSprite;
 import com.company.assembleegameclient.objects.Portal;
 import com.company.assembleegameclient.tutorial.Tutorial;
 import com.company.assembleegameclient.tutorial.doneAction;
-import com.company.assembleegameclient.ui._7f;
+import com.company.assembleegameclient.ui.RoundedButton;
 import com.company.ui.SimpleText;
 
 import flash.events.Event;
@@ -17,7 +17,7 @@ public class PortalPanel extends Panel {
 
     public var portal_:Portal;
     private var nameText:SimpleText;
-    private var enterButton:_7f;
+    private var enterButton:RoundedButton;
     private var statusText:SimpleText;
 
     public function PortalPanel(gs:GameSprite, portal:Portal) {
@@ -25,7 +25,7 @@ public class PortalPanel extends Panel {
         this.portal_ = portal;
         this.nameText = PanelUtil.createLabel("Portal");
         addChild(this.nameText);
-        this.enterButton = new _7f(16, "Enter");
+        this.enterButton = new RoundedButton(16, "Enter");
         addChild(this.enterButton);
         // Portal._xq: portal is locked. Otherwise a blocked portal is full.
         this.statusText = PanelUtil.createLabel(this.portal_.isLocked_ ? "Locked" : "Full", 18, 0xFF0000, WIDTH, false);

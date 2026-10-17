@@ -46,7 +46,7 @@ public class ChangeNameFrame extends Frame {
                 GA.global().trackEvent("credits", ((this.gs_.charList_.converted_) ? "buyConverted" : "buy"), "Name Change", Parameters._0u);
             }*/
             this.gs_.charList_.name_ = this.name_.text();
-            this.gs_.hudView_._02y.setName(this.name_.text());
+            this.gs_.hudView_.invTabs_.setName(this.name_.text());
             stage.focus = null;
             dispatchEvent(new Event(Event.COMPLETE));
         } else {

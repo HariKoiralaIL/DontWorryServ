@@ -69,7 +69,7 @@ import client.signals.EmptySignal;
 
 import com.company.assembleegameclient.screens.charrects.CurrentCharacterRect;
 import com.company.assembleegameclient.screens.charrects.CharacterRectList;
-import com.company.assembleegameclient.ui.InvTabs;
+import com.company.assembleegameclient.ui.PlayerPanel;
 
 /**
  * Robotlegs config for the UI layer: signal-to-command mappings,
@@ -117,7 +117,7 @@ public class UIConfig implements IConfig {
         this.injector.map(DataSignalA).toValue(new DataSignalA());
         this.signalCommandMap.map(EmptySignal).toCommand(AddCornerViewCommand);
         this.mediatorMap.map(KeyPanel).toMediator(KeyPanelMediator);
-        this.mediatorMap.map(InvTabs).toMediator(InvTabsMediator);
+        this.mediatorMap.map(PlayerPanel).toMediator(InvTabsMediator);
     }
 
 }

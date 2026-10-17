@@ -155,7 +155,7 @@ public class GameInputHandler {
         Parameters._0F_o = !Parameters._0F_o;
         var visible:Boolean = !Parameters._0F_o;
         this.gs_.hudView_.visible = visible;
-        this.gs_.textBox_._01P_.visible = visible;
+        this.gs_.textBox_.messageHolder_.visible = visible;
     }
 
     private function toggleFullscreen(stage:Stage):void {
@@ -234,13 +234,13 @@ public class GameInputHandler {
     }
 
     private function onMouseWheel(event:MouseEvent):void {
-        if (this.gs_ == null || this.gs_.hudView_ == null || this.gs_.hudView_._F_ == null) {
+        if (this.gs_ == null || this.gs_.hudView_ == null || this.gs_.hudView_.miniMap_ == null) {
             return;
         }
         if (event.delta > 0) {
-            this.gs_.hudView_._F_._K_r();   // minimap zoom in
+            this.gs_.hudView_.miniMap_.zoomIn();   // minimap zoom in
         } else {
-            this.gs_.hudView_._F_._w_();    // minimap zoom out
+            this.gs_.hudView_.miniMap_.zoomOut();    // minimap zoom out
         }
     }
 
@@ -308,12 +308,12 @@ public class GameInputHandler {
             case Parameters.data_.useInvSlot7: this.useItem(6); break;
             case Parameters.data_.useInvSlot8: this.useItem(7); break;
             case Parameters.data_.miniMapZoomOut:
-                if (this.gs_.hudView_._F_ == null) break;
-                this.gs_.hudView_._F_._w_();
+                if (this.gs_.hudView_.miniMap_ == null) break;
+                this.gs_.hudView_.miniMap_.zoomOut();
                 break;
             case Parameters.data_.miniMapZoomIn:
-                if (this.gs_.hudView_._F_ == null) break;
-                this.gs_.hudView_._F_._K_r();
+                if (this.gs_.hudView_.miniMap_ == null) break;
+                this.gs_.hudView_.miniMap_.zoomIn();
                 break;
             case Parameters.data_.togglePerformanceStats:
                 this.togglePerformanceStats();
@@ -336,8 +336,8 @@ public class GameInputHandler {
                 this.toggleFullscreen(stage);
                 break;
             case Parameters.data_.switchTabs:
-                if (this.gs_.hudView_._02y == null) break;
-                this.gs_.hudView_._02y.nextTab();
+                if (this.gs_.hudView_.invTabs_ == null) break;
+                this.gs_.hudView_.invTabs_.nextTab();
                 break;
             case Parameters.data_.marketHotkey:
                 this.clearInput();

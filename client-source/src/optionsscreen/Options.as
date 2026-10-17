@@ -21,7 +21,7 @@ import audio.MusicManager;
 
 import com.company.assembleegameclient.game.GameSprite;
 import com.company.assembleegameclient.parameters.Parameters;
-import com.company.assembleegameclient.ui._0M_Y_;
+import com.company.assembleegameclient.ui.StatusBar;
 import com.company.ui.SimpleText;
 import com.company.util.AssetLibrary;
 import com.company.util.KeyCodes;
@@ -279,7 +279,7 @@ public class Options extends Sprite {
     }
 
     private function onBarTextChange():void {
-        _0M_Y_.options_.dispatch(Parameters.data_.toggleBarText);
+        StatusBar.options_.dispatch(Parameters.data_.toggleBarText);
     }
 
     private function addSoundOptions():void {

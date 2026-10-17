@@ -1,71 +1,85 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.ui._jM_
-
 package com.company.assembleegameclient.ui {
-import flash.display.Sprite;
+import audio.SoundEffects;
 
 import com.company.ui.SimpleText;
 
-import flash.filters.DropShadowFilter;
+import flash.display.Sprite;
 import flash.events.MouseEvent;
+import flash.filters.DropShadowFilter;
 
-import audio.SoundEffects;
-
+/**
+ * Plain text link: white text that turns yellow on hover and plays a click sound.
+ *
+ * Formerly: _jM_
+ */
 public class TextButton extends Sprite {
 
-    public function TextButton(_arg1:int, _arg2:Boolean, _arg3:String, _arg4:Boolean=false) {
-        this.text_ = new SimpleText(_arg1, 0xFFFFFF, false, 0, 0, "Myriad Pro");
-        this.text_.setBold(_arg2);
-        this.text_.text = _arg3;
+    private static const HOVER_COLOR:uint = 0xFFDC85;
+    private static const DISABLED_COLOR:uint = 0xB3B3B3;
+
+    public var text_:SimpleText;
+    /** Colour while the mouse is not over the button (formerly _S_4). */
+    public var normalColor_:uint = 0xFFFFFF;
+    /** Colour used instead of normalColor_ after mouse-out when dimmed (formerly _G3_). */
+    public var dimmedColor_:uint = DISABLED_COLOR;
+
+    /** Use dimmedColor_ instead of normalColor_ when the mouse leaves (formerly _g4_). */
+    private var dimmed_:Boolean = false;
+
+    /**
+     * @param fontSize font size
+     * @param bold     bold text
+     * @param label    button text
+     * @param dimmed   show the button in the dimmed colour when not hovered
+     */
+    public function TextButton(fontSize:int, bold:Boolean, label:String, dimmed:Boolean = false) {
+        super();
+        this.text_ = new SimpleText(fontSize, 0xFFFFFF, false, 0, 0, "Myriad Pro");
+        this.text_.setBold(bold);
+        this.text_.text = label;
         this.text_.updateMetrics();
         addChild(this.text_);
         this.text_.filters = [new DropShadowFilter(0, 0, 0)];
-        this._g4_ = _arg4;
+        this.dimmed_ = dimmed;
         addEventListener(MouseEvent.MOUSE_OVER, this.onMouseOver);
         addEventListener(MouseEvent.MOUSE_OUT, this.onMouseOut);
         addEventListener(MouseEvent.CLICK, this.onClick);
     }
-    public var text_:SimpleText;
-    public var _c9:int;
-    public var _I_x:int;
-    public var _S_4:uint = 0xFFFFFF;
-    public var _G3_:uint = 0xB3B3B3;
-    private var _g4_:Boolean = false;
 
-    public function _bu(_arg1:String):void {
-        this.text_.text = _arg1;
+    /** Replaces the text and turns the button into a grey, non-interactive label. Formerly _bu. */
+    public function setTextDisabled(label:String):void {
+        this.text_.text = label;
         this.text_.updateMetrics();
-        this._02W_(0xB3B3B3);
+        this.setNormalColor(DISABLED_COLOR);
         mouseEnabled = false;
         mouseChildren = false;
     }
 
-    public function _gp(_arg1:uint):void {
-        this.text_.setColor(_arg1);
+    /** Formerly _gp */
+    public function setTextColor(color:uint):void {
+        this.text_.setColor(color);
     }
 
-    public function _02W_(_arg1:uint):void {
-        this._S_4 = _arg1;
-        this._gp(this._S_4);
+    /** Formerly _02W_ */
+    public function setNormalColor(color:uint):void {
+        this.normalColor_ = color;
+        this.setTextColor(this.normalColor_);
     }
 
-    private function onMouseOver(_arg1:MouseEvent):void {
-        this._gp(16768133);
+    private function onMouseOver(event:MouseEvent):void {
+        this.setTextColor(HOVER_COLOR);
     }
 
-    private function onMouseOut(_arg1:MouseEvent):void {
-        if (this._g4_)
-            this._gp(this._G3_);
-        else
-            this._gp(this._S_4);
+    private function onMouseOut(event:MouseEvent):void {
+        if (this.dimmed_) {
+            this.setTextColor(this.dimmedColor_);
+        } else {
+            this.setTextColor(this.normalColor_);
+        }
     }
 
-    private function onClick(_arg1:MouseEvent):void {
+    private function onClick(event:MouseEvent):void {
         SoundEffects.play("button_click");
     }
-
 }
-}//package com.company.assembleegameclient.ui
-
+}

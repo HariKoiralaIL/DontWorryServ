@@ -36,7 +36,7 @@ public class SetGiveContainerUI extends Frame {
     }
 
     private function onEnterFrame(e:Event):void {
-        this.inventory_.draw(this.inventory_._iA_.equipment_);
+        this.inventory_.draw(this.inventory_.owner_.equipment_);
     }
 
     private function onAdded(e:Event):void {

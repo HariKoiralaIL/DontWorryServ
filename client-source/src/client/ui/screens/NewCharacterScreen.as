@@ -1,7 +1,7 @@
 package client.ui.screens {
 import com.company.assembleegameclient.appengine.CharListEvent;
 import com.company.assembleegameclient.objects.ObjectLibrary;
-import com.company.assembleegameclient.ui.ui_goldcoin;
+import com.company.assembleegameclient.ui.CurrencyDisplay;
 
 import flash.events.Event;
 import flash.events.MouseEvent;
@@ -20,7 +20,7 @@ public class NewCharacterScreen extends BaseScreen {
     public var play:Signal;
 
     private var backButton:MenuButton;
-    private var goldCoinDisplay:ui_goldcoin;
+    private var goldCoinDisplay:CurrencyDisplay;
     /** CharacterBox instances keyed by player object type. */
     private var characterBoxes:Object = {};
 
@@ -36,7 +36,7 @@ public class NewCharacterScreen extends BaseScreen {
         this.backButton = new MenuButton("back", 36, false);
         this.backButton.addEventListener(MouseEvent.CLICK, this.onBackClick);
         addChild(this.backButton);
-        this.goldCoinDisplay = new ui_goldcoin();
+        this.goldCoinDisplay = new CurrencyDisplay();
         this.goldCoinDisplay.draw(model.credits_, model.fame_);
         addChild(this.goldCoinDisplay);
         this.buildCharacterBoxes(model);

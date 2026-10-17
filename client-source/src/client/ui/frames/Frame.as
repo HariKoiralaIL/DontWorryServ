@@ -147,10 +147,10 @@ public class Frame extends Sprite {
         mouseEnabled = false;
         mouseChildren = false;
         for each (_local1 in this.linkButtons) {
-            _local1._02W_(0xB3B3B3);
+            _local1.setNormalColor(0xB3B3B3);
         }
-        this.Button1._02W_(0xB3B3B3);
-        this.Button2._02W_(0xB3B3B3);
+        this.Button1.setNormalColor(0xB3B3B3);
+        this.Button2.setNormalColor(0xB3B3B3);
     }
 
     public function enableInput():void {
@@ -163,10 +163,10 @@ public class Frame extends Sprite {
         for each (var _local5 in this.linkButtons) {
             _local2 = _local5;
             _local5;
-            _local2._02W_(0xFFFFFF);
+            _local2.setNormalColor(0xFFFFFF);
         }
-        this.Button1._02W_(0xFFFFFF);
-        this.Button2._02W_(0xFFFFFF);
+        this.Button1.setNormalColor(0xFFFFFF);
+        this.Button2.setNormalColor(0xFFFFFF);
     }
 
     public function draw():void {

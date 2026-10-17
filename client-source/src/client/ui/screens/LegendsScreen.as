@@ -1,7 +1,7 @@
 package client.ui.screens {
-import com.company.assembleegameclient.ui._00A_;
-import com.company.assembleegameclient.ui._0K_B_;
-import com.company.assembleegameclient.ui._Q_y;
+import com.company.assembleegameclient.ui.SelectableLabel;
+import com.company.assembleegameclient.ui.Scrollbar;
+import com.company.assembleegameclient.ui.LeaderboardListItem;
 import com.company.ui.SimpleText;
 
 import flash.display.Graphics;
@@ -28,7 +28,7 @@ public class LegendsScreen extends Sprite {
     private static const NO_CHAR_Y:Number = Number.MIN_VALUE;
 
     /** Remembered across instances so the last-used tab stays selected. */
-    private static var selectedTab:_00A_;
+    private static var selectedTab:SelectableLabel;
 
     public var close:Signal;
     /** Dispatches the timespan ("week" / "month" / "all") whose list should be loaded. */
@@ -42,8 +42,8 @@ public class LegendsScreen extends Sprite {
     private var listContainer:Sprite;
     private var doneButton:MenuButton;
     private var separator:Shape;
-    private var scrollBar:_0K_B_;
-    private var tabs:Vector.<_00A_> = new Vector.<_00A_>();
+    private var scrollBar:Scrollbar;
+    private var tabs:Vector.<SelectableLabel> = new Vector.<SelectableLabel>();
     private var currentList:Sprite;
     private var accountId_:int;
     private var charId_:int;
@@ -74,20 +74,20 @@ public class LegendsScreen extends Sprite {
         var listMask:Shape = new Shape();
         var maskGraphics:Graphics = listMask.graphics;
         maskGraphics.beginFill(0);
-        maskGraphics.drawRect(0, 0, _Q_y.WIDTH, 430);
+        maskGraphics.drawRect(0, 0, LeaderboardListItem.WIDTH, 430);
         maskGraphics.endFill();
         this.listContainer.addChild(listMask);
         this.listContainer.mask = listMask;
         addChild(this.listContainer);
         this.separator = new Shape();
         addChild(this.separator);
-        this.scrollBar = new _0K_B_(16, VISIBLE_HEIGHT);
+        this.scrollBar = new Scrollbar(16, VISIBLE_HEIGHT);
         this.scrollBar.x = ((800 - this.scrollBar.width) - 4);
         this.scrollBar.y = 104;
         addChild(this.scrollBar);
         var index:int = 0;
         while (index < TAB_LABELS.length) {
-            var tab:_00A_ = new _00A_(TAB_LABELS[index]);
+            var tab:SelectableLabel = new SelectableLabel(TAB_LABELS[index]);
             tab.x = (20 + (index * 90));
             tab.y = 70;
             tab.addEventListener(MouseEvent.MOUSE_DOWN, this.onTabMouseDown);
@@ -122,10 +122,10 @@ public class LegendsScreen extends Sprite {
         var charY:Number = NO_CHAR_Y;
         for each (var entry:XML in fameList.FameListElem) {
             var isOwnAccount:Boolean = (int(entry.@accountId) == this.accountId_);
-            var row:_Q_y = new _Q_y(isOwnAccount, rank, entry);
-            row.y = ((rank - 1) * _Q_y.HEIGHT);
+            var row:LeaderboardListItem = new LeaderboardListItem(isOwnAccount, rank, entry);
+            row.y = ((rank - 1) * LeaderboardListItem.HEIGHT);
             if (isOwnAccount && (int(entry.@charId) == this.charId_)) {
-                charY = (row.y + (_Q_y.HEIGHT / 2));
+                charY = (row.y + (LeaderboardListItem.HEIGHT / 2));
             }
             row.addEventListener(MouseEvent.MOUSE_DOWN, this.onRowMouseDown);
             list.addChild(row);
@@ -133,9 +133,9 @@ public class LegendsScreen extends Sprite {
         }
         if (charY == NO_CHAR_Y) {
             for each (var ownEntry:XML in fameList.MyFameListElem) {
-                row = new _Q_y(true, -1, ownEntry);
-                row.y = ((rank - 1) * _Q_y.HEIGHT);
-                charY = (row.y + (_Q_y.HEIGHT / 2));
+                row = new LeaderboardListItem(true, -1, ownEntry);
+                row.y = ((rank - 1) * LeaderboardListItem.HEIGHT);
+                charY = (row.y + (LeaderboardListItem.HEIGHT / 2));
                 row.addEventListener(MouseEvent.MOUSE_DOWN, this.onRowMouseDown);
                 list.addChild(row);
                 rank++;
@@ -152,11 +152,11 @@ public class LegendsScreen extends Sprite {
     public function onLoadError(message:String):void {
     }
 
-    private function setSelected(tab:_00A_):void {
+    private function setSelected(tab:SelectableLabel):void {
         if (tab == selectedTab) {
             return;
         }
-        for each (var other:_00A_ in this.tabs) {
+        for each (var other:SelectableLabel in this.tabs) {
             other.setSelected(false);
         }
         selectedTab = tab;
@@ -184,10 +184,10 @@ public class LegendsScreen extends Sprite {
         this.listContainer.addChild(this.currentList);
         if (this.currentList.height > VISIBLE_HEIGHT) {
             this.scrollBar.visible = true;
-            this.scrollBar._fA_(VISIBLE_HEIGHT, this.currentList.height);
+            this.scrollBar.setIndicatorSize(VISIBLE_HEIGHT, this.currentList.height);
             this.scrollBar.addEventListener(Event.CHANGE, this.onScroll);
             if (charY != NO_CHAR_Y) {
-                this.scrollBar._0D__(((charY - 200) / (this.currentList.height - VISIBLE_HEIGHT)));
+                this.scrollBar.setPosition(((charY - 200) / (this.currentList.height - VISIBLE_HEIGHT)));
             }
         } else {
             this.scrollBar.visible = false;
@@ -195,11 +195,11 @@ public class LegendsScreen extends Sprite {
     }
 
     private function onTabMouseDown(event:MouseEvent):void {
-        this.setSelected((event.currentTarget as _00A_));
+        this.setSelected((event.currentTarget as SelectableLabel));
     }
 
     private function onScroll(event:Event):void {
-        this.currentList.y = (-(this.scrollBar._Q_D_()) * (this.currentList.height - VISIBLE_HEIGHT));
+        this.currentList.y = (-(this.scrollBar.getPosition()) * (this.currentList.height - VISIBLE_HEIGHT));
     }
 
     private function onRowMouseDown(event:MouseEvent):void {
@@ -207,7 +207,7 @@ public class LegendsScreen extends Sprite {
             this.listContainer.removeChild(this.currentList);
             this.currentList = null;
         }
-        var row:_Q_y = (event.currentTarget as _Q_y);
+        var row:LeaderboardListItem = (event.currentTarget as LeaderboardListItem);
         this.characterSelected.dispatch(row.accountId_, row.charId_);
     }
 

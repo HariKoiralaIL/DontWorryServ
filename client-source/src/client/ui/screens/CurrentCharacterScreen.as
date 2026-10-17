@@ -6,10 +6,10 @@ import beginnersoffer.BeginnersOfferButton;
 import client.ui.frames.NewAccountNameOverlay;
 
 import com.company.assembleegameclient.appengine.CharListEvent;
-import com.company.assembleegameclient.ui._0K_B_;
-import com.company.assembleegameclient.ui._1B_v;
+import com.company.assembleegameclient.ui.Scrollbar;
+import com.company.assembleegameclient.ui.KeyCountDisplay;
 import com.company.assembleegameclient.ui.TextButton;
-import com.company.assembleegameclient.ui.ui_goldcoin;
+import com.company.assembleegameclient.ui.CurrencyDisplay;
 import com.company.ui.SimpleText;
 
 import flash.display.Shape;
@@ -46,8 +46,8 @@ public class CurrentCharacterScreen extends BaseScreen {
     private var model:CharListEvent;
     private var nameText:SimpleText;
     private var chooseNameButton:TextButton;
-    private var goldCoinDisplay:ui_goldcoin;
-    private var keysDisplay:_1B_v;
+    private var goldCoinDisplay:CurrencyDisplay;
+    private var keysDisplay:KeyCountDisplay;
     private var graveyardButton:TextButton;
     private var charactersButton:TextButton;
     private var newsText:SimpleText;
@@ -58,7 +58,7 @@ public class CurrentCharacterScreen extends BaseScreen {
     private var mainButton:MenuButton;
     private var classesButton:MenuButton;
     private var boundaryLine:Shape;
-    private var scrollBar:_0K_B_;
+    private var scrollBar:Scrollbar;
     private var curState:int = CharsAndNews.STATE_CHARACTERS;
 
     public function CurrentCharacterScreen() {
@@ -161,7 +161,7 @@ public class CurrentCharacterScreen extends BaseScreen {
     }
 
     private function buildGoldFame():void {
-        this.goldCoinDisplay = new ui_goldcoin();
+        this.goldCoinDisplay = new CurrencyDisplay();
         this.goldCoinDisplay.draw(this.model.credits_, this.model.fame_);
         this.goldCoinDisplay.x = this.getStageBounds().width;
         this.goldCoinDisplay.y = 20;
@@ -169,7 +169,7 @@ public class CurrentCharacterScreen extends BaseScreen {
     }
 
     private function buildKeys():void {
-        this.keysDisplay = new _1B_v();
+        this.keysDisplay = new KeyCountDisplay();
         this.keysDisplay.draw(this.model.keys_);
         this.keysDisplay.x = this.getStageBounds().width;
         this.keysDisplay.y = 44;
@@ -221,10 +221,10 @@ public class CurrentCharacterScreen extends BaseScreen {
     }
 
     private function buildScroll():void {
-        this.scrollBar = new _0K_B_(16, (VISIBLE_HEIGHT - 1));
+        this.scrollBar = new Scrollbar(16, (VISIBLE_HEIGHT - 1));
         this.scrollBar.x = 443;
         this.scrollBar.y = 113;
-        this.scrollBar._fA_((VISIBLE_HEIGHT - 1), this.charactersList.height);
+        this.scrollBar.setIndicatorSize((VISIBLE_HEIGHT - 1), this.charactersList.height);
         this.scrollBar.addEventListener(Event.CHANGE, this.onScroll);
         addChild(this.scrollBar);
     }
@@ -310,7 +310,7 @@ public class CurrentCharacterScreen extends BaseScreen {
     }
 
     private function onScroll(event:Event):void {
-        this.charactersList.setScrollY(((-(this.scrollBar._Q_D_())) * (this.listHeight - VISIBLE_HEIGHT)));
+        this.charactersList.setScrollY(((-(this.scrollBar.getPosition())) * (this.listHeight - VISIBLE_HEIGHT)));
     }
 
     private function onPlayClick(event:Event):void {

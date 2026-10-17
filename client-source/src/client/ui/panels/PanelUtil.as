@@ -1,7 +1,7 @@
 package client.ui.panels {
 import com.company.assembleegameclient.parameters.Parameters;
-import com.company.assembleegameclient.ui._0G_h;
-import com.company.assembleegameclient.ui.ui_chat;
+import com.company.assembleegameclient.ui.RankDisplay;
+import com.company.assembleegameclient.ui.Chat;
 import com.company.ui.SimpleText;
 
 import flash.display.Sprite;
@@ -52,7 +52,7 @@ public class PanelUtil {
         label.updateMetrics();
         label.filters = [new DropShadowFilter(0, 0, 0)];
         holder.addChild(label);
-        var rank:Sprite = new _0G_h(stars, false, false);
+        var rank:Sprite = new RankDisplay(stars, false, false);
         rank.x = label.width + 4;
         rank.y = (label.height / 2) - (rank.height / 2);
         holder.addChild(rank);
@@ -61,7 +61,7 @@ public class PanelUtil {
 
     /** True when the interact key was pressed and the player isn't typing in chat. */
     public static function isInteractKey(event:KeyboardEvent):Boolean {
-        return event.keyCode == Parameters.data_.interact && !ui_chat._0G_B_;
+        return event.keyCode == Parameters.data_.interact && !Chat.inputActive_;
     }
 }
 }

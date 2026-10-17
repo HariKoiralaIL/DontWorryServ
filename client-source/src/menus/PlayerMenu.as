@@ -2,7 +2,7 @@ package menus
 {
     import com.company.assembleegameclient.game.GameSprite;
     import com.company.assembleegameclient.objects.Player;
-    import com.company.assembleegameclient.ui.ui_playerslist;
+    import com.company.assembleegameclient.ui.GameObjectListItem;
     import com.company.assembleegameclient.util.GuildUtil;
     import com.company.util.AssetLibrary;
 
@@ -14,7 +14,7 @@ package menus
         public var gs_:GameSprite;
         public var playerName_:String;
         public var player_:Player;
-        public var playerRow_:ui_playerslist;
+        public var playerRow_:GameObjectListItem;
 
         public function PlayerMenu(gameSprite:GameSprite, player:Player)
         {
@@ -23,7 +23,7 @@ package menus
             this.gs_ = gameSprite;
             this.playerName_ = player.name_;
             this.player_ = player;
-            this.playerRow_ = new ui_playerslist(0xB3B3B3, true, this.player_);
+            this.playerRow_ = new GameObjectListItem(0xB3B3B3, true, this.player_);
             addChild(this.playerRow_);
             if (Player._e_D)
             {

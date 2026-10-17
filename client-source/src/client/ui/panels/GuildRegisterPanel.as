@@ -7,8 +7,8 @@ import com.company.assembleegameclient.game.GameSprite;
 import com.company.assembleegameclient.objects.Player;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.ui.FrameHolder;
-import com.company.assembleegameclient.ui._7f;
-import com.company.assembleegameclient.ui._u5;
+import com.company.assembleegameclient.ui.RoundedButton;
+import com.company.assembleegameclient.ui.BuyButton;
 import com.company.assembleegameclient.util.Currency;
 import com.company.assembleegameclient.util.GuildUtil;
 import com.company.ui.SimpleText;
@@ -36,13 +36,13 @@ public class GuildRegisterPanel extends Panel {
         title.y = 0;
         addChild(title);
         if (inGuild) {
-            var renounceButton:_7f = new _7f(16, "Renounce");
+            var renounceButton:RoundedButton = new RoundedButton(16, "Renounce");
             renounceButton.addEventListener(MouseEvent.CLICK, this.onRenounceClick);
             renounceButton.x = (WIDTH / 2) - (renounceButton.width / 2);
             renounceButton.y = (HEIGHT - renounceButton.height) - 4;
             addChild(renounceButton);
         } else {
-            var createButton:_u5 = new _u5("Create ", 16, Parameters._0H_m, Currency.FAME);
+            var createButton:BuyButton = new BuyButton("Create ", 16, Parameters._0H_m, Currency.FAME);
             createButton.addEventListener(MouseEvent.CLICK, this.onCreateClick);
             createButton.x = (WIDTH / 2) - (createButton.w_ / 2);
             createButton.y = (HEIGHT - (createButton.height / 2)) - 10;

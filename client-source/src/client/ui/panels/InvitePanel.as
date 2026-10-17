@@ -1,6 +1,6 @@
 package client.ui.panels {
 import com.company.assembleegameclient.game.GameSprite;
-import com.company.assembleegameclient.ui._7f;
+import com.company.assembleegameclient.ui.RoundedButton;
 import com.company.ui.SimpleText;
 
 import flash.events.Event;
@@ -17,18 +17,18 @@ public class InvitePanel extends Panel {
 
     private static const TIMEOUT_MS:int = 20 * 1000;
 
-    private var rejectButton:_7f;
-    private var acceptButton:_7f;
+    private var rejectButton:RoundedButton;
+    private var acceptButton:RoundedButton;
     private var timeoutTimer:Timer;
 
     public function InvitePanel(gs:GameSprite) {
         super(gs);
-        this.rejectButton = new _7f(16, "Reject");
+        this.rejectButton = new RoundedButton(16, "Reject");
         this.rejectButton.addEventListener(MouseEvent.CLICK, this.onRejectClick);
         this.rejectButton.x = (WIDTH / 4) - (this.rejectButton.width / 2);
         this.rejectButton.y = (HEIGHT - this.rejectButton.height) - 4;
         addChild(this.rejectButton);
-        this.acceptButton = new _7f(16, "Accept");
+        this.acceptButton = new RoundedButton(16, "Accept");
         this.acceptButton.addEventListener(MouseEvent.CLICK, this.onAcceptClick);
         this.acceptButton.x = ((3 * WIDTH) / 4) - (this.acceptButton.width / 2);
         this.acceptButton.y = (HEIGHT - this.acceptButton.height) - 4;

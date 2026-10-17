@@ -31,7 +31,7 @@ public class Crafting extends Frame {
     private var obj_:GameObject;
 
     private function onEnterFrame(param1:Event):void {
-        this.inventory_.draw(this.inventory_._iA_.equipment_);
+        this.inventory_.draw(this.inventory_.owner_.equipment_);
     }
 
     private function onAdded(param1:Event):void {

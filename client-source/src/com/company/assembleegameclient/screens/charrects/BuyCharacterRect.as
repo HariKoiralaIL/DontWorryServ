@@ -10,7 +10,7 @@ import flash.display.Bitmap;
 import flash.display.Shape;
 import flash.filters.DropShadowFilter;
 
-import com.company.assembleegameclient.ui._u5;
+import com.company.assembleegameclient.ui.BuyButton;
 
 import flash.display.BitmapData;
 
@@ -52,7 +52,7 @@ public class BuyCharacterRect extends CharacterRect {
         this.priceText_.x = (200 - this.priceText_.width);
         this.priceText_.y = 38;
         addChild(this.priceText_);
-        var _local4:BitmapData = _u5.fame();
+        var _local4:BitmapData = BuyButton.getFameIcon();
         _local4 = BitmapUtil.crop(_local4, 6, 6, (_local4.width - 12), (_local4.height - 12));
         this.coin_ = new Bitmap();
         this.coin_.bitmapData = _local4;

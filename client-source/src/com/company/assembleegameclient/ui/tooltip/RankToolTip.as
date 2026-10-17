@@ -1,6 +1,6 @@
 package com.company.assembleegameclient.ui.tooltip {
 import com.company.assembleegameclient.objects.ObjectLibrary;
-import com.company.assembleegameclient.ui._return;
+import com.company.assembleegameclient.ui.LineSeparator;
 import com.company.assembleegameclient.util.FameUtil;
 import com.company.rotmg.graphics.StarGraphic;
 import com.company.ui.SimpleText;
@@ -15,7 +15,7 @@ public class RankToolTip extends ToolTip {
     private var titleText_:SimpleText;
     private var star_:StarGraphic;
     private var descriptionText_:SimpleText;
-    private var divider_:_return;
+    private var divider_:LineSeparator;
 
     public function RankToolTip(rank:int) {
         super(0x2A2A2A, 1, 0xFFFFFF, 1);
@@ -44,7 +44,7 @@ public class RankToolTip extends ToolTip {
         descriptionText_.y = 30;
         addChild(descriptionText_);
 
-        divider_ = new _return(100, DIVIDER_COLOR);
+        divider_ = new LineSeparator(100, DIVIDER_COLOR);
         divider_.x = 6;
         divider_.y = height + 10;
         addChild(divider_);
@@ -59,7 +59,7 @@ public class RankToolTip extends ToolTip {
     }
 
     override public function draw():void {
-        divider_._rs(width - 10, DIVIDER_COLOR);
+        divider_.drawHorizontal(width - 10, DIVIDER_COLOR);
         super.draw();
     }
 

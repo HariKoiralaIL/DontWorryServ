@@ -1,6 +1,6 @@
 package client.ui.screens {
 import com.company.assembleegameclient.appengine.CharListEvent;
-import com.company.assembleegameclient.ui._0K_B_;
+import com.company.assembleegameclient.ui.Scrollbar;
 import com.company.ui.SimpleText;
 
 import flash.display.Graphics;
@@ -25,7 +25,7 @@ public class ServersScreen extends BaseScreen {
     private var separator:Shape;
     private var listContainer:Sprite;
     private var serverListView:ServerListView;
-    private var scrollBar:_0K_B_;
+    private var scrollBar:Scrollbar;
 
     public function ServersScreen() {
         addChild(new _charscreen());
@@ -60,10 +60,10 @@ public class ServersScreen extends BaseScreen {
         this.serverListView.addEventListener(Event.COMPLETE, this.onDone);
         this.listContainer.addChild(this.serverListView);
         if (this.serverListView.height > VISIBLE_HEIGHT) {
-            this.scrollBar = new _0K_B_(16, VISIBLE_HEIGHT);
+            this.scrollBar = new Scrollbar(16, VISIBLE_HEIGHT);
             this.scrollBar.x = ((800 - this.scrollBar.width) - 4);
             this.scrollBar.y = 104;
-            this.scrollBar._fA_(VISIBLE_HEIGHT, this.serverListView.height);
+            this.scrollBar.setIndicatorSize(VISIBLE_HEIGHT, this.serverListView.height);
             this.scrollBar.addEventListener(Event.CHANGE, this.onScroll);
             addChild(this.scrollBar);
         }
@@ -81,7 +81,7 @@ public class ServersScreen extends BaseScreen {
     }
 
     private function onScroll(event:Event):void {
-        this.serverListView.y = (8 - (this.scrollBar._Q_D_() * (this.serverListView.height - VISIBLE_HEIGHT)));
+        this.serverListView.y = (8 - (this.scrollBar.getPosition() * (this.serverListView.height - VISIBLE_HEIGHT)));
     }
 
     private function onDone(event:Event):void {

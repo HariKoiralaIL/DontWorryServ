@@ -3,7 +3,7 @@ package game.guild {
 
     import com.company.assembleegameclient.appengine.AppEngineClient;
     import com.company.assembleegameclient.parameters.Parameters;
-    import com.company.assembleegameclient.ui._0K_B_;
+    import com.company.assembleegameclient.ui.Scrollbar;
     import com.company.assembleegameclient.util.GuildUtil;
     import com.company.ui.SimpleText;
     import com.company.util.PropertyUtil;
@@ -42,7 +42,7 @@ package game.guild {
         private var viewport_:Sprite;
         private var list_:Sprite;
         private var openSlotsText_:SimpleText;
-        private var scrollBar_:_0K_B_;
+        private var scrollBar_:Scrollbar;
 
         public function GuildMemberList(count:int, offset:int, playerName:String = "", playerRank:int = 0) {
             super();
@@ -140,10 +140,10 @@ package game.guild {
             this.viewport_.addChild(this.list_);
 
             if (this.list_.height > VIEW_HEIGHT) {
-                this.scrollBar_ = new _0K_B_(16, VIEW_HEIGHT);
+                this.scrollBar_ = new Scrollbar(16, VIEW_HEIGHT);
                 this.scrollBar_.x = ((STAGE_WIDTH - this.scrollBar_.width) - 4);
                 this.scrollBar_.y = 104;
-                this.scrollBar_._fA_(VIEW_HEIGHT, this.list_.height);
+                this.scrollBar_.setIndicatorSize(VIEW_HEIGHT, this.list_.height);
                 this.scrollBar_.addEventListener(Event.CHANGE, this.onScroll);
                 addChild(this.scrollBar_);
             }
@@ -157,7 +157,7 @@ package game.guild {
         }
 
         private function onScroll(e:Event):void {
-            this.list_.y = (-(this.scrollBar_._Q_D_()) * (this.list_.height - VIEW_HEIGHT));
+            this.list_.y = (-(this.scrollBar_.getPosition()) * (this.list_.height - VIEW_HEIGHT));
         }
     }
 }

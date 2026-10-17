@@ -6,7 +6,7 @@
 package client.ui.frames {
 import com.company.assembleegameclient.account.web.PurchaseMediator;
 
-import com.company.assembleegameclient.ui._7f;
+import com.company.assembleegameclient.ui.RoundedButton;
 
 import flash.events.MouseEvent;
 
@@ -35,7 +35,7 @@ public class BuyGoldFrame extends Frame {
     private var mediator:PurchaseMediator;
     private var paymentSelector:PaymentMethodSelector;
     private var offerSelector:GoldOfferSelector;
-    private var buyButton:_7f;
+    private var buyButton:RoundedButton;
 
     private function build():void {
         this.addPaymentMethods();
@@ -87,7 +87,7 @@ public class BuyGoldFrame extends Frame {
     }
 
     private function addBuyButton():void {
-        this.buyButton = new _7f(16, BUY_LABEL);
+        this.buyButton = new RoundedButton(16, BUY_LABEL);
         this.buyButton.addEventListener(MouseEvent.CLICK, this.onBuy);
         this.buyButton.x = 8;
         this.buyButton.y = (h_ - 50);

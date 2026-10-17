@@ -29,7 +29,7 @@ import com.company.assembleegameclient.objects.*;
 import com.company.assembleegameclient.objects.LootContainer;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.ui.FrameHolder;
-import com.company.assembleegameclient.ui._B_N_;
+import com.company.assembleegameclient.ui.MapImageViewer;
 import com.company.assembleegameclient.util.Currency;
 import com.company.assembleegameclient.util.ObjectPool;
 import com.company.net.NetworkMessage;
@@ -865,7 +865,7 @@ public class GameServerClient {
         while (i < msg.tiles_.length) {
             var tile:GroundTileData = msg.tiles_[i];
             this.gs_.map_.setGroundTile(tile.x_, tile.y_, tile.type_);
-            this.gs_.hudView_._F_.setGroundTile(tile.x_, tile.y_, tile.type_);
+            this.gs_.hudView_.miniMap_.setGroundTile(tile.x_, tile.y_, tile.type_);
             i++;
         }
         i = 0;
@@ -894,7 +894,7 @@ public class GameServerClient {
         }
         this.processObjectStatus(status, 0, -1);
         if (obj.props_.static_ && obj.props_.occupySquare_ && !obj.props_.noMiniMap_) {
-            this.gs_.hudView_._F_._0A_R_(obj.x_, obj.y_, obj);
+            this.gs_.hudView_.miniMap_._0A_R_(obj.x_, obj.y_, obj);
         }
     }
 
@@ -1191,7 +1191,7 @@ public class GameServerClient {
     }
 
     private function onPic(msg:Pic):void {
-        this.gs_.addChild(new _B_N_(msg.bitmapData_));
+        this.gs_.addChild(new MapImageViewer(msg.bitmapData_));
     }
 
     private function onPlaySound(msg:PlaySound):void {
@@ -1443,7 +1443,7 @@ public class GameServerClient {
             }
         }
         if (text || !Parameters.data_.hidePlayerChat || this.hasSpecialPrefix(msg.name_)) {
-            this.gs_.textBox_._ro(msg.name_, msg.objectId_, msg.numStars_, msg.recipient_, text);
+            this.gs_.textBox_.addMessage(msg.name_, msg.objectId_, msg.numStars_, msg.recipient_, text);
         }
     }
 
@@ -1503,9 +1503,9 @@ public class GameServerClient {
 
     private function resetInventoryUI():void {
         SoundEffects.play("error");
-        this.gs_.hudView_._02y._e9.refresh();
-        this.gs_.hudView_._02y.equips_.refresh();
-        this.gs_.hudView_._U_T_.redraw();
+        this.gs_.hudView_.invTabs_._e9.refresh();
+        this.gs_.hudView_.invTabs_.equips_.refresh();
+        this.gs_.hudView_.interactPanel_.redraw();
     }
 
     private function onBuyResult(msg:BuyResult):void {
@@ -1553,26 +1553,26 @@ public class GameServerClient {
 
     private function onTradeRequested(msg:TradeRequested):void {
         if (Parameters.data_.showTradePopup) {
-            this.gs_.hudView_._U_T_.setOverridePanel(new TradeRequestPanel(this.gs_, msg.name_));
+            this.gs_.hudView_.interactPanel_.setOverridePanel(new TradeRequestPanel(this.gs_, msg.name_));
         }
         this.gs_.textBox_.addText("", msg.name_ + " wants to trade with you.  Type \"/trade " + msg.name_ + "\" to trade.");
     }
 
     private function onTradeStart(msg:TradeStart):void {
-        this.gs_.hudView_._0L_v(msg);
+        this.gs_.hudView_.startTrade(msg);
     }
 
     private function onTradeChanged(msg:TradeChanged):void {
-        this.gs_.hudView_._ss(msg);
+        this.gs_.hudView_.onTradeChanged(msg);
     }
 
     private function onTradeDone(msg:TradeDone):void {
-        this.gs_.hudView_._A_a();
+        this.gs_.hudView_.closeTradeOrSelection();
         this.gs_.textBox_.addText("", msg.description_);
     }
 
     private function onTradeAccepted(msg:TradeAccepted):void {
-        this.gs_.hudView_._mH_(msg);
+        this.gs_.hudView_.onTradeAccepted(msg);
     }
 
     // ---- Incoming: social -------------------------------------------------
@@ -1599,7 +1599,7 @@ public class GameServerClient {
 
     private function onInvitedToGuild(msg:InvitedToGuild):void {
         if (Parameters.data_.showGuildInvitePopup) {
-            this.gs_.hudView_._U_T_.setOverridePanel(new GuildInvitePanel(this.gs_, msg.name_, msg.guildName_));
+            this.gs_.hudView_.interactPanel_.setOverridePanel(new GuildInvitePanel(this.gs_, msg.name_, msg.guildName_));
         }
         this.gs_.textBox_.addText("", "You have been invited by " + msg.name_ + " to join the guild " + msg.guildName_
                 + '.\n  If you wish to join type "/join ' + msg.guildName_ + '"');
@@ -1607,7 +1607,7 @@ public class GameServerClient {
 
     private function onInvitedToParty(msg:InvitedToParty):void {
         if (Parameters.data_.showGuildInvitePopup) {
-            this.gs_.hudView_._U_T_.setOverridePanel(new PartyInvitePanel(this.gs_, msg.name_, msg.partyID_));
+            this.gs_.hudView_.interactPanel_.setOverridePanel(new PartyInvitePanel(this.gs_, msg.name_, msg.partyID_));
         }
         this.gs_.textBox_.addText("", "You have been invited by " + msg.name_ + " to join a party.\nIf you wish to join, type \"/party join " + msg.name_ + "\"");
     }

@@ -1,38 +1,40 @@
-﻿// Decompiled by AS3 Sorcerer 1.99
-// http://www.as3sorcerer.com/
-
-//com.company.assembleegameclient.ui._y3
-
 package com.company.assembleegameclient.ui {
-import flash.display.Sprite;
-import flash.display.Shape;
-
 import client.ui.frames.Frame;
 
 import flash.display.Graphics;
+import flash.display.Shape;
+import flash.display.Sprite;
 import flash.events.Event;
 
+/**
+ * Shows a Frame on top of a dimmed full-screen backdrop and removes itself
+ * when the frame completes.
+ *
+ * Formerly: _y3
+ */
 public class FrameHolder extends Sprite {
 
+    private static const DIM_ALPHA:Number = 0.8;
+
+    private var dimScreen:Shape;
+    private var frame:Frame;
+
     public function FrameHolder(frame:Frame) {
+        super();
         this.dimScreen = new Shape();
-        var _local2:Graphics = this.dimScreen.graphics;
-        _local2.clear();
-        _local2.beginFill(0, 0.8);
-        _local2.drawRect(0 - (projectblogo.sWidth - 800), 0 - (projectblogo.sHeight - 600), projectblogo.sWidth*2, projectblogo.sHeight*2);
-        _local2.endFill();
+        var g:Graphics = this.dimScreen.graphics;
+        g.clear();
+        g.beginFill(0, DIM_ALPHA);
+        g.drawRect(0 - (projectblogo.sWidth - 800), 0 - (projectblogo.sHeight - 600), projectblogo.sWidth * 2, projectblogo.sHeight * 2);
+        g.endFill();
         addChild(this.dimScreen);
         this.frame = frame;
         this.frame.addEventListener(Event.COMPLETE, this.onComplete);
         addChild(this.frame);
     }
-    private var dimScreen:Shape;
-    private var frame:Frame;
 
-    private function onComplete(_arg1:Event):void {
+    private function onComplete(event:Event):void {
         parent.removeChild(this);
     }
-
 }
-}//package com.company.assembleegameclient.ui
-
+}

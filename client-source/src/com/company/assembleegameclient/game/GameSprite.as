@@ -18,12 +18,12 @@ import com.company.assembleegameclient.objects.Projectile;
 import com.company.assembleegameclient.parameters.Parameters;
 import com.company.assembleegameclient.tutorial.Tutorial;
 import com.company.assembleegameclient.ui.Protip;
-import com.company.assembleegameclient.ui._0B_X_;
-import com.company.assembleegameclient.ui._0G_h;
-import com.company.assembleegameclient.ui._1B_v;
-import com.company.assembleegameclient.ui._L_N_;
-import com.company.assembleegameclient.ui.ui_chat;
-import com.company.assembleegameclient.ui.ui_goldcoin;
+import com.company.assembleegameclient.ui.HudView;
+import com.company.assembleegameclient.ui.RankDisplay;
+import com.company.assembleegameclient.ui.KeyCountDisplay;
+import com.company.assembleegameclient.ui.GuildText;
+import com.company.assembleegameclient.ui.Chat;
+import com.company.assembleegameclient.ui.CurrencyDisplay;
 import com.company.assembleegameclient.util.TextureRedrawer;
 import com.company.util.MoreColorUtil;
 import com.company.util.BitmapEffectCache;
@@ -49,8 +49,8 @@ public class GameSprite extends BaseGameSprite {
     private static const STAGE_HEIGHT:int = 600;
     private static const HUD_WIDTH:int = 200;
 
-    public var textBox_:ui_chat;
-    public var hudView_:_0B_X_;
+    public var textBox_:Chat;
+    public var hudView_:HudView;
     public var charList_:CharListEvent;
     public var isNexus_:Boolean = false;
     public var protip_:Protip = null;
@@ -59,10 +59,10 @@ public class GameSprite extends BaseGameSprite {
     public var donateButton_:MenuLinkButton;
     public var discordButton_:MenuLinkButton;
     public var RaidButton_:MenuLinkButton;
-    public var starsDisplay_:_0G_h;
-    public var guildText_:_L_N_;
-    public var goldDisplay_:ui_goldcoin;
-    public var keysDisplay_:_1B_v;
+    public var starsDisplay_:RankDisplay;
+    public var guildText_:GuildText;
+    public var goldDisplay_:CurrencyDisplay;
+    public var keysDisplay_:KeyCountDisplay;
     private var gameMap_:GameMap;
     private var loadingScreen:MapLoadingScreen;
     private var isOnStage:Boolean;
@@ -74,9 +74,9 @@ public class GameSprite extends BaseGameSprite {
         addChild(this.map_);
         this.gsc_ = new GameServerClient(this, server, gameId, createCharacter, charId, keyTime, keyBytes, mapJSON);
         this.mui_ = new GameInputHandler(this);
-        this.textBox_ = new ui_chat(this, 600, 600);
+        this.textBox_ = new Chat(this, 600, 600);
         addChild(this.textBox_);
-        this.hudView_ = new _0B_X_(this, HUD_WIDTH, 600);
+        this.hudView_ = new HudView(this, HUD_WIDTH, 600);
         addChild(this.hudView_);
         this.idleWatcher_ = new IdleWatcher();
         addEventListener(Event.ADDED_TO_STAGE, this.onAddedToStage);
@@ -112,11 +112,11 @@ public class GameSprite extends BaseGameSprite {
     override public function initialize():void {
         this.map_.initialize();
         this.hudView_.initialize();
-        this.goldDisplay_ = new ui_goldcoin(this);
+        this.goldDisplay_ = new CurrencyDisplay(this);
         this.goldDisplay_.x = 594;
         this.goldDisplay_.y = 0;
         addChild(this.goldDisplay_);
-        this.keysDisplay_ = new _1B_v();
+        this.keysDisplay_ = new KeyCountDisplay();
         this.keysDisplay_.x = 594;
         this.keysDisplay_.y = 24;
         addChild(this.keysDisplay_);
@@ -124,11 +124,11 @@ public class GameSprite extends BaseGameSprite {
             this.initExtras();
         }
         if (this.map_.showDisplays_) {
-            this.starsDisplay_ = new _0G_h(-1, true, false);
+            this.starsDisplay_ = new RankDisplay(-1, true, false);
             this.starsDisplay_.x = 8;
             this.starsDisplay_.y = 4;
             addChild(this.starsDisplay_);
-            this.guildText_ = new _L_N_("", -1);
+            this.guildText_ = new GuildText("", -1);
             this.guildText_.x = 64;
             this.guildText_.y = 6;
             addChild(this.guildText_);

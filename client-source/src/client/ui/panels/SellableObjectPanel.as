@@ -6,7 +6,7 @@ import account.Account;
 import com.company.assembleegameclient.game.GameSprite;
 import com.company.assembleegameclient.objects.Player;
 import com.company.assembleegameclient.objects.SellableObject;
-import com.company.assembleegameclient.ui._u5;
+import com.company.assembleegameclient.ui.BuyButton;
 import com.company.assembleegameclient.ui.tooltip.ToolTip;
 import com.company.assembleegameclient.util.Currency;
 import com.company.assembleegameclient.util.ConfirmPurchaseModal;
@@ -41,7 +41,7 @@ public class SellableObjectPanel extends Panel {
     private var sellable:SellableObject;
     private var modal:ConfirmPurchaseModal;
     private var nameText:SimpleText;
-    private var buyButton:_u5;
+    private var buyButton:BuyButton;
     private var rankRequiredLabel:Sprite = null;
     private var guildRankLabel:SimpleText = null;
     private var iconHolder:Sprite;
@@ -57,7 +57,7 @@ public class SellableObjectPanel extends Panel {
         addChild(this.iconHolder);
         this.bitmap = new Bitmap(null);
         this.iconHolder.addChild(this.bitmap);
-        this.buyButton = new _u5("Buy for ", 16, 0, Currency.INVALID);
+        this.buyButton = new BuyButton("Buy for ", 16, 0, Currency.INVALID);
         this.buyButton.addEventListener(MouseEvent.CLICK, this.onBuyClick);
         addChild(this.buyButton);
         this.setObject(obj);
@@ -87,7 +87,7 @@ public class SellableObjectPanel extends Panel {
             }
         } else {
             this.buyButton.setPrice(this.sellable.price_, this.sellable.currency_);
-            this.buyButton._A_w(gs_.gsc_.outstandingBuy_ == null);
+            this.buyButton.setEnabled(gs_.gsc_.outstandingBuy_ == null);
             this.buyButton.x = (WIDTH / 2) - (this.buyButton.w_ / 2);
             this.buyButton.y = (HEIGHT - (this.buyButton.height / 2)) - BUY_BUTTON_BOTTOM_OFFSET;
             if (!contains(this.buyButton)) {

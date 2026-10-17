@@ -1,6 +1,6 @@
 package com.company.assembleegameclient.ui.tooltip {
 import com.company.assembleegameclient.objects.GameObject;
-import com.company.assembleegameclient.ui.ui_playerslist;
+import com.company.assembleegameclient.ui.GameObjectListItem;
 import com.company.ui.SimpleText;
 
 import flash.filters.DropShadowFilter;
@@ -10,7 +10,7 @@ public class QuestToolTip extends ToolTip {
     private static const BACKGROUND_COLOR:uint = 0x5C1D1D;
     private static const QUEST_COLOR:uint = 0xFC8642;
 
-    public var playerEntry_:ui_playerslist;
+    public var playerEntry_:GameObjectListItem;
     private var text_:SimpleText;
 
     public function QuestToolTip(gameObject:GameObject) {
@@ -23,7 +23,7 @@ public class QuestToolTip extends ToolTip {
         text_.x = 0;
         text_.y = 0;
         addChild(text_);
-        playerEntry_ = new ui_playerslist(0xB3B3B3, true, gameObject);
+        playerEntry_ = new GameObjectListItem(0xB3B3B3, true, gameObject);
         playerEntry_.x = 0;
         playerEntry_.y = 32;
         addChild(playerEntry_);
